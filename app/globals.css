@@ -1,0 +1,709 @@
+/* ── 1. Google Fonts ────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap');
+
+/* ── 2. mir.no layout CSS is loaded via <link> in layout.tsx ─ */
+
+/* ── 3. Font override: remap Nimbus Sans → Jost ────────────── */
+/* Register "Nimbus Sans" as Jost so mir.css font-family refs work */
+:root {
+  --wa-font: 'Jost', Arial, sans-serif;
+}
+
+* {
+  font-family: var(--wa-font) !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── 4. WaArchi-specific overrides ─────────────────────────── */
+html {
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #fff;
+}
+
+/* Logo sizing */
+.wa-logo {
+  width: 68px;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Nav: fixed 50px from left edge, 1px border */
+.nav.dropdown.smaller.big {
+  left: 50px !important;
+  margin-left: 0 !important;
+  padding-top: 28px !important;
+  padding-bottom: 28px !important;
+  box-shadow: none !important;
+  border: 1px solid #111 !important;
+  align-items: center !important;
+}
+
+/* Space between logo and first nav link */
+.new-logo.w-inline-block {
+  margin-bottom: 20px !important;
+}
+
+/* Shared column: divider + grid share identical bounds */
+.wa-grid-column {
+  max-width: 1500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Grid fills the shared column, no extra centering needed */
+.work-section.top.work-new {
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.intro-text {
+  display: none !important;
+}
+
+/* Section divider — matches work-section's 1svw side padding exactly */
+.wa-divider {
+  display: flex;
+  align-items: center;
+  margin: 3svh 0;
+  padding: 0 1svw;
+  gap: 1.2em;
+}
+
+.wa-divider::before,
+.wa-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #111;
+}
+
+.wa-divider-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #111;
+  white-space: nowrap;
+}
+
+/* Carousel: infinite scroll animation */
+@keyframes scroll-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.carousel-inner {
+  overflow: hidden;
+}
+
+.carousel-track {
+  animation: scroll-left 40s linear infinite;
+  width: max-content;
+}
+
+.carousel-track:hover {
+  animation-play-state: paused;
+}
+
+/* Carousel card */
+.carousel-card {
+  flex-shrink: 0;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-card img {
+  height: 100%;
+  width: auto;
+  object-fit: cover;
+  display: block;
+}
+
+.carousel-card-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px 16px 12px;
+  background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%);
+  color: #fff;
+}
+
+/* Work item aspect ratio + border */
+.work-link {
+  aspect-ratio: 1/1;
+  outline: 1px solid #111 !important;
+}
+
+.work-link.big {
+  aspect-ratio: 1/1;
+  outline: 1px solid #111 !important;
+}
+
+/* Project image fills container */
+.project-image-main {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Hover zoom */
+.work-link:hover .project-image-main {
+  transform: scale(1.03);
+  transition: transform 0.6s ease;
+}
+
+.project-image-main {
+  transition: transform 0.6s ease;
+}
+
+/* ── Studio page ──────────────────────────────────────────────── */
+.wa-studio {
+  padding: 8svh max(4svw, 220px) 10svh;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+/* Hero: large heading left, text right */
+.wa-studio-hero {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 6svw;
+  align-items: start;
+  padding-bottom: 7svh;
+}
+
+.wa-studio-hero-heading {
+  font-size: clamp(4rem, 8vw, 9rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  margin: 0;
+}
+
+.wa-studio-hero-text p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #444;
+  margin: 0 0 1.25rem;
+}
+
+.wa-studio-hero-text p:last-child {
+  margin-bottom: 0;
+}
+
+.wa-studio-section {
+  margin-top: 6svh;
+}
+
+/* Section label */
+.wa-studio-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #111;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #111;
+}
+
+/* Team grid */
+.wa-team-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.wa-team-card {
+  outline: 1px solid #111;
+  overflow: hidden;
+}
+
+.wa-team-gif {
+  display: block;
+  max-height: 700px;
+  width: auto;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.wa-team-info {
+  padding: 16px 20px;
+}
+
+.wa-team-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+}
+
+.wa-team-role {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #999;
+}
+
+/* CTA */
+.wa-studio-cta {
+  margin-top: 7svh;
+  padding-top: 4svh;
+  border-top: 1px solid #111;
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.wa-studio-cta-text {
+  font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.wa-studio-cta-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.wa-studio-cta-link {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #111;
+  text-decoration: none;
+  border-bottom: 1px solid #111;
+  padding-bottom: 2px;
+}
+
+/* Studio / Kontakt page layout */
+.wa-page {
+  padding: 8svh 4svw;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.wa-page h1 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1.1;
+  margin: 0 0 2rem;
+  letter-spacing: -0.02em;
+}
+
+.wa-page p {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: #444;
+  margin-bottom: 1.25rem;
+}
+
+.wa-page a {
+  color: #111;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid #111;
+  padding-bottom: 1px;
+}
+
+/* ── Kontakt page ───────────────────────────────────────────── */
+.wa-kontakt-page {
+  padding-top: 4svh;
+  padding-bottom: 6svh;
+}
+
+.wa-kontakt-page .wa-prozess-header {
+  margin-bottom: 1svh;
+  position: relative;
+  z-index: 1;
+}
+
+.wa-kontakt-page .wa-prozess-gif-wrap {
+  margin-top: -8svh;
+  margin-bottom: -8svh;
+}
+
+.wa-kontakt-page .wa-kontakt-info {
+  position: relative;
+  z-index: 1;
+}
+
+.wa-kontakt-hero-gif {
+  width: 500px;
+  height: 500px;
+  object-fit: cover;
+  display: block;
+}
+
+.wa-kontakt-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.wa-kontakt-email {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #111;
+  text-decoration: none;
+  border-bottom: 1px solid #111;
+  padding-bottom: 2px;
+  margin-bottom: 2rem;
+  display: inline-block;
+}
+
+.wa-kontakt-address {
+  font-size: 0.8rem;
+  color: #aaa;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ── Prozess page ────────────────────────────────────────────── */
+.wa-prozess-page {
+  padding: 8svh max(4svw, 220px) 10svh;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.wa-prozess-header {
+  margin-bottom: 4svh;
+  text-align: center;
+}
+
+.wa-prozess-heading {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.25rem;
+  line-height: 1.1;
+}
+
+.wa-prozess-intro {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: #555;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* GIF — centered, 500×500 */
+.wa-prozess-gif-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20svh;
+}
+
+.wa-prozess-hero-gif {
+  width: 500px;
+  height: 500px;
+  object-fit: cover;
+  display: block;
+}
+
+.wa-prozess-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 8svh;
+  margin-top: 8svh;
+}
+
+.wa-prozess-step {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5svw;
+  align-items: start;
+}
+
+.wa-prozess-step--reverse .wa-prozess-image-wrap {
+  order: 2;
+}
+
+.wa-prozess-step--reverse .wa-prozess-text {
+  order: 1;
+}
+
+.wa-prozess-image-wrap {
+  outline: 1px solid #111;
+  overflow: hidden;
+}
+
+.wa-prozess-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Large display number */
+.wa-prozess-number {
+  display: block;
+  font-size: clamp(4rem, 6vw, 7rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: #e8e8e8;
+  line-height: 1;
+  margin: 0 0 0.25rem;
+}
+
+.wa-prozess-title {
+  font-size: clamp(1.3rem, 2.2vw, 1.9rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.25rem;
+  line-height: 1.15;
+}
+
+.wa-prozess-body {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: #444;
+  margin: 0;
+}
+
+/* Project sticky header — slides in from top, centered */
+.wa-project-sticky {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(calc(-100% - 40px));
+  background: #fff;
+  border: 1px solid #111;
+  padding: 14px 32px;
+  z-index: 100;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: center;
+  min-width: 260px;
+}
+
+.wa-project-sticky--visible {
+  transform: translateX(-50%) translateY(0);
+}
+
+.wa-project-sticky-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+}
+
+.wa-project-sticky-meta {
+  font-size: 0.65rem !important;
+  margin: 0 !important;
+}
+
+/* Project detail page */
+.wa-project-header {
+  padding: 6svh 4svw 3svh;
+  padding-left: max(4svw, 220px);
+}
+
+.wa-project-header h1 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 1rem 0 0.5rem;
+}
+
+.wa-project-meta {
+  font-size: 0.75rem;
+  color: #888;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.wa-back {
+  font-size: 0.72rem;
+  color: #999;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.wa-project-images {
+  display: flex;
+  flex-direction: column;
+  gap: 17.56px;
+}
+
+.wa-image-window {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.wa-project-img {
+  display: block;
+  max-width: min(1500px, 100%);
+  max-height: 900px;
+  width: auto;
+  height: auto;
+  outline: 1px solid #111;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   MOBILE / RESPONSIVE  (≤767px)
+   The desktop layout is built around a fixed left sidebar nav. On
+   phones we flip that nav into a top bar and undo the sidebar-clearance
+   paddings so content can use the full width.
+   ══════════════════════════════════════════════════════════════════ */
+@media (max-width: 767px) {
+
+  /* Push page content clear of the fixed top bar */
+  body {
+    padding-top: 90px;
+  }
+
+  /* ── Nav → top bar (inline row, same bordered look) ────────────── */
+  /* mir.css hides .nav.dropdown at this breakpoint — force it back. */
+  .nav.dropdown.smaller.big {
+    display: flex !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    margin: 0 !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+    row-gap: 4px;
+    column-gap: 18px;
+    padding: 12px 16px !important;
+    border: none !important;
+    border-bottom: 1px solid #111 !important;
+  }
+
+  /* Logo on its own centered row above the links */
+  .nav.dropdown.smaller.big .new-logo.w-inline-block {
+    flex: 0 0 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px !important;
+  }
+
+  .wa-logo {
+    width: 46px;
+  }
+
+  /* Links in a single inline row */
+  .nav.dropdown.smaller.big .link-5.big {
+    margin-bottom: 0 !important;
+    font-size: 0.9rem !important;
+    line-height: 1 !important;
+  }
+
+  /* ── Collapse the 220px sidebar-clearance paddings ─────────────── */
+  .wa-studio,
+  .wa-prozess-page {
+    padding-left: 5vw !important;
+    padding-right: 5vw !important;
+    padding-top: 4svh !important;
+  }
+
+  .wa-project-header {
+    padding-left: 5vw !important;
+    padding-right: 5vw !important;
+  }
+
+  /* ── Home: work grid 2-up, ignoring the desktop 12-col spans ───── */
+  .work_list.new {
+    grid-template-columns: 1fr 1fr !important;
+    grid-column-gap: 8px !important;
+    grid-row-gap: 8px !important;
+  }
+
+  .work_item {
+    grid-column: auto !important;
+  }
+
+  /* Carousel: cap height so one strip doesn't fill the screen */
+  .carousel-inner {
+    height: 34svh !important;
+  }
+
+  /* ── Studio ────────────────────────────────────────────────────── */
+  .wa-studio-hero {
+    grid-template-columns: 1fr !important;
+    gap: 3svh !important;
+    padding-bottom: 4svh !important;
+  }
+
+  .wa-studio-hero-heading {
+    font-size: clamp(3rem, 16vw, 5rem) !important;
+  }
+
+  .wa-team-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .wa-studio-cta {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 1.25rem !important;
+  }
+
+  /* ── Prozess ───────────────────────────────────────────────────── */
+  .wa-prozess-step {
+    grid-template-columns: 1fr !important;
+    gap: 2svh !important;
+  }
+
+  /* Keep the image above the text even on "reverse" rows */
+  .wa-prozess-step--reverse .wa-prozess-image-wrap {
+    order: 0 !important;
+  }
+
+  .wa-prozess-step--reverse .wa-prozess-text {
+    order: 1 !important;
+  }
+
+  .wa-prozess-gif-wrap {
+    margin-bottom: 6svh !important;
+  }
+
+  /* Fixed 500px hero GIFs → fluid squares that never overflow */
+  .wa-prozess-hero-gif,
+  .wa-kontakt-hero-gif {
+    width: min(500px, 78vw) !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1;
+  }
+
+  /* ── Kontakt: drop the desktop overlap trick ───────────────────── */
+  .wa-kontakt-page .wa-prozess-gif-wrap {
+    margin-top: 0 !important;
+    margin-bottom: 2svh !important;
+  }
+
+  /* ── Project detail: keep the sticky bar below the top nav ─────── */
+  .wa-project-sticky {
+    top: 94px !important;
+    min-width: 0 !important;
+    max-width: 88vw;
+  }
+}
+
+/* Small phones: single-column, full-bleed work images */
+@media (max-width: 479px) {
+  .work_list.new {
+    grid-template-columns: 1fr !important;
+  }
+}
+
