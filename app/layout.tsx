@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Nav from "@/components/Nav";
-import type { ReactNode } from "react";
+import Header from "@/components/Header";
+import BranchTheme from "@/components/BranchTheme";
 
 export const metadata: Metadata = {
-  title: "WaArchi Studio — Architekturvisualisierung NRW",
+  title: "nokta — Studio für Design, Architekturvisualisierung & Liniendrucke",
   description:
-    "Fotorealistische Architekturvisualisierungen aus NRW. Wir erstellen hochwertige 3D-Renderings für Architekten, Bauträger und Privatpersonen.",
-  metadataBase: new URL("https://waarchi.de"),
+    "nokta ist ein Studio mit drei Disziplinen: nokta (Layout, Design, Druck), nokta.arch (Architekturvisualisierung) und nokta.line (2D-, Vektor- und CAD-Kunstdrucke).",
+  metadataBase: new URL("https://nokta.kaanmaan.cv"),
 };
 
 export default function RootLayout({
@@ -18,11 +18,12 @@ export default function RootLayout({
   return (
     <html lang="de">
       <head>
-        {/* mir.no layout CSS — loaded from public folder */}
+        {/* mir.no layout CSS — used by the ported archviz (nokta.arch) pages */}
         <link rel="stylesheet" href="/mir.css" />
       </head>
       <body>
-        <Nav />
+        <BranchTheme />
+        <Header />
         {children}
       </body>
     </html>

@@ -1,25 +1,40 @@
 import type { Metadata } from "next";
-import Carousel from "@/components/Carousel";
-import WorkGrid from "@/components/WorkGrid";
+import Link from "next/link";
+import type { CSSProperties } from "react";
+import { BRANCHES } from "@/lib/branches";
 
 export const metadata: Metadata = {
-  title: "WaArchi Studio — Architekturvisualisierung NRW",
+  title: "nokta — ein Studio, drei Disziplinen",
   alternates: { canonical: "/" },
 };
 
 export default function HomePage() {
   return (
-    <>
-      {/* Scrolling carousel — mirrors mir.no top strip */}
-      <Carousel />
+    <main className="nk-landing">
+      <h1 className="nk-landing-mark">
+        nokta<span className="nk-dot">.</span>
+      </h1>
+      <p className="nk-landing-lead">
+        Ein Studio, drei Disziplinen. Vom Punkt zur Linie zur Form.
+      </p>
 
-      {/* Divider + grid share the same column so lines align with image edges */}
-      <div className="wa-grid-column">
-        <div className="wa-divider">
-          <span className="wa-divider-label">WaArchi Studio</span>
-        </div>
-        <WorkGrid />
+      <div className="nk-branch-grid">
+        {BRANCHES.map((b) => (
+          <Link
+            key={b.key}
+            href={b.path}
+            className="nk-branch-card"
+            style={{ "--accent": b.accent } as CSSProperties}
+          >
+            <span className="nk-branch-card__key">
+              nokta.{b.label}
+              <span className="nk-dot">.</span>
+            </span>
+            <span className="nk-branch-card__tag">{b.tagline}</span>
+            <span className="nk-branch-card__desc">{b.desc}</span>
+          </Link>
+        ))}
       </div>
-    </>
+    </main>
   );
 }

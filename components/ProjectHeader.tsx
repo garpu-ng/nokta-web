@@ -31,7 +31,7 @@ export default function ProjectHeader({ title, client, category, year, descripti
     <>
       {/* Original header — stays in normal document flow */}
       <div ref={headerRef} className="wa-project-header">
-        <Link href="/" className="wa-back">← Alle Projekte</Link>
+        <Link href="/arch" className="wa-back">← Alle Projekte</Link>
         <h1>{title}</h1>
         <p className="wa-project-meta">
           {client} &nbsp;·&nbsp; {category} &nbsp;·&nbsp; {year}

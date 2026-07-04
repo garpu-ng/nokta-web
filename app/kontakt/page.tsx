@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Kontakt — WaArchi",
+  title: "Kontakt — nokta",
 };
 
 export default function KontaktPage() {
@@ -19,7 +19,7 @@ export default function KontaktPage() {
       {/* ── Logo GIF ────────────────────────────────────────────── */}
       <div className="wa-prozess-gif-wrap">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/logogif2.gif" alt="WaArchi" className="wa-kontakt-hero-gif" />
+        <img src="/logogif2.gif" alt="nokta" className="wa-kontakt-hero-gif" />
       </div>
 
       {/* ── Contact info ────────────────────────────────────────── */}
@@ -32,7 +32,7 @@ export default function KontaktPage() {
           hallo@waarchi.de
         </a>
         <p className="wa-kontakt-address">
-          WaArchi Studio<br />
+          nokta Studio<br />
           Nordrhein-Westfalen, Deutschland<br />
           USt-IdNr.: auf Anfrage
         </p>

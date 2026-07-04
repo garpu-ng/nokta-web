@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Studio — WaArchi",
-  description: "WaArchi Studio — Architekturvisualisierung aus NRW.",
+  title: "Studio — nokta",
+  description: "nokta Studio — Architekturvisualisierung aus NRW.",
 };
 
 export default function StudioPage() {
@@ -15,7 +15,7 @@ export default function StudioPage() {
         <h1 className="wa-studio-hero-heading">Studio</h1>
         <div className="wa-studio-hero-text">
           <p>
-            WaArchi ist ein auf Architekturvisualisierung spezialisiertes Studio
+            nokta ist ein auf Architekturvisualisierung spezialisiertes Studio
             aus Nordrhein-Westfalen. Wir erstellen fotorealistische 3D-Renderings
             für Architekten, Bauträger und Privatpersonen.
           </p>
