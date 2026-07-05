@@ -11,9 +11,6 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <main className="nk-landing">
-      <h1 className="nk-landing-mark">
-        nokta<span className="nk-dot">.</span>
-      </h1>
       <p className="nk-landing-lead">
         Ein Studio, drei Disziplinen. Vom Punkt zur Linie zur Form.
       </p>

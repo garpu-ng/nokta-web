@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Carousel from "@/components/Carousel";
 import WorkGrid from "@/components/WorkGrid";
 import { BRANCH_BY_KEY } from "@/lib/branches";
 
@@ -14,13 +13,17 @@ export const metadata: Metadata = {
 export default function ArchPage() {
   return (
     <>
-      {/* Scrolling carousel — mirrors mir.no top strip */}
-      <Carousel />
+      <div className="nk-branch" style={{ paddingBottom: "1.5rem" }}>
+        <header className="nk-branch-head" style={{ marginBottom: 0 }}>
+          <h1 className="nk-branch-title">
+            nokta.arch<span className="nk-dot">.</span>
+          </h1>
+          <p className="nk-branch-tag">{branch.tagline}</p>
+          <p className="nk-branch-lead">{branch.desc}</p>
+        </header>
+      </div>
 
       <div className="wa-grid-column">
-        <div className="wa-divider">
-          <span className="wa-divider-label">nokta.arch — {branch.tagline}</span>
-        </div>
         <WorkGrid />
       </div>
     </>

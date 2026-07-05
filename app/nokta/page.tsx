@@ -33,7 +33,7 @@ export default function NoktaPage() {
     <main className="nk-branch">
       <header className="nk-branch-head">
         <h1 className="nk-branch-title">
-          nokta<span className="nk-dot">.</span>
+          nokta.nokta<span className="nk-dot">.</span>
         </h1>
         <p className="nk-branch-tag">{branch.tagline}</p>
         <p className="nk-branch-lead">{branch.desc}</p>

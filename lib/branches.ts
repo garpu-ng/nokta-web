@@ -1,7 +1,7 @@
 // The three disciplines of nokta. Everything (header tabs, theming, landing
 // cards) is derived from this list so a branch is defined in exactly one place.
 
-export type BranchKey = "nokta" | "arch" | "line";
+export type BranchKey = "home" | "nokta" | "arch" | "line";
 
 export type Branch = {
   key: BranchKey;
@@ -13,8 +13,10 @@ export type Branch = {
   tagline: string;
   /** short description for the landing card */
   desc: string;
-  /** deep "motto" colour — used for the dot, active tab, buttons, accents */
+  /** deep "motto" colour — used for the tab, active state, buttons, accents */
   accent: string;
+  /** muted page wash for this branch (matches the CSS [data-branch] value) */
+  bg: string;
 };
 
 export const BRANCHES: Branch[] = [
@@ -25,7 +27,8 @@ export const BRANCHES: Branch[] = [
     tagline: "Layout · Design · Druck",
     desc:
       "Von der ersten Skizze bis zur Druckvorlage — Branding, Editorial und Layout mit Sinn für Komposition.",
-    accent: "#B0664A", // clay
+    accent: "#ae6a4e", // clay
+    bg: "#ae6a4e",
   },
   {
     key: "arch",
@@ -34,7 +37,8 @@ export const BRANCHES: Branch[] = [
     tagline: "Architekturvisualisierung",
     desc:
       "Fotorealistische 3D-Renderings für Architekten, Bauträger und Privatpersonen aus NRW.",
-    accent: "#4E6076", // slate blue
+    accent: "#5c6e82", // slate blue
+    bg: "#5c6e82",
   },
   {
     key: "line",
@@ -43,7 +47,8 @@ export const BRANCHES: Branch[] = [
     tagline: "2D · Vektor · CAD-Kunstdrucke",
     desc:
       "Technische Zeichnungen als Kunst — gerahmte CAD-Liniendrucke ikonischer Bauwerke.",
-    accent: "#5E6B4E", // drafting green
+    accent: "#6e7a54", // drafting green
+    bg: "#6e7a54",
   },
 ];
 
@@ -51,9 +56,24 @@ export const BRANCH_BY_KEY = Object.fromEntries(
   BRANCHES.map((b) => [b.key, b]),
 ) as Record<BranchKey, Branch>;
 
-/** Map any pathname to the branch that owns it (or null for the core landing). */
+/** The home tab — black, lives at "/". Not a discipline, so it's kept out of
+    BRANCHES (which drives the landing cards) but sits first in the tab bar. */
+export const HOME_TAB: Branch = {
+  key: "home",
+  label: "home",
+  path: "/",
+  tagline: "Übersicht",
+  desc: "",
+  accent: "#1a1a18",
+  bg: "#1a1a18",
+};
+
+/** Everything shown in the top tab bar, in order. */
+export const TABS: Branch[] = [HOME_TAB, ...BRANCHES];
+
+/** Map any pathname to the branch that owns it (or null for a neutral page). */
 export function branchForPath(pathname: string): BranchKey | null {
-  if (pathname === "/") return null;
+  if (pathname === "/") return "home";
   if (pathname.startsWith("/nokta")) return "nokta";
   if (pathname.startsWith("/line")) return "line";
   // arch owns its own route plus the ported archviz project + process pages

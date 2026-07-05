@@ -13,23 +13,32 @@
      --brand-accent below; the body background transitions between them. */
   --paper: #f2eee6;
   --ink: #1a1a18;
-  --brand-bg: var(--paper);   /* whole-page wash */
-  --brand-accent: var(--ink); /* dot, active tab, buttons */
-  --header-h: 64px;
+  --brand-bg: var(--paper);    /* whole-page flood colour */
+  --brand-accent: var(--ink);  /* dot / accents */
+  --on-brand: var(--ink);      /* text sitting directly on the flood colour */
 }
 
-/* Branch washes (muted background) + motto-colours (deep accent). */
+/* Branch motto-colours. The page floods this colour; the matching tab shares it
+   so the active tab connects into the page. Text on the colour goes light. */
 :root[data-branch="nokta"] {
-  --brand-bg: #ede0d6;
-  --brand-accent: #b0664a; /* clay */
+  --brand-bg: #ae6a4e;
+  --brand-accent: #ae6a4e; /* clay */
+  --on-brand: #faf6f0;
 }
 :root[data-branch="arch"] {
-  --brand-bg: #dee3ea;
-  --brand-accent: #4e6076; /* slate blue */
+  --brand-bg: #5c6e82;
+  --brand-accent: #5c6e82; /* slate blue */
+  --on-brand: #f4f6f9;
 }
 :root[data-branch="line"] {
-  --brand-bg: #e2e6da;
-  --brand-accent: #5e6b4e; /* drafting green */
+  --brand-bg: #6e7a54;
+  --brand-accent: #6e7a54; /* drafting green */
+  --on-brand: #f5f6ee;
+}
+:root[data-branch="home"] {
+  --brand-bg: #1a1a18;
+  --brand-accent: #1a1a18; /* black */
+  --on-brand: #f2eee6; /* paper text on black */
 }
 
 * {
@@ -48,10 +57,11 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background: var(--brand-bg);
+  /* !important beats mir.css's `body{background-color:#fff}` (loaded after).
+     Branch-to-branch transitions are animated by the reveal overlay, so the
+     base bg swaps instantly underneath it. */
+  background: var(--brand-bg) !important;
   color: var(--ink);
-  /* the branch-to-branch colour wash */
-  transition: background-color 0.55s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Logo sizing */
@@ -693,77 +703,176 @@ body {
    nokta — header, landing, and branch pages
    ══════════════════════════════════════════════════════════════════ */
 
-/* ── Persistent header ────────────────────────────────────────────── */
-.nk-header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  row-gap: 6px;
-  column-gap: 1.5rem;
-  padding: 16px clamp(16px, 4vw, 40px);
-  background: var(--paper);
-  border-bottom: 1px solid var(--ink);
-}
-
-.nk-wordmark {
-  font-size: 1.5rem;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  color: var(--ink);
-  text-decoration: none;
-  line-height: 1;
-}
-
-/* The one element that carries the branch colour into the neutral header */
+/* ── The accent dot (used in landing + branch headings) ───────────── */
 .nk-dot {
   color: var(--brand-accent);
   transition: color 0.55s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.nk-tabs {
-  display: flex;
-  align-items: baseline;
-  gap: 1.1rem;
-  flex-wrap: wrap;
+/* ── Colour-flood overlay ─────────────────────────────────────────────
+   Sits BEHIND the page content (which fades in on top) and behind the header,
+   above only the old page background — so the colour floods in as the new
+   background while cards/text stay on top. */
+.nk-reveal {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  display: none;
+  pointer-events: none;
+  will-change: clip-path;
 }
 
-.nk-tab {
-  font-size: 0.95rem;
+/* ── Incoming-page fade (app/template.tsx remounts this per navigation) ──
+   Positioned above the flood overlay so content is never painted over. */
+.nk-page-fade {
+  position: relative;
+  z-index: 1;
+  animation: nk-fade-in 0.5s ease both;
+}
+@keyframes nk-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Persistent header: big wordmark + segmented tab bar ──────────── */
+.nk-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  background: var(--paper);
+}
+
+/* Centred column, capped at the tab group's width (4 tabs × 400px). Keeps the
+   tabs centred on wide screens while the logo (padding-left: 0) anchors to the
+   group's left edge. */
+.nk-topbar-inner {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* Brand row: logo anchored left, utility stack anchored right (both align with
+   the tab group's edges via the centred inner column). */
+.nk-topbar-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+/* Plain-text utility links, in a row, right-aligned next to the tab group's
+   right edge, vertically centred in the brand row. */
+.nk-utility {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-self: center;
+  gap: 1.25rem;
+}
+
+.nk-util {
+  color: var(--ink);
+  font-size: 0.72rem;
+  line-height: 1.2;
   font-weight: 500;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  transition: opacity 0.18s ease;
+}
+.nk-util:hover {
+  opacity: 0.55;
+}
+
+.nk-brand {
+  display: inline-block;
+  /* left padding is 0 so the wordmark's left edge sits on the border, exactly
+     above the flush-left nokta.home tab */
+  padding: clamp(20px, 4vw, 34px) clamp(16px, 4vw, 40px) clamp(12px, 2vw, 18px) 0;
+  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 0.85;
   color: var(--ink);
   text-decoration: none;
-  opacity: 0.5;
-  padding-bottom: 3px;
-  border-bottom: 1.5px solid transparent;
-  transition: opacity 0.2s, border-color 0.2s;
+}
+.nk-brand-dot {
+  color: var(--ink);
 }
 
-.nk-tab:hover {
-  opacity: 0.85;
+/* Segmented bar — three equal thirds, each filled with its motto colour.
+   The active branch's tab shares the page colour, so it reads as connected. */
+.nk-tabbar {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  width: 100%;
 }
 
-.nk-tab--muted {
-  font-size: 0.78rem;
-  letter-spacing: 0.05em;
+.nk-tab2 {
+  /* ~400px per tab; shrinks to fit rather than overflow on narrow screens */
+  flex: 0 1 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  text-align: center;
+  text-decoration: none;
+  background: var(--tab);
+  color: #fff;
+  padding: 12px;
+  transition:
+    min-height 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+    padding 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.18s ease;
+}
+/* On hover the tab grows 5px downward only — a solid extension in the tab's
+   own colour, so it doesn't shift siblings or the layout. */
+.nk-tab2:hover {
+  box-shadow: 0 5px 0 0 var(--tab);
+}
+
+.nk-tab2__label {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #fff;
+  transition: font-size 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.nk-tab2__dot {
+  color: rgba(255, 255, 255, 0.85);
+}
+.nk-tab2__tag {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.82);
+  white-space: nowrap;
 }
 
-.nk-tab--active {
-  opacity: 1;
-  border-bottom-color: var(--brand-accent);
+/* HOME — tall, full detail */
+.nk-tabbar--home .nk-tab2 {
+  min-height: 150px;
+}
+.nk-tabbar--home .nk-tab2__label {
+  font-size: 1.7rem;
 }
 
-.nk-tabs-sep {
-  width: 1px;
-  align-self: stretch;
-  background: var(--ink);
-  opacity: 0.2;
-  margin: 2px 0.2rem;
+/* BRANCH — reclined into a compact strip */
+.nk-tabbar--branch .nk-tab2 {
+  min-height: 0;
+  padding: 11px 12px;
+}
+.nk-tabbar--branch .nk-tab2__label {
+  font-size: 1rem;
+}
+.nk-tabbar--branch .nk-tab2__tag {
+  display: none;
 }
 
 /* ── Core landing (/) ─────────────────────────────────────────────── */
@@ -788,7 +897,8 @@ body {
 
 .nk-landing-lead {
   font-size: clamp(1rem, 2.2vw, 1.4rem);
-  color: #555;
+  color: var(--on-brand);
+  opacity: 0.75;
   margin: 1.5rem 0 clamp(3rem, 8vh, 5rem);
   max-width: 30ch;
   line-height: 1.5;
@@ -806,12 +916,12 @@ body {
   flex-direction: column;
   gap: 0.75rem;
   padding: 1.75rem 1.5rem 1.5rem;
-  border: 1px solid var(--ink);
+  border: 1px solid color-mix(in srgb, var(--on-brand) 45%, transparent);
   text-decoration: none;
-  color: var(--ink);
+  color: var(--on-brand);
   background: transparent;
   min-height: 230px;
-  transition: background-color 0.35s ease, color 0.35s ease;
+  transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease;
 }
 
 .nk-branch-card:hover {
@@ -865,25 +975,27 @@ body {
   letter-spacing: -0.04em;
   line-height: 0.95;
   margin: 0;
-  color: var(--ink);
+  color: var(--on-brand);
 }
 
 .nk-branch-title .nk-dot {
-  color: var(--brand-accent);
+  color: var(--on-brand);
 }
 
 .nk-branch-tag {
   font-size: 0.75rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--brand-accent);
+  color: var(--on-brand);
+  opacity: 0.8;
   margin: 0.9rem 0 0;
 }
 
 .nk-branch-lead {
   font-size: 1.05rem;
   line-height: 1.7;
-  color: #444;
+  color: var(--on-brand);
+  opacity: 0.92;
   max-width: 60ch;
   margin: 1.25rem 0 0;
 }
@@ -967,7 +1079,7 @@ body {
   text-transform: uppercase;
   font-weight: 600;
   color: #fff;
-  background: var(--brand-accent);
+  background: var(--ink); /* black button, per the sketch */
   border: none;
   padding: 8px 16px;
   cursor: pointer;
@@ -984,6 +1096,7 @@ body {
 .nk-service {
   padding: 1.5rem;
   border: 1px solid var(--ink);
+  background: #faf8f4; /* paper card so text reads on the coloured page */
 }
 
 .nk-service h3 {
@@ -991,6 +1104,7 @@ body {
   font-weight: 600;
   letter-spacing: -0.02em;
   margin: 0 0 0.5rem;
+  color: var(--ink);
 }
 
 .nk-service p {
@@ -1002,9 +1116,20 @@ body {
 
 /* ── Mobile ───────────────────────────────────────────────────────── */
 @media (max-width: 767px) {
-  .nk-header {
-    padding: 12px 16px;
+  .nk-tab2 {
+    padding: 9px 6px;
   }
+  .nk-tab2__label {
+    font-size: 0.82rem !important;
+    letter-spacing: -0.03em;
+  }
+  .nk-tabbar--home .nk-tab2 {
+    min-height: 92px;
+  }
+  .nk-tab2__tag {
+    display: none;
+  }
+
   .nk-branch-grid,
   .nk-print-grid,
   .nk-service-grid {
@@ -1014,4 +1139,3 @@ body {
     min-height: 0;
   }
 }
-
