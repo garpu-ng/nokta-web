@@ -209,6 +209,15 @@ body {
   transition: transform 0.6s ease;
 }
 
+/* Project labels: white rectangle with black text, overlaid on the arch images */
+.project-card.new {
+  background: #fff !important;
+  padding: 8px 22px !important;
+}
+.project-card .project-name {
+  color: #111 !important;
+}
+
 /* ── Studio page ──────────────────────────────────────────────── */
 .wa-studio {
   padding: 8svh max(4svw, 220px) 10svh;
