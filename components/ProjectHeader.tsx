@@ -36,7 +36,7 @@ export default function ProjectHeader({ title, client, category, year, descripti
         <p className="wa-project-meta">
           {client} &nbsp;·&nbsp; {category} &nbsp;·&nbsp; {year}
         </p>
-        <p style={{ fontSize: "0.95rem", color: "#555", maxWidth: "560px", lineHeight: 1.7 }}>
+        <p style={{ fontSize: "0.95rem", color: "var(--on-brand)", opacity: 0.9, maxWidth: "560px", lineHeight: 1.7 }}>
           {description}
         </p>
       </div>

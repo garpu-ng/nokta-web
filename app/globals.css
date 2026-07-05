@@ -62,6 +62,10 @@ body {
      base bg swaps instantly underneath it. */
   background: var(--brand-bg) !important;
   color: var(--ink);
+  /* sticky footer: page content grows, footer sits at the bottom */
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
 }
 
 /* Logo sizing */
@@ -89,7 +93,7 @@ body {
 
 /* Shared column: divider + grid share identical bounds */
 .wa-grid-column {
-  max-width: 1500px;
+  max-width: 1040px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -553,6 +557,7 @@ body {
   font-weight: 600;
   letter-spacing: -0.02em;
   margin: 1rem 0 0.5rem;
+  color: var(--on-brand);
 }
 
 .wa-project-meta {
@@ -563,9 +568,17 @@ body {
   margin-bottom: 1rem;
 }
 
+/* On the coloured project page the header meta is light; the white sticky
+   card below keeps the dark #888. */
+.wa-project-header .wa-project-meta {
+  color: var(--on-brand);
+  opacity: 0.8;
+}
+
 .wa-back {
   font-size: 0.72rem;
-  color: #999;
+  color: var(--on-brand);
+  opacity: 0.7;
   text-decoration: none;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -727,6 +740,11 @@ body {
 .nk-page-fade {
   position: relative;
   z-index: 1;
+  flex: 1 0 auto;
+  /* Page content is at least a full viewport tall, so the footer always sits
+     below the fold (with the sticky header on top, it's never visible on load
+     — you scroll to reach it) on any screen size. */
+  min-height: 100svh;
   animation: nk-fade-in 0.5s ease both;
 }
 @keyframes nk-fade-in {
@@ -741,7 +759,14 @@ body {
 }
 
 /* ── Persistent header: big wordmark + segmented tab bar ──────────── */
-.nk-topbar {
+/* Brand row scrolls away with the page; tab bar sticks to the top. Both sit
+   above page content so the colour flood never touches them. */
+.nk-brandbar {
+  position: relative;
+  z-index: 900;
+  background: var(--paper);
+}
+.nk-tabsticky {
   position: sticky;
   top: 0;
   z-index: 900;
@@ -1137,5 +1162,108 @@ body {
   }
   .nk-branch-card {
     min-height: 0;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   Global footer — pure black, mirrors the header's centred column
+   ══════════════════════════════════════════════════════════════════ */
+.nk-footer {
+  flex-shrink: 0;
+  background: #000;
+  color: #fff;
+  line-height: 1.5; /* override mir.css's fixed 20px */
+}
+
+.nk-footer-inner {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: clamp(3rem, 7vw, 6rem) clamp(16px, 4vw, 40px) 2rem;
+}
+
+.nk-footer-top {
+  display: flex;
+  justify-content: space-between;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  flex-wrap: wrap;
+}
+
+/* Brand block (mirrors the header logo, left side) */
+.nk-footer-brand {
+  max-width: 340px;
+}
+.nk-footer-mark {
+  display: inline-block;
+  font-size: clamp(2.6rem, 5vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 0.85;
+  color: #fff;
+  text-decoration: none;
+}
+.nk-footer-tag {
+  margin: 1.25rem 0 1.5rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #fff;
+}
+.nk-footer-email {
+  font-size: 1rem;
+  color: #fff;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  padding-bottom: 2px;
+  transition: border-color 0.2s ease;
+}
+.nk-footer-email:hover {
+  border-color: #fff;
+}
+
+/* Link columns (right side) */
+.nk-footer-cols {
+  display: flex;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  flex-wrap: wrap;
+}
+.nk-footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.nk-footer-col-h {
+  margin-bottom: 0.5rem;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #fff;
+}
+.nk-footer-link {
+  width: fit-content;
+  font-size: 0.92rem;
+  color: #fff;
+  text-decoration: none;
+  transition: opacity 0.18s ease;
+}
+.nk-footer-link:hover {
+  opacity: 0.6;
+}
+
+/* Bottom line: copyright + tagline */
+.nk-footer-bottom {
+  margin-top: clamp(3rem, 6vw, 5rem);
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+  color: #fff;
+}
+
+@media (max-width: 767px) {
+  .nk-footer-top {
+    flex-direction: column;
   }
 }

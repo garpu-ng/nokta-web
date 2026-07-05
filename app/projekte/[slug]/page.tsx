@@ -60,21 +60,22 @@ export default async function ProjectPage({ params }: Props) {
       <div
         style={{
           display: "flex",
-          justifyContent: "space-between",
-          padding: "4svh 4svw",
-          borderTop: "1px solid #eee",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "clamp(2rem, 6vw, 4.5rem)",
+          padding: "5svh 4svw",
         }}
       >
-        {prev ? (
-          <Link href={`/projekte/${prev.slug}`} style={{ fontSize: "0.75rem", color: "#555", textDecoration: "none" }}>
+        {prev && (
+          <Link href={`/projekte/${prev.slug}`} style={{ fontSize: "0.95rem", color: "var(--on-brand)", opacity: 0.85, textDecoration: "none" }}>
             ← {prev.title}
           </Link>
-        ) : <span />}
-        {next ? (
-          <Link href={`/projekte/${next.slug}`} style={{ fontSize: "0.75rem", color: "#555", textDecoration: "none" }}>
+        )}
+        {next && (
+          <Link href={`/projekte/${next.slug}`} style={{ fontSize: "0.95rem", color: "var(--on-brand)", opacity: 0.85, textDecoration: "none" }}>
             {next.title} →
           </Link>
-        ) : <span />}
+        )}
       </div>
     </>
   );

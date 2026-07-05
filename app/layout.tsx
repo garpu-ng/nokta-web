@@ -3,6 +3,7 @@ import Link from "next/link";
 import "./globals.css";
 import TabBar from "@/components/TabBar";
 import BranchReveal from "@/components/BranchReveal";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "nokta — Studio für Design, Architekturvisualisierung & Liniendrucke",
@@ -17,7 +18,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="de">
+    // data-scroll-behavior="smooth" → Next disables smooth scrolling *during
+    // route transitions* (so navigation lands cleanly at the top) while keeping
+    // CSS smooth-scroll for in-page scrolling.
+    <html lang="de" data-scroll-behavior="smooth">
       <head>
         {/* mir.no layout CSS — used by the ported archviz (nokta.arch) pages */}
         <link rel="stylesheet" href="/mir.css" />
@@ -26,10 +30,8 @@ export default function RootLayout({
         {/* colour-flood overlay (sits below the header, above content) */}
         <BranchReveal />
 
-        {/* persistent white header: big wordmark + the segmented tab bar.
-            The inner wrapper is centred and capped at the tab group's width, so
-            the logo's left edge always aligns with the (centred) home tab. */}
-        <header className="nk-topbar">
+        {/* Brand row — wordmark + utility links. Scrolls away with the page. */}
+        <header className="nk-brandbar">
           <div className="nk-topbar-inner">
             <div className="nk-topbar-row">
               <Link href="/" className="nk-brand" aria-label="nokta — Startseite">
@@ -42,11 +44,19 @@ export default function RootLayout({
                 <Link href="/datenschutz" className="nk-util">datenschutz.</Link>
               </nav>
             </div>
-            <TabBar />
           </div>
         </header>
 
+        {/* Tab bar — sticks to the top of the viewport once reached. */}
+        <div className="nk-tabsticky">
+          <div className="nk-topbar-inner">
+            <TabBar />
+          </div>
+        </div>
+
         {children}
+
+        <Footer />
       </body>
     </html>
   );

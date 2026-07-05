@@ -30,8 +30,20 @@ export default function BranchReveal() {
   const overlayRef = useRef<HTMLDivElement>(null);
   const revealing = useRef(false);
 
-  // Non-reveal navigations (the reveal handles its own commit).
   useEffect(() => {
+    // Snap exactly to the top on every navigation (instant, bypassing the CSS
+    // smooth-scroll). A second snap next frame catches any post-layout shift
+    // (e.g. the arch grid's lazy images) so it always lands fully at the top.
+    const html = document.documentElement;
+    const prev = html.style.scrollBehavior;
+    html.style.scrollBehavior = "auto";
+    window.scrollTo(0, 0);
+    requestAnimationFrame(() => {
+      window.scrollTo(0, 0);
+      html.style.scrollBehavior = prev;
+    });
+
+    // Non-reveal navigations (the reveal handles its own commit).
     if (revealing.current) return;
     applyBranch(branchForPath(pathname));
   }, [pathname]);
