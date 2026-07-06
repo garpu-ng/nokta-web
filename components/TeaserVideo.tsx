@@ -23,14 +23,14 @@ export default function TeaserVideo() {
       <video
         ref={ref}
         className={styles.video}
-        poster="/noktateaser-poster.jpg?v=28"
+        poster="/noktateaser-poster.jpg?v=29"
         autoPlay
         muted
         loop
         playsInline
         preload="auto"
       >
-        <source src="/noktateaser.mp4?v=28" type="video/mp4" />
+        <source src="/noktateaser.mp4?v=29" type="video/mp4" />
       </video>
       <span className={styles.logo}>
         nokta<span className={styles.dot}>.</span>
