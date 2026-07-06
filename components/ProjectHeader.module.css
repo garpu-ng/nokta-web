@@ -1,0 +1,84 @@
+/* Archviz project detail header + the floating sticky frame that slides in
+   from the top once you scroll past the real header. */
+
+.header {
+  padding: 6svh 4svw 3svh;
+  padding-left: max(4svw, 220px);
+}
+
+.header h1 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 1rem 0 0.5rem;
+  color: var(--on-brand);
+}
+
+.projectMeta {
+  font-size: 0.75rem;
+  color: #888;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+/* On the coloured project page the in-flow header meta is light; the white
+   sticky card below keeps the dark #888. */
+.header .projectMeta {
+  color: var(--on-brand);
+  opacity: 0.8;
+}
+
+.back {
+  font-size: 0.72rem;
+  color: var(--on-brand);
+  opacity: 0.7;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Project sticky header — slides in from top, centered. */
+.sticky {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(calc(-100% - 40px));
+  background: #fff;
+  border: 1px solid #111;
+  padding: 14px 32px;
+  z-index: 100;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: center;
+  min-width: 260px;
+}
+
+.stickyVisible {
+  transform: translateX(-50%) translateY(0);
+}
+
+.stickyTitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+}
+
+.stickyMeta {
+  font-size: 0.65rem !important;
+  margin: 0 !important;
+}
+
+@media (max-width: 767px) {
+  .header {
+    padding-left: 5vw !important;
+    padding-right: 5vw !important;
+  }
+
+  /* Keep the sticky bar below the top nav. */
+  .sticky {
+    top: 94px !important;
+    min-width: 0 !important;
+    max-width: 88vw;
+  }
+}

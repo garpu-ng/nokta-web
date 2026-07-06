@@ -1,0 +1,135 @@
+/* ══════════════════════════════════════════════════════════════════
+   Archviz (nokta.arch) layer — GLOBAL ON PURPOSE.
+
+   These rules augment Webflow classes that are defined in public/mir.css
+   (.work-section, .work_list, .work_item, .work-link, .work-project — the
+   12-column grid the /arch page is built on). Because the markup must keep
+   matching mir.css's global class names, these overrides CANNOT be scoped
+   into a CSS Module. They live here, global and documented, instead of being
+   mixed into the nokta component/page modules.
+
+   Owned by: components/WorkGrid.tsx (and the /arch route).
+   Do NOT rename these selectors or move them into a module — that would
+   detach them from mir.css and break the arch grid.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* Grid fills the shared column, no extra centering needed. The side padding is
+   zeroed so the images sit flush with the .wa-grid-column edge (which is padded
+   to match the .nk-branch header) — otherwise mir.css's `padding:0 2svw` would
+   re-inset the grid and misalign it from the header text. */
+.work-section.top.work-new {
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Work item aspect ratio + border. */
+.work-link {
+  aspect-ratio: 1/1;
+  outline: 1px solid #111 !important;
+}
+
+.work-link.big {
+  aspect-ratio: 1/1;
+  outline: 1px solid #111 !important;
+}
+
+/* Project image fills container. */
+.project-image-main {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+/* Hover zoom. */
+.work-link:hover .project-image-main {
+  transform: scale(1.03);
+  transition: transform 0.6s ease;
+}
+
+/* Project labels: white rectangle with black text, overlaid on the arch images. */
+.project-card.new {
+  background: #fff !important;
+  padding: 8px 22px !important;
+}
+.project-card .project-name {
+  color: #111 !important;
+}
+
+/* ── Mobile (≤767px): work grid 2-up, ignoring the desktop 12-col spans ── */
+@media (max-width: 767px) {
+  .work_list.new {
+    grid-template-columns: 1fr 1fr !important;
+    grid-column-gap: 8px !important;
+    grid-row-gap: 8px !important;
+  }
+
+  .work_item {
+    grid-column: auto !important;
+  }
+}
+
+/* Small phones: single-column, full-bleed work images. */
+@media (max-width: 479px) {
+  .work_list.new {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── Carousel (components/Carousel.tsx) ──────────────────────────────
+   Also coupled to mir.css: .carousel-inner{height/​display:flex} and
+   .carousel-track{display:flex} come from mir.css — these rules only augment
+   (scroll animation, card framing). Keep global; do NOT modularize. */
+@keyframes scroll-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.carousel-inner {
+  overflow: hidden;
+}
+
+.carousel-track {
+  animation: scroll-left 40s linear infinite;
+  width: max-content;
+}
+
+.carousel-track:hover {
+  animation-play-state: paused;
+}
+
+.carousel-card {
+  flex-shrink: 0;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-card img {
+  height: 100%;
+  width: auto;
+  object-fit: cover;
+  display: block;
+}
+
+.carousel-card-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px 16px 12px;
+  background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%);
+  color: #fff;
+}
+
+@media (max-width: 767px) {
+  /* cap height so one strip doesn't fill the screen */
+  .carousel-inner {
+    height: 34svh !important;
+  }
+}

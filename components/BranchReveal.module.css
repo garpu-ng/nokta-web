@@ -1,0 +1,12 @@
+/* Colour-flood overlay.
+   Sits BEHIND the page content (which fades in on top) and behind the header,
+   above only the old page background — so the colour floods in as the new
+   background while cards/text stay on top. */
+.reveal {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  display: none;
+  pointer-events: none;
+  will-change: clip-path;
+}

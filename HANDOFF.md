@@ -75,10 +75,27 @@ Everything keys off one file:
   label, path, tagline, desc, accent, bg }`. `branchForPath(pathname)` maps any
   route to its branch (arch also owns `/projekte/*` and `/prozess`).
 
+### Styling architecture (refactored 2026-07-06)
+`app/globals.css` is now just an entry point — it `@import`s four concern-split
+stylesheets, and reusable components carry their own CSS Modules:
+- **`app/styles/tokens.css`** — design tokens + the `:root[data-branch=…]` theme wash
+- **`app/styles/base.css`** — reset/overrides on top of mir.css + global utilities
+  (`.nk-dot`, `.nk-page-fade`)
+- **`app/styles/waarchi.css`** — archviz rules coupled to `public/mir.css` (WorkGrid,
+  Carousel); **global on purpose** — their class names must match mir.css's Webflow grid
+- **`app/styles/nokta.css`** — our studio page + shared page-layout styles (global)
+- **`*.module.css`** — colocated, scoped styles for components: `Footer`, `TabBar`,
+  `BranchReveal`, `ProjectHeader`, plus header chrome in `app/layout.module.css`
+
+> `public/mir.css` (127 KB minified Webflow reset+grid) is **load-bearing** for the
+> `/arch` pages and is still loaded via `<link>` in `layout.tsx` — do not delete it.
+> Tailwind + postcss were removed (they were installed but unused).
+
 ### Theming (the colour wash)
-- **`app/globals.css`** defines CSS variables. `:root` = neutral core (paper
+- **`app/styles/tokens.css`** defines CSS variables. `:root` = neutral core (paper
   `--paper`, ink `--ink`). Each `:root[data-branch="arch|line|nokta"]` overrides
-  `--brand-bg` (page wash) and `--brand-accent` (motto colour).
+  `--brand-bg` (page wash) and `--brand-accent` (motto colour). Keep these colours in
+  sync with `lib/branches.ts`.
 - **`components/BranchReveal.tsx`** (client, in the layout) sets
   `data-branch` on `<html>`:
   - On a **tab click** it plays the circular colour-flood (see below), then
@@ -92,10 +109,11 @@ Everything keys off one file:
   (`--branch`) on a branch page (CSS transitions the size because the element
   persists across navigation in the layout). Clicking a tab dispatches a
   `nk:reveal` DOM event `{ x, y, color, branch }` then `router.push`.
-- **`components/SideNav.tsx`** — the floating left nav restored from waarchi
-  (logo + studio + kontakt). Drifts to vertical-centre on scroll. Desktop only
-  (hidden < 768px via mir.css).
-- **`components/BranchReveal.tsx`** — renders the `.nk-reveal` overlay.
+- **`components/BranchReveal.tsx`** — renders the `.reveal` overlay
+  (`BranchReveal.module.css`).
+
+(The brand row + utility links live directly in `app/layout.tsx`, styled by
+`app/layout.module.css`. There is no separate `SideNav` component.)
 
 ### The colour-flood reveal
 1. Tab click → `TabBar` dispatches `nk:reveal` with the click coords + target
@@ -112,14 +130,15 @@ Everything keys off one file:
 - **`app/template.tsx`** — Next.js `template` remounts per navigation, replaying
   the `.nk-page-fade` fade-in for incoming branch content.
 
-### Key CSS anchors in `globals.css`
-- `.nk-reveal` — the flood overlay
-- `.nk-page-fade` / `@keyframes nk-fade-in` — content fade
-- `.nk-tabbar`, `.nk-tab2`, `--home` / `--branch` variants — the tabs
-- `.nav.dropdown.smaller.big` etc. (from waarchi/mir.css) — the floating left nav
-- `.nk-landing`, `.nk-branch`, `.nk-print*`, `.nk-service*` — page layouts
-- Desktop left-gutter clearance (`padding-left`) is at the **end of the file**
-  so it wins over the base `padding` shorthands — don't move it earlier.
+### Where the CSS lives now
+- Flood overlay → `components/BranchReveal.module.css` (`.reveal`)
+- Content fade (`.nk-page-fade` / `@keyframes nk-fade-in`) → `app/styles/base.css`
+- Tabs (`.tabbar`, `.tab2`, `.home` / `.branch` variants) → `components/TabBar.module.css`
+- Header brand row + utility links → `app/layout.module.css`
+- Landing / branch / print / service page layouts → `app/styles/nokta.css`
+- Archviz grid + carousel (mir.css-coupled, global) → `app/styles/waarchi.css`
+- Desktop left-gutter clearance lives with each page/component's own styles now
+  (`.wa-studio`, `.wa-prozess-page`, `ProjectHeader.module.css`).
 
 ---
 

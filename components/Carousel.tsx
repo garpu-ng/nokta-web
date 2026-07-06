@@ -14,7 +14,7 @@ export default function Carousel() {
             <Link
               key={`${project.slug}-${i}`}
               href={`/projekte/${project.slug}`}
-              className="carousel-card w-dyn-item"
+              className="carousel-card"
               style={{ aspectRatio: "4/3" }}
             >
               <Image

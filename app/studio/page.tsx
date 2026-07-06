@@ -49,6 +49,15 @@ export default function StudioPage() {
             </div>
           </div>
 
+          <div className="wa-team-card">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/flymemert.gif" alt="Mert" className="wa-team-gif" />
+            <div className="wa-team-info">
+              <div className="wa-team-name">Mert</div>
+              <div className="wa-team-role">Platzhalter · TBD</div>
+            </div>
+          </div>
+
         </div>
       </section>
 

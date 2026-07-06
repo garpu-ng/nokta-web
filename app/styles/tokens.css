@@ -1,0 +1,43 @@
+/* ══════════════════════════════════════════════════════════════════
+   Design tokens — the single source of truth for colour + type.
+   The whole-page "colour wash" is driven entirely from here: BranchReveal
+   sets data-branch on <html>, and these [data-branch] blocks swap the
+   --brand-* variables. Every component/module reads var(--brand-accent)
+   etc. rather than hardcoding a colour.
+   NOTE: branch colours here must stay in sync with lib/branches.ts.
+   ══════════════════════════════════════════════════════════════════ */
+
+:root {
+  --wa-font: 'Jost', Arial, sans-serif;
+
+  /* Core (neutral) identity. Each branch overrides --brand-bg and
+     --brand-accent below; the body background transitions between them. */
+  --paper: #f2eee6;
+  --ink: #1a1a18;
+  --brand-bg: var(--paper);    /* whole-page flood colour */
+  --brand-accent: var(--ink);  /* dot / accents */
+  --on-brand: var(--ink);      /* text sitting directly on the flood colour */
+}
+
+/* Branch motto-colours. The page floods this colour; the matching tab shares it
+   so the active tab connects into the page. Text on the colour goes light. */
+:root[data-branch="nokta"] {
+  --brand-bg: #ae6a4e;
+  --brand-accent: #ae6a4e; /* clay */
+  --on-brand: #faf6f0;
+}
+:root[data-branch="arch"] {
+  --brand-bg: #5c6e82;
+  --brand-accent: #5c6e82; /* slate blue */
+  --on-brand: #f4f6f9;
+}
+:root[data-branch="line"] {
+  --brand-bg: #6e7a54;
+  --brand-accent: #6e7a54; /* drafting green */
+  --on-brand: #f5f6ee;
+}
+:root[data-branch="home"] {
+  --brand-bg: #1a1a18;
+  --brand-accent: #1a1a18; /* black */
+  --on-brand: #f2eee6; /* paper text on black */
+}

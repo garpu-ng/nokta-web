@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { branchForPath, type BranchKey } from "@/lib/branches";
+import styles from "./BranchReveal.module.css";
 
 export type RevealDetail = {
   x: number;
@@ -83,5 +84,5 @@ export default function BranchReveal() {
     return () => window.removeEventListener("nk:reveal", onReveal);
   }, []);
 
-  return <div ref={overlayRef} className="nk-reveal" aria-hidden="true" />;
+  return <div ref={overlayRef} className={styles.reveal} aria-hidden="true" />;
 }

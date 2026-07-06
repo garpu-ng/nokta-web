@@ -1,0 +1,65 @@
+/* ══════════════════════════════════════════════════════════════════
+   Base layer — our document-level styles that sit ON TOP of public/mir.css
+   (the 127 KB Webflow reset/grid loaded via <link> in layout.tsx).
+   The !important flags here are deliberate: they override real Webflow
+   defaults from mir.css (font-family, body{background:#fff}, line-height).
+   Also holds the two cross-cutting themed utilities used across pages
+   (.nk-dot) and the per-navigation content fade (.nk-page-fade).
+   ══════════════════════════════════════════════════════════════════ */
+
+/* Remap everything to Jost — beats mir.css's html{font-family:sans-serif}. */
+* {
+  font-family: var(--wa-font) !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  background: var(--brand-bg);
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  /* !important beats mir.css's `body{background-color:#fff}` (loaded after).
+     Branch-to-branch transitions are animated by the reveal overlay, so the
+     base bg swaps instantly underneath it. */
+  background: var(--brand-bg) !important;
+  color: var(--ink);
+  /* sticky footer: page content grows, footer sits at the bottom */
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
+/* ── Cross-cutting utilities ─────────────────────────────────────────── */
+
+/* The accent dot (used in landing + branch headings). */
+.nk-dot {
+  color: var(--brand-accent);
+  transition: color 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Incoming-page fade (app/template.tsx remounts this per navigation).
+   Positioned above the flood overlay so content is never painted over. */
+.nk-page-fade {
+  position: relative;
+  z-index: 1;
+  flex: 1 0 auto;
+  /* Page content is at least a full viewport tall, so the footer always sits
+     below the fold on load (you scroll to reach it) on any screen size. */
+  min-height: 100svh;
+  animation: nk-fade-in 0.5s ease both;
+}
+@keyframes nk-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,667 @@
+/* ══════════════════════════════════════════════════════════════════
+   nokta page + shared-layout styles — GLOBAL.
+
+   These are our own (non-mir.css) styles for the studio pages and the
+   shared page vocabulary that several routes reuse:
+     - .nk-branch* — the generic branch-page shell (/arch, /line, /nokta)
+     - .wa-prozess* / .wa-kontakt* — shared by /prozess and /kontakt
+     - .wa-page* — shared by /impressum and /datenschutz
+   Because this vocabulary is shared across pages (with descendant-coupled
+   overrides like `.wa-kontakt-page .wa-prozess-header`), it is kept as one
+   organized global stylesheet rather than fragmented into per-page modules.
+   Reusable *components* live in their own *.module.css (Footer, TabBar,
+   ProjectHeader, …); this file is for page/shared layout.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* Archviz grid column (/arch). Matches the .nk-branch header box exactly
+   (same max-width + horizontal padding) so the images line up flush with the
+   nokta.arch header text. The work-section's own side padding is zeroed in
+   waarchi.css so nothing re-insets the grid. */
+.wa-grid-column {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(20px, 5vw, 48px);
+  padding-right: clamp(20px, 5vw, 48px);
+}
+
+/* ── Studio page ──────────────────────────────────────────────── */
+.wa-studio {
+  padding: 8svh max(4svw, 220px) 10svh;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+/* Hero: large heading left, text right */
+.wa-studio-hero {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 6svw;
+  align-items: start;
+  padding-bottom: 7svh;
+}
+
+.wa-studio-hero-heading {
+  font-size: clamp(4rem, 8vw, 9rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  margin: 0;
+}
+
+.wa-studio-hero-text p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #444;
+  margin: 0 0 1.25rem;
+}
+
+.wa-studio-hero-text p:last-child {
+  margin-bottom: 0;
+}
+
+.wa-studio-section {
+  margin-top: 6svh;
+}
+
+/* Section label */
+.wa-studio-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #111;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #111;
+}
+
+/* Team grid */
+.wa-team-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.wa-team-card {
+  outline: 1px solid #111;
+  overflow: hidden;
+}
+
+.wa-team-gif {
+  display: block;
+  max-height: 700px;
+  width: auto;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.wa-team-info {
+  padding: 16px 20px;
+}
+
+.wa-team-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+}
+
+.wa-team-role {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #999;
+}
+
+/* CTA */
+.wa-studio-cta {
+  margin-top: 7svh;
+  padding-top: 4svh;
+  border-top: 1px solid #111;
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.wa-studio-cta-text {
+  font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.wa-studio-cta-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.wa-studio-cta-link {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #111;
+  text-decoration: none;
+  border-bottom: 1px solid #111;
+  padding-bottom: 2px;
+}
+
+/* ── Legal pages (/impressum, /datenschutz) ───────────────────── */
+.wa-page {
+  padding: 8svh 4svw;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.wa-page h1 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1.1;
+  margin: 0 0 2rem;
+  letter-spacing: -0.02em;
+}
+
+.wa-page p {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: #444;
+  margin-bottom: 1.25rem;
+}
+
+.wa-page a {
+  color: #111;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid #111;
+  padding-bottom: 1px;
+}
+
+/* ── Kontakt page (reuses .wa-prozess-* below) ────────────────── */
+.wa-kontakt-page {
+  padding-top: 4svh;
+  padding-bottom: 6svh;
+}
+
+.wa-kontakt-page .wa-prozess-header {
+  margin-bottom: 1svh;
+  position: relative;
+  z-index: 1;
+}
+
+.wa-kontakt-page .wa-prozess-gif-wrap {
+  margin-top: -8svh;
+  margin-bottom: -8svh;
+}
+
+.wa-kontakt-page .wa-kontakt-info {
+  position: relative;
+  z-index: 1;
+}
+
+.wa-kontakt-hero-gif {
+  width: 500px;
+  height: 500px;
+  object-fit: cover;
+  display: block;
+}
+
+.wa-kontakt-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.wa-kontakt-email {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #111;
+  text-decoration: none;
+  border-bottom: 1px solid #111;
+  padding-bottom: 2px;
+  margin-bottom: 2rem;
+  display: inline-block;
+}
+
+.wa-kontakt-address {
+  font-size: 0.8rem;
+  color: #aaa;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ── Prozess page (shared by /prozess and /kontakt) ───────────── */
+.wa-prozess-page {
+  padding: 8svh max(4svw, 220px) 10svh;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.wa-prozess-header {
+  margin-bottom: 4svh;
+  text-align: center;
+}
+
+.wa-prozess-heading {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.25rem;
+  line-height: 1.1;
+}
+
+.wa-prozess-intro {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: #555;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* GIF — centered, 500×500 */
+.wa-prozess-gif-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20svh;
+}
+
+.wa-prozess-hero-gif {
+  width: 500px;
+  height: 500px;
+  object-fit: cover;
+  display: block;
+}
+
+.wa-prozess-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 8svh;
+  margin-top: 8svh;
+}
+
+.wa-prozess-step {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5svw;
+  align-items: start;
+}
+
+.wa-prozess-step--reverse .wa-prozess-image-wrap {
+  order: 2;
+}
+
+.wa-prozess-step--reverse .wa-prozess-text {
+  order: 1;
+}
+
+.wa-prozess-image-wrap {
+  outline: 1px solid #111;
+  overflow: hidden;
+}
+
+.wa-prozess-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Large display number */
+.wa-prozess-number {
+  display: block;
+  font-size: clamp(4rem, 6vw, 7rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: #e8e8e8;
+  line-height: 1;
+  margin: 0 0 0.25rem;
+}
+
+.wa-prozess-title {
+  font-size: clamp(1.3rem, 2.2vw, 1.9rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.25rem;
+  line-height: 1.15;
+}
+
+.wa-prozess-body {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: #444;
+  margin: 0;
+}
+
+/* ── Project detail page images (/projekte/[slug]) ────────────── */
+.wa-project-images {
+  display: flex;
+  flex-direction: column;
+  gap: 17.56px;
+}
+
+.wa-image-window {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.wa-project-img {
+  display: block;
+  max-width: min(1500px, 100%);
+  max-height: 900px;
+  width: auto;
+  height: auto;
+  outline: 1px solid #111;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   MOBILE / RESPONSIVE  (≤767px) — undo the 220px sidebar-clearance
+   paddings so content can use the full width on phones.
+   ══════════════════════════════════════════════════════════════════ */
+@media (max-width: 767px) {
+
+  /* ── Collapse the 220px sidebar-clearance paddings ─────────────── */
+  .wa-studio,
+  .wa-prozess-page {
+    padding-left: 5vw !important;
+    padding-right: 5vw !important;
+    padding-top: 4svh !important;
+  }
+
+  /* ── Studio ────────────────────────────────────────────────────── */
+  .wa-studio-hero {
+    grid-template-columns: 1fr !important;
+    gap: 3svh !important;
+    padding-bottom: 4svh !important;
+  }
+
+  .wa-studio-hero-heading {
+    font-size: clamp(3rem, 16vw, 5rem) !important;
+  }
+
+  .wa-team-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .wa-studio-cta {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 1.25rem !important;
+  }
+
+  /* ── Prozess ───────────────────────────────────────────────────── */
+  .wa-prozess-step {
+    grid-template-columns: 1fr !important;
+    gap: 2svh !important;
+  }
+
+  /* Keep the image above the text even on "reverse" rows */
+  .wa-prozess-step--reverse .wa-prozess-image-wrap {
+    order: 0 !important;
+  }
+
+  .wa-prozess-step--reverse .wa-prozess-text {
+    order: 1 !important;
+  }
+
+  .wa-prozess-gif-wrap {
+    margin-bottom: 6svh !important;
+  }
+
+  /* Fixed 500px hero GIFs → fluid squares that never overflow */
+  .wa-prozess-hero-gif,
+  .wa-kontakt-hero-gif {
+    width: min(500px, 78vw) !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1;
+  }
+
+  /* ── Kontakt: drop the desktop overlap trick ───────────────────── */
+  .wa-kontakt-page .wa-prozess-gif-wrap {
+    margin-top: 0 !important;
+    margin-bottom: 2svh !important;
+  }
+
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   nokta landing + branch pages
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── Core landing (/) ─────────────────────────────────────────────── */
+.nk-landing {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: clamp(3rem, 10vh, 7rem) clamp(20px, 5vw, 48px) 6rem;
+}
+
+.nk-landing-lead {
+  font-size: clamp(1rem, 2.2vw, 1.4rem);
+  color: var(--on-brand);
+  opacity: 0.75;
+  margin: 1.5rem 0 clamp(3rem, 8vh, 5rem);
+  max-width: 30ch;
+  line-height: 1.5;
+}
+
+.nk-branch-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.nk-branch-card {
+  --card: var(--accent);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.75rem 1.5rem 1.5rem;
+  border: 1px solid color-mix(in srgb, var(--on-brand) 45%, transparent);
+  text-decoration: none;
+  color: var(--on-brand);
+  background: transparent;
+  min-height: 230px;
+  transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease;
+}
+
+.nk-branch-card:hover {
+  background: var(--card);
+  color: #fff;
+}
+
+.nk-branch-card__key {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.nk-branch-card__key .nk-dot {
+  color: var(--card);
+  transition: color 0.35s ease;
+}
+
+.nk-branch-card:hover .nk-branch-card__key .nk-dot {
+  color: #fff;
+}
+
+.nk-branch-card__tag {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.65;
+}
+
+.nk-branch-card__desc {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  margin-top: auto;
+  opacity: 0.85;
+}
+
+/* ── Generic branch page shell (/arch, /line, /nokta) ─────────────── */
+.nk-branch {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: clamp(2.5rem, 7vh, 5rem) clamp(20px, 5vw, 48px) 6rem;
+}
+
+.nk-branch-head {
+  margin-bottom: clamp(2rem, 5vh, 3.5rem);
+}
+
+.nk-branch-title {
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  margin: 0;
+  color: var(--on-brand);
+}
+
+.nk-branch-title .nk-dot {
+  color: var(--on-brand);
+}
+
+.nk-branch-tag {
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--on-brand);
+  opacity: 0.8;
+  margin: 0.9rem 0 0;
+}
+
+.nk-branch-lead {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--on-brand);
+  opacity: 0.92;
+  max-width: 60ch;
+  margin: 1.25rem 0 0;
+}
+
+/* ── nokta.line — print shop ──────────────────────────────────────── */
+.nk-print-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.nk-print {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--ink);
+  background: #faf9f5;
+}
+
+/* placeholder art frame until real line-art assets land */
+.nk-print__art {
+  aspect-ratio: 3 / 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  border-bottom: 1px solid var(--ink);
+  background:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 11px,
+      rgba(94, 107, 78, 0.12) 11px,
+      rgba(94, 107, 78, 0.12) 12px
+    );
+}
+
+.nk-print__art span {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--brand-accent);
+  text-align: center;
+}
+
+.nk-print__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1rem 1.1rem 1.2rem;
+}
+
+.nk-print__name {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.nk-print__meta {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #888;
+}
+
+.nk-print__buy {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.6rem;
+}
+
+.nk-print__price {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.nk-btn {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #fff;
+  background: var(--ink); /* black button, per the sketch */
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* ── nokta (design/print) services ────────────────────────────────── */
+.nk-service-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.nk-service {
+  padding: 1.5rem;
+  border: 1px solid var(--ink);
+  background: #faf8f4; /* paper card so text reads on the coloured page */
+}
+
+.nk-service h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.5rem;
+  color: var(--ink);
+}
+
+.nk-service p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #555;
+  margin: 0;
+}
+
+/* ── Mobile ───────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .nk-branch-grid,
+  .nk-print-grid,
+  .nk-service-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .nk-branch-card {
+    min-height: 0;
+  }
+}

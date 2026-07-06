@@ -1,0 +1,87 @@
+/* Segmented bar — three equal thirds, each filled with its motto colour
+   (set via the --tab custom property inline). The active branch's tab shares
+   the page colour, so it reads as connected. */
+.tabbar {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  width: 100%;
+}
+
+.tab2 {
+  /* ~400px per tab; shrinks to fit rather than overflow on narrow screens */
+  flex: 0 1 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  text-align: center;
+  text-decoration: none;
+  background: var(--tab);
+  color: #fff;
+  padding: 12px;
+  transition:
+    min-height 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+    padding 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.18s ease;
+}
+/* On hover the tab grows 5px downward only — a solid extension in the tab's
+   own colour, so it doesn't shift siblings or the layout. */
+.tab2:hover {
+  box-shadow: 0 5px 0 0 var(--tab);
+}
+
+.label {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #fff;
+  transition: font-size 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.dot {
+  color: rgba(255, 255, 255, 0.85);
+}
+.tag {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.82);
+  white-space: nowrap;
+}
+
+/* HOME — tall, full detail */
+.home .tab2 {
+  min-height: 150px;
+}
+.home .label {
+  font-size: 1.7rem;
+}
+
+/* BRANCH — reclined into a compact strip */
+.branch .tab2 {
+  min-height: 0;
+  padding: 11px 12px;
+}
+.branch .label {
+  font-size: 1rem;
+}
+.branch .tag {
+  display: none;
+}
+
+/* ── Mobile ───────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .tab2 {
+    padding: 9px 6px;
+  }
+  .label {
+    font-size: 0.82rem !important;
+    letter-spacing: -0.03em;
+  }
+  .home .tab2 {
+    min-height: 92px;
+  }
+  .tag {
+    display: none;
+  }
+}

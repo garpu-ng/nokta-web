@@ -4,6 +4,7 @@ import "./globals.css";
 import TabBar from "@/components/TabBar";
 import BranchReveal from "@/components/BranchReveal";
 import Footer from "@/components/Footer";
+import styles from "./layout.module.css";
 
 export const metadata: Metadata = {
   title: "nokta — Studio für Design, Architekturvisualisierung & Liniendrucke",
@@ -26,30 +27,33 @@ export default function RootLayout({
         {/* mir.no layout CSS — used by the ported archviz (nokta.arch) pages */}
         <link rel="stylesheet" href="/mir.css" />
       </head>
-      <body>
+      {/* suppressHydrationWarning: browser extensions (e.g. asbplayer) inject
+          attributes on <body> before React hydrates; this scopes the warning
+          to <body> only and doesn't hide real mismatches elsewhere. */}
+      <body suppressHydrationWarning>
         {/* colour-flood overlay (sits below the header, above content) */}
         <BranchReveal />
 
         {/* Brand row — wordmark + utility links. Scrolls away with the page. */}
-        <header className="nk-brandbar">
-          <div className="nk-topbar-inner">
-            <div className="nk-topbar-row">
-              <Link href="/" className="nk-brand" aria-label="nokta — Startseite">
-                nokta<span className="nk-brand-dot">.</span>
+        <header className={styles.brandbar}>
+          <div className={styles.topbarInner}>
+            <div className={styles.topbarRow}>
+              <Link href="/" className={styles.brand} aria-label="nokta — Startseite">
+                nokta<span className={styles.brandDot}>.</span>
               </Link>
-              <nav className="nk-utility" aria-label="Weitere Seiten">
-                <Link href="/studio" className="nk-util">team.</Link>
-                <Link href="/impressum" className="nk-util">impressum.</Link>
-                <Link href="/kontakt" className="nk-util">contact.</Link>
-                <Link href="/datenschutz" className="nk-util">datenschutz.</Link>
+              <nav className={styles.utility} aria-label="Weitere Seiten">
+                <Link href="/studio" className={styles.util}>team.</Link>
+                <Link href="/impressum" className={styles.util}>impressum.</Link>
+                <Link href="/kontakt" className={styles.util}>contact.</Link>
+                <Link href="/datenschutz" className={styles.util}>datenschutz.</Link>
               </nav>
             </div>
           </div>
         </header>
 
         {/* Tab bar — sticks to the top of the viewport once reached. */}
-        <div className="nk-tabsticky">
-          <div className="nk-topbar-inner">
+        <div className={styles.tabsticky}>
+          <div className={styles.topbarInner}>
             <TabBar />
           </div>
         </div>

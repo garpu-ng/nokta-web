@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import styles from "./ProjectHeader.module.css";
 
 interface Props {
   title: string;
@@ -30,10 +31,10 @@ export default function ProjectHeader({ title, client, category, year, descripti
   return (
     <>
       {/* Original header — stays in normal document flow */}
-      <div ref={headerRef} className="wa-project-header">
-        <Link href="/arch" className="wa-back">← Alle Projekte</Link>
+      <div ref={headerRef} className={styles.header}>
+        <Link href="/arch" className={styles.back}>← Alle Projekte</Link>
         <h1>{title}</h1>
-        <p className="wa-project-meta">
+        <p className={styles.projectMeta}>
           {client} &nbsp;·&nbsp; {category} &nbsp;·&nbsp; {year}
         </p>
         <p style={{ fontSize: "0.95rem", color: "var(--on-brand)", opacity: 0.9, maxWidth: "560px", lineHeight: 1.7 }}>
@@ -42,9 +43,9 @@ export default function ProjectHeader({ title, client, category, year, descripti
       </div>
 
       {/* Floating sticky frame — slides in from top when scrolled far enough */}
-      <div className={`wa-project-sticky${fixed ? " wa-project-sticky--visible" : ""}`}>
-        <div className="wa-project-sticky-title">{title}</div>
-        <div className="wa-project-meta wa-project-sticky-meta">
+      <div className={`${styles.sticky}${fixed ? " " + styles.stickyVisible : ""}`}>
+        <div className={styles.stickyTitle}>{title}</div>
+        <div className={`${styles.projectMeta} ${styles.stickyMeta}`}>
           {category} &nbsp;·&nbsp; {year}
         </div>
       </div>

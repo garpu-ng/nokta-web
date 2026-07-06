@@ -3,6 +3,7 @@
 import type { CSSProperties, MouseEvent } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { TABS, branchForPath, type Branch } from "@/lib/branches";
+import styles from "./TabBar.module.css";
 
 /**
  * Segmented tab bar — three equal-thirds, each filled with its branch's motto
@@ -30,7 +31,7 @@ export default function TabBar() {
 
   return (
     <div
-      className={`nk-tabbar ${isHome ? "nk-tabbar--home" : "nk-tabbar--branch"}`}
+      className={`${styles.tabbar} ${isHome ? styles.home : styles.branch}`}
       role="tablist"
     >
       {TABS.map((b) => (
@@ -40,14 +41,14 @@ export default function TabBar() {
           role="tab"
           aria-selected={active === b.key}
           onClick={(e) => onTab(e, b)}
-          className={`nk-tab2 ${active === b.key ? "nk-tab2--active" : ""}`}
+          className={styles.tab2}
           style={{ "--tab": b.bg } as CSSProperties}
         >
-          <span className="nk-tab2__label">
+          <span className={styles.label}>
             nokta.{b.label}
-            <span className="nk-tab2__dot">.</span>
+            <span className={styles.dot}>.</span>
           </span>
-          <span className="nk-tab2__tag">{b.tagline}</span>
+          <span className={styles.tag}>{b.tagline}</span>
         </a>
       ))}
     </div>
