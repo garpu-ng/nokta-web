@@ -1,0 +1,39 @@
+/* Teaser banner — capped at the shared content width (= the four tabs), the
+   calm footage with the nokta. wordmark centred on it. */
+.teaser {
+  container-type: inline-size; /* so the wordmark scales with the video width */
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  overflow: hidden;
+  background: #000;
+}
+
+.video {
+  display: block;
+  width: 100%;
+  height: clamp(190px, 46vh, 480px);
+  object-fit: cover;
+}
+
+/* Centred wordmark, scaling with the video width (container query units). */
+.logo {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  font-size: 9cqw;
+  text-shadow: 0 2px 40px rgba(0, 0, 0, 0.55);
+}
+.dot {
+  color: #fff;
+}

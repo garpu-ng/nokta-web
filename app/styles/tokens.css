@@ -17,6 +17,10 @@
   --brand-bg: var(--paper);    /* whole-page flood colour */
   --brand-accent: var(--ink);  /* dot / accents */
   --on-brand: var(--ink);      /* text sitting directly on the flood colour */
+
+  /* Shared max content width = the four tabs (4 × 400px). The tab bar, the
+     teaser video, and the home pillar all align to this. */
+  --content-max: 1600px;
 }
 
 /* Branch motto-colours. The page floods this colour; the matching tab shares it

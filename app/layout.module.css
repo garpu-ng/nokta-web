@@ -17,7 +17,7 @@
 /* Centred column, capped at the tab group's width. Keeps the tabs centred on
    wide screens while the logo (padding-left: 0) anchors to the group's left edge. */
 .topbarInner {
-  max-width: 1600px;
+  max-width: var(--content-max);
   margin: 0 auto;
 }
 
