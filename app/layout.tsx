@@ -38,16 +38,21 @@ export default function RootLayout({
         <header className={styles.brandbar}>
           <div className={styles.topbarInner}>
             <div className={styles.topbarRow}>
-              <Link href="/" className={styles.brand} aria-label="nokta, Startseite">
-                nokta
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/nokta_dot_black.webp"
-                  alt=""
-                  aria-hidden="true"
-                  className={styles.brandDot}
-                />
-              </Link>
+              {/* The word links home; the dot is a hidden easter egg (/punkt). */}
+              <div className={styles.brand}>
+                <Link href="/" className={styles.brandWord} aria-label="nokta, Startseite">
+                  nokta
+                </Link>
+                <Link href="/punkt" className={styles.brandDotLink} aria-label="Punkt">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/nokta_dot_black.webp"
+                    alt=""
+                    aria-hidden="true"
+                    className={styles.brandDot}
+                  />
+                </Link>
+              </div>
               <nav className={styles.utility} aria-label="Weitere Seiten">
                 <Link href="/studio" className={styles.util}>team.</Link>
                 <Link href="/impressum" className={styles.util}>impressum.</Link>

@@ -1,0 +1,58 @@
+/* Full-screen takeover for the /punkt easter egg — sits above the header,
+   tabs and footer (z above 900) so it reads as its own little world. */
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: #1a1a18;
+  overflow: hidden;
+  cursor: crosshair;
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+/* Centred wordmark, sitting on the living dot. */
+.center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.word {
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: #f2eee6;
+  font-size: clamp(2rem, 7vw, 5rem);
+  user-select: none;
+}
+.word img {
+  display: inline-block;
+  width: 0.486em;
+  height: 0.486em;
+  margin-left: calc(-0.16em + 7px);
+  vertical-align: calc(-0.17em + 1px);
+}
+
+.back {
+  position: absolute;
+  top: 24px;
+  left: 28px;
+  z-index: 1;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #f2eee6;
+  opacity: 0.5;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+.back:hover {
+  opacity: 1;
+}
