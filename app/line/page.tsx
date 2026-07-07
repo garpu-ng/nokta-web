@@ -22,7 +22,6 @@ export default function LinePage() {
         <p className="nk-branch-lead">
           Ikonische Bauwerke als technische Zeichnung: vektorisierte
           CAD-Liniendrucke, gedruckt in A1, gerahmt und bereit für die Wand.
-          Jeder Druck 100&nbsp;€.
         </p>
       </header>
 
