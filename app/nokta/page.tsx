@@ -1,42 +1,30 @@
 import type { Metadata } from "next";
-import { BRANCH_BY_KEY } from "@/lib/branches";
+import { getT } from "@/lib/i18n";
 
-const branch = BRANCH_BY_KEY.nokta;
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getT();
+  return {
+    title: t("meta.nokta.title"),
+    description: t("branch.nokta.desc"),
+    alternates: { canonical: "/nokta" },
+  };
+}
 
-export const metadata: Metadata = {
-  title: "nokta · Layout, Design und Druck",
-  description: branch.desc,
-  alternates: { canonical: "/nokta" },
-};
+export default async function NoktaPage() {
+  const t = await getT();
+  const services = [0, 1, 2, 3].map((i) => ({
+    title: t(`nokta.svc.${i}.title`),
+    text: t(`nokta.svc.${i}.text`),
+  }));
 
-const services = [
-  {
-    title: "Branding & Identity",
-    text: "Logo, Wortmarke und ein System, das überall funktioniert. Sauber gedacht, schnell umgesetzt.",
-  },
-  {
-    title: "Editorial & Layout",
-    text: "Broschüren, Portfolios und Publikationen. Typografie mit Rhythmus und Luft.",
-  },
-  {
-    title: "Druckvorlagen",
-    text: "Druckreife Dateien mit korrektem Beschnitt, Farbraum und Veredelung für jede Auflage.",
-  },
-  {
-    title: "Poster & Plakat",
-    text: "Großformate, die aus der Nähe und aus der Ferne knallen.",
-  },
-];
-
-export default function NoktaPage() {
   return (
     <main className="nk-branch">
       <header className="nk-branch-head">
         <h1 className="nk-branch-title">
           nokta.nokta<span className="nk-dot">.</span>
         </h1>
-        <p className="nk-branch-tag">{branch.tagline}</p>
-        <p className="nk-branch-lead">{branch.desc}</p>
+        <p className="nk-branch-tag">{t("branch.nokta.tag")}</p>
+        <p className="nk-branch-lead">{t("branch.nokta.desc")}</p>
       </header>
 
       <div className="nk-service-grid">

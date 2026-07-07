@@ -4,25 +4,37 @@ import "./globals.css";
 import TabBar from "@/components/TabBar";
 import BranchReveal from "@/components/BranchReveal";
 import Footer from "@/components/Footer";
+import LanguageToggle from "@/components/LanguageToggle";
+import { getLocale, getT } from "@/lib/i18n";
 import styles from "./layout.module.css";
 
-export const metadata: Metadata = {
-  title: "nokta · Studio für Design, Architekturvisualisierung und Liniendrucke",
-  description:
-    "nokta ist ein interdisziplinäres Designstudio aus NRW: Design und Druck, Architekturvisualisierung und CAD-Liniendrucke. Eigene Tools, viele Ideen, kurze Wege.",
-  metadataBase: new URL("https://nokta.kaanmaan.cv"),
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getT();
+  return {
+    title: t("meta.site.title"),
+    description: t("meta.site.desc"),
+    metadataBase: new URL("https://nokta.kaanmaan.cv"),
+  };
+}
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const locale = await getLocale();
+  const t = await getT();
+  const taglines = {
+    home: t("branch.home.tag"),
+    nokta: t("branch.nokta.tag"),
+    arch: t("branch.arch.tag"),
+    line: t("branch.line.tag"),
+  };
   return (
     // data-scroll-behavior="smooth" → Next disables smooth scrolling *during
     // route transitions* (so navigation lands cleanly at the top) while keeping
     // CSS smooth-scroll for in-page scrolling.
-    <html lang="de" data-scroll-behavior="smooth">
+    <html lang={locale} data-scroll-behavior="smooth">
       <head>
         {/* mir.no layout CSS — used by the ported archviz (nokta.arch) pages */}
         <link rel="stylesheet" href="/mir.css" />
@@ -40,10 +52,10 @@ export default function RootLayout({
             <div className={styles.topbarRow}>
               {/* The word links home; the dot is a hidden easter egg (/punkt). */}
               <div className={styles.brand}>
-                <Link href="/" className={styles.brandWord} aria-label="nokta, Startseite">
+                <Link href="/" className={styles.brandWord} aria-label={t("aria.home")}>
                   nokta
                 </Link>
-                <Link href="/punkt" className={styles.brandDotLink} aria-label="Punkt">
+                <Link href="/punkt" className={styles.brandDotLink} aria-label={t("aria.punkt")}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src="/nokta_dot_black.webp"
@@ -53,11 +65,12 @@ export default function RootLayout({
                   />
                 </Link>
               </div>
-              <nav className={styles.utility} aria-label="Weitere Seiten">
-                <Link href="/studio" className={styles.util}>team.</Link>
-                <Link href="/impressum" className={styles.util}>impressum.</Link>
-                <Link href="/kontakt" className={styles.util}>contact.</Link>
-                <Link href="/datenschutz" className={styles.util}>datenschutz.</Link>
+              <nav className={styles.utility} aria-label={t("aria.morePages")}>
+                <Link href="/studio" className={styles.util}>{t("nav.team")}</Link>
+                <Link href="/impressum" className={styles.util}>{t("nav.impressum")}</Link>
+                <Link href="/kontakt" className={styles.util}>{t("nav.contact")}</Link>
+                <Link href="/datenschutz" className={styles.util}>{t("nav.datenschutz")}</Link>
+                <LanguageToggle current={locale} label={t("aria.language")} />
               </nav>
             </div>
           </div>
@@ -66,7 +79,7 @@ export default function RootLayout({
         {/* Tab bar — sticks to the top of the viewport once reached. */}
         <div className={styles.tabsticky}>
           <div className={styles.topbarInner}>
-            <TabBar />
+            <TabBar taglines={taglines} />
           </div>
         </div>
 

@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { BRANCHES } from "@/lib/branches";
+import { getT } from "@/lib/i18n";
 import styles from "./Footer.module.css";
 
 // Global footer — pure black, mirrors the header's centred column. Social links
 // are placeholders (href="#") until the real profiles exist.
-export default function Footer() {
+export default async function Footer() {
+  const t = await getT();
   return (
     <footer className={styles.footer}>
       <div className={styles.inner}>
@@ -14,9 +16,9 @@ export default function Footer() {
               nokta<span>.</span>
             </Link>
             <p className={styles.tag}>
-              Ein Studio, drei Disziplinen.
+              {t("footer.tag1")}
               <br />
-              Vom Punkt zur Linie zur Form.
+              {t("footer.tag2")}
             </p>
             <a href="mailto:hallo@waarchi.de" className={styles.email}>
               hallo@waarchi.de
@@ -34,7 +36,7 @@ export default function Footer() {
 
           <nav className={styles.cols} aria-label="Footer">
             <div className={styles.col}>
-              <span className={styles.colH}>Disziplinen</span>
+              <span className={styles.colH}>{t("footer.col.disciplines")}</span>
               <Link href="/" className={styles.link}>
                 nokta.home
               </Link>
@@ -46,15 +48,15 @@ export default function Footer() {
             </div>
 
             <div className={styles.col}>
-              <span className={styles.colH}>Studio</span>
-              <Link href="/studio" className={styles.link}>team</Link>
-              <Link href="/kontakt" className={styles.link}>kontakt</Link>
-              <Link href="/impressum" className={styles.link}>impressum</Link>
-              <Link href="/datenschutz" className={styles.link}>datenschutz</Link>
+              <span className={styles.colH}>{t("footer.col.studio")}</span>
+              <Link href="/studio" className={styles.link}>{t("footer.link.team")}</Link>
+              <Link href="/kontakt" className={styles.link}>{t("footer.link.kontakt")}</Link>
+              <Link href="/impressum" className={styles.link}>{t("footer.link.impressum")}</Link>
+              <Link href="/datenschutz" className={styles.link}>{t("footer.link.datenschutz")}</Link>
             </div>
 
             <div className={styles.col}>
-              <span className={styles.colH}>Social</span>
+              <span className={styles.colH}>{t("footer.col.social")}</span>
               <a href="#" className={styles.link}>Instagram</a>
               <a href="#" className={styles.link}>LinkedIn</a>
               <a href="#" className={styles.link}>Behance</a>
@@ -65,7 +67,7 @@ export default function Footer() {
 
         <div className={styles.bottom}>
           <span>© 2026 nokta · Nordrhein-Westfalen, DE</span>
-          <span>Architektur · Design · Liniendrucke</span>
+          <span>{t("footer.disciplines")}</span>
         </div>
       </div>
     </footer>

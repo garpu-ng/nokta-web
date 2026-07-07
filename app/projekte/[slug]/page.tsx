@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProject, PROJECTS } from "@/lib/projects";
 import ProjectHeader from "@/components/ProjectHeader";
+import { getT } from "@/lib/i18n";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -14,9 +15,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const project = getProject(slug);
   if (!project) return {};
+  const t = await getT();
   return {
     title: `${project.title} · nokta.arch`,
-    description: project.description,
+    description: t(`projects.desc.${slug}`),
   };
 }
 
@@ -24,6 +26,12 @@ export default async function ProjectPage({ params }: Props) {
   const { slug } = await params;
   const project = getProject(slug);
   if (!project) notFound();
+
+  const t = await getT();
+  const clientLabel =
+    project.client === "Privatkunde"
+      ? t("projects.client.private")
+      : project.client;
 
   // Find prev/next for navigation
   const idx = PROJECTS.findIndex((p) => p.slug === slug);
@@ -35,10 +43,11 @@ export default async function ProjectPage({ params }: Props) {
       {/* Header */}
       <ProjectHeader
         title={project.title}
-        client={project.client}
-        category={project.category}
+        client={clientLabel}
+        category={t(`projects.cat.${project.category}`)}
         year={project.year}
-        description={project.description}
+        description={t(`projects.desc.${slug}`)}
+        backLabel={t("project.back")}
       />
 
       {/* Image windows */}

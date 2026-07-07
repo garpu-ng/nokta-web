@@ -1,19 +1,20 @@
 import type { Metadata } from "next";
+import { getT } from "@/lib/i18n";
 
-export const metadata: Metadata = {
-  title: "Kontakt · nokta",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getT();
+  return { title: t("meta.kontakt.title") };
+}
 
-export default function KontaktPage() {
+export default async function KontaktPage() {
+  const t = await getT();
   return (
     <div className="wa-prozess-page wa-kontakt-page">
 
       {/* ── Header ──────────────────────────────────────────────── */}
       <div className="wa-prozess-header">
-        <h1 className="wa-prozess-heading">Kontakt</h1>
-        <p className="wa-prozess-intro">
-          Du hast ein Projekt in Planung? Wir freuen uns, von dir zu hören.
-        </p>
+        <h1 className="wa-prozess-heading">{t("kontakt.heading")}</h1>
+        <p className="wa-prozess-intro">{t("kontakt.intro")}</p>
       </div>
 
       {/* ── Animated dot ────────────────────────────────────────── */}
@@ -25,16 +26,15 @@ export default function KontaktPage() {
       {/* ── Contact info ────────────────────────────────────────── */}
       <div className="wa-kontakt-info">
         <p className="wa-prozess-intro" style={{ marginBottom: "2rem" }}>
-          Für Anfragen, Angebote oder einfach so: schreib uns.
-          Wir melden uns innerhalb von 24 Stunden.
+          {t("kontakt.infoLead")}
         </p>
         <a href="mailto:hallo@waarchi.de" className="wa-kontakt-email">
           hallo@waarchi.de
         </a>
         <p className="wa-kontakt-address">
           nokta Studio<br />
-          Nordrhein-Westfalen, Deutschland<br />
-          USt-IdNr.: auf Anfrage
+          {t("kontakt.addr.region")}<br />
+          {t("kontakt.addr.vat")}
         </p>
       </div>
 

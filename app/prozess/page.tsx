@@ -1,47 +1,34 @@
 import type { Metadata } from "next";
+import { getT } from "@/lib/i18n";
 
-export const metadata: Metadata = {
-  title: "Prozess · nokta",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getT();
+  return { title: t("meta.prozess.title") };
+}
 
-const steps = [
-  {
-    number: "01",
-    title: "Konzept & Referenzen",
-    text: "Am Anfang steht deine Idee. Du schickst uns Pläne, Skizzen und Referenzen, und wir klären gemeinsam, wie das Bild später wirken soll. So steht die Basis, bevor wir loslegen.",
-    image: "/prozess/step1.jpg",
-  },
-  {
-    number: "02",
-    title: "3D-Modellierung",
-    text: 'Aus deinen Unterlagen bauen wir ein detailliertes 3D-Modell von Gebäude und Umgebung, mit sauberen Proportionen und Geometrien. Du bekommst erste Rohansichten ("Clay Renders"), damit wir Perspektive und Bildausschnitt gemeinsam festlegen.',
-    image: "/prozess/step2.jpg",
-  },
-  {
-    number: "03",
-    title: "Materialien & Licht",
-    text: "Jetzt kommt Leben ins Modell. Wir legen fotorealistische Materialien an und setzen das Licht so, dass die Stimmung passt: mal das warme Licht eines Sommertags, mal die Dämmerung.",
-    image: "/prozess/step3.jpg",
-  },
-  {
-    number: "04",
-    title: "Finale & Post-Production",
-    text: "Nach deiner Freigabe rendern wir in hoher Auflösung. In der Post-Production ziehen wir Farben, Kontraste und Details nach, bis das Bild sitzt und dein Projekt genau so zeigt, wie es soll.",
-    image: "/prozess/step4.jpg",
-  },
+const stepImages = [
+  "/prozess/step1.jpg",
+  "/prozess/step2.jpg",
+  "/prozess/step3.jpg",
+  "/prozess/step4.jpg",
 ];
 
-export default function ProzessPage() {
+export default async function ProzessPage() {
+  const t = await getT();
+  const steps = stepImages.map((image, i) => ({
+    number: String(i + 1).padStart(2, "0"),
+    title: t(`prozess.step.${i + 1}.title`),
+    text: t(`prozess.step.${i + 1}.text`),
+    image,
+  }));
+
   return (
     <div className="wa-prozess-page">
 
       {/* ── Header ──────────────────────────────────────────────── */}
       <div className="wa-prozess-header">
-        <h1 className="wa-prozess-heading">Wie wir arbeiten</h1>
-        <p className="wa-prozess-intro">
-          Von der ersten Skizze bis zum fertigen Bild: ein klarer Ablauf. Mit
-          eigenem Setup kommen wir schnell zu vielen Varianten, du entscheidest.
-        </p>
+        <h1 className="wa-prozess-heading">{t("prozess.heading")}</h1>
+        <p className="wa-prozess-intro">{t("prozess.intro")}</p>
       </div>
 
       {/* ── Overview GIF ────────────────────────────────────────── */}
@@ -49,7 +36,7 @@ export default function ProzessPage() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/prozess/howwework-stepbystep.gif.gif"
-          alt="Prozess im Überblick"
+          alt={t("prozess.gifAlt")}
           className="wa-prozess-hero-gif"
         />
       </div>

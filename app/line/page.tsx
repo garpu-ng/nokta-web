@@ -1,28 +1,27 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PRINTS } from "@/lib/prints";
-import { BRANCH_BY_KEY } from "@/lib/branches";
+import { getT } from "@/lib/i18n";
 
-const branch = BRANCH_BY_KEY.line;
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getT();
+  return {
+    title: t("meta.line.title"),
+    description: t("branch.line.desc"),
+    alternates: { canonical: "/line" },
+  };
+}
 
-export const metadata: Metadata = {
-  title: "nokta.line · CAD-Kunstdrucke",
-  description: branch.desc,
-  alternates: { canonical: "/line" },
-};
-
-export default function LinePage() {
+export default async function LinePage() {
+  const t = await getT();
   return (
     <main className="nk-branch">
       <header className="nk-branch-head">
         <h1 className="nk-branch-title">
           nokta.line<span className="nk-dot">.</span>
         </h1>
-        <p className="nk-branch-tag">{branch.tagline}</p>
-        <p className="nk-branch-lead">
-          Ikonische Bauwerke als technische Zeichnung. Aus echten CAD-Daten
-          vektorisiert, in A1 gedruckt, gerahmt und bereit für die Wand.
-        </p>
+        <p className="nk-branch-tag">{t("branch.line.tag")}</p>
+        <p className="nk-branch-lead">{t("line.lead")}</p>
       </header>
 
       <div className="nk-print-grid">
@@ -39,7 +38,7 @@ export default function LinePage() {
               </span>
               <div className="nk-print__buy">
                 <span className="nk-print__price">{print.price} €</span>
-                <span className="nk-print__cta">Ansehen →</span>
+                <span className="nk-print__cta">{t("line.view")}</span>
               </div>
             </div>
           </Link>

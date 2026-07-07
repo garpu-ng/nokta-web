@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PRINTS, getPrint } from "@/lib/prints";
+import { getT } from "@/lib/i18n";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -13,9 +14,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const print = getPrint(slug);
   if (!print) return {};
+  const t = await getT();
   return {
     title: `${print.title} · nokta.line`,
-    description: `${print.title}, ${print.subtitle} · ${print.year} · ${print.architect}. Vektorisierter CAD-Liniendruck, gedruckt in A1 und gerahmt. ${print.price} €.`,
+    description: `${print.title}, ${print.subtitle} · ${print.year} · ${print.architect}. ${t("line.metaDescSuffix")} ${print.price} €.`,
     alternates: { canonical: `/line/${print.slug}` },
   };
 }
@@ -25,6 +27,7 @@ export default async function PrintPage({ params }: Props) {
   const print = getPrint(slug);
   if (!print) notFound();
 
+  const t = await getT();
   const idx = PRINTS.findIndex((p) => p.slug === slug);
   const prev = PRINTS[idx - 1];
   const next = PRINTS[idx + 1];
@@ -32,7 +35,7 @@ export default async function PrintPage({ params }: Props) {
   return (
     <main className="nk-branch nk-print-page">
       <Link href="/line" className="nk-print-back">
-        ← nokta.line
+        {t("line.back")}
       </Link>
 
       <div className="nk-print-detail">
@@ -41,7 +44,7 @@ export default async function PrintPage({ params }: Props) {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={print.image}
-            alt={`${print.title}, vektorisierter CAD-Liniendruck`}
+            alt={`${print.title}, ${t("line.altSuffix")}`}
             className="nk-print-detail__art"
           />
         </div>
@@ -56,44 +59,41 @@ export default async function PrintPage({ params }: Props) {
 
           <dl className="nk-print-detail__specs">
             <div>
-              <dt>Baujahr</dt>
+              <dt>{t("line.spec.year")}</dt>
               <dd>{print.year}</dd>
             </div>
             <div>
-              <dt>Architekt</dt>
+              <dt>{t("line.spec.architect")}</dt>
               <dd>{print.architect}</dd>
             </div>
             <div>
-              <dt>Koordinaten</dt>
+              <dt>{t("line.spec.coords")}</dt>
               <dd>{print.coordinates}</dd>
             </div>
             <div>
-              <dt>Technik</dt>
-              <dd>Vektorisierte CAD-Zeichnung</dd>
+              <dt>{t("line.spec.technique")}</dt>
+              <dd>{t("line.spec.techniqueVal")}</dd>
             </div>
             <div>
-              <dt>Format</dt>
-              <dd>A1 (594 × 841 mm), gerahmt</dd>
+              <dt>{t("line.spec.format")}</dt>
+              <dd>{t("line.spec.formatVal")}</dd>
             </div>
           </dl>
 
-          <p className="nk-print-detail__lead">
-            Ein technischer Aufriss als Kunst. Jede Linie aus einer CAD-Zeichnung
-            vektorisiert, sauber gesetzt, in A1 gedruckt und gerahmt.
-          </p>
+          <p className="nk-print-detail__lead">{t("line.detailLead")}</p>
 
           <div className="nk-print-detail__buy">
             <span className="nk-print-detail__price">{print.price} €</span>
             {/* TODO: wire Stripe Checkout — for now routes to inquiry */}
             <Link href="/kontakt" className="nk-btn">
-              Bestellen
+              {t("line.order")}
             </Link>
           </div>
         </div>
       </div>
 
       {/* Prev / Next */}
-      <nav className="nk-print-nav" aria-label="Weitere Drucke">
+      <nav className="nk-print-nav" aria-label={t("aria.morePrints")}>
         {prev ? (
           <Link href={`/line/${prev.slug}`}>← {prev.title}</Link>
         ) : (

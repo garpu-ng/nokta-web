@@ -11,7 +11,11 @@ import styles from "./TabBar.module.css";
  * The active branch's tab shares the page colour, so it reads as connected to
  * the page. Clicking fires the colour-flood from the click point.
  */
-export default function TabBar() {
+export default function TabBar({
+  taglines,
+}: {
+  taglines: Record<string, string>;
+}) {
   const router = useRouter();
   const pathname = usePathname();
   const active = branchForPath(pathname);
@@ -48,7 +52,7 @@ export default function TabBar() {
             nokta.{b.label}
             <span className={styles.dot}>.</span>
           </span>
-          <span className={styles.tag}>{b.tagline}</span>
+          <span className={styles.tag}>{taglines[b.key] ?? b.tagline}</span>
         </a>
       ))}
     </div>

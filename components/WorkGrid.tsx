@@ -1,8 +1,10 @@
 import { PROJECTS } from "@/lib/projects";
 import Link from "next/link";
 import Image from "next/image";
+import { getT } from "@/lib/i18n";
 
-export default function WorkGrid() {
+export default async function WorkGrid() {
+  const t = await getT();
   return (
     <div className="work-section top work-new">
       <div className="work_wrapper w-dyn-list">
@@ -40,7 +42,9 @@ export default function WorkGrid() {
                       className="project-name re new small"
                       style={{ marginBottom: "4px" }}
                     >
-                      {project.client}
+                      {project.client === "Privatkunde"
+                        ? t("projects.client.private")
+                        : project.client}
                     </div>
                     <div className="project-name new">
                       {project.title}

@@ -10,9 +10,10 @@ interface Props {
   category: string;
   year: string | number;
   description: string;
+  backLabel: string;
 }
 
-export default function ProjectHeader({ title, client, category, year, description }: Props) {
+export default function ProjectHeader({ title, client, category, year, description, backLabel }: Props) {
   const headerRef = useRef<HTMLDivElement>(null);
   const [fixed, setFixed] = useState(false);
 
@@ -32,7 +33,7 @@ export default function ProjectHeader({ title, client, category, year, descripti
     <>
       {/* Original header — stays in normal document flow */}
       <div ref={headerRef} className={styles.header}>
-        <Link href="/arch" className={styles.back}>← Alle Projekte</Link>
+        <Link href="/arch" className={styles.back}>{backLabel}</Link>
         <h1>{title}</h1>
         <p className={styles.projectMeta}>
           {client} &nbsp;·&nbsp; {category} &nbsp;·&nbsp; {year}
