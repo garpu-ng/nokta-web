@@ -4,7 +4,7 @@ import { BRANCH_BY_KEY } from "@/lib/branches";
 const branch = BRANCH_BY_KEY.nokta;
 
 export const metadata: Metadata = {
-  title: "nokta — Layout, Design & Druck",
+  title: "nokta · Layout, Design und Druck",
   description: branch.desc,
   alternates: { canonical: "/nokta" },
 };
@@ -12,11 +12,11 @@ export const metadata: Metadata = {
 const services = [
   {
     title: "Branding & Identity",
-    text: "Logo, Wortmarke und ein visuelles System, das über alle Medien hinweg trägt.",
+    text: "Logo, Wortmarke und ein visuelles System, das überall funktioniert.",
   },
   {
     title: "Editorial & Layout",
-    text: "Broschüren, Portfolios und Publikationen — Typografie mit Sinn für Rhythmus und Weißraum.",
+    text: "Broschüren, Portfolios und Publikationen mit Gespür für Typografie und Weißraum.",
   },
   {
     title: "Druckvorlagen",
@@ -24,7 +24,7 @@ const services = [
   },
   {
     title: "Poster & Plakat",
-    text: "Großformatige Kompositionen, die aus der Nähe wie aus der Ferne funktionieren.",
+    text: "Großformate, die aus der Nähe und aus der Ferne funktionieren.",
   },
 ];
 

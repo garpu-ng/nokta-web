@@ -26,7 +26,7 @@ export const BRANCHES: Branch[] = [
     path: "/nokta",
     tagline: "Layout · Design · Druck",
     desc:
-      "Von der ersten Skizze bis zur Druckvorlage — Branding, Editorial und Layout mit Sinn für Komposition.",
+      "Von der ersten Skizze bis zur fertigen Druckvorlage: Branding, Editorial und Layout mit Gespür für Komposition.",
     accent: "#ae6a4e", // clay
     bg: "#ae6a4e",
   },
@@ -46,7 +46,7 @@ export const BRANCHES: Branch[] = [
     path: "/line",
     tagline: "2D · Vektor · CAD-Kunstdrucke",
     desc:
-      "Technische Zeichnungen als Kunst — gerahmte CAD-Liniendrucke ikonischer Bauwerke.",
+      "Technische Zeichnungen als Kunst: gerahmte CAD-Liniendrucke ikonischer Bauwerke, gedruckt in A1.",
     accent: "#6e7a54", // drafting green
     bg: "#6e7a54",
   },

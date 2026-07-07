@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = getProject(slug);
   if (!project) return {};
   return {
-    title: `${project.title} — nokta.arch`,
+    title: `${project.title} · nokta.arch`,
     description: project.description,
   };
 }
@@ -48,7 +48,7 @@ export default async function ProjectPage({ params }: Props) {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={src}
-              alt={`${project.title} — Bild ${i + 1}`}
+              alt={`${project.title}, Bild ${i + 1}`}
               className="wa-project-img"
               loading={i === 0 ? "eager" : "lazy"}
             />

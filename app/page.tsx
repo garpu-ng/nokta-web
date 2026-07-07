@@ -5,7 +5,7 @@ import { BRANCHES } from "@/lib/branches";
 import TeaserVideo from "@/components/TeaserVideo";
 
 export const metadata: Metadata = {
-  title: "nokta — ein Studio, drei Disziplinen",
+  title: "nokta · ein Studio, drei Disziplinen",
   alternates: { canonical: "/" },
 };
 

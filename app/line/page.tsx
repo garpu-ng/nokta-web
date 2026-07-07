@@ -6,7 +6,7 @@ import { BRANCH_BY_KEY } from "@/lib/branches";
 const branch = BRANCH_BY_KEY.line;
 
 export const metadata: Metadata = {
-  title: "nokta.line — CAD-Kunstdrucke",
+  title: "nokta.line · CAD-Kunstdrucke",
   description: branch.desc,
   alternates: { canonical: "/line" },
 };
@@ -20,8 +20,9 @@ export default function LinePage() {
         </h1>
         <p className="nk-branch-tag">{branch.tagline}</p>
         <p className="nk-branch-lead">
-          Ikonische Bauwerke als technische Zeichnung — vektorisierte
-          CAD-Liniendrucke, gerahmt und bereit für die Wand. Jeder Druck 100&nbsp;€.
+          Ikonische Bauwerke als technische Zeichnung: vektorisierte
+          CAD-Liniendrucke, gedruckt in A1, gerahmt und bereit für die Wand.
+          Jeder Druck 100&nbsp;€.
         </p>
       </header>
 

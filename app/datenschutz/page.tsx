@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Datenschutz — nokta",
+  title: "Datenschutz · nokta",
 };
 
 export default function DatenschutzPage() {
@@ -40,7 +40,7 @@ export default function DatenschutzPage() {
       </p>
 
       <p style={{ opacity: 0.55, fontSize: "0.8rem", marginTop: "3rem" }}>
-        Platzhalter — bitte vor Veröffentlichung durch eine vollständige,
+        Platzhalter: bitte vor Veröffentlichung durch eine vollständige,
         geprüfte Datenschutzerklärung ersetzen (Hosting, Cookies, ggf.
         Zahlungsdienstleister für nokta.line etc.).
       </p>

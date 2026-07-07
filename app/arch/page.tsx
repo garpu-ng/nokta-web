@@ -5,7 +5,7 @@ import { BRANCH_BY_KEY } from "@/lib/branches";
 const branch = BRANCH_BY_KEY.arch;
 
 export const metadata: Metadata = {
-  title: "nokta.arch — Architekturvisualisierung NRW",
+  title: "nokta.arch · Architekturvisualisierung NRW",
   description: branch.desc,
   alternates: { canonical: "/arch" },
 };

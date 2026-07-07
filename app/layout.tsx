@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 import styles from "./layout.module.css";
 
 export const metadata: Metadata = {
-  title: "nokta — Studio für Design, Architekturvisualisierung & Liniendrucke",
+  title: "nokta · Studio für Design, Architekturvisualisierung und Liniendrucke",
   description:
     "nokta ist ein Studio mit drei Disziplinen: nokta (Layout, Design, Druck), nokta.arch (Architekturvisualisierung) und nokta.line (2D-, Vektor- und CAD-Kunstdrucke).",
   metadataBase: new URL("https://nokta.kaanmaan.cv"),
@@ -38,7 +38,7 @@ export default function RootLayout({
         <header className={styles.brandbar}>
           <div className={styles.topbarInner}>
             <div className={styles.topbarRow}>
-              <Link href="/" className={styles.brand} aria-label="nokta — Startseite">
+              <Link href="/" className={styles.brand} aria-label="nokta, Startseite">
                 nokta<span className={styles.brandDot}>.</span>
               </Link>
               <nav className={styles.utility} aria-label="Weitere Seiten">

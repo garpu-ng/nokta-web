@@ -14,8 +14,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const print = getPrint(slug);
   if (!print) return {};
   return {
-    title: `${print.title} — nokta.line`,
-    description: `${print.title}, ${print.subtitle} · ${print.year} · ${print.architect}. Vektorisierter CAD-Liniendruck, gerahmt. ${print.price} €.`,
+    title: `${print.title} · nokta.line`,
+    description: `${print.title}, ${print.subtitle} · ${print.year} · ${print.architect}. Vektorisierter CAD-Liniendruck, gedruckt in A1 und gerahmt. ${print.price} €.`,
     alternates: { canonical: `/line/${print.slug}` },
   };
 }
@@ -41,7 +41,7 @@ export default async function PrintPage({ params }: Props) {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={print.image}
-            alt={`${print.title} — vektorisierter CAD-Liniendruck`}
+            alt={`${print.title}, vektorisierter CAD-Liniendruck`}
             className="nk-print-detail__art"
           />
         </div>
@@ -69,13 +69,17 @@ export default async function PrintPage({ params }: Props) {
             </div>
             <div>
               <dt>Technik</dt>
-              <dd>Vektorisierte CAD-Zeichnung, gerahmt</dd>
+              <dd>Vektorisierte CAD-Zeichnung</dd>
+            </div>
+            <div>
+              <dt>Format</dt>
+              <dd>A1 (594 × 841 mm), gerahmt</dd>
             </div>
           </dl>
 
           <p className="nk-print-detail__lead">
-            Ein technischer Aufriss als Kunst — jede Linie aus einer CAD-Zeichnung
-            vektorisiert, sauber gesetzt und gerahmt für die Wand.
+            Ein technischer Aufriss als Kunst. Jede Linie aus einer CAD-Zeichnung
+            vektorisiert, sauber gesetzt, in A1 gedruckt und gerahmt.
           </p>
 
           <div className="nk-print-detail__buy">

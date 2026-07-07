@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Kontakt — nokta",
+  title: "Kontakt · nokta",
 };
 
 export default function KontaktPage() {
@@ -12,7 +12,7 @@ export default function KontaktPage() {
       <div className="wa-prozess-header">
         <h1 className="wa-prozess-heading">Kontakt</h1>
         <p className="wa-prozess-intro">
-          Haben Sie ein Projekt in Planung? Wir freuen uns darauf, von Ihnen zu hören.
+          Du hast ein Projekt in Planung? Wir freuen uns, von dir zu hören.
         </p>
       </div>
 
@@ -25,7 +25,7 @@ export default function KontaktPage() {
       {/* ── Contact info ────────────────────────────────────────── */}
       <div className="wa-kontakt-info">
         <p className="wa-prozess-intro" style={{ marginBottom: "2rem" }}>
-          Für Anfragen, Angebote oder allgemeine Fragen — schreib uns einfach.
+          Für Anfragen, Angebote oder einfach so: schreib uns.
           Wir melden uns innerhalb von 24 Stunden.
         </p>
         <a href="mailto:hallo@waarchi.de" className="wa-kontakt-email">

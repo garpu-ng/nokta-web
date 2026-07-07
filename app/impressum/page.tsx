@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Impressum — nokta",
+  title: "Impressum · nokta",
 };
 
 export default function ImpressumPage() {
@@ -44,7 +44,7 @@ export default function ImpressumPage() {
       </p>
 
       <p style={{ opacity: 0.55, fontSize: "0.8rem", marginTop: "3rem" }}>
-        Platzhalter — bitte vor Veröffentlichung durch die echten rechtlichen
+        Platzhalter: bitte vor Veröffentlichung durch die echten rechtlichen
         Angaben ersetzen.
       </p>
     </main>

@@ -64,7 +64,7 @@ export default function Footer() {
         </div>
 
         <div className={styles.bottom}>
-          <span>© 2026 nokta — Nordrhein-Westfalen, DE</span>
+          <span>© 2026 nokta · Nordrhein-Westfalen, DE</span>
           <span>Architektur · Design · Liniendrucke</span>
         </div>
       </div>
