@@ -26,7 +26,7 @@ export const BRANCHES: Branch[] = [
     path: "/nokta",
     tagline: "Layout · Design · Druck",
     desc:
-      "Von der ersten Skizze bis zur fertigen Druckvorlage: Branding, Editorial und Layout mit Gespür für Komposition.",
+      "Branding, Editorial, Layout und Druck. Mit eigenen Tools testen wir schnell viele Richtungen und finden das, was sitzt.",
     accent: "#ae6a4e", // clay
     bg: "#ae6a4e",
   },
@@ -36,7 +36,7 @@ export const BRANCHES: Branch[] = [
     path: "/arch",
     tagline: "Architekturvisualisierung",
     desc:
-      "Fotorealistische 3D-Renderings für Architekten, Bauträger und Privatpersonen aus NRW.",
+      "Fotorealistische 3D-Renderings für Architekten, Bauträger und Privatpersonen. Mit eigenem Setup kommen wir schnell zu vielen Varianten.",
     accent: "#5c6e82", // slate blue
     bg: "#5c6e82",
   },
@@ -46,7 +46,7 @@ export const BRANCHES: Branch[] = [
     path: "/line",
     tagline: "2D · Vektor · CAD-Kunstdrucke",
     desc:
-      "Technische Zeichnungen als Kunst: gerahmte CAD-Liniendrucke ikonischer Bauwerke, gedruckt in A1.",
+      "Ikonische Bauwerke als CAD-Liniendruck. Aus echten Zeichnungen vektorisiert, in A1 gedruckt und gerahmt.",
     accent: "#6e7a54", // drafting green
     bg: "#6e7a54",
   },

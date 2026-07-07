@@ -39,8 +39,8 @@ export default function ProzessPage() {
       <div className="wa-prozess-header">
         <h1 className="wa-prozess-heading">Wie wir arbeiten</h1>
         <p className="wa-prozess-intro">
-          Von der ersten Skizze bis zum fertigen Rendering: ein klarer Ablauf,
-          transparent und ganz auf dein Projekt zugeschnitten.
+          Von der ersten Skizze bis zum fertigen Bild: ein klarer Ablauf. Mit
+          eigenem Setup kommen wir schnell zu vielen Varianten, du entscheidest.
         </p>
       </div>
 

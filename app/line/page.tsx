@@ -20,8 +20,8 @@ export default function LinePage() {
         </h1>
         <p className="nk-branch-tag">{branch.tagline}</p>
         <p className="nk-branch-lead">
-          Ikonische Bauwerke als technische Zeichnung: vektorisierte
-          CAD-Liniendrucke, gedruckt in A1, gerahmt und bereit für die Wand.
+          Ikonische Bauwerke als technische Zeichnung. Aus echten CAD-Daten
+          vektorisiert, in A1 gedruckt, gerahmt und bereit für die Wand.
         </p>
       </header>
 

@@ -12,11 +12,11 @@ export const metadata: Metadata = {
 const services = [
   {
     title: "Branding & Identity",
-    text: "Logo, Wortmarke und ein visuelles System, das überall funktioniert.",
+    text: "Logo, Wortmarke und ein System, das überall funktioniert. Sauber gedacht, schnell umgesetzt.",
   },
   {
     title: "Editorial & Layout",
-    text: "Broschüren, Portfolios und Publikationen mit Gespür für Typografie und Weißraum.",
+    text: "Broschüren, Portfolios und Publikationen. Typografie mit Rhythmus und Luft.",
   },
   {
     title: "Druckvorlagen",
@@ -24,7 +24,7 @@ const services = [
   },
   {
     title: "Poster & Plakat",
-    text: "Großformate, die aus der Nähe und aus der Ferne funktionieren.",
+    text: "Großformate, die aus der Nähe und aus der Ferne knallen.",
   },
 ];
 

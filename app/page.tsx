@@ -19,7 +19,8 @@ export default function HomePage() {
       <div className="nk-pillar">
         <main className="nk-landing">
           <p className="nk-landing-lead">
-            Ein Studio, drei Disziplinen. Vom Punkt zur Linie zur Form.
+            Interdisziplinäres Design aus einer Hand. Eigene Tools, viele
+            Ideen, kurze Wege. Vom Punkt zur Linie zur Form.
           </p>
 
           <div className="nk-branch-grid">

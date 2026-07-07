@@ -15,15 +15,20 @@ export default function StudioPage() {
         <h1 className="wa-studio-hero-heading">Studio</h1>
         <div className="wa-studio-hero-text">
           <p>
-            nokta ist ein Designstudio aus Nordrhein-Westfalen. Ein Studio,
-            drei Disziplinen: Layout und Druck, Architekturvisualisierung und
-            CAD-Liniendrucke.
+            nokta ist ein interdisziplinäres Designstudio aus Nordrhein-Westfalen.
+            Ein Studio, drei Disziplinen: Layout und Druck, Architekturvisualisierung
+            und CAD-Liniendrucke.
           </p>
           <p>
-            Angefangen haben wir mit Architekturvisualisierung, und die bleibt
-            einer unserer Bausteine: fotorealistische 3D-Renderings für
-            Architekten, Bauträger und Privatpersonen. Wir haben ein Gespür für
-            Licht, Material und Raum und zeigen dein Projekt, wie es später
+            Wir denken nicht in Schubladen. Wir bauen uns eigene Tools und
+            Workflows, kombinieren unsere Skills über die Disziplinen hinweg und
+            kommen so schnell zu vielen guten Ergebnissen. Statt einer Idee zeigen
+            wir dir zehn.
+          </p>
+          <p>
+            Angefangen haben wir mit Architekturvisualisierung. Heute ist sie
+            einer von mehreren Bausteinen: fotorealistische 3D-Renderings mit
+            Gespür für Licht, Material und Raum. Dein Projekt, wie es später
             aussieht. Lange bevor der erste Stein liegt.
           </p>
         </div>

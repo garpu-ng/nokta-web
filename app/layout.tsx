@@ -9,7 +9,7 @@ import styles from "./layout.module.css";
 export const metadata: Metadata = {
   title: "nokta · Studio für Design, Architekturvisualisierung und Liniendrucke",
   description:
-    "nokta ist ein Studio mit drei Disziplinen: nokta (Layout, Design, Druck), nokta.arch (Architekturvisualisierung) und nokta.line (2D-, Vektor- und CAD-Kunstdrucke).",
+    "nokta ist ein interdisziplinäres Designstudio aus NRW: Design und Druck, Architekturvisualisierung und CAD-Liniendrucke. Eigene Tools, viele Ideen, kurze Wege.",
   metadataBase: new URL("https://nokta.kaanmaan.cv"),
 };
 
