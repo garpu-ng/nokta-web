@@ -39,7 +39,7 @@ export default function StudioPage() {
             <img src="/flymekaan.gif" alt="Kaan" className="wa-team-gif" />
             <div className="wa-team-info">
               <div className="wa-team-name">Kaan</div>
-              <div className="wa-team-role">Visualisierung · Konzept</div>
+              <div className="wa-team-role">Design · Konzept</div>
             </div>
           </div>
 
@@ -48,7 +48,7 @@ export default function StudioPage() {
             <img src="/flymehammed.gif" alt="Mohammed" className="wa-team-gif" />
             <div className="wa-team-info">
               <div className="wa-team-name">Mohammed</div>
-              <div className="wa-team-role">3D · Rendering</div>
+              <div className="wa-team-role">3D · Visualisierung</div>
             </div>
           </div>
 
@@ -57,7 +57,7 @@ export default function StudioPage() {
             <img src="/flymemert.gif" alt="Mert" className="wa-team-gif" />
             <div className="wa-team-info">
               <div className="wa-team-name">Mert</div>
-              <div className="wa-team-role">Platzhalter · TBD</div>
+              <div className="wa-team-role">Layout · Druck</div>
             </div>
           </div>
 
