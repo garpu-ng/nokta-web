@@ -16,10 +16,10 @@ export default function KontaktPage() {
         </p>
       </div>
 
-      {/* ── Logo GIF ────────────────────────────────────────────── */}
+      {/* ── Animated dot ────────────────────────────────────────── */}
       <div className="wa-prozess-gif-wrap">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/logogif2.gif" alt="nokta" className="wa-kontakt-hero-gif" />
+        <img src="/nokta_dot_black.webp" alt="nokta" className="wa-kontakt-hero-gif" />
       </div>
 
       {/* ── Contact info ────────────────────────────────────────── */}
