@@ -24,9 +24,9 @@ export default function Footer() {
           </div>
 
           {/* Decorative dot-row animation, sits between the brand block and
-              the link columns. */}
+              the link columns. Transparent-background animated WebP. */}
           <img
-            src="/nokta_dots_row.gif"
+            src="/nokta_dots_row.webp"
             alt=""
             aria-hidden="true"
             className={styles.dotsRow}

@@ -95,8 +95,8 @@
 }
 
 /* Decorative dot-row animation — sits in the top row between the brand block
-   and the link columns. Its own near-black background (#262624) blends into
-   the black footer. */
+   and the link columns. Transparent-background WebP, so it drops cleanly onto
+   the black footer with no colour box. */
 .dotsRow {
   align-self: center;
   flex: 0 1 auto;
