@@ -23,6 +23,15 @@ export default function Footer() {
             </a>
           </div>
 
+          {/* Decorative dot-row animation, sits between the brand block and
+              the link columns. */}
+          <img
+            src="/nokta_dots_row.gif"
+            alt=""
+            aria-hidden="true"
+            className={styles.dotsRow}
+          />
+
           <nav className={styles.cols} aria-label="Footer">
             <div className={styles.col}>
               <span className={styles.colH}>Disziplinen</span>
@@ -56,13 +65,6 @@ export default function Footer() {
 
         <div className={styles.bottom}>
           <span>© 2026 nokta — Nordrhein-Westfalen, DE</span>
-          {/* Decorative dot-row animation, centred in the bar. */}
-          <img
-            src="/nokta_dots_row.gif"
-            alt=""
-            aria-hidden="true"
-            className={styles.dotsRow}
-          />
           <span>Architektur · Design · Liniendrucke</span>
         </div>
       </div>
