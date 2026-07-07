@@ -82,10 +82,12 @@
 
 /* Bottom line: copyright + tagline */
 .bottom {
+  position: relative;
   margin-top: clamp(3rem, 6vw, 5rem);
   padding-top: 1.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.12);
   display: flex;
+  align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 0.75rem;
@@ -94,8 +96,26 @@
   color: #fff;
 }
 
+/* Decorative dot-row animation — pinned to the exact centre of the bar so it
+   sits cleanly between the copyright and tagline, independent of their widths.
+   Its own near-black background (#262624) blends into the black footer. */
+.dotsRow {
+  position: absolute;
+  left: 50%;
+  top: calc(50% + 0.75rem);
+  transform: translate(-50%, -50%);
+  height: 24px;
+  width: auto;
+  pointer-events: none;
+  user-select: none;
+}
+
 @media (max-width: 767px) {
   .top {
     flex-direction: column;
+  }
+  /* The bar wraps on mobile; a centred overlay would collide with the text. */
+  .dotsRow {
+    display: none;
   }
 }
