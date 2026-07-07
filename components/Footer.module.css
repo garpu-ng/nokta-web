@@ -14,6 +14,7 @@
 }
 
 .top {
+  position: relative;
   display: flex;
   justify-content: space-between;
   gap: clamp(2.5rem, 6vw, 5rem);
@@ -94,12 +95,15 @@
   color: #f2eee6;
 }
 
-/* Decorative dot-row animation — sits in the top row between the brand block
-   and the link columns. Transparent-background WebP, so it drops cleanly onto
-   the black footer with no colour box. */
+/* Decorative dot-row animation — pinned to the true horizontal centre of the
+   footer (the .inner column is centred in the viewport, so 50% of .top is the
+   screen centre), independent of the brand/columns widths. Transparent WebP,
+   so it drops cleanly onto the black footer with no colour box. */
 .dotsRow {
-  align-self: center;
-  flex: 0 1 auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   width: clamp(160px, 20vw, 260px);
   height: auto;
   pointer-events: none;
@@ -110,8 +114,11 @@
   .top {
     flex-direction: column;
   }
-  /* Centred in the stacked column layout. */
+  /* Stacked layout: return the row to normal flow, centred in the column so it
+     can't overlap the brand block or link columns. */
   .dotsRow {
+    position: static;
+    transform: none;
     align-self: center;
   }
 }
