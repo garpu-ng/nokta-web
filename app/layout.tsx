@@ -39,7 +39,14 @@ export default function RootLayout({
           <div className={styles.topbarInner}>
             <div className={styles.topbarRow}>
               <Link href="/" className={styles.brand} aria-label="nokta, Startseite">
-                nokta<span className={styles.brandDot}>.</span>
+                nokta
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/nokta_dot_black.webp"
+                  alt=""
+                  aria-hidden="true"
+                  className={styles.brandDot}
+                />
               </Link>
               <nav className={styles.utility} aria-label="Weitere Seiten">
                 <Link href="/studio" className={styles.util}>team.</Link>

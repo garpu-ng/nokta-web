@@ -64,6 +64,14 @@
   color: var(--ink);
   text-decoration: none;
 }
+/* The wordmark's dot is the animated nokta dot (black, transparent bg).
+   Sizes/seats it like the period it replaces — the webp has ~30% transparent
+   padding, so the negative margins trim the gap to the "a" and the baseline. */
 .brandDot {
-  color: var(--ink);
+  display: inline-block;
+  width: 0.6em;
+  height: 0.6em;
+  margin-left: -0.16em;
+  vertical-align: -0.17em;
+  user-select: none;
 }
