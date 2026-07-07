@@ -59,6 +59,7 @@ const ja: Record<string, string> = {
   "kontakt.infoLead": "お問い合わせ、お見積り、ちょっとした挨拶でも、ご連絡ください。24時間以内にお返事します。",
   "kontakt.addr.region": "ノルトライン＝ヴェストファーレン州、ドイツ",
   "kontakt.addr.vat": "VAT番号：ご請求に応じて",
+  "kontakt.mailAria": "メールを送る",
 
   "line.lead": "象徴的な建築物を技術図面として。実際のCADデータからベクター化し、A1で印刷、額装、壁にすぐ飾れます。",
   "line.view": "見る →",

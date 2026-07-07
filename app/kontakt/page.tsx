@@ -19,8 +19,11 @@ export default async function KontaktPage() {
 
       {/* ── Animated dot ────────────────────────────────────────── */}
       <div className="wa-prozess-gif-wrap">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/nokta_dot_black.webp" alt="nokta" className="wa-kontakt-hero-gif" />
+        {/* TODO: replace placeholder address (hallo@nokta.studio) — see README */}
+        <a href="mailto:hallo@nokta.studio" aria-label={t("kontakt.mailAria")}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/nokta_dot_black.webp" alt="nokta" className="wa-kontakt-hero-gif" />
+        </a>
       </div>
 
       {/* ── Contact info ────────────────────────────────────────── */}

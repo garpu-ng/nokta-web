@@ -59,6 +59,7 @@ const en: Record<string, string> = {
   "kontakt.infoLead": "For enquiries, quotes or just to say hi: write us. We’ll get back to you within 24 hours.",
   "kontakt.addr.region": "North Rhine-Westphalia, Germany",
   "kontakt.addr.vat": "VAT ID: on request",
+  "kontakt.mailAria": "Write an email",
 
   "line.lead": "Iconic buildings as technical drawings. Vectorised from real CAD data, printed in A1, framed and ready for the wall.",
   "line.view": "View →",

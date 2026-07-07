@@ -67,6 +67,7 @@ const de: Record<string, string> = {
   "kontakt.infoLead": "Für Anfragen, Angebote oder einfach so: schreib uns. Wir melden uns innerhalb von 24 Stunden.",
   "kontakt.addr.region": "Nordrhein-Westfalen, Deutschland",
   "kontakt.addr.vat": "USt-IdNr.: auf Anfrage",
+  "kontakt.mailAria": "E-Mail schreiben",
 
   // ── nokta.line (prints) ───────────────────────────────────────────
   "line.lead": "Ikonische Bauwerke als technische Zeichnung. Aus echten CAD-Daten vektorisiert, in A1 gedruckt, gerahmt und bereit für die Wand.",

@@ -59,6 +59,7 @@ const tr: Record<string, string> = {
   "kontakt.infoLead": "Talepler, teklifler ya da sadece merhaba demek için: bize yaz. 24 saat içinde dönüş yaparız.",
   "kontakt.addr.region": "Kuzey Ren-Vestfalya, Almanya",
   "kontakt.addr.vat": "Vergi No: talep üzerine",
+  "kontakt.mailAria": "E-posta yaz",
 
   "line.lead": "İkonik yapılar teknik çizim olarak. Gerçek CAD verisinden vektörleştirilmiş, A1 basılmış, çerçeveli ve duvara hazır.",
   "line.view": "İncele →",

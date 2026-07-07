@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# nokta
 
-## Getting Started
+Website des interdisziplinären Designstudios **nokta** — Design & Druck,
+Architekturvisualisierung (nokta.arch) und CAD-Liniendrucke (nokta.line).
+Next.js (App Router), Deploy über Vercel (Push auf `main` → Auto-Build).
 
-First, run the development server:
+---
+
+## ✅ To-Do
+
+Laufende offene Punkte, getrennt von den einzelnen Website-Builds. Erledigtes
+abhaken (`[x]`), Neues unten anhängen.
+
+- [ ] **Kontakt-Mailadresse:** Platzhalter `hallo@nokta.studio` (mailto hinter dem
+      schwarzen Dot) durch die echte Adresse ersetzen; mit `hallo@waarchi.de`
+      vereinheitlichen.
+- [ ] **nokta.line — Checkout:** echten Stripe-Checkout anbinden. Aktuell führt
+      „Bestellen" nur zu `/kontakt`.
+- [ ] **Impressum & Datenschutz:** echte, geprüfte Rechtstexte einsetzen
+      (aktuell Platzhalter, nur Deutsch).
+- [ ] **Social-Links:** Instagram / LinkedIn / Behance im Footer sind noch `#`.
+- [ ] **Team:** Rollen/Personen bestätigen (Mert war ein Platzhalter).
+- [ ] **i18n / SEO:** optional eigene `/en`-URLs + `hreflang` (aktuell
+      Cookie-basiert, eine URL pro Seite); ggf. Rechtstexte übersetzen.
+- [ ] **Print-Master:** A1-Vektordateien liegen bewusst **nicht** im Repo
+      (bezahltes Produkt) — Fulfilment-Quelle separat sichern.
+
+---
+
+## Entwicklung
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Läuft auf [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Deploy:** Commit/Push auf `main` — Vercel baut und veröffentlicht automatisch.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Sprachen (i18n)
 
-## Learn More
+Cookie-basierter Umschalter (DE / EN / TR / JA) im Header. Alle Texte liegen in
+`messages/{de,en,tr,ja}.ts` (flache Keys, **Deutsch als Fallback**). Locale wird
+serverseitig aus dem Cookie gelesen (`lib/i18n.ts`) und setzt `<html lang>`.
+Neue Texte immer zuerst in `messages/de.ts` anlegen, dann in den anderen Sprachen.
 
-To learn more about Next.js, take a look at the following resources:
+## Notizen
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Design-Tokens & Farbpalette: `app/styles/tokens.css` (fünf Markenfarben).
+- Der Punkt im Header verlinkt auf ein Easter Egg unter `/punkt`.
