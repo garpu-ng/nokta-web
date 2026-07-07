@@ -16,14 +16,14 @@
 
 .projectMeta {
   font-size: 0.75rem;
-  color: #888;
+  color: rgba(26, 26, 24, 0.5);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   margin-bottom: 1rem;
 }
 
 /* On the coloured project page the in-flow header meta is light; the white
-   sticky card below keeps the dark #888. */
+   sticky card below keeps the dark rgba(26, 26, 24, 0.5). */
 .header .projectMeta {
   color: var(--on-brand);
   opacity: 0.8;
@@ -44,8 +44,8 @@
   top: 30px;
   left: 50%;
   transform: translateX(-50%) translateY(calc(-100% - 40px));
-  background: #fff;
-  border: 1px solid #111;
+  background: #f2eee6;
+  border: 1px solid #1a1a18;
   padding: 14px 32px;
   z-index: 100;
   transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);

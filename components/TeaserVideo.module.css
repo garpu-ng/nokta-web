@@ -8,7 +8,7 @@
   max-width: var(--content-max);
   margin: 0 auto;
   overflow: hidden;
-  background: #000;
+  background: #1a1a18;
 }
 
 .video {
@@ -27,13 +27,13 @@
   align-items: center;
   justify-content: center;
   pointer-events: none;
-  color: #fff;
+  color: #f2eee6;
   font-weight: 700;
   letter-spacing: -0.05em;
   line-height: 1;
   font-size: 9cqw;
-  text-shadow: 0 2px 40px rgba(0, 0, 0, 0.55);
+  text-shadow: 0 2px 40px rgba(26, 26, 24, 0.55);
 }
 .dot {
-  color: #fff;
+  color: #f2eee6;
 }

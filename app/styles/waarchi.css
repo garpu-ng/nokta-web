@@ -28,12 +28,12 @@
 /* Work item aspect ratio + border. */
 .work-link {
   aspect-ratio: 1/1;
-  outline: 1px solid #111 !important;
+  outline: 1px solid #1a1a18 !important;
 }
 
 .work-link.big {
   aspect-ratio: 1/1;
-  outline: 1px solid #111 !important;
+  outline: 1px solid #1a1a18 !important;
 }
 
 /* Project image fills container. */
@@ -54,11 +54,11 @@
 
 /* Project labels: white rectangle with black text, overlaid on the arch images. */
 .project-card.new {
-  background: #fff !important;
+  background: #f2eee6 !important;
   padding: 8px 22px !important;
 }
 .project-card .project-name {
-  color: #111 !important;
+  color: #1a1a18 !important;
 }
 
 /* ── Mobile (≤767px): work grid 2-up, ignoring the desktop 12-col spans ── */
@@ -123,8 +123,8 @@
   left: 0;
   right: 0;
   padding: 24px 16px 12px;
-  background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%);
-  color: #fff;
+  background: linear-gradient(to top, rgba(26, 26, 24, 0.6) 0%, transparent 100%);
+  color: #f2eee6;
 }
 
 @media (max-width: 767px) {

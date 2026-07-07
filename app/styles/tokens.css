@@ -28,17 +28,17 @@
 :root[data-branch="nokta"] {
   --brand-bg: #ae6a4e;
   --brand-accent: #ae6a4e; /* clay */
-  --on-brand: #faf6f0;
+  --on-brand: #f2eee6;
 }
 :root[data-branch="arch"] {
   --brand-bg: #5c6e82;
   --brand-accent: #5c6e82; /* slate blue */
-  --on-brand: #f4f6f9;
+  --on-brand: #f2eee6;
 }
 :root[data-branch="line"] {
   --brand-bg: #6e7a54;
   --brand-accent: #6e7a54; /* drafting green */
-  --on-brand: #f5f6ee;
+  --on-brand: #f2eee6;
 }
 :root[data-branch="home"] {
   --brand-bg: #1a1a18;

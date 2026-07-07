@@ -2,8 +2,8 @@
 
 .footer {
   flex-shrink: 0;
-  background: #000;
-  color: #fff;
+  background: #1a1a18;
+  color: #f2eee6;
   line-height: 1.5; /* override mir.css's fixed 20px */
 }
 
@@ -30,25 +30,25 @@
   font-weight: 700;
   letter-spacing: -0.05em;
   line-height: 0.85;
-  color: #fff;
+  color: #f2eee6;
   text-decoration: none;
 }
 .tag {
   margin: 1.25rem 0 1.5rem;
   font-size: 0.9rem;
   line-height: 1.6;
-  color: #fff;
+  color: #f2eee6;
 }
 .email {
   font-size: 1rem;
-  color: #fff;
+  color: #f2eee6;
   text-decoration: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  border-bottom: 1px solid rgba(242, 238, 230, 0.4);
   padding-bottom: 2px;
   transition: border-color 0.2s ease;
 }
 .email:hover {
-  border-color: #fff;
+  border-color: #f2eee6;
 }
 
 /* Link columns (right side) */
@@ -67,12 +67,12 @@
   font-size: 0.65rem;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  color: #fff;
+  color: #f2eee6;
 }
 .link {
   width: fit-content;
   font-size: 0.92rem;
-  color: #fff;
+  color: #f2eee6;
   text-decoration: none;
   transition: opacity 0.18s ease;
 }
@@ -84,14 +84,14 @@
 .bottom {
   margin-top: clamp(3rem, 6vw, 5rem);
   padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1px solid rgba(242, 238, 230, 0.12);
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 0.75rem;
   font-size: 0.72rem;
   letter-spacing: 0.03em;
-  color: #fff;
+  color: #f2eee6;
 }
 
 /* Decorative dot-row animation — sits in the top row between the brand block
