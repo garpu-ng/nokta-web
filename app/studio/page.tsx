@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Studio · nokta",
-  description: "nokta Studio, Architekturvisualisierung aus NRW.",
+  description: "nokta, Designstudio aus NRW mit drei Disziplinen: Design und Druck, Architekturvisualisierung und CAD-Liniendrucke.",
 };
 
 export default function StudioPage() {
@@ -15,13 +15,16 @@ export default function StudioPage() {
         <h1 className="wa-studio-hero-heading">Studio</h1>
         <div className="wa-studio-hero-text">
           <p>
-            nokta ist ein Studio aus Nordrhein-Westfalen, spezialisiert auf
-            Architekturvisualisierung. Wir machen fotorealistische 3D-Renderings
-            für Architekten, Bauträger und Privatpersonen.
+            nokta ist ein Designstudio aus Nordrhein-Westfalen. Ein Studio,
+            drei Disziplinen: Layout und Druck, Architekturvisualisierung und
+            CAD-Liniendrucke.
           </p>
           <p>
-            Wir haben ein Gespür für Licht, Material und Raum und zeigen dein
-            Projekt, wie es später aussieht. Lange bevor der erste Stein liegt.
+            Angefangen haben wir mit Architekturvisualisierung, und die bleibt
+            einer unserer Bausteine: fotorealistische 3D-Renderings für
+            Architekten, Bauträger und Privatpersonen. Wir haben ein Gespür für
+            Licht, Material und Raum und zeigen dein Projekt, wie es später
+            aussieht. Lange bevor der erste Stein liegt.
           </p>
         </div>
       </section>
