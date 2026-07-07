@@ -69,9 +69,9 @@
    padding, so the negative margins trim the gap to the "a" and the baseline. */
 .brandDot {
   display: inline-block;
-  width: 0.54em;
-  height: 0.54em;
+  width: 0.486em;
+  height: 0.486em;
   margin-left: calc(-0.16em + 5px);
-  vertical-align: calc(-0.17em - 3px);
+  vertical-align: calc(-0.17em + 3px);
   user-select: none;
 }
