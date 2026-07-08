@@ -45,7 +45,7 @@
   display: inline-block;
   width: 0.486em;
   height: 0.486em;
-  margin-left: -0.12em;
+  margin-left: calc(-0.12em + 4px);
   vertical-align: -0.15em;
   user-select: none;
 }
