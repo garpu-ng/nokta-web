@@ -33,7 +33,11 @@ export default function TeaserVideo() {
         <source src="/noktateaser.mp4?v=29" type="video/mp4" />
       </video>
       <span className={styles.logo}>
-        nokta<span className={styles.dot}>.</span>
+        <span className={styles.word}>
+          nokta
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/nokta_dot_cream.webp" alt="" aria-hidden="true" className={styles.dot} />
+        </span>
       </span>
     </div>
   );
