@@ -839,27 +839,38 @@
 }
 
 .nk-404__mark {
+  /* Digit size drives everything. The dot webp only fills ~40% of its own
+     square canvas (the rest is transparent margin), so its box is sized ~1.85×
+     the digit size to make the visible blob read as a "0" of the same height. */
+  --nk-404-digit: clamp(6rem, 24vw, 13rem);
+  --nk-404-dot: calc(var(--nk-404-digit) * 1.78);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(0.5rem, 2.5vw, 1.5rem);
   line-height: 1;
 }
 
 /* !important beats base.css's `* { font-family: var(--wa-font) !important }`. */
 .nk-404__digit {
   font-family: var(--mono-font) !important;
-  font-size: clamp(6rem, 24vw, 13rem);
+  font-size: var(--nk-404-digit);
   font-weight: 700;
   letter-spacing: -0.04em;
   color: var(--ink);
 }
 
 .nk-404__dot {
-  width: clamp(4.5rem, 18vw, 9.5rem);
-  height: clamp(4.5rem, 18vw, 9.5rem);
+  /* !important beats mir.css's `img { max-width:100%; height:auto }`, which
+     otherwise clamps the width and drags the height along with it. */
+  width: var(--nk-404-dot) !important;
+  height: var(--nk-404-dot) !important;
+  max-width: none !important;
+  flex: none;
   object-fit: contain;
   display: block;
+  /* The visible blob only fills ~40% of the webp; pull the 4s back in over the
+     transparent side padding so the trio sits tight like "4 0 4". */
+  margin-inline: calc(var(--nk-404-dot) * -0.27) !important;
 }
 
 .nk-404__title {
