@@ -18,7 +18,7 @@
   object-fit: cover;
 }
 
-/* Centred wordmark, scaling with the video width (container query units). */
+/* Centred wordmark logo, scaling with the video width (container query units). */
 .logo {
   position: absolute;
   inset: 0;
@@ -27,25 +27,13 @@
   align-items: center;
   justify-content: center;
   pointer-events: none;
-  color: #f2eee6;
-  font-weight: 700;
-  letter-spacing: -0.05em;
-  line-height: 1;
-  font-size: 9cqw;
-  text-shadow: 0 2px 40px rgba(26, 26, 24, 0.55);
 }
-.word {
-  display: inline-block;
-  white-space: nowrap;
-}
-/* The wordmark's dot is the animated cream nokta dot (transparent bg), seated
-   like the period it replaces — negative margins trim the webp's transparent
-   padding to the "a" and the baseline. */
-.dot {
-  display: inline-block;
-  width: 0.486em;
-  height: 0.486em;
-  margin-left: calc(-0.12em + 4px);
-  vertical-align: -0.15em;
+/* New wordmark logo (testing). The asset is already white, so it drops straight
+   onto the dark footage; the drop-shadow lifts it off busy frames. */
+.logoImg {
+  width: 54cqw;
+  max-width: 82%;
+  height: auto;
+  filter: drop-shadow(0 2px 40px rgba(26, 26, 24, 0.55));
   user-select: none;
 }

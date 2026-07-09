@@ -50,18 +50,15 @@ export default async function RootLayout({
         <header className={styles.brandbar}>
           <div className={styles.topbarInner}>
             <div className={styles.topbarRow}>
-              {/* The word links home; the dot is a hidden easter egg (/punkt). */}
+              {/* Logo links home. (Testing a new wordmark logo — the standalone
+                  dot easter egg is parked for now.) */}
               <div className={styles.brand}>
                 <Link href="/" className={styles.brandWord} aria-label={t("aria.home")}>
-                  nokta
-                </Link>
-                <Link href="/punkt" className={styles.brandDotLink} aria-label={t("aria.punkt")}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src="/nokta_dot_black.webp"
-                    alt=""
-                    aria-hidden="true"
-                    className={styles.brandDot}
+                    src="/nokta_logo.png"
+                    alt="nokta"
+                    className={styles.brandLogo}
                   />
                 </Link>
               </div>
