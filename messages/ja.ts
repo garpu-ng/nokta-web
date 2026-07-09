@@ -100,6 +100,11 @@ const ja: Record<string, string> = {
   "footer.link.datenschutz": "プライバシー",
   "footer.disciplines": "建築 · デザイン · ラインプリント",
 
+  "notfound.aria": "404 — ページが見つかりません",
+  "notfound.title": "この点は、うちにありません。",
+  "notfound.text": "私たちは nokta（点）。すべては点から始まります。でも、このページだけは見当たりません。タイプミスか、古いリンクか、移動したのかもしれません。もう一度、点に戻りましょう。",
+  "notfound.cta": "ホームに戻る",
+
   "nav.team": "チーム",
   "nav.impressum": "会社概要",
   "nav.contact": "お問い合わせ",

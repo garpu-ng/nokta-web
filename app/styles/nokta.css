@@ -818,3 +818,75 @@
     gap: 2rem !important;
   }
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   404 / not-found page
+
+   The "404" reads as 4 · dot · 4: the two 4s in the mono display face,
+   the middle "0" is our black dot webp. Neutral paper theme (a 404 path
+   maps to no branch), so the dot stays black on paper.
+   ══════════════════════════════════════════════════════════════════ */
+.nk-404 {
+  min-height: 62svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 8svh clamp(20px, 5vw, 48px) 10svh;
+}
+
+.nk-404__mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.5rem, 2.5vw, 1.5rem);
+  line-height: 1;
+}
+
+/* !important beats base.css's `* { font-family: var(--wa-font) !important }`. */
+.nk-404__digit {
+  font-family: var(--mono-font) !important;
+  font-size: clamp(6rem, 24vw, 13rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+
+.nk-404__dot {
+  width: clamp(4.5rem, 18vw, 9.5rem);
+  height: clamp(4.5rem, 18vw, 9.5rem);
+  object-fit: contain;
+  display: block;
+}
+
+.nk-404__title {
+  font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--ink);
+  margin: clamp(1.5rem, 4vh, 2.5rem) 0 0;
+}
+
+.nk-404__text {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: rgba(26, 26, 24, 0.72);
+  max-width: 46ch;
+  margin: 1rem 0 0;
+}
+
+.nk-404__cta {
+  display: inline-block;
+  margin-top: clamp(1.75rem, 4vh, 2.5rem);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #1a1a18;
+  text-decoration: none;
+  border-bottom: 1px solid #1a1a18;
+  padding-bottom: 2px;
+}

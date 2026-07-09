@@ -111,6 +111,12 @@ const de: Record<string, string> = {
   "footer.link.datenschutz": "datenschutz",
   "footer.disciplines": "Architektur · Design · Liniendrucke",
 
+  // ── 404 / not-found ───────────────────────────────────────────────
+  "notfound.aria": "404 — Seite nicht gefunden",
+  "notfound.title": "Diesen Punkt haben wir nicht.",
+  "notfound.text": "Wir sind nokta — bei uns dreht sich alles um den Punkt. Nur diese Seite haben wir nicht im Programm. Tippfehler, alter Link oder einfach umgezogen. Vom Punkt zurück zum Anfang.",
+  "notfound.cta": "Zurück zur Startseite",
+
   // ── Header nav / aria ─────────────────────────────────────────────
   "nav.team": "team.",
   "nav.impressum": "impressum.",

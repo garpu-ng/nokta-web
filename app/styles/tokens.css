@@ -9,6 +9,8 @@
 
 :root {
   --wa-font: 'Jost', Arial, sans-serif;
+  /* Mono display face — used for the big 404 digits (the "0" is our dot). */
+  --mono-font: 'Space Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
 
   /* Core (neutral) identity. Each branch overrides --brand-bg and
      --brand-accent below; the body background transitions between them. */
