@@ -87,3 +87,33 @@
   vertical-align: calc(-0.17em + 1px);
   user-select: none;
 }
+
+/* ── Mobile header ────────────────────────────────────────────────
+   Next to the wordmark there's only ~210px on a 360px phone — not enough for
+   all four utility words, so they used to wrap awkwardly (…contact. on line 1,
+   datenschutz. + the language switch orphaned on line 2). On mobile, stack the
+   brand row so the utility gets the full width beneath the wordmark: the four
+   words then sit on one line, with the language switch on its own line below.
+   Desktop (brand-left / utility-right on one row) is untouched. */
+@media (max-width: 767px) {
+  .topbarRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+  .utility {
+    justify-content: flex-start;
+    align-self: stretch;
+    align-items: baseline;
+    column-gap: 1rem;
+    row-gap: 0.55rem;
+    padding-bottom: clamp(12px, 3vw, 18px);
+  }
+  /* The language switch is the last child → give it a full row of its own,
+     left-aligned under the words. */
+  .utility > :last-child {
+    flex-basis: 100%;
+    display: flex;
+    justify-content: flex-start;
+  }
+}
