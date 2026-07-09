@@ -102,7 +102,7 @@ const en: Record<string, string> = {
 
   "notfound.aria": "404 — Page not found",
   "notfound.title": "This point isn't on our map.",
-  "notfound.text": "We're nokta — everything revolves around the dot. This page just isn't one of ours. A typo, an old link, or it simply moved. Let's get you back to the point.",
+  "notfound.text": "We're nokta. Everything revolves around the dot. This page just isn't one of ours. A typo, an old link, or it simply moved. Let's get you back to the point.",
   "notfound.cta": "Back to the homepage",
 
   "nav.team": "team.",

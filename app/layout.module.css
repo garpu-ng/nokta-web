@@ -54,6 +54,12 @@
 
 .brand {
   display: inline-block;
+  /* Keep the wordmark and its dot on one line: the row is a flex container and
+     on narrow screens the brand box gets squeezed, which was breaking the dot
+     onto a second line under "nokta". nowrap + no shrink keeps "nokta●" whole
+     (the utility nav wraps instead). */
+  white-space: nowrap;
+  flex-shrink: 0;
   /* left padding is 0 so the wordmark's left edge sits on the border, exactly
      above the flush-left nokta.home tab */
   padding: clamp(20px, 4vw, 34px) clamp(16px, 4vw, 40px) clamp(12px, 2vw, 18px) 0;

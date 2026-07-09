@@ -102,7 +102,7 @@ const tr: Record<string, string> = {
 
   "notfound.aria": "404 — Sayfa bulunamadı",
   "notfound.title": "Bu nokta bizde yok.",
-  "notfound.text": "Biz nokta'yız — her şey noktanın etrafında döner. Ama bu sayfa bizde yok. Bir yazım hatası, eski bir bağlantı ya da taşınmış olabilir. Baştan, noktaya geri dönelim.",
+  "notfound.text": "Biz nokta'yız. Her şey noktanın etrafında döner. Ama bu sayfa bizde yok. Bir yazım hatası, eski bir bağlantı ya da taşınmış olabilir. Baştan, noktaya geri dönelim.",
   "notfound.cta": "Ana sayfaya dön",
 
   "nav.team": "ekip.",
