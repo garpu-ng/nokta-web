@@ -102,7 +102,7 @@
     gap: 0;
   }
   .utility {
-    justify-content: flex-start;
+    justify-content: flex-end;
     align-self: stretch;
     align-items: baseline;
     column-gap: 1rem;
@@ -110,10 +110,10 @@
     padding-bottom: clamp(12px, 3vw, 18px);
   }
   /* The language switch is the last child → give it a full row of its own,
-     left-aligned under the words. */
+     right-aligned under the words (the wordmark stays anchored left). */
   .utility > :last-child {
     flex-basis: 100%;
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
   }
 }
