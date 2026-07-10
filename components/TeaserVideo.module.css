@@ -28,12 +28,12 @@
   justify-content: center;
   pointer-events: none;
 }
-/* New wordmark logo (testing). The asset is already white, so it drops straight
-   onto the dark footage; the drop-shadow lifts it off busy frames. */
+/* Wordmark logo. The asset is black, so invert it to white for the dark
+   footage; the drop-shadow lifts it off busy frames. */
 .logoImg {
   width: 54cqw;
   max-width: 82%;
   height: auto;
-  filter: drop-shadow(0 2px 40px rgba(26, 26, 24, 0.55));
+  filter: invert(1) drop-shadow(0 2px 40px rgba(26, 26, 24, 0.55));
   user-select: none;
 }
