@@ -14,7 +14,7 @@
 
   /* Core (neutral) identity. Each branch overrides --brand-bg and
      --brand-accent below; the body background transitions between them. */
-  --paper: #f2eee6;
+  --paper: #e8ded3;
   --ink: #1a1a18;
   --brand-bg: var(--paper);    /* whole-page flood colour */
   --brand-accent: var(--ink);  /* dot / accents */
@@ -25,25 +25,27 @@
   --content-max: 1600px;
 }
 
-/* Branch motto-colours. The page floods this colour; the matching tab shares it
-   so the active tab connects into the page. Text on the colour goes light. */
+/* Branch motto-colours (Discreet palette). The page floods this colour; the
+   matching tab shares it so the active tab connects into the page. --on-brand
+   is chosen per branch for legibility: dark ink on the light fills (sand,
+   lavender), light paper on the dark ones (blue, black). */
 :root[data-branch="nokta"] {
-  --brand-bg: #ae6a4e;
-  --brand-accent: #ae6a4e; /* clay */
-  --on-brand: #f2eee6;
+  --brand-bg: #e8d5b5;
+  --brand-accent: #e8d5b5; /* sand */
+  --on-brand: var(--ink);
 }
 :root[data-branch="arch"] {
-  --brand-bg: #5c6e82;
-  --brand-accent: #5c6e82; /* slate blue */
-  --on-brand: #f2eee6;
+  --brand-bg: #384ed1;
+  --brand-accent: #384ed1; /* blue */
+  --on-brand: var(--paper);
 }
 :root[data-branch="line"] {
-  --brand-bg: #6e7a54;
-  --brand-accent: #6e7a54; /* drafting green */
-  --on-brand: #f2eee6;
+  --brand-bg: #918cb7;
+  --brand-accent: #918cb7; /* lavender */
+  --on-brand: var(--ink);
 }
 :root[data-branch="home"] {
   --brand-bg: #1a1a18;
   --brand-accent: #1a1a18; /* black */
-  --on-brand: #f2eee6; /* paper text on black */
+  --on-brand: var(--paper); /* paper text on black */
 }

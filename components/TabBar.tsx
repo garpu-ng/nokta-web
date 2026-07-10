@@ -2,7 +2,7 @@
 
 import type { CSSProperties, MouseEvent } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { TABS, branchForPath, type Branch } from "@/lib/branches";
+import { TABS, branchForPath, inkOn, type Branch } from "@/lib/branches";
 import styles from "./TabBar.module.css";
 
 /**
@@ -46,7 +46,7 @@ export default function TabBar({
           aria-selected={active === b.key}
           onClick={(e) => onTab(e, b)}
           className={styles.tab2}
-          style={{ "--tab": b.bg } as CSSProperties}
+          style={{ "--tab": b.bg, "--tab-fg": inkOn(b.bg) } as CSSProperties}
         >
           <span className={styles.label}>
             nokta.{b.label}

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import { BRANCHES } from "@/lib/branches";
+import { BRANCHES, inkOn } from "@/lib/branches";
 import TeaserVideo from "@/components/TeaserVideo";
 import { getT } from "@/lib/i18n";
 
@@ -31,7 +31,7 @@ export default async function HomePage() {
                 key={b.key}
                 href={b.path}
                 className="nk-branch-card"
-                style={{ "--accent": b.accent } as CSSProperties}
+                style={{ "--accent": b.accent, "--card-fg": inkOn(b.accent) } as CSSProperties}
               >
                 <span className="nk-branch-card__key">
                   nokta.{b.label}

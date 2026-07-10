@@ -27,8 +27,8 @@ export const BRANCHES: Branch[] = [
     tagline: "Layout · Design · Druck",
     desc:
       "Branding, Editorial, Layout und Druck. Mit eigenen Tools testen wir schnell viele Richtungen und finden das, was sitzt.",
-    accent: "#ae6a4e", // clay
-    bg: "#ae6a4e",
+    accent: "#e8d5b5", // sand
+    bg: "#e8d5b5",
   },
   {
     key: "arch",
@@ -37,8 +37,8 @@ export const BRANCHES: Branch[] = [
     tagline: "Architekturvisualisierung",
     desc:
       "Fotorealistische 3D-Renderings für Architekten, Bauträger und Privatpersonen. Mit eigenem Setup kommen wir schnell zu vielen Varianten.",
-    accent: "#5c6e82", // slate blue
-    bg: "#5c6e82",
+    accent: "#384ed1", // blue
+    bg: "#384ed1",
   },
   {
     key: "line",
@@ -47,8 +47,8 @@ export const BRANCHES: Branch[] = [
     tagline: "2D · Vektor · CAD-Kunstdrucke",
     desc:
       "Ikonische Bauwerke als CAD-Liniendruck. Aus echten Zeichnungen vektorisiert, in A1 gedruckt und gerahmt.",
-    accent: "#6e7a54", // drafting green
-    bg: "#6e7a54",
+    accent: "#918cb7", // lavender
+    bg: "#918cb7",
   },
 ];
 
@@ -85,4 +85,23 @@ export function branchForPath(pathname: string): BranchKey | null {
     return "arch";
   // studio / kontakt are studio-wide → keep the neutral core theme
   return null;
+}
+
+/** Paper (warm off-white cream) and ink (near-black) — the two text colours we
+    flip between so labels stay legible on any fill. Keep in sync with tokens.css. */
+export const PAPER = "#e8ded3";
+export const INK = "#1a1a18";
+
+/** Pick the legible text colour for a given background fill: ink on light
+    fills, paper on dark ones (WCAG relative luminance, threshold ~0.25). Used
+    so the tab labels and landing-card hovers read on any palette. */
+export function inkOn(hex: string): string {
+  const h = hex.replace("#", "");
+  const toLin = (c: number) =>
+    c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+  const r = toLin(parseInt(h.slice(0, 2), 16) / 255);
+  const g = toLin(parseInt(h.slice(2, 4), 16) / 255);
+  const b = toLin(parseInt(h.slice(4, 6), 16) / 255);
+  const L = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  return L > 0.25 ? INK : PAPER;
 }

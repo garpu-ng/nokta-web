@@ -19,7 +19,9 @@
   text-align: center;
   text-decoration: none;
   background: var(--tab);
-  color: #f2eee6;
+  /* --tab-fg is set per tab (ink on light fills, paper on dark) so the label
+     stays legible on any palette. */
+  color: var(--tab-fg, #e8ded3);
   padding: 12px;
   transition:
     min-height 0.55s cubic-bezier(0.4, 0, 0.2, 1),
@@ -35,17 +37,19 @@
 .label {
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: #f2eee6;
+  color: inherit; /* inherits --tab-fg from .tab2 */
   transition: font-size 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .dot {
-  color: rgba(242, 238, 230, 0.85);
+  color: inherit;
+  opacity: 0.85;
 }
 .tag {
   font-size: 0.68rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(242, 238, 230, 0.82);
+  color: inherit;
+  opacity: 0.82;
   white-space: nowrap;
 }
 
