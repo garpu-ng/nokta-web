@@ -27,8 +27,8 @@ export const BRANCHES: Branch[] = [
     tagline: "Layout · Design · Druck",
     desc:
       "Branding, Editorial, Layout und Druck. Mit eigenen Tools testen wir schnell viele Richtungen und finden das, was sitzt.",
-    accent: "#ce2121", // red
-    bg: "#ce2121",
+    accent: "#b83636", // red
+    bg: "#b83636",
   },
   {
     key: "arch",
@@ -37,8 +37,8 @@ export const BRANCHES: Branch[] = [
     tagline: "Architekturvisualisierung",
     desc:
       "Fotorealistische 3D-Renderings für Architekten, Bauträger und Privatpersonen. Mit eigenem Setup kommen wir schnell zu vielen Varianten.",
-    accent: "#384ed1", // blue
-    bg: "#384ed1",
+    accent: "#4b5cbe", // blue
+    bg: "#4b5cbe",
   },
   {
     key: "line",
@@ -47,8 +47,8 @@ export const BRANCHES: Branch[] = [
     tagline: "2D · Vektor · CAD-Kunstdrucke",
     desc:
       "Ikonische Bauwerke als CAD-Liniendruck. Aus echten Zeichnungen vektorisiert, in A1 gedruckt und gerahmt.",
-    accent: "#5f744e", // green
-    bg: "#5f744e",
+    accent: "#5f6f53", // green
+    bg: "#5f6f53",
   },
 ];
 
@@ -89,7 +89,7 @@ export function branchForPath(pathname: string): BranchKey | null {
 
 /** Paper (warm off-white cream) and ink (near-black) — the two text colours we
     flip between so labels stay legible on any fill. Keep in sync with tokens.css. */
-export const PAPER = "#e8ded3";
+export const PAPER = "#e9e0ce";
 export const INK = "#1a1a18";
 
 /** Pick the legible text colour for a given background fill: ink on light

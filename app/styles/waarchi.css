@@ -54,7 +54,7 @@
 
 /* Project labels: white rectangle with black text, overlaid on the arch images. */
 .project-card.new {
-  background: #e8ded3 !important;
+  background: #e9e0ce !important;
   padding: 8px 22px !important;
 }
 .project-card .project-name {
@@ -124,7 +124,7 @@
   right: 0;
   padding: 24px 16px 12px;
   background: linear-gradient(to top, rgba(26, 26, 24, 0.6) 0%, transparent 100%);
-  color: #e8ded3;
+  color: #e9e0ce;
 }
 
 @media (max-width: 767px) {

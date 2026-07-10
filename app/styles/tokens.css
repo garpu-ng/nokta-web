@@ -14,7 +14,7 @@
 
   /* Core (neutral) identity. Each branch overrides --brand-bg and
      --brand-accent below; the body background transitions between them. */
-  --paper: #e8ded3;
+  --paper: #e9e0ce;
   --ink: #1a1a18;
   --brand-bg: var(--paper);    /* whole-page flood colour */
   --brand-accent: var(--ink);  /* dot / accents */
@@ -29,18 +29,18 @@
    so the active tab connects into the page. --on-brand is chosen per branch for
    legibility (light paper on these dark fills; ink would be used on a light one). */
 :root[data-branch="nokta"] {
-  --brand-bg: #ce2121;
-  --brand-accent: #ce2121; /* red */
+  --brand-bg: #b83636;
+  --brand-accent: #b83636; /* red */
   --on-brand: var(--paper);
 }
 :root[data-branch="arch"] {
-  --brand-bg: #384ed1;
-  --brand-accent: #384ed1; /* blue */
+  --brand-bg: #4b5cbe;
+  --brand-accent: #4b5cbe; /* blue */
   --on-brand: var(--paper);
 }
 :root[data-branch="line"] {
-  --brand-bg: #5f744e;
-  --brand-accent: #5f744e; /* green */
+  --brand-bg: #5f6f53;
+  --brand-accent: #5f6f53; /* green */
   --on-brand: var(--paper);
 }
 :root[data-branch="home"] {

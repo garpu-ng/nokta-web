@@ -21,7 +21,7 @@
   background: var(--tab);
   /* --tab-fg is set per tab (ink on light fills, paper on dark) so the label
      stays legible on any palette. */
-  color: var(--tab-fg, #e8ded3);
+  color: var(--tab-fg, #e9e0ce);
   padding: 12px;
   transition:
     min-height 0.55s cubic-bezier(0.4, 0, 0.2, 1),
