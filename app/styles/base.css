@@ -42,6 +42,12 @@ body {
      this, and class rules that need another face (e.g. .nk-404__digit's mono)
      simply win on specificity. */
   font-family: var(--wa-font);
+  /* Carried over from the old Webflow body reset (mir.css set
+     `body{font-size:14px;line-height:20px}`): the em-based archviz label
+     sizes in arch.css (.project-name* at 0.7–1.8em) compute against this
+     base, so dropping it would silently scale them up to the 16px default. */
+  font-size: 14px;
+  line-height: 20px;
   -webkit-font-smoothing: antialiased;
   /* sticky footer: page content grows, footer sits at the bottom */
   display: flex;
