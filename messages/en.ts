@@ -89,6 +89,9 @@ const en: Record<string, string> = {
   "projects.desc.ipehouse": "Elegant visualisation of a modern house with an ipe wood façade.",
   "projects.desc.velostation": "Architectural visualisation of a modern bike station in an urban setting.",
 
+  "arch.hero.caption": "architectural visualization · düsseldorf",
+  "arch.hero.claim": "Spaces, before they exist.",
+
   "footer.tag1": "One studio, three disciplines.",
   "footer.tag2": "From the dot to the line to the form.",
   "footer.col.disciplines": "Disciplines",

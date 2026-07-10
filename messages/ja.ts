@@ -89,6 +89,9 @@ const ja: Record<string, string> = {
   "projects.desc.ipehouse": "イペ材ファサードの現代的な住宅のエレガントなビジュアライゼーション。",
   "projects.desc.velostation": "都市空間における現代的な駐輪ステーションの建築ビジュアライゼーション。",
 
+  "arch.hero.caption": "建築ビジュアライゼーション · デュッセルドルフ",
+  "arch.hero.claim": "まだ存在しない空間を。",
+
   "footer.tag1": "ひとつのスタジオ、三つの領域。",
   "footer.tag2": "点から線へ、線から形へ。",
   "footer.col.disciplines": "領域",

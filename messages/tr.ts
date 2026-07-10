@@ -89,6 +89,9 @@ const tr: Record<string, string> = {
   "projects.desc.ipehouse": "Ipe ahşap cepheli modern bir evin zarif görselleştirmesi.",
   "projects.desc.velostation": "Kentsel alanda modern bir bisiklet istasyonunun mimari görselleştirmesi.",
 
+  "arch.hero.caption": "mimari görselleştirme · düsseldorf",
+  "arch.hero.claim": "Mekânlar, var olmadan önce.",
+
   "footer.tag1": "Bir stüdyo, üç disiplin.",
   "footer.tag2": "Noktadan çizgiye, çizgiden forma.",
   "footer.col.disciplines": "Disiplinler",

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import WorkGrid from "@/components/WorkGrid";
+import ArchHero from "@/components/arch/ArchHero";
+import archStyles from "@/components/arch/ArchHero.module.css";
 import { getT } from "@/lib/i18n";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -15,14 +17,12 @@ export default async function ArchPage() {
   const t = await getT();
   return (
     <>
-      <div className="nk-branch" style={{ paddingBottom: "1.5rem" }}>
-        <header className="nk-branch-head" style={{ marginBottom: 0 }}>
-          <h1 className="nk-branch-title">
-            nokta.arch<span className="nk-dot">.</span>
-          </h1>
-          <p className="nk-branch-tag">{t("branch.arch.tag")}</p>
-          <p className="nk-branch-lead">{t("branch.arch.desc")}</p>
-        </header>
+      <ArchHero />
+
+      {/* Intro lead — the branch.arch.desc copy, on its own paper block
+          below the hero (styles live in ArchHero.module.css). */}
+      <div className={archStyles.intro}>
+        <p className={archStyles.introLead}>{t("branch.arch.desc")}</p>
       </div>
 
       <div className="wa-grid-column">

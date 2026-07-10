@@ -1,0 +1,92 @@
+/* Hero poster. The page body behind is flooded cobalt (--brand-bg); this
+   section is the paper sheet, so cream dominates and the cobalt shows as
+   the diagonal plane + the page margins around the sheet. */
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--paper);
+  min-height: min(78svh, 820px);
+  padding: clamp(3rem, 9svh, 6rem) clamp(20px, 5vw, 48px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+/* Hard-edged cobalt plane cutting the top-right corner (tunable). */
+.plane {
+  position: absolute;
+  inset: 0;
+  background: var(--brand-accent);
+  clip-path: polygon(58% 0, 100% 0, 100% 52%);
+}
+
+/* Tiny scale figure standing near the plane's lower edge. */
+.figure {
+  position: absolute;
+  top: 34%;
+  right: 26%;
+  width: clamp(10px, 1.2vw, 18px);
+  height: auto;
+}
+
+.title {
+  /* Display face: soft, slightly wonky, very heavy — the FLOR voice.
+     A class selector beats the `body { font-family }` element rule on
+     specificity, so no !important is needed (the old universal font
+     rule that used to force it is gone with mir.css). */
+  font-family: var(--display-font);
+  font-variation-settings: "SOFT" 80, "WONK" 1, "opsz" 144;
+  font-weight: 900;
+  font-size: clamp(3.2rem, 10vw, 9rem);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0;
+  position: relative;
+  max-width: 9ch;
+}
+.titleDot {
+  color: var(--brand-accent);
+}
+
+.caption {
+  font-family: var(--mono-font);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: lowercase;
+  color: var(--ink);
+  opacity: 0.7;
+  margin: 1.2rem 0 0;
+  position: relative;
+}
+
+.claim {
+  font-size: clamp(1rem, 1.8vw, 1.3rem);
+  color: var(--ink);
+  opacity: 0.85;
+  max-width: 34ch;
+  line-height: 1.5;
+  margin: 0.6rem 0 0;
+  position: relative;
+}
+
+/* Intro lead — the existing branch.arch.desc copy, moved off the old header
+   onto its own paper block below the hero (keeps cream dominant and sets up
+   the page rhythm before the poster wall). */
+.intro {
+  background: var(--paper);
+  padding: clamp(2.5rem, 8svh, 5rem) clamp(20px, 5vw, 48px);
+}
+.introLead {
+  max-width: 46ch;
+  margin: 0;
+  font-size: clamp(1.15rem, 2.4vw, 1.7rem);
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+@media (max-width: 767px) {
+  .hero { min-height: 64svh; }
+  .plane { clip-path: polygon(40% 0, 100% 0, 100% 34%); }
+  .figure { top: 22%; right: 30%; }
+}

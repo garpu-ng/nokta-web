@@ -99,6 +99,10 @@ const de: Record<string, string> = {
   "projects.desc.ipehouse": "Elegante Visualisierung eines modernen Hauses mit Ipe-Holzfassade.",
   "projects.desc.velostation": "Architekturvisualisierung einer modernen Fahrradstation im urbanen Raum.",
 
+  // ── nokta.arch (poster-wall redesign) ─────────────────────────────
+  "arch.hero.caption": "architekturvisualisierung · düsseldorf",
+  "arch.hero.claim": "Räume, bevor es sie gibt.",
+
   // ── Footer ────────────────────────────────────────────────────────
   "footer.tag1": "Ein Studio, drei Disziplinen.",
   "footer.tag2": "Vom Punkt zur Linie zur Form.",
