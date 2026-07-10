@@ -19,8 +19,10 @@ disciplines / "branches":
 Brand idea: **nokta = "dot/point"** (Turkish). The three branches are the
 geometric progression **point → line → form** (design → 2D lines → 3D form).
 
-Tech: **Next.js 16.2.1** (App Router, Turbopack), **React 19**, **Tailwind 4**,
-TypeScript. Images set to `unoptimized` (see `next.config.ts`).
+Tech: **Next.js 16.2.1** (App Router, Turbopack), **React 19**, plain CSS
+(tokens + modules; Tailwind was removed — see the stylesheet History note), TypeScript.
+Images use Next's built-in optimization (`next/image`; the old global
+`unoptimized` flag was removed from `next.config.ts`).
 
 > ⚠️ **Read `AGENTS.md`** — this Next.js version has breaking changes vs older
 > docs. When an AI assistant edits code here, it should consult
