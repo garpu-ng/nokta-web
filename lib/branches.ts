@@ -27,8 +27,8 @@ export const BRANCHES: Branch[] = [
     tagline: "Layout · Design · Druck",
     desc:
       "Branding, Editorial, Layout und Druck. Mit eigenen Tools testen wir schnell viele Richtungen und finden das, was sitzt.",
-    accent: "#904422", // red
-    bg: "#904422",
+    accent: "#ce2121", // red
+    bg: "#ce2121",
   },
   {
     key: "arch",

@@ -29,8 +29,8 @@
    so the active tab connects into the page. --on-brand is chosen per branch for
    legibility (light paper on these dark fills; ink would be used on a light one). */
 :root[data-branch="nokta"] {
-  --brand-bg: #904422;
-  --brand-accent: #904422; /* red */
+  --brand-bg: #ce2121;
+  --brand-accent: #ce2121; /* red */
   --on-brand: var(--paper);
 }
 :root[data-branch="arch"] {
