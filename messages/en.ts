@@ -92,6 +92,8 @@ const en: Record<string, string> = {
   "arch.hero.caption": "architectural visualization · düsseldorf",
   "arch.hero.claim": "Spaces, before they exist.",
   "arch.wall.label": "Selected work",
+  "arch.grid.tagline": "Your project, thought in space.",
+  "arch.grid.cta": "Start a project",
 
   "footer.tag1": "One studio, three disciplines.",
   "footer.tag2": "From the dot to the line to the form.",

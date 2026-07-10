@@ -103,6 +103,8 @@ const de: Record<string, string> = {
   "arch.hero.caption": "architekturvisualisierung · düsseldorf",
   "arch.hero.claim": "Räume, bevor es sie gibt.",
   "arch.wall.label": "Ausgewählte Arbeiten",
+  "arch.grid.tagline": "Ihr Projekt, im Raum gedacht.",
+  "arch.grid.cta": "Projekt anfragen",
 
   // ── Footer ────────────────────────────────────────────────────────
   "footer.tag1": "Ein Studio, drei Disziplinen.",

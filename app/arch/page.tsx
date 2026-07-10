@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import ArchHero from "@/components/arch/ArchHero";
 import DotField from "@/components/arch/DotField";
 import PosterWall from "@/components/arch/PosterWall";
+import PerspectiveGrid from "@/components/arch/PerspectiveGrid";
 import archStyles from "@/components/arch/ArchHero.module.css";
 import { getT } from "@/lib/i18n";
 
@@ -29,6 +30,9 @@ export default async function ArchPage() {
       <DotField />
 
       <PosterWall />
+
+      {/* Full-bleed closing band — sits outside PosterWall's paper column. */}
+      <PerspectiveGrid tagline={t("arch.grid.tagline")} cta={t("arch.grid.cta")} />
     </>
   );
 }
