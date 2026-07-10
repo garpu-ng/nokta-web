@@ -25,14 +25,13 @@
   --content-max: 1600px;
 }
 
-/* Branch motto-colours (Discreet palette). The page floods this colour; the
-   matching tab shares it so the active tab connects into the page. --on-brand
-   is chosen per branch for legibility: dark ink on the light fills (sand,
-   lavender), light paper on the dark ones (blue, black). */
+/* Branch motto-colours. The page floods this colour; the matching tab shares it
+   so the active tab connects into the page. --on-brand is chosen per branch for
+   legibility (light paper on these dark fills; ink would be used on a light one). */
 :root[data-branch="nokta"] {
-  --brand-bg: #e8d5b5;
-  --brand-accent: #e8d5b5; /* sand */
-  --on-brand: var(--ink);
+  --brand-bg: #904422;
+  --brand-accent: #904422; /* red */
+  --on-brand: var(--paper);
 }
 :root[data-branch="arch"] {
   --brand-bg: #384ed1;
@@ -40,9 +39,9 @@
   --on-brand: var(--paper);
 }
 :root[data-branch="line"] {
-  --brand-bg: #918cb7;
-  --brand-accent: #918cb7; /* lavender */
-  --on-brand: var(--ink);
+  --brand-bg: #5f744e;
+  --brand-accent: #5f744e; /* green */
+  --on-brand: var(--paper);
 }
 :root[data-branch="home"] {
   --brand-bg: #1a1a18;

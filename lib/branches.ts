@@ -27,8 +27,8 @@ export const BRANCHES: Branch[] = [
     tagline: "Layout · Design · Druck",
     desc:
       "Branding, Editorial, Layout und Druck. Mit eigenen Tools testen wir schnell viele Richtungen und finden das, was sitzt.",
-    accent: "#e8d5b5", // sand
-    bg: "#e8d5b5",
+    accent: "#904422", // red
+    bg: "#904422",
   },
   {
     key: "arch",
@@ -47,8 +47,8 @@ export const BRANCHES: Branch[] = [
     tagline: "2D · Vektor · CAD-Kunstdrucke",
     desc:
       "Ikonische Bauwerke als CAD-Liniendruck. Aus echten Zeichnungen vektorisiert, in A1 gedruckt und gerahmt.",
-    accent: "#918cb7", // lavender
-    bg: "#918cb7",
+    accent: "#5f744e", // green
+    bg: "#5f744e",
   },
 ];
 
