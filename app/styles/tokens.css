@@ -25,22 +25,19 @@
   --content-max: 1600px;
 }
 
-/* Branch motto-colours. The page floods this colour; the matching tab shares it
-   so the active tab connects into the page. Text on the colour goes light. */
-:root[data-branch="nokta"] {
-  --brand-bg: #ae6a4e;
-  --brand-accent: #ae6a4e; /* clay */
-  --on-brand: #f2eee6;
-}
-:root[data-branch="arch"] {
-  --brand-bg: #5c6e82;
-  --brand-accent: #5c6e82; /* slate blue */
-  --on-brand: #f2eee6;
-}
+/* TRIAL: the three branch pages (nokta / arch / line) render on the neutral
+   cream (paper) background instead of their motto-colour wash — the same look as
+   the studio & kontakt pages. Text and accents go ink so they read on cream.
+   The coloured tabs in the tab bar are unaffected.
+   To restore the colour wash, revert this block to the per-branch colours:
+     nokta #ae6a4e (clay) · arch #5c6e82 (slate) · line #6e7a54 (drafting green),
+   each with --on-brand: #f2eee6. */
+:root[data-branch="nokta"],
+:root[data-branch="arch"],
 :root[data-branch="line"] {
-  --brand-bg: #6e7a54;
-  --brand-accent: #6e7a54; /* drafting green */
-  --on-brand: #f2eee6;
+  --brand-bg: var(--paper);
+  --brand-accent: var(--ink);
+  --on-brand: var(--ink);
 }
 :root[data-branch="home"] {
   --brand-bg: #1a1a18;

@@ -25,11 +25,9 @@ export default function TabBar({
   const onTab = (e: MouseEvent, b: Branch) => {
     e.preventDefault();
     if (pathname === b.path) return;
-    window.dispatchEvent(
-      new CustomEvent("nk:reveal", {
-        detail: { x: e.clientX, y: e.clientY, color: b.bg, branch: b.key },
-      }),
-    );
+    // TRIAL: navigate straight to the branch — the colour-flood reveal that used
+    // to play from the click point is disabled. (Re-dispatch "nk:reveal" here
+    // with { x, y, color: b.bg, branch: b.key } to restore the animation.)
     router.push(b.path);
   };
 
