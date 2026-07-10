@@ -72,6 +72,23 @@ textarea {
   transition: color 0.55s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* ── Xerox-grain overlay ─────────────────────────────────────────────
+   Adds print texture to poster surfaces (moodbook: photocopy grain).
+   Pure CSS overlay — an SVG feTurbulence noise tile as a data URI,
+   so no network request and no JS. Apply to positioned containers. */
+.nk-grain {
+  position: relative;
+}
+.nk-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 240px 240px;
+}
+
 /* Incoming-page fade (app/template.tsx remounts this per navigation).
    Positioned above the flood overlay so content is never painted over. */
 .nk-page-fade {
