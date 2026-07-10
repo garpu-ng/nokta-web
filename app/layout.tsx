@@ -1,6 +1,22 @@
 import type { Metadata } from "next";
+import { Jost, Space_Mono } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
+
+const jost = Jost({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
+  variable: "--font-jost",
+});
+
+const spaceMono = Space_Mono({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
+  variable: "--font-space-mono",
+});
 import TabBar from "@/components/TabBar";
 import BranchReveal from "@/components/BranchReveal";
 import Footer from "@/components/Footer";
@@ -13,7 +29,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: t("meta.site.title"),
     description: t("meta.site.desc"),
-    metadataBase: new URL("https://nokta.kaanmaan.cv"),
+    metadataBase: new URL("https://www.nokta-studio.de"),
   };
 }
 
@@ -34,7 +50,11 @@ export default async function RootLayout({
     // data-scroll-behavior="smooth" → Next disables smooth scrolling *during
     // route transitions* (so navigation lands cleanly at the top) while keeping
     // CSS smooth-scroll for in-page scrolling.
-    <html lang={locale} data-scroll-behavior="smooth">
+    <html
+      lang={locale}
+      data-scroll-behavior="smooth"
+      className={`${jost.variable} ${spaceMono.variable}`}
+    >
       <head>
         {/* mir.no layout CSS — used by the ported archviz (nokta.arch) pages */}
         <link rel="stylesheet" href="/mir.css" />
