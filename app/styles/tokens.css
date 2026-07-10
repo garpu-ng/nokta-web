@@ -9,7 +9,8 @@
 
 :root {
   --wa-font: var(--font-jost), Arial, sans-serif;
-  /* Mono display face — used for the big 404 digits (the "0" is our dot). */
+  /* Mono display face — sets the two big 4s on the 404 page (the "0" between
+     them isn't type at all, it's the brand <Dot> SVG). */
   --mono-font: var(--font-space-mono), ui-monospace, 'SFMono-Regular', Menlo, monospace;
 
   /* Core (neutral) identity. Each branch overrides --brand-bg and

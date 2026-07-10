@@ -1,24 +1,19 @@
 import Link from "next/link";
 import { getT } from "@/lib/i18n";
+import Dot from "@/components/Dot";
 
 // Root not-found — rendered inside the root layout for any unmatched route.
-// The "404" is drawn as 4 · dot · 4, where the middle "0" is our black dot
-// webp and the two 4s are set in the mono display face. A 404 path maps to no
-// branch (branchForPath → null), so the neutral paper theme keeps the dot
-// reading black on paper.
+// The "404" is drawn as 4 · dot · 4, where the middle "0" is our brand dot
+// (inline <Dot> SVG) and the two 4s are set in the mono display face. A 404
+// path maps to no branch (branchForPath → null), so the neutral paper theme
+// keeps the dot reading ink-black on paper (it inherits currentColor).
 export default async function NotFound() {
   const t = await getT();
   return (
     <div className="nk-404">
       <div className="nk-404__mark" role="img" aria-label={t("notfound.aria")}>
         <span className="nk-404__digit" aria-hidden="true">4</span>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/nokta_dot_black.webp"
-          alt=""
-          aria-hidden="true"
-          className="nk-404__dot"
-        />
+        <Dot className="nk-404__dot" />
         <span className="nk-404__digit" aria-hidden="true">4</span>
       </div>
 

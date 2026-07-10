@@ -3,12 +3,14 @@
 import type { CSSProperties, MouseEvent } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { TABS, branchForPath, type Branch } from "@/lib/branches";
+import Dot from "./Dot";
 import styles from "./TabBar.module.css";
 
 /**
  * Segmented tab bar — three equal-thirds, all black. Each branch tab carries its
- * motto colour only as a small animated dot (right-aligned), a muted stand-in
- * for the old solid-colour fill. Tall on the home page, "reclines" to a compact
+ * motto colour only as the small brand dot (right-aligned, inline <Dot> SVG
+ * tinted with the branch accent), a muted stand-in for the old solid-colour
+ * fill. Tall on the home page, "reclines" to a compact
  * strip on a branch. Clicking fires the page colour-flood from the click point.
  */
 export default function TabBar({
@@ -53,9 +55,8 @@ export default function TabBar({
             <span className={styles.dot}>.</span>
           </span>
           <span className={styles.tag}>{taglines[b.key] ?? b.tagline}</span>
-          {b.dot && (
-            /* eslint-disable-next-line @next/next/no-img-element */
-            <img src={b.dot} alt="" aria-hidden="true" className={styles.tabDot} />
+          {b.key !== "home" && (
+            <Dot color={b.accent} className={styles.tabDot} />
           )}
         </a>
       ))}

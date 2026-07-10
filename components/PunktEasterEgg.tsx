@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
+import Dot from "./Dot";
 import styles from "./PunktEasterEgg.module.css";
 
 // Each brand colour maps to a form — "Vom Punkt zur Linie zur Form":
@@ -193,8 +194,7 @@ export default function PunktEasterEgg() {
       <div className={styles.center}>
         <span className={styles.word}>
           nokta
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/nokta_dot_black.webp" alt="" aria-hidden="true" />
+          <Dot />
         </span>
       </div>
     </div>,

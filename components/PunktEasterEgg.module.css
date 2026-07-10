@@ -32,12 +32,17 @@
   font-size: clamp(2rem, 7vw, 5rem);
   user-select: none;
 }
-.word img {
+/* The brand <Dot> SVG as the "." after "nokta". Cropped tight (no phantom
+   padding), so it sizes near a period and needs only a hair of offset — unlike
+   the old webp whose transparent margin forced big negative corrections. Kept
+   ink-black so it reads on the coloured living blob behind the wordmark. */
+.word svg {
   display: inline-block;
-  width: 0.486em;
-  height: 0.486em;
-  margin-left: calc(-0.16em + 7px);
-  vertical-align: calc(-0.17em + 1px);
+  width: 0.2em;
+  height: auto;
+  color: #1a1a18;
+  margin-left: 0.06em;
+  vertical-align: -0.02em;
 }
 
 .back {

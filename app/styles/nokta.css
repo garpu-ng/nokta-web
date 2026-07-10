@@ -189,8 +189,10 @@
 }
 
 .wa-kontakt-page .wa-prozess-gif-wrap {
-  margin-top: -8svh;
-  margin-bottom: -8svh;
+  /* The old overlap trick tucked neighbours into the webp's transparent padding;
+     the tight <Dot> has none, so just a modest breathing gap around the hero. */
+  margin-top: 2svh;
+  margin-bottom: 2svh;
 }
 
 .wa-kontakt-page .wa-kontakt-info {
@@ -199,9 +201,11 @@
 }
 
 .wa-kontakt-hero-gif {
-  width: 500px;
-  height: 500px;
-  object-fit: cover;
+  /* Brand <Dot> SVG, tight-cropped — size the box directly to the visible dot
+     (the old webp filled ~40% of a 500px box with transparent padding). */
+  width: auto;
+  height: clamp(170px, 40vw, 220px);
+  color: var(--ink);
   display: block;
 }
 
@@ -408,9 +412,9 @@
     margin-bottom: 6svh !important;
   }
 
-  /* Fixed 500px hero GIFs → fluid squares that never overflow */
-  .wa-prozess-hero-gif,
-  .wa-kontakt-hero-gif {
+  /* Fixed 500px prozess hero GIF → fluid square that never overflows. (The
+     kontakt dot is the tight <Dot> SVG, already fluid via its clamped height.) */
+  .wa-prozess-hero-gif {
     width: min(500px, 78vw) !important;
     height: auto !important;
     aspect-ratio: 1 / 1;
@@ -851,11 +855,11 @@
 }
 
 .nk-404__mark {
-  /* Digit size drives everything. The dot webp only fills ~40% of its own
-     square canvas (the rest is transparent margin), so its box is sized ~1.85×
-     the digit size to make the visible blob read as a "0" of the same height. */
+  /* Digit size drives everything. The <Dot> SVG is cropped tight to the blob,
+     so its box height is set directly to ~0.72× the digit size to make it read
+     as a "0" of roughly the same height as the two mono 4s. */
   --nk-404-digit: clamp(6rem, 24vw, 13rem);
-  --nk-404-dot: calc(var(--nk-404-digit) * 1.78);
+  --nk-404-dot: calc(var(--nk-404-digit) * 0.72);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -873,14 +877,13 @@
 }
 
 .nk-404__dot {
-  width: var(--nk-404-dot);
   height: var(--nk-404-dot);
+  width: auto;
   flex: none;
-  object-fit: contain;
   display: block;
-  /* The visible blob only fills ~40% of the webp; pull the 4s back in over the
-     transparent side padding so the trio sits tight like "4 0 4". */
-  margin-inline: calc(var(--nk-404-dot) * -0.27);
+  color: var(--ink);
+  /* Tight, letter-spacing-like snug so the trio reads as "4 0 4". */
+  margin-inline: calc(var(--nk-404-digit) * -0.02);
 }
 
 .nk-404__title {

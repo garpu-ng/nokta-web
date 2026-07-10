@@ -44,13 +44,13 @@
   display: none;
 }
 
-/* Motto-colour dot, right-aligned. The webp has ~30% transparent padding, so
-   the box is sized larger than the visible blob and that padding gives it a
-   natural right margin. */
+/* Motto-colour brand dot, right-aligned. The inline <Dot> SVG is cropped tight
+   to the blob (no phantom padding), so the box size *is* the visible dot size
+   and the right offset is set explicitly per state below. Height drives it;
+   width follows the blob's aspect ratio. */
 .tabDot {
   position: absolute;
   top: 50%;
-  right: 4px;
   transform: translateY(-50%);
   width: auto;
   pointer-events: none;
@@ -80,19 +80,20 @@
    label/tag clear the dot instead of running under it. */
 .home .tab2 {
   min-height: 150px;
-  padding-right: 52px;
+  padding-right: 48px;
 }
 .home .label {
   font-size: 1.7rem;
 }
 .home .tabDot {
-  height: 58px;
+  height: 23px;
+  right: 20px;
 }
 
 /* BRANCH — reclined into a compact strip */
 .branch .tab2 {
   min-height: 0;
-  padding: 11px 40px 11px 12px;
+  padding: 11px 38px 11px 12px;
 }
 .branch .label {
   font-size: 1rem;
@@ -101,7 +102,8 @@
   display: none;
 }
 .branch .tabDot {
-  height: 44px;
+  height: 17px;
+  right: 16px;
 }
 
 /* ── Mobile ───────────────────────────────────────────────────────── */
@@ -117,7 +119,7 @@
   }
   .home .tab2,
   .branch .tab2 {
-    padding-right: 24px;
+    padding-right: 26px;
   }
   .home .tab2 {
     min-height: 92px;
@@ -125,13 +127,12 @@
   .tag {
     display: none;
   }
-  .tabDot {
-    right: 2px;
-  }
   .home .tabDot {
-    height: 34px;
+    height: 13px;
+    right: 12px;
   }
   .branch .tabDot {
-    height: 24px;
+    height: 9px;
+    right: 9px;
   }
 }
