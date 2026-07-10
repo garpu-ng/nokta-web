@@ -49,7 +49,7 @@ export default async function PrintPage({ params }: Props) {
             width={getMediaSize(print.image).width}
             height={getMediaSize(print.image).height}
             sizes="(max-width: 767px) 100vw, 50vw"
-            priority
+            preload
             className="nk-print-detail__art"
           />
         </div>

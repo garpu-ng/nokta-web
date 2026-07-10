@@ -83,7 +83,7 @@ export default async function RootLayout({
                     alt="nokta"
                     width={2000}
                     height={410}
-                    priority
+                    preload
                     className={styles.brandLogo}
                   />
                 </Link>

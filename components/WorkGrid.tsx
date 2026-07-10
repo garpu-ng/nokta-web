@@ -27,7 +27,7 @@ export default async function WorkGrid() {
                     src={project.thumb}
                     alt={project.title}
                     fill
-                    priority={project.span >= 6}
+                    preload={project.span >= 6}
                     sizes={
                       project.span === 6
                         ? "(max-width: 768px) 100vw, 50vw"

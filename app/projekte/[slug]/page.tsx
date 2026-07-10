@@ -62,7 +62,7 @@ export default async function ProjectPage({ params }: Props) {
               width={getMediaSize(src).width}
               height={getMediaSize(src).height}
               sizes="(max-width: 1500px) 100vw, 1500px"
-              priority={i === 0}
+              preload={i === 0}
               className="wa-project-img"
             />
           </div>
