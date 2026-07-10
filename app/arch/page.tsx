@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import WorkGrid from "@/components/WorkGrid";
 import ArchHero from "@/components/arch/ArchHero";
 import DotField from "@/components/arch/DotField";
+import PosterWall from "@/components/arch/PosterWall";
 import archStyles from "@/components/arch/ArchHero.module.css";
 import { getT } from "@/lib/i18n";
 
@@ -28,9 +28,7 @@ export default async function ArchPage() {
 
       <DotField />
 
-      <div className="wa-grid-column">
-        <WorkGrid />
-      </div>
+      <PosterWall />
     </>
   );
 }

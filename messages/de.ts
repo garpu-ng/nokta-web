@@ -102,6 +102,7 @@ const de: Record<string, string> = {
   // ── nokta.arch (poster-wall redesign) ─────────────────────────────
   "arch.hero.caption": "architekturvisualisierung · düsseldorf",
   "arch.hero.claim": "Räume, bevor es sie gibt.",
+  "arch.wall.label": "Ausgewählte Arbeiten",
 
   // ── Footer ────────────────────────────────────────────────────────
   "footer.tag1": "Ein Studio, drei Disziplinen.",

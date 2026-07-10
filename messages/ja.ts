@@ -91,6 +91,7 @@ const ja: Record<string, string> = {
 
   "arch.hero.caption": "建築ビジュアライゼーション · デュッセルドルフ",
   "arch.hero.claim": "まだ存在しない空間を。",
+  "arch.wall.label": "選定作品",
 
   "footer.tag1": "ひとつのスタジオ、三つの領域。",
   "footer.tag2": "点から線へ、線から形へ。",

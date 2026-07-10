@@ -91,6 +91,7 @@ const tr: Record<string, string> = {
 
   "arch.hero.caption": "mimari görselleştirme · düsseldorf",
   "arch.hero.claim": "Mekânlar, var olmadan önce.",
+  "arch.wall.label": "Seçilmiş işler",
 
   "footer.tag1": "Bir stüdyo, üç disiplin.",
   "footer.tag2": "Noktadan çizgiye, çizgiden forma.",
