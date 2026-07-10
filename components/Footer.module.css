@@ -4,7 +4,7 @@
   flex-shrink: 0;
   background: #1a1a18;
   color: #e9e0ce;
-  line-height: 1.5; /* override mir.css's fixed 20px */
+  line-height: 1.5; /* comfortable footer leading (body has no global line-height) */
 }
 
 .inner {

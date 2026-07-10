@@ -1,7 +1,7 @@
 /* ══════════════════════════════════════════════════════════════════
    nokta page + shared-layout styles — GLOBAL.
 
-   These are our own (non-mir.css) styles for the studio pages and the
+   These are our own (non-Webflow) styles for the studio pages and the
    shared page vocabulary that several routes reuse:
      - .nk-branch* — the generic branch-page shell (/arch, /line, /nokta)
      - .wa-prozess* / .wa-kontakt* — shared by /prozess and /kontakt
@@ -862,9 +862,10 @@
   line-height: 1;
 }
 
-/* !important beats base.css's `* { font-family: var(--wa-font) !important }`. */
+/* The mono display face for the digits. A plain class rule beats the Jost
+   body font on specificity (no !important needed). */
 .nk-404__digit {
-  font-family: var(--mono-font) !important;
+  font-family: var(--mono-font);
   font-size: var(--nk-404-digit);
   font-weight: 700;
   letter-spacing: -0.04em;
@@ -872,17 +873,14 @@
 }
 
 .nk-404__dot {
-  /* !important beats mir.css's `img { max-width:100%; height:auto }`, which
-     otherwise clamps the width and drags the height along with it. */
-  width: var(--nk-404-dot) !important;
-  height: var(--nk-404-dot) !important;
-  max-width: none !important;
+  width: var(--nk-404-dot);
+  height: var(--nk-404-dot);
   flex: none;
   object-fit: contain;
   display: block;
   /* The visible blob only fills ~40% of the webp; pull the 4s back in over the
      transparent side padding so the trio sits tight like "4 0 4". */
-  margin-inline: calc(var(--nk-404-dot) * -0.27) !important;
+  margin-inline: calc(var(--nk-404-dot) * -0.27);
 }
 
 .nk-404__title {

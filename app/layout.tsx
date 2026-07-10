@@ -59,10 +59,6 @@ export default async function RootLayout({
       data-scroll-behavior="smooth"
       className={`${jost.variable} ${spaceMono.variable}`}
     >
-      <head>
-        {/* mir.no layout CSS — used by the ported archviz (nokta.arch) pages */}
-        <link rel="stylesheet" href="/mir.css" />
-      </head>
       {/* suppressHydrationWarning: browser extensions (e.g. asbplayer) inject
           attributes on <body> before React hydrates; this scopes the warning
           to <body> only and doesn't hide real mismatches elsewhere. */}

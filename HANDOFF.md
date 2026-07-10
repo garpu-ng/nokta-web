@@ -79,17 +79,22 @@ Everything keys off one file:
 `app/globals.css` is now just an entry point — it `@import`s four concern-split
 stylesheets, and reusable components carry their own CSS Modules:
 - **`app/styles/tokens.css`** — design tokens + the `:root[data-branch=…]` theme wash
-- **`app/styles/base.css`** — reset/overrides on top of mir.css + global utilities
-  (`.nk-dot`, `.nk-page-fade`)
-- **`app/styles/waarchi.css`** — archviz rules coupled to `public/mir.css` (WorkGrid,
-  Carousel); **global on purpose** — their class names must match mir.css's Webflow grid
+- **`app/styles/base.css`** — document reset (`box-sizing`) + global overrides
+  (body font/bg) + global utilities (`.nk-dot`, `.nk-page-fade`)
+- **`app/styles/waarchi.css`** — archviz augments (WorkGrid, Carousel); **global on
+  purpose** — their class names must match the Webflow grid base in `arch.css`
 - **`app/styles/nokta.css`** — our studio page + shared page-layout styles (global)
+- **`app/styles/arch.css`** — Webflow base geometry for the archviz grid + carousel,
+  extracted from the old `public/mir.css`; `@import`ed **last** so it sits where mir.css
+  used to in the cascade
 - **`*.module.css`** — colocated, scoped styles for components: `Footer`, `TabBar`,
   `BranchReveal`, `ProjectHeader`, plus header chrome in `app/layout.module.css`
 
-> `public/mir.css` (127 KB minified Webflow reset+grid) is **load-bearing** for the
-> `/arch` pages and is still loaded via `<link>` in `layout.tsx` — do not delete it.
-> Tailwind + postcss were removed (they were installed but unused).
+> **History:** the `/arch` pages were once styled by a render-blocking 127 KB Webflow
+> export at `public/mir.css`, loaded via `<link>` in `layout.tsx`. It was retired: the
+> ~1 KB of archviz rules it was load-bearing for now live in `app/styles/arch.css`, and
+> the `!important` hacks that only existed to beat it were dropped. Tailwind + postcss
+> were also removed (installed but unused).
 
 ### Theming (the colour wash)
 - **`app/styles/tokens.css`** defines CSS variables. `:root` = neutral core (paper
@@ -121,8 +126,8 @@ stylesheets, and reusable components carry their own CSS Modules:
 2. `BranchReveal` animates the `.nk-reveal` overlay's `clip-path` from
    `circle(0 at x y)` to a full-viewport circle (Web Animations API, 620ms).
 3. **Z-index layering makes it "ignore the top bar":** overlay `z-index:500`,
-   sits **above page content but below** the TabBar (`900`) and SideNav
-   (`200000`, from mir.css). So the colour spreads across the page only.
+   sits **above page content but below** the TabBar (`900`). So the colour
+   spreads across the page only.
 4. On finish, `data-branch` is committed (real bg swaps under the overlay) and
    the overlay hides.
 
@@ -136,7 +141,7 @@ stylesheets, and reusable components carry their own CSS Modules:
 - Tabs (`.tabbar`, `.tab2`, `.home` / `.branch` variants) → `components/TabBar.module.css`
 - Header brand row + utility links → `app/layout.module.css`
 - Landing / branch / print / service page layouts → `app/styles/nokta.css`
-- Archviz grid + carousel (mir.css-coupled, global) → `app/styles/waarchi.css`
+- Archviz grid + carousel (Webflow base → `app/styles/arch.css`; augments → `app/styles/waarchi.css`, both global)
 - Desktop left-gutter clearance lives with each page/component's own styles now
   (`.wa-studio`, `.wa-prozess-page`, `ProjectHeader.module.css`).
 

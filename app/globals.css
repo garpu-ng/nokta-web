@@ -1,21 +1,29 @@
 /* ══════════════════════════════════════════════════════════════════
    globals.css — entry point only.
 
-   The styling layer is split by concern:
+   The styling layer is split by concern, imported in cascade order:
      styles/tokens.css   → design tokens + [data-branch] theme wash
-     styles/base.css     → reset/overrides on top of mir.css + global utils
-     styles/waarchi.css  → archviz rules coupled to public/mir.css (WorkGrid,
-                           Carousel) — global by necessity
+     styles/base.css     → document reset + our global overrides + utils
+     styles/waarchi.css  → archviz augments (WorkGrid, Carousel) — global by
+                           necessity; layered before arch.css so its
+                           !important rules win
      styles/nokta.css    → our studio page + shared page-layout styles (global)
+     styles/arch.css     → Webflow base geometry for the archviz grid/carousel,
+                           extracted from the old public/mir.css. Imported LAST,
+                           exactly where mir.css used to sit in the cascade, so
+                           the effective outcome is unchanged.
    Reusable components are colocated in their own *.module.css files
    (components/Footer.module.css, components/TabBar.module.css, …) and the
    header chrome in app/layout.module.css.
 
-   public/mir.css (127 KB Webflow reset+grid) is still loaded via <link> in
-   layout.tsx — it is load-bearing for the /arch (archviz) pages.
+   (History: the /arch pages were previously styled by a render-blocking
+   127 KB Webflow export at public/mir.css, loaded via <link> in layout.tsx.
+   That file is gone; only the archviz rules it was load-bearing for survive,
+   hand-formatted, in styles/arch.css.)
    ══════════════════════════════════════════════════════════════════ */
 
 @import "./styles/tokens.css";
 @import "./styles/base.css";
 @import "./styles/waarchi.css";
 @import "./styles/nokta.css";
+@import "./styles/arch.css";

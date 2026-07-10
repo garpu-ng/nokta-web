@@ -1,16 +1,24 @@
 /* ══════════════════════════════════════════════════════════════════
-   Base layer — our document-level styles that sit ON TOP of public/mir.css
-   (the 127 KB Webflow reset/grid loaded via <link> in layout.tsx).
-   The !important flags here are deliberate: they override real Webflow
-   defaults from mir.css (font-family, body{background:#fff}, line-height).
+   Base layer — the document reset + our document-level overrides.
+
+   Historically these sat ON TOP of a render-blocking 127 KB Webflow export
+   (public/mir.css) and needed !important to beat its reset (font-family,
+   body{background:#fff}). That export is gone — its archviz rules now live
+   in styles/arch.css — so these overrides are plain rules again.
+
+   The only piece of the old Webflow reset kept here is the part that is
+   genuinely load-bearing site-wide: `box-sizing:border-box` (the whole
+   layout is designed for the border-box model) plus the mobile
+   text-size-adjust guard.
+
    Also holds the two cross-cutting themed utilities used across pages
    (.nk-dot) and the per-navigation content fade (.nk-page-fade).
    ══════════════════════════════════════════════════════════════════ */
 
-/* Remap everything to Jost — beats mir.css's html{font-family:sans-serif}. */
+/* Document reset — border-box everywhere. The whole site is laid out for it;
+   without it every padded / max-width box would grow past its intended size. */
 * {
-  font-family: var(--wa-font) !important;
-  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
 }
 
 html {
@@ -18,20 +26,36 @@ html {
   padding: 0;
   background: var(--brand-bg);
   scroll-behavior: smooth;
+  /* Stop mobile browsers inflating text on orientation change. */
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
   padding: 0;
-  /* !important beats mir.css's `body{background-color:#fff}` (loaded after).
-     Branch-to-branch transitions are animated by the reveal overlay, so the
+  /* Branch-to-branch transitions are animated by the reveal overlay, so the
      base bg swaps instantly underneath it. */
-  background: var(--brand-bg) !important;
+  background: var(--brand-bg);
   color: var(--ink);
+  /* Everything renders in Jost. A plain body rule suffices now that the old
+     Webflow reset (html{font-family:sans-serif}) is gone: content inherits
+     this, and class rules that need another face (e.g. .nk-404__digit's mono)
+     simply win on specificity. */
+  font-family: var(--wa-font);
+  -webkit-font-smoothing: antialiased;
   /* sticky footer: page content grows, footer sits at the bottom */
   display: flex;
   flex-direction: column;
   min-height: 100svh;
+}
+
+/* Form controls don't inherit font-family by default — opt them back into Jost
+   (previously handled by the blanket `* { font-family … !important }`). */
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
 }
 
 /* ── Cross-cutting utilities ─────────────────────────────────────────── */
