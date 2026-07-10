@@ -2,27 +2,31 @@ import type { Metadata } from "next";
 import { Jost, Space_Mono } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
-
-const jost = Jost({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  style: ["normal", "italic"],
-  display: "swap",
-  variable: "--font-jost",
-});
-
-const spaceMono = Space_Mono({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  display: "swap",
-  variable: "--font-space-mono",
-});
 import TabBar from "@/components/TabBar";
 import BranchReveal from "@/components/BranchReveal";
 import Footer from "@/components/Footer";
 import LanguageToggle from "@/components/LanguageToggle";
 import { getLocale, getT } from "@/lib/i18n";
 import styles from "./layout.module.css";
+
+/* Fonts are self-hosted at build time via next/font (GDPR: the browser never
+   talks to Google Fonts). Exposed as CSS variables consumed by tokens.css. */
+const jost = Jost({
+  // Jost is a variable font — no weight list needed; the variable woff2
+  // covers the full weight range. Italic is a separate file, so list both styles.
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  display: "swap",
+  variable: "--font-jost",
+});
+
+const spaceMono = Space_Mono({
+  // Space Mono is NOT variable — its static weights must be listed.
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
+  variable: "--font-space-mono",
+});
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getT();
