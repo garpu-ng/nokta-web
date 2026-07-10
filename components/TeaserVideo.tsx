@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import styles from "./TeaserVideo.module.css";
 
 // Muted-autoplay teaser banner with the nokta. wordmark centred on it. Sets
@@ -33,8 +34,14 @@ export default function TeaserVideo() {
         <source src="/noktateaser.mp4?v=29" type="video/mp4" />
       </video>
       <span className={styles.logo}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/nokta_logo.png" alt="" aria-hidden="true" className={styles.logoImg} />
+        <Image
+          src="/nokta_logo.png"
+          alt=""
+          aria-hidden="true"
+          width={2000}
+          height={410}
+          className={styles.logoImg}
+        />
       </span>
     </div>
   );

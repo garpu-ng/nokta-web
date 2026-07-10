@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { PRINTS, getPrint } from "@/lib/prints";
+import { getMediaSize } from "@/lib/mediaSizes";
 import { getT } from "@/lib/i18n";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -41,10 +43,13 @@ export default async function PrintPage({ params }: Props) {
       <div className="nk-print-detail">
         {/* Framed artwork */}
         <div className="nk-print-detail__frame">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={print.image}
             alt={`${print.title}, ${t("line.altSuffix")}`}
+            width={getMediaSize(print.image).width}
+            height={getMediaSize(print.image).height}
+            sizes="(max-width: 767px) 100vw, 50vw"
+            priority
             className="nk-print-detail__art"
           />
         </div>

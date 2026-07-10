@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { BRANCHES } from "@/lib/branches";
 import { getT } from "@/lib/i18n";
 import styles from "./Footer.module.css";
@@ -26,11 +27,16 @@ export default async function Footer() {
           </div>
 
           {/* Decorative dot-row animation, sits between the brand block and
-              the link columns. Transparent-background animated WebP. */}
-          <img
+              the link columns. Transparent-background *animated* WebP — next/image
+              can't optimize animated frames, so `unoptimized` passes it through
+              as-is (the file itself was already resized down to 600×200). */}
+          <Image
             src="/nokta_dots_row.webp"
             alt=""
             aria-hidden="true"
+            width={600}
+            height={200}
+            unoptimized
             className={styles.dotsRow}
           />
 

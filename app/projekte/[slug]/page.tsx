@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getProject, PROJECTS } from "@/lib/projects";
+import { getMediaSize } from "@/lib/mediaSizes";
 import ProjectHeader from "@/components/ProjectHeader";
 import { getT } from "@/lib/i18n";
 
@@ -54,12 +56,14 @@ export default async function ProjectPage({ params }: Props) {
       <div className="wa-project-images">
         {project.images.map((src, i) => (
           <div key={i} className="wa-image-window">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={src}
               alt={`${project.title}, Bild ${i + 1}`}
+              width={getMediaSize(src).width}
+              height={getMediaSize(src).height}
+              sizes="(max-width: 1500px) 100vw, 1500px"
+              priority={i === 0}
               className="wa-project-img"
-              loading={i === 0 ? "eager" : "lazy"}
             />
           </div>
         ))}

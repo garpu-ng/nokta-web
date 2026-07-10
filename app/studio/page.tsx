@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import GifVideo from "@/components/GifVideo";
 import { getT } from "@/lib/i18n";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -31,8 +32,7 @@ export default async function StudioPage() {
         <div className="wa-team-grid">
 
           <div className="wa-team-card">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/flymekaan.gif" alt="Kaan" className="wa-team-gif" />
+            <GifVideo src="/flymekaan.mp4" label="Kaan" width={502} height={1014} className="wa-team-gif" />
             <div className="wa-team-info">
               <div className="wa-team-name">Kaan</div>
               <div className="wa-team-role">{t("studio.role.kaan")}</div>
@@ -40,8 +40,7 @@ export default async function StudioPage() {
           </div>
 
           <div className="wa-team-card">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/flymehammed.gif" alt="Mohammed" className="wa-team-gif" />
+            <GifVideo src="/flymehammed.mp4" label="Mohammed" width={502} height={1014} className="wa-team-gif" />
             <div className="wa-team-info">
               <div className="wa-team-name">Mohammed</div>
               <div className="wa-team-role">{t("studio.role.mohammed")}</div>
@@ -49,8 +48,10 @@ export default async function StudioPage() {
           </div>
 
           <div className="wa-team-card">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/flymemert.gif" alt="Mert" className="wa-team-gif" />
+            {/* NOTE: the source asset for Mert has been missing from /public since
+                before this change (the old /flymemert.gif 404'd too). Kept in the
+                same converted-video form as the others for when the asset lands. */}
+            <GifVideo src="/flymemert.mp4" label="Mert" width={502} height={1014} className="wa-team-gif" />
             <div className="wa-team-info">
               <div className="wa-team-name">Mert</div>
               <div className="wa-team-role">{t("studio.role.mert")}</div>

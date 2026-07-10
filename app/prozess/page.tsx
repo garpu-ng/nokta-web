@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import GifVideo from "@/components/GifVideo";
+import { getMediaSize } from "@/lib/mediaSizes";
 import { getT } from "@/lib/i18n";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -33,10 +36,14 @@ export default async function ProzessPage() {
 
       {/* ── Overview GIF ────────────────────────────────────────── */}
       <div className="wa-prozess-gif-wrap">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/prozess/howwework-stepbystep.gif.gif"
-          alt={t("prozess.gifAlt")}
+        {/* Was a 680 KB animated GIF; now an H.264 loop. Opaque source, so mp4 is
+            safe (no alpha). CSS (.wa-prozess-hero-gif: 500×500, object-fit cover)
+            governs the rendered size. */}
+        <GifVideo
+          src="/prozess/howwework-stepbystep.mp4"
+          label={t("prozess.gifAlt")}
+          width={1440}
+          height={1498}
           className="wa-prozess-hero-gif"
         />
       </div>
@@ -49,8 +56,14 @@ export default async function ProzessPage() {
             className={`wa-prozess-step${i % 2 === 1 ? " wa-prozess-step--reverse" : ""}`}
           >
             <div className="wa-prozess-image-wrap">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={step.image} alt={step.title} className="wa-prozess-img" />
+              <Image
+                src={step.image}
+                alt={step.title}
+                width={getMediaSize(step.image).width}
+                height={getMediaSize(step.image).height}
+                sizes="(max-width: 767px) 100vw, 50vw"
+                className="wa-prozess-img"
+              />
             </div>
             <div className="wa-prozess-text">
               <span className="wa-prozess-number">{step.number}</span>

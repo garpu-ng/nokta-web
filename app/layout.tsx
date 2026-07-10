@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Jost, Space_Mono } from "next/font/google";
 import Link from "next/link";
+import Image from "next/image";
 import "./globals.css";
 import TabBar from "@/components/TabBar";
 import BranchReveal from "@/components/BranchReveal";
@@ -74,10 +75,15 @@ export default async function RootLayout({
                   dot easter egg is parked for now.) */}
               <div className={styles.brand}>
                 <Link href="/" className={styles.brandWord} aria-label={t("aria.home")}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  {/* Brand wordmark — above the fold on every page, so preload it.
+                      Intrinsic size is the source PNG; .brandLogo CSS (height clamp,
+                      width auto) governs the rendered size. */}
+                  <Image
                     src="/nokta_logo.png"
                     alt="nokta"
+                    width={2000}
+                    height={410}
+                    priority
                     className={styles.brandLogo}
                   />
                 </Link>

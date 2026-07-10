@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { PRINTS } from "@/lib/prints";
+import { getMediaSize } from "@/lib/mediaSizes";
 import { getT } from "@/lib/i18n";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -28,8 +30,13 @@ export default async function LinePage() {
         {PRINTS.map((print) => (
           <Link key={print.slug} href={`/line/${print.slug}`} className="nk-print">
             <div className="nk-print__art">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={print.image} alt={print.title} loading="lazy" />
+              <Image
+                src={print.image}
+                alt={print.title}
+                width={getMediaSize(print.image).width}
+                height={getMediaSize(print.image).height}
+                sizes="(max-width: 767px) 100vw, 33vw"
+              />
             </div>
             <div className="nk-print__body">
               <span className="nk-print__name">{print.title}</span>
