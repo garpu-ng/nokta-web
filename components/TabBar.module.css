@@ -25,12 +25,23 @@
   transition:
     min-height 0.55s cubic-bezier(0.4, 0, 0.2, 1),
     padding 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.45s ease,
     box-shadow 0.18s ease;
 }
 /* On hover the tab grows 5px downward — a thin extension in the branch's motto
    colour, the one spot of colour beyond the dot. */
 .tab2:hover {
   box-shadow: 0 5px 0 0 var(--tab);
+}
+
+/* Active tab (you're on its page) fills with the motto colour, reconnecting to
+   the flooded page. Its dot would sit invisibly on the same colour, so hide it.
+   (Home's --tab is black, so an active home tab simply stays black.) */
+.active {
+  background: var(--tab);
+}
+.active .tabDot {
+  display: none;
 }
 
 /* Motto-colour dot, right-aligned. The webp has ~30% transparent padding, so

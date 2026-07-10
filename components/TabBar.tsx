@@ -45,7 +45,7 @@ export default function TabBar({
           role="tab"
           aria-selected={active === b.key}
           onClick={(e) => onTab(e, b)}
-          className={styles.tab2}
+          className={`${styles.tab2}${active === b.key ? " " + styles.active : ""}`}
           style={{ "--tab": b.bg } as CSSProperties}
         >
           <span className={styles.label}>
