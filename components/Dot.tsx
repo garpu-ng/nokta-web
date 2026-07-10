@@ -10,9 +10,11 @@ import type { SVGProps } from "react";
  *
  * Server-compatible (pure markup, no client hooks). Fills `currentColor` by
  * default, so it inherits the surrounding text colour; pass `color` to tint it
- * explicitly (e.g. a branch motto colour). `size` sets both width and height;
- * omit it to size the box from CSS instead. Any other SVG props (className,
- * style, aria-*) pass straight through.
+ * explicitly (e.g. a branch motto colour). `size` sets both width and height to
+ * the same value — but the viewBox is 167×157, so a square box squishes the blob
+ * by ~6%; prefer sizing the box from CSS (height + width:auto, as every current
+ * consumer does) and reach for `size` only for a quick square. Any other SVG
+ * props (className, style, aria-*) pass straight through.
  */
 export default function Dot({
   color,

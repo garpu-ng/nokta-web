@@ -3,10 +3,12 @@
 import { useEffect, useRef } from "react";
 
 // Drop-in replacement for an animated GIF that used to ship as an <img>. Renders
-// a silent, looping, autoplaying <video> styled exactly like the old image (same
-// className / intrinsic width+height so CSS governs the rendered size). Mirrors
-// the TeaserVideo house pattern: set `muted` via the property (more reliable than
-// the attribute across browsers) and kick off play() on mount.
+// a silent, looping <video> styled exactly like the old image (same className /
+// intrinsic width+height so CSS governs the rendered size). Mirrors the
+// TeaserVideo house pattern: set `muted` via the property (more reliable than the
+// attribute across browsers) and kick off play() on mount. Autoplay is driven
+// from the effect rather than the native `autoplay` attribute so it can be
+// suppressed under prefers-reduced-motion (the first frame stays visible).
 //
 // Use for OPAQUE source GIFs converted to H.264 mp4 — H.264 has no alpha channel,
 // so transparent animations must stay as WebP instead.
@@ -28,6 +30,13 @@ export default function GifVideo({ src, className, width, height, label }: Props
     const v = ref.current;
     if (!v) return;
     v.muted = true;
+    // Honour prefers-reduced-motion: leave the video paused on its first frame.
+    if (
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
     v.play().catch(() => {
       /* autoplay may be blocked; the first frame stays visible */
     });
@@ -39,7 +48,6 @@ export default function GifVideo({ src, className, width, height, label }: Props
       className={className}
       width={width}
       height={height}
-      autoPlay
       muted
       loop
       playsInline

@@ -111,6 +111,7 @@ const en: Record<string, string> = {
   "nav.datenschutz": "privacy.",
   "aria.home": "nokta, home",
   "aria.punkt": "Dot",
+  "aria.mainNav": "Main navigation",
   "aria.morePages": "More pages",
   "aria.morePrints": "More prints",
   "aria.language": "Choose language",

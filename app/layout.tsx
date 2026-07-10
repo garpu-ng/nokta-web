@@ -102,7 +102,7 @@ export default async function RootLayout({
         {/* Tab bar — sticks to the top of the viewport once reached. */}
         <div className={styles.tabsticky}>
           <div className={styles.topbarInner}>
-            <TabBar taglines={taglines} />
+            <TabBar taglines={taglines} navLabel={t("aria.mainNav")} />
           </div>
         </div>
 

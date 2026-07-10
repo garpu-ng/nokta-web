@@ -53,7 +53,12 @@ export default function BranchReveal() {
     const onReveal = (e: Event) => {
       const { x, y, color, branch } = (e as CustomEvent<RevealDetail>).detail;
       const ov = overlayRef.current;
-      if (!ov || typeof ov.animate !== "function") {
+      // No animation surface, or the visitor prefers reduced motion → skip the
+      // circular clip-path flood and commit the theme instantly (same fallback).
+      const reduceMotion =
+        typeof window.matchMedia === "function" &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!ov || typeof ov.animate !== "function" || reduceMotion) {
         applyBranch(branch);
         return;
       }

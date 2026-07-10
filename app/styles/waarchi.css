@@ -109,6 +109,14 @@
   animation-play-state: paused;
 }
 
+/* Reduced motion: stop the infinite auto-scroll. The strip stays put, showing
+   its first frame of cards, instead of drifting continuously. */
+@media (prefers-reduced-motion: reduce) {
+  .carousel-track {
+    animation: none;
+  }
+}
+
 .carousel-card {
   flex-shrink: 0;
   height: 100%;

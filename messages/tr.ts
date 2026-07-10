@@ -111,6 +111,7 @@ const tr: Record<string, string> = {
   "nav.datenschutz": "gizlilik.",
   "aria.home": "nokta, ana sayfa",
   "aria.punkt": "Nokta",
+  "aria.mainNav": "Ana gezinme",
   "aria.morePages": "Diğer sayfalar",
   "aria.morePrints": "Diğer baskılar",
   "aria.language": "Dil seç",

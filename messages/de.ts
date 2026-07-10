@@ -124,6 +124,7 @@ const de: Record<string, string> = {
   "nav.datenschutz": "datenschutz.",
   "aria.home": "nokta, Startseite",
   "aria.punkt": "Punkt",
+  "aria.mainNav": "Hauptnavigation",
   "aria.morePages": "Weitere Seiten",
   "aria.morePrints": "Weitere Drucke",
   "aria.language": "Sprache wählen",

@@ -111,6 +111,7 @@ const ja: Record<string, string> = {
   "nav.datenschutz": "プライバシー",
   "aria.home": "nokta、ホーム",
   "aria.punkt": "ドット",
+  "aria.mainNav": "メインナビゲーション",
   "aria.morePages": "その他のページ",
   "aria.morePrints": "その他のプリント",
   "aria.language": "言語を選択",

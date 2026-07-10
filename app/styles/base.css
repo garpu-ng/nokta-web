@@ -93,3 +93,23 @@ textarea {
     transform: translateY(0);
   }
 }
+
+/* Reduced motion: no smooth-scroll and no page-level movement. The incoming-page
+   fade is kept as opacity only (a gentle cross-fade doesn't move anything); the
+   6px translateY is dropped. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .nk-page-fade {
+    animation: nk-fade-in-opacity 0.5s ease both;
+  }
+  @keyframes nk-fade-in-opacity {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}

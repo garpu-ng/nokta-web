@@ -4,7 +4,7 @@
   flex-shrink: 0;
   background: #1a1a18;
   color: #e9e0ce;
-  line-height: 1.5; /* comfortable footer leading (body has no global line-height) */
+  line-height: 1.5; /* comfortable footer leading, overriding the body's 20px (base.css) for the footer's looser blocks */
 }
 
 .inner {

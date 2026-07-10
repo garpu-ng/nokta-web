@@ -27,6 +27,10 @@
 
 /* ── Studio page ──────────────────────────────────────────────── */
 .wa-studio {
+  /* The horizontal max(4svw, 220px) is an intentional wide content inset on
+     desktop — keeps the studio copy off the edges and reading well against the
+     flood colour. (It once cleared a left sidebar; there's no sidebar now, the
+     generous inset is deliberate. Undone to 5vw on mobile below.) */
   padding: 8svh max(4svw, 220px) 10svh;
   max-width: 1500px;
   margin: 0 auto;
@@ -236,6 +240,9 @@
 
 /* ── Prozess page (shared by /prozess and /kontakt) ───────────── */
 .wa-prozess-page {
+  /* Same intentional wide content inset on desktop as .wa-studio (not sidebar
+     clearance — there's no sidebar; the max(4svw, 220px) is a deliberate inset).
+     Undone to 5vw on mobile below. */
   padding: 8svh max(4svw, 220px) 10svh;
   max-width: 1500px;
   margin: 0 auto;
@@ -339,7 +346,10 @@
 .wa-project-images {
   display: flex;
   flex-direction: column;
-  gap: 17.56px;
+  /* Even vertical rhythm between stacked project shots. Rounded from an inherited
+     17.56px (a Webflow-era artifact with no meaningful provenance) to a clean
+     18px — a sub-pixel change with no visible effect. */
+  gap: 18px;
 }
 
 .wa-image-window {
@@ -359,12 +369,12 @@
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   MOBILE / RESPONSIVE  (≤767px) — undo the 220px sidebar-clearance
+   MOBILE / RESPONSIVE  (≤767px) — drop the desktop 220px wide-inset
    paddings so content can use the full width on phones.
    ══════════════════════════════════════════════════════════════════ */
 @media (max-width: 767px) {
 
-  /* ── Collapse the 220px sidebar-clearance paddings ─────────────── */
+  /* ── Collapse the desktop wide-inset paddings to a slim 5vw ─────── */
   .wa-studio,
   .wa-prozess-page {
     padding-left: 5vw !important;

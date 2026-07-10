@@ -15,8 +15,10 @@ import styles from "./TabBar.module.css";
  */
 export default function TabBar({
   taglines,
+  navLabel,
 }: {
   taglines: Record<string, string>;
+  navLabel: string;
 }) {
   const router = useRouter();
   const pathname = usePathname();
@@ -36,16 +38,18 @@ export default function TabBar({
   };
 
   return (
-    <div
+    // Site navigation, not an ARIA tablist: these are links to standalone pages
+    // (no tab panels, no arrow-key roving). A <nav> landmark with aria-current on
+    // the active link is the honest semantics.
+    <nav
       className={`${styles.tabbar} ${isHome ? styles.home : styles.branch}`}
-      role="tablist"
+      aria-label={navLabel}
     >
       {TABS.map((b) => (
         <a
           key={b.key}
           href={b.path}
-          role="tab"
-          aria-selected={active === b.key}
+          aria-current={active === b.key ? "page" : undefined}
           onClick={(e) => onTab(e, b)}
           className={`${styles.tab2}${active === b.key ? " " + styles.active : ""}`}
           style={{ "--tab": b.bg } as CSSProperties}
@@ -60,6 +64,6 @@ export default function TabBar({
           )}
         </a>
       ))}
-    </div>
+    </nav>
   );
 }

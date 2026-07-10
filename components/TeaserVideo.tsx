@@ -5,8 +5,10 @@ import Image from "next/image";
 import styles from "./TeaserVideo.module.css";
 
 // Muted-autoplay teaser banner with the nokta. wordmark centred on it. Sets
-// muted via the property (more reliable than the attribute across browsers)
-// and kicks off play() on mount.
+// muted via the property (more reliable than the attribute across browsers) and
+// kicks off play() on mount. Autoplay is driven from the effect rather than the
+// native `autoplay` attribute so it can be suppressed under prefers-reduced-motion
+// (the poster stays visible).
 export default function TeaserVideo() {
   const ref = useRef<HTMLVideoElement>(null);
 
@@ -14,6 +16,13 @@ export default function TeaserVideo() {
     const v = ref.current;
     if (!v) return;
     v.muted = true;
+    // Honour prefers-reduced-motion: leave the video paused on its poster frame.
+    if (
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
     v.play().catch(() => {
       /* autoplay may be blocked; the poster stays visible */
     });
@@ -25,7 +34,6 @@ export default function TeaserVideo() {
         ref={ref}
         className={styles.video}
         poster="/noktateaser-poster.jpg?v=29"
-        autoPlay
         muted
         loop
         playsInline
