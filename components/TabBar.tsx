@@ -2,14 +2,14 @@
 
 import type { CSSProperties, MouseEvent } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { TABS, branchForPath, inkOn, type Branch } from "@/lib/branches";
+import { TABS, branchForPath, type Branch } from "@/lib/branches";
 import styles from "./TabBar.module.css";
 
 /**
- * Segmented tab bar — three equal-thirds, each filled with its branch's motto
- * colour. Tall on the home page, "reclines" to a compact strip on a branch.
- * The active branch's tab shares the page colour, so it reads as connected to
- * the page. Clicking fires the colour-flood from the click point.
+ * Segmented tab bar — three equal-thirds, all black. Each branch tab carries its
+ * motto colour only as a small animated dot (right-aligned), a muted stand-in
+ * for the old solid-colour fill. Tall on the home page, "reclines" to a compact
+ * strip on a branch. Clicking fires the page colour-flood from the click point.
  */
 export default function TabBar({
   taglines,
@@ -46,13 +46,17 @@ export default function TabBar({
           aria-selected={active === b.key}
           onClick={(e) => onTab(e, b)}
           className={styles.tab2}
-          style={{ "--tab": b.bg, "--tab-fg": inkOn(b.bg) } as CSSProperties}
+          style={{ "--tab": b.bg } as CSSProperties}
         >
           <span className={styles.label}>
             nokta.{b.label}
             <span className={styles.dot}>.</span>
           </span>
           <span className={styles.tag}>{taglines[b.key] ?? b.tagline}</span>
+          {b.dot && (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img src={b.dot} alt="" aria-hidden="true" className={styles.tabDot} />
+          )}
         </a>
       ))}
     </div>

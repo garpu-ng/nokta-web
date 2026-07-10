@@ -1,6 +1,6 @@
-/* Segmented bar — three equal thirds, each filled with its motto colour
-   (set via the --tab custom property inline). The active branch's tab shares
-   the page colour, so it reads as connected. */
+/* Segmented bar — three equal thirds, all black. The branch's motto colour
+   lives only in a small animated dot (right-aligned, --tab kept for the hover
+   accent). The page itself still floods the motto colour. */
 .tabbar {
   display: flex;
   justify-content: center;
@@ -10,6 +10,7 @@
 
 .tab2 {
   /* ~400px per tab; shrinks to fit rather than overflow on narrow screens */
+  position: relative;
   flex: 0 1 400px;
   display: flex;
   flex-direction: column;
@@ -18,20 +19,32 @@
   gap: 4px;
   text-align: center;
   text-decoration: none;
-  background: var(--tab);
-  /* --tab-fg is set per tab (ink on light fills, paper on dark) so the label
-     stays legible on any palette. */
-  color: var(--tab-fg, #e9e0ce);
+  background: #1a1a18;
+  color: var(--paper);
   padding: 12px;
   transition:
     min-height 0.55s cubic-bezier(0.4, 0, 0.2, 1),
     padding 0.55s cubic-bezier(0.4, 0, 0.2, 1),
     box-shadow 0.18s ease;
 }
-/* On hover the tab grows 5px downward only — a solid extension in the tab's
-   own colour, so it doesn't shift siblings or the layout. */
+/* On hover the tab grows 5px downward — a thin extension in the branch's motto
+   colour, the one spot of colour beyond the dot. */
 .tab2:hover {
   box-shadow: 0 5px 0 0 var(--tab);
+}
+
+/* Motto-colour dot, right-aligned. The webp has ~30% transparent padding, so
+   the box is sized larger than the visible blob and that padding gives it a
+   natural right margin. */
+.tabDot {
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  transform: translateY(-50%);
+  width: auto;
+  max-width: none; /* beat mir.css img{max-width:100%} */
+  pointer-events: none;
+  user-select: none;
 }
 
 .label {
@@ -53,18 +66,23 @@
   white-space: nowrap;
 }
 
-/* HOME — tall, full detail */
+/* HOME — tall, full detail. Reserve a right "dot lane" so the centred
+   label/tag clear the dot instead of running under it. */
 .home .tab2 {
   min-height: 150px;
+  padding-right: 52px;
 }
 .home .label {
   font-size: 1.7rem;
+}
+.home .tabDot {
+  height: 58px !important; /* !important beats mir.css img{height:auto} */
 }
 
 /* BRANCH — reclined into a compact strip */
 .branch .tab2 {
   min-height: 0;
-  padding: 11px 12px;
+  padding: 11px 40px 11px 12px;
 }
 .branch .label {
   font-size: 1rem;
@@ -72,20 +90,38 @@
 .branch .tag {
   display: none;
 }
+.branch .tabDot {
+  height: 44px !important;
+}
 
 /* ── Mobile ───────────────────────────────────────────────────────── */
 @media (max-width: 767px) {
+  /* Narrow tabs: smaller label + a right dot lane so the dot never sits on the
+     label. */
   .tab2 {
-    padding: 9px 6px;
+    padding: 9px 24px 9px 6px;
   }
   .label {
-    font-size: 0.82rem !important;
+    font-size: 0.72rem !important;
     letter-spacing: -0.03em;
+  }
+  .home .tab2,
+  .branch .tab2 {
+    padding-right: 24px;
   }
   .home .tab2 {
     min-height: 92px;
   }
   .tag {
     display: none;
+  }
+  .tabDot {
+    right: 2px;
+  }
+  .home .tabDot {
+    height: 34px !important;
+  }
+  .branch .tabDot {
+    height: 24px !important;
   }
 }

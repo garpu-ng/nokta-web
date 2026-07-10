@@ -17,6 +17,9 @@ export type Branch = {
   accent: string;
   /** muted page wash for this branch (matches the CSS [data-branch] value) */
   bg: string;
+  /** animated dot webp in this branch's motto colour, shown on the (black) tab.
+      Empty for home (its motto colour is black — no visible dot). */
+  dot: string;
 };
 
 export const BRANCHES: Branch[] = [
@@ -29,6 +32,7 @@ export const BRANCHES: Branch[] = [
       "Branding, Editorial, Layout und Druck. Mit eigenen Tools testen wir schnell viele Richtungen und finden das, was sitzt.",
     accent: "#b83636", // red
     bg: "#b83636",
+    dot: "/nokta_dot_red.webp",
   },
   {
     key: "arch",
@@ -39,6 +43,7 @@ export const BRANCHES: Branch[] = [
       "Fotorealistische 3D-Renderings für Architekten, Bauträger und Privatpersonen. Mit eigenem Setup kommen wir schnell zu vielen Varianten.",
     accent: "#4b5cbe", // blue
     bg: "#4b5cbe",
+    dot: "/nokta_dot_blue.webp",
   },
   {
     key: "line",
@@ -49,6 +54,7 @@ export const BRANCHES: Branch[] = [
       "Ikonische Bauwerke als CAD-Liniendruck. Aus echten Zeichnungen vektorisiert, in A1 gedruckt und gerahmt.",
     accent: "#5f6f53", // green
     bg: "#5f6f53",
+    dot: "/nokta_dot_green.webp",
   },
 ];
 
@@ -66,6 +72,7 @@ export const HOME_TAB: Branch = {
   desc: "",
   accent: "#1a1a18",
   bg: "#1a1a18",
+  dot: "",
 };
 
 /** Everything shown in the top tab bar, in order. */
