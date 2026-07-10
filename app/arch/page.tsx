@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import WorkGrid from "@/components/WorkGrid";
 import ArchHero from "@/components/arch/ArchHero";
+import DotField from "@/components/arch/DotField";
 import archStyles from "@/components/arch/ArchHero.module.css";
 import { getT } from "@/lib/i18n";
 
@@ -24,6 +25,8 @@ export default async function ArchPage() {
       <div className={archStyles.intro}>
         <p className={archStyles.introLead}>{t("branch.arch.desc")}</p>
       </div>
+
+      <DotField />
 
       <div className="wa-grid-column">
         <WorkGrid />
