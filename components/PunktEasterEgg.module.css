@@ -28,7 +28,7 @@
   font-weight: 700;
   letter-spacing: -0.05em;
   line-height: 1;
-  color: #e4c99b;
+  color: #f2eee6;
   font-size: clamp(2rem, 7vw, 5rem);
   user-select: none;
 }
@@ -48,7 +48,7 @@
   font-size: 0.72rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #e4c99b;
+  color: #f2eee6;
   opacity: 0.5;
   text-decoration: none;
   transition: opacity 0.2s ease;

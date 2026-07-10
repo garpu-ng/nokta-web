@@ -485,7 +485,7 @@
 
 .nk-branch-card:hover {
   background: var(--card);
-  color: #e4c99b;
+  color: #f2eee6;
 }
 
 .nk-branch-card__key {
@@ -500,7 +500,7 @@
 }
 
 .nk-branch-card:hover .nk-branch-card__key .nk-dot {
-  color: #e4c99b;
+  color: #f2eee6;
 }
 
 .nk-branch-card__tag {
@@ -571,7 +571,7 @@
   display: flex;
   flex-direction: column;
   border: 1px solid var(--ink);
-  background: #e4c99b;
+  background: #f2eee6;
   color: var(--ink);
   text-decoration: none;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
@@ -588,7 +588,7 @@
   align-items: center;
   justify-content: center;
   padding: 1.5rem 1.5rem 0;
-  background: #e4c99b;
+  background: #f2eee6;
   /* The card is a column flex, so this box is a flex item whose default
      min-height:auto would let the tall artwork override aspect-ratio and grow
      the box. Pin it to 0 (+ clip) so the 3:4 frame always governs. */
@@ -656,7 +656,7 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   font-weight: 600;
-  color: #e4c99b;
+  color: #f2eee6;
   background: var(--ink); /* black button, per the sketch */
   border: none;
   padding: 8px 16px;
@@ -692,7 +692,7 @@
   align-items: center;
   justify-content: center;
   padding: clamp(1.5rem, 3vw, 2.75rem);
-  background: #e4c99b;
+  background: #f2eee6;
   border: 1px solid var(--ink);
 }
 .nk-print-detail__art {
@@ -797,7 +797,7 @@
 .nk-service {
   padding: 1.5rem;
   border: 1px solid var(--ink);
-  background: #e4c99b; /* paper card so text reads on the coloured page */
+  background: #f2eee6; /* paper card so text reads on the coloured page */
 }
 
 .nk-service h3 {

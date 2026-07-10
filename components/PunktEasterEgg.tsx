@@ -6,13 +6,13 @@ import Link from "next/link";
 import styles from "./PunktEasterEgg.module.css";
 
 // Each brand colour maps to a form — "Vom Punkt zur Linie zur Form":
-//   0 Chile Rojo #ae431e → round blob
-//   1 Terracota  #d06224 → rounded square
-//   2 Olive      #8a8635 → rounded triangle
+//   0 clay  #ae6a4e → round blob
+//   1 slate #5c6e82 → rounded square
+//   2 green #6e7a54 → rounded triangle
 const PALETTE: [number, number, number][] = [
-  [174, 67, 30],
-  [208, 98, 36],
-  [138, 134, 53],
+  [174, 106, 78],
+  [92, 110, 130],
+  [110, 122, 84],
 ];
 
 // Normalised polar radius of the current form at angle `a` (before wobble).
