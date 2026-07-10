@@ -27,8 +27,8 @@ export const BRANCHES: Branch[] = [
     tagline: "Layout · Design · Druck",
     desc:
       "Branding, Editorial, Layout und Druck. Mit eigenen Tools testen wir schnell viele Richtungen und finden das, was sitzt.",
-    accent: "#ae6a4e", // clay
-    bg: "#ae6a4e",
+    accent: "#ae431e", // Chile Rojo
+    bg: "#ae431e",
   },
   {
     key: "arch",
@@ -37,8 +37,8 @@ export const BRANCHES: Branch[] = [
     tagline: "Architekturvisualisierung",
     desc:
       "Fotorealistische 3D-Renderings für Architekten, Bauträger und Privatpersonen. Mit eigenem Setup kommen wir schnell zu vielen Varianten.",
-    accent: "#5c6e82", // slate blue
-    bg: "#5c6e82",
+    accent: "#d06224", // Terracota
+    bg: "#d06224",
   },
   {
     key: "line",
@@ -47,8 +47,8 @@ export const BRANCHES: Branch[] = [
     tagline: "2D · Vektor · CAD-Kunstdrucke",
     desc:
       "Ikonische Bauwerke als CAD-Liniendruck. Aus echten Zeichnungen vektorisiert, in A1 gedruckt und gerahmt.",
-    accent: "#6e7a54", // drafting green
-    bg: "#6e7a54",
+    accent: "#8a8635", // Olive
+    bg: "#8a8635",
   },
 ];
 

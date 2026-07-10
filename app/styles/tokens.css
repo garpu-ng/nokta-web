@@ -14,7 +14,7 @@
 
   /* Core (neutral) identity. Each branch overrides --brand-bg and
      --brand-accent below; the body background transitions between them. */
-  --paper: #f2eee6;
+  --paper: #e4c99b;
   --ink: #1a1a18;
   --brand-bg: var(--paper);    /* whole-page flood colour */
   --brand-accent: var(--ink);  /* dot / accents */
@@ -28,22 +28,22 @@
 /* Branch motto-colours. The page floods this colour; the matching tab shares it
    so the active tab connects into the page. Text on the colour goes light. */
 :root[data-branch="nokta"] {
-  --brand-bg: #ae6a4e;
-  --brand-accent: #ae6a4e; /* clay */
-  --on-brand: #f2eee6;
+  --brand-bg: #ae431e;
+  --brand-accent: #ae431e; /* Chile Rojo */
+  --on-brand: #e4c99b;
 }
 :root[data-branch="arch"] {
-  --brand-bg: #5c6e82;
-  --brand-accent: #5c6e82; /* slate blue */
-  --on-brand: #f2eee6;
+  --brand-bg: #d06224;
+  --brand-accent: #d06224; /* Terracota */
+  --on-brand: #e4c99b;
 }
 :root[data-branch="line"] {
-  --brand-bg: #6e7a54;
-  --brand-accent: #6e7a54; /* drafting green */
-  --on-brand: #f2eee6;
+  --brand-bg: #8a8635;
+  --brand-accent: #8a8635; /* Olive */
+  --on-brand: #e4c99b;
 }
 :root[data-branch="home"] {
   --brand-bg: #1a1a18;
   --brand-accent: #1a1a18; /* black */
-  --on-brand: #f2eee6; /* paper text on black */
+  --on-brand: #e4c99b; /* paper text on black */
 }
