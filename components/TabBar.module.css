@@ -1,6 +1,7 @@
-/* Segmented bar — three equal thirds, all black. The branch's motto colour
-   lives only in a small animated dot (right-aligned, --tab kept for the hover
-   accent). The page itself still floods the motto colour. */
+/* Segmented bar — four equal tabs, all black. The accent lives in the text:
+   each tab's label/tag renders in its motto colour (--tab). The active tab fills
+   with that motto colour and its text goes paper so it stays legible on the fill.
+   The page itself still floods the motto colour. */
 .tabbar {
   display: flex;
   justify-content: center;
@@ -20,47 +21,43 @@
   text-align: center;
   text-decoration: none;
   background: #1a1a18;
-  color: var(--paper);
+  /* Text carries the branch accent; children inherit this. */
+  color: var(--tab);
   padding: 12px;
   transition:
     min-height 0.55s cubic-bezier(0.4, 0, 0.2, 1),
     padding 0.55s cubic-bezier(0.4, 0, 0.2, 1),
     background-color 0.45s ease,
+    color 0.45s ease,
     box-shadow 0.18s ease;
 }
 /* On hover the tab grows 5px downward — a thin extension in the branch's motto
-   colour, the one spot of colour beyond the dot. */
+   colour. */
 .tab2:hover {
   box-shadow: 0 5px 0 0 var(--tab);
 }
 
 /* Active tab (you're on its page) fills with the motto colour, reconnecting to
-   the flooded page. Its dot would sit invisibly on the same colour, so hide it.
-   (Home's --tab is black, so an active home tab simply stays black.) */
+   the flooded page. Its accent text would vanish on the same colour, so fade the
+   text to paper. (Home's --tab is black, so an active home tab simply stays
+   black — see the data-home rule below, which keeps its text paper regardless.) */
 .active {
   background: var(--tab);
-}
-.active .tabDot {
-  display: none;
+  color: var(--paper);
 }
 
-/* Motto-colour brand dot, right-aligned. The inline <Dot> SVG is cropped tight
-   to the blob (no phantom padding), so the box size *is* the visible dot size
-   and the right offset is set explicitly per state below. Height drives it;
-   width follows the blob's aspect ratio. */
-.tabDot {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: auto;
-  pointer-events: none;
-  user-select: none;
+/* Home edge case: its motto colour IS the tab background (#1a1a18), so
+   motto-coloured text would be invisible. Pin home's text to paper at all times
+   — inactive and active alike (its active bg stays black, so paper reads there
+   too). Higher specificity than .active, so it wins in the active state. */
+.tab2[data-home] {
+  color: var(--paper);
 }
 
 .label {
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: inherit; /* inherits --tab-fg from .tab2 */
+  color: inherit; /* inherits the accent/paper colour from .tab2 */
   transition: font-size 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .dot {
@@ -76,24 +73,18 @@
   white-space: nowrap;
 }
 
-/* HOME — tall, full detail. Reserve a right "dot lane" so the centred
-   label/tag clear the dot instead of running under it. */
+/* HOME — tall, full detail. */
 .home .tab2 {
   min-height: 150px;
-  padding-right: 48px;
 }
 .home .label {
   font-size: 1.7rem;
-}
-.home .tabDot {
-  height: 23px;
-  right: 20px;
 }
 
 /* BRANCH — reclined into a compact strip */
 .branch .tab2 {
   min-height: 0;
-  padding: 11px 38px 11px 12px;
+  padding: 11px 12px;
 }
 .branch .label {
   font-size: 1rem;
@@ -101,38 +92,20 @@
 .branch .tag {
   display: none;
 }
-.branch .tabDot {
-  height: 17px;
-  right: 16px;
-}
 
 /* ── Mobile ───────────────────────────────────────────────────────── */
 @media (max-width: 767px) {
-  /* Narrow tabs: smaller label + a right dot lane so the dot never sits on the
-     label. */
   .tab2 {
-    padding: 9px 24px 9px 6px;
+    padding: 9px 6px;
   }
   .label {
     font-size: 0.72rem !important;
     letter-spacing: -0.03em;
-  }
-  .home .tab2,
-  .branch .tab2 {
-    padding-right: 26px;
   }
   .home .tab2 {
     min-height: 92px;
   }
   .tag {
     display: none;
-  }
-  .home .tabDot {
-    height: 13px;
-    right: 12px;
-  }
-  .branch .tabDot {
-    height: 9px;
-    right: 9px;
   }
 }

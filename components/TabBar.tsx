@@ -3,15 +3,15 @@
 import type { CSSProperties, MouseEvent } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { TABS, branchForPath, type Branch } from "@/lib/branches";
-import Dot from "./Dot";
 import styles from "./TabBar.module.css";
 
 /**
- * Segmented tab bar — three equal-thirds, all black. Each branch tab carries its
- * motto colour only as the small brand dot (right-aligned, inline <Dot> SVG
- * tinted with the branch accent), a muted stand-in for the old solid-colour
- * fill. Tall on the home page, "reclines" to a compact
- * strip on a branch. Clicking fires the page colour-flood from the click point.
+ * Segmented tab bar — four equal tabs, all black. The branch's motto colour lives
+ * in the tab's *text* (label, its trailing "." and the tagline). The active tab
+ * (you're on its page) fills with that motto colour and its text fades to paper
+ * so it stays legible on the fill, reconnecting to the flooded page. Tall on the
+ * home page, "reclines" to a compact strip on a branch. Clicking fires the page
+ * colour-flood from the click point.
  */
 export default function TabBar({
   taglines,
@@ -52,16 +52,17 @@ export default function TabBar({
           aria-current={active === b.key ? "page" : undefined}
           onClick={(e) => onTab(e, b)}
           className={`${styles.tab2}${active === b.key ? " " + styles.active : ""}`}
+          // --tab is the motto colour: the tab's text colour when inactive, its
+          // background fill when active. home's motto is black (= tab bg), so
+          // motto text would vanish — data-home pins that tab's text to paper.
           style={{ "--tab": b.bg } as CSSProperties}
+          data-home={b.key === "home" ? "true" : undefined}
         >
           <span className={styles.label}>
             nokta.{b.label}
             <span className={styles.dot}>.</span>
           </span>
           <span className={styles.tag}>{taglines[b.key] ?? b.tagline}</span>
-          {b.key !== "home" && (
-            <Dot color={b.accent} className={styles.tabDot} />
-          )}
         </a>
       ))}
     </nav>
