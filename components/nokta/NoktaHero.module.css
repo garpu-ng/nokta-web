@@ -1,0 +1,121 @@
+/* Press proof: a cream sheet carrying its trim marks and registration cross.
+   The large raster dot is an accent plane only; all copy remains pure ink. */
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--paper);
+  min-height: min(78svh, 820px);
+  padding: clamp(3rem, 9svh, 6rem) clamp(20px, 5vw, 48px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.halftone {
+  position: absolute;
+  z-index: -1;
+  top: -12%;
+  right: -14%;
+  display: block;
+  width: clamp(280px, 42vw, 640px);
+  height: auto;
+  opacity: 0.92;
+  pointer-events: none;
+}
+
+.cropMark {
+  position: absolute;
+  z-index: 0;
+  width: 68px;
+  height: 68px;
+  overflow: visible;
+  pointer-events: none;
+}
+.cropMark path,
+.registration circle,
+.registration path {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1;
+  opacity: 0.6;
+}
+.topLeft { top: 0; left: 0; }
+.topRight { top: 0; right: 0; }
+.bottomLeft { bottom: 0; left: 0; }
+.bottomRight { right: 0; bottom: 0; }
+
+.registration {
+  position: absolute;
+  z-index: 0;
+  top: clamp(3.5rem, 10svh, 5.5rem);
+  left: clamp(3.5rem, 9vw, 8rem);
+  width: 26px;
+  height: 26px;
+  pointer-events: none;
+}
+.registration circle,
+.registration path { opacity: 0.5; }
+
+.title {
+  position: relative;
+  z-index: 1;
+  max-width: 9ch;
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--display-font);
+  font-variation-settings: "SOFT" 80, "WONK" 1, "opsz" 144;
+  font-size: clamp(3.2rem, 10vw, 9rem);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+.titleDot { color: var(--brand-accent); }
+
+.caption {
+  position: relative;
+  z-index: 1;
+  margin: 1.2rem 0 0;
+  color: var(--ink);
+  font-family: var(--mono-font);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: lowercase;
+  opacity: 0.7;
+}
+.claim {
+  position: relative;
+  z-index: 1;
+  max-width: 34ch;
+  margin: 0.6rem 0 0;
+  color: var(--ink);
+  font-size: clamp(1rem, 1.8vw, 1.3rem);
+  line-height: 1.5;
+  opacity: 0.85;
+}
+
+/* Intro lead lives in this module so this branch stays self-contained. */
+.intro {
+  background: var(--paper);
+  padding: clamp(2.5rem, 8svh, 5rem) clamp(20px, 5vw, 48px);
+}
+.introLead {
+  max-width: 46ch;
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(1.15rem, 2.4vw, 1.7rem);
+  line-height: 1.5;
+}
+
+@media (max-width: 767px) {
+  .hero { min-height: 64svh; }
+  .halftone {
+    top: -8%;
+    right: -22%;
+    width: 62vw;
+  }
+  .registration {
+    top: 4rem;
+    left: 3.5rem;
+  }
+}
