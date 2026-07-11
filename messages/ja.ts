@@ -4,7 +4,7 @@ const ja: Record<string, string> = {
   "meta.site.desc": "nokta はドイツ発の学際的デザインスタジオです。デザインと印刷、建築ビジュアライゼーション、CADラインプリント。自前のツール、たくさんのアイデア、短い道のり。",
   "meta.home.title": "nokta · ひとつのスタジオ、三つの領域",
   "meta.nokta.title": "nokta · レイアウト・デザイン・印刷",
-  "meta.arch.title": "nokta.arch · 建築ビジュアライゼーション",
+  "meta.arch.title": "nokta.cube · 建築ビジュアライゼーション",
   "meta.line.title": "nokta.line · CADアートプリント",
   "meta.studio.title": "スタジオ · nokta",
   "meta.studio.desc": "nokta、三つの領域を持つドイツ発のデザインスタジオ：デザインと印刷、建築ビジュアライゼーション、CADラインプリント。",

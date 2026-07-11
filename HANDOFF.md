@@ -13,7 +13,7 @@ disciplines / "branches":
 | Branch | Route | What it does | Motto-colour |
 |--------|-------|--------------|--------------|
 | **nokta** | `/nokta` | Layout · Design · Druck (graphic design, print) | clay `#B0664A` |
-| **nokta.arch** | `/arch` | Architekturvisualisierung (the old waarchi work) | slate `#4E6076` |
+| **nokta.cube** | `/arch` | Architekturvisualisierung (the old waarchi work) | slate `#4E6076` |
 | **nokta.line** | `/line` | 2D / Vektor / CAD-Kunstdrucke — framed prints, 100 € | drafting-green `#5E6B4E` |
 
 Brand idea: **nokta = "dot/point"** (Turkish). The three branches are the
@@ -191,7 +191,7 @@ Data files: `lib/projects.ts` (arch projects), `lib/prints.ts` (line prints).
 ## 7. Related / where things live
 
 - **This repo (nokta):** `github.com/garpu-ng/nokta-web`
-- **waarchi (frozen, = nokta.arch source):** `github.com/garpu-ng/waarchi-revamp`
+- **waarchi (frozen, = nokta.cube source):** `github.com/garpu-ng/waarchi-revamp`
   — also still deployed on Vercel (projects `waarchi-revamp` + duplicate
   `waarchi-revamp-y4fp`; custom domain `waarchi.kaanmaan.cv`).
 - **waarchi local backups (Linux):** `/home/kaan/backups/` (git bundle + tarball)

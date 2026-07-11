@@ -11,7 +11,7 @@ export default async function ArchHero() {
       {/* Cobalt plane — clip-path polygon, no image. */}
       <div className={styles.plane} aria-hidden="true" />
       <h1 className={styles.title}>
-        nokta.arch<span className={styles.titleDot}>.</span>
+        nokta.cube<span className={styles.titleDot}>.</span>
       </h1>
       <p className={styles.caption}>{t("arch.hero.caption")}</p>
       <p className={styles.claim}>{t("arch.hero.claim")}</p>

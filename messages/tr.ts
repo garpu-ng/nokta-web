@@ -4,7 +4,7 @@ const tr: Record<string, string> = {
   "meta.site.desc": "nokta, Almanya merkezli disiplinler arası bir tasarım stüdyosu: tasarım ve baskı, mimari görselleştirme ve CAD çizgi baskılar. Kendi araçlarımız, bol fikir, kısa yollar.",
   "meta.home.title": "nokta · bir stüdyo, üç disiplin",
   "meta.nokta.title": "nokta · dizgi, tasarım ve baskı",
-  "meta.arch.title": "nokta.arch · mimari görselleştirme",
+  "meta.arch.title": "nokta.cube · mimari görselleştirme",
   "meta.line.title": "nokta.line · CAD sanat baskıları",
   "meta.studio.title": "Stüdyo · nokta",
   "meta.studio.desc": "nokta, üç disiplinli bir tasarım stüdyosu: tasarım ve baskı, mimari görselleştirme ve CAD çizgi baskılar.",

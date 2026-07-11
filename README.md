@@ -1,7 +1,7 @@
 # nokta
 
 Website des interdisziplinären Designstudios **nokta** — Design & Druck,
-Architekturvisualisierung (nokta.arch) und CAD-Liniendrucke (nokta.line).
+Architekturvisualisierung (nokta.cube) und CAD-Liniendrucke (nokta.line).
 Next.js (App Router), Deploy über Vercel (Push auf `main` → Auto-Build).
 
 ---

@@ -6,7 +6,7 @@ const de: Record<string, string> = {
   "meta.site.desc": "nokta ist ein interdisziplinäres Designstudio aus NRW: Design und Druck, Architekturvisualisierung und CAD-Liniendrucke. Eigene Tools, viele Ideen, kurze Wege.",
   "meta.home.title": "nokta · ein Studio, drei Disziplinen",
   "meta.nokta.title": "nokta · Layout, Design und Druck",
-  "meta.arch.title": "nokta.arch · Architekturvisualisierung NRW",
+  "meta.arch.title": "nokta.cube · Architekturvisualisierung NRW",
   "meta.line.title": "nokta.line · CAD-Kunstdrucke",
   "meta.studio.title": "Studio · nokta",
   "meta.studio.desc": "nokta, Designstudio aus NRW mit drei Disziplinen: Design und Druck, Architekturvisualisierung und CAD-Liniendrucke.",
@@ -116,7 +116,7 @@ const de: Record<string, string> = {
   "projects.desc.ipehouse": "Elegante Visualisierung eines modernen Hauses mit Ipe-Holzfassade.",
   "projects.desc.velostation": "Architekturvisualisierung einer modernen Fahrradstation im urbanen Raum.",
 
-  // ── nokta.arch (poster-wall redesign) ─────────────────────────────
+  // ── nokta.cube (poster-wall redesign) ─────────────────────────────
   "arch.hero.caption": "architekturvisualisierung · düsseldorf",
   "arch.hero.claim": "Räume, bevor es sie gibt.",
   "arch.wall.label": "Ausgewählte Arbeiten",

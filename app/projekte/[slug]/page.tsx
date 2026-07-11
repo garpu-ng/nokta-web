@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!project) return {};
   const t = await getT();
   return {
-    title: `${project.title} · nokta.arch`,
+    title: `${project.title} · nokta.cube`,
     description: t(`projects.desc.${slug}`),
   };
 }

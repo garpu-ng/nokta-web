@@ -1,4 +1,4 @@
-# nokta.arch Poster-Wall Redesign — Implementation Plan
+# nokta.cube Poster-Wall Redesign — Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
@@ -28,7 +28,7 @@ The moodbook is NOT 1920s-ornament art deco — it's flat Matisse cut-outs, gene
 **Colors:** existing tokens only — `--paper #e9e0ce`, `--ink #1a1a18`, arch cobalt `#4b5cbe`, nokta red `#b83636` (as the "thread" accent). No new colors.
 
 **Page rhythm (top to bottom):**
-1. `ArchHero` — poster 1: paper field, cobalt diagonal plane, huge Fraunces "nokta.arch.", mono caption, tiny figure at the diagonal's edge.
+1. `ArchHero` — poster 1: paper field, cobalt diagonal plane, huge Fraunces "nokta.cube.", mono caption, tiny figure at the diagonal's edge.
 2. Intro lead (existing i18n copy) on paper.
 3. `DotField` — poster 2: ink dot drape on paper with red center thread, as a section divider.
 4. `PosterWall` — the six projects as an editorial poster wall (mixed widths, ghost numerals, rotated mono captions, Fraunces titles under true-color renders).
@@ -176,7 +176,7 @@ export default async function ArchHero() {
         />
       </svg>
       <h1 className={styles.title}>
-        nokta.arch<span className={styles.titleDot}>.</span>
+        nokta.cube<span className={styles.titleDot}>.</span>
       </h1>
       <p className={styles.caption}>{t("arch.hero.caption")}</p>
       <p className={styles.claim}>{t("arch.hero.claim")}</p>
@@ -270,7 +270,7 @@ Note for the implementer: `* { font-family }` no longer exists (removed with mir
 
 - [ ] **Step 5: Verify**
 
-Run: `npm run build && npm start` then `curl -s localhost:3000/arch | grep -c "nokta.arch"`
+Run: `npm run build && npm start` then `curl -s localhost:3000/arch | grep -c "nokta.cube"`
 Expected: build passes; hero markup present; visually check `http://localhost:3000/arch` if a browser is available.
 
 - [ ] **Step 6: Commit**

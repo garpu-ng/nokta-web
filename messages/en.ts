@@ -4,7 +4,7 @@ const en: Record<string, string> = {
   "meta.site.desc": "nokta is an interdisciplinary design studio from Germany: design and print, architectural visualisation and CAD line prints. Own tools, lots of ideas, short paths.",
   "meta.home.title": "nokta · one studio, three disciplines",
   "meta.nokta.title": "nokta · layout, design and print",
-  "meta.arch.title": "nokta.arch · architectural visualisation",
+  "meta.arch.title": "nokta.cube · architectural visualisation",
   "meta.line.title": "nokta.line · CAD art prints",
   "meta.studio.title": "Studio · nokta",
   "meta.studio.desc": "nokta, a design studio from Germany with three disciplines: design and print, architectural visualisation and CAD line prints.",

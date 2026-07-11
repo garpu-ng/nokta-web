@@ -1,7 +1,7 @@
 import { getT } from "@/lib/i18n";
 import styles from "./NoktaHero.module.css";
 
-/* Press-proof hero. The accent plane is one giant rasterised dot: nokta.nokta
+/* Press-proof hero. The accent plane is one giant rasterised dot: nokta.point
    rendered literally as a dot made of dots. The grid and radius ramp are
    deliberately deterministic, keeping the server output stable. */
 const SIZE = 800;
@@ -65,7 +65,7 @@ export default async function NoktaHero() {
       </svg>
 
       <h1 className={styles.title}>
-        nokta.nokta<span className={styles.titleDot}>.</span>
+        nokta.point<span className={styles.titleDot}>.</span>
       </h1>
       <p className={styles.caption}>{t("nokta.hero.caption")}</p>
       <p className={styles.claim}>{t("nokta.hero.claim")}</p>
