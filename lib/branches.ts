@@ -22,7 +22,7 @@ export type Branch = {
 export const BRANCHES: Branch[] = [
   {
     key: "nokta",
-    label: "nokta",
+    label: "point",
     path: "/nokta",
     tagline: "Layout · Design · Druck",
     desc:
@@ -32,7 +32,7 @@ export const BRANCHES: Branch[] = [
   },
   {
     key: "arch",
-    label: "arch",
+    label: "cube",
     path: "/arch",
     tagline: "Architekturvisualisierung",
     desc:
