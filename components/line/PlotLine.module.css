@@ -1,10 +1,13 @@
 /* The page's one orchestrated movement: a seed-stable plotter path draws once
    when it enters view. A 2400px dash safely exceeds the generated path. */
 .section {
+  background: var(--paper);
+}
+
+.inner {
   max-width: 1100px;
   margin: 0 auto;
   padding: clamp(1.5rem, 5svh, 3.5rem) clamp(20px, 5vw, 48px);
-  background: var(--paper);
 }
 
 .plot {

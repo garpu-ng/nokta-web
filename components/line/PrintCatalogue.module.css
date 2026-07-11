@@ -1,8 +1,12 @@
 .catalogue {
+  background: var(--paper);
+  padding: clamp(2rem, 6svh, 4rem) 0 clamp(4rem, 10svh, 7rem);
+}
+
+.inner {
   max-width: 1100px;
   margin: 0 auto;
-  padding: clamp(2rem, 6svh, 4rem) clamp(20px, 5vw, 48px) clamp(4rem, 10svh, 7rem);
-  background: var(--paper);
+  padding: 0 clamp(20px, 5vw, 48px);
 }
 
 .label {

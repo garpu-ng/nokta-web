@@ -85,18 +85,20 @@ export default function PlotLine() {
 
   return (
     <section ref={ref} className={styles.section}>
-      <svg
-        viewBox={`0 0 ${W} ${H}`}
-        className={`${styles.plot}${drawn ? ` ${styles.drawn}` : ""}`}
-        aria-hidden="true"
-      >
-        <circle cx={START.x.toFixed(1)} cy={START.y.toFixed(1)} r="5" className={styles.startDot} />
-        <path d={PATH} className={styles.path} />
-        <g className={styles.crosshair} transform={`translate(${END.x.toFixed(1)} ${END.y.toFixed(1)})`}>
-          <circle r="3" className={styles.crosshairRing} />
-          <path d="M-8 0h16M0-8v16" className={styles.crosshairLine} />
-        </g>
-      </svg>
+      <div className={styles.inner}>
+        <svg
+          viewBox={`0 0 ${W} ${H}`}
+          className={`${styles.plot}${drawn ? ` ${styles.drawn}` : ""}`}
+          aria-hidden="true"
+        >
+          <circle cx={START.x.toFixed(1)} cy={START.y.toFixed(1)} r="5" className={styles.startDot} />
+          <path d={PATH} className={styles.path} />
+          <g className={styles.crosshair} transform={`translate(${END.x.toFixed(1)} ${END.y.toFixed(1)})`}>
+            <circle r="3" className={styles.crosshairRing} />
+            <path d="M-8 0h16M0-8v16" className={styles.crosshairLine} />
+          </g>
+        </svg>
+      </div>
     </section>
   );
 }
