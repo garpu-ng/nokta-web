@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { getT } from "@/lib/i18n";
+import shell from "@/components/BranchShell.module.css";
+import styles from "./page.module.css";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getT();
@@ -18,18 +20,18 @@ export default async function NoktaPage() {
   }));
 
   return (
-    <main className="nk-branch">
-      <header className="nk-branch-head">
-        <h1 className="nk-branch-title">
+    <main className={shell.branch}>
+      <header className={shell.head}>
+        <h1 className={shell.title}>
           nokta.nokta<span className="nk-dot">.</span>
         </h1>
-        <p className="nk-branch-tag">{t("branch.nokta.tag")}</p>
-        <p className="nk-branch-lead">{t("branch.nokta.desc")}</p>
+        <p className={shell.tag}>{t("branch.nokta.tag")}</p>
+        <p className={shell.lead}>{t("branch.nokta.desc")}</p>
       </header>
 
-      <div className="nk-service-grid">
+      <div className={styles.serviceGrid}>
         {services.map((s) => (
-          <div key={s.title} className="nk-service">
+          <div key={s.title} className={styles.service}>
             <h3>{s.title}</h3>
             <p>{s.text}</p>
           </div>

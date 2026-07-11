@@ -5,6 +5,8 @@ import { notFound } from "next/navigation";
 import { PRINTS, getPrint } from "@/lib/prints";
 import { getMediaSize } from "@/lib/mediaSizes";
 import { getT } from "@/lib/i18n";
+import shell from "@/components/BranchShell.module.css";
+import styles from "./page.module.css";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -35,14 +37,14 @@ export default async function PrintPage({ params }: Props) {
   const next = PRINTS[idx + 1];
 
   return (
-    <main className="nk-branch nk-print-page">
-      <Link href="/line" className="nk-print-back">
+    <main className={shell.branch}>
+      <Link href="/line" className={styles.printBack}>
         {t("line.back")}
       </Link>
 
-      <div className="nk-print-detail">
+      <div className={styles.printDetail}>
         {/* Framed artwork */}
-        <div className="nk-print-detail__frame">
+        <div className={styles.detailFrame}>
           <Image
             src={print.image}
             alt={`${print.title}, ${t("line.altSuffix")}`}
@@ -50,19 +52,19 @@ export default async function PrintPage({ params }: Props) {
             height={getMediaSize(print.image).height}
             sizes="(max-width: 767px) 100vw, 50vw"
             preload
-            className="nk-print-detail__art"
+            className={styles.detailArt}
           />
         </div>
 
         {/* Info column */}
-        <div className="nk-print-detail__info">
-          <h1 className="nk-print-detail__title">
+        <div className={styles.detailInfo}>
+          <h1 className={styles.detailTitle}>
             {print.title}
             <span className="nk-dot">.</span>
           </h1>
-          <p className="nk-print-detail__city">{print.subtitle}</p>
+          <p className={styles.detailCity}>{print.subtitle}</p>
 
-          <dl className="nk-print-detail__specs">
+          <dl className={styles.detailSpecs}>
             <div>
               <dt>{t("line.spec.year")}</dt>
               <dd>{print.year}</dd>
@@ -85,12 +87,12 @@ export default async function PrintPage({ params }: Props) {
             </div>
           </dl>
 
-          <p className="nk-print-detail__lead">{t("line.detailLead")}</p>
+          <p className={styles.detailLead}>{t("line.detailLead")}</p>
 
-          <div className="nk-print-detail__buy">
-            <span className="nk-print-detail__price">{print.price} €</span>
+          <div className={styles.detailBuy}>
+            <span className={styles.detailPrice}>{print.price} €</span>
             {/* TODO: wire Stripe Checkout — for now routes to inquiry */}
-            <Link href="/kontakt" className="nk-btn">
+            <Link href="/kontakt" className={styles.btn}>
               {t("line.order")}
             </Link>
           </div>
@@ -98,7 +100,7 @@ export default async function PrintPage({ params }: Props) {
       </div>
 
       {/* Prev / Next */}
-      <nav className="nk-print-nav" aria-label={t("aria.morePrints")}>
+      <nav className={styles.printNav} aria-label={t("aria.morePrints")}>
         {prev ? (
           <Link href={`/line/${prev.slug}`}>← {prev.title}</Link>
         ) : (

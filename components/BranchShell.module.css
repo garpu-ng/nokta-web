@@ -1,0 +1,44 @@
+/* Generic branch-page shell (/line, /nokta — /arch has its own module).
+   Migrated from the global .nk-branch* vocabulary in app/styles/nokta.css.
+   The trailing dot uses the GLOBAL `.nk-dot` utility (base.css), targeted here
+   via :global(); TSX keeps className="nk-dot" on the span. */
+.branch {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: clamp(2.5rem, 7vh, 5rem) clamp(20px, 5vw, 48px) 6rem;
+}
+
+.head {
+  margin-bottom: clamp(2rem, 5vh, 3.5rem);
+}
+
+.title {
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  margin: 0;
+  color: var(--on-brand);
+}
+
+.title :global(.nk-dot) {
+  color: var(--on-brand);
+}
+
+.tag {
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--on-brand);
+  opacity: 0.8;
+  margin: 0.9rem 0 0;
+}
+
+.lead {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--on-brand);
+  opacity: 0.92;
+  max-width: 60ch;
+  margin: 1.25rem 0 0;
+}

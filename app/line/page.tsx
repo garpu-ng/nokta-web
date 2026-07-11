@@ -4,6 +4,8 @@ import Image from "next/image";
 import { PRINTS } from "@/lib/prints";
 import { getMediaSize } from "@/lib/mediaSizes";
 import { getT } from "@/lib/i18n";
+import shell from "@/components/BranchShell.module.css";
+import styles from "./page.module.css";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getT();
@@ -17,19 +19,19 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function LinePage() {
   const t = await getT();
   return (
-    <main className="nk-branch">
-      <header className="nk-branch-head">
-        <h1 className="nk-branch-title">
+    <main className={shell.branch}>
+      <header className={shell.head}>
+        <h1 className={shell.title}>
           nokta.line<span className="nk-dot">.</span>
         </h1>
-        <p className="nk-branch-tag">{t("branch.line.tag")}</p>
-        <p className="nk-branch-lead">{t("line.lead")}</p>
+        <p className={shell.tag}>{t("branch.line.tag")}</p>
+        <p className={shell.lead}>{t("line.lead")}</p>
       </header>
 
-      <div className="nk-print-grid">
+      <div className={styles.printGrid}>
         {PRINTS.map((print) => (
-          <Link key={print.slug} href={`/line/${print.slug}`} className="nk-print">
-            <div className="nk-print__art">
+          <Link key={print.slug} href={`/line/${print.slug}`} className={styles.print}>
+            <div className={styles.printArt}>
               <Image
                 src={print.image}
                 alt={print.title}
@@ -38,14 +40,14 @@ export default async function LinePage() {
                 sizes="(max-width: 767px) 100vw, 33vw"
               />
             </div>
-            <div className="nk-print__body">
-              <span className="nk-print__name">{print.title}</span>
-              <span className="nk-print__meta">
+            <div className={styles.printBody}>
+              <span className={styles.printName}>{print.title}</span>
+              <span className={styles.printMeta}>
                 {print.subtitle} · {print.year}
               </span>
-              <div className="nk-print__buy">
-                <span className="nk-print__price">{print.price} €</span>
-                <span className="nk-print__cta">{t("line.view")}</span>
+              <div className={styles.printBuy}>
+                <span className={styles.printPrice}>{print.price} €</span>
+                <span className={styles.printCta}>{t("line.view")}</span>
               </div>
             </div>
           </Link>

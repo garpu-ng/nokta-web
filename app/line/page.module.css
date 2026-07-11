@@ -1,0 +1,99 @@
+/* nokta.line — print shop list page.
+   Migrated from the global .nk-print* vocabulary in app/styles/nokta.css. */
+.printGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+/* Catalogue card — a link to the product page. */
+.print {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--ink);
+  background: #e9e0ce;
+  color: var(--ink);
+  text-decoration: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.print:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(26, 26, 24, 0.18);
+}
+
+/* The print sits on its own white paper, matted inside the card. */
+.printArt {
+  aspect-ratio: 3 / 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1.5rem 0;
+  background: #e9e0ce;
+  /* The card is a column flex, so this box is a flex item whose default
+     min-height:auto would let the tall artwork override aspect-ratio and grow
+     the box. Pin it to 0 (+ clip) so the 3:4 frame always governs. */
+  min-height: 0;
+  overflow: hidden;
+}
+.printArt img {
+  max-width: 100%;
+  max-height: 100%;
+  /* Safari flex bug: an <img> flex item defaults to min-width/min-height:auto
+     (its intrinsic 1600px), ignores max-width and renders at full resolution —
+     the artwork "grew by itself" after lazy-loading. Zeroing the min-sizes lets
+     it shrink to the frame. */
+  min-width: 0;
+  min-height: 0;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  box-shadow: 0 2px 10px rgba(26, 26, 24, 0.12);
+}
+
+.printCta {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--brand-accent);
+}
+
+.printBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1rem 1.1rem 1.2rem;
+}
+
+.printName {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.printMeta {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(26, 26, 24, 0.5);
+}
+
+.printBuy {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.6rem;
+}
+
+.printPrice {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* ── Mobile ───────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .printGrid {
+    grid-template-columns: 1fr !important;
+  }
+}

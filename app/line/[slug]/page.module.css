@@ -1,0 +1,152 @@
+/* nokta.line — product detail page.
+   Migrated from the global .nk-print-detail* / .nk-print-back / .nk-print-nav /
+   .nk-btn vocabulary in app/styles/nokta.css. */
+
+/* Note: the prior markup also had a bare `nk-print-page` marker class on the
+   <main>. It carried no declarations anywhere in the global sheet (a dead
+   class), so it is intentionally dropped here — an empty CSS-module rule is
+   stripped at build and would surface as a literal "undefined" className. The
+   <main> keeps only the shell's .branch class; render is unchanged. */
+
+.printBack {
+  display: inline-block;
+  margin-bottom: clamp(1.5rem, 4vh, 2.5rem);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--on-brand);
+  opacity: 0.8;
+  text-decoration: none;
+}
+.printBack:hover {
+  opacity: 1;
+}
+
+.printDetail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+}
+
+/* White paper frame the print is mounted on. */
+.detailFrame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.5rem, 3vw, 2.75rem);
+  background: #e9e0ce;
+  border: 1px solid var(--ink);
+}
+.detailArt {
+  display: block;
+  max-width: 100%;
+  min-width: 0; /* Safari flex: keep the img from ignoring max-width (see .printArt) */
+  height: auto;
+  box-shadow: 0 6px 26px rgba(26, 26, 24, 0.18);
+}
+
+.detailInfo {
+  color: var(--on-brand);
+  padding-top: 0.5rem;
+}
+.detailTitle {
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin: 0;
+  color: var(--on-brand);
+}
+.detailTitle :global(.nk-dot) {
+  color: var(--on-brand);
+}
+.detailCity {
+  margin: 0.6rem 0 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.detailSpecs {
+  margin: clamp(1.75rem, 4vh, 2.5rem) 0 0;
+  border-top: 1px solid color-mix(in srgb, var(--on-brand) 35%, transparent);
+}
+.detailSpecs > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--on-brand) 20%, transparent);
+}
+.detailSpecs dt {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+.detailSpecs dd {
+  margin: 0;
+  font-size: 0.9rem;
+  text-align: right;
+}
+
+.detailLead {
+  margin: 1.5rem 0 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  opacity: 0.9;
+  max-width: 44ch;
+}
+
+.detailBuy {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: clamp(1.75rem, 4vh, 2.5rem);
+}
+.detailPrice {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--on-brand);
+}
+
+.printNav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-top: clamp(3rem, 7vh, 5rem);
+  padding-top: 1.5rem;
+  border-top: 1px solid color-mix(in srgb, var(--on-brand) 25%, transparent);
+}
+.printNav a {
+  font-size: 0.9rem;
+  color: var(--on-brand);
+  opacity: 0.85;
+  text-decoration: none;
+}
+.printNav a:hover {
+  opacity: 1;
+}
+
+.btn {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #e9e0ce;
+  background: var(--ink); /* black button, per the sketch */
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* ── Mobile ───────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .printDetail {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+}
