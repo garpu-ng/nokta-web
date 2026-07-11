@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import Image from "next/image";
-import { PRINTS } from "@/lib/prints";
-import { getMediaSize } from "@/lib/mediaSizes";
 import { getT } from "@/lib/i18n";
-import shell from "@/components/BranchShell.module.css";
-import styles from "./page.module.css";
+import LineBand from "@/components/line/LineBand";
+import LineHero from "@/components/line/LineHero";
+import PlotLine from "@/components/line/PlotLine";
+import PrintCatalogue from "@/components/line/PrintCatalogue";
+import lineStyles from "@/components/line/LineHero.module.css";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getT();
@@ -19,40 +18,18 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function LinePage() {
   const t = await getT();
   return (
-    <main className={shell.branch}>
-      <header className={shell.head}>
-        <h1 className={shell.title}>
-          nokta.line<span className="nk-dot">.</span>
-        </h1>
-        <p className={shell.tag}>{t("branch.line.tag")}</p>
-        <p className={shell.lead}>{t("line.lead")}</p>
-      </header>
+    <>
+      <LineHero />
 
-      <div className={styles.printGrid}>
-        {PRINTS.map((print) => (
-          <Link key={print.slug} href={`/line/${print.slug}`} className={styles.print}>
-            <div className={styles.printArt}>
-              <Image
-                src={print.image}
-                alt={print.title}
-                width={getMediaSize(print.image).width}
-                height={getMediaSize(print.image).height}
-                sizes="(max-width: 767px) 100vw, 33vw"
-              />
-            </div>
-            <div className={styles.printBody}>
-              <span className={styles.printName}>{print.title}</span>
-              <span className={styles.printMeta}>
-                {print.subtitle} · {print.year}
-              </span>
-              <div className={styles.printBuy}>
-                <span className={styles.printPrice}>{print.price} €</span>
-                <span className={styles.printCta}>{t("line.view")}</span>
-              </div>
-            </div>
-          </Link>
-        ))}
+      <div className={lineStyles.intro}>
+        <p className={lineStyles.introLead}>{t("line.lead")}</p>
       </div>
-    </main>
+
+      <PlotLine />
+
+      <PrintCatalogue />
+
+      <LineBand />
+    </>
   );
 }

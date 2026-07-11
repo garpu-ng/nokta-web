@@ -1,0 +1,67 @@
+/* The page's one orchestrated movement: a seed-stable plotter path draws once
+   when it enters view. A 2400px dash safely exceeds the generated path. */
+.section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 5svh, 3.5rem) clamp(20px, 5vw, 48px);
+  background: var(--paper);
+}
+
+.plot {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.startDot {
+  fill: var(--ink);
+}
+
+.path {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2;
+  stroke-dasharray: 2400;
+  stroke-dashoffset: 2400;
+  transition: stroke-dashoffset 1.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.crosshair {
+  opacity: 0;
+  transition: opacity 0.25s ease 1.55s;
+}
+
+.crosshairRing,
+.crosshairLine {
+  fill: none;
+  stroke: #b83636;
+}
+
+.crosshairLine {
+  stroke-width: 1.5;
+}
+
+.crosshairRing {
+  stroke-width: 1.5;
+}
+
+.drawn .path {
+  stroke-dashoffset: 0;
+}
+
+.drawn .crosshair {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .path {
+    stroke-dashoffset: 0;
+    transition: none;
+  }
+
+  .crosshair {
+    opacity: 1;
+    transition: none;
+  }
+}
