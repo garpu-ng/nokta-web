@@ -83,12 +83,13 @@ stylesheets, and reusable components carry their own CSS Modules:
 - **`app/styles/tokens.css`** — design tokens + the `:root[data-branch=…]` theme wash
 - **`app/styles/base.css`** — document reset (`box-sizing`) + global overrides
   (body font/bg) + global utilities (`.nk-dot`, `.nk-page-fade`)
-- **`app/styles/waarchi.css`** — archviz augments (WorkGrid, Carousel); **global on
-  purpose** — their class names must match the Webflow grid base in `arch.css`
+- **`app/styles/waarchi.css`** — carousel augments (Carousel); **global on
+  purpose** — their class names must match the Webflow carousel base in `arch.css`
+  (the old WorkGrid rules were retired with the /arch poster-wall redesign)
 - **`app/styles/nokta.css`** — our studio page + shared page-layout styles (global)
-- **`app/styles/arch.css`** — Webflow base geometry for the archviz grid + carousel,
-  extracted from the old `public/mir.css`; `@import`ed **last** so it sits where mir.css
-  used to in the cascade
+- **`app/styles/arch.css`** — Webflow base geometry for the carousel, extracted from
+  the old `public/mir.css`; `@import`ed **last** so it sits where mir.css used to in
+  the cascade (its former archviz-grid rules were retired with the poster wall)
 - **`*.module.css`** — colocated, scoped styles for components: `Footer`, `TabBar`,
   `BranchReveal`, `ProjectHeader`, plus header chrome in `app/layout.module.css`
 
@@ -143,7 +144,7 @@ stylesheets, and reusable components carry their own CSS Modules:
 - Tabs (`.tabbar`, `.tab2`, `.home` / `.branch` variants) → `components/TabBar.module.css`
 - Header brand row + utility links → `app/layout.module.css`
 - Landing / branch / print / service page layouts → `app/styles/nokta.css`
-- Archviz grid + carousel (Webflow base → `app/styles/arch.css`; augments → `app/styles/waarchi.css`, both global)
+- Carousel (Webflow base → `app/styles/arch.css`; augments → `app/styles/waarchi.css`, both global); the /arch page itself is the poster-wall components under `components/arch/`
 - Desktop left-gutter clearance lives with each page/component's own styles now
   (`.wa-studio`, `.wa-prozess-page`, `ProjectHeader.module.css`).
 
@@ -154,7 +155,7 @@ stylesheets, and reusable components carry their own CSS Modules:
 | File | Route | Status |
 |------|-------|--------|
 | `app/page.tsx` | `/` | ✅ nokta landing (mark + 3 branch cards) |
-| `app/arch/page.tsx` | `/arch` | ✅ archviz (waarchi Carousel + WorkGrid), real |
+| `app/arch/page.tsx` | `/arch` | ✅ archviz poster-wall redesign (ArchHero, DotField, PosterWall, PerspectiveGrid), real |
 | `app/line/page.tsx` | `/line` | 🟡 print shop — **placeholder art**, buy = stub |
 | `app/nokta/page.tsx` | `/nokta` | 🟡 design/print — **placeholder services copy** |
 | `app/projekte/[slug]/page.tsx` | `/projekte/…` | ✅ arch project detail (real) |
