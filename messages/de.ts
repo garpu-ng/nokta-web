@@ -35,6 +35,14 @@ const de: Record<string, string> = {
   "nokta.svc.3.title": "Poster & Plakat",
   "nokta.svc.3.text": "Großformate, die aus der Nähe und aus der Ferne knallen.",
 
+  // ── nokta (press-proof redesign) ──────────────────────────────────
+  "nokta.hero.caption": "layout · design · druck",
+  "nokta.hero.claim": "Vom ersten Entwurf bis auf den Bogen.",
+  "nokta.index.label": "Leistungen · Inhalt",
+  "nokta.strip.label": "farbkontrollstreifen · hausfarben",
+  "nokta.band.tagline": "Vom Entwurf bis in den Druck.",
+  "nokta.band.cta": "Projekt anfragen",
+
   // ── Studio ────────────────────────────────────────────────────────
   "studio.heading": "Studio",
   "studio.p1": "nokta ist ein interdisziplinäres Designstudio aus Nordrhein-Westfalen. Ein Studio, drei Disziplinen: Layout und Druck, Architekturvisualisierung und CAD-Liniendrucke.",
@@ -70,7 +78,16 @@ const de: Record<string, string> = {
   "kontakt.mailAria": "E-Mail schreiben",
 
   // ── nokta.line (prints) ───────────────────────────────────────────
+  "line.hero.caption": "cad · vektor · liniendruck",
+  "line.hero.claim": "Bauwerke, auf ihre Linien reduziert.",
+  "line.tb.sheet": "Blatt",
+  "line.tb.scale": "Maßstab",
+  "line.tb.format": "Format",
+  "line.tb.date": "Stand",
+  "line.catalogue.label": "Katalog · vier Motive",
   "line.lead": "Ikonische Bauwerke als technische Zeichnung. Aus echten CAD-Daten vektorisiert, in A1 gedruckt, gerahmt und bereit für die Wand.",
+  "line.band.tagline": "Ihr Motiv, als Linie gedacht.",
+  "line.band.cta": "Anfragen",
   "line.view": "Ansehen →",
   "line.back": "← nokta.line",
   "line.spec.year": "Baujahr",
