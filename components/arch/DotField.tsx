@@ -4,7 +4,8 @@ import styles from "./DotField.module.css";
    into waves toward the bottom (moodbook: dot-matrix drape), with the center
    column set in the brand red as a single "thread". Deterministic: seeded
    mulberry32 PRNG, so the SVG is identical on every render (SSR-stable).
-   ~1,100 dots ≈ 40 KB of SVG — acceptable for the one page that uses it. */
+   ~1,100 dots ≈ 80 KB of inline SVG (compresses well over the wire) —
+   acceptable for the one page that uses it. */
 function mulberry32(seed: number) {
   return () => {
     seed |= 0;

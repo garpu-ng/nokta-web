@@ -1,9 +1,8 @@
 /* ══════════════════════════════════════════════════════════════════
    Archviz (nokta.arch) layer — GLOBAL ON PURPOSE.
 
-   These rules augment the Webflow classes whose base geometry lives in
-   styles/arch.css (.work-section, .work_list, .work_item, .work-link,
-   .work-project — the 12-column grid the /arch page is built on). Those
+   These rules augment the Webflow carousel classes whose base geometry
+   lives in styles/arch.css (.carousel-track, .carousel-inner). Those
    classes were originally defined in the old public/mir.css Webflow export;
    that file is gone and the base rules now live in arch.css, but the markup
    still uses the same global Webflow class names, so these overrides CANNOT
@@ -13,78 +12,16 @@
    Layered BEFORE arch.css (see globals.css) so the !important augments here
    still win — the same order they had when they beat the live mir.css.
 
-   Owned by: components/WorkGrid.tsx (and the /arch route).
+   HISTORY: this file also augmented the 12-column work-grid classes
+   (.work-section / .work_list / .work_item / .work-link / .project-image-main
+   / .project-card) for the old WorkGrid.tsx. That component was retired when
+   /arch moved to the component-scoped poster wall (components/arch/
+   PosterWall.tsx), and those augments were removed with it.
+
+   Owned by: components/Carousel.tsx.
    Do NOT rename these selectors or move them into a module — that would
-   detach them from arch.css and break the arch grid.
+   detach them from arch.css and break the carousel.
    ══════════════════════════════════════════════════════════════════ */
-
-/* Grid fills the shared column, no extra centering needed. The side padding is
-   zeroed so the images sit flush with the .wa-grid-column edge (which is padded
-   to match the .nk-branch header) — otherwise arch.css's `padding:0 2svw` would
-   re-inset the grid and misalign it from the header text. */
-.work-section.top.work-new {
-  max-width: none !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-
-/* Work item aspect ratio + border. */
-.work-link {
-  aspect-ratio: 1/1;
-  outline: 1px solid #1a1a18 !important;
-}
-
-.work-link.big {
-  aspect-ratio: 1/1;
-  outline: 1px solid #1a1a18 !important;
-}
-
-/* Project image fills container. */
-.project-image-main {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s ease;
-}
-
-/* Hover zoom. */
-.work-link:hover .project-image-main {
-  transform: scale(1.03);
-  transition: transform 0.6s ease;
-}
-
-/* Project labels: white rectangle with black text, overlaid on the arch images. */
-.project-card.new {
-  background: #e9e0ce !important;
-  padding: 8px 22px !important;
-}
-.project-card .project-name {
-  color: #1a1a18 !important;
-}
-
-/* ── Mobile (≤767px): work grid 2-up, ignoring the desktop 12-col spans ── */
-@media (max-width: 767px) {
-  .work_list.new {
-    grid-template-columns: 1fr 1fr !important;
-    grid-column-gap: 8px !important;
-    grid-row-gap: 8px !important;
-  }
-
-  .work_item {
-    grid-column: auto !important;
-  }
-}
-
-/* Small phones: single-column, full-bleed work images. */
-@media (max-width: 479px) {
-  .work_list.new {
-    grid-template-columns: 1fr !important;
-  }
-}
 
 /* ── Carousel (components/Carousel.tsx) ──────────────────────────────
    Also coupled to arch.css: .carousel-inner{height/​display:flex} and

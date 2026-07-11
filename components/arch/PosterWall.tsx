@@ -20,11 +20,17 @@ export default async function PosterWall() {
       <div className={styles.grid}>
         {PROJECTS.map((p, i) => {
           const { width, height } = getMediaSize(p.thumb);
+          // Wide/narrow alternation (wide, narrow, narrow, wide, …) pairs a
+          // 7-col and a 5-col poster per row, which tiles cleanly into 12 for
+          // exactly the current 6 PROJECTS. It is ORDER-DEPENDENT: if PROJECTS
+          // grows or is reordered, recheck the pairing — a run like wide/wide
+          // can force a 7+7 row that overflows the 12-col grid.
+          const isNarrow = i % 4 === 1 || i % 4 === 2;
           return (
             <Link
               key={p.slug}
               href={`/projekte/${p.slug}`}
-              className={`${styles.poster} ${i % 4 === 1 || i % 4 === 2 ? styles.narrow : styles.wide}`}
+              className={`${styles.poster} ${isNarrow ? styles.narrow : styles.wide}`}
             >
               <span className={styles.numeral} aria-hidden="true">
                 {String(i + 1).padStart(2, "0")}

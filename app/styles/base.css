@@ -43,9 +43,10 @@ body {
      simply win on specificity. */
   font-family: var(--wa-font);
   /* Carried over from the old Webflow body reset (mir.css set
-     `body{font-size:14px;line-height:20px}`): the em-based archviz label
-     sizes in arch.css (.project-name* at 0.7–1.8em) compute against this
-     base, so dropping it would silently scale them up to the 16px default. */
+     `body{font-size:14px;line-height:20px}`). It once anchored the em-based
+     archviz label sizes (.project-name* in arch.css); those rules retired with
+     WorkGrid, but the reset is kept as the site-wide baseline so any remaining
+     em-based sizing does not silently scale up to the 16px default. */
   font-size: 14px;
   line-height: 20px;
   -webkit-font-smoothing: antialiased;

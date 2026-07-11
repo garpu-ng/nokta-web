@@ -6,12 +6,17 @@
    <link> on every page). mir.css is gone; only the handful of rules the
    ported archviz markup actually depends on survive here, hand-formatted.
 
-   OWNED BY: components/WorkGrid.tsx + components/Carousel.tsx and the
-   /arch route (the 12-column work grid + the auto-scrolling carousel).
-   These are the Webflow *base* geometry for the grid/labels/carousel;
-   app/styles/waarchi.css augments the very same class names (aspect
-   ratios, outlines, brand colours, scroll animation) and is layered
-   BEFORE this file — see globals.css.
+   OWNED BY: components/Carousel.tsx (the auto-scrolling carousel). These
+   are the Webflow *base* geometry for the carousel track/inner strip;
+   app/styles/waarchi.css augments the same class names (scroll animation,
+   card framing) and is layered BEFORE this file — see globals.css.
+
+   HISTORY: this file also carried the 12-column work-grid base geometry
+   (.work-section / .work_list / .work_item / .work-link / .work-project /
+   .project-image-main / .project-card / .project-name) for the old
+   WorkGrid.tsx. That component was retired when /arch moved to the
+   component-scoped poster wall (components/arch/PosterWall.tsx), and those
+   now-dead rules were removed with it — only the carousel geometry remains.
 
    CASCADE: this file is @imported LAST in globals.css, exactly where the
    old mir.css sat (after tokens/base/waarchi/nokta), so the effective
@@ -25,119 +30,12 @@
      - Webflow's global `img { max-width:100%; height:auto }`, which used
        to force !important sizing hacks elsewhere (TabBar dot, 404 dot).
        Every image on the site sets its own size, so it is simply dropped.
-     - font-family declarations on .project-name* (Nimbus Sans / Sabon
-       Next). They were always overridden by the Jost body font, so the
-       labels keep inheriting Jost — the values are intentionally omitted.
      - unused Webflow class variants (.home/.feed/.studio/.search/.two/
        .architect/.arc/.work/…) that never appear on this markup.
 
    Do NOT rename these selectors or fold them into a CSS Module — the
    markup must keep matching these exact Webflow class names.
    ══════════════════════════════════════════════════════════════════ */
-
-/* ── Project label card (WorkGrid overlay) ─────────────────────────── */
-.project-card {
-  cursor: pointer;
-  background-color: #fff;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-  width: auto;
-  height: auto;
-  margin-bottom: 1svh;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 10px 32px;
-  display: flex;
-  position: absolute;
-  inset: auto auto 0%;
-}
-.project-card.new {
-  background-color: #fff0;
-}
-
-/* ── Project labels (font-family intentionally omitted; inherits Jost) ── */
-.project-name {
-  color: #414141;
-  margin-bottom: 0;
-  font-size: 0.9em;
-  font-weight: 700;
-  line-height: 1.5em;
-}
-.project-name.re {
-  color: #5a5a5a;
-  white-space: nowrap;
-  font-size: 1em;
-  font-weight: 400;
-}
-.project-name.re.new {
-  color: #fff;
-  font-size: 1em;
-  line-height: 1.4em;
-}
-.project-name.re.new.small {
-  font-size: 0.7em;
-}
-.project-name.new {
-  color: #fff;
-  text-align: center;
-  font-size: 1.4em;
-  line-height: 1.1em;
-  position: relative;
-}
-
-/* ── Work section + 12-column grid ─────────────────────────────────── */
-.work-section {
-  padding-bottom: 137px;
-  padding-left: 1.5svw;
-  padding-right: 1.5svw;
-}
-.work-section.top {
-  margin-bottom: 0;
-  padding: 1.5svh 1svw;
-}
-.work-section.top.work-new {
-  margin-top: 1svw;
-  padding: 0 2svw 2svh;
-}
-.work_list {
-  grid-column-gap: 1svw;
-  grid-row-gap: 1svw;
-  grid-template-rows: auto auto auto;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-auto-columns: 1fr;
-  grid-auto-flow: dense;
-  display: grid;
-}
-.work_list.new {
-  grid-template-rows: auto;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-}
-.work_item {
-  width: 100%;
-  height: 100%;
-}
-.work-project {
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  position: relative;
-}
-.work-link {
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  max-height: 96svh;
-  display: flex;
-}
-.project-image-main {
-  object-fit: cover;
-  width: 100%;
-  max-width: none;
-  height: 100%;
-  max-height: none;
-}
 
 /* ── Carousel base geometry (augmented by waarchi.css) ─────────────── */
 .carousel-track {
@@ -154,94 +52,9 @@
 
 /* ══════════════════════════════════════════════════════════════════
    Responsive — the media blocks are kept in the SAME source order as the
-   old mir.css (1920 → 991 → 767 → 479) so overlapping breakpoints resolve
-   identically. waarchi.css's !important mobile rules (2-up / 1-up grid)
-   still win over these where they overlap.
+   old mir.css (1920 → 479) so overlapping breakpoints resolve identically.
    ══════════════════════════════════════════════════════════════════ */
 @media screen and (min-width: 1920px) {
-  .project-card {
-    z-index: 9999;
-    pointer-events: auto;
-    cursor: pointer;
-    margin-bottom: 1.5svh;
-  }
-  .project-card:hover {
-    color: #fff;
-    background-color: #fff;
-  }
-  .project-card.new {
-    transform: none;
-  }
-  .project-card.new:hover {
-    background-color: #fff0;
-  }
-  .project-name,
-  .project-name.re,
-  .project-name.re.new {
-    font-size: 1em;
-  }
-  .project-name.re.new.small {
-    font-size: 0.9em;
-  }
-  .project-name.new {
-    font-size: 1.8em;
-  }
-  .work_wrapper {
-    width: 100%;
-  }
-  .work-section {
-    padding-bottom: 0;
-    padding-left: 1.5svw;
-    padding-right: 1.5svw;
-  }
-  .work-section.top {
-    margin-top: 0;
-    padding-top: 1.5svh;
-    padding-left: 1svw;
-    padding-right: 1svw;
-    position: static;
-  }
-  .work-section.top.work-new {
-    object-fit: cover;
-    padding-left: 1svw;
-    padding-right: 1svw;
-  }
-  .work_list {
-    grid-column-gap: 1svw;
-    grid-row-gap: 1svw;
-    grid-template-rows: auto;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-auto-columns: 1fr;
-    grid-auto-flow: dense;
-    display: grid;
-  }
-  .work-project {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-    position: relative;
-  }
-  .work_item {
-    width: 100%;
-    height: 100%;
-  }
-  .work-link {
-    width: 100%;
-    height: 100%;
-    max-height: 96svh;
-    transition: opacity 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
-    position: relative;
-  }
-  .work-link:hover {
-    opacity: 1;
-  }
-  .project-image-main {
-    object-fit: cover;
-    width: 100%;
-    max-width: none;
-    height: 100%;
-    max-height: none;
-  }
   .carousel-track {
     grid-column-gap: 3px;
     grid-row-gap: 3px;
@@ -264,120 +77,7 @@
   }
 }
 
-@media screen and (max-width: 991px) {
-  .project-card {
-    text-align: center;
-    max-width: 90%;
-    padding: 8px 22px;
-  }
-  .project-name {
-    font-size: 0.7em;
-    line-height: 1.24em;
-  }
-  .project-name.re {
-    font-size: 0.78em;
-  }
-  .project-name.new {
-    font-size: 1.4em;
-  }
-  .work_wrapper {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-  }
-  .work-section.top {
-    padding-top: 0;
-  }
-  .work_list {
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    width: 100%;
-  }
-  .work_list.new {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .work-section.top {
-    padding-left: 3svw;
-    padding-right: 3svw;
-  }
-  .work_list {
-    grid-column-gap: 3svw;
-    grid-row-gap: 3svw;
-    grid-template-columns: 1fr;
-  }
-  .work-link {
-    min-height: 40svh;
-  }
-}
-
 @media screen and (max-width: 479px) {
-  .project-card {
-    justify-content: flex-end;
-    align-items: center;
-    margin-bottom: 8px;
-    padding: 8px 20px 10px;
-  }
-  .project-name {
-    white-space: nowrap;
-    font-size: 0.76em;
-    line-height: 1.6em;
-  }
-  .project-name.re {
-    text-align: center;
-    white-space: nowrap;
-    width: 100%;
-    min-width: auto;
-    font-size: 0.76em;
-    line-height: 1em;
-    text-decoration: none;
-  }
-  .project-name.re.new {
-    font-size: 0.95em;
-    line-height: 1em;
-  }
-  .project-name.new {
-    font-size: 1.3em;
-  }
-  .work-section.top {
-    margin-top: 0;
-    padding-top: 0;
-    padding-left: 4svw;
-    padding-right: 4svw;
-  }
-  .work_list {
-    grid-column-gap: 4svw;
-    grid-row-gap: 4svw;
-    width: 100%;
-    height: 100%;
-  }
-  .work_list.new {
-    grid-column-gap: 10px;
-    grid-row-gap: 10px;
-    grid-template-columns: 1fr;
-  }
-  .work-project {
-    object-fit: cover;
-    flex-wrap: nowrap;
-    justify-content: center;
-    min-width: 100%;
-    max-width: 100%;
-    min-height: auto;
-    max-height: 100%;
-    display: flex;
-  }
-  .work-link {
-    width: 100%;
-    height: 100%;
-    max-height: 90svh;
-    position: relative;
-  }
-  .project-image-main {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-  }
   .carousel-track {
     width: 100%;
     height: 100%;

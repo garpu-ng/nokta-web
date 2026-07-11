@@ -4,11 +4,11 @@
    The styling layer is split by concern, imported in cascade order:
      styles/tokens.css   → design tokens + [data-branch] theme wash
      styles/base.css     → document reset + our global overrides + utils
-     styles/waarchi.css  → archviz augments (WorkGrid, Carousel) — global by
+     styles/waarchi.css  → archviz carousel augments — global by
                            necessity; layered before arch.css so its
                            !important rules win
      styles/nokta.css    → our studio page + shared page-layout styles (global)
-     styles/arch.css     → Webflow base geometry for the archviz grid/carousel,
+     styles/arch.css     → Webflow base geometry for the archviz carousel,
                            extracted from the old public/mir.css. Imported LAST,
                            exactly where mir.css used to sit in the cascade, so
                            the effective outcome is unchanged.
