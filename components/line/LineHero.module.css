@@ -1,17 +1,18 @@
 /* Millimeter-paper hero. The branch body supplies the green flood around this
    cream drafting sheet; green stays a measured mark rather than a field. */
 .hero {
+  --hero-inset: clamp(3rem, 9svh, 6rem);
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   min-height: min(78svh, 820px);
   overflow: hidden;
-  padding: clamp(3rem, 9svh, 6rem) clamp(20px, 5vw, 48px);
+  padding: var(--hero-inset) clamp(20px, 5vw, 48px);
   /* The drafting dimension is part of this stack, unlike the other branch
      heroes. Give it the space by reducing only this sheet's lower inset so
      the wordmark baseline stays aligned with /arch and /nokta. */
-  padding-bottom: clamp(2rem, calc(9svh - 3.4rem), 6rem);
+  padding-bottom: max(1rem, calc(var(--hero-inset) - 3.4rem));
   background:
     linear-gradient(color-mix(in srgb, var(--brand-accent) 22%, transparent) 1px, transparent 1px),
     linear-gradient(90deg, color-mix(in srgb, var(--brand-accent) 22%, transparent) 1px, transparent 1px),
@@ -136,7 +137,7 @@
     min-height: 64svh;
     /* The dimension line is shorter on a phone, so only compensate its
        rendered height; this keeps the title aligned without crowding copy. */
-    padding-bottom: clamp(3rem, calc(9svh - 1rem), 6rem);
+    padding-bottom: max(2rem, calc(var(--hero-inset) - 1rem));
   }
 
   .titleBlock {
