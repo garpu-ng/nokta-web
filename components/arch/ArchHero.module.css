@@ -31,10 +31,20 @@
   color: var(--ink);
   margin: 0;
   position: relative;
-  max-width: 9ch;
+  max-width: none;
+  width: 100%;
 }
-.titleDot {
-  color: var(--brand-accent);
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .caption {
