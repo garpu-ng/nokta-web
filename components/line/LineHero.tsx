@@ -1,4 +1,5 @@
 import { getT } from "@/lib/i18n";
+import WordmarkHeadline from "@/components/WordmarkHeadline";
 import styles from "./LineHero.module.css";
 
 /* Drafting-sheet hero. The paper is ruled as millimeter paper; the wordmark
@@ -9,9 +10,14 @@ export default async function LineHero() {
 
   return (
     <section className={`${styles.hero} nk-grain`}>
-      <h1 className={styles.title}>
-        nokta.line<span className={styles.titleDot}>.</span>
-      </h1>
+      <WordmarkHeadline
+        logoSrc="/nokta_logo-line-warp.svg"
+        logoWidth={1200}
+        logoHeight={246}
+        suffix="line"
+        className={styles.title}
+        dotClassName={styles.titleDot}
+      />
 
       {/* Dimension line: |← 594 mm →| */}
       <svg className={styles.dim} viewBox="0 0 594 44" aria-hidden="true">
