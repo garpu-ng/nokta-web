@@ -1,0 +1,29 @@
+.title {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+
+.logo {
+  display: block;
+  flex: none;
+  width: auto;
+  height: 0.72em;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.suffix {
+  color: inherit;
+  font-family: var(--headline-font);
+  font-size: 1em;
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.dot {
+  color: var(--brand-accent);
+}

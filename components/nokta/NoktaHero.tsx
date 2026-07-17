@@ -1,4 +1,5 @@
 import { getT } from "@/lib/i18n";
+import WordmarkHeadline from "@/components/WordmarkHeadline";
 import styles from "./NoktaHero.module.css";
 
 /* Press-proof hero. The accent plane is one giant rasterised dot: nokta.point
@@ -64,9 +65,7 @@ export default async function NoktaHero() {
         <path d="M26 4v44M4 26h44" />
       </svg>
 
-      <h1 className={styles.title}>
-        nokta.point<span className={styles.titleDot}>.</span>
-      </h1>
+      <WordmarkHeadline suffix="point" className={styles.title} dotClassName={styles.titleDot} />
       <p className={styles.caption}>{t("nokta.hero.caption")}</p>
       <p className={styles.claim}>{t("nokta.hero.claim")}</p>
     </section>

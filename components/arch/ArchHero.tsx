@@ -1,4 +1,5 @@
 import { getT } from "@/lib/i18n";
+import WordmarkHeadline from "@/components/WordmarkHeadline";
 import styles from "./ArchHero.module.css";
 
 /* Poster 1 — vast paper field, one hard cobalt plane cutting the top-right
@@ -10,9 +11,7 @@ export default async function ArchHero() {
     <section className={`${styles.hero} nk-grain`}>
       {/* Cobalt plane — clip-path polygon, no image. */}
       <div className={styles.plane} aria-hidden="true" />
-      <h1 className={styles.title}>
-        nokta.cube<span className={styles.titleDot}>.</span>
-      </h1>
+      <WordmarkHeadline suffix="cube" className={styles.title} dotClassName={styles.titleDot} />
       <p className={styles.caption}>{t("arch.hero.caption")}</p>
       <p className={styles.claim}>{t("arch.hero.claim")}</p>
     </section>
