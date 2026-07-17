@@ -33,7 +33,7 @@ export default function ProjectHeader({ title, client, category, year, descripti
     <>
       {/* Original header — stays in normal document flow */}
       <div ref={headerRef} className={styles.header}>
-        <Link href="/arch" className={styles.back}>{backLabel}</Link>
+        <Link href="/cube" className={styles.back}>{backLabel}</Link>
         <h1>{title}</h1>
         <p className={styles.projectMeta}>
           {client} &nbsp;·&nbsp; {category} &nbsp;·&nbsp; {year}

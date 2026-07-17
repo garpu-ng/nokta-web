@@ -23,7 +23,7 @@ export const BRANCHES: Branch[] = [
   {
     key: "nokta",
     label: "point",
-    path: "/nokta",
+    path: "/point",
     tagline: "Layout · Design · Druck",
     desc:
       "Branding, Editorial, Layout und Druck. Mit eigenen Tools testen wir schnell viele Richtungen und finden das, was sitzt.",
@@ -33,7 +33,7 @@ export const BRANCHES: Branch[] = [
   {
     key: "arch",
     label: "cube",
-    path: "/arch",
+    path: "/cube",
     tagline: "Architekturvisualisierung",
     desc:
       "Fotorealistische 3D-Renderings für Architekten, Bauträger und Privatpersonen. Mit eigenem Setup kommen wir schnell zu vielen Varianten.",
@@ -74,10 +74,11 @@ export const TABS: Branch[] = [HOME_TAB, ...BRANCHES];
 /** Map any pathname to the branch that owns it (or null for a neutral page). */
 export function branchForPath(pathname: string): BranchKey | null {
   if (pathname === "/") return "home";
-  if (pathname.startsWith("/nokta")) return "nokta";
+  if (pathname.startsWith("/point") || pathname.startsWith("/nokta")) return "nokta";
   if (pathname.startsWith("/line")) return "line";
   // arch owns its own route plus the ported archviz project + process pages
   if (
+    pathname.startsWith("/cube") ||
     pathname.startsWith("/arch") ||
     pathname.startsWith("/projekte") ||
     pathname.startsWith("/prozess")
