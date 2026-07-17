@@ -64,7 +64,6 @@
   margin: 0;
   color: var(--ink);
   font-family: var(--display-font);
-  font-variation-settings: "SOFT" 80, "WONK" 1, "opsz" 144;
   font-size: clamp(3.2rem, 10vw, 9rem);
   font-weight: 900;
   line-height: 0.9;

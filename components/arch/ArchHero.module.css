@@ -21,12 +21,9 @@
 }
 
 .title {
-  /* Display face: soft, slightly wonky, very heavy — the FLOR voice.
-     A class selector beats the `body { font-family }` element rule on
-     specificity, so no !important is needed (the old universal font
-     rule that used to force it is gone with mir.css). */
+  /* Righteous is the shared headline face. A class selector beats the
+     `body { font-family }` element rule on specificity. */
   font-family: var(--display-font);
-  font-variation-settings: "SOFT" 80, "WONK" 1, "opsz" 144;
   font-weight: 900;
   font-size: clamp(3.2rem, 10vw, 9rem);
   line-height: 0.9;

@@ -78,6 +78,10 @@
   color: #e9e0ce;
 }
 
+.carousel-card-label > div:last-child {
+  font-family: var(--headline-font);
+}
+
 @media (max-width: 767px) {
   /* cap height so one strip doesn't fill the screen */
   .carousel-inner {

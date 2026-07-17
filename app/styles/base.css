@@ -56,6 +56,17 @@ body {
   min-height: 100svh;
 }
 
+/* Every semantic heading uses the shared display face. Component-specific
+   display titles already consume --display-font, which aliases this token. */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--headline-font);
+}
+
 /* Form controls don't inherit font-family by default — opt them back into Jost
    (previously handled by the blanket `* { font-family … !important }`). */
 button,

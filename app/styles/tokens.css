@@ -12,8 +12,10 @@
   /* Mono display face — sets the two big 4s on the 404 page (the "0" between
      them isn't type at all, it's the brand <Dot> SVG). */
   --mono-font: var(--font-space-mono), ui-monospace, 'SFMono-Regular', Menlo, monospace;
-  /* Display face — currently consumed only by the /arch poster styles. */
-  --display-font: var(--font-fraunces), Georgia, serif;
+  /* Shared headline face — used by semantic headings, display titles, and tabs. */
+  --headline-font: var(--font-righteous), Arial, sans-serif;
+  /* Keep the existing display token as an alias for component-scoped styles. */
+  --display-font: var(--headline-font);
 
   /* Core (neutral) identity. Each branch overrides --brand-bg and
      --brand-accent below; the body background transitions between them. */

@@ -6,7 +6,7 @@
 }
 
 .label {
-  font-family: var(--mono-font);
+  font-family: var(--headline-font);
   font-size: 0.7rem;
   font-weight: 400;
   letter-spacing: 0.22em;
@@ -48,7 +48,6 @@
   left: -0.05em;
   z-index: 0;
   font-family: var(--display-font);
-  font-variation-settings: "SOFT" 80, "WONK" 1;
   font-weight: 900;
   font-size: clamp(4rem, 8vw, 7.5rem);
   line-height: 1;
@@ -95,7 +94,6 @@
   z-index: 1;
   display: block;
   font-family: var(--display-font);
-  font-variation-settings: "SOFT" 80, "WONK" 1;
   font-weight: 700;
   font-size: clamp(1.4rem, 2.6vw, 2rem);
   line-height: 1.05;

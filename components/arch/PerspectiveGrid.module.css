@@ -40,7 +40,6 @@
 }
 .tagline {
   font-family: var(--display-font);
-  font-variation-settings: "SOFT" 80, "WONK" 1;
   font-weight: 700;
   font-size: clamp(1.8rem, 4.5vw, 3.4rem);
   color: var(--paper);

@@ -55,6 +55,7 @@
 }
 
 .label {
+  font-family: var(--headline-font);
   font-weight: 700;
   letter-spacing: -0.02em;
   color: inherit; /* inherits the accent/paper colour from .tab2 */

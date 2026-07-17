@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Jost, Space_Mono, Fraunces } from "next/font/google";
+import { Jost, Space_Mono, Righteous } from "next/font/google";
 import Link from "next/link";
 import Image from "next/image";
 import "./globals.css";
@@ -29,15 +29,14 @@ const spaceMono = Space_Mono({
   variable: "--font-space-mono",
 });
 
-// Display face for the /arch poster redesign — variable font with the
-// soft/wonk axes that give it the chunky retro-serif voice of the moodbook.
-// Self-hosted like the others (GDPR: no runtime Google Fonts requests).
-const fraunces = Fraunces({
+// Headline face used throughout the site, including the browser tabs.
+// Righteous is a static single-weight face, so explicitly request its only
+// available weight while keeping the same self-hosted, swap-loading setup.
+const righteous = Righteous({
   subsets: ["latin"],
+  weight: "400",
   display: "swap",
-  style: ["normal", "italic"],
-  axes: ["SOFT", "WONK", "opsz"],
-  variable: "--font-fraunces",
+  variable: "--font-righteous",
 });
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -69,7 +68,7 @@ export default async function RootLayout({
     <html
       lang={locale}
       data-scroll-behavior="smooth"
-      className={`${jost.variable} ${spaceMono.variable} ${fraunces.variable}`}
+      className={`${jost.variable} ${spaceMono.variable} ${righteous.variable}`}
     >
       {/* suppressHydrationWarning: browser extensions (e.g. asbplayer) inject
           attributes on <body> before React hydrates; this scopes the warning

@@ -116,6 +116,7 @@
 }
 
 .wa-studio-cta-text {
+  font-family: var(--headline-font);
   font-size: clamp(1.4rem, 2.5vw, 2.2rem);
   font-weight: 600;
   letter-spacing: -0.02em;
@@ -490,6 +491,7 @@
 }
 
 .nk-branch-card__key {
+  font-family: var(--headline-font);
   font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: -0.03em;
@@ -580,6 +582,7 @@
 }
 
 .nk-404__title {
+  font-family: var(--headline-font);
   font-size: clamp(1.4rem, 3.5vw, 2.2rem);
   font-weight: 600;
   letter-spacing: -0.02em;

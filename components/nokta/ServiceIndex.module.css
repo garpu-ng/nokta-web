@@ -11,7 +11,7 @@
   padding-bottom: 0.9rem;
   border-bottom: 1px solid var(--ink);
   color: var(--ink);
-  font-family: var(--mono-font);
+  font-family: var(--headline-font);
   font-size: 0.7rem;
   font-weight: 400;
   letter-spacing: 0.22em;
@@ -42,7 +42,6 @@
   margin: 0;
   color: var(--ink);
   font-family: var(--display-font);
-  font-variation-settings: "SOFT" 80, "WONK" 1;
   font-size: clamp(1.5rem, 3.2vw, 2.4rem);
   font-weight: 700;
   line-height: 1;

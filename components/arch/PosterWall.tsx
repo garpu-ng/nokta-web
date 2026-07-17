@@ -6,7 +6,7 @@ import { getT } from "@/lib/i18n";
 import styles from "./PosterWall.module.css";
 
 /* Poster wall — each project is a matted "print": true-color render (the
-   product is never tinted), Fraunces title below, Space Mono meta rotated
+   product is never tinted), Righteous title below, Space Mono meta rotated
    along the side, a huge ghost numeral behind. Rows alternate wide/narrow
    (7/5 columns) for editorial rhythm instead of the old uniform squares.
    Image width/height come from the measured intrinsic sizes in mediaSizes
