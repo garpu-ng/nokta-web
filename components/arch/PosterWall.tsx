@@ -7,7 +7,7 @@ import styles from "./PosterWall.module.css";
 
 /* Poster wall — each project is a matted "print": true-color render (the
    product is never tinted), Righteous title below, Space Mono meta rotated
-   along the side, a huge ghost numeral behind. Rows alternate wide/narrow
+   along the side. Rows alternate wide/narrow
    (7/5 columns) for editorial rhythm instead of the old uniform squares.
    Image width/height come from the measured intrinsic sizes in mediaSizes
    (the thumbs are NOT uniformly square — portrait, square and landscape all
@@ -32,9 +32,6 @@ export default async function PosterWall() {
               href={`/projekte/${p.slug}`}
               className={`${styles.poster} ${isNarrow ? styles.narrow : styles.wide}`}
             >
-              <span className={styles.numeral} aria-hidden="true">
-                {String(i + 1).padStart(2, "0")}
-              </span>
               <span className={styles.meta}>
                 {p.year} · {p.category}
               </span>

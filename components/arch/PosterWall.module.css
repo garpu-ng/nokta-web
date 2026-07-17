@@ -38,23 +38,6 @@
   padding-top: clamp(2rem, 6svh, 4rem); /* staggered baseline */
 }
 
-/* Ghost numeral behind the print (postmodern scale clash). Firefox has
-   supported -webkit-text-stroke since v49, so the outlined-transparent
-   treatment renders everywhere the site targets. The stroke colour uses the
-   same color-mix(… srgb …, transparent) form already used in nokta.css. */
-.numeral {
-  position: absolute;
-  top: -0.35em;
-  left: -0.05em;
-  z-index: 0;
-  font-family: var(--display-font);
-  font-weight: 900;
-  font-size: clamp(4rem, 8vw, 7.5rem);
-  line-height: 1;
-  color: transparent;
-  -webkit-text-stroke: 1px color-mix(in srgb, var(--ink) 38%, transparent);
-}
-
 /* Rotated mono caption along the print's left edge. Sits in the section's
    left padding / column gutter — the wall's left padding (>=38px at the
    768px desktop breakpoint) covers the -1.6rem offset, so it never clips
