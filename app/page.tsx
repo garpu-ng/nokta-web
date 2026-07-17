@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { CSSProperties } from "react";
 import { BRANCHES, inkOn } from "@/lib/branches";
 import TeaserVideo from "@/components/TeaserVideo";
+import HomeContact from "@/components/HomeContact";
 import { getT } from "@/lib/i18n";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -44,6 +45,12 @@ export default async function HomePage() {
           </div>
         </main>
       </div>
+
+      <HomeContact
+        title={t("home.contact.title")}
+        body={t("home.contact.body")}
+        cta={t("home.contact.cta")}
+      />
     </div>
   );
 }

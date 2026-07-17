@@ -12,6 +12,9 @@ const ja: Record<string, string> = {
   "meta.kontakt.title": "お問い合わせ · nokta",
 
   "home.lead": "ワンチームでの学際的デザイン。自前のツール、たくさんのアイデア、短い道のり。点から線へ、線から形へ。",
+  "home.contact.title": "始まりの点はありますか？",
+  "home.contact.body": "スケッチ、図面、まだ途中の考えを見せてください。私たちは適切な問いから始めます。",
+  "home.contact.cta": "プロジェクトを始める",
 
   "branch.home.tag": "概要",
   "branch.nokta.tag": "レイアウト · デザイン · 印刷",

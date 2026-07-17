@@ -12,6 +12,9 @@ const en: Record<string, string> = {
   "meta.kontakt.title": "Contact · nokta",
 
   "home.lead": "Interdisciplinary design from one team. Own tools, lots of ideas, short paths. From the dot to the line to the form.",
+  "home.contact.title": "Have a point to start from?",
+  "home.contact.body": "Show us the sketch, plan or unfinished thought. We’ll come back with the right questions.",
+  "home.contact.cta": "Start a project",
 
   "branch.home.tag": "Overview",
   "branch.nokta.tag": "Layout · Design · Print",

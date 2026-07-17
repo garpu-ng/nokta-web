@@ -15,6 +15,9 @@ const de: Record<string, string> = {
 
   // ── Home ──────────────────────────────────────────────────────────
   "home.lead": "Interdisziplinäres Design aus einer Hand. Eigene Tools, viele Ideen, kurze Wege. Vom Punkt zur Linie zur Form.",
+  "home.contact.title": "Hast du einen Punkt, an dem wir anfangen?",
+  "home.contact.body": "Zeig uns die Skizze, den Plan oder den unfertigen Gedanken. Wir melden uns mit den richtigen Fragen.",
+  "home.contact.cta": "Projekt beginnen",
 
   // ── Branches (landing cards, branch headers, tab taglines) ────────
   "branch.home.tag": "Übersicht",

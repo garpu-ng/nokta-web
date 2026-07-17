@@ -12,6 +12,9 @@ const tr: Record<string, string> = {
   "meta.kontakt.title": "İletişim · nokta",
 
   "home.lead": "Tek elden disiplinler arası tasarım. Kendi araçlarımız, bol fikir, kısa yollar. Noktadan çizgiye, çizgiden forma.",
+  "home.contact.title": "Başlayabileceğimiz bir noktan var mı?",
+  "home.contact.body": "Bize eskizi, planı ya da tamamlanmamış fikri göster. Doğru sorularla geri dönelim.",
+  "home.contact.cta": "Projeyi başlat",
 
   "branch.home.tag": "Genel bakış",
   "branch.nokta.tag": "Dizgi · Tasarım · Baskı",
