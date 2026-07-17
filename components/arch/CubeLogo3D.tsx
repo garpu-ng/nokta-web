@@ -3,18 +3,27 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import * as THREE from "three";
-import { SVGLoader } from "three/examples/jsm/loaders/SVGLoader.js";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import styles from "./CubeLogo3D.module.css";
 
 const LOGO_COLOR = 0x4c5ebf;
-const LOGO_SOURCE = "/nokta_cube_logo.svg";
+const LOGO_SOURCE = "/nokta_cube_logo.glb";
+const FALLBACK_SOURCE = "/nokta_cube_logo.svg";
 const ROTATION_PERIOD_MS = 14000;
+const MODEL_WIDTH = 3.9;
+const MODEL_SCREEN_FRACTION = 0.55;
+// Keep in sync with .canvas in CubeLogo3D.module.css. The canvas renders
+// beyond the headline box so rotating depth/bevels cannot hit its edges.
+const CANVAS_OVERSCAN_X = 0.04;
+const CANVAS_OVERSCAN_Y = 0.35;
+// Leave a small horizontal safety inset so the model's bevel never touches
+// the WebGL viewport edge while preserving its measured 55% width.
+const LOGO_OFFSET_X = -1.43;
 
 /**
- * Converts the supplied vector mark into a shallow, bevelled mesh in the
- * browser. Keeping the SVG as the source avoids shipping a second large model
- * asset while preserving a crisp fallback for unsupported or reduced-motion
- * contexts.
+ * Loads the handmade GLB and gives it the branch's cobalt/gloss treatment.
+ * The SVG remains available as a crisp fallback for unsupported or
+ * reduced-motion contexts.
  */
 export default function CubeLogo3D() {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -74,57 +83,56 @@ export default function CubeLogo3D() {
     const logo = new THREE.Group();
     scene.add(logo);
 
-    const loader = new SVGLoader();
+    const loader = new GLTFLoader();
     loader.load(
       LOGO_SOURCE,
-      (data) => {
+      (gltf) => {
         if (disposed) return;
 
-        const depth = 0.22;
         const material = new THREE.MeshPhysicalMaterial({
           color: LOGO_COLOR,
-          roughness: 0.24,
+          roughness: 0.2,
           metalness: 0.04,
-          clearcoat: 0.9,
-          clearcoatRoughness: 0.12,
+          clearcoat: 1,
+          clearcoatRoughness: 0.08,
           side: THREE.DoubleSide,
         });
         materials.push(material);
 
-        for (const path of data.paths) {
-          const shapes = SVGLoader.createShapes(path);
-          for (const shape of shapes) {
-            const geometry = new THREE.ExtrudeGeometry(shape, {
-              bevelEnabled: true,
-              bevelSegments: 3,
-              bevelSize: 0.035,
-              bevelThickness: 0.035,
-              curveSegments: 8,
-              depth,
-              steps: 1,
-            });
-            // SVG coordinates point down the screen and extrusion starts at z=0.
-            geometry.scale(1, -1, 1);
-            geometry.translate(0, 0, -depth / 2);
-            geometry.computeVertexNormals();
-            geometries.push(geometry);
-            logo.add(new THREE.Mesh(geometry, material));
-          }
+        let meshCount = 0;
+        gltf.scene.traverse((object) => {
+          if (!(object instanceof THREE.Mesh)) return;
+          meshCount += 1;
+          geometries.push(object.geometry);
+          object.material = Array.isArray(object.material)
+            ? object.material.map(() => material)
+            : material;
+          object.castShadow = true;
+          object.receiveShadow = true;
+        });
+
+        if (meshCount === 0) {
+          setFallback(true);
+          return;
         }
 
-        const bounds = new THREE.Box3().setFromObject(logo);
+        logo.add(gltf.scene);
+        const bounds = new THREE.Box3().setFromObject(gltf.scene);
         const center = bounds.getCenter(new THREE.Vector3());
         const size = bounds.getSize(new THREE.Vector3());
-        const uniformScale = Math.min(3.9 / size.x, 2.15 / size.y);
-        logo.scale.setScalar(uniformScale);
-        // Scale the centering offset as well; otherwise the unscaled SVG
-        // coordinates would place the finished mesh hundreds of units away.
-        logo.position.set(
+        const uniformScale = Math.min(MODEL_WIDTH / size.x, 2.15 / size.y);
+        gltf.scene.scale.setScalar(uniformScale);
+        // Scale the centering offset as well because the loaded model's
+        // translation is applied outside its local scale.
+        gltf.scene.position.set(
           -center.x * uniformScale,
           -center.y * uniformScale,
           -center.z * uniformScale,
         );
-        logo.rotation.x = -0.12;
+        // Keep the parent rotation free of yaw/roll. The imported model's
+        // local orientation is preserved; only this parent rotates on X.
+        logo.position.x = LOGO_OFFSET_X;
+        logo.rotation.set(0, 0, 0);
         setFallback(false);
       },
       undefined,
@@ -135,10 +143,21 @@ export default function CubeLogo3D() {
 
     const resize = () => {
       if (!renderer) return;
-      const width = Math.max(mount.clientWidth, 1);
-      const height = Math.max(mount.clientHeight, 1);
-      renderer.setSize(width, height, false);
-      camera.aspect = width / height;
+      const stageWidth = Math.max(mount.clientWidth, 1);
+      const stageHeight = Math.max(mount.clientHeight, 1);
+      const renderWidth = stageWidth * (1 + CANVAS_OVERSCAN_X * 2);
+      const renderHeight = stageHeight * (1 + CANVAS_OVERSCAN_Y * 2);
+      const aspect = renderWidth / renderHeight;
+      renderer.setSize(renderWidth, renderHeight, false);
+      camera.aspect = aspect;
+      // Fit the normalized model to the same percentage of the lockup at every
+      // breakpoint. This lets the 3D mark behave like the fixed-ratio SVG logos
+      // used by /point and /line. Compensate for the larger overscan canvas so
+      // its visible size inside the original headline box does not change.
+      const renderFraction = MODEL_SCREEN_FRACTION * (stageWidth / renderWidth);
+      const horizontalHalfView = Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2) * aspect;
+      camera.position.z = MODEL_WIDTH / (2 * renderFraction * horizontalHalfView);
+      camera.lookAt(0, 0, 0);
       camera.updateProjectionMatrix();
     };
     resize();
@@ -150,7 +169,7 @@ export default function CubeLogo3D() {
     const render = (now: number) => {
       if (disposed || !renderer) return;
       const elapsed = now - startedAt;
-      logo.rotation.x = -0.12 + (elapsed / ROTATION_PERIOD_MS) * Math.PI * 2;
+      logo.rotation.set((elapsed / ROTATION_PERIOD_MS) * Math.PI * 2, 0, 0);
       renderer.render(scene, camera);
       frameId = window.requestAnimationFrame(render);
     };
@@ -176,10 +195,11 @@ export default function CubeLogo3D() {
     >
       <Image
         className={styles.fallback}
-        src={LOGO_SOURCE}
+        src={FALLBACK_SOURCE}
         alt=""
-        fill
-        sizes="(max-width: 960px) 94vw, 960px"
+        width={1276}
+        height={262}
+        sizes="(max-width: 960px) 55vw, 528px"
         unoptimized
       />
     </div>

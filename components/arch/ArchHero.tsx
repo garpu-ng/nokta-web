@@ -13,7 +13,12 @@ export default async function ArchHero() {
       <div className={styles.plane} aria-hidden="true" />
       <h1 className={styles.title}>
         <span className={styles.srOnly}>nokta.cube.</span>
-        <CubeLogo3D />
+        <span className={styles.logoLockup} aria-hidden="true">
+          <span className={styles.cubeSuffix}>
+            .cube<span className={styles.titleDot}>.</span>
+          </span>
+          <CubeLogo3D />
+        </span>
       </h1>
       <p className={styles.caption}>{t("arch.hero.caption")}</p>
       <p className={styles.claim}>{t("arch.hero.claim")}</p>

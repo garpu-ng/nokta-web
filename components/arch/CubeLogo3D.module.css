@@ -1,18 +1,20 @@
 .stage {
   position: relative;
-  width: min(94vw, 960px);
-  height: clamp(150px, 24vw, 270px);
-  margin: 0 0 clamp(1.5rem, 4vw, 3rem);
+  z-index: 1;
+  width: 100%;
+  /* Match the 0.9 line-height of the shared branch headline exactly. */
+  height: clamp(2.88rem, 9vw, 8.1rem);
+  margin: 0;
   perspective: 1200px;
 }
 
-.canvas,
-.fallback {
+.canvas {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  /* Keep these values in sync with the renderer overscan constants. */
+  top: -35%;
+  left: -4%;
+  width: 108%;
+  height: 170%;
 }
 
 .canvas {
@@ -21,9 +23,14 @@
 }
 
 .fallback {
-  padding: 0 1%;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 55%;
+  height: auto;
   filter: brightness(0) saturate(100%) invert(39%) sepia(33%) saturate(1176%)
     hue-rotate(198deg) brightness(93%) contrast(89%) drop-shadow(0 12px 18px rgba(26, 31, 77, 0.18));
+  transform: translateY(-50%);
   transition: opacity 300ms ease;
 }
 

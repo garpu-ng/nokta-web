@@ -35,6 +35,32 @@
   width: 100%;
 }
 
+.logoLockup {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: min(100%, 960px);
+}
+
+.cubeSuffix {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  left: 59%;
+  color: var(--ink);
+  font-family: var(--headline-font);
+  font-size: clamp(3.2rem, 10vw, 9rem);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 0.9;
+  transform: translateY(-50%);
+  white-space: nowrap;
+}
+
+.titleDot {
+  color: var(--brand-accent);
+}
+
 .srOnly {
   position: absolute;
   width: 1px;
