@@ -37,7 +37,7 @@ body {
      base bg swaps instantly underneath it. */
   background: var(--brand-bg);
   color: var(--ink);
-  /* Everything renders in Jost. A plain body rule suffices now that the old
+  /* Everything renders in DM Sans. A plain body rule suffices now that the old
      Webflow reset (html{font-family:sans-serif}) is gone: content inherits
      this, and class rules that need another face (e.g. .nk-404__digit's mono)
      simply win on specificity. */
@@ -67,7 +67,7 @@ h6 {
   font-family: var(--headline-font);
 }
 
-/* Form controls don't inherit font-family by default — opt them back into Jost
+/* Form controls don't inherit font-family by default — opt them back into DM Sans
    (previously handled by the blanket `* { font-family … !important }`). */
 button,
 input,

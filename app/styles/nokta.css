@@ -561,7 +561,7 @@
   line-height: 1;
 }
 
-/* The mono display face for the digits. A plain class rule beats the Jost
+/* The mono display face for the digits. A plain class rule beats the DM Sans
    body font on specificity (no !important needed). */
 .nk-404__digit {
   font-family: var(--mono-font);

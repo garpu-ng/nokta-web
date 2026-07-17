@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Jost, Space_Mono, Righteous } from "next/font/google";
+import { DM_Sans, Space_Mono, Righteous } from "next/font/google";
 import Link from "next/link";
 import Image from "next/image";
 import "./globals.css";
@@ -12,13 +12,13 @@ import styles from "./layout.module.css";
 
 /* Fonts are self-hosted at build time via next/font (GDPR: the browser never
    talks to Google Fonts). Exposed as CSS variables consumed by tokens.css. */
-const jost = Jost({
-  // Jost is a variable font — no weight list needed; the variable woff2
+const dmSans = DM_Sans({
+  // DM Sans is a variable font — no weight list needed; the variable woff2
   // covers the full weight range. Italic is a separate file, so list both styles.
   subsets: ["latin"],
   style: ["normal", "italic"],
   display: "swap",
-  variable: "--font-jost",
+  variable: "--font-dm-sans",
 });
 
 const spaceMono = Space_Mono({
@@ -68,7 +68,7 @@ export default async function RootLayout({
     <html
       lang={locale}
       data-scroll-behavior="smooth"
-      className={`${jost.variable} ${spaceMono.variable} ${righteous.variable}`}
+      className={`${dmSans.variable} ${spaceMono.variable} ${righteous.variable}`}
     >
       {/* suppressHydrationWarning: browser extensions (e.g. asbplayer) inject
           attributes on <body> before React hydrates; this scopes the warning
