@@ -11,15 +11,26 @@ Next.js (App Router), Deploy über Vercel (Push auf `main` → Auto-Build).
 Laufende offene Punkte, getrennt von den einzelnen Website-Builds. Erledigtes
 abhaken (`[x]`), Neues unten anhängen.
 
-- [ ] **Kontakt-Mailadresse:** Platzhalter `hallo@nokta.studio` (mailto hinter dem
-      schwarzen Dot) durch die echte Adresse ersetzen; mit `hallo@waarchi.de`
-      vereinheitlichen.
-- [ ] **nokta.line — Checkout:** echten Stripe-Checkout anbinden. Aktuell führt
-      „Bestellen" nur zu `/kontakt`.
+- [ ] **Kontakt-Mailadresse:** `hallo@nokta-studio.de` überall vereinheitlicht
+      (Footer, Kontakt, Impressum, Datenschutz); die Adresse ist aber angenommen —
+      die **Mailbox muss noch echt werden** (registrieren/einrichten).
+- [ ] **nokta.line — Checkout:** Stripe **Payment Links in `lib/prints.ts`
+      eintragen** (`paymentLink` pro Druck). Solange leer, fällt der Button auf
+      `/kontakt` zurück; sobald eine `buy.stripe.com`-URL drinsteht, ist der Druck
+      live — kein Code nötig.
 - [ ] **Impressum & Datenschutz:** echte, geprüfte Rechtstexte einsetzen
       (aktuell Platzhalter, nur Deutsch).
 - [ ] **Social-Links:** Instagram / LinkedIn / Behance im Footer sind noch `#`.
-- [ ] **Team:** Rollen/Personen bestätigen (Mert war ein Platzhalter).
+- [ ] **Team / Mert:** Die Mert-Karte ist jetzt bewusst ein „portrait folgt"-
+      Platzhalter (i18n, alle vier Sprachen). Echtes Portrait unter
+      `public/flymemert.mp4` nachreichen und die Karte gegen die `<GifVideo>`-Zeile
+      der anderen tauschen (Kommentar in `app/studio/page.tsx`).
+- [ ] **Alt-Routen aufräumen:** `/arch` + `/nokta` existieren nur noch als
+      `permanentRedirect`-Stubs auf `/cube` + `/point` — irgendwann entfernen.
+- [ ] **Sprachumschalter:** „JA" wird am rechten Rand auf breiten Screens
+      abgeschnitten (bestehend).
+- [ ] **Lint:** zwei bestehende Lint-Fehler noch offen
+      (`LanguageToggle.tsx:25`, `PunktEasterEgg.tsx:56`).
 - [ ] **i18n / SEO:** optional eigene `/en`-URLs + `hreflang` (aktuell
       Cookie-basiert, eine URL pro Seite); ggf. Rechtstexte übersetzen.
 - [ ] **Print-Master:** A1-Vektordateien liegen bewusst **nicht** im Repo
