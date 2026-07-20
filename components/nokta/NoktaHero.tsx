@@ -2,7 +2,6 @@ import type { CSSProperties } from "react";
 import { getT } from "@/lib/i18n";
 import PlotterReveal from "@/components/PlotterReveal";
 import WordmarkHeadline from "@/components/WordmarkHeadline";
-import CropMarks from "@/components/print/CropMarks";
 import Registration from "@/components/print/Registration";
 import styles from "./NoktaHero.module.css";
 
@@ -62,8 +61,6 @@ export default async function NoktaHero() {
           ))}
         </svg>
       </PlotterReveal>
-
-      <CropMarks />
 
       <Registration className={styles.registration} />
 

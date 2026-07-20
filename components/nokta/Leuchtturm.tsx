@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { getT } from "@/lib/i18n";
 import { getMediaSize } from "@/lib/mediaSizes";
-import CropMarks from "@/components/print/CropMarks";
 import styles from "./Leuchtturm.module.css";
 
 /* Leuchtturm — the studio's house design manual, shown as the real artifact it
@@ -9,8 +8,8 @@ import styles from "./Leuchtturm.module.css";
    obtainable — it's the internal rulebook every job starts from, and the copy
    says exactly that. The scanned cover (grainy photocopy aesthetic, the five
    nokta glyphs stacked vertically) is the hero and carries its own texture, so
-   the frame around it stays quiet: crop marks and one mono spec line. Layout
-   mirrors ArtPlate (text left, plate right) for an alternating rhythm. */
+   the frame around it stays quiet: one mono spec line. Layout mirrors ArtPlate
+   (text left, plate right) for an alternating rhythm. */
 const SRC = "/point/leuchtturm-cover.webp";
 
 export default async function Leuchtturm() {
@@ -33,7 +32,6 @@ export default async function Leuchtturm() {
 
           <figure className={styles.specimen}>
             <div className={styles.frame}>
-              <CropMarks className={styles.crop} />
               <Image
                 src={SRC}
                 alt={t("point.manual.alt")}

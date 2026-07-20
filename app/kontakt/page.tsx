@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { getT } from "@/lib/i18n";
 import Dot from "@/components/Dot";
-import CropMarks from "@/components/print/CropMarks";
 import Registration from "@/components/print/Registration";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -13,9 +12,6 @@ export default async function KontaktPage() {
   const t = await getT();
   return (
     <div className="wa-prozess-page wa-kontakt-page">
-
-      {/* Trim marks framing the contact sheet — the shared press vocabulary. */}
-      <CropMarks />
 
       {/* ── Header ──────────────────────────────────────────────── */}
       <div className="wa-prozess-header">

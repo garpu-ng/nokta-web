@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import GifVideo from "@/components/GifVideo";
-import CropMarks from "@/components/print/CropMarks";
 import Registration from "@/components/print/Registration";
 import { getT } from "@/lib/i18n";
 
@@ -17,10 +16,6 @@ export default async function StudioPage() {
   const t = await getT();
   return (
     <div className="wa-studio">
-
-      {/* Trim marks framing the studio sheet — same press vocabulary the branch
-          heroes wear, so /studio reads as part of the one press run. */}
-      <CropMarks />
 
       {/* ── Hero: heading left, text right ──────────────────────── */}
       <section className="wa-studio-hero">

@@ -1,5 +1,5 @@
-/* Press proof: a cream sheet carrying its trim marks and registration cross.
-   The large raster dot is an accent plane only; all copy remains pure ink. */
+/* Press proof: a cream sheet carrying its registration cross. The large raster
+   dot is an accent plane only; all copy remains pure ink. */
 .hero {
   position: relative;
   isolation: isolate;
@@ -59,13 +59,9 @@
   }
 }
 
-/* The corner trim marks are now the shared <CropMarks/> kit; its own module
-   pins them flush to this positioned .hero and strokes them in currentColor
-   (which resolves to the inherited ink here) at --crop-opacity 0.6 — identical
-   to the local marks this hero used to draw.
-
-   The registration mark's paint likewise comes from the kit (currentColor
-   stroke, --reg-opacity 0.5); this module only places and sizes it. */
+/* The registration mark comes from the shared <Registration/> kit (currentColor
+   stroke, --reg-opacity 0.5); this module only places and sizes it, pinning it
+   flush to this positioned .hero. */
 .registration {
   position: absolute;
   z-index: 0;

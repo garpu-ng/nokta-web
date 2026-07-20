@@ -1,9 +1,8 @@
 // Shared renderer for the generated social cards (app + branch opengraph-image
 // / twitter-image routes). One flat poster: the motto colour flooding the whole
-// 1200×630 field, the "nokta.point." wordmark set large in paper, a tiny
-// lowercase caption of the branch tagline, and crop marks tucked into the four
-// corners — the print-shop registration language, at low opacity. Poster, not
-// screenshot: no gradients, no shadows, no chrome.
+// 1200×630 field, the "nokta.point." wordmark set large in paper, and a tiny
+// lowercase caption of the branch tagline. Poster, not screenshot: no
+// gradients, no shadows, no chrome.
 //
 // No binary assets: the image is built entirely from JSX + CSS by ImageResponse
 // (satori under the hood), so nothing ships to the repo. It also uses no custom
@@ -21,52 +20,6 @@ import { PAPER } from "@/lib/branches";
     anything off this 1.91:1 ratio, so every card is exactly this size. */
 export const OG_SIZE = { width: 1200, height: 630 };
 export const OG_CONTENT_TYPE = "image/png";
-
-// Corner crop marks: a thin L in each corner, inset from the trim edge, drawn
-// in paper at low opacity. Absolutely positioned so they sit outside the flex
-// flow of the wordmark/caption.
-const MARK_LEN = 62; // arm length
-const MARK_W = 2; // stroke width
-const MARK_INSET = 46; // gap from the page edge
-const MARK_OPACITY = 0.42;
-
-/** The eight little bars (two per corner) that make up the crop marks. */
-function cropMarks() {
-  // Each corner is keyed by which edges it hugs; the arms share that anchor.
-  const corners = [
-    { key: "tl", v: { top: MARK_INSET, left: MARK_INSET }, h: { top: MARK_INSET, left: MARK_INSET } },
-    { key: "tr", v: { top: MARK_INSET, right: MARK_INSET }, h: { top: MARK_INSET, right: MARK_INSET } },
-    { key: "bl", v: { bottom: MARK_INSET, left: MARK_INSET }, h: { bottom: MARK_INSET, left: MARK_INSET } },
-    { key: "br", v: { bottom: MARK_INSET, right: MARK_INSET }, h: { bottom: MARK_INSET, right: MARK_INSET } },
-  ] as const;
-
-  return corners.flatMap((c) => [
-    // vertical arm
-    <div
-      key={`${c.key}-v`}
-      style={{
-        position: "absolute",
-        width: MARK_W,
-        height: MARK_LEN,
-        background: PAPER,
-        opacity: MARK_OPACITY,
-        ...c.v,
-      }}
-    />,
-    // horizontal arm
-    <div
-      key={`${c.key}-h`}
-      style={{
-        position: "absolute",
-        width: MARK_LEN,
-        height: MARK_W,
-        background: PAPER,
-        opacity: MARK_OPACITY,
-        ...c.h,
-      }}
-    />,
-  ]);
-}
 
 /** Render one social card. `wordmark` is the full lockup ("nokta.point.");
     `caption` the lowercase tagline; `background` the branch motto colour. */
@@ -94,8 +47,6 @@ export function renderOgImage(opts: {
           padding: "96px",
         }}
       >
-        {cropMarks()}
-
         <div
           style={{
             display: "flex",

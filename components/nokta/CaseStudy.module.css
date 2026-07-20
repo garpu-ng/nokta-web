@@ -1,6 +1,6 @@
-/* Featured case study — a cream press sheet carrying its trim marks, a
-   horizontal proof-sheet strip and the prepress facts. The report's own cyan
-   wayfinding accent is scoped here as a project-local colour. */
+/* Featured case study — a cream press sheet carrying a horizontal proof-sheet
+   strip and the prepress facts. The report's own cyan wayfinding accent is
+   scoped here as a project-local colour. */
 .case {
   position: relative;
   isolation: isolate;

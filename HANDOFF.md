@@ -151,13 +151,17 @@ stylesheets, and reusable components carry their own CSS Modules:
 - Desktop left-gutter clearance lives with each page/component's own styles now
   (`.wa-studio`, `.wa-prozess-page`, `ProjectHeader.module.css`).
 
-### Print-vocabulary kit + site-wide dressing (added 2026-07-20)
-- **`components/print/`** — the shared "print forensics" marks, each a small SVG
-  in `currentColor` with a colocated `*.module.css`: `CropMarks` (the four trim
-  L's framing a sheet) and `Registration` (a single registration target). They
-  wear whatever ink their context provides, so the same components sit on paper
-  and on the black footer. Used by `NoktaHero` (refactored onto the kit, zero
-  visual change), `/studio`, `/kontakt`, the `not-found` 404 sheet, and `Footer`.
+### Print-vocabulary kit + site-wide dressing (added 2026-07-20, crop marks removed 2026-07-20)
+- **`components/print/`** — the shared "print forensics" marks. Only
+  `Registration` (a single circle-and-crosshair registration target, small SVG
+  in `currentColor` with a colocated `*.module.css`) remains; it wears whatever
+  ink its context provides, so the same component sits on paper and on the
+  black footer. Used by `NoktaHero`, `/studio`, `/kontakt`, `CaseStudy`, and
+  `Footer`. The former `CropMarks` component (four trim L's framing a sheet)
+  and every corner-tick/crop-mark decoration site-wide (home manifesto pillar,
+  home branch cards, `NoktaBand`, `ArtPlate`/`Leuchtturm` specimen frames, the
+  `lib/og.tsx` social-card corners) were removed at the client's request —
+  Registration marks are unaffected and stay everywhere they were.
 - **`.nk-mono-caption`** — Space-Mono micro-caption utility in
   `app/styles/base.css`, the studio's "technical annotation" voice (studio hero
   caption, Mert's `portrait folgt` placeholder, etc.).
@@ -174,7 +178,7 @@ stylesheets, and reusable components carry their own CSS Modules:
   without JS), each with a mono caption naming its design decision, plus
   prepress facts, the honest PDF/web links and the delivery narrative — the
   report's cyan is borrowed here only, as a section-scoped `--case-cyan`.
-  `ArtPlate` mounts `n-study.png` as a crop-marked print specimen, capped at
+  `ArtPlate` mounts `n-study.png` as a framed print specimen, capped at
   its native 536px. `Leuchtturm` shows the scanned cover of the house design
   manual as a real studio artifact — **deliberately no CTA/link/price**: it's
   the internal rulebook every job starts from, and mirrors ArtPlate's layout
@@ -190,7 +194,7 @@ stylesheets, and reusable components carry their own CSS Modules:
 - **Social cards** — `lib/socialMeta.ts` (the shared OG/Twitter *text* block:
   title, description, canonical url, og:locale) + `lib/og.tsx` (the poster
   *image* renderer via `next/og`'s `ImageResponse` — flat motto-colour field,
-  paper wordmark, mono caption, corner crop marks). The images are wired through
+  paper wordmark, mono caption). The images are wired through
   the file-convention routes `app/{opengraph-image,twitter-image}.tsx` plus
   per-branch equivalents under `point/`, `cube/`, `line/` — **8 routes total**.
   No binary assets ship; the poster renders in `next/og`'s bundled default face,
@@ -212,8 +216,8 @@ stylesheets, and reusable components carry their own CSS Modules:
 | `app/studio/page.tsx` | `/studio` | ✅ rewritten in nokta voice; Mert's card = deliberate `portrait folgt` placeholder |
 | `app/kontakt/page.tsx` | `/kontakt` | ✅ rewritten in nokta voice; email now `hallo@nokta-studio.de` |
 
-Every page above also wears the print-vocabulary dressing (crop marks /
-registration / mono captions — see §4). `/arch` and `/nokta` still exist as
+Every page above also wears the print-vocabulary dressing (registration /
+mono captions — see §4). `/arch` and `/nokta` still exist as
 `permanentRedirect` stubs to `/cube` and `/point` (cleanup candidate — see §6).
 
 Data files: `lib/projects.ts` (arch projects), `lib/prints.ts` (line prints).

@@ -19,25 +19,12 @@
   pointer-events: none;
 }
 .registration circle,
-.registration path,
-.cropMark path {
+.registration path {
   fill: none;
   stroke: var(--paper);
   stroke-width: 1.5;
   opacity: 0.4;
 }
-.cropMark {
-  position: absolute;
-  z-index: 0;
-  width: 68px;
-  height: 68px;
-  overflow: visible;
-  pointer-events: none;
-}
-.topLeft { top: 0; left: 0; }
-.topRight { top: 0; right: 0; }
-.bottomLeft { bottom: 0; left: 0; }
-.bottomRight { right: 0; bottom: 0; }
 
 .content {
   position: relative;

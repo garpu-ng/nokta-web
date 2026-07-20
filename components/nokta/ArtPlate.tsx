@@ -1,15 +1,14 @@
 import Image from "next/image";
 import { getT } from "@/lib/i18n";
 import { getMediaSize } from "@/lib/mediaSizes";
-import CropMarks from "@/components/print/CropMarks";
 import styles from "./ArtPlate.module.css";
 
 /* Art plate — the studio's style statement, bridging the commissioned work to
    what nokta likes: a system and one deliberate deviation. n-study.png is the
    authoritative artwork (a grid of chunky italic "n"s with a single cobalt one
    breaking rank); it is shown at its native size inside a framed print-specimen
-   plate with crop marks and a mono spec caption, never scaled past 536px where
-   it would pixelate. */
+   plate with a mono spec caption, never scaled past 536px where it would
+   pixelate. */
 const SRC = "/point/n-study.png";
 
 export default async function ArtPlate() {
@@ -30,7 +29,6 @@ export default async function ArtPlate() {
         <div className={styles.body}>
           <figure className={styles.specimen}>
             <div className={styles.frame}>
-              <CropMarks className={styles.crop} />
               <Image
                 src={SRC}
                 alt={t("point.plate.alt")}

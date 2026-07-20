@@ -14,9 +14,6 @@
 
 /* ── Studio page ──────────────────────────────────────────────── */
 .wa-studio {
-  /* position: relative anchors the <CropMarks/> trim brackets to this sheet's
-     own corners. */
-  position: relative;
   /* The horizontal max(4svw, 220px) is an intentional wide content inset on
      desktop — keeps the studio copy off the edges and reading well against the
      flood colour. (It once cleared a left sidebar; there's no sidebar now, the
@@ -205,9 +202,6 @@
 
 /* ── Kontakt page (reuses .wa-prozess-* below) ────────────────── */
 .wa-kontakt-page {
-  /* position: relative anchors the <CropMarks/> to this sheet's corners (kept
-     off the shared .wa-prozess-page so /prozess is unaffected). */
-  position: relative;
   padding-top: 4svh;
   padding-bottom: 6svh;
 }
@@ -500,7 +494,6 @@
 /* Black pillar beneath the video — same width as the video/tabs, stretches to
    the footer, so video → content → footer read as one dark column. */
 .nk-pillar {
-  position: relative; /* anchors the corner trim marks */
   flex: 1 0 auto;
   width: 100%;
   max-width: var(--content-max);
@@ -508,34 +501,12 @@
   background: #1a1a18;
 }
 
-/* Trim brackets at the pillar's corners — the one print-forensics touch that
-   frames the manifesto as a press sheet (rendered by <CropMark> in page.tsx).
-   Paper stroke, faint, decorative. */
-.nk-pillar__crop {
-  position: absolute;
-  width: 26px;
-  height: 26px;
-  color: var(--paper);
-  opacity: 0.26;
-  overflow: visible;
-  pointer-events: none;
-}
-.nk-pillar__crop path {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1;
-}
-.nk-pillar__crop--tl { top: 16px; left: 16px; }
-.nk-pillar__crop--tr { top: 16px; right: 16px; }
-.nk-pillar__crop--bl { bottom: 16px; left: 16px; }
-.nk-pillar__crop--br { bottom: 16px; right: 16px; }
-
 /* The landing now fills the full pillar (was locked to 1100px) so the motto and
    its progression diagram can own the whole stage the video above spans; the
-   generous horizontal padding — clear of the corner crop marks — is the only
-   thing insetting the content. The lead + motto are centred (a centred manifesto
-   stack); the branch grid below is a full-width block whose card text stays
-   left-aligned, so no text-align is set on the container itself. */
+   generous horizontal padding is the only thing insetting the content. The
+   lead + motto are centred (a centred manifesto stack); the branch grid below
+   is a full-width block whose card text stays left-aligned, so no text-align
+   is set on the container itself. */
 .nk-landing {
   max-width: var(--content-max);
   margin: 0 auto;
@@ -586,16 +557,14 @@
    The generic 1px-outline boxes are gone. Each card is now a plate from the
    same press run: a hairline TOP RULE (the sheet's trim edge, like the /point
    ServiceIndex rows), a mono FOLIO ("01" …) stamped on it top-left with the
-   miniature discipline mark opposite it top-right, and CORNER TICKS closing the
-   two bottom corners in lieu of a full border — registration-mark framing, not a
-   box. A whisper of the branch colour tints the surface so each sheet already
-   carries its own hue on the black pillar; hover then floods it to the full
-   accent, the legible foreground coming from the existing --card / --card-fg
-   custom-property mechanism (unchanged). Flat print idiom throughout — no
-   shadow, gradient or radius. */
+   miniature discipline mark opposite it top-right. A whisper of the branch
+   colour tints the surface so each sheet already carries its own hue on the
+   black pillar; hover then floods it to the full accent, the legible
+   foreground coming from the existing --card / --card-fg custom-property
+   mechanism (unchanged). Flat print idiom throughout — no shadow, gradient or
+   radius. */
 .nk-branch-card {
   --card: var(--accent);
-  position: relative; /* anchors the bottom corner ticks */
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
@@ -609,30 +578,10 @@
   transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease;
 }
 
-/* Corner ticks at the two bottom corners — short L-brackets that frame the sheet
-   without boxing it in. They ride the same hover colour shift as the top rule. */
-.nk-branch-card::before,
-.nk-branch-card::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  width: 13px;
-  height: 13px;
-  border: 0 solid color-mix(in srgb, var(--on-brand) 42%, transparent);
-  border-bottom-width: 1px;
-  transition: border-color 0.35s ease;
-}
-.nk-branch-card::before { left: 0; border-left-width: 1px; }
-.nk-branch-card::after { right: 0; border-right-width: 1px; }
-
 .nk-branch-card:hover {
   background: var(--card);
   color: var(--card-fg, #e9e0ce); /* ink on light fills, paper on dark */
   border-top-color: color-mix(in srgb, var(--card-fg, #e9e0ce) 40%, transparent);
-}
-.nk-branch-card:hover::before,
-.nk-branch-card:hover::after {
-  border-color: color-mix(in srgb, var(--card-fg, #e9e0ce) 40%, transparent);
 }
 
 /* Header row: folio left, discipline mark stamped top-right, sitting on the rule. */
@@ -723,8 +672,6 @@
    maps to no branch), so the dot stays black on paper.
    ══════════════════════════════════════════════════════════════════ */
 .nk-404 {
-  /* position: relative anchors the <CropMarks/> to the 404 sheet's corners. */
-  position: relative;
   min-height: 62svh;
   display: flex;
   flex-direction: column;

@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { getT } from "@/lib/i18n";
 import { getMediaSize } from "@/lib/mediaSizes";
-import CropMarks from "@/components/print/CropMarks";
 import Registration from "@/components/print/Registration";
 import styles from "./CaseStudy.module.css";
 
@@ -32,7 +31,6 @@ export default async function CaseStudy() {
 
   return (
     <section className={`${styles.case} nk-grain`}>
-      <CropMarks />
       <div className={styles.inner}>
         <header className={styles.head}>
           <p className={`nk-mono-caption ${styles.kicker}`}>{t("point.case.kicker")}</p>

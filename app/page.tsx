@@ -49,24 +49,6 @@ function renderMotto(template: string, word: (k: MottoKey) => string): ReactNode
   });
 }
 
-/* Trim brackets hugging the four corners of the pillar — the one quiet
-   print-forensics touch that frames the manifesto as a press sheet, tying home
-   into the family of crop marks · registration · Schriftfeld already worn by the
-   branch heroes. Paper stroke, low opacity (styled in nokta.css). */
-function CropMark({ corner }: { corner: "tl" | "tr" | "bl" | "br" }) {
-  const d = {
-    tl: "M0 14V0H14",
-    tr: "M16 0H30V14",
-    bl: "M0 16V30H14",
-    br: "M30 16V30H16",
-  }[corner];
-  return (
-    <svg className={`nk-pillar__crop nk-pillar__crop--${corner}`} viewBox="0 0 30 30" aria-hidden="true">
-      <path d={d} />
-    </svg>
-  );
-}
-
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getT();
   const locale = await getLocale();
@@ -91,12 +73,6 @@ export default async function HomePage() {
 
       {/* Black pillar — video-wide, extends from below the video to the footer */}
       <div className="nk-pillar">
-        {/* Trim marks framing the pillar as a press sheet. */}
-        <CropMark corner="tl" />
-        <CropMark corner="tr" />
-        <CropMark corner="bl" />
-        <CropMark corner="br" />
-
         <main className="nk-landing">
           {/* The descriptive lead … */}
           <p className="nk-landing-lead">{t("home.lead.body")}</p>
