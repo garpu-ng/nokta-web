@@ -1,12 +1,17 @@
 import { getT } from "@/lib/i18n";
 import styles from "./ServiceIndex.module.css";
 
+/* The two services the flagship commission proves get a one-line evidence hook
+   linking them back to the case study above. */
+const EVIDENCE = new Set([1, 2]);
+
 export default async function ServiceIndex() {
   const t = await getT();
   const services = [0, 1, 2, 3].map((index) => ({
     folio: String(index + 1).padStart(2, "0"),
     title: t(`nokta.svc.${index}.title`),
     text: t(`nokta.svc.${index}.text`),
+    evidence: EVIDENCE.has(index) ? t(`nokta.svc.${index}.evidence`) : null,
   }));
 
   return (
@@ -23,6 +28,12 @@ export default async function ServiceIndex() {
                 <span className={`${styles.folio} ${styles.folioEnd}`}>{service.folio}</span>
               </div>
               <p className={styles.text}>{service.text}</p>
+              {service.evidence ? (
+                <p className={`nk-mono-caption ${styles.evidence}`}>
+                  <span className={styles.evidenceMark} aria-hidden="true">↳</span>
+                  {service.evidence}
+                </p>
+              ) : null}
             </article>
           ))}
         </div>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import ColorStrip from "@/components/nokta/ColorStrip";
+import ArtPlate from "@/components/nokta/ArtPlate";
+import CaseStudy from "@/components/nokta/CaseStudy";
 import NoktaBand from "@/components/nokta/NoktaBand";
 import NoktaHero from "@/components/nokta/NoktaHero";
 import ServiceIndex from "@/components/nokta/ServiceIndex";
@@ -29,7 +30,8 @@ export default async function PointPage() {
       <div className={heroStyles.intro}>
         <p className={heroStyles.introLead}>{t("branch.nokta.desc")}</p>
       </div>
-      <ColorStrip />
+      <CaseStudy />
+      <ArtPlate />
       <ServiceIndex />
       <NoktaBand />
     </>

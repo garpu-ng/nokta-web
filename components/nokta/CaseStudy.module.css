@@ -1,0 +1,198 @@
+/* Featured case study — a cream press sheet carrying its trim marks, a
+   horizontal proof-sheet strip and the prepress facts. The report's own cyan
+   wayfinding accent is scoped here as a project-local colour. */
+.case {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--paper);
+  padding: clamp(3rem, 9svh, 6rem) clamp(20px, 5vw, 48px);
+  --case-cyan: #0e97b7;
+}
+.inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.head {
+  max-width: 62ch;
+}
+.kicker {
+  margin: 0 0 1rem;
+  color: var(--case-cyan);
+  opacity: 1;
+}
+.label {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--display-font);
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+.labelDot { color: var(--brand-accent); }
+.title {
+  margin: 1rem 0 0;
+  color: var(--ink);
+  font-family: var(--display-font);
+  font-size: clamp(1.1rem, 2.4vw, 1.6rem);
+  font-weight: 700;
+  line-height: 1.15;
+  opacity: 0.85;
+}
+.lead {
+  max-width: 52ch;
+  margin: 1rem 0 0;
+  color: var(--ink);
+  font-size: clamp(1rem, 1.9vw, 1.25rem);
+  line-height: 1.55;
+  opacity: 0.82;
+}
+
+/* ── Proof-sheet strip ───────────────────────────────────────────────── */
+.strip {
+  display: flex;
+  gap: clamp(1rem, 3vw, 2rem);
+  margin: clamp(2rem, 6svh, 3.5rem) 0 0;
+  padding: 0 0 1.25rem;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+.strip:focus-visible {
+  outline: 2px solid var(--case-cyan);
+  outline-offset: 4px;
+}
+.proof {
+  flex: 0 0 auto;
+  width: clamp(240px, 78vw, 360px);
+  scroll-snap-align: start;
+}
+.figure {
+  margin: 0;
+}
+.frame {
+  position: relative;
+  display: block;
+  background: var(--paper);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--ink) 22%, transparent);
+  outline: 1px solid color-mix(in srgb, var(--ink) 14%, transparent);
+}
+.art {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.reg {
+  position: absolute;
+  z-index: 1;
+  right: 8px;
+  bottom: 8px;
+  width: 20px;
+  height: 20px;
+  color: var(--ink);
+  --reg-opacity: 0.4;
+}
+.caption {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin: 0.85rem 0 0;
+  color: var(--ink);
+  opacity: 0.75;
+  line-height: 1.4;
+}
+.folio {
+  flex: 0 0 auto;
+  color: var(--case-cyan);
+  opacity: 1;
+}
+
+/* ── Facts + narrative ───────────────────────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(1.5rem, 5vw, 3.5rem);
+  margin: clamp(2.5rem, 7svh, 4rem) 0 0;
+  padding: clamp(1.5rem, 4svh, 2.5rem) 0 0;
+  border-top: 1px solid color-mix(in srgb, var(--ink) 45%, transparent);
+}
+
+.facts {
+  margin: 0;
+}
+.factRow {
+  display: grid;
+  grid-template-columns: 8rem minmax(0, 1fr);
+  gap: 0.75rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 18%, transparent);
+}
+.factLabel {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--mono-font);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.55;
+  line-height: 1.5;
+}
+.factValue {
+  margin: 0;
+  color: var(--ink);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  margin: 1.5rem 0 0;
+}
+.pdf,
+.web {
+  font-family: var(--mono-font);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+}
+.pdf {
+  color: var(--paper);
+  background: var(--ink);
+  padding: 0.7rem 1.1rem;
+  transition: background 0.2s ease;
+}
+.pdf:hover,
+.pdf:focus-visible {
+  background: var(--brand-accent);
+}
+.web {
+  align-self: center;
+  color: var(--case-cyan);
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+}
+
+.narrative p {
+  max-width: 60ch;
+  margin: 0 0 1rem;
+  color: var(--ink);
+  font-size: clamp(0.98rem, 1.7vw, 1.12rem);
+  line-height: 1.65;
+  opacity: 0.85;
+}
+.narrative p:last-child { margin-bottom: 0; }
+
+@media (max-width: 767px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .factRow {
+    grid-template-columns: 7rem minmax(0, 1fr);
+  }
+}

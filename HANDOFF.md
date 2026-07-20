@@ -167,6 +167,16 @@ stylesheets, and reusable components carry their own CSS Modules:
   plot-line → cobalt wireframe cube), `BranchCardMark` (the miniature per-card
   discipline marks), and `geometry.ts` (shared seeded geometry for both). The
   three motto words and both marks pull their colours from `lib/branches.ts`.
+- **`components/nokta/CaseStudy.tsx` + `ArtPlate.tsx`** — the /point work-led
+  sections (both server components, colocated `*.module.css`). `CaseStudy`
+  presents the KI-Kommission Abschlussbericht: six `.webp` spreads in a plain
+  focusable scroll-snap strip (no carousel; complete without JS), each with a
+  mono caption naming its design decision, plus prepress facts, the honest
+  PDF/web links and the delivery narrative — the report's cyan is borrowed here
+  only, as a section-scoped `--case-cyan`. `ArtPlate` mounts `n-study.png` as a
+  crop-marked print specimen, capped at its native 536px. Assets live under
+  `public/point/` (`abschlussbericht/*.webp`, the 7.9 MB PDF, `n-study.png`);
+  their intrinsic sizes are registered in `lib/mediaSizes.ts`.
 - **`components/PlotterReveal.tsx`** — an `IntersectionObserver` client wrapper
   (consistent with `components/arch/PerspectiveGrid`) that drives the scroll
   motion: `NoktaHero`'s halftone stamps assemble ring-by-ring and the
@@ -188,7 +198,7 @@ stylesheets, and reusable components carry their own CSS Modules:
 | File | Route | Status |
 |------|-------|--------|
 | `app/page.tsx` | `/` | ✅ home manifesto — lead + centered motto "Vom Punkt zur Linie zur Form.", the `ProgressionMark` band, 3 press-sheet branch cards |
-| `app/point/page.tsx` | `/point` | ✅ nokta.point (Layout · Design · Druck) — real content, nokta voice |
+| `app/point/page.tsx` | `/point` | ✅ nokta.point — **work-led**: hero + intro, then the flagship `CaseStudy` (KI-Kommission Abschlussbericht: 6-spread proof-sheet strip, prepress facts, PDF/web links, narrative), the `ArtPlate` n-study specimen, `ServiceIndex` (two services carry a case-study evidence hook), NoktaBand |
 | `app/cube/page.tsx` | `/cube` | ✅ archviz poster-wall (ArchHero, DotField, PosterWall, PerspectiveGrid), real |
 | `app/line/page.tsx` | `/line` | ✅ print shop index (real prints) |
 | `app/line/[slug]/page.tsx` | `/line/…` | 🟡 print detail — Schriftfeld "technical passport" + per-print metadata; **transaction-ready minus links**: buy CTA becomes a Stripe Payment Link once `paymentLink` is pasted, else falls back to `/kontakt` |
