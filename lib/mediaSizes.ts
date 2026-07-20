@@ -50,6 +50,7 @@ const SIZES: Record<string, MediaSize> = {
   "/point/abschlussbericht/opinion.webp": { width: 1477, height: 2085 },
   "/point/abschlussbericht/termine.webp": { width: 1477, height: 2085 },
   "/point/n-study.png": { width: 536, height: 918 },
+  "/point/leuchtturm-cover.webp": { width: 1200, height: 1710 },
   "/line/chrysler.webp": { width: 1600, height: 2400 },
   "/line/eiffel.webp": { width: 1600, height: 2355 },
   "/line/empire-state.webp": { width: 1600, height: 2433 },

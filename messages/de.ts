@@ -95,6 +95,13 @@ const de: Record<string, string> = {
   "point.plate.alt": "Raster aus wiederholten fetten kursiven Kleinbuchstaben „n“, schwarz auf hellem Bogen, mit einem einzelnen „n“ in Kobaltblau, das aus dem Muster ausbricht.",
   "point.plate.text": "Zwischen den Aufträgen entstehen Studien wie diese: ein Raster aus fetten, kursiven n, schwarz auf dem Bogen. Alles folgt dem System — bis auf ein einziges n in Kobalt, das ausschert. So arbeiten wir am liebsten: klare Ordnung, ein bewusster Bruch.",
 
+  // ── nokta.point · Hausmanual (Leuchtturm) ─────────────────────────
+  "point.manual.kicker": "hausmanual · regelwerk",
+  "point.manual.label": "Leuchtturm",
+  "point.manual.text": "Der Leuchtturm ist unser Hausmanual: Typografie-Regeln, Raster, Farbsystem und Druckstandards — alles, womit hier jede Arbeit anfängt. Zu kaufen gibt es ihn nicht; wir arbeiten daraus. Aber schon der Umschlag zeigt, wie wir Bücher denken: als gebaute Objekte.",
+  "point.manual.spec": "leuchtturm · hausinternes manual · fortlaufend ergänzt",
+  "point.manual.alt": "Gescannter Umschlag des Hausmanuals „Leuchtturm“: körniges Schwarzweiß, oben ein schwarzer Balken mit „NOKTA STUDIO – LEUCHTTURM“ in gesperrter Monoschrift, darunter die fünf nokta-Glyphen vertikal gestapelt in Grautönen, leicht gedreht, dazu graue Eckfelder und eine sichtbare Falzlinie.",
+
   // ── Studio ────────────────────────────────────────────────────────
   "studio.heading": "Studio",
   "studio.caption": "ein studio · drei disziplinen · nrw",

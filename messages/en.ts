@@ -87,6 +87,13 @@ const en: Record<string, string> = {
   "point.plate.alt": "Grid of repeated bold italic lowercase letters “n”, black on a light sheet, with a single “n” in cobalt blue breaking out of the pattern.",
   "point.plate.text": "Between commissions we make studies like this one: a grid of bold, italic n’s, black on the sheet. Everything follows the system — except a single cobalt n that steps out of line. This is how we like to work: clear order, one deliberate break.",
 
+  // ── nokta.point · house manual (Leuchtturm) ───────────────────────
+  "point.manual.kicker": "house manual · rulebook",
+  "point.manual.label": "Leuchtturm",
+  "point.manual.text": "Leuchtturm is our house manual: typographic rules, the grid, the colour system and the print standards — everything every job here starts from. It isn’t for sale; we work from it. But the cover alone shows how we think about books: as built objects.",
+  "point.manual.spec": "leuchtturm · in-house manual · continually extended",
+  "point.manual.alt": "Scanned cover of the house manual “Leuchtturm”: grainy black and white, a black bar at the top reading “NOKTA STUDIO – LEUCHTTURM” in spaced mono capitals, below it the five nokta glyphs stacked vertically in shades of grey, slightly rotated, with grey corner patches and a visible fold line.",
+
   "studio.heading": "Studio",
   "studio.caption": "one studio · three disciplines · nrw",
   "studio.p1": "nokta is an interdisciplinary design studio from North Rhine-Westphalia, Germany. One studio, three disciplines: layout and print, architectural visualisation and CAD line prints.",

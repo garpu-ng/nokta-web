@@ -89,6 +89,13 @@ const tr: Record<string, string> = {
   "point.plate.alt": "Açık renk bir tabaka üzerinde siyah, tekrar eden kalın italik küçük „n“ harflerinden oluşan bir ızgara; içinde desenden çıkan tek bir kobalt mavisi „n“.",
   "point.plate.text": "İşler arasında bunun gibi çalışmalar çıkıyor: tabaka üzerinde siyah, kalın italik n’lerden bir ızgara. Her şey sistemi izliyor — sıradan çıkan tek bir kobalt n dışında. En çok böyle çalışmayı seviyoruz: net bir düzen, bilinçli bir kırılma.",
 
+  // ── nokta.point · stüdyo el kitabı (Leuchtturm) ───────────────────
+  "point.manual.kicker": "stüdyo el kitabı · kurallar",
+  "point.manual.label": "Leuchtturm",
+  "point.manual.text": "Leuchtturm bizim stüdyo el kitabımız: tipografi kuralları, ızgara, renk sistemi ve baskı standartları — buradaki her işin başladığı her şey. Satılık değil; biz ondan çalışıyoruz. Ama daha kapağı bile kitapları nasıl düşündüğümüzü gösteriyor: inşa edilmiş nesneler olarak.",
+  "point.manual.spec": "leuchtturm · stüdyo içi el kitabı · sürekli genişliyor",
+  "point.manual.alt": "„Leuchtturm“ stüdyo el kitabının taranmış kapağı: grenli siyah-beyaz, üstte aralıklı mono büyük harflerle „NOKTA STUDIO – LEUCHTTURM“ yazan siyah bir bant, altında gri tonlarında, hafifçe döndürülmüş, dikey istiflenmiş beş nokta glifi; gri köşe blokları ve görünür bir katlama izi.",
+
   "studio.heading": "Stüdyo",
   "studio.caption": "tek stüdyo · üç disiplin · nrw",
   "studio.p1": "nokta, Almanya Kuzey Ren-Vestfalya’dan disiplinler arası bir tasarım stüdyosu. Bir stüdyo, üç disiplin: dizgi ve baskı, mimari görselleştirme ve CAD çizgi baskılar.",

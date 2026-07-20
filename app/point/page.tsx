@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import ArtPlate from "@/components/nokta/ArtPlate";
 import CaseStudy from "@/components/nokta/CaseStudy";
+import Leuchtturm from "@/components/nokta/Leuchtturm";
 import NoktaBand from "@/components/nokta/NoktaBand";
 import NoktaHero from "@/components/nokta/NoktaHero";
 import ServiceIndex from "@/components/nokta/ServiceIndex";
@@ -32,6 +33,7 @@ export default async function PointPage() {
       </div>
       <CaseStudy />
       <ArtPlate />
+      <Leuchtturm />
       <ServiceIndex />
       <NoktaBand />
     </>

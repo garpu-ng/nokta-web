@@ -1,0 +1,83 @@
+/* Leuchtturm — the house manual as a quiet specimen. The scanned cover brings
+   its own photocopy grain, so the section under-decorates: paper ground, crop
+   marks on the frame, one mono spec line. Mirrors ArtPlate's plate layout with
+   the columns swapped (text left, cover right) for an alternating rhythm. */
+.manual {
+  background: var(--paper);
+  padding: clamp(3rem, 8svh, 5.5rem) clamp(20px, 5vw, 48px);
+}
+.inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.head {
+  margin: 0 0 clamp(1.5rem, 5svh, 2.5rem);
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--ink);
+}
+.kicker {
+  margin: 0 0 0.75rem;
+}
+.label {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--display-font);
+  font-size: clamp(1.8rem, 4.5vw, 3rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+.labelDot { color: var(--brand-accent); }
+
+.body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(1.5rem, 5vw, 3.5rem);
+}
+
+.text {
+  max-width: 46ch;
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(1rem, 1.9vw, 1.25rem);
+  line-height: 1.6;
+  opacity: 0.85;
+}
+
+.specimen {
+  margin: 0;
+}
+.frame {
+  position: relative;
+  width: min(100%, 420px);
+  padding: clamp(20px, 4vw, 40px);
+  background: var(--paper);
+  outline: 1px solid color-mix(in srgb, var(--ink) 16%, transparent);
+  color: var(--ink);
+}
+.crop {
+  --crop-opacity: 0.5;
+}
+.art {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.spec {
+  margin: 0.9rem 0 0;
+  color: var(--ink);
+}
+
+@media (max-width: 767px) {
+  .body {
+    grid-template-columns: 1fr;
+  }
+  /* Cover first on small screens — the scan is the hero. */
+  .specimen { order: -1; }
+  .frame {
+    width: min(100%, 380px);
+    margin: 0 auto;
+  }
+}
