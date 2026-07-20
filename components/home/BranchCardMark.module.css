@@ -1,0 +1,29 @@
+/* Structure only — sizing, stroke weights, dash. The mark's *colour* (accent →
+   card foreground on hover) is handled globally in nokta.css via the
+   `nk-branch-card__mark` class, so it stays with the rest of the card's colour
+   transitions. Everything here is drawn in currentColor. */
+/* The box size (and colour) is owned by `.nk-branch-card__mark` in nokta.css,
+   so the mark stays in step with the card's layout + hover transition; this
+   module only carries the drawing's structure. */
+.mark {
+  display: block;
+  /* Stroke edges may sit a hair outside the viewBox; don't clip them. */
+  overflow: visible;
+}
+
+.stroke {
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.tick {
+  stroke-width: 1.4;
+}
+
+/* Wireframe cube's hidden edges — thinner, dashed construction lines. */
+.hidden {
+  stroke-width: 1;
+  stroke-dasharray: 2.5 2.5;
+  opacity: 0.5;
+}

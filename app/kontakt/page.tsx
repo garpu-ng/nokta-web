@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { getT } from "@/lib/i18n";
 import Dot from "@/components/Dot";
+import CropMarks from "@/components/print/CropMarks";
+import Registration from "@/components/print/Registration";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getT();
@@ -12,6 +14,9 @@ export default async function KontaktPage() {
   return (
     <div className="wa-prozess-page wa-kontakt-page">
 
+      {/* Trim marks framing the contact sheet — the shared press vocabulary. */}
+      <CropMarks />
+
       {/* ── Header ──────────────────────────────────────────────── */}
       <div className="wa-prozess-header">
         <h1 className="wa-prozess-heading">{t("kontakt.heading")}</h1>
@@ -20,9 +25,13 @@ export default async function KontaktPage() {
 
       {/* ── Animated dot ────────────────────────────────────────── */}
       <div className="wa-prozess-gif-wrap">
-        {/* TODO: replace placeholder address (hallo@nokta.studio) — see README */}
-        <a href="mailto:hallo@nokta.studio" aria-label={t("kontakt.mailAria")}>
+        {/* Studio contact address — kept in sync with the footer / impressum. The
+            big ink dot gets a small registration mark on its upper-right shoulder,
+            as if the sheet were aligned around the point. The mark is absolutely
+            positioned, so it doesn't enlarge the link's hit area. */}
+        <a className="wa-kontakt-dot-link" href="mailto:hallo@nokta-studio.de" aria-label={t("kontakt.mailAria")}>
           <Dot className="wa-kontakt-hero-gif" />
+          <Registration className="wa-kontakt-registration" />
         </a>
       </div>
 
@@ -31,8 +40,8 @@ export default async function KontaktPage() {
         <p className="wa-prozess-intro" style={{ marginBottom: "2rem" }}>
           {t("kontakt.infoLead")}
         </p>
-        <a href="mailto:hallo@waarchi.de" className="wa-kontakt-email">
-          hallo@waarchi.de
+        <a href="mailto:hallo@nokta-studio.de" className="wa-kontakt-email">
+          hallo@nokta-studio.de
         </a>
         <p className="wa-kontakt-address">
           nokta Studio<br />

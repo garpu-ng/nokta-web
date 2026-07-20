@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { BRANCHES } from "@/lib/branches";
 import { getT } from "@/lib/i18n";
+import Registration from "@/components/print/Registration";
 import styles from "./Footer.module.css";
 
 // Global footer — pure black, mirrors the header's centred column. Social links
@@ -21,8 +22,8 @@ export default async function Footer() {
               <br />
               {t("footer.tag2")}
             </p>
-            <a href="mailto:hallo@waarchi.de" className={styles.email}>
-              hallo@waarchi.de
+            <a href="mailto:hallo@nokta-studio.de" className={styles.email}>
+              hallo@nokta-studio.de
             </a>
           </div>
 
@@ -66,12 +67,16 @@ export default async function Footer() {
               <a href="#" className={styles.link}>Instagram</a>
               <a href="#" className={styles.link}>LinkedIn</a>
               <a href="#" className={styles.link}>Behance</a>
-              <a href="mailto:hallo@waarchi.de" className={styles.link}>E-Mail</a>
+              <a href="mailto:hallo@nokta-studio.de" className={styles.link}>E-Mail</a>
             </div>
           </nav>
         </div>
 
         <div className={styles.bottom}>
+          {/* A quiet registration mark sitting on the colophon's trim line, the
+              one print-forensics detail on the dark footer. currentColor resolves
+              to the footer's paper; --reg-opacity keeps it at a whisper. */}
+          <Registration className={styles.regMark} />
           <span>© 2026 nokta · Nordrhein-Westfalen, DE</span>
           <span>{t("footer.disciplines")}</span>
         </div>

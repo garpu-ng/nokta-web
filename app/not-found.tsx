@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getT } from "@/lib/i18n";
 import Dot from "@/components/Dot";
+import CropMarks from "@/components/print/CropMarks";
 
 // Root not-found — rendered inside the root layout for any unmatched route.
 // The "404" is drawn as 4 · dot · 4, where the middle "0" is our brand dot
@@ -12,6 +13,10 @@ export default async function NotFound() {
   const t = await getT();
   return (
     <div className="nk-404">
+      {/* Trim marks around the 404 sheet — the 4·dot·4 mark carries the page,
+          so the crop marks are the one quiet touch that ties it into the run. */}
+      <CropMarks />
+
       <div className="nk-404__mark" role="img" aria-label={t("notfound.aria")}>
         <span className="nk-404__digit" aria-hidden="true">4</span>
         <Dot className="nk-404__dot" />

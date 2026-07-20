@@ -1,72 +1,74 @@
+import type { CSSProperties } from "react";
 import { getT } from "@/lib/i18n";
+import PlotterReveal from "@/components/PlotterReveal";
 import WordmarkHeadline from "@/components/WordmarkHeadline";
+import CropMarks from "@/components/print/CropMarks";
+import Registration from "@/components/print/Registration";
 import styles from "./NoktaHero.module.css";
 
 /* Press-proof hero. The accent plane is one giant rasterised dot: nokta.point
    rendered literally as a dot made of dots. The grid and radius ramp are
-   deliberately deterministic, keeping the server output stable. */
+   deliberately deterministic, keeping the server output stable. When the hero
+   scrolls into view the dot arrives the way a press lands: it stamps in ring by
+   ring from the centre out over ~0.8s (see PlotterReveal + the stylesheet). */
 const SIZE = 800;
 const STEP = 20;
 const RADIUS = SIZE / 2;
 
-const halftoneDots = (() => {
-  const dots: { x: number; y: number; r: number }[] = [];
+/* Grouping the ~1,250 dots into concentric rings keeps the sweep cheap: every
+   dot in a ring shares one staggered delay, so we carry ~14 delay values on
+   <g> wrappers instead of a style attribute per circle. */
+const RINGS = 14;
+const RING_STEP_MS = 40; // per-ring stagger (centre = 0, outermost ≈ 520ms)
+
+const halftoneRings = (() => {
+  const rings: { x: number; y: number; r: number }[][] = Array.from(
+    { length: RINGS },
+    () => [],
+  );
   for (let y = STEP / 2; y < SIZE; y += STEP) {
     for (let x = STEP / 2; x < SIZE; x += STEP) {
       const distance = Math.hypot(x - RADIUS, y - RADIUS);
       if (distance > RADIUS - STEP / 2) continue;
-      dots.push({
+      const ring = Math.min(RINGS - 1, Math.floor((distance / RADIUS) * RINGS));
+      rings[ring].push({
         x,
         y,
         r: 1.5 + 7 * Math.pow(1 - distance / RADIUS, 0.55),
       });
     }
   }
-  return dots;
+  return rings;
 })();
-
-function CropMark({ corner }: { corner: "topLeft" | "topRight" | "bottomLeft" | "bottomRight" }) {
-  const path = {
-    topLeft: "M12 34H34M34 12V34",
-    topRight: "M34 34H56M34 12V34",
-    bottomLeft: "M12 34H34M34 34V56",
-    bottomRight: "M34 34H56M34 34V56",
-  }[corner];
-
-  return (
-    <svg
-      className={`${styles.cropMark} ${styles[corner]}`}
-      viewBox="0 0 68 68"
-      aria-hidden="true"
-    >
-      <path d={path} />
-    </svg>
-  );
-}
 
 export default async function NoktaHero() {
   const t = await getT();
 
   return (
     <section className={`${styles.hero} nk-grain`}>
-      <svg className={styles.halftone} viewBox={`0 0 ${SIZE} ${SIZE}`} aria-hidden="true">
-        {halftoneDots.map((dot, index) => (
-          <circle key={index} cx={dot.x} cy={dot.y} r={dot.r} fill="#b83636" />
-        ))}
-      </svg>
+      {/* A thin client shell observes this SVG and toggles the draw-in classes;
+          the SVG itself is server-rendered and shipped once as its children. */}
+      <PlotterReveal armedClassName={styles.armed} animateClassName={styles.animate}>
+        <svg className={styles.halftone} viewBox={`0 0 ${SIZE} ${SIZE}`} aria-hidden="true">
+          {halftoneRings.map((ring, index) => (
+            <g
+              key={index}
+              style={{ "--nk-ring-delay": `${index * RING_STEP_MS}ms` } as CSSProperties}
+            >
+              {ring.map((dot, dotIndex) => (
+                <circle key={dotIndex} cx={dot.x} cy={dot.y} r={dot.r} fill="#b83636" />
+              ))}
+            </g>
+          ))}
+        </svg>
+      </PlotterReveal>
 
-      <CropMark corner="topLeft" />
-      <CropMark corner="topRight" />
-      <CropMark corner="bottomLeft" />
-      <CropMark corner="bottomRight" />
+      <CropMarks />
 
-      <svg className={styles.registration} viewBox="0 0 52 52" aria-hidden="true">
-        <circle cx="26" cy="26" r="12" />
-        <path d="M26 4v44M4 26h44" />
-      </svg>
+      <Registration className={styles.registration} />
 
       <WordmarkHeadline suffix="point" className={styles.title} dotClassName={styles.titleDot} />
-      <p className={styles.caption}>{t("nokta.hero.caption")}</p>
+      <p className={`nk-mono-caption ${styles.caption}`}>{t("nokta.hero.caption")}</p>
       <p className={styles.claim}>{t("nokta.hero.claim")}</p>
     </section>
   );

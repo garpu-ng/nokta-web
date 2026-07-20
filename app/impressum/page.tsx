@@ -26,7 +26,7 @@ export default function ImpressumPage() {
       <p>
         <strong>Kontakt</strong>
         <br />
-        E-Mail: <a href="mailto:hallo@waarchi.de">hallo@waarchi.de</a>
+        E-Mail: <a href="mailto:hallo@nokta-studio.de">hallo@nokta-studio.de</a>
         <br />
         Telefon: [Nummer]
       </p>

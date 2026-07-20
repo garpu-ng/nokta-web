@@ -84,6 +84,21 @@ textarea {
   transition: color 0.55s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* ── Space Mono micro-caption ────────────────────────────────────────
+   The lowercase technical-annotation voice worn by every branch hero
+   (nokta / arch / line captions all repeat this exact recipe). Promoted to a
+   global utility so the pattern lives in one place. Colour is left as
+   currentColor — it reads on paper or ink — and opacity keeps it a quiet
+   annotation; the consumer sets the surrounding colour. */
+.nk-mono-caption {
+  font-family: var(--mono-font);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: lowercase;
+  color: currentColor;
+  opacity: 0.7;
+}
+
 /* ── Xerox-grain overlay ─────────────────────────────────────────────
    Adds print texture to poster surfaces (moodbook: photocopy grain).
    Pure CSS overlay — an SVG feTurbulence noise tile as a data URI,

@@ -83,6 +83,8 @@
 
 /* Bottom line: copyright + tagline */
 .bottom {
+  /* position: relative anchors the registration mark to this bar. */
+  position: relative;
   margin-top: clamp(3rem, 6vw, 5rem);
   padding-top: 1.5rem;
   border-top: 1px solid rgba(233, 224, 206, 0.12);
@@ -93,6 +95,20 @@
   font-size: 0.72rem;
   letter-spacing: 0.03em;
   color: #e9e0ce;
+}
+
+/* Registration mark centred on the colophon's hairline trim, in the gap between
+   the copyright (far left) and disciplines (far right). Paper stroke via
+   currentColor, held to a whisper — a print detail, not a UI element. */
+.regMark {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 22px;
+  height: 22px;
+  --reg-opacity: 0.9;
+  opacity: 0.28;
 }
 
 /* Decorative dot-row animation — pinned to the true horizontal centre of the

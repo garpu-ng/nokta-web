@@ -24,27 +24,48 @@
   pointer-events: none;
 }
 
-.cropMark {
-  position: absolute;
-  z-index: 0;
-  width: 68px;
-  height: 68px;
-  overflow: visible;
-  pointer-events: none;
+/* Draw-in: the mega-dot arrives like a press landing, stamping in ring by ring
+   from the centre outward over ~0.8s. Dots are grouped into concentric rings
+   (<g>), each carrying a shared --nk-ring-delay. The default (no class) is the
+   finished dot, so first paint before JS and the no-JS render are never blank;
+   the PlotterReveal shell only adds .armed (snap to the pre-impact state once
+   JS is live) and then .animate (stamp the rings in). Each dot scales up from
+   its own centre — the fill-box transform-origin makes it grow in place. */
+.halftone circle {
+  transform-box: fill-box;
+  transform-origin: center;
 }
-.cropMark path,
-.registration circle,
-.registration path {
-  fill: none;
-  stroke: var(--ink);
-  stroke-width: 1;
-  opacity: 0.6;
+/* JS live: snap every dot to its pre-impact state, no transition (so idle→armed
+   never animates the hide). */
+.armed circle {
+  opacity: 0;
+  transform: scale(0.4);
 }
-.topLeft { top: 0; left: 0; }
-.topRight { top: 0; right: 0; }
-.bottomLeft { bottom: 0; left: 0; }
-.bottomRight { right: 0; bottom: 0; }
+/* Observer confirmed in view: stamp the rings in, centre first. */
+.animate circle {
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    opacity 0.32s ease-out,
+    transform 0.32s cubic-bezier(0.2, 0.7, 0.3, 1);
+  transition-delay: var(--nk-ring-delay, 0ms);
+}
+@media (prefers-reduced-motion: reduce) {
+  .armed circle,
+  .animate circle {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
 
+/* The corner trim marks are now the shared <CropMarks/> kit; its own module
+   pins them flush to this positioned .hero and strokes them in currentColor
+   (which resolves to the inherited ink here) at --crop-opacity 0.6 — identical
+   to the local marks this hero used to draw.
+
+   The registration mark's paint likewise comes from the kit (currentColor
+   stroke, --reg-opacity 0.5); this module only places and sizes it. */
 .registration {
   position: absolute;
   z-index: 0;
@@ -52,10 +73,7 @@
   left: clamp(3.5rem, 9vw, 8rem);
   width: 26px;
   height: 26px;
-  pointer-events: none;
 }
-.registration circle,
-.registration path { opacity: 0.5; }
 
 .title {
   position: relative;
@@ -70,16 +88,14 @@
 }
 .titleDot { color: var(--brand-accent); }
 
+/* Mono styling now comes from the global .nk-mono-caption utility; this class
+   keeps only the hero-specific placement (lifting the caption above the raster
+   dot plane). currentColor from the utility resolves to the inherited ink, and
+   opacity 0.7 matches — an unchanged render. */
 .caption {
   position: relative;
   z-index: 1;
   margin: 1.2rem 0 0;
-  color: var(--ink);
-  font-family: var(--mono-font);
-  font-size: 0.7rem;
-  letter-spacing: 0.22em;
-  text-transform: lowercase;
-  opacity: 0.7;
 }
 .claim {
   position: relative;

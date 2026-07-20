@@ -14,7 +14,13 @@ const de: Record<string, string> = {
   "meta.kontakt.title": "Kontakt · nokta",
 
   // ── Home ──────────────────────────────────────────────────────────
-  "home.lead": "Interdisziplinäres Design aus einer Hand. Eigene Tools, viele Ideen, kurze Wege. Vom Punkt zur Linie zur Form.",
+  "home.lead.body": "Interdisziplinäres Design aus einer Hand. Eigene Tools, viele Ideen, kurze Wege.",
+  // Closing motto — the {tokens} let the landing wrap each word in its branch
+  // colour (see app/page.tsx renderMotto). point→rot, line→grün, form→kobalt.
+  "home.motto": "Vom {point} zur {line} zur {form}.",
+  "home.motto.point": "Punkt",
+  "home.motto.line": "Linie",
+  "home.motto.form": "Form",
   "home.contact.title": "Hast du einen Punkt, an dem wir anfangen?",
   "home.contact.body": "Zeig uns die Skizze, den Plan oder den unfertigen Gedanken. Wir melden uns mit den richtigen Fragen.",
   "home.contact.cta": "Projekt beginnen",
@@ -48,6 +54,7 @@ const de: Record<string, string> = {
 
   // ── Studio ────────────────────────────────────────────────────────
   "studio.heading": "Studio",
+  "studio.caption": "ein studio · drei disziplinen · nrw",
   "studio.p1": "nokta ist ein interdisziplinäres Designstudio aus Nordrhein-Westfalen. Ein Studio, drei Disziplinen: Layout und Druck, Architekturvisualisierung und CAD-Liniendrucke.",
   "studio.p2": "Wir denken nicht in Schubladen. Wir bauen uns eigene Tools und Workflows, kombinieren unsere Skills über die Disziplinen hinweg und kommen so schnell zu vielen guten Ergebnissen. Statt einer Idee zeigen wir dir zehn.",
   "studio.p3": "Angefangen haben wir mit Architekturvisualisierung. Heute ist sie einer von mehreren Bausteinen: fotorealistische 3D-Renderings mit Gespür für Licht, Material und Raum. Dein Projekt, wie es später aussieht. Lange bevor der erste Stein liegt.",
@@ -55,6 +62,8 @@ const de: Record<string, string> = {
   "studio.role.kaan": "Design · Konzept",
   "studio.role.mohammed": "3D · Visualisierung",
   "studio.role.mert": "Layout · Druck",
+  // Placeholder caption on Mert's team card until his portrait clip lands.
+  "studio.mert.placeholder": "portrait folgt",
   "studio.cta": "Projekt in Planung?",
   "studio.ctaProcess": "Unser Prozess",
   "studio.ctaWrite": "Schreib uns",
@@ -87,6 +96,9 @@ const de: Record<string, string> = {
   "line.tb.scale": "Maßstab",
   "line.tb.format": "Format",
   "line.tb.date": "Stand",
+  "line.tb.subject": "Motiv",
+  "line.tb.city": "Stadt",
+  "line.tb.price": "Preis",
   "line.catalogue.label": "Katalog · vier Motive",
   "line.lead": "Ikonische Bauwerke als technische Zeichnung. Aus echten CAD-Daten vektorisiert, in A1 gedruckt, gerahmt und bereit für die Wand.",
   "line.band.tagline": "Ihr Motiv, als Linie gedacht.",
@@ -102,6 +114,7 @@ const de: Record<string, string> = {
   "line.spec.formatVal": "A1 (594 × 841 mm), gerahmt",
   "line.detailLead": "Ein technischer Aufriss als Kunst. Jede Linie aus einer CAD-Zeichnung vektorisiert, sauber gesetzt, in A1 gedruckt und gerahmt.",
   "line.order": "Bestellen",
+  "line.buy": "Kaufen",
   "line.altSuffix": "vektorisierter CAD-Liniendruck",
   "line.metaDescSuffix": "Vektorisierter CAD-Liniendruck, gedruckt in A1 und gerahmt.",
 

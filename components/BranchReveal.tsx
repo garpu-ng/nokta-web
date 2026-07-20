@@ -19,12 +19,16 @@ function applyBranch(branch: BranchKey | null) {
 }
 
 /**
- * Owns the page's branch theme. Two paths in:
+ * Owns the page's branch theme after hydration. Two paths in:
  *  - Tab click → a "nk:reveal" event floods the branch colour out in a circle
  *    from the tab, then commits the theme. The overlay sits below the top bar
  *    and left nav (higher z-index), so the wash never touches the chrome.
  *  - Any other navigation (logo, back button, direct load) → theme applied
  *    instantly.
+ * The INITIAL value is server-rendered (proxy.ts forwards the pathname,
+ * app/layout.tsx bakes data-branch into <html>), so the theme is already
+ * correct pre-hydration/no-JS; this component's first effect run derives the
+ * same value from the same branchForPath and re-applies it — a no-op.
  */
 export default function BranchReveal() {
   const pathname = usePathname();

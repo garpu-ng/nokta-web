@@ -1,7 +1,8 @@
 /* ══════════════════════════════════════════════════════════════════
    Design tokens — the single source of truth for colour + type.
-   The whole-page "colour wash" is driven entirely from here: BranchReveal
-   sets data-branch on <html>, and these [data-branch] blocks swap the
+   The whole-page "colour wash" is driven entirely from here: data-branch on
+   <html> (server-rendered by app/layout.tsx via proxy.ts, then owned by
+   BranchReveal after hydration) makes these [data-branch] blocks swap the
    --brand-* variables. Every component/module reads var(--brand-accent)
    etc. rather than hardcoding a colour.
    NOTE: branch colours here must stay in sync with lib/branches.ts.

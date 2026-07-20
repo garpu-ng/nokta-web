@@ -11,7 +11,13 @@ const ja: Record<string, string> = {
   "meta.prozess.title": "プロセス · nokta",
   "meta.kontakt.title": "お問い合わせ · nokta",
 
-  "home.lead": "ワンチームでの学際的デザイン。自前のツール、たくさんのアイデア、短い道のり。点から線へ、線から形へ。",
+  "home.lead.body": "ワンチームでの学際的デザイン。自前のツール、たくさんのアイデア、短い道のり。",
+  // Particles ride outside the {tokens}. Vocabulary matches footer.tag2 / the
+  // branch names: 点 (point) · 線 (line) · 形 (form).
+  "home.motto": "{point}から{line}へ、{line}から{form}へ。",
+  "home.motto.point": "点",
+  "home.motto.line": "線",
+  "home.motto.form": "形",
   "home.contact.title": "始まりの点はありますか？",
   "home.contact.body": "スケッチ、図面、まだ途中の考えを見せてください。私たちは適切な問いから始めます。",
   "home.contact.cta": "プロジェクトを始める",
@@ -41,6 +47,7 @@ const ja: Record<string, string> = {
   "nokta.band.cta": "プロジェクトの相談",
 
   "studio.heading": "スタジオ",
+  "studio.caption": "ひとつのスタジオ · 三つの領域 · nrw",
   "studio.p1": "nokta はドイツ・ノルトライン＝ヴェストファーレン発の学際的デザインスタジオです。ひとつのスタジオ、三つの領域：レイアウトと印刷、建築ビジュアライゼーション、CADラインプリント。",
   "studio.p2": "私たちは枠にとらわれません。自前のツールとワークフローを組み、領域を越えてスキルを掛け合わせ、素早く多くの良い結果に到達します。ひとつのアイデアではなく、十個お見せします。",
   "studio.p3": "私たちは建築ビジュアライゼーションから始めました。今ではそれはいくつかの柱の一つ。光・素材・空間の感覚を持ったフォトリアルな3Dレンダリングです。あなたのプロジェクトを、完成後の姿で。最初の石が置かれるずっと前に。",
@@ -48,6 +55,7 @@ const ja: Record<string, string> = {
   "studio.role.kaan": "デザイン · コンセプト",
   "studio.role.mohammed": "3D · ビジュアライゼーション",
   "studio.role.mert": "レイアウト · 印刷",
+  "studio.mert.placeholder": "ポートレート準備中",
   "studio.cta": "進行中のプロジェクトはありますか？",
   "studio.ctaProcess": "私たちのプロセス",
   "studio.ctaWrite": "ご連絡ください",
@@ -77,6 +85,9 @@ const ja: Record<string, string> = {
   "line.tb.scale": "縮尺",
   "line.tb.format": "判型",
   "line.tb.date": "更新",
+  "line.tb.subject": "モチーフ",
+  "line.tb.city": "都市",
+  "line.tb.price": "価格",
   "line.catalogue.label": "カタログ · 四つのモチーフ",
   "line.lead": "象徴的な建築物を技術図面として。実際のCADデータからベクター化し、A1で印刷、額装、壁にすぐ飾れます。",
   "line.band.tagline": "あなたのモチーフを、線で。",
@@ -92,6 +103,7 @@ const ja: Record<string, string> = {
   "line.spec.formatVal": "A1（594 × 841 mm）、額装",
   "line.detailLead": "アートとしての技術立面図。すべての線をCAD図面からベクター化し、きれいに組版、A1で印刷、額装。",
   "line.order": "注文する",
+  "line.buy": "購入",
   "line.altSuffix": "ベクター化したCADラインプリント",
   "line.metaDescSuffix": "ベクター化したCADラインプリント、A1印刷・額装。",
 

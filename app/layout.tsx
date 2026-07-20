@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
 import { DM_Sans, Space_Mono, Righteous } from "next/font/google";
+import { headers } from "next/headers";
 import Link from "next/link";
 import Image from "next/image";
 import "./globals.css";
+import { branchForPath, NK_PATHNAME_HEADER } from "@/lib/branches";
 import TabBar from "@/components/TabBar";
 import BranchReveal from "@/components/BranchReveal";
 import Footer from "@/components/Footer";
 import LanguageToggle from "@/components/LanguageToggle";
 import { getLocale, getT } from "@/lib/i18n";
+import { socialMetadata } from "@/lib/socialMeta";
 import styles from "./layout.module.css";
 
 /* Fonts are self-hosted at build time via next/font (GDPR: the browser never
@@ -41,10 +44,18 @@ const righteous = Righteous({
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getT();
+  const locale = await getLocale();
+  const title = t("meta.site.title");
+  const description = t("meta.site.desc");
   return {
-    title: t("meta.site.title"),
-    description: t("meta.site.desc"),
+    title,
+    description,
     metadataBase: new URL("https://www.nokta-studio.de"),
+    // Studio-wide default social card. No `path` → no og:url here, so the
+    // pages that inherit this block (studio, kontakt, legal…) don't pick up a
+    // wrong canonical; branch pages set their own url. The card image comes
+    // from app/opengraph-image.tsx + app/twitter-image.tsx.
+    ...socialMetadata({ title, description, locale }),
   };
 }
 
@@ -55,6 +66,14 @@ export default async function RootLayout({
 }) {
   const locale = await getLocale();
   const t = await getT();
+  // Branch theme at first paint: proxy.ts forwards the request pathname in a
+  // header, and mapping it through branchForPath here bakes data-branch into
+  // the server HTML — so the colour wash is correct before hydration and
+  // without JS. After hydration, BranchReveal owns the attribute (its first
+  // effect re-applies this same value, a no-op). If the header is ever missing
+  // (proxy skipped), fall back to the neutral core rather than guessing.
+  const pathname = (await headers()).get(NK_PATHNAME_HEADER);
+  const branch = pathname ? branchForPath(pathname) : null;
   const taglines = {
     home: t("branch.home.tag"),
     nokta: t("branch.nokta.tag"),
@@ -68,6 +87,7 @@ export default async function RootLayout({
     <html
       lang={locale}
       data-scroll-behavior="smooth"
+      data-branch={branch ?? undefined}
       className={`${dmSans.variable} ${spaceMono.variable} ${righteous.variable}`}
     >
       {/* suppressHydrationWarning: browser extensions (e.g. asbplayer) inject

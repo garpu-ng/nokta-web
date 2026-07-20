@@ -1,0 +1,52 @@
+/* The lead progression diagram. Lives on the black pillar beneath the centred
+   motto and spans the full stage as a wide 8:1 band: connectors are paper
+   hairlines, the glyphs carry their motto colours (supplied inline from
+   lib/branches.ts). No motion — a static press-diagram.
+
+   Every stroke below sets vector-effect:non-scaling-stroke so its width is read
+   in final device pixels, independent of how far the 1200-unit viewBox is scaled
+   up (≈1300px desktop) or down (≈350px mobile). Without this the hairlines would
+   thin to near-nothing on the small mobile render. */
+.mark {
+  display: block;
+  width: 100%; /* span the full stage, edge-aligned with the branch-card row below */
+  height: auto;
+  margin: 0 auto clamp(3rem, 8vh, 5rem); /* centre it, then separate from the cards */
+  /* Stroke edges may sit a hair outside the viewBox; don't clip them. */
+  overflow: visible;
+}
+
+/* Paper rules between the glyphs — a measured, faint connection. */
+.link {
+  fill: none;
+  stroke: var(--paper);
+  stroke-width: 1;
+  opacity: 0.3;
+  vector-effect: non-scaling-stroke;
+}
+
+/* The plotted line itself. */
+.plot {
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+/* The crosshair capping the plot (stroke colour inherited from the group). */
+.tick {
+  stroke-width: 1.2;
+  vector-effect: non-scaling-stroke;
+}
+
+/* Wireframe cube edges; the hidden set is thinner + dashed. */
+.cube {
+  stroke-width: 1.8;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.cubeHidden {
+  stroke-width: 1.1;
+  stroke-dasharray: 3 3;
+  opacity: 0.5;
+}

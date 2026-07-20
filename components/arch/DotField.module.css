@@ -9,3 +9,60 @@
   max-width: 1100px;
   margin: 0 auto;
 }
+
+/* Draw-in: the drape assembles top-to-bottom, one row at a time, and the red
+   centre thread lands last. Each row is a <g> carrying a shared --nk-row-delay;
+   the thread is its own <g> with a late delay. Colour and opacity live here
+   (they used to be inline) so the classes can drive the fade. The default (no
+   class) is the finished drape, so first paint before JS and the no-JS render
+   are never blank — the PlotterReveal shell only adds .armed (snap to the
+   pre-draw state once JS is live) then .animate (settle each row in). */
+.ink circle {
+  fill: var(--ink);
+  opacity: 0.82;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.thread circle {
+  fill: #b83636;
+  opacity: 0.9;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+/* JS live: snap every dot to its pre-draw state, no transition. */
+.armed .ink circle,
+.armed .thread circle {
+  opacity: 0;
+  transform: scale(0.5);
+}
+/* Observer confirmed in view: settle the rows in, top first, thread last. */
+.animate .ink circle {
+  opacity: 0.82;
+  transform: scale(1);
+  transition:
+    opacity 0.3s ease-out,
+    transform 0.3s cubic-bezier(0.2, 0.7, 0.3, 1);
+  transition-delay: var(--nk-row-delay, 0ms);
+}
+.animate .thread circle {
+  opacity: 0.9;
+  transform: scale(1);
+  transition:
+    opacity 0.3s ease-out,
+    transform 0.3s cubic-bezier(0.2, 0.7, 0.3, 1);
+  transition-delay: var(--nk-row-delay, 0ms);
+}
+@media (prefers-reduced-motion: reduce) {
+  .armed .ink circle,
+  .animate .ink circle {
+    opacity: 0.82;
+    transform: none;
+    transition: none;
+  }
+  .armed .thread circle,
+  .animate .thread circle {
+    opacity: 0.9;
+    transform: none;
+    transition: none;
+  }
+}

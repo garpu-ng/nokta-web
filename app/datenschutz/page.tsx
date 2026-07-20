@@ -13,7 +13,7 @@ export default function DatenschutzPage() {
         <strong>1. Verantwortlicher</strong>
         <br />
         nokta Studio, [Name, Anschrift], Nordrhein-Westfalen. Kontakt:{" "}
-        <a href="mailto:hallo@waarchi.de">hallo@waarchi.de</a>.
+        <a href="mailto:hallo@nokta-studio.de">hallo@nokta-studio.de</a>.
       </p>
 
       <p>

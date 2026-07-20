@@ -3,15 +3,20 @@ import ColorStrip from "@/components/nokta/ColorStrip";
 import NoktaBand from "@/components/nokta/NoktaBand";
 import NoktaHero from "@/components/nokta/NoktaHero";
 import ServiceIndex from "@/components/nokta/ServiceIndex";
-import { getT } from "@/lib/i18n";
+import { getLocale, getT } from "@/lib/i18n";
+import { socialMetadata } from "@/lib/socialMeta";
 import heroStyles from "@/components/nokta/NoktaHero.module.css";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getT();
+  const locale = await getLocale();
+  const title = t("meta.nokta.title");
+  const description = t("branch.nokta.desc");
   return {
-    title: t("meta.nokta.title"),
-    description: t("branch.nokta.desc"),
+    title,
+    description,
     alternates: { canonical: "/point" },
+    ...socialMetadata({ title, description, locale, path: "/point" }),
   };
 }
 

@@ -71,6 +71,11 @@ export const HOME_TAB: Branch = {
 /** Everything shown in the top tab bar, in order. */
 export const TABS: Branch[] = [HOME_TAB, ...BRANCHES];
 
+/** Request header carrying the pathname into the server render. proxy.ts sets
+    it; app/layout.tsx feeds it through branchForPath so <html> already carries
+    data-branch in the server HTML (theme before/without client JS). */
+export const NK_PATHNAME_HEADER = "x-nk-pathname";
+
 /** Map any pathname to the branch that owns it (or null for a neutral page). */
 export function branchForPath(pathname: string): BranchKey | null {
   if (pathname === "/") return "home";

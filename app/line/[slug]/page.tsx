@@ -19,10 +19,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const print = getPrint(slug);
   if (!print) return {};
   const t = await getT();
+  // One per-print description, reused for the page tag and the social card.
+  const description = `${print.title}, ${print.subtitle} · ${print.year} · ${print.architect}. ${t("line.metaDescSuffix")} ${print.price} €.`;
+  const title = `${print.title} · nokta.line`;
+  const { width, height } = getMediaSize(print.image);
   return {
-    title: `${print.title} · nokta.line`,
-    description: `${print.title}, ${print.subtitle} · ${print.year} · ${print.architect}. ${t("line.metaDescSuffix")} ${print.price} €.`,
+    title,
+    description,
     alternates: { canonical: `/line/${print.slug}` },
+    // Product page: give a shared link a preview of the framed print. The
+    // relative image URL resolves against the layout's metadataBase.
+    openGraph: {
+      type: "website",
+      title,
+      description,
+      url: `/line/${print.slug}`,
+      images: [{ url: print.image, width, height, alt: `${print.title}, ${t("line.altSuffix")}` }],
+    },
   };
 }
 
@@ -64,7 +77,20 @@ export default async function PrintPage({ params }: Props) {
           </h1>
           <p className={styles.detailCity}>{print.subtitle}</p>
 
-          <dl className={styles.detailSpecs}>
+          {/* Technical passport — the print's Schriftfeld. Same visual grammar
+              as the corner title block in components/line/LineHero.tsx
+              (.titleBlock): a hairline-ruled box of mono dt/dd pairs. Here it
+              is the product's centrepiece detail, so it restates the full
+              engraved data of the sheet rather than sitting as a corner mark. */}
+          <dl className={styles.passport}>
+            <div>
+              <dt>{t("line.tb.subject")}</dt>
+              <dd>{print.title}</dd>
+            </div>
+            <div>
+              <dt>{t("line.tb.city")}</dt>
+              <dd>{print.subtitle}</dd>
+            </div>
             <div>
               <dt>{t("line.spec.year")}</dt>
               <dd>{print.year}</dd>
@@ -85,16 +111,37 @@ export default async function PrintPage({ params }: Props) {
               <dt>{t("line.spec.format")}</dt>
               <dd>{t("line.spec.formatVal")}</dd>
             </div>
+            <div>
+              <dt>{t("line.tb.price")}</dt>
+              <dd>{print.price} €</dd>
+            </div>
           </dl>
 
           <p className={styles.detailLead}>{t("line.detailLead")}</p>
 
           <div className={styles.detailBuy}>
-            <span className={styles.detailPrice}>{print.price} €</span>
-            {/* TODO: wire Stripe Checkout — for now routes to inquiry */}
-            <Link href="/kontakt" className={styles.btn}>
-              {t("line.order")}
-            </Link>
+            {print.paymentLink ? (
+              // Live: a fixed-price Stripe Payment Link (see Print.paymentLink).
+              // Opens Stripe's hosted checkout in a new tab; the price rides in
+              // the label so this button carries the price on its own.
+              <a
+                href={print.paymentLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.btn}
+              >
+                {t("line.buy")} · {print.price} €
+              </a>
+            ) : (
+              // No link pasted yet: fall back to the /kontakt inquiry route.
+              // The passport above still shows the price.
+              <>
+                <span className={styles.detailPrice}>{print.price} €</span>
+                <Link href="/kontakt" className={styles.btn}>
+                  {t("line.order")}
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>

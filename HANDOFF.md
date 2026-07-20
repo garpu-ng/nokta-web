@@ -104,8 +104,12 @@ stylesheets, and reusable components carry their own CSS Modules:
   `--paper`, ink `--ink`). Each `:root[data-branch="arch|line|nokta"]` overrides
   `--brand-bg` (page wash) and `--brand-accent` (motto colour). Keep these colours in
   sync with `lib/branches.ts`.
-- **`components/BranchReveal.tsx`** (client, in the layout) sets
-  `data-branch` on `<html>`:
+- **Initial value is server-rendered:** `proxy.ts` (Next 16's renamed
+  middleware) forwards the request pathname in a header (`x-nk-pathname`);
+  `app/layout.tsx` maps it through `branchForPath` and bakes `data-branch`
+  into `<html>` — so the wash is correct at first paint and without JS.
+- **`components/BranchReveal.tsx`** (client, in the layout) then owns
+  `data-branch` on `<html>` after hydration:
   - On a **tab click** it plays the circular colour-flood (see below), then
     commits `data-branch`.
   - On any **other navigation** (logo, back button, direct URL) it sets

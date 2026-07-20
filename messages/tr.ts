@@ -11,7 +11,13 @@ const tr: Record<string, string> = {
   "meta.prozess.title": "Süreç · nokta",
   "meta.kontakt.title": "İletişim · nokta",
 
-  "home.lead": "Tek elden disiplinler arası tasarım. Kendi araçlarımız, bol fikir, kısa yollar. Noktadan çizgiye, çizgiden forma.",
+  "home.lead.body": "Tek elden disiplinler arası tasarım. Kendi araçlarımız, bol fikir, kısa yollar.",
+  // Turkish attaches the case suffixes to the words, so they ride just outside
+  // the {tokens}: "{point}dan {line}ye, {line}den {form}a."
+  "home.motto": "{point}dan {line}ye, {line}den {form}a.",
+  "home.motto.point": "Nokta",
+  "home.motto.line": "çizgi",
+  "home.motto.form": "form",
   "home.contact.title": "Başlayabileceğimiz bir noktan var mı?",
   "home.contact.body": "Bize eskizi, planı ya da tamamlanmamış fikri göster. Doğru sorularla geri dönelim.",
   "home.contact.cta": "Projeyi başlat",
@@ -41,6 +47,7 @@ const tr: Record<string, string> = {
   "nokta.band.cta": "Proje başlat",
 
   "studio.heading": "Stüdyo",
+  "studio.caption": "tek stüdyo · üç disiplin · nrw",
   "studio.p1": "nokta, Almanya Kuzey Ren-Vestfalya’dan disiplinler arası bir tasarım stüdyosu. Bir stüdyo, üç disiplin: dizgi ve baskı, mimari görselleştirme ve CAD çizgi baskılar.",
   "studio.p2": "Kalıplarda düşünmüyoruz. Kendi araçlarımızı ve iş akışlarımızı kuruyor, becerilerimizi disiplinler arası birleştiriyor ve hızlıca çok sayıda iyi sonuca ulaşıyoruz. Bir fikir yerine sana on tane gösteriyoruz.",
   "studio.p3": "İşe mimari görselleştirmeyle başladık. Bugün o, birçok yapı taşından biri: ışık, malzeme ve mekân duygusuyla fotogerçekçi 3B render’lar. Projen, daha sonra nasıl görüneceğiyle. İlk taş konmadan çok önce.",
@@ -48,6 +55,7 @@ const tr: Record<string, string> = {
   "studio.role.kaan": "Tasarım · Konsept",
   "studio.role.mohammed": "3B · Görselleştirme",
   "studio.role.mert": "Dizgi · Baskı",
+  "studio.mert.placeholder": "portre yakında",
   "studio.cta": "Aklında bir proje mi var?",
   "studio.ctaProcess": "Sürecimiz",
   "studio.ctaWrite": "Bize yaz",
@@ -77,6 +85,9 @@ const tr: Record<string, string> = {
   "line.tb.scale": "Ölçek",
   "line.tb.format": "Format",
   "line.tb.date": "Tarih",
+  "line.tb.subject": "Motif",
+  "line.tb.city": "Şehir",
+  "line.tb.price": "Fiyat",
   "line.catalogue.label": "Katalog · dört motif",
   "line.lead": "İkonik yapılar teknik çizim olarak. Gerçek CAD verisinden vektörleştirilmiş, A1 basılmış, çerçeveli ve duvara hazır.",
   "line.band.tagline": "Motifiniz, çizgi olarak düşünüldü.",
@@ -92,6 +103,7 @@ const tr: Record<string, string> = {
   "line.spec.formatVal": "A1 (594 × 841 mm), çerçeveli",
   "line.detailLead": "Sanat olarak teknik bir görünüş. Her çizgi bir CAD çiziminden vektörleştirilmiş, temiz dizilmiş, A1 basılmış ve çerçeveli.",
   "line.order": "Sipariş ver",
+  "line.buy": "Satın al",
   "line.altSuffix": "vektörleştirilmiş CAD çizgi baskısı",
   "line.metaDescSuffix": "Vektörleştirilmiş CAD çizgi baskısı, A1 basılmış ve çerçeveli.",
 

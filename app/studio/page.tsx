@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import GifVideo from "@/components/GifVideo";
+import CropMarks from "@/components/print/CropMarks";
+import Registration from "@/components/print/Registration";
 import { getT } from "@/lib/i18n";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -16,9 +18,17 @@ export default async function StudioPage() {
   return (
     <div className="wa-studio">
 
+      {/* Trim marks framing the studio sheet — same press vocabulary the branch
+          heroes wear, so /studio reads as part of the one press run. */}
+      <CropMarks />
+
       {/* ── Hero: heading left, text right ──────────────────────── */}
       <section className="wa-studio-hero">
-        <h1 className="wa-studio-hero-heading">{t("studio.heading")}</h1>
+        <div className="wa-studio-hero-headline">
+          <h1 className="wa-studio-hero-heading">{t("studio.heading")}</h1>
+          {/* Space Mono micro-caption, the studio's technical annotation voice. */}
+          <p className="nk-mono-caption wa-studio-hero-caption">{t("studio.caption")}</p>
+        </div>
         <div className="wa-studio-hero-text">
           <p>{t("studio.p1")}</p>
           <p>{t("studio.p2")}</p>
@@ -48,10 +58,21 @@ export default async function StudioPage() {
           </div>
 
           <div className="wa-team-card">
-            {/* NOTE: the source asset for Mert has been missing from /public since
-                before this change (the old /flymemert.gif 404'd too). Kept in the
-                same converted-video form as the others for when the asset lands. */}
-            <GifVideo src="/flymemert.mp4" label="Mert" width={502} height={1014} className="wa-team-gif" />
+            {/* Mert's portrait asset isn't in /public yet — there's no
+                /flymemert.mp4 (the old /flymemert.gif 404'd too), so the other
+                cards' <GifVideo> here rendered an empty frame. Until the asset
+                lands, show a deliberate placeholder in the press-sheet vocabulary
+                instead: an outlined portrait frame with a centred registration
+                mark and a mono caption.
+
+                TO SWAP IN THE REAL PORTRAIT: drop the converted clip at
+                public/flymemert.mp4 and replace this whole <div.wa-team-placeholder>
+                with the same line the other two cards use:
+                  <GifVideo src="/flymemert.mp4" label="Mert" width={502} height={1014} className="wa-team-gif" /> */}
+            <div className="wa-team-placeholder" aria-hidden="true">
+              <Registration className="wa-team-placeholder-reg" />
+              <span className="nk-mono-caption">{t("studio.mert.placeholder")}</span>
+            </div>
             <div className="wa-team-info">
               <div className="wa-team-name">Mert</div>
               <div className="wa-team-role">{t("studio.role.mert")}</div>

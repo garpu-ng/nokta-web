@@ -1,0 +1,14 @@
+/* Registration mark — see Registration.tsx. Paint only: the host supplies the
+   position and size, this file only strokes the circle + cross in currentColor. */
+.registration {
+  display: block;
+  overflow: visible;
+  pointer-events: none;
+}
+.registration circle,
+.registration path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
+  opacity: var(--reg-opacity, 0.5);
+}
