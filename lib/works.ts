@@ -84,9 +84,10 @@ function fromPrint(slug: string, span: Work["span"], lift?: number): Work {
    phone renders one column and ignores them. Widths follow the thumbnails'
    ratios — the two near-square archviz thumbs (teahouse 1415×1415, binome
    1150×1281) carry a column more than the plan's baseline so they hold their
-   own beside the tall portrait sheets. Lifts hang the sheets at varied
-   heights (hand-pinned, not a rigid grid); tune them per row-neighbour so no
-   two adjacent tops align. */
+   own beside the tall portrait sheets, and the four CAD prints stand at span 4
+   so the drawings read (velostation gives up its width to close the final
+   4+4+4 row). Lifts hang the sheets at varied heights (hand-pinned, not a
+   rigid grid); tune them per row-neighbour so no two adjacent tops align. */
 export const WORKS: Work[] = [
   fromProject("sanktgores", 7, 0),
   {
@@ -101,7 +102,7 @@ export const WORKS: Work[] = [
     source: { type: "piece" },
   },
   fromProject("teahouse", 6, 0),
-  fromPrint("eiffel", 3, 4.5),
+  fromPrint("eiffel", 4, 4.5),
   fromProject("beatbuilding", 7, 2),
   {
     slug: "n-studie",
@@ -114,7 +115,7 @@ export const WORKS: Work[] = [
     source: { type: "piece" },
   },
   fromProject("binome", 7, 0),
-  fromPrint("chrysler", 3, 5.5),
+  fromPrint("chrysler", 4, 5.5),
   fromProject("ipehouse", 7, 1.5),
   {
     slug: "leuchtturm",
@@ -126,9 +127,9 @@ export const WORKS: Work[] = [
     lift: 4,
     source: { type: "piece" },
   },
-  fromPrint("empire-state", 3, 0),
-  fromProject("velostation", 6, 3),
-  fromPrint("osaka", 3, 6),
+  fromPrint("empire-state", 4, 0),
+  fromProject("velostation", 4, 3),
+  fromPrint("osaka", 4, 6),
 ];
 
 export function getWork(slug: string): Work | undefined {

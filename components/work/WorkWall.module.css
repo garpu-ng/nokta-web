@@ -3,8 +3,9 @@
    wider than a print sheet without either one becoming a section. */
 
 /* ── Filter row: the kind stamps ─────────────────────────────────────
-   Same words that annotate every card, set as small pressed stamps. On a phone
-   the row scrolls sideways rather than wrapping into a block of buttons. */
+   Same words that annotate every card, set as a tab row spanning the full
+   content width — each stamp takes an equal share. On a phone the row scrolls
+   sideways rather than wrapping into a block of buttons. */
 .filter {
   display: flex;
   flex-wrap: nowrap;
@@ -20,13 +21,15 @@
 }
 
 .stamp {
-  flex: none;
-  padding: 0.4rem 0.85rem;
+  /* Equal shares of the content width — a tab bar, not a row of chips. */
+  flex: 1 1 0;
+  text-align: center;
+  padding: 0.75rem 1rem;
   border: 1px solid color-mix(in srgb, var(--ink) 45%, transparent);
   background: transparent;
   color: var(--ink);
   font-family: var(--mono-font);
-  font-size: 0.62rem;
+  font-size: 0.74rem;
   letter-spacing: 0.16em;
   line-height: 1.2;
   /* The stamps are the same words the cards are annotated with, spelled the
@@ -112,5 +115,11 @@
 
   .grid {
     row-gap: clamp(2.5rem, 6svh, 3.5rem);
+  }
+
+  /* Six equal tabs don't fit 390px — fall back to natural widths and the
+     sideways scroll. */
+  .stamp {
+    flex: none;
   }
 }

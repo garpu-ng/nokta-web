@@ -13,8 +13,9 @@
 /* ── Print passport ─────────────────────────────────────────────────── */
 .print {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(2rem, 5vw, 4.5rem);
+  /* The sheet is the point — it takes the wider column, the passport the rest. */
+  grid-template-columns: 1.35fr 1fr;
+  gap: clamp(2rem, 4vw, 3.5rem);
   align-items: start;
 }
 
