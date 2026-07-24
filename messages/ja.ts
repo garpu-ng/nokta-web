@@ -55,8 +55,8 @@ const ja: Record<string, string> = {
   "nokta.svc.3.text": "実際の図面からベクター化。平面図、立面図、断面図をきれいな線で — データとして、または額装したA1プリントとして。",
 
   // ── ケーススタディ（AI委員会 最終報告書） ─────────────────────────
-  "point.case.kicker": "工房から · エディトリアル",
-  "point.case.label": "工房から",
+  "point.case.kicker": "エディトリアル · 製版",
+  "point.case.label": "216ページ、印刷可能",
   "point.case.title": "最終報告書 · AI、競争と競争力",
   "point.case.lead": "競争と人工知能に関する委員会の最終報告書 — 最初の本文カラムから印刷可能なデータまで、216ページのエディトリアル。",
   "point.case.stripAria": "最終報告書から6ページ、横スクロール可能",

@@ -53,8 +53,8 @@ const tr: Record<string, string> = {
   "nokta.svc.3.text": "Gerçek çizimlerden vektörleştirilmiş. Kat planları, görünüşler ve kesitler temiz çizgi olarak — dosya ya da çerçeveli A1 baskı.",
 
   // ── Vaka çalışması (YZ Komisyonu nihai raporu) ────────────────────
-  "point.case.kicker": "atölyeden · editoryal",
-  "point.case.label": "Atölyeden",
+  "point.case.kicker": "editoryal · baskı öncesi",
+  "point.case.label": "216 sayfa, baskıya hazır",
   "point.case.title": "Nihai rapor · YZ, Rekabet ve Rekabet Gücü",
   "point.case.lead": "Rekabet ve Yapay Zekâ Komisyonu’nun nihai raporu — ilk metin sütunundan baskıya hazır dosyaya, 216 sayfa editoryal.",
   "point.case.stripAria": "Nihai rapordan altı sayfa, yatay olarak kaydırılabilir",

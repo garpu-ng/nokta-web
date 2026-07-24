@@ -64,8 +64,8 @@ const de: Record<string, string> = {
   "nokta.svc.3.text": "Aus echten Zeichnungen vektorisiert. Grundrisse, Ansichten und Schnitte als saubere Linie — als Datei oder als gerahmter A1-Druck.",
 
   // ── Fallstudie (Abschlussbericht KI-Kommission) ───────────────────
-  "point.case.kicker": "aus der werkstatt · editorial",
-  "point.case.label": "Aus der Werkstatt",
+  "point.case.kicker": "editorial · druckvorstufe",
+  "point.case.label": "216 Seiten, druckreif",
   "point.case.title": "Abschlussbericht · KI, Wettbewerb & Wettbewerbsfähigkeit",
   "point.case.lead": "Der Abschlussbericht der Kommission Wettbewerb & Künstliche Intelligenz — 216 Seiten Editorial, von der ersten Satzspalte bis zur druckreifen Datei.",
   "point.case.stripAria": "Sechs Seiten aus dem Abschlussbericht, horizontal scrollbar",
@@ -199,7 +199,7 @@ const de: Record<string, string> = {
   // ── Header nav / aria ─────────────────────────────────────────────
   "nav.studio": "studio.",
   "nav.prozess": "prozess.",
-  "nav.contact": "contact.",
+  "nav.contact": "kontakt.",
   "aria.home": "nokta, Startseite",
   "aria.punkt": "Der Punkt",
   "aria.mainNav": "Hauptnavigation",

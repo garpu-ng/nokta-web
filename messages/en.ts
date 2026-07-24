@@ -61,8 +61,8 @@ const en: Record<string, string> = {
   "nokta.svc.3.text": "Vectorised from real drawings. Floor plans, elevations and sections as clean line — as a file or as a framed A1 print.",
 
   // ── Case study (AI Commission final report) ───────────────────────
-  "point.case.kicker": "from the workshop · editorial",
-  "point.case.label": "From the workshop",
+  "point.case.kicker": "editorial · prepress",
+  "point.case.label": "216 pages, print-ready",
   "point.case.title": "Final report · AI, Competition & Competitiveness",
   "point.case.lead": "The final report of the Commission on Competition & Artificial Intelligence — 216 pages of editorial, from the first column of text to the print-ready file.",
   "point.case.stripAria": "Six pages from the final report, scrollable horizontally",
