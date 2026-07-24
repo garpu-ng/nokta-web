@@ -1,0 +1,78 @@
+/* A sheet on the wall. Print vocabulary throughout: a hairline frame, a rule
+   under it, the title in the display face and the mono annotation beneath.
+   Every kind of work wears the same card — nothing here is branded per kind,
+   and there is no colour on it. */
+
+.card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+/* The image keeps its own ratio — architecture leads the wall by ratio, so no
+   card crops its work into a common shape. */
+.frame {
+  display: block;
+  overflow: hidden;
+  outline: 1px solid color-mix(in srgb, var(--ink) 55%, transparent);
+  background: var(--paper);
+  transition: outline-color 0.25s ease;
+}
+
+.img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.6s ease;
+}
+
+.caption {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 0.9rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid color-mix(in srgb, var(--ink) 55%, transparent);
+}
+
+.title {
+  display: block;
+  font-family: var(--display-font);
+  font-size: clamp(1.05rem, 1.5vw, 1.35rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+.anno {
+  display: block;
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+}
+
+/* Restrained hover: the frame's hairline goes to full ink and the sheet edges
+   a hair closer. Nothing floods, nothing recolours. */
+.card:hover .frame,
+.card:focus-visible .frame {
+  outline-color: var(--ink);
+}
+
+.card:hover .img {
+  transform: scale(1.02);
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 5px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .img,
+  .card:hover .img {
+    transform: none;
+    transition: none;
+  }
+}

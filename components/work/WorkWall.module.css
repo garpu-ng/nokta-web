@@ -1,0 +1,105 @@
+/* The wall — a 12-column sheet the works are pinned onto in their curated
+   order. Column widths come from each work's own span, so a rendering stands
+   wider than a print sheet without either one becoming a section. */
+
+/* ── Filter row: the kind stamps ─────────────────────────────────────
+   Same words that annotate every card, set as small pressed stamps. On a phone
+   the row scrolls sideways rather than wrapping into a block of buttons. */
+.filter {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  overflow-x: auto;
+  margin: 0 0 clamp(2rem, 5vh, 3rem);
+  padding-bottom: 0.35rem;
+  /* the row is a quiet control strip, not a scrollbar exhibit */
+  scrollbar-width: none;
+}
+.filter::-webkit-scrollbar {
+  display: none;
+}
+
+.stamp {
+  flex: none;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid color-mix(in srgb, var(--ink) 45%, transparent);
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--mono-font);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  line-height: 1.2;
+  text-transform: lowercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.stamp:hover {
+  border-color: var(--ink);
+}
+
+/* Pressed = inked in. */
+.stamp[aria-pressed="true"] {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.stamp:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* ── The grid ────────────────────────────────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  align-items: start;
+  column-gap: clamp(1rem, 2vw, 1.5rem);
+  row-gap: clamp(2.5rem, 7svh, 4.5rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cell {
+  min-width: 0;
+}
+
+.span3 {
+  grid-column: span 3;
+}
+.span4 {
+  grid-column: span 4;
+}
+.span5 {
+  grid-column: span 5;
+}
+.span6 {
+  grid-column: span 6;
+}
+.span7 {
+  grid-column: span 7;
+}
+
+/* Filtered out, not unmounted: the image stays decoded and the wall snaps back
+   instantly when the filter is released. */
+.filteredOut {
+  display: none;
+}
+
+/* ── Phone: one column, spans ignored ────────────────────────────────── */
+@media (max-width: 767px) {
+  .span3,
+  .span4,
+  .span5,
+  .span6,
+  .span7 {
+    grid-column: span 12;
+  }
+
+  .grid {
+    row-gap: clamp(2.5rem, 6svh, 3.5rem);
+  }
+}
