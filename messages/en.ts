@@ -1,17 +1,27 @@
-// English
+// English — mirrors the key set of messages/de.ts (German is the source of
+// truth; a missing key falls back to German at runtime, see lib/i18n.ts).
+//
+// Same register as the German: say what it is, never why it is allowed. Facts,
+// no defence, no agency-speak, no superlatives. Self-initiated work is
+// annotated "Self-initiated", nothing more.
 const en: Record<string, string> = {
-  "meta.site.title": "nokta · studio for design, architectural visualisation and line prints",
-  "meta.site.desc": "nokta is an interdisciplinary design studio from Germany: design and print, architectural visualisation and CAD line prints. Own tools, lots of ideas, short paths.",
-  "meta.home.title": "nokta · one studio, three disciplines",
-  "meta.nokta.title": "nokta · layout, design and print",
-  "meta.arch.title": "nokta.cube · architectural visualisation",
-  "meta.line.title": "nokta.line · CAD art prints",
+  // ── Metadata ──────────────────────────────────────────────────────
+  "meta.site.title": "nokta — design studio, Düsseldorf",
+  "meta.site.desc": "Design studio in Düsseldorf. We draw buildings, books and prints — visualisation, typesetting, prepress and CAD plans.",
+  "meta.home.title": "nokta — buildings, books, prints",
   "meta.studio.title": "Studio · nokta",
-  "meta.studio.desc": "nokta, a design studio from Germany with three disciplines: design and print, architectural visualisation and CAD line prints.",
+  "meta.studio.desc": "The studio behind the work: three people in Düsseldorf. Architectural visualisation, editorial and typesetting, print production and CAD plans.",
   "meta.prozess.title": "Process · nokta",
   "meta.kontakt.title": "Contact · nokta",
 
-  "home.lead.body": "Interdisciplinary design from one team. Own tools, lots of ideas, short paths.",
+  // ── Home ──────────────────────────────────────────────────────────
+  "home.lead": "We draw buildings, books and prints.",
+  "home.sub": "Design studio · Düsseldorf",
+  "home.wall.label": "Work",
+  "home.wall.aria": "All work",
+  // Closing motto — the {point} {line} {form} tokens are substituted in
+  // app/page.tsx and must survive verbatim; the sentence's final period is
+  // dropped there and re-set as the red studio dot.
   "home.motto": "From the {point} to the {line} to the {form}.",
   "home.motto.point": "dot",
   "home.motto.line": "line",
@@ -20,33 +30,37 @@ const en: Record<string, string> = {
   "home.contact.body": "Show us the sketch, plan or unfinished thought. We’ll come back with the right questions.",
   "home.contact.cta": "Start a project",
 
-  "branch.home.tag": "Overview",
-  "branch.nokta.tag": "Layout · Design · Print",
-  "branch.nokta.desc": "Branding, editorial, layout and print. With our own tools we try a lot of directions fast and land on the one that fits.",
-  "branch.arch.tag": "Architectural visualisation",
-  "branch.arch.desc": "Photorealistic 3D renderings for architects, developers and private clients. With our own setup we get to many variations fast.",
-  "branch.line.tag": "2D · Vector · CAD art prints",
-  "branch.line.desc": "Iconic buildings as CAD line prints. Vectorised from real drawings, printed in A1 and framed.",
+  // ── Work (the one wall + every detail page) ───────────────────────
+  // The annotation every work carries: kind stamp · year · client. Own work is
+  // annotated "Self-initiated" and stands beside the commissions, unexplained.
+  "work.own": "Self-initiated",
+  "work.back": "All work",
+  "work.filter.all": "All",
+  "work.kind.rendering": "Rendering",
+  "work.kind.cad": "CAD print",
+  "work.kind.editorial": "Editorial",
+  "work.kind.study": "Study",
+  "work.kind.manual": "Manual",
+  "work.prev": "Previous work",
+  "work.next": "Next work",
+  "work.nstudie.lead": "A typographic study of the lowercase n. Drawn, set in a grid, issued as a print.",
 
-  "nokta.svc.0.title": "Branding & Identity",
-  "nokta.svc.0.text": "Logo, wordmark and a system that works everywhere. Cleanly thought out, quickly executed.",
-  "nokta.svc.1.title": "Editorial & Layout",
-  "nokta.svc.1.text": "Brochures, portfolios and publications. Typography with rhythm and room to breathe.",
-  "nokta.svc.1.evidence": "as in the AI Commission’s final report",
-  "nokta.svc.2.title": "Print-ready files",
-  "nokta.svc.2.text": "Print-ready files with correct bleed, colour space and finishing for any run.",
-  "nokta.svc.2.evidence": "print-ready across 216 pages",
-  "nokta.svc.3.title": "Poster & Print",
-  "nokta.svc.3.text": "Large formats that land from up close and from across the room.",
-
-  "nokta.hero.caption": "layout · design · print",
-  "nokta.hero.claim": "From first draft to the press sheet.",
+  // ── Services (ServiceIndex, /studio) ──────────────────────────────
+  // Four rows, each stated as a deliverable. Rows 1 and 2 carry an evidence
+  // line (see components/nokta/ServiceIndex.tsx) citing the flagship commission.
   "nokta.index.label": "Services · Contents",
-  "nokta.strip.label": "colour control strip · house colours",
-  "nokta.band.tagline": "From draft to print.",
-  "nokta.band.cta": "Start a project",
+  "nokta.svc.0.title": "Architectural visualisation",
+  "nokta.svc.0.text": "Model, light, image. Plans and sketches become exterior and interior views at photographic quality — first clay renders to settle perspective and framing, then the final images at print resolution.",
+  "nokta.svc.1.title": "Editorial & typesetting",
+  "nokta.svc.1.text": "From manuscript to prepress. Grid, typography, picture editing, indexes and folios — for brochures, reports and books.",
+  "nokta.svc.1.evidence": "AI Commission final report · 216 pages · 8 chapters",
+  "nokta.svc.2.title": "Print production",
+  "nokta.svc.2.text": "Paper, sheet, print run. Print-ready files with bleed, colour space and finishing, agreed with the printer.",
+  "nokta.svc.2.evidence": "216 pages print-ready · bleed, colour space, sequence checked",
+  "nokta.svc.3.title": "CAD plans & line prints",
+  "nokta.svc.3.text": "Vectorised from real drawings. Floor plans, elevations and sections as clean line — as a file or as a framed A1 print.",
 
-  // ── nokta.point · case study (AI Commission final report) ─────────
+  // ── Case study (AI Commission final report) ───────────────────────
   "point.case.kicker": "from the workshop · editorial",
   "point.case.label": "From the workshop",
   "point.case.title": "Final report · AI, Competition & Competitiveness",
@@ -80,34 +94,37 @@ const en: Record<string, string> = {
   "point.case.narrative1": "The brief: a 216-page government report with eight chapters, 20 recommendations, principles, a scientific report and the opinions and essays of the commission members — as one document you can read front to back without getting lost.",
   "point.case.narrative2": "nokta built the layout system for it: a continuous grid with numbered chapters and folios, cyan wayfinding for the text types, two-column body text for the science, distinct registers for opinion and quote. What ships at the end is the print-ready file — bleed, colour space and sequence all in order.",
 
-  // ── nokta.point · art plate (n study) ─────────────────────────────
+  // ── Art plate (n study) ───────────────────────────────────────────
   "point.plate.kicker": "house type · study",
   "point.plate.label": "A system and one deviation",
   "point.plate.spec": "n study · 536 × 918 px · one accent",
   "point.plate.alt": "Grid of repeated bold italic lowercase letters “n”, black on a light sheet, with a single “n” in cobalt blue breaking out of the pattern.",
   "point.plate.text": "Between commissions we make studies like this one: a grid of bold, italic n’s, black on the sheet. Everything follows the system — except a single cobalt n that steps out of line. This is how we like to work: clear order, one deliberate break.",
 
-  // ── nokta.point · house manual (Leuchtturm) ───────────────────────
+  // ── House manual (Leuchtturm) ─────────────────────────────────────
   "point.manual.kicker": "house manual · rulebook",
   "point.manual.label": "Leuchtturm",
   "point.manual.text": "Leuchtturm is our house manual: typographic rules, the grid, the colour system and the print standards — everything every job here starts from. It isn’t for sale; we work from it. But the cover alone shows how we think about books: as built objects.",
   "point.manual.spec": "leuchtturm · in-house manual · continually extended",
   "point.manual.alt": "Scanned cover of the house manual “Leuchtturm”: grainy black and white, a black bar at the top reading “NOKTA STUDIO – LEUCHTTURM” in spaced mono capitals, below it the five nokta glyphs stacked vertically in shades of grey, slightly rotated, with grey corner patches and a visible fold line.",
 
+  // ── Studio ────────────────────────────────────────────────────────
   "studio.heading": "Studio",
-  "studio.caption": "one studio · three disciplines · nrw",
-  "studio.p1": "nokta is an interdisciplinary design studio from North Rhine-Westphalia, Germany. One studio, three disciplines: layout and print, architectural visualisation and CAD line prints.",
-  "studio.p2": "We don’t think in boxes. We build our own tools and workflows, combine our skills across disciplines and get to a lot of good results fast. Instead of one idea, we show you ten.",
-  "studio.p3": "We started out in architectural visualisation. Today it’s one of several building blocks: photorealistic 3D renderings with a feel for light, material and space. Your project, the way it’ll look. Long before the first stone is laid.",
+  "studio.caption": "design studio · düsseldorf · nrw",
+  "studio.p1": "nokta is a design studio in Düsseldorf. There are three of us, and we draw buildings, books and prints: architectural visualisation, editorial and typesetting, print production and CAD plans.",
+  "studio.p2": "We build our own tools and workflows: render setups, typesetting templates and prepress checks. At the start of a project there are several versions on the table, not one.",
+  "studio.p3": "We started with architectural visualisation; it is still the largest part of the work. Photorealistic 3D renderings, interior and exterior: light, material, space. The project as it will look — long before the first stone is laid.",
   "studio.team": "The team",
   "studio.role.kaan": "Design · Concept",
   "studio.role.mohammed": "3D · Visualisation",
   "studio.role.mert": "Layout · Print",
+  // Placeholder caption on Mert's team card until his portrait clip lands.
   "studio.mert.placeholder": "portrait to follow",
   "studio.cta": "Got a project in the works?",
   "studio.ctaProcess": "Our process",
   "studio.ctaWrite": "Write us",
 
+  // ── Process ───────────────────────────────────────────────────────
   "prozess.heading": "How we work",
   "prozess.intro": "From the first sketch to the finished image: a clear flow. With our own setup we get to many variations fast, and you decide.",
   "prozess.gifAlt": "Process at a glance",
@@ -120,6 +137,7 @@ const en: Record<string, string> = {
   "prozess.step.4.title": "Final & Post-Production",
   "prozess.step.4.text": "Once you sign off, we render at high resolution. In post we push colours, contrast and details until the image sits and shows your project exactly the way it should.",
 
+  // ── Contact ───────────────────────────────────────────────────────
   "kontakt.heading": "Contact",
   "kontakt.intro": "Got a project in the works? We’d love to hear from you.",
   "kontakt.infoLead": "For enquiries, quotes or just to say hi: write us. We’ll get back to you within 24 hours.",
@@ -127,8 +145,7 @@ const en: Record<string, string> = {
   "kontakt.addr.vat": "VAT ID: on request",
   "kontakt.mailAria": "Write an email",
 
-  "line.hero.caption": "cad · vector · line print",
-  "line.hero.claim": "Buildings, reduced to their lines.",
+  // ── Line prints — passport, specification, purchase (/arbeiten/[slug]) ─
   "line.tb.sheet": "Sheet",
   "line.tb.scale": "Scale",
   "line.tb.format": "Format",
@@ -136,12 +153,6 @@ const en: Record<string, string> = {
   "line.tb.subject": "Subject",
   "line.tb.city": "City",
   "line.tb.price": "Price",
-  "line.catalogue.label": "Catalogue · four subjects",
-  "line.lead": "Iconic buildings as technical drawings. Vectorised from real CAD data, printed in A1, framed and ready for the wall.",
-  "line.band.tagline": "Your subject, thought as line.",
-  "line.band.cta": "Enquire",
-  "line.view": "View →",
-  "line.back": "← nokta.line",
   "line.spec.year": "Year built",
   "line.spec.architect": "Architect",
   "line.spec.coords": "Coordinates",
@@ -155,12 +166,8 @@ const en: Record<string, string> = {
   "line.altSuffix": "vectorised CAD line print",
   "line.metaDescSuffix": "Vectorised CAD line print, printed in A1 and framed.",
 
-  "project.back": "← All projects",
+  // ── Projects (renderings) ─────────────────────────────────────────
   "projects.client.private": "Private client",
-  "projects.cat.Wohnbau": "Residential",
-  "projects.cat.Gartenarchitektur": "Garden architecture",
-  "projects.cat.Gewerbebau": "Commercial",
-  "projects.cat.Infrastruktur": "Infrastructure",
   "projects.desc.sanktgores": "Photorealistic exterior visualisation of a modern single-family home in Germany.",
   "projects.desc.teahouse": "Atmospheric visualisation of a Japanese-inspired tea house.",
   "projects.desc.beatbuilding": "Visualisation of an urban cultural building with a striking façade.",
@@ -168,37 +175,34 @@ const en: Record<string, string> = {
   "projects.desc.ipehouse": "Elegant visualisation of a modern house with an ipe wood façade.",
   "projects.desc.velostation": "Architectural visualisation of a modern bike station in an urban setting.",
 
-  "arch.hero.caption": "architectural visualization · düsseldorf",
-  "arch.hero.claim": "Spaces, before they exist.",
-  "arch.wall.label": "Selected work",
-  "arch.grid.tagline": "Your project, thought in space.",
-  "arch.grid.cta": "Start a project",
-
-  "footer.tag1": "One studio, three disciplines.",
+  // ── Footer ────────────────────────────────────────────────────────
+  // tag1 + tag2 stack in the colophon brand block; tag2 also becomes the root
+  // social card caption (app/opengraph-image.tsx, lowercased).
+  "footer.tag1": "Design studio in Düsseldorf.",
   "footer.tag2": "From the dot to the line to the form.",
-  "footer.col.disciplines": "Disciplines",
-  "footer.col.studio": "Studio",
+  "footer.col.seiten": "Pages",
+  "footer.col.rechtliches": "Legal",
   "footer.col.social": "Social",
-  "footer.link.team": "team",
+  "footer.link.arbeiten": "work",
+  "footer.link.studio": "studio",
+  "footer.link.prozess": "process",
   "footer.link.kontakt": "contact",
   "footer.link.impressum": "imprint",
   "footer.link.datenschutz": "privacy",
-  "footer.disciplines": "Architecture · Design · Line prints",
+  "footer.disciplines": "Visualisation · Editorial · Print · CAD",
 
+  // ── 404 / not-found ───────────────────────────────────────────────
   "notfound.aria": "404 — Page not found",
   "notfound.title": "This point isn't on our map.",
-  "notfound.text": "We're nokta. Everything revolves around the dot. This page just isn't one of ours. A typo, an old link, or it simply moved. Let's get you back to the point.",
+  "notfound.text": "We don’t carry this page. A typo, an old link, or it simply moved. From the point back to the start.",
   "notfound.cta": "Back to the homepage",
 
-  "nav.team": "team.",
-  "nav.impressum": "imprint.",
+  // ── Header nav / aria ─────────────────────────────────────────────
+  "nav.studio": "studio.",
+  "nav.prozess": "process.",
   "nav.contact": "contact.",
-  "nav.datenschutz": "privacy.",
   "aria.home": "nokta, home",
-  "aria.punkt": "Dot",
   "aria.mainNav": "Main navigation",
-  "aria.morePages": "More pages",
-  "aria.morePrints": "More prints",
   "aria.language": "Choose language",
 };
 

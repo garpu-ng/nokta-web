@@ -1,17 +1,19 @@
 // Türkçe
 const tr: Record<string, string> = {
-  "meta.site.title": "nokta · tasarım, mimari görselleştirme ve çizgi baskılar stüdyosu",
-  "meta.site.desc": "nokta, Almanya merkezli disiplinler arası bir tasarım stüdyosu: tasarım ve baskı, mimari görselleştirme ve CAD çizgi baskılar. Kendi araçlarımız, bol fikir, kısa yollar.",
-  "meta.home.title": "nokta · bir stüdyo, üç disiplin",
-  "meta.nokta.title": "nokta · dizgi, tasarım ve baskı",
-  "meta.arch.title": "nokta.cube · mimari görselleştirme",
-  "meta.line.title": "nokta.line · CAD sanat baskıları",
+  // ── Üst veri ──────────────────────────────────────────────────────
+  "meta.site.title": "nokta — tasarım stüdyosu, Düsseldorf",
+  "meta.site.desc": "Düsseldorf’ta tasarım stüdyosu. Yapılar, kitaplar ve baskılar çiziyoruz — görselleştirme, dizgi, baskı öncesi ve CAD planları.",
+  "meta.home.title": "nokta — yapılar, kitaplar, baskılar",
   "meta.studio.title": "Stüdyo · nokta",
-  "meta.studio.desc": "nokta, üç disiplinli bir tasarım stüdyosu: tasarım ve baskı, mimari görselleştirme ve CAD çizgi baskılar.",
+  "meta.studio.desc": "İşlerin arkasındaki stüdyo: Düsseldorf’ta üç kişi. Mimari görselleştirme, editoryal ve dizgi, baskı üretimi ve CAD planları.",
   "meta.prozess.title": "Süreç · nokta",
   "meta.kontakt.title": "İletişim · nokta",
 
-  "home.lead.body": "Tek elden disiplinler arası tasarım. Kendi araçlarımız, bol fikir, kısa yollar.",
+  // ── Ana sayfa ─────────────────────────────────────────────────────
+  "home.lead": "Yapılar, kitaplar ve baskılar çiziyoruz.",
+  "home.sub": "tasarım stüdyosu · düsseldorf",
+  "home.wall.label": "işler",
+  "home.wall.aria": "Tüm işler",
   // Turkish attaches the case suffixes to the words, so they ride just outside
   // the {tokens}: "{point}dan {line}ye, {line}den {form}a."
   "home.motto": "{point}dan {line}ye, {line}den {form}a.",
@@ -22,33 +24,35 @@ const tr: Record<string, string> = {
   "home.contact.body": "Bize eskizi, planı ya da tamamlanmamış fikri göster. Doğru sorularla geri dönelim.",
   "home.contact.cta": "Projeyi başlat",
 
-  "branch.home.tag": "Genel bakış",
-  "branch.nokta.tag": "Dizgi · Tasarım · Baskı",
-  "branch.nokta.desc": "Marka, editoryal, dizgi ve baskı. Kendi araçlarımızla hızlıca birçok yönü deniyor, oturanı buluyoruz.",
-  "branch.arch.tag": "Mimari görselleştirme",
-  "branch.arch.desc": "Mimarlar, müteahhitler ve bireysel müşteriler için fotogerçekçi 3B render’lar. Kendi kurulumumuzla hızlıca birçok varyasyona ulaşıyoruz.",
-  "branch.line.tag": "2D · Vektör · CAD sanat baskıları",
-  "branch.line.desc": "İkonik yapılar CAD çizgi baskısı olarak. Gerçek çizimlerden vektörleştirilmiş, A1 basılmış ve çerçeveli.",
+  // ── İşler (tek duvar + tüm detay sayfaları) ───────────────────────
+  // Her işin taşıdığı tek künye: tür · yıl · müşteri. Kendi işlerimiz
+  // "Kendi projemiz" diye künyelenir ve siparişlerin yanında öylece durur.
+  "work.own": "Kendi projemiz",
+  "work.back": "Tüm işler",
+  "work.filter.all": "Tümü",
+  "work.kind.rendering": "Render",
+  "work.kind.cad": "CAD baskı",
+  "work.kind.editorial": "Editoryal",
+  "work.kind.study": "Çalışma",
+  "work.kind.manual": "El kitabı",
+  "work.prev": "önceki iş",
+  "work.next": "sonraki iş",
+  "work.nstudie.lead": "Küçük n üzerine tipografik bir çalışma. Çizildi, ızgaraya oturtuldu, baskı olarak çıkarıldı.",
 
-  "nokta.svc.0.title": "Marka & Kimlik",
-  "nokta.svc.0.text": "Logo, kelime markası ve her yerde çalışan bir sistem. Temiz düşünülmüş, hızlı uygulanmış.",
-  "nokta.svc.1.title": "Editoryal & Dizgi",
-  "nokta.svc.1.text": "Broşürler, portfolyolar ve yayınlar. Ritmi ve nefes alanı olan tipografi.",
-  "nokta.svc.1.evidence": "YZ Komisyonu’nun nihai raporundaki gibi",
-  "nokta.svc.2.title": "Baskıya hazır dosyalar",
-  "nokta.svc.2.text": "Doğru taşma payı, renk uzayı ve son işlemle her adet için baskıya hazır dosyalar.",
-  "nokta.svc.2.evidence": "216 sayfa boyunca baskıya hazır",
-  "nokta.svc.3.title": "Poster & Afiş",
-  "nokta.svc.3.text": "Yakından da uzaktan da vuran büyük formatlar.",
-
-  "nokta.hero.caption": "mizanpaj · tasarım · baskı",
-  "nokta.hero.claim": "İlk taslaktan baskı tabakasına.",
+  // ── Hizmetler (ServiceIndex, /studio) ─────────────────────────────
   "nokta.index.label": "Hizmetler · İçindekiler",
-  "nokta.strip.label": "renk kontrol şeridi · marka renkleri",
-  "nokta.band.tagline": "Taslaktan baskıya.",
-  "nokta.band.cta": "Proje başlat",
+  "nokta.svc.0.title": "Mimari görselleştirme",
+  "nokta.svc.0.text": "Model, ışık, görsel. Planlardan ve eskizlerden fotoğraf kalitesinde dış ve iç görünüşler çıkar — önce perspektifi ve kadrajı netleştiren clay render’lar, sonra baskı çözünürlüğünde final görseller.",
+  "nokta.svc.1.title": "Editoryal & Dizgi",
+  "nokta.svc.1.text": "Ham metinden baskı öncesine. Izgara, tipografi, görsel editörlüğü, dizin ve folyolar — broşürler, raporlar ve kitaplar için.",
+  "nokta.svc.1.evidence": "yz komisyonu nihai raporu · 216 sayfa · 8 bölüm",
+  "nokta.svc.2.title": "Baskı üretimi",
+  "nokta.svc.2.text": "Kâğıt, tabaka, tiraj. Taşma payı, renk uzayı ve son işlemleriyle baskıya hazır dosyalar, matbaayla birlikte netleştirilmiş.",
+  "nokta.svc.2.evidence": "216 sayfa baskıya hazır · taşma payı, renk uzayı, sıralama kontrol edildi",
+  "nokta.svc.3.title": "CAD planları & çizgi baskılar",
+  "nokta.svc.3.text": "Gerçek çizimlerden vektörleştirilmiş. Kat planları, görünüşler ve kesitler temiz çizgi olarak — dosya ya da çerçeveli A1 baskı.",
 
-  // ── nokta.point · vaka çalışması (YZ Komisyonu nihai raporu) ──────
+  // ── Vaka çalışması (YZ Komisyonu nihai raporu) ────────────────────
   "point.case.kicker": "atölyeden · editoryal",
   "point.case.label": "Atölyeden",
   "point.case.title": "Nihai rapor · YZ, Rekabet ve Rekabet Gücü",
@@ -82,25 +86,26 @@ const tr: Record<string, string> = {
   "point.case.narrative1": "Görev: sekiz bölüm, 20 öneri, ilkeler, bilimsel bir rapor ve komisyon üyelerinin görüş ve makalelerinden oluşan 216 sayfalık bir hükümet raporu — baştan sona, kaybolmadan okunabilen tek bir belge olarak.",
   "point.case.narrative2": "nokta bunun için mizanpaj sistemini kurdu: numaralı bölümler ve folyolarla sürekli bir ızgara, metin türleri için camgöbeği yönlendirme, bilim için iki sütunlu ana metin, görüş ve alıntı için ayrı kayıtlar. Sonunda teslim edilen, baskıya hazır dosya — taşma payı, renk uzayı ve sıralama yerli yerinde.",
 
-  // ── nokta.point · sanat plakası (n çalışması) ─────────────────────
+  // ── Sanat plakası (n çalışması) ───────────────────────────────────
   "point.plate.kicker": "künye yazısı · çalışma",
   "point.plate.label": "Bir sistem ve bir sapma",
   "point.plate.spec": "n çalışması · 536 × 918 px · tek vurgu",
   "point.plate.alt": "Açık renk bir tabaka üzerinde siyah, tekrar eden kalın italik küçük „n“ harflerinden oluşan bir ızgara; içinde desenden çıkan tek bir kobalt mavisi „n“.",
   "point.plate.text": "İşler arasında bunun gibi çalışmalar çıkıyor: tabaka üzerinde siyah, kalın italik n’lerden bir ızgara. Her şey sistemi izliyor — sıradan çıkan tek bir kobalt n dışında. En çok böyle çalışmayı seviyoruz: net bir düzen, bilinçli bir kırılma.",
 
-  // ── nokta.point · stüdyo el kitabı (Leuchtturm) ───────────────────
+  // ── Stüdyo el kitabı (Leuchtturm) ─────────────────────────────────
   "point.manual.kicker": "stüdyo el kitabı · kurallar",
   "point.manual.label": "Leuchtturm",
   "point.manual.text": "Leuchtturm bizim stüdyo el kitabımız: tipografi kuralları, ızgara, renk sistemi ve baskı standartları — buradaki her işin başladığı her şey. Satılık değil; biz ondan çalışıyoruz. Ama daha kapağı bile kitapları nasıl düşündüğümüzü gösteriyor: inşa edilmiş nesneler olarak.",
   "point.manual.spec": "leuchtturm · stüdyo içi el kitabı · sürekli genişliyor",
   "point.manual.alt": "„Leuchtturm“ stüdyo el kitabının taranmış kapağı: grenli siyah-beyaz, üstte aralıklı mono büyük harflerle „NOKTA STUDIO – LEUCHTTURM“ yazan siyah bir bant, altında gri tonlarında, hafifçe döndürülmüş, dikey istiflenmiş beş nokta glifi; gri köşe blokları ve görünür bir katlama izi.",
 
+  // ── Stüdyo ────────────────────────────────────────────────────────
   "studio.heading": "Stüdyo",
-  "studio.caption": "tek stüdyo · üç disiplin · nrw",
-  "studio.p1": "nokta, Almanya Kuzey Ren-Vestfalya’dan disiplinler arası bir tasarım stüdyosu. Bir stüdyo, üç disiplin: dizgi ve baskı, mimari görselleştirme ve CAD çizgi baskılar.",
-  "studio.p2": "Kalıplarda düşünmüyoruz. Kendi araçlarımızı ve iş akışlarımızı kuruyor, becerilerimizi disiplinler arası birleştiriyor ve hızlıca çok sayıda iyi sonuca ulaşıyoruz. Bir fikir yerine sana on tane gösteriyoruz.",
-  "studio.p3": "İşe mimari görselleştirmeyle başladık. Bugün o, birçok yapı taşından biri: ışık, malzeme ve mekân duygusuyla fotogerçekçi 3B render’lar. Projen, daha sonra nasıl görüneceğiyle. İlk taş konmadan çok önce.",
+  "studio.caption": "tasarım stüdyosu · düsseldorf · nrw",
+  "studio.p1": "nokta, Düsseldorf’ta bir tasarım stüdyosu. Üç kişiyiz; yapılar, kitaplar ve baskılar çiziyoruz: mimari görselleştirme, editoryal ve dizgi, baskı üretimi ve CAD planları.",
+  "studio.p2": "Araçlarımızı ve iş akışlarımızı kendimiz kuruyoruz: render kurulumları, dizgi şablonları ve baskı öncesi kontrol adımları. Bir projenin başında masada tek bir varyasyon değil, birkaç tanesi durur.",
+  "studio.p3": "İşe mimari görselleştirmeyle başladık; bugün de işin en büyük bölümü o. Fotogerçekçi 3B render’lar, içeride ve dışarıda: ışık, malzeme, mekân. Proje, sonradan nasıl görünecekse öyle — ilk taş konmadan çok önce.",
   "studio.team": "Ekip",
   "studio.role.kaan": "Tasarım · Konsept",
   "studio.role.mohammed": "3B · Görselleştirme",
@@ -110,6 +115,7 @@ const tr: Record<string, string> = {
   "studio.ctaProcess": "Sürecimiz",
   "studio.ctaWrite": "Bize yaz",
 
+  // ── Süreç ─────────────────────────────────────────────────────────
   "prozess.heading": "Nasıl çalışıyoruz",
   "prozess.intro": "İlk eskizden bitmiş görsele: net bir akış. Kendi kurulumumuzla hızlıca birçok varyasyona ulaşıyoruz, kararı sen veriyorsun.",
   "prozess.gifAlt": "Sürece genel bakış",
@@ -122,6 +128,7 @@ const tr: Record<string, string> = {
   "prozess.step.4.title": "Final & Post-Prodüksiyon",
   "prozess.step.4.text": "Onayından sonra yüksek çözünürlükte render alıyoruz. Post prodüksiyonda renkleri, kontrastı ve detayları görsel oturana ve projeni tam istendiği gibi gösterene kadar çekiyoruz.",
 
+  // ── İletişim ──────────────────────────────────────────────────────
   "kontakt.heading": "İletişim",
   "kontakt.intro": "Aklında bir proje mi var? Senden haber almayı çok isteriz.",
   "kontakt.infoLead": "Talepler, teklifler ya da sadece merhaba demek için: bize yaz. 24 saat içinde dönüş yaparız.",
@@ -129,8 +136,7 @@ const tr: Record<string, string> = {
   "kontakt.addr.vat": "Vergi No: talep üzerine",
   "kontakt.mailAria": "E-posta yaz",
 
-  "line.hero.caption": "cad · vektör · çizgi baskı",
-  "line.hero.claim": "Yapılar, çizgilerine indirgenmiş.",
+  // ── Çizgi baskılar — künye, spesifikasyon, satın alma (/arbeiten/[slug]) ─
   "line.tb.sheet": "Pafta",
   "line.tb.scale": "Ölçek",
   "line.tb.format": "Format",
@@ -138,12 +144,6 @@ const tr: Record<string, string> = {
   "line.tb.subject": "Motif",
   "line.tb.city": "Şehir",
   "line.tb.price": "Fiyat",
-  "line.catalogue.label": "Katalog · dört motif",
-  "line.lead": "İkonik yapılar teknik çizim olarak. Gerçek CAD verisinden vektörleştirilmiş, A1 basılmış, çerçeveli ve duvara hazır.",
-  "line.band.tagline": "Motifiniz, çizgi olarak düşünüldü.",
-  "line.band.cta": "Sorun",
-  "line.view": "İncele →",
-  "line.back": "← nokta.line",
   "line.spec.year": "Yapım yılı",
   "line.spec.architect": "Mimar",
   "line.spec.coords": "Koordinatlar",
@@ -157,12 +157,8 @@ const tr: Record<string, string> = {
   "line.altSuffix": "vektörleştirilmiş CAD çizgi baskısı",
   "line.metaDescSuffix": "Vektörleştirilmiş CAD çizgi baskısı, A1 basılmış ve çerçeveli.",
 
-  "project.back": "← Tüm projeler",
+  // ── Projeler (render’lar) ─────────────────────────────────────────
   "projects.client.private": "Bireysel müşteri",
-  "projects.cat.Wohnbau": "Konut",
-  "projects.cat.Gartenarchitektur": "Peyzaj mimarisi",
-  "projects.cat.Gewerbebau": "Ticari yapı",
-  "projects.cat.Infrastruktur": "Altyapı",
   "projects.desc.sanktgores": "Almanya’da modern bir müstakil evin fotogerçekçi dış görselleştirmesi.",
   "projects.desc.teahouse": "Japon esintili bir çay evinin atmosferik görselleştirmesi.",
   "projects.desc.beatbuilding": "Çarpıcı cepheli kentsel bir kültür binasının görselleştirmesi.",
@@ -170,37 +166,32 @@ const tr: Record<string, string> = {
   "projects.desc.ipehouse": "Ipe ahşap cepheli modern bir evin zarif görselleştirmesi.",
   "projects.desc.velostation": "Kentsel alanda modern bir bisiklet istasyonunun mimari görselleştirmesi.",
 
-  "arch.hero.caption": "mimari görselleştirme · düsseldorf",
-  "arch.hero.claim": "Mekânlar, var olmadan önce.",
-  "arch.wall.label": "Seçilmiş işler",
-  "arch.grid.tagline": "Projeniz, mekân olarak düşünüldü.",
-  "arch.grid.cta": "Proje başlat",
-
-  "footer.tag1": "Bir stüdyo, üç disiplin.",
+  // ── Alt bilgi ─────────────────────────────────────────────────────
+  "footer.tag1": "Düsseldorf’ta tasarım stüdyosu.",
   "footer.tag2": "Noktadan çizgiye, çizgiden forma.",
-  "footer.col.disciplines": "Disiplinler",
-  "footer.col.studio": "Stüdyo",
+  "footer.col.seiten": "Sayfalar",
+  "footer.col.rechtliches": "Yasal",
   "footer.col.social": "Sosyal",
-  "footer.link.team": "ekip",
+  "footer.link.arbeiten": "işler",
+  "footer.link.studio": "stüdyo",
+  "footer.link.prozess": "süreç",
   "footer.link.kontakt": "iletişim",
   "footer.link.impressum": "künye",
   "footer.link.datenschutz": "gizlilik",
-  "footer.disciplines": "Mimari · Tasarım · Çizgi baskılar",
+  "footer.disciplines": "Görselleştirme · Editoryal · Baskı · CAD",
 
+  // ── 404 / bulunamadı ──────────────────────────────────────────────
   "notfound.aria": "404 — Sayfa bulunamadı",
   "notfound.title": "Bu nokta bizde yok.",
-  "notfound.text": "Biz nokta'yız. Her şey noktanın etrafında döner. Ama bu sayfa bizde yok. Bir yazım hatası, eski bir bağlantı ya da taşınmış olabilir. Baştan, noktaya geri dönelim.",
+  "notfound.text": "Bu sayfa bizde yok. Yazım hatası, eski bir bağlantı ya da taşınmış bir sayfa. Noktadan başa dönelim.",
   "notfound.cta": "Ana sayfaya dön",
 
-  "nav.team": "ekip.",
-  "nav.impressum": "künye.",
+  // ── Başlık gezinme / aria ─────────────────────────────────────────
+  "nav.studio": "stüdyo.",
+  "nav.prozess": "süreç.",
   "nav.contact": "iletişim.",
-  "nav.datenschutz": "gizlilik.",
   "aria.home": "nokta, ana sayfa",
-  "aria.punkt": "Nokta",
   "aria.mainNav": "Ana gezinme",
-  "aria.morePages": "Diğer sayfalar",
-  "aria.morePrints": "Diğer baskılar",
   "aria.language": "Dil seç",
 };
 
