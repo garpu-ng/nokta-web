@@ -72,7 +72,7 @@
   align-items: baseline;
   gap: 0.5rem;
   margin: 0.7rem 2.5rem 0;
-  color: #b83636;
+  color: var(--accent);
   opacity: 0.85;
 }
 .evidenceMark {
@@ -80,7 +80,7 @@
 }
 .entry:hover .folio,
 .entry:hover .leader {
-  color: #b83636;
+  color: var(--accent);
   opacity: 1;
 }
 
