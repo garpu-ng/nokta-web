@@ -48,7 +48,8 @@ const de: Record<string, string> = {
   "work.nstudie.lead": "Eine typografische Studie über das kleine n. Gezeichnet, gerastert, als Druck aufgelegt.",
 
   // ── Leistungen (ServiceIndex, /studio) ────────────────────────────
-  // Four rows, each stated as a deliverable. Rows 1 and 2 carry an evidence
+  // Four rows, each stated as a deliverable. Keys svc.1 and svc.2 (zero-indexed
+  // — the rows displayed as folios 02 and 03) carry an evidence
   // line (see components/nokta/ServiceIndex.tsx) citing the flagship commission.
   "nokta.index.label": "Leistungen · Inhalt",
   "nokta.svc.0.title": "Architekturvisualisierung",
@@ -101,12 +102,12 @@ const de: Record<string, string> = {
   "point.plate.label": "System und eine Abweichung",
   "point.plate.spec": "n-studie · 536 × 918 px · ein akzent",
   "point.plate.alt": "Raster aus wiederholten fetten kursiven Kleinbuchstaben „n“, schwarz auf hellem Bogen, mit einem einzelnen „n“ in Kobaltblau, das aus dem Muster ausbricht.",
-  "point.plate.text": "Zwischen den Aufträgen entstehen Studien wie diese: ein Raster aus fetten, kursiven n, schwarz auf dem Bogen. Alles folgt dem System — bis auf ein einziges n in Kobalt, das ausschert. So arbeiten wir am liebsten: klare Ordnung, ein bewusster Bruch.",
+  "point.plate.text": "Ein Raster aus fetten, kursiven n, schwarz auf dem Bogen. Alles folgt dem System — bis auf ein einziges n in Kobalt, das ausschert.",
 
   // ── Hausmanual (Leuchtturm) ───────────────────────────────────────
   "point.manual.kicker": "hausmanual · regelwerk",
   "point.manual.label": "Leuchtturm",
-  "point.manual.text": "Der Leuchtturm ist unser Hausmanual: Typografie-Regeln, Raster, Farbsystem und Druckstandards — alles, womit hier jede Arbeit anfängt. Zu kaufen gibt es ihn nicht; wir arbeiten daraus. Aber schon der Umschlag zeigt, wie wir Bücher denken: als gebaute Objekte.",
+  "point.manual.text": "Der Leuchtturm ist unser Hausmanual: Typografie-Regeln, Raster, Farbsystem und Druckstandards — alles, womit hier jede Arbeit anfängt. Zu kaufen gibt es ihn nicht; wir arbeiten daraus.",
   "point.manual.spec": "leuchtturm · hausinternes manual · fortlaufend ergänzt",
   "point.manual.alt": "Gescannter Umschlag des Hausmanuals „Leuchtturm“: körniges Schwarzweiß, oben ein schwarzer Balken mit „NOKTA STUDIO – LEUCHTTURM“ in gesperrter Monoschrift, darunter die fünf nokta-Glyphen vertikal gestapelt in Grautönen, leicht gedreht, dazu graue Eckfelder und eine sichtbare Falzlinie.",
 
@@ -114,7 +115,7 @@ const de: Record<string, string> = {
   "studio.heading": "Studio",
   "studio.caption": "designstudio · düsseldorf · nrw",
   "studio.p1": "nokta ist ein Designstudio in Düsseldorf. Wir sind zu dritt und zeichnen Gebäude, Bücher und Drucke: Architekturvisualisierung, Editorial und Satz, Druckproduktion und CAD-Pläne.",
-  "studio.p2": "Wir bauen unsere Werkzeuge und Abläufe selbst: Render-Setups, Satzvorlagen und Prüfschritte für die Druckvorstufe. Am Anfang eines Projekts liegen mehrere Varianten auf dem Tisch, nicht eine.",
+  "studio.p2": "Wir bauen unsere Werkzeuge und Abläufe selbst: Render-Setups, Satzvorlagen und Prüfschritte für die Druckvorstufe. Am Anfang eines Projekts liegen mehrere Varianten auf dem Tisch.",
   "studio.p3": "Angefangen haben wir mit Architekturvisualisierung; sie ist bis heute der größte Teil der Arbeit. Fotorealistische 3D-Renderings, innen und außen: Licht, Material, Raum. Das Projekt, wie es später aussieht — lange bevor der erste Stein liegt.",
   "studio.team": "Das Team",
   "studio.role.kaan": "Design · Konzept",
@@ -128,7 +129,7 @@ const de: Record<string, string> = {
 
   // ── Prozess ───────────────────────────────────────────────────────
   "prozess.heading": "Wie wir arbeiten",
-  "prozess.intro": "Von der ersten Skizze bis zum fertigen Bild: ein klarer Ablauf. Mit eigenem Setup kommen wir schnell zu vielen Varianten, du entscheidest.",
+  "prozess.intro": "Von der ersten Skizze bis zum fertigen Bild: ein klarer Ablauf. Mit eigenem Setup kommen wir zu vielen Varianten, du entscheidest.",
   "prozess.gifAlt": "Prozess im Überblick",
   "prozess.step.1.title": "Konzept & Referenzen",
   "prozess.step.1.text": "Am Anfang steht deine Idee. Du schickst uns Pläne, Skizzen und Referenzen, und wir klären gemeinsam, wie das Bild später wirken soll. So steht die Basis, bevor wir loslegen.",
@@ -148,10 +149,6 @@ const de: Record<string, string> = {
   "kontakt.mailAria": "E-Mail schreiben",
 
   // ── Liniendrucke — Passport, Spezifikation, Kauf (/arbeiten/[slug]) ─
-  "line.tb.sheet": "Blatt",
-  "line.tb.scale": "Maßstab",
-  "line.tb.format": "Format",
-  "line.tb.date": "Stand",
   "line.tb.subject": "Motiv",
   "line.tb.city": "Stadt",
   "line.tb.price": "Preis",
@@ -171,10 +168,10 @@ const de: Record<string, string> = {
   // ── Projekte (Renderings) ─────────────────────────────────────────
   "projects.client.private": "Privatkunde",
   "projects.desc.sanktgores": "Fotorealistische Außenvisualisierung eines modernen Einfamilienhauses in NRW.",
-  "projects.desc.teahouse": "Stimmungsvolle Visualisierung eines japanisch inspirierten Teehauses.",
-  "projects.desc.beatbuilding": "Visualisierung eines urbanen Kulturgebäudes mit markanter Fassade.",
+  "projects.desc.teahouse": "Visualisierung eines japanisch inspirierten Teehauses im Garten.",
+  "projects.desc.beatbuilding": "Visualisierung eines urbanen Kulturgebäudes.",
   "projects.desc.binome": "Innen- und Außenvisualisierung eines minimalistischen Wohnprojekts.",
-  "projects.desc.ipehouse": "Elegante Visualisierung eines modernen Hauses mit Ipe-Holzfassade.",
+  "projects.desc.ipehouse": "Visualisierung eines modernen Hauses mit Ipe-Holzfassade.",
   "projects.desc.velostation": "Architekturvisualisierung einer modernen Fahrradstation im urbanen Raum.",
 
   // ── Footer ────────────────────────────────────────────────────────
@@ -204,6 +201,7 @@ const de: Record<string, string> = {
   "nav.prozess": "prozess.",
   "nav.contact": "contact.",
   "aria.home": "nokta, Startseite",
+  "aria.punkt": "Der Punkt",
   "aria.mainNav": "Hauptnavigation",
   "aria.language": "Sprache wählen",
 };

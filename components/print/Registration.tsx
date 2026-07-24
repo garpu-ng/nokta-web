@@ -1,8 +1,8 @@
 import styles from "./Registration.module.css";
 
 /* Registration mark — the circle-and-cross a press uses to align the colour
-   separations onto one another. Lifted verbatim from NoktaHero and promoted to
-   the shared kit. This renders only the mark; the host positions and sizes it
+   separations onto one another. Part of the shared print-vocabulary kit.
+   This renders only the mark; the host positions and sizes it
    (via `className`). Stroke is currentColor, so it reads on paper or ink; tune
    its strength with the --reg-opacity custom property (default 0.5). Purely
    decorative (aria-hidden). */

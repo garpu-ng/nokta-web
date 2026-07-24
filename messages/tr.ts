@@ -91,12 +91,12 @@ const tr: Record<string, string> = {
   "point.plate.label": "Bir sistem ve bir sapma",
   "point.plate.spec": "n çalışması · 536 × 918 px · tek vurgu",
   "point.plate.alt": "Açık renk bir tabaka üzerinde siyah, tekrar eden kalın italik küçük „n“ harflerinden oluşan bir ızgara; içinde desenden çıkan tek bir kobalt mavisi „n“.",
-  "point.plate.text": "İşler arasında bunun gibi çalışmalar çıkıyor: tabaka üzerinde siyah, kalın italik n’lerden bir ızgara. Her şey sistemi izliyor — sıradan çıkan tek bir kobalt n dışında. En çok böyle çalışmayı seviyoruz: net bir düzen, bilinçli bir kırılma.",
+  "point.plate.text": "Tabaka üzerinde siyah, kalın italik n’lerden bir ızgara. Her şey sistemi izliyor — sıradan çıkan tek bir kobalt n dışında.",
 
   // ── Stüdyo el kitabı (Leuchtturm) ─────────────────────────────────
   "point.manual.kicker": "stüdyo el kitabı · kurallar",
   "point.manual.label": "Leuchtturm",
-  "point.manual.text": "Leuchtturm bizim stüdyo el kitabımız: tipografi kuralları, ızgara, renk sistemi ve baskı standartları — buradaki her işin başladığı her şey. Satılık değil; biz ondan çalışıyoruz. Ama daha kapağı bile kitapları nasıl düşündüğümüzü gösteriyor: inşa edilmiş nesneler olarak.",
+  "point.manual.text": "Leuchtturm bizim stüdyo el kitabımız: tipografi kuralları, ızgara, renk sistemi ve baskı standartları — buradaki her işin başladığı her şey. Satılık değil; biz ondan çalışıyoruz.",
   "point.manual.spec": "leuchtturm · stüdyo içi el kitabı · sürekli genişliyor",
   "point.manual.alt": "„Leuchtturm“ stüdyo el kitabının taranmış kapağı: grenli siyah-beyaz, üstte aralıklı mono büyük harflerle „NOKTA STUDIO – LEUCHTTURM“ yazan siyah bir bant, altında gri tonlarında, hafifçe döndürülmüş, dikey istiflenmiş beş nokta glifi; gri köşe blokları ve görünür bir katlama izi.",
 
@@ -104,7 +104,7 @@ const tr: Record<string, string> = {
   "studio.heading": "Stüdyo",
   "studio.caption": "tasarım stüdyosu · düsseldorf · nrw",
   "studio.p1": "nokta, Düsseldorf’ta bir tasarım stüdyosu. Üç kişiyiz; yapılar, kitaplar ve baskılar çiziyoruz: mimari görselleştirme, editoryal ve dizgi, baskı üretimi ve CAD planları.",
-  "studio.p2": "Araçlarımızı ve iş akışlarımızı kendimiz kuruyoruz: render kurulumları, dizgi şablonları ve baskı öncesi kontrol adımları. Bir projenin başında masada tek bir varyasyon değil, birkaç tanesi durur.",
+  "studio.p2": "Araçlarımızı ve iş akışlarımızı kendimiz kuruyoruz: render kurulumları, dizgi şablonları ve baskı öncesi kontrol adımları. Bir projenin başında masada birkaç varyasyon durur.",
   "studio.p3": "İşe mimari görselleştirmeyle başladık; bugün de işin en büyük bölümü o. Fotogerçekçi 3B render’lar, içeride ve dışarıda: ışık, malzeme, mekân. Proje, sonradan nasıl görünecekse öyle — ilk taş konmadan çok önce.",
   "studio.team": "Ekip",
   "studio.role.kaan": "Tasarım · Konsept",
@@ -117,7 +117,7 @@ const tr: Record<string, string> = {
 
   // ── Süreç ─────────────────────────────────────────────────────────
   "prozess.heading": "Nasıl çalışıyoruz",
-  "prozess.intro": "İlk eskizden bitmiş görsele: net bir akış. Kendi kurulumumuzla hızlıca birçok varyasyona ulaşıyoruz, kararı sen veriyorsun.",
+  "prozess.intro": "İlk eskizden bitmiş görsele: net bir akış. Kendi kurulumumuzla birçok varyasyona ulaşıyoruz, kararı sen veriyorsun.",
   "prozess.gifAlt": "Sürece genel bakış",
   "prozess.step.1.title": "Konsept & Referanslar",
   "prozess.step.1.text": "Her şey senin fikrinle başlar. Bize planları, eskizleri ve referansları gönderirsin, görselin nasıl bir his vermesi gerektiğini birlikte netleştiririz. Başlamadan önce temel böyle oturur.",
@@ -137,10 +137,6 @@ const tr: Record<string, string> = {
   "kontakt.mailAria": "E-posta yaz",
 
   // ── Çizgi baskılar — künye, spesifikasyon, satın alma (/arbeiten/[slug]) ─
-  "line.tb.sheet": "Pafta",
-  "line.tb.scale": "Ölçek",
-  "line.tb.format": "Format",
-  "line.tb.date": "Tarih",
   "line.tb.subject": "Motif",
   "line.tb.city": "Şehir",
   "line.tb.price": "Fiyat",
@@ -160,10 +156,10 @@ const tr: Record<string, string> = {
   // ── Projeler (render’lar) ─────────────────────────────────────────
   "projects.client.private": "Bireysel müşteri",
   "projects.desc.sanktgores": "Almanya’da modern bir müstakil evin fotogerçekçi dış görselleştirmesi.",
-  "projects.desc.teahouse": "Japon esintili bir çay evinin atmosferik görselleştirmesi.",
-  "projects.desc.beatbuilding": "Çarpıcı cepheli kentsel bir kültür binasının görselleştirmesi.",
+  "projects.desc.teahouse": "Japon esintili bir bahçe çay evinin görselleştirmesi.",
+  "projects.desc.beatbuilding": "Kentsel bir kültür binasının görselleştirmesi.",
   "projects.desc.binome": "Minimalist bir konut projesinin iç ve dış görselleştirmesi.",
-  "projects.desc.ipehouse": "Ipe ahşap cepheli modern bir evin zarif görselleştirmesi.",
+  "projects.desc.ipehouse": "Ipe ahşap cepheli modern bir evin görselleştirmesi.",
   "projects.desc.velostation": "Kentsel alanda modern bir bisiklet istasyonunun mimari görselleştirmesi.",
 
   // ── Alt bilgi ─────────────────────────────────────────────────────
@@ -191,6 +187,7 @@ const tr: Record<string, string> = {
   "nav.prozess": "süreç.",
   "nav.contact": "iletişim.",
   "aria.home": "nokta, ana sayfa",
+  "aria.punkt": "Nokta",
   "aria.mainNav": "Ana gezinme",
   "aria.language": "Dil seç",
 };

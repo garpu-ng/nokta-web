@@ -5,7 +5,7 @@ import Registration from "@/components/print/Registration";
 import styles from "./CaseStudy.module.css";
 
 /* Featured commission — the flagship editorial job that shows, rather than
-   tells, what nokta.point does. Six spreads from the KI-Kommission
+   tells, what the studio does. Six spreads from the KI-Kommission
    Abschlussbericht are laid out as a horizontal proof-sheet strip: a plain
    scroll-snap list (no carousel state), keyboard-scrollable and fully rendered
    without JS. Each proof carries a mono caption naming the design decision it

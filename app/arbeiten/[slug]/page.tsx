@@ -24,6 +24,8 @@ import styles from "./page.module.css";
 
 type Props = { params: Promise<{ slug: string }> };
 
+// Currently inert (the locale cookie keeps every page dynamic), but kept so the
+// route prerenders the moment i18n moves off cookies.
 export function generateStaticParams() {
   return WORKS.map((work) => ({ slug: work.slug }));
 }

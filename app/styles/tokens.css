@@ -5,6 +5,8 @@
    and --accent is the studio's red: one coloured mark per view (the dot after
    the wordmark, the motto's closing period, a label's trailing point), never a
    surface. Dark sections (footer, the contact band) are ink, not accent.
+   One deliberate exception: the contact band's disc is the brand dot at scale
+   — the single place the accent is allowed to be a field.
    Every module reads these variables rather than hardcoding a colour.
    NOTE: the same three values live in lib/colors.ts for the places that need a
    literal (the generated OG cards, inline SVG marks) — keep them in sync.

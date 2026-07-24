@@ -34,6 +34,14 @@
   color: #e9e0ce;
   text-decoration: none;
 }
+.mark a {
+  color: inherit;
+  text-decoration: none;
+}
+/* The wordmark's closing period — the footer's one accent mark. */
+.mark .punkt {
+  color: var(--accent);
+}
 .tag {
   margin: 1.25rem 0 1.5rem;
   font-size: 0.9rem;

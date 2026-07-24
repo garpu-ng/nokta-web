@@ -11,8 +11,8 @@
    layout is designed for the border-box model) plus the mobile
    text-size-adjust guard.
 
-   Also holds the two cross-cutting themed utilities used across pages
-   (.nk-dot) and the per-navigation content fade (.nk-page-fade).
+   Also holds the cross-cutting utilities used across pages (.nk-mono-caption,
+   .nk-grain) and the per-navigation content fade (.nk-page-fade).
    ══════════════════════════════════════════════════════════════════ */
 
 /* Document reset — border-box everywhere. The whole site is laid out for it;
@@ -77,12 +77,6 @@ textarea {
 }
 
 /* ── Cross-cutting utilities ─────────────────────────────────────────── */
-
-/* The red dot — the studio's one coloured mark, wherever a wordmark or a
-   heading closes with a period. */
-.nk-dot {
-  color: var(--accent);
-}
 
 /* ── Space Mono micro-caption ────────────────────────────────────────
    The lowercase technical-annotation voice worn by every branch hero

@@ -1,4 +1,4 @@
-// nokta.line catalogue — framed CAD line-art prints of iconic buildings.
+// The CAD line-print catalogue — framed line-art prints of iconic buildings.
 // Display artwork lives in /public/line/<slug>.webp (a screen-resolution
 // preview on white paper — the print-ready vector master is kept out of the
 // public bundle since the prints are a paid product). Metadata

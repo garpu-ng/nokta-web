@@ -99,12 +99,12 @@ const en: Record<string, string> = {
   "point.plate.label": "A system and one deviation",
   "point.plate.spec": "n study · 536 × 918 px · one accent",
   "point.plate.alt": "Grid of repeated bold italic lowercase letters “n”, black on a light sheet, with a single “n” in cobalt blue breaking out of the pattern.",
-  "point.plate.text": "Between commissions we make studies like this one: a grid of bold, italic n’s, black on the sheet. Everything follows the system — except a single cobalt n that steps out of line. This is how we like to work: clear order, one deliberate break.",
+  "point.plate.text": "A grid of bold, italic n’s, black on the sheet. Everything follows the system — except a single cobalt n that steps out of line.",
 
   // ── House manual (Leuchtturm) ─────────────────────────────────────
   "point.manual.kicker": "house manual · rulebook",
   "point.manual.label": "Leuchtturm",
-  "point.manual.text": "Leuchtturm is our house manual: typographic rules, the grid, the colour system and the print standards — everything every job here starts from. It isn’t for sale; we work from it. But the cover alone shows how we think about books: as built objects.",
+  "point.manual.text": "Leuchtturm is our house manual: typographic rules, the grid, the colour system and the print standards — everything every job here starts from. It isn’t for sale; we work from it.",
   "point.manual.spec": "leuchtturm · in-house manual · continually extended",
   "point.manual.alt": "Scanned cover of the house manual “Leuchtturm”: grainy black and white, a black bar at the top reading “NOKTA STUDIO – LEUCHTTURM” in spaced mono capitals, below it the five nokta glyphs stacked vertically in shades of grey, slightly rotated, with grey corner patches and a visible fold line.",
 
@@ -112,7 +112,7 @@ const en: Record<string, string> = {
   "studio.heading": "Studio",
   "studio.caption": "design studio · düsseldorf · nrw",
   "studio.p1": "nokta is a design studio in Düsseldorf. There are three of us, and we draw buildings, books and prints: architectural visualisation, editorial and typesetting, print production and CAD plans.",
-  "studio.p2": "We build our own tools and workflows: render setups, typesetting templates and prepress checks. At the start of a project there are several versions on the table, not one.",
+  "studio.p2": "We build our own tools and workflows: render setups, typesetting templates and prepress checks. At the start of a project there are several versions on the table.",
   "studio.p3": "We started with architectural visualisation; it is still the largest part of the work. Photorealistic 3D renderings, interior and exterior: light, material, space. The project as it will look — long before the first stone is laid.",
   "studio.team": "The team",
   "studio.role.kaan": "Design · Concept",
@@ -126,7 +126,7 @@ const en: Record<string, string> = {
 
   // ── Process ───────────────────────────────────────────────────────
   "prozess.heading": "How we work",
-  "prozess.intro": "From the first sketch to the finished image: a clear flow. With our own setup we get to many variations fast, and you decide.",
+  "prozess.intro": "From the first sketch to the finished image: a clear flow. With our own setup we get to many variations, and you decide.",
   "prozess.gifAlt": "Process at a glance",
   "prozess.step.1.title": "Concept & References",
   "prozess.step.1.text": "It starts with your idea. You send us plans, sketches and references, and together we work out how the image should feel. That’s the base, before we get going.",
@@ -146,10 +146,6 @@ const en: Record<string, string> = {
   "kontakt.mailAria": "Write an email",
 
   // ── Line prints — passport, specification, purchase (/arbeiten/[slug]) ─
-  "line.tb.sheet": "Sheet",
-  "line.tb.scale": "Scale",
-  "line.tb.format": "Format",
-  "line.tb.date": "As of",
   "line.tb.subject": "Subject",
   "line.tb.city": "City",
   "line.tb.price": "Price",
@@ -169,10 +165,10 @@ const en: Record<string, string> = {
   // ── Projects (renderings) ─────────────────────────────────────────
   "projects.client.private": "Private client",
   "projects.desc.sanktgores": "Photorealistic exterior visualisation of a modern single-family home in Germany.",
-  "projects.desc.teahouse": "Atmospheric visualisation of a Japanese-inspired tea house.",
-  "projects.desc.beatbuilding": "Visualisation of an urban cultural building with a striking façade.",
+  "projects.desc.teahouse": "Visualisation of a Japanese-inspired garden tea house.",
+  "projects.desc.beatbuilding": "Visualisation of an urban cultural building.",
   "projects.desc.binome": "Interior and exterior visualisation of a minimalist residential project.",
-  "projects.desc.ipehouse": "Elegant visualisation of a modern house with an ipe wood façade.",
+  "projects.desc.ipehouse": "Visualisation of a modern house with an ipe wood façade.",
   "projects.desc.velostation": "Architectural visualisation of a modern bike station in an urban setting.",
 
   // ── Footer ────────────────────────────────────────────────────────
@@ -202,6 +198,7 @@ const en: Record<string, string> = {
   "nav.prozess": "process.",
   "nav.contact": "contact.",
   "aria.home": "nokta, home",
+  "aria.punkt": "The dot",
   "aria.mainNav": "Main navigation",
   "aria.language": "Choose language",
 };

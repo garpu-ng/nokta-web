@@ -42,7 +42,7 @@ export default function DatenschutzPage() {
       <p style={{ opacity: 0.55, fontSize: "0.8rem", marginTop: "3rem" }}>
         Platzhalter: bitte vor Veröffentlichung durch eine vollständige,
         geprüfte Datenschutzerklärung ersetzen (Hosting, Cookies, ggf.
-        Zahlungsdienstleister für nokta.line etc.).
+        Zahlungsdienstleister für die Drucke etc.).
       </p>
     </main>
   );

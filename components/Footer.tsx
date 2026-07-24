@@ -14,9 +14,14 @@ export default async function Footer() {
       <div className={styles.inner}>
         <div className={styles.top}>
           <div className={styles.brand}>
-            <Link href="/" className={styles.mark}>
-              nokta<span>.</span>
-            </Link>
+            <span className={styles.mark}>
+              <Link href="/">nokta</Link>
+              {/* The wordmark's period is the accent mark of the footer — and
+                  the quiet door to the easter egg at /punkt. */}
+              <Link href="/punkt" className={styles.punkt} aria-label={t("aria.punkt")}>
+                .
+              </Link>
+            </span>
             <p className={styles.tag}>
               {t("footer.tag1")}
               <br />
