@@ -539,7 +539,7 @@
 
 /* The sentence's final period, set as the studio's dot — the single accent. */
 .nk-statement-dot {
-  color: #b83636;
+  color: var(--accent);
 }
 
 /* ── The wall ─────────────────────────────────────────────────────── */

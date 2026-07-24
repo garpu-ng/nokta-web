@@ -4,26 +4,17 @@
    The styling layer is split by concern, imported in cascade order:
      styles/tokens.css   → design tokens (paper, ink, the red accent, type)
      styles/base.css     → document reset + our global overrides + utils
-     styles/waarchi.css  → archviz carousel augments — global by
-                           necessity; layered before arch.css so its
-                           !important rules win
      styles/nokta.css    → our studio page + shared page-layout styles (global)
-     styles/arch.css     → Webflow base geometry for the archviz carousel,
-                           extracted from the old public/mir.css. Imported LAST,
-                           exactly where mir.css used to sit in the cascade, so
-                           the effective outcome is unchanged.
    Reusable components are colocated in their own *.module.css files
    (components/Footer.module.css, components/ProjectHeader.module.css, …) and
    the header chrome in app/layout.module.css.
 
-   (History: the /arch pages were previously styled by a render-blocking
-   127 KB Webflow export at public/mir.css, loaded via <link> in layout.tsx.
-   That file is gone; only the archviz rules it was load-bearing for survive,
-   hand-formatted, in styles/arch.css.)
+   (History: an archviz carousel used to live here, styled by a render-blocking
+   127 KB Webflow export at public/mir.css. The export was reduced to
+   styles/arch.css + styles/waarchi.css, and both went out with the carousel
+   itself when the three branch sections became one studio.)
    ══════════════════════════════════════════════════════════════════ */
 
 @import "./styles/tokens.css";
 @import "./styles/base.css";
-@import "./styles/waarchi.css";
 @import "./styles/nokta.css";
-@import "./styles/arch.css";

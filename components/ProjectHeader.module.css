@@ -74,10 +74,11 @@
 }
 
 @media (max-width: 767px) {
-  /* Keep the sticky bar below the top nav. */
+  /* Nothing is pinned above the content any more — the 94px here used to clear
+     the old sticky branch tab bar — so the card floats at the same small offset
+     as on desktop, only narrower. */
   .sticky {
-    top: 94px !important;
-    min-width: 0 !important;
+    min-width: 0;
     max-width: 88vw;
   }
 }

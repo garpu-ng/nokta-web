@@ -9,6 +9,13 @@ import {
 } from "@/lib/locales";
 import styles from "./LanguageToggle.module.css";
 
+// Writing document.cookie is a browser side effect, not React state, so it
+// lives outside the component — which also keeps react-hooks/immutability from
+// reading the assignment as a mutation of an outer-scope value.
+function persistLocale(locale: Locale) {
+  document.cookie = `${LOCALE_COOKIE}=${locale};path=/;max-age=31536000;samesite=lax`;
+}
+
 // Sets the language cookie and re-renders the server tree (router.refresh),
 // so every server component picks up the new locale without a full reload.
 export default function LanguageToggle({
@@ -22,7 +29,7 @@ export default function LanguageToggle({
 
   const choose = (locale: Locale) => {
     if (locale === current) return;
-    document.cookie = `${LOCALE_COOKIE}=${locale};path=/;max-age=31536000;samesite=lax`;
+    persistLocale(locale);
     router.refresh();
   };
 

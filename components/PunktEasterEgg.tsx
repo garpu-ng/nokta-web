@@ -53,6 +53,9 @@ export default function PunktEasterEgg() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [mounted, setMounted] = useState(false);
 
+  // The standard SSR gate for a portal: document.body only exists after mount,
+  // so this one cascading render is the point, not an accident.
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => setMounted(true), []);
 
   useEffect(() => {

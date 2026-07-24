@@ -3,8 +3,8 @@
 
    Historically these sat ON TOP of a render-blocking 127 KB Webflow export
    (public/mir.css) and needed !important to beat its reset (font-family,
-   body{background:#fff}). That export is gone — its archviz rules now live
-   in styles/arch.css — so these overrides are plain rules again.
+   body{background:#fff}). That export is gone — and so, with the branch
+   sections, is the last of it — so these overrides are plain rules again.
 
    The only piece of the old Webflow reset kept here is the part that is
    genuinely load-bearing site-wide: `box-sizing:border-box` (the whole
@@ -44,8 +44,8 @@ body {
   font-family: var(--wa-font);
   /* Carried over from the old Webflow body reset (mir.css set
      `body{font-size:14px;line-height:20px}`). It once anchored the em-based
-     archviz label sizes (.project-name* in arch.css); those rules retired with
-     WorkGrid, but the reset is kept as the site-wide baseline so any remaining
+     archviz label sizes; those rules are long retired, but the reset is kept
+     as the site-wide baseline so any remaining
      em-based sizing does not silently scale up to the 16px default. */
   font-size: 14px;
   line-height: 20px;

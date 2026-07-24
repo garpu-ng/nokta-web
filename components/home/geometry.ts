@@ -1,13 +1,12 @@
-// Deterministic geometry for the home manifesto marks (ProgressionMark and
-// BranchCardMark). Everything here is a pure function of its arguments — no
-// Math.random and no clock reads — so the emitted SVG is byte-identical on the
-// server and the first client render (SSR-stable), and nothing ever moves.
+// Deterministic geometry for the home statement's ProgressionMark. Everything
+// here is a pure function of its arguments — no Math.random and no clock reads
+// — so the emitted SVG is byte-identical on the server and the first client
+// render (SSR-stable), and nothing ever moves.
 
 export type Pt = { x: number; y: number };
 
-/* mulberry32 — the same tiny seeded PRNG used elsewhere on the site
-   (components/line/PlotLine, components/arch/DotField). Kept local so the home
-   marks stay self-contained rather than reaching across the tree. */
+/* mulberry32 — a tiny seeded PRNG, kept local so the mark stays self-contained
+   rather than reaching across the tree. */
 function mulberry32(seed: number) {
   return () => {
     seed |= 0;
@@ -19,10 +18,10 @@ function mulberry32(seed: number) {
 }
 
 /* A pen-plotter path in a `width × height` box: points evenly spaced on x,
-   jittered on y by the seeded PRNG, then joined as Catmull–Rom → cubic Bézier
-   (identical maths to components/line/PlotLine). The first `calm` points stay
-   near the centre line so the plot eases in. Returns the path plus its start /
-   end so the caller can cap the ends with a dot and a crosshair. */
+   jittered on y by the seeded PRNG, then joined as Catmull–Rom → cubic Bézier.
+   The first `calm` points stay near the centre line so the plot eases in.
+   Returns the path plus its start / end so the caller can cap the ends with a
+   dot and a crosshair. */
 export function plotLine(opts: {
   width: number;
   height: number;
@@ -56,8 +55,7 @@ export function plotLine(opts: {
 /* A wireframe cube: a front square and a back square offset by the depth vector
    (dx, dy). Returns two path strings — the nine visible edges (solid) and the
    three edges meeting the enclosed rear vertex (drawn dashed, like construction
-   lines). Purely geometric, so both the lead diagram and the card mark share
-   one definition of "cube". */
+   lines). */
 export function cube(opts: {
   x: number;
   y: number;
@@ -88,27 +86,4 @@ export function cube(opts: {
   // The three edges into the enclosed rear vertex (bbl) sit behind the solid.
   const hidden = [seg(bbl, btl), seg(bbl, bbr), seg(bbl, fbl)].join(" ");
   return { visible, hidden };
-}
-
-/* A circular halftone cluster: dots on a grid clipped to a disc, radius ramped
-   by distance from the centre (the same idea as components/nokta/NoktaHero, in
-   miniature). Deterministic without a PRNG — the pattern is a pure function of
-   the grid. */
-export function halftone(opts: {
-  size: number;
-  step: number;
-  maxR: number;
-  minR?: number;
-}): { x: number; y: number; r: number }[] {
-  const { size, step, maxR, minR = 0.6 } = opts;
-  const c = size / 2;
-  const dots: { x: number; y: number; r: number }[] = [];
-  for (let y = step / 2; y < size; y += step) {
-    for (let x = step / 2; x < size; x += step) {
-      const dist = Math.hypot(x - c, y - c);
-      if (dist > c - step / 2) continue;
-      dots.push({ x, y, r: minR + (maxR - minR) * Math.pow(1 - dist / c, 0.7) });
-    }
-  }
-  return dots;
 }
