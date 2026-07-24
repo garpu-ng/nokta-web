@@ -1,7 +1,8 @@
 # nokta
 
-Website des interdisziplinären Designstudios **nokta** — Design & Druck,
-Architekturvisualisierung (nokta.cube) und CAD-Liniendrucke (nokta.line).
+Website des Designstudios **nokta**, Düsseldorf. Ein Studio, eine Wand:
+alle Arbeiten (Visualisierung, Editorial, Druck, CAD) auf einer Startseite,
+jede Arbeit mit eigener Detailseite unter `/arbeiten/[slug]`.
 Next.js (App Router), Deploy über Vercel (Push auf `main` → Auto-Build).
 
 ---
@@ -14,7 +15,7 @@ abhaken (`[x]`), Neues unten anhängen.
 - [ ] **Kontakt-Mailadresse:** `hallo@nokta-studio.de` überall vereinheitlicht
       (Footer, Kontakt, Impressum, Datenschutz); die Adresse ist aber angenommen —
       die **Mailbox muss noch echt werden** (registrieren/einrichten).
-- [ ] **nokta.line — Checkout:** Stripe **Payment Links in `lib/prints.ts`
+- [ ] **Drucke — Checkout:** Stripe **Payment Links in `lib/prints.ts`
       eintragen** (`paymentLink` pro Druck). Solange leer, fällt der Button auf
       `/kontakt` zurück; sobald eine `buy.stripe.com`-URL drinsteht, ist der Druck
       live — kein Code nötig.
@@ -25,12 +26,12 @@ abhaken (`[x]`), Neues unten anhängen.
       Platzhalter (i18n, alle vier Sprachen). Echtes Portrait unter
       `public/flymemert.mp4` nachreichen und die Karte gegen die `<GifVideo>`-Zeile
       der anderen tauschen (Kommentar in `app/studio/page.tsx`).
-- [ ] **Alt-Routen aufräumen:** `/arch` + `/nokta` existieren nur noch als
-      `permanentRedirect`-Stubs auf `/cube` + `/point` — irgendwann entfernen.
+- [ ] **Alt-Routen aufräumen:** `/point`, `/cube`, `/line`, `/arch`, `/nokta`
+      sind `permanentRedirect`-Stubs auf `/`; `/line/[slug]` + `/projekte/[slug]`
+      leiten auf `/arbeiten/[slug]` — irgendwann entfernen, wenn nichts mehr
+      auf die alten Pfade zeigt.
 - [ ] **Sprachumschalter:** „JA" wird am rechten Rand auf breiten Screens
       abgeschnitten (bestehend).
-- [ ] **Lint:** zwei bestehende Lint-Fehler noch offen
-      (`LanguageToggle.tsx:25`, `PunktEasterEgg.tsx:56`).
 - [ ] **i18n / SEO:** optional eigene `/en`-URLs + `hreflang` (aktuell
       Cookie-basiert, eine URL pro Seite); ggf. Rechtstexte übersetzen.
 - [ ] **Print-Master:** A1-Vektordateien liegen bewusst **nicht** im Repo
@@ -58,5 +59,6 @@ Neue Texte immer zuerst in `messages/de.ts` anlegen, dann in den anderen Sprache
 
 ## Notizen
 
-- Design-Tokens & Farbpalette: `app/styles/tokens.css` (fünf Markenfarben).
-- Der Punkt im Header verlinkt auf ein Easter Egg unter `/punkt`.
+- Design-Tokens & Farbpalette: `app/styles/tokens.css` (drei Farben: Papier,
+  Tinte, der rote Akzent — dieselben Werte in `lib/colors.ts`).
+- Der rote Punkt der Fußzeilen-Wortmarke verlinkt auf ein Easter Egg unter `/punkt`.
