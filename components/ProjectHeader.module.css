@@ -1,9 +1,11 @@
-/* Archviz project detail header + the floating sticky frame that slides in
-   from the top once you scroll past the real header. */
+/* Work detail header + the floating sticky frame that slides in from the top
+   once you scroll past the real header. Sits in the same 1100px content frame
+   as the wall and as the detail bodies below it. */
 
 .header {
-  padding: 6svh 4svw 3svh;
-  padding-left: max(4svw, 220px);
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: clamp(2.5rem, 7vh, 5rem) clamp(20px, 5vw, 48px) clamp(1.5rem, 4vh, 2.5rem);
 }
 
 .header h1 {
@@ -14,19 +16,10 @@
   color: var(--on-brand);
 }
 
-.projectMeta {
-  font-size: 0.75rem;
-  color: rgba(26, 26, 24, 0.5);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-bottom: 1rem;
-}
-
-/* On the coloured project page the in-flow header meta is light; the white
-   sticky card below keeps the dark rgba(26, 26, 24, 0.5). */
-.header .projectMeta {
+.anno {
+  margin: 0;
   color: var(--on-brand);
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
 .back {
@@ -36,6 +29,10 @@
   text-decoration: none;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+}
+
+.back:hover {
+  opacity: 1;
 }
 
 /* Project sticky header — slides in from top, centered. */
@@ -65,17 +62,18 @@
   margin-bottom: 4px;
 }
 
-.stickyMeta {
-  font-size: 0.65rem !important;
-  margin: 0 !important;
+/* The floating card is always paper, so its annotation is always ink — and a
+   size smaller than on the page, to keep the card tight. */
+.stickyAnno {
+  color: #1a1a18;
+  opacity: 0.6;
+}
+.stickyAnno :global(.nk-mono-caption) {
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
 }
 
 @media (max-width: 767px) {
-  .header {
-    padding-left: 5vw !important;
-    padding-right: 5vw !important;
-  }
-
   /* Keep the sticky bar below the top nav. */
   .sticky {
     top: 94px !important;

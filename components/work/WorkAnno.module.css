@@ -1,0 +1,11 @@
+/* The annotation wears the site's mono-caption voice — mono, spaced, quiet —
+   but keeps its own casing: a client is a proper name (BMWE, Stadtplanung NRW)
+   and is stated as it is written, never lowercased into decoration. */
+/* Selector carries the element so it outranks the global .nk-mono-caption
+   utility whatever order the two sheets end up in. */
+span.anno {
+  display: block;
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: none;
+}

@@ -42,13 +42,12 @@ export default async function ProjectPage({ params }: Props) {
 
   return (
     <>
-      {/* Header */}
+      {/* Header. This route is superseded by /arbeiten/[slug] and becomes a
+          redirect stub in the next step of the restructure. */}
       <ProjectHeader
         title={project.title}
-        client={clientLabel}
-        category={t(`projects.cat.${project.category}`)}
-        year={project.year}
-        description={t(`projects.desc.${slug}`)}
+        anno={`${clientLabel} · ${t(`projects.cat.${project.category}`)} · ${project.year}`}
+        backHref="/cube"
         backLabel={t("project.back")}
       />
 

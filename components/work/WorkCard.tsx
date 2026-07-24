@@ -52,7 +52,7 @@ export default function WorkCard({ item }: { item: WallItem }) {
       </span>
       <span className={styles.caption}>
         <span className={styles.title}>{item.title}</span>
-        <WorkAnno anno={item.anno} className={styles.anno} />
+        <WorkAnno anno={item.anno} />
       </span>
     </Link>
   );

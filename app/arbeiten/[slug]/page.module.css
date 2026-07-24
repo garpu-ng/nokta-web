@@ -1,0 +1,155 @@
+/* /arbeiten/[slug] — the shared detail frame plus the print passport, ported
+   from the retired nokta.line product page. The renderings' image stack keeps
+   using the global .wa-project-images vocabulary; the pieces bring their own
+   sections (CaseStudy, ArtPlate, Leuchtturm), all of them already paper-backed
+   and set in this same 1100px measure. */
+
+.body {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 48px);
+}
+
+/* ── Print passport ─────────────────────────────────────────────────── */
+.print {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+}
+
+/* Paper frame the sheet is mounted on. */
+.frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.5rem, 3vw, 2.75rem);
+  background: var(--paper);
+  border: 1px solid var(--ink);
+}
+.art {
+  display: block;
+  max-width: 100%;
+  min-width: 0; /* Safari flex: keep the img from ignoring max-width */
+  height: auto;
+  box-shadow: 0 6px 26px rgba(26, 26, 24, 0.18);
+}
+
+.info {
+  color: var(--on-brand);
+}
+
+/* Schriftfeld — the data engraved on the sheet, restated as the product's
+   centrepiece: a hairline-ruled box of mono, uppercase dt/dd pairs. */
+.passport {
+  margin: 0;
+  border: 1px solid var(--on-brand);
+  background: color-mix(in srgb, var(--on-brand) 5%, transparent);
+  color: var(--on-brand);
+  font-family: var(--mono-font);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.passport > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 0.5rem 0.85rem;
+}
+.passport > div + div {
+  border-top: 1px solid color-mix(in srgb, var(--on-brand) 30%, transparent);
+}
+.passport dt {
+  flex: none;
+  opacity: 0.6;
+}
+.passport dd {
+  margin: 0;
+  min-width: 0;
+  text-align: right;
+}
+
+/* The factual lead — under the passport on a print, on its own above the plate
+   on the n-Studie. */
+.lead {
+  margin: 1.5rem 0 0;
+  max-width: 52ch;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--on-brand);
+  opacity: 0.9;
+}
+
+.buy {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: clamp(1.75rem, 4vh, 2.5rem);
+}
+.price {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--on-brand);
+}
+
+.btn {
+  padding: 8px 16px;
+  border: none;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* ── Prev / next — the wall's running order, one step at a time ─────── */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: clamp(3rem, 8svh, 5rem) auto 0;
+  padding: 1.5rem clamp(20px, 5vw, 48px) clamp(4rem, 9svh, 6rem);
+  border-top: 1px solid color-mix(in srgb, var(--on-brand) 25%, transparent);
+}
+
+.navLink {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.35rem;
+  color: var(--on-brand);
+  text-decoration: none;
+}
+.navNext {
+  text-align: right;
+}
+
+.navTitle {
+  font-family: var(--display-font);
+  font-size: clamp(1rem, 1.8vw, 1.3rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+}
+.navLink:hover .navTitle {
+  opacity: 1;
+}
+
+/* ── Mobile ─────────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .print {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .nav {
+    gap: 1rem;
+  }
+}

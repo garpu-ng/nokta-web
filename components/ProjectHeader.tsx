@@ -1,19 +1,25 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import type { ReactNode } from "react";
 import Link from "next/link";
 import styles from "./ProjectHeader.module.css";
 
+/* The header every piece of work wears: where to go back to, the title, and the
+   one annotation line (kind · year · client-or-Eigenprojekt) — identical to the
+   card the work has on the wall. A floating copy of the title slides in from the
+   top once you have scrolled well past the real header, so a long image stack
+   never loses its label. */
+
 interface Props {
   title: string;
-  client: string;
-  category: string;
-  year: string | number;
-  description: string;
+  /** the pre-translated annotation line, rendered under the title */
+  anno?: ReactNode;
+  backHref: string;
   backLabel: string;
 }
 
-export default function ProjectHeader({ title, client, category, year, description, backLabel }: Props) {
+export default function ProjectHeader({ title, anno, backHref, backLabel }: Props) {
   const headerRef = useRef<HTMLDivElement>(null);
   const [fixed, setFixed] = useState(false);
 
@@ -33,22 +39,15 @@ export default function ProjectHeader({ title, client, category, year, descripti
     <>
       {/* Original header — stays in normal document flow */}
       <div ref={headerRef} className={styles.header}>
-        <Link href="/cube" className={styles.back}>{backLabel}</Link>
+        <Link href={backHref} className={styles.back}>{backLabel}</Link>
         <h1>{title}</h1>
-        <p className={styles.projectMeta}>
-          {client} &nbsp;·&nbsp; {category} &nbsp;·&nbsp; {year}
-        </p>
-        <p style={{ fontSize: "0.95rem", color: "var(--on-brand)", opacity: 0.9, maxWidth: "560px", lineHeight: 1.7 }}>
-          {description}
-        </p>
+        {anno ? <p className={styles.anno}>{anno}</p> : null}
       </div>
 
       {/* Floating sticky frame — slides in from top when scrolled far enough */}
       <div className={`${styles.sticky}${fixed ? " " + styles.stickyVisible : ""}`}>
         <div className={styles.stickyTitle}>{title}</div>
-        <div className={`${styles.projectMeta} ${styles.stickyMeta}`}>
-          {category} &nbsp;·&nbsp; {year}
-        </div>
+        {anno ? <div className={`${styles.anno} ${styles.stickyAnno}`}>{anno}</div> : null}
       </div>
     </>
   );

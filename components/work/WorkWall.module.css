@@ -29,7 +29,9 @@
   font-size: 0.62rem;
   letter-spacing: 0.16em;
   line-height: 1.2;
-  text-transform: lowercase;
+  /* The stamps are the same words the cards are annotated with, spelled the
+     same way — no decorative lowercasing. */
+  text-transform: none;
   white-space: nowrap;
   cursor: pointer;
   transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
