@@ -28,7 +28,7 @@
   line-height: 0.95;
   letter-spacing: -0.02em;
 }
-.labelDot { color: var(--brand-accent); }
+.labelDot { color: var(--accent); }
 
 .body {
   display: grid;

@@ -1,11 +1,13 @@
 /* ══════════════════════════════════════════════════════════════════
    Design tokens — the single source of truth for colour + type.
-   The whole-page "colour wash" is driven entirely from here: data-branch on
-   <html> (server-rendered by app/layout.tsx via proxy.ts, then owned by
-   BranchReveal after hydration) makes these [data-branch] blocks swap the
-   --brand-* variables. Every component/module reads var(--brand-accent)
-   etc. rather than hardcoding a colour.
-   NOTE: branch colours here must stay in sync with lib/branches.ts.
+
+   Three colours, no themes. The page is always paper, the type is always ink,
+   and --accent is the studio's red: one coloured mark per view (the dot after
+   the wordmark, the motto's closing period, a label's trailing point), never a
+   surface. Dark sections (footer, the contact band) are ink, not accent.
+   Every module reads these variables rather than hardcoding a colour.
+   NOTE: the same three values live in lib/colors.ts for the places that need a
+   literal (the generated OG cards, inline SVG marks) — keep them in sync.
    ══════════════════════════════════════════════════════════════════ */
 
 :root {
@@ -13,44 +15,17 @@
   /* Mono display face — sets the two big 4s on the 404 page (the "0" between
      them isn't type at all, it's the brand <Dot> SVG). */
   --mono-font: var(--font-space-mono), ui-monospace, 'SFMono-Regular', Menlo, monospace;
-  /* Shared headline face — used by semantic headings, display titles, and tabs. */
+  /* Shared headline face — used by semantic headings and display titles. */
   --headline-font: var(--font-righteous), Arial, sans-serif;
   /* Keep the existing display token as an alias for component-scoped styles. */
   --display-font: var(--headline-font);
 
-  /* Core (neutral) identity. Each branch overrides --brand-bg and
-     --brand-accent below; the body background transitions between them. */
-  --paper: #e9e0ce;
-  --ink: #1a1a18;
-  --brand-bg: var(--paper);    /* whole-page flood colour */
-  --brand-accent: var(--ink);  /* dot / accents */
-  --on-brand: var(--ink);      /* text sitting directly on the flood colour */
+  /* The studio's colours. */
+  --paper: #e9e0ce; /* the sheet — the background of every page */
+  --ink: #1a1a18;   /* the type, the rules, the dark sections */
+  --accent: #b83636; /* the red mark — a dot, never a wash */
 
-  /* Shared max content width = the four tabs (4 × 400px). The tab bar, the
-     teaser video, and the home pillar all align to this. */
+  /* Shared max content width for the full-bleed chrome (the footer column).
+     Page content itself runs in a narrower 1100px frame. */
   --content-max: 1600px;
-}
-
-/* Branch motto-colours. The page floods this colour; the matching tab shares it
-   so the active tab connects into the page. --on-brand is chosen per branch for
-   legibility (light paper on these dark fills; ink would be used on a light one). */
-:root[data-branch="nokta"] {
-  --brand-bg: #b83636;
-  --brand-accent: #b83636; /* red */
-  --on-brand: var(--paper);
-}
-:root[data-branch="arch"] {
-  --brand-bg: #4b5cbe;
-  --brand-accent: #4b5cbe; /* blue */
-  --on-brand: var(--paper);
-}
-:root[data-branch="line"] {
-  --brand-bg: #5f6f53;
-  --brand-accent: #5f6f53; /* green */
-  --on-brand: var(--paper);
-}
-:root[data-branch="home"] {
-  --brand-bg: #1a1a18;
-  --brand-accent: #1a1a18; /* black */
-  --on-brand: var(--paper); /* paper text on black */
 }

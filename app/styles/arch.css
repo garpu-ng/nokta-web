@@ -28,7 +28,7 @@
        one genuinely load-bearing reset, `* { box-sizing: border-box }`,
        moved to base.css (it is document-wide, not archviz-specific).
      - Webflow's global `img { max-width:100%; height:auto }`, which used
-       to force !important sizing hacks elsewhere (TabBar dot, 404 dot).
+       to force !important sizing hacks elsewhere (the 404 dot).
        Every image on the site sets its own size, so it is simply dropped.
      - unused Webflow class variants (.home/.feed/.studio/.search/.two/
        .architect/.arc/.work/…) that never appear on this markup.

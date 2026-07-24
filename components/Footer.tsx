@@ -1,12 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
-import { BRANCHES } from "@/lib/branches";
 import { getT } from "@/lib/i18n";
 import Registration from "@/components/print/Registration";
 import styles from "./Footer.module.css";
 
-// Global footer — pure black, mirrors the header's centred column. Social links
-// are placeholders (href="#") until the real profiles exist.
+// Global footer — the colophon slab: ink, full width, under every page. Two
+// short link columns (the pages, then the legal ones) plus the contact block.
+// Social links are placeholders (href="#") until the real profiles exist.
 export default async function Footer() {
   const t = await getT();
   return (
@@ -42,22 +42,18 @@ export default async function Footer() {
           />
 
           <nav className={styles.cols} aria-label="Footer">
+            {/* The pages. "Arbeiten" is the home page — the work is the site,
+                so it needs no separate route to point at. */}
             <div className={styles.col}>
-              <span className={styles.colH}>{t("footer.col.disciplines")}</span>
-              <Link href="/" className={styles.link}>
-                nokta.home
-              </Link>
-              {BRANCHES.map((b) => (
-                <Link key={b.key} href={b.path} className={styles.link}>
-                  nokta.<span style={{ color: b.bg }}>{b.label}</span>
-                </Link>
-              ))}
+              <span className={styles.colH}>{t("footer.col.seiten")}</span>
+              <Link href="/" className={styles.link}>{t("footer.link.arbeiten")}</Link>
+              <Link href="/studio" className={styles.link}>{t("footer.link.studio")}</Link>
+              <Link href="/prozess" className={styles.link}>{t("footer.link.prozess")}</Link>
+              <Link href="/kontakt" className={styles.link}>{t("footer.link.kontakt")}</Link>
             </div>
 
             <div className={styles.col}>
-              <span className={styles.colH}>{t("footer.col.studio")}</span>
-              <Link href="/studio" className={styles.link}>{t("footer.link.team")}</Link>
-              <Link href="/kontakt" className={styles.link}>{t("footer.link.kontakt")}</Link>
+              <span className={styles.colH}>{t("footer.col.rechtliches")}</span>
               <Link href="/impressum" className={styles.link}>{t("footer.link.impressum")}</Link>
               <Link href="/datenschutz" className={styles.link}>{t("footer.link.datenschutz")}</Link>
             </div>

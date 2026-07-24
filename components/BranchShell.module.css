@@ -18,18 +18,18 @@
   letter-spacing: -0.04em;
   line-height: 0.95;
   margin: 0;
-  color: var(--on-brand);
+  color: var(--ink);
 }
 
 .title :global(.nk-dot) {
-  color: var(--on-brand);
+  color: var(--ink);
 }
 
 .tag {
   font-size: 0.75rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--on-brand);
+  color: var(--ink);
   opacity: 0.8;
   margin: 0.9rem 0 0;
 }
@@ -37,7 +37,7 @@
 .lead {
   font-size: 1.05rem;
   line-height: 1.7;
-  color: var(--on-brand);
+  color: var(--ink);
   opacity: 0.92;
   max-width: 60ch;
   margin: 1.25rem 0 0;

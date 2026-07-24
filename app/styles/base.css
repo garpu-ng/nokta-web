@@ -24,7 +24,7 @@
 html {
   margin: 0;
   padding: 0;
-  background: var(--brand-bg);
+  background: var(--paper);
   scroll-behavior: smooth;
   /* Stop mobile browsers inflating text on orientation change. */
   -webkit-text-size-adjust: 100%;
@@ -33,9 +33,9 @@ html {
 body {
   margin: 0;
   padding: 0;
-  /* Branch-to-branch transitions are animated by the reveal overlay, so the
-     base bg swaps instantly underneath it. */
-  background: var(--brand-bg);
+  /* One studio, one sheet: every page is paper, top to bottom. Dark sections
+     (footer, contact band) paint ink over it; nothing ever washes the page. */
+  background: var(--paper);
   color: var(--ink);
   /* Everything renders in DM Sans. A plain body rule suffices now that the old
      Webflow reset (html{font-family:sans-serif}) is gone: content inherits
@@ -78,10 +78,10 @@ textarea {
 
 /* ── Cross-cutting utilities ─────────────────────────────────────────── */
 
-/* The accent dot (used in landing + branch headings). */
+/* The red dot — the studio's one coloured mark, wherever a wordmark or a
+   heading closes with a period. */
 .nk-dot {
-  color: var(--brand-accent);
-  transition: color 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--accent);
 }
 
 /* ── Space Mono micro-caption ────────────────────────────────────────

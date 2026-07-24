@@ -3,15 +3,13 @@ import HomeContact from "@/components/HomeContact";
 import ProgressionMark from "@/components/home/ProgressionMark";
 import { toWallItem } from "@/components/work/WorkCard";
 import WorkWall from "@/components/work/WorkWall";
+import { INK, RED } from "@/lib/colors";
 import { getLocale, getT } from "@/lib/i18n";
 import { socialMetadata } from "@/lib/socialMeta";
 import { WORKS, type WorkKind } from "@/lib/works";
 
 // The two colours the progression diagram is drawn in: the studio's red for the
-// opening point, ink for the line and the form. (A later restructure step moves
-// these into lib/colors.ts together with paper and ink.)
-const RED = "#b83636";
-const INK = "#1a1a18";
+// opening point, ink for the line and the form.
 const MARK_COLORS = { point: RED, line: INK, form: INK };
 
 /* The motto is one i18n string with {tokens} so every locale can phrase the

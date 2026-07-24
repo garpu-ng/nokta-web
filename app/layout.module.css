@@ -1,63 +1,41 @@
-/* Persistent header chrome: big wordmark + utility links, above the sticky tabs.
-   Brand row scrolls away with the page; the tab bar sticks to the top. Both sit
-   above page content (z-index) so the colour flood never touches them. */
+/* The site header — the title block of the sheet.
 
-.brandbar {
+   One row on paper: the wordmark on the left, the three pages and the language
+   switch on the right, a hairline underneath. Nothing sticks and nothing floats;
+   it scrolls away with the page like anything else printed on the sheet.
+   It shares the content frame (1100px + the same side padding) with the
+   statement, the wall and the work pages, so the wordmark's left edge sits
+   exactly above the first line of every page. */
+
+.header {
+  /* Positioned so the header always paints above the incoming-page fade
+     (.nk-page-fade, z-index 1) — pages that pull content upward can't cover it. */
   position: relative;
-  z-index: 900;
-  background: var(--paper);
-}
-.tabsticky {
-  position: sticky;
-  top: 0;
-  z-index: 900;
+  z-index: 2;
   background: var(--paper);
 }
 
-/* Centred column, capped at the tab group's width. Keeps the tabs centred on
-   wide screens while the logo (padding-left: 0) anchors to the group's left edge. */
-.topbarInner {
-  max-width: var(--content-max);
+.inner {
+  max-width: 1100px;
   margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 48px);
 }
 
-/* Brand row: logo anchored left, utility stack anchored right. */
-.topbarRow {
+/* The hairline is drawn on the row, not the header, so it stops at the content
+   frame instead of running the full width of the window — a trim line, not a
+   toolbar edge. */
+.row {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
   gap: 1.5rem;
-}
-
-/* Plain-text utility links, right-aligned, vertically centred in the brand row. */
-.utility {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  align-self: center;
-  gap: 1.25rem;
-}
-
-.util {
-  color: var(--ink);
-  font-size: 0.72rem;
-  line-height: 1.2;
-  font-weight: 500;
-  letter-spacing: 0.03em;
-  text-decoration: none;
-  transition: opacity 0.18s ease;
-}
-.util:hover {
-  opacity: 0.55;
+  padding: clamp(20px, 4vw, 34px) 0 clamp(12px, 2vw, 18px);
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 18%, transparent);
 }
 
 .brand {
   display: inline-block;
   flex-shrink: 0;
-  /* left padding is 0 so the logo's left edge sits on the border, exactly
-     above the flush-left nokta.home tab */
-  padding: clamp(20px, 4vw, 34px) clamp(16px, 4vw, 40px) clamp(12px, 2vw, 18px) 0;
   line-height: 0;
 }
 .brandWord {
@@ -66,7 +44,7 @@
   text-decoration: none;
 }
 /* Wordmark logo. The asset is black on transparent, so it drops straight onto
-   the light (paper) header. */
+   the paper. */
 .brandLogo {
   display: block;
   height: clamp(1.7rem, 4.2vw, 2.9rem);
@@ -74,32 +52,45 @@
   user-select: none;
 }
 
-/* ── Mobile header ────────────────────────────────────────────────
-   Next to the wordmark there's only ~210px on a 360px phone — not enough for
-   all four utility words, so they used to wrap awkwardly (…contact. on line 1,
-   datenschutz. + the language switch orphaned on line 2). On mobile, stack the
-   brand row so the utility gets the full width beneath the wordmark: the four
-   words then sit on one line, with the language switch on its own line below.
-   Desktop (brand-left / utility-right on one row) is untouched. */
+/* Three pages plus the language switch, set small and quiet — they name the
+   rest of the sheet, they don't compete with the work. */
+.nav {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: flex-end;
+  column-gap: 1.25rem;
+  row-gap: 0.55rem;
+}
+
+.navLink {
+  color: var(--ink);
+  font-size: 0.72rem;
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  transition: opacity 0.18s ease;
+}
+.navLink:hover {
+  opacity: 0.55;
+}
+
+/* ── Phone ───────────────────────────────────────────────────────────
+   On a 390px screen the wordmark leaves ~200px next to it — enough for the
+   three words but not for the language switch as well. Stack instead: wordmark
+   on its own line, the nav right-aligned beneath it. The nav still wraps as a
+   unit, so if a locale set ever grows the switch simply drops to a line of its
+   own rather than breaking mid-row. */
 @media (max-width: 767px) {
-  .topbarRow {
+  .row {
     flex-direction: column;
     align-items: stretch;
-    gap: 0;
+    gap: 0.75rem;
+    padding-top: clamp(16px, 4vw, 24px);
   }
-  .utility {
-    justify-content: flex-end;
-    align-self: stretch;
-    align-items: baseline;
+  .nav {
     column-gap: 1rem;
-    row-gap: 0.55rem;
-    padding-bottom: clamp(12px, 3vw, 18px);
-  }
-  /* The language switch is the last child → give it a full row of its own,
-     right-aligned under the words (the wordmark stays anchored left). */
-  .utility > :last-child {
-    flex-basis: 100%;
-    display: flex;
-    justify-content: flex-end;
   }
 }

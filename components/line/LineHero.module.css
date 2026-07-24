@@ -14,10 +14,10 @@
      the wordmark baseline stays aligned with /arch and /nokta. */
   padding-bottom: max(1rem, calc(var(--hero-inset) - 3.4rem));
   background:
-    linear-gradient(color-mix(in srgb, var(--brand-accent) 22%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in srgb, var(--brand-accent) 22%, transparent) 1px, transparent 1px),
-    linear-gradient(color-mix(in srgb, var(--brand-accent) 10%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in srgb, var(--brand-accent) 10%, transparent) 1px, transparent 1px),
+    linear-gradient(color-mix(in srgb, var(--ink) 22%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--ink) 22%, transparent) 1px, transparent 1px),
+    linear-gradient(color-mix(in srgb, var(--ink) 10%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--ink) 10%, transparent) 1px, transparent 1px),
     var(--paper);
   background-size: 40px 40px, 40px 40px, 8px 8px, 8px 8px, auto;
 }
@@ -34,7 +34,7 @@
 }
 
 .titleDot {
-  color: var(--brand-accent);
+  color: var(--accent);
 }
 
 .dim {

@@ -1,12 +1,8 @@
 import type { Metadata } from "next";
 import { DM_Sans, Space_Mono, Righteous } from "next/font/google";
-import { headers } from "next/headers";
 import Link from "next/link";
 import Image from "next/image";
 import "./globals.css";
-import { branchForPath, NK_PATHNAME_HEADER } from "@/lib/branches";
-import TabBar from "@/components/TabBar";
-import BranchReveal from "@/components/BranchReveal";
 import Footer from "@/components/Footer";
 import LanguageToggle from "@/components/LanguageToggle";
 import { getLocale, getT } from "@/lib/i18n";
@@ -53,8 +49,8 @@ export async function generateMetadata(): Promise<Metadata> {
     metadataBase: new URL("https://www.nokta-studio.de"),
     // Studio-wide default social card. No `path` → no og:url here, so the
     // pages that inherit this block (studio, kontakt, legal…) don't pick up a
-    // wrong canonical; branch pages set their own url. The card image comes
-    // from app/opengraph-image.tsx + app/twitter-image.tsx.
+    // wrong canonical; home and the work pages set their own url. The card
+    // image comes from app/opengraph-image.tsx + app/twitter-image.tsx.
     ...socialMetadata({ title, description, locale }),
   };
 }
@@ -66,20 +62,6 @@ export default async function RootLayout({
 }) {
   const locale = await getLocale();
   const t = await getT();
-  // Branch theme at first paint: proxy.ts forwards the request pathname in a
-  // header, and mapping it through branchForPath here bakes data-branch into
-  // the server HTML — so the colour wash is correct before hydration and
-  // without JS. After hydration, BranchReveal owns the attribute (its first
-  // effect re-applies this same value, a no-op). If the header is ever missing
-  // (proxy skipped), fall back to the neutral core rather than guessing.
-  const pathname = (await headers()).get(NK_PATHNAME_HEADER);
-  const branch = pathname ? branchForPath(pathname) : null;
-  const taglines = {
-    home: t("branch.home.tag"),
-    nokta: t("branch.nokta.tag"),
-    arch: t("branch.arch.tag"),
-    line: t("branch.line.tag"),
-  };
   return (
     // data-scroll-behavior="smooth" → Next disables smooth scrolling *during
     // route transitions* (so navigation lands cleanly at the top) while keeping
@@ -87,22 +69,21 @@ export default async function RootLayout({
     <html
       lang={locale}
       data-scroll-behavior="smooth"
-      data-branch={branch ?? undefined}
       className={`${dmSans.variable} ${spaceMono.variable} ${righteous.variable}`}
     >
       {/* suppressHydrationWarning: browser extensions (e.g. asbplayer) inject
           attributes on <body> before React hydrates; this scopes the warning
           to <body> only and doesn't hide real mismatches elsewhere. */}
       <body suppressHydrationWarning>
-        {/* colour-flood overlay (sits below the header, above content) */}
-        <BranchReveal />
-
-        {/* Brand row — wordmark + utility links. Scrolls away with the page. */}
-        <header className={styles.brandbar}>
-          <div className={styles.topbarInner}>
-            <div className={styles.topbarRow}>
-              {/* Logo links home. (Testing a new wordmark logo — the standalone
-                  dot easter egg is parked for now.) */}
+        {/* The header is the title block of a sheet, not an app bar: the
+            wordmark left, three pages and the language right, one hairline
+            underneath. It scrolls away with the page — nothing sticks.
+            Impressum and Datenschutz are not pages you navigate to, they are
+            pages you look up: they stay in the footer. */}
+        <header className={styles.header}>
+          <div className={styles.inner}>
+            <div className={styles.row}>
+              {/* The logo links home, and home is the work. */}
               <div className={styles.brand}>
                 <Link href="/" className={styles.brandWord} aria-label={t("aria.home")}>
                   {/* Brand wordmark — above the fold on every page, so preload it.
@@ -118,23 +99,15 @@ export default async function RootLayout({
                   />
                 </Link>
               </div>
-              <nav className={styles.utility} aria-label={t("aria.morePages")}>
-                <Link href="/studio" className={styles.util}>{t("nav.team")}</Link>
-                <Link href="/impressum" className={styles.util}>{t("nav.impressum")}</Link>
-                <Link href="/kontakt" className={styles.util}>{t("nav.contact")}</Link>
-                <Link href="/datenschutz" className={styles.util}>{t("nav.datenschutz")}</Link>
+              <nav className={styles.nav} aria-label={t("aria.mainNav")}>
+                <Link href="/studio" className={styles.navLink}>{t("nav.studio")}</Link>
+                <Link href="/prozess" className={styles.navLink}>{t("nav.prozess")}</Link>
+                <Link href="/kontakt" className={styles.navLink}>{t("nav.contact")}</Link>
                 <LanguageToggle current={locale} label={t("aria.language")} />
               </nav>
             </div>
           </div>
         </header>
-
-        {/* Tab bar — sticks to the top of the viewport once reached. */}
-        <div className={styles.tabsticky}>
-          <div className={styles.topbarInner}>
-            <TabBar taglines={taglines} navLabel={t("aria.mainNav")} />
-          </div>
-        </div>
 
         {children}
 

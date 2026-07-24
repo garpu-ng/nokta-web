@@ -215,8 +215,13 @@ const de: Record<string, string> = {
   "footer.tag2": "Vom Punkt zur Linie zur Form.",
   "footer.col.disciplines": "Disziplinen",
   "footer.col.studio": "Studio",
+  "footer.col.seiten": "Seiten",
+  "footer.col.rechtliches": "Rechtliches",
   "footer.col.social": "Social",
   "footer.link.team": "team",
+  "footer.link.arbeiten": "arbeiten",
+  "footer.link.studio": "studio",
+  "footer.link.prozess": "prozess",
   "footer.link.kontakt": "kontakt",
   "footer.link.impressum": "impressum",
   "footer.link.datenschutz": "datenschutz",
@@ -230,6 +235,8 @@ const de: Record<string, string> = {
 
   // ── Header nav / aria ─────────────────────────────────────────────
   "nav.team": "team.",
+  "nav.studio": "studio.",
+  "nav.prozess": "prozess.",
   "nav.impressum": "impressum.",
   "nav.contact": "contact.",
   "nav.datenschutz": "datenschutz.",

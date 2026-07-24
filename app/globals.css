@@ -2,7 +2,7 @@
    globals.css — entry point only.
 
    The styling layer is split by concern, imported in cascade order:
-     styles/tokens.css   → design tokens + [data-branch] theme wash
+     styles/tokens.css   → design tokens (paper, ink, the red accent, type)
      styles/base.css     → document reset + our global overrides + utils
      styles/waarchi.css  → archviz carousel augments — global by
                            necessity; layered before arch.css so its
@@ -13,8 +13,8 @@
                            exactly where mir.css used to sit in the cascade, so
                            the effective outcome is unchanged.
    Reusable components are colocated in their own *.module.css files
-   (components/Footer.module.css, components/TabBar.module.css, …) and the
-   header chrome in app/layout.module.css.
+   (components/Footer.module.css, components/ProjectHeader.module.css, …) and
+   the header chrome in app/layout.module.css.
 
    (History: the /arch pages were previously styled by a render-blocking
    127 KB Webflow export at public/mir.css, loaded via <link> in layout.tsx.

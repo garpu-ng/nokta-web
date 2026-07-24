@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: var(--brand-accent);
+  background: var(--ink);
 }
 .registration {
   position: absolute;
@@ -54,7 +54,7 @@
 }
 .cta:hover {
   background: var(--paper);
-  color: var(--brand-accent);
+  color: var(--ink);
 }
 .cta:focus-visible {
   outline: 2px solid var(--paper);

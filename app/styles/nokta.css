@@ -8,8 +8,8 @@
    Because this vocabulary is shared across pages (with descendant-coupled
    overrides like `.wa-kontakt-page .wa-prozess-header`), it is kept as one
    organized global stylesheet rather than fragmented into per-page modules.
-   Reusable *components* live in their own *.module.css (Footer, TabBar,
-   ProjectHeader, …); this file is for page/shared layout.
+   Reusable *components* live in their own *.module.css (Footer, ProjectHeader,
+   …); this file is for page/shared layout.
    ══════════════════════════════════════════════════════════════════ */
 
 /* ── Studio page ──────────────────────────────────────────────── */
@@ -21,6 +21,17 @@
   padding: 8svh max(4svw, 220px) 10svh;
   max-width: 1500px;
   margin: 0 auto;
+}
+
+/* The service index is a full-width section carrying its own frame, so it
+   breaks the studio column in two. The block that follows it (the CTA row)
+   must not repeat the column's top inset — the index's own bottom padding
+   already holds them apart. */
+.wa-studio-tail {
+  padding-top: 0;
+}
+.wa-studio-tail .wa-studio-cta {
+  margin-top: 0;
 }
 
 /* Hero: large heading left, text right */

@@ -13,18 +13,18 @@
   font-weight: 600;
   letter-spacing: -0.02em;
   margin: 1rem 0 0.5rem;
-  color: var(--on-brand);
+  color: var(--ink);
 }
 
 .anno {
   margin: 0;
-  color: var(--on-brand);
+  color: var(--ink);
   opacity: 0.85;
 }
 
 .back {
   font-size: 0.72rem;
-  color: var(--on-brand);
+  color: var(--ink);
   opacity: 0.7;
   text-decoration: none;
   letter-spacing: 0.1em;

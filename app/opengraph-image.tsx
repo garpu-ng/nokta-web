@@ -9,7 +9,7 @@
 
 import { makeTranslate } from "@/lib/i18n";
 import { DEFAULT_LOCALE } from "@/lib/locales";
-import { INK } from "@/lib/branches";
+import { INK } from "@/lib/colors";
 import { renderOgImage, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/og";
 
 const t = makeTranslate(DEFAULT_LOCALE);

@@ -80,9 +80,13 @@
   line-height: 1.05;
 }
 
-.titleDot,
+/* The trailing dot is the one coloured mark; the call to action is ink like
+   every other line of type on the sheet. */
+.titleDot {
+  color: var(--accent);
+}
 .cta {
-  color: var(--brand-accent);
+  color: var(--ink);
 }
 
 .meta,
@@ -127,11 +131,11 @@
 
 .print:hover .frame,
 .print:focus-visible .frame {
-  outline-color: var(--brand-accent);
+  outline-color: var(--ink);
 }
 
 .print:focus-visible {
-  outline: 2px solid var(--brand-accent);
+  outline: 2px solid var(--ink);
   outline-offset: 5px;
 }
 

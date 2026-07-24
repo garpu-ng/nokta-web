@@ -79,12 +79,12 @@ export default async function ProjectPage({ params }: Props) {
         }}
       >
         {prev && (
-          <Link href={`/projekte/${prev.slug}`} style={{ fontSize: "0.95rem", color: "var(--on-brand)", opacity: 0.85, textDecoration: "none" }}>
+          <Link href={`/projekte/${prev.slug}`} style={{ fontSize: "0.95rem", color: "var(--ink)", opacity: 0.85, textDecoration: "none" }}>
             ← {prev.title}
           </Link>
         )}
         {next && (
-          <Link href={`/projekte/${next.slug}`} style={{ fontSize: "0.95rem", color: "var(--on-brand)", opacity: 0.85, textDecoration: "none" }}>
+          <Link href={`/projekte/${next.slug}`} style={{ fontSize: "0.95rem", color: "var(--ink)", opacity: 0.85, textDecoration: "none" }}>
             {next.title} →
           </Link>
         )}

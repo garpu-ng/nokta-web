@@ -82,7 +82,7 @@
   line-height: 0.9;
   letter-spacing: -0.02em;
 }
-.titleDot { color: var(--brand-accent); }
+.titleDot { color: var(--accent); }
 
 /* Mono styling now comes from the global .nk-mono-caption utility; this class
    keeps only the hero-specific placement (lifting the caption above the raster

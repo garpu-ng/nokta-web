@@ -83,7 +83,7 @@
   margin-top: 0.9rem;
 }
 .dotAccent {
-  color: var(--brand-accent);
+  color: var(--accent);
 }
 .poster:hover .dotAccent {
   color: #b83636; /* the red thread answers on hover */

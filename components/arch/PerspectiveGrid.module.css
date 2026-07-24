@@ -1,6 +1,6 @@
 .band {
   position: relative;
-  background: var(--brand-accent);
+  background: var(--ink);
   overflow: hidden;
   min-height: clamp(340px, 52svh, 560px);
   display: flex;
@@ -58,4 +58,4 @@
   text-decoration: none;
   transition: background-color 0.25s ease, color 0.25s ease;
 }
-.cta:hover { background: var(--paper); color: var(--brand-accent); }
+.cta:hover { background: var(--paper); color: var(--ink); }

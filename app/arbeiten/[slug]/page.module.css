@@ -36,16 +36,16 @@
 }
 
 .info {
-  color: var(--on-brand);
+  color: var(--ink);
 }
 
 /* Schriftfeld — the data engraved on the sheet, restated as the product's
    centrepiece: a hairline-ruled box of mono, uppercase dt/dd pairs. */
 .passport {
   margin: 0;
-  border: 1px solid var(--on-brand);
-  background: color-mix(in srgb, var(--on-brand) 5%, transparent);
-  color: var(--on-brand);
+  border: 1px solid var(--ink);
+  background: color-mix(in srgb, var(--ink) 5%, transparent);
+  color: var(--ink);
   font-family: var(--mono-font);
   font-size: 0.62rem;
   letter-spacing: 0.1em;
@@ -59,7 +59,7 @@
   padding: 0.5rem 0.85rem;
 }
 .passport > div + div {
-  border-top: 1px solid color-mix(in srgb, var(--on-brand) 30%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--ink) 30%, transparent);
 }
 .passport dt {
   flex: none;
@@ -78,7 +78,7 @@
   max-width: 52ch;
   font-size: 0.95rem;
   line-height: 1.7;
-  color: var(--on-brand);
+  color: var(--ink);
   opacity: 0.9;
 }
 
@@ -91,7 +91,7 @@
 .price {
   font-size: 1.6rem;
   font-weight: 700;
-  color: var(--on-brand);
+  color: var(--ink);
 }
 
 .btn {
@@ -115,7 +115,7 @@
   max-width: 1100px;
   margin: clamp(3rem, 8svh, 5rem) auto 0;
   padding: 1.5rem clamp(20px, 5vw, 48px) clamp(4rem, 9svh, 6rem);
-  border-top: 1px solid color-mix(in srgb, var(--on-brand) 25%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--ink) 25%, transparent);
 }
 
 .navLink {
@@ -123,7 +123,7 @@
   min-width: 0;
   flex-direction: column;
   gap: 0.35rem;
-  color: var(--on-brand);
+  color: var(--ink);
   text-decoration: none;
 }
 .navNext {

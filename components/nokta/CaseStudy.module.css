@@ -31,7 +31,7 @@
   line-height: 0.95;
   letter-spacing: -0.02em;
 }
-.labelDot { color: var(--brand-accent); }
+.labelDot { color: var(--accent); }
 .title {
   margin: 1rem 0 0;
   color: var(--ink);
@@ -169,7 +169,7 @@
 }
 .pdf:hover,
 .pdf:focus-visible {
-  background: var(--brand-accent);
+  background: var(--accent);
 }
 .web {
   align-self: center;

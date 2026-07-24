@@ -2,7 +2,7 @@ import { getT } from "@/lib/i18n";
 import styles from "./ColorStrip.module.css";
 
 /* Keep these source-of-truth palette values in sync with app/styles/tokens.css
-   (and lib/branches.ts). A print control strip needs the literal ink values. */
+   (and lib/colors.ts). A print control strip needs the literal ink values. */
 const colours = [
   { key: "ink", hex: "1a1a18" },
   { key: "red", hex: "b83636" },

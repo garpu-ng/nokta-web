@@ -1,4 +1,4 @@
-/* Hero poster. The page body behind is flooded cobalt (--brand-bg); this
+/* Hero poster. The page body behind is ink; this
    section is the paper sheet, so cream dominates and the cobalt shows as
    the diagonal plane + the page margins around the sheet. */
 .hero {
@@ -16,7 +16,7 @@
 .plane {
   position: absolute;
   inset: 0;
-  background: var(--brand-accent);
+  background: var(--ink);
   clip-path: polygon(58% 0, 100% 0, 100% 52%);
 }
 
@@ -58,7 +58,7 @@
 }
 
 .titleDot {
-  color: var(--brand-accent);
+  color: var(--accent);
 }
 
 .srOnly {
