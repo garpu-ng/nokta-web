@@ -1,40 +1,7 @@
-import type { Metadata } from "next";
-import { getLocale, getT } from "@/lib/i18n";
-import { socialMetadata } from "@/lib/socialMeta";
-import LineBand from "@/components/line/LineBand";
-import LineHero from "@/components/line/LineHero";
-import PlotLine from "@/components/line/PlotLine";
-import PrintCatalogue from "@/components/line/PrintCatalogue";
-import lineStyles from "@/components/line/LineHero.module.css";
+import { permanentRedirect } from "next/navigation";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getT();
-  const locale = await getLocale();
-  const title = t("meta.line.title");
-  const description = t("branch.line.desc");
-  return {
-    title,
-    description,
-    alternates: { canonical: "/line" },
-    ...socialMetadata({ title, description, locale, path: "/line" }),
-  };
-}
-
-export default async function LinePage() {
-  const t = await getT();
-  return (
-    <>
-      <LineHero />
-
-      <div className={lineStyles.intro}>
-        <p className={lineStyles.introLead}>{t("line.lead")}</p>
-      </div>
-
-      <PlotLine />
-
-      <PrintCatalogue />
-
-      <LineBand />
-    </>
-  );
+// /line was the CAD-print branch and its catalogue. The prints sit on the wall
+// now; each one keeps a page of its own at /arbeiten/[slug].
+export default function LegacyLinePage() {
+  permanentRedirect("/");
 }
