@@ -319,6 +319,88 @@
   margin: 0 auto;
 }
 
+/* ── Prozess overview: the four material cards ───────────────────────
+   One card per process, in the studio's press-sheet voice: hairline frame,
+   mono folio, headline title with the closing dot. Only a card whose workflow
+   page exists is a link (and says so with a quiet mono CTA) — the others
+   simply state their process. */
+.wa-prozess-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1rem, 2vw, 1.75rem);
+  margin: 6svh 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wa-prozess-card-cell {
+  min-width: 0;
+  display: flex;
+}
+
+.wa-prozess-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  width: 100%;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  border: 1px solid color-mix(in srgb, var(--ink) 30%, transparent);
+  color: var(--ink);
+  text-decoration: none;
+  transition: border-color 0.2s ease;
+}
+
+.wa-prozess-card--link:hover,
+.wa-prozess-card--link:focus-visible {
+  border-color: var(--ink);
+}
+.wa-prozess-card--link:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.wa-prozess-card-folio {
+  font-family: var(--mono-font);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  opacity: 0.55;
+}
+
+.wa-prozess-card-title {
+  margin: 0;
+  font-family: var(--headline-font);
+  font-weight: 400;
+  font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+.wa-prozess-card-dot {
+  color: var(--accent);
+}
+
+.wa-prozess-card-text {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: rgba(26, 26, 24, 0.78);
+  max-width: 44ch;
+}
+
+.wa-prozess-card-cta {
+  margin-top: auto;
+  padding-top: 0.75rem;
+}
+.wa-prozess-card--link:hover .wa-prozess-card-cta {
+  color: var(--accent);
+}
+
+@media (max-width: 767px) {
+  .wa-prozess-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* GIF — centered, 500×500 */
 .wa-prozess-gif-wrap {
   display: flex;

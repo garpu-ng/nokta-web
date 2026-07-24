@@ -56,6 +56,7 @@ export default function WorkWall({
             className={`${styles.cell} ${styles[`span${item.span}`]}${
               active && item.kind !== active ? ` ${styles.filteredOut}` : ""
             }`}
+            style={{ "--lift": `${item.lift}rem` } as React.CSSProperties}
           >
             <WorkCard item={item} />
           </li>

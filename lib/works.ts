@@ -33,6 +33,9 @@ export type Work = {
   thumb: string;
   /** 12-col grid span on the wall (desktop); phone is always one column */
   span: 3 | 4 | 5 | 6 | 7;
+  /** vertical drop (rem) on the desktop wall — the works hang at varied
+      heights like sheets pinned by hand; the phone column ignores it */
+  lift?: number;
   /** where the detail body comes from */
   source:
     | { type: "project"; project: Project }
@@ -45,7 +48,7 @@ export type Work = {
     fact on the print's own detail page. */
 const PRINT_EDITION_YEAR = "2025";
 
-function fromProject(slug: string, span: Work["span"]): Work {
+function fromProject(slug: string, span: Work["span"], lift?: number): Work {
   const project = PROJECTS.find((p) => p.slug === slug);
   if (!project) throw new Error(`works.ts: no project "${slug}" in lib/projects.ts`);
   return {
@@ -56,11 +59,12 @@ function fromProject(slug: string, span: Work["span"]): Work {
     client: project.client,
     thumb: project.thumb,
     span,
+    lift,
     source: { type: "project", project },
   };
 }
 
-function fromPrint(slug: string, span: Work["span"]): Work {
+function fromPrint(slug: string, span: Work["span"], lift?: number): Work {
   const print = PRINTS.find((p) => p.slug === slug);
   if (!print) throw new Error(`works.ts: no print "${slug}" in lib/prints.ts`);
   return {
@@ -71,6 +75,7 @@ function fromPrint(slug: string, span: Work["span"]): Work {
     // No client: the edition is the studio's own work → annotated "Eigenprojekt".
     thumb: print.image,
     span,
+    lift,
     source: { type: "print", print },
   };
 }
@@ -79,9 +84,11 @@ function fromPrint(slug: string, span: Work["span"]): Work {
    phone renders one column and ignores them. Widths follow the thumbnails'
    ratios — the two near-square archviz thumbs (teahouse 1415×1415, binome
    1150×1281) carry a column more than the plan's baseline so they hold their
-   own beside the tall portrait sheets. */
+   own beside the tall portrait sheets. Lifts hang the sheets at varied
+   heights (hand-pinned, not a rigid grid); tune them per row-neighbour so no
+   two adjacent tops align. */
 export const WORKS: Work[] = [
-  fromProject("sanktgores", 7),
+  fromProject("sanktgores", 7, 0),
   {
     slug: "abschlussbericht-ki-kommission",
     title: "Abschlussbericht KI-Kommission",
@@ -90,11 +97,12 @@ export const WORKS: Work[] = [
     client: "BMWE",
     thumb: "/point/abschlussbericht/cover.webp",
     span: 5,
+    lift: 3.5,
     source: { type: "piece" },
   },
-  fromProject("teahouse", 6),
-  fromPrint("eiffel", 3),
-  fromProject("beatbuilding", 7),
+  fromProject("teahouse", 6, 0),
+  fromPrint("eiffel", 3, 4.5),
+  fromProject("beatbuilding", 7, 2),
   {
     slug: "n-studie",
     title: "n-Studie",
@@ -102,11 +110,12 @@ export const WORKS: Work[] = [
     year: "2025",
     thumb: "/point/n-study.png",
     span: 4,
+    lift: 0,
     source: { type: "piece" },
   },
-  fromProject("binome", 7),
-  fromPrint("chrysler", 3),
-  fromProject("ipehouse", 7),
+  fromProject("binome", 7, 0),
+  fromPrint("chrysler", 3, 5.5),
+  fromProject("ipehouse", 7, 1.5),
   {
     slug: "leuchtturm",
     title: "Leuchtturm",
@@ -114,11 +123,12 @@ export const WORKS: Work[] = [
     year: "2025",
     thumb: "/point/leuchtturm-cover.webp",
     span: 4,
+    lift: 4,
     source: { type: "piece" },
   },
-  fromPrint("empire-state", 3),
-  fromProject("velostation", 6),
-  fromPrint("osaka", 3),
+  fromPrint("empire-state", 3, 0),
+  fromProject("velostation", 6, 3),
+  fromPrint("osaka", 3, 6),
 ];
 
 export function getWork(slug: string): Work | undefined {

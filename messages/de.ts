@@ -13,6 +13,7 @@ const de: Record<string, string> = {
   "meta.studio.title": "Studio · nokta",
   "meta.studio.desc": "Das Studio hinter den Arbeiten: drei Leute in Düsseldorf. Architekturvisualisierung, Editorial und Satz, Druckproduktion und CAD-Pläne.",
   "meta.prozess.title": "Prozess · nokta",
+  "meta.prozess3d.title": "3D-Prozess · nokta",
   "meta.kontakt.title": "Kontakt · nokta",
 
   // ── Home ──────────────────────────────────────────────────────────
@@ -129,6 +130,9 @@ const de: Record<string, string> = {
 
   // ── Prozess ───────────────────────────────────────────────────────
   "prozess.heading": "Wie wir arbeiten",
+  "prozess.index.intro": "Vier Abläufe, einer je Material.",
+  "prozess.card.cta": "Zum Ablauf",
+  "prozess.3d.heading": "Architekturvisualisierung",
   "prozess.intro": "Von der ersten Skizze bis zum fertigen Bild: ein klarer Ablauf. Mit eigenem Setup kommen wir zu vielen Varianten, du entscheidest.",
   "prozess.gifAlt": "Prozess im Überblick",
   "prozess.step.1.title": "Konzept & Referenzen",

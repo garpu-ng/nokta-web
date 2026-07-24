@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...WORKS.map((w) => ({ url: `${BASE}/arbeiten/${w.slug}` })),
     { url: `${BASE}/studio` },
     { url: `${BASE}/prozess` },
+    { url: `${BASE}/prozess/3d` },
     { url: `${BASE}/kontakt` },
     { url: `${BASE}/impressum` },
     { url: `${BASE}/datenschutz` },

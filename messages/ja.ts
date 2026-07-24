@@ -7,6 +7,7 @@ const ja: Record<string, string> = {
   "meta.studio.title": "スタジオ · nokta",
   "meta.studio.desc": "作品の背後にあるスタジオ：デュッセルドルフの三人。建築ビジュアライゼーション、エディトリアルと組版、印刷制作、CAD図面。",
   "meta.prozess.title": "プロセス · nokta",
+  "meta.prozess3d.title": "3Dプロセス · nokta",
   "meta.kontakt.title": "お問い合わせ · nokta",
 
   // ── ホーム ────────────────────────────────────────────────────────
@@ -120,6 +121,9 @@ const ja: Record<string, string> = {
 
   // ── プロセス ──────────────────────────────────────────────────────
   "prozess.heading": "私たちの進め方",
+  "prozess.index.intro": "四つの流れ。素材ごとに一つ。",
+  "prozess.card.cta": "流れを見る",
+  "prozess.3d.heading": "建築ビジュアライゼーション",
   "prozess.intro": "最初のスケッチから完成画像まで、明快な流れ。自前のセットアップで多くのバリエーションに到達し、決めるのはあなたです。",
   "prozess.gifAlt": "プロセスの概要",
   "prozess.step.1.title": "コンセプト & リファレンス",

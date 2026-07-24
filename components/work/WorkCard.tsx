@@ -19,6 +19,8 @@ export type WallItem = {
   kind: WorkKind;
   thumb: string;
   span: Work["span"];
+  /** vertical drop (rem) on the desktop wall; phone ignores it */
+  lift: number;
   anno: WorkAnnotation;
 };
 
@@ -31,6 +33,7 @@ export function toWallItem(work: Work, t: (key: string) => string): WallItem {
     kind: work.kind,
     thumb: work.thumb,
     span: work.span,
+    lift: work.lift ?? 0,
     anno: workAnnotation(work, t),
   };
 }

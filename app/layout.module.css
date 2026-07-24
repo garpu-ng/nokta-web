@@ -1,18 +1,19 @@
-/* The site header — the title block of the sheet.
+/* The site header — the title block of the sheet, printed as an ink bar.
 
-   One row on paper: the wordmark on the left, the three pages and the language
-   switch on the right, a hairline underneath. Nothing sticks and nothing floats;
-   it scrolls away with the page like anything else printed on the sheet.
-   It shares the content frame (1100px + the same side padding) with the
-   statement, the wall and the work pages, so the wordmark's left edge sits
-   exactly above the first line of every page. */
+   One row on ink: the wordmark on the left, the three pages and the language
+   switch on the right. Nothing sticks and nothing floats; it scrolls away with
+   the page like anything else printed on the sheet. It shares the content
+   frame (1100px + the same side padding) with the statement, the wall and the
+   work pages, so the wordmark's left edge sits exactly above the first line of
+   every page. */
 
 .header {
   /* Positioned so the header always paints above the incoming-page fade
      (.nk-page-fade, z-index 1) — pages that pull content upward can't cover it. */
   position: relative;
   z-index: 2;
-  background: var(--paper);
+  background: var(--ink);
+  color: var(--paper);
 }
 
 .inner {
@@ -21,16 +22,14 @@
   padding: 0 clamp(20px, 5vw, 48px);
 }
 
-/* The hairline is drawn on the row, not the header, so it stops at the content
-   frame instead of running the full width of the window — a trim line, not a
-   toolbar edge. */
+/* On the ink bar the row needs no hairline — the bar's own edge against the
+   paper page is the trim line. */
 .row {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
   gap: 1.5rem;
   padding: clamp(20px, 4vw, 34px) 0 clamp(12px, 2vw, 18px);
-  border-bottom: 1px solid color-mix(in srgb, var(--ink) 18%, transparent);
 }
 
 .brand {
@@ -43,13 +42,15 @@
   color: inherit;
   text-decoration: none;
 }
-/* Wordmark logo. The asset is black on transparent, so it drops straight onto
-   the paper. */
+/* Wordmark logo. The asset is black on transparent; on the ink bar it is
+   flipped to paper with a filter (invert to white, then a touch of sepia to
+   land on the warm paper tone). */
 .brandLogo {
   display: block;
   height: clamp(1.7rem, 4.2vw, 2.9rem);
   width: auto;
   user-select: none;
+  filter: invert(1) sepia(0.14) brightness(0.97);
 }
 
 /* Three pages plus the language switch, set small and quiet — they name the
@@ -65,7 +66,7 @@
 }
 
 .navLink {
-  color: var(--ink);
+  color: inherit;
   font-size: 0.72rem;
   line-height: 1.2;
   font-weight: 500;

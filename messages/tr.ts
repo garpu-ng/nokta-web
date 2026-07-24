@@ -7,6 +7,7 @@ const tr: Record<string, string> = {
   "meta.studio.title": "Stüdyo · nokta",
   "meta.studio.desc": "İşlerin arkasındaki stüdyo: Düsseldorf’ta üç kişi. Mimari görselleştirme, editoryal ve dizgi, baskı üretimi ve CAD planları.",
   "meta.prozess.title": "Süreç · nokta",
+  "meta.prozess3d.title": "3B süreç · nokta",
   "meta.kontakt.title": "İletişim · nokta",
 
   // ── Ana sayfa ─────────────────────────────────────────────────────
@@ -117,6 +118,9 @@ const tr: Record<string, string> = {
 
   // ── Süreç ─────────────────────────────────────────────────────────
   "prozess.heading": "Nasıl çalışıyoruz",
+  "prozess.index.intro": "Dört akış, her malzemeye bir tane.",
+  "prozess.card.cta": "Akışı gör",
+  "prozess.3d.heading": "Mimari görselleştirme",
   "prozess.intro": "İlk eskizden bitmiş görsele: net bir akış. Kendi kurulumumuzla birçok varyasyona ulaşıyoruz, kararı sen veriyorsun.",
   "prozess.gifAlt": "Sürece genel bakış",
   "prozess.step.1.title": "Konsept & Referanslar",

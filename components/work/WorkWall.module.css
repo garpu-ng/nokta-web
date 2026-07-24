@@ -69,6 +69,15 @@
   min-width: 0;
 }
 
+/* The sheets hang at varied heights — each work's curated lift (see
+   lib/works.ts) drops it below its row's baseline, so the wall reads as
+   hand-pinned rather than ruled. Desktop only; the phone column stays flush. */
+@media (min-width: 768px) {
+  .cell {
+    margin-top: var(--lift, 0rem);
+  }
+}
+
 .span3 {
   grid-column: span 3;
 }
