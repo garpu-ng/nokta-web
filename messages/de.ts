@@ -14,9 +14,15 @@ const de: Record<string, string> = {
   "meta.kontakt.title": "Kontakt · nokta",
 
   // ── Home ──────────────────────────────────────────────────────────
+  "home.lead": "Wir zeichnen Gebäude, Bücher und Drucke.",
+  "home.sub": "Designstudio · Düsseldorf",
+  "home.wall.label": "Arbeiten",
+  "home.wall.aria": "Alle Arbeiten",
   "home.lead.body": "Interdisziplinäres Design aus einer Hand. Eigene Tools, viele Ideen, kurze Wege.",
-  // Closing motto — the {tokens} let the landing wrap each word in its branch
-  // colour (see app/page.tsx renderMotto). point→rot, line→grün, form→kobalt.
+  // Closing motto — the {tokens} let each locale phrase the progression its own
+  // way (German chains "vom … zur …", Turkish attaches case suffixes, Japanese
+  // uses particles). All three words are ink; the sentence's final period is
+  // dropped in app/page.tsx and re-set as the red studio dot.
   "home.motto": "Vom {point} zur {line} zur {form}.",
   "home.motto.point": "Punkt",
   "home.motto.line": "Linie",
@@ -24,6 +30,21 @@ const de: Record<string, string> = {
   "home.contact.title": "Hast du einen Punkt, an dem wir anfangen?",
   "home.contact.body": "Zeig uns die Skizze, den Plan oder den unfertigen Gedanken. Wir melden uns mit den richtigen Fragen.",
   "home.contact.cta": "Projekt beginnen",
+
+  // ── Arbeiten (the one wall + every detail page) ───────────────────
+  // The annotation every work carries: kind stamp · year · client. Own work is
+  // annotated "Eigenprojekt" and stands beside the commissions, unexplained.
+  "work.own": "Eigenprojekt",
+  "work.back": "Alle Arbeiten",
+  "work.filter.all": "Alle",
+  "work.kind.rendering": "Rendering",
+  "work.kind.cad": "CAD-Druck",
+  "work.kind.editorial": "Editorial",
+  "work.kind.study": "Studie",
+  "work.kind.manual": "Handbuch",
+  "work.prev": "Vorherige Arbeit",
+  "work.next": "Nächste Arbeit",
+  "work.nstudie.lead": "Eine typografische Studie über das kleine n. Gezeichnet, gerastert, als Druck aufgelegt.",
 
   // ── Branches (landing cards, branch headers, tab taglines) ────────
   "branch.home.tag": "Übersicht",

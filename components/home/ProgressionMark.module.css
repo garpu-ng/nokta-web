@@ -1,7 +1,7 @@
-/* The lead progression diagram. Lives on the black pillar beneath the centred
-   motto and spans the full stage as a wide 8:1 band: connectors are paper
-   hairlines, the glyphs carry their motto colours (supplied inline from
-   lib/branches.ts). No motion — a static press-diagram.
+/* The lead progression diagram. Lives on paper beneath the home statement and
+   spans the full stage as a wide 8:1 band: connectors are ink hairlines, the
+   glyphs carry the colours the caller hands in (red point, ink line, ink form).
+   No motion — a static press-diagram.
 
    Every stroke below sets vector-effect:non-scaling-stroke so its width is read
    in final device pixels, independent of how far the 1200-unit viewBox is scaled
@@ -16,10 +16,10 @@
   overflow: visible;
 }
 
-/* Paper rules between the glyphs — a measured, faint connection. */
+/* Hairline rules between the glyphs — a measured, faint connection. */
 .link {
   fill: none;
-  stroke: var(--paper);
+  stroke: var(--ink);
   stroke-width: 1;
   opacity: 0.3;
   vector-effect: non-scaling-stroke;

@@ -2,13 +2,13 @@ import { cube, plotLine } from "./geometry";
 import styles from "./ProgressionMark.module.css";
 
 /* The motto drawn as one diagram: a filled point → a plotted line → a wireframe
-   cube, read left-to-right and linked by faint paper rules. It restates, in
-   marks, the coloured words in the lead ("Vom Punkt zur Linie zur Form"). The
-   three glyph colours are handed in by the caller from lib/branches.ts so they
-   stay in sync with those words and with the branch heroes.
+   cube, read left-to-right and linked by faint hairline rules. It restates, in
+   marks, the words above it ("Vom Punkt zur Linie zur Form"). The three glyph
+   colours are handed in by the caller: the studio's red opens the progression,
+   the line and the form are ink.
 
-   Composed for a WIDE stage: this now spans the full pillar width beneath the
-   centred motto, so the viewBox is a long 8:1 band (1200×150) with real
+   Composed for a WIDE stage: this spans the full statement width beneath the
+   motto, so the viewBox is a long 8:1 band (1200×150) with real
    horizontal breathing room between the three glyphs and a long plotted line in
    the middle — redrawn wide, not just a scaled-up half-width mark. Strokes use
    vector-effect:non-scaling-stroke (in the module CSS) so they stay crisp at any
