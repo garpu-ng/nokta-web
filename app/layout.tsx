@@ -103,6 +103,7 @@ export default async function RootLayout({
                 </Link>
               </div>
               <nav className={styles.nav} aria-label={t("aria.mainNav")}>
+                <Link href="/" className={styles.navLink}>{t("nav.home")}</Link>
                 <Link href="/studio" className={styles.navLink}>{t("nav.studio")}</Link>
                 <Link href="/prozess" className={styles.navLink}>{t("nav.prozess")}</Link>
                 <Link href="/kontakt" className={styles.navLink}>{t("nav.contact")}</Link>

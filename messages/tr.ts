@@ -187,6 +187,7 @@ const tr: Record<string, string> = {
   "notfound.cta": "Ana sayfaya dön",
 
   // ── Başlık gezinme / aria ─────────────────────────────────────────
+  "nav.home": "ana sayfa.",
   "nav.studio": "stüdyo.",
   "nav.prozess": "süreç.",
   "nav.contact": "iletişim.",

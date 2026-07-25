@@ -201,6 +201,7 @@ const de: Record<string, string> = {
   "notfound.cta": "Zurück zur Startseite",
 
   // ── Header nav / aria ─────────────────────────────────────────────
+  "nav.home": "start.",
   "nav.studio": "studio.",
   "nav.prozess": "prozess.",
   "nav.contact": "kontakt.",

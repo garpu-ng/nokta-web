@@ -192,6 +192,7 @@ const ja: Record<string, string> = {
   "notfound.cta": "ホームに戻る",
 
   // ── ヘッダーナビ / aria ───────────────────────────────────────────
+  "nav.home": "ホーム",
   "nav.studio": "スタジオ",
   "nav.prozess": "プロセス",
   "nav.contact": "お問い合わせ",

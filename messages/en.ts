@@ -198,6 +198,7 @@ const en: Record<string, string> = {
   "notfound.cta": "Back to the homepage",
 
   // ── Header nav / aria ─────────────────────────────────────────────
+  "nav.home": "home.",
   "nav.studio": "studio.",
   "nav.prozess": "process.",
   "nav.contact": "contact.",
