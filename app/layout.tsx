@@ -5,9 +5,11 @@ import Image from "next/image";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import LanguageToggle from "@/components/LanguageToggle";
+import Schriftfeld from "@/components/print/Schriftfeld";
 import DotCursor from "@/components/plotter/DotCursor";
 import { getLocale, getT } from "@/lib/i18n";
 import { socialMetadata } from "@/lib/socialMeta";
+import { WORK_SLUGS } from "@/lib/works";
 import styles from "./layout.module.css";
 
 /* Fonts are self-hosted at build time via next/font (GDPR: the browser never
@@ -115,8 +117,10 @@ export default async function RootLayout({
         <Footer />
 
         {/* Chrome that belongs to the sheet rather than to any one page. Both
-            are decorative overlays: aria-hidden, pointer-events none, and both
-            render nothing at all until JS has read the environment. */}
+            are decorative overlays: aria-hidden and pointer-events none. The
+            sheet numbers are handed over as plain slugs so the client bundle
+            never pulls in the work data itself. */}
+        <Schriftfeld locale={locale} sheets={WORK_SLUGS} />
         <DotCursor />
       </body>
     </html>

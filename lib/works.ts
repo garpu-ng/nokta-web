@@ -132,6 +132,12 @@ export const WORKS: Work[] = [
   fromPrint("osaka", 4, 6),
 ];
 
+/** The wall's running order reduced to bare slugs. Handed to the live title
+    block so a client component can number the sheet you are on without the
+    whole work catalogue (and the projects and prints behind it) crossing into
+    the browser bundle. */
+export const WORK_SLUGS: string[] = WORKS.map((w) => w.slug);
+
 export function getWork(slug: string): Work | undefined {
   return WORKS.find((w) => w.slug === slug);
 }

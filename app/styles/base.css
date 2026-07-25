@@ -176,13 +176,33 @@ body.nk-cursor-off * {
   }
 }
 
+/* When the press roller is passing (components/print/PressRoller.tsx mounts a
+   .nk-roller for the life of a navigated-to page), the incoming sheet does not
+   rise: the roller is what reveals it, and a rise underneath would be a second
+   entrance fighting the first. Only the opacity remains, and only long enough
+   that the paint doesn't read as a snap. Declared with :has() rather than a
+   class set from JS so it is already true at the new page's first paint —
+   nothing is toggled after the fact, so nothing can restart an animation. */
+body:has(.nk-roller) .nk-page-fade {
+  animation: nk-fade-flat 0.26s linear backwards;
+}
+@keyframes nk-fade-flat {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 /* Reduced motion: no smooth-scroll, and the page simply is — no transition
    between one sheet and the next. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-  .nk-page-fade {
+  .nk-page-fade,
+  body:has(.nk-roller) .nk-page-fade {
     animation: none;
   }
 }

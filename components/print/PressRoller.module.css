@@ -1,0 +1,42 @@
+/* Paint for the press roller (see PressRoller.tsx): one ink bar the width of
+   the viewport, wiping left to right across the incoming sheet with the accent
+   as its leading edge and a faint grain on its face — the pass of the roller,
+   not a curtain. The page is already painted behind it the whole time.
+
+   Transform only, pointer-events none, so it can neither shift the layout nor
+   delay a single click. */
+
+.roller {
+  position: fixed;
+  inset: 0;
+  z-index: 2500;
+  pointer-events: none;
+  background: var(--ink);
+  /* The 2px the roller leads with — the one coloured edge on the whole pass.
+     Inside the box (border-box is global), so the ink stops 2px short of it. */
+  border-right: 2px solid var(--accent);
+  /* 101%: the bar is fully clear of the sheet at both ends of the pass. */
+  transform: translate3d(-101%, 0, 0);
+  will-change: transform;
+  animation: nk-roll 0.45s cubic-bezier(0.7, 0, 0.2, 1) forwards;
+}
+
+/* Grain on the roller's face — the same photocopy noise the poster surfaces
+   wear, held very low so it reads as texture on the ink, never as pattern. */
+.roller::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 240px 240px;
+}
+
+@keyframes nk-roll {
+  from {
+    transform: translate3d(-101%, 0, 0);
+  }
+  to {
+    transform: translate3d(101%, 0, 0);
+  }
+}
