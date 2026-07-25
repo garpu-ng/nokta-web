@@ -1,0 +1,53 @@
+/* Paint for the Reveal primitive (see Reveal.tsx). The base class is
+   deliberately empty of motion: the finished state is the default, and the
+   pre-state only ever exists once JS has decided the box is safely below the
+   fold. Transform / opacity / clip-path only — a reveal never reflows. */
+
+.reveal {
+  min-width: 0;
+}
+
+/* Armed = the pre-state. Both the pre-state and the transition are declared
+   here so the class can simply be joined by .shown to play forwards. */
+.armed {
+  opacity: 0;
+  will-change: opacity, transform;
+  transition:
+    opacity 0.72s cubic-bezier(0.2, 0.7, 0.2, 1) var(--reveal-delay, 0ms),
+    transform 0.72s cubic-bezier(0.2, 0.7, 0.2, 1) var(--reveal-delay, 0ms),
+    clip-path 0.85s cubic-bezier(0.2, 0.7, 0.2, 1) var(--reveal-delay, 0ms);
+}
+
+/* A sheet pinned up: it rises the last two centimetres into place. */
+.rise.armed {
+  transform: translateY(22px);
+}
+
+/* A plate laid down: the bottom edge opens as the image settles. Kept subtle —
+   an eighth of the frame, not a curtain. */
+.wipe.armed {
+  transform: translateY(12px);
+  clip-path: inset(0 0 13% 0);
+}
+
+.armed.shown {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+/* clip-path is only ever set on .wipe: an inset(0) on the others would quietly
+   clip the card hovers (the registration mark sits outside its frame). */
+.wipe.armed.shown {
+  clip-path: inset(0 0 0 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .armed,
+  .armed.shown,
+  .wipe.armed {
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+    transition: none;
+  }
+}

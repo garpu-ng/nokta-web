@@ -583,27 +583,65 @@
   color: var(--ink);
 }
 
-/* The statement: what the studio does, stated once. */
+/* The statement: what the studio does, stated once — and set as the masthead
+   of a broadsheet, because arriving on the site should feel like a sheet
+   coming off the press. The whole block enters once, in one order: the
+   headline's words rise a beat apart, then the annotation, the motto and the
+   drawn progression follow. Everything below the headline queues off
+   --nk-lead-steps (the headline's word count, capped, set inline by the page),
+   so the arrival keeps its rhythm in every locale. */
 .nk-statement {
+  /* the beat the whole arrival is counted in */
+  --nk-step: 70ms;
+  /* when the last word of the headline sets off */
+  --nk-lead-landed: calc(var(--nk-lead-steps, 0) * var(--nk-step));
   max-width: 1100px;
   margin: 0 auto;
-  padding: clamp(3rem, 9svh, 6rem) clamp(20px, 5vw, 48px) clamp(1.5rem, 4svh, 3rem);
+  padding: clamp(3.25rem, 11svh, 7rem) clamp(20px, 5vw, 48px) clamp(1.5rem, 4svh, 3rem);
 }
 
 .nk-statement-lead {
   margin: 0;
-  max-width: 20ch;
-  font-size: clamp(2rem, 5.4vw, 4rem);
+  /* A masthead measure: the line breaks two or three times and stacks. */
+  max-width: 15ch;
+  font-size: clamp(3rem, 7.5vw, 6.5rem);
   font-weight: 400; /* Righteous is a single-weight face */
-  letter-spacing: -0.02em;
-  line-height: 1.05;
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+  text-wrap: balance;
   color: var(--ink);
+}
+
+/* One word of the headline. Inline-block so it can be moved on its own; the
+   real spaces between the spans still do the line breaking. */
+.nk-statement-word {
+  display: inline-block;
+  animation: nk-rise-in 0.62s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+  animation-delay: calc(var(--i, 0) * var(--nk-step));
 }
 
 /* Studio and city, in the annotation voice the whole site uses for facts. */
 .nk-statement-sub {
-  margin: 1.15rem 0 0;
+  margin: 1.35rem 0 0;
   color: var(--ink);
+  animation: nk-rise-in 0.62s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+  animation-delay: calc(var(--nk-lead-landed) + 120ms);
+}
+
+/* The arrival's one movement: up from a hand's width below, into place. Used
+   by every part of the masthead; only the delay differs. `backwards` fill
+   holds the pre-state during the delay and then hands the element back to its
+   own styles — nothing is left transformed once the entrance is over (a
+   lingering transform would turn the block into a containing block). */
+@keyframes nk-rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* The motto, one line under the statement. Body face (not the display wordmark)
@@ -612,16 +650,29 @@
    replace it. */
 .nk-statement-motto {
   margin: clamp(2rem, 6svh, 3.25rem) 0 clamp(1.5rem, 4svh, 2.5rem);
-  font-size: clamp(1.15rem, 2.6vw, 1.9rem);
+  font-size: clamp(1.3rem, 3.1vw, 2.35rem);
   font-weight: 700;
-  letter-spacing: -0.01em;
-  line-height: 1.2;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  text-wrap: balance;
   color: var(--ink);
+  animation: nk-rise-in 0.62s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+  animation-delay: calc(var(--nk-lead-landed) + 210ms);
 }
 
 /* The sentence's final period, set as the studio's dot — the single accent. */
 .nk-statement-dot {
   color: var(--accent);
+}
+
+/* Reduced motion: the masthead is simply printed — no entrance at all. The
+   finished state is the elements' own, so dropping the animation is enough. */
+@media (prefers-reduced-motion: reduce) {
+  .nk-statement-word,
+  .nk-statement-sub,
+  .nk-statement-motto {
+    animation: none;
+  }
 }
 
 /* ── The wall ─────────────────────────────────────────────────────── */

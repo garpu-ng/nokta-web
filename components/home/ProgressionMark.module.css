@@ -50,3 +50,41 @@
   stroke-dasharray: 3 3;
   opacity: 0.5;
 }
+
+/* ── The pen's pass ───────────────────────────────────────────────────
+   The clip rect the whole band is drawn through: it opens from its left edge
+   at a constant rate, so the marks arrive in the order the pen would lay them
+   down and the empty stretches between glyphs read as the pen travelling.
+   Linear on purpose — a plotter does not ease.
+
+   The scaling is done on the clip geometry rather than on stroke dashes,
+   which keeps it exact at any render width: dash lengths interact with
+   vector-effect:non-scaling-stroke (the strokes above all use it), a swept
+   clip does not.
+
+   `backwards` fill holds the closed state through the delay and then hands the
+   rect back to its own geometry, so at rest the clip is simply the full band.
+   The delay chains onto the masthead's arrival: --nk-lead-landed is published
+   by .nk-statement, the block this mark closes. */
+.sweep {
+  transform-box: fill-box;
+  transform-origin: 0% 50%;
+  animation: nk-mark-sweep 2s linear backwards;
+  animation-delay: calc(var(--nk-lead-landed, 0ms) + 260ms);
+}
+
+@keyframes nk-mark-sweep {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Reduced motion: the diagram is printed, not drawn. */
+@media (prefers-reduced-motion: reduce) {
+  .sweep {
+    animation: none;
+  }
+}

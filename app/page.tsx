@@ -1,3 +1,5 @@
+import { Fragment } from "react";
+import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import HomeContact from "@/components/HomeContact";
 import ProgressionMark from "@/components/home/ProgressionMark";
@@ -28,6 +30,15 @@ function motto(t: (key: string) => string): string {
     .replace(/[.。]\s*$/, "");
 }
 
+/* The masthead entrance is choreographed in CSS off two custom properties:
+   each word carries its own index, and the block below the headline waits for
+   the whole line to have landed. Splitting on whitespace changes no character
+   of the copy — the words are re-joined by the real spaces between the spans —
+   and a script that doesn't space its words (Japanese) simply yields one span
+   and rises as a single line. The step is capped so a long locale can't drag
+   the arrival out. */
+const STAGGER_CAP = 5;
+
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getT();
   const locale = await getLocale();
@@ -56,10 +67,29 @@ export default async function HomePage() {
     return acc;
   }, []);
 
+  const leadWords = t("home.lead").split(" ");
+  // How long the headline takes to land — everything under it queues behind.
+  const leadSteps = Math.min(leadWords.length - 1, STAGGER_CAP);
+
   return (
     <main className="nk-home">
-      <section className="nk-statement">
-        <h1 className="nk-statement-lead">{t("home.lead")}</h1>
+      <section
+        className="nk-statement"
+        style={{ "--nk-lead-steps": leadSteps } as CSSProperties}
+      >
+        <h1 className="nk-statement-lead">
+          {leadWords.map((word, i) => (
+            <Fragment key={`${i}-${word}`}>
+              {i > 0 ? " " : null}
+              <span
+                className="nk-statement-word"
+                style={{ "--i": Math.min(i, STAGGER_CAP) } as CSSProperties}
+              >
+                {word}
+              </span>
+            </Fragment>
+          ))}
+        </h1>
         <p className="nk-mono-caption nk-statement-sub">{t("home.sub")}</p>
         <p className="nk-statement-motto">
           {motto(t)}
