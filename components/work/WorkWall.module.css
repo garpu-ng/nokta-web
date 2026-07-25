@@ -31,8 +31,12 @@
   padding: 12px;
   border: none;
   background: var(--ink);
-  /* The accent lives in the text: each tab's label in its motto colour. */
-  color: var(--tab);
+  /* The accent lives in the text: each tab's label in its motto colour.
+     Held in --label rather than read straight from --tab so the hover swap
+     below has a name for "the colour this tab is written in" — which is NOT
+     the tab's motto colour on the home tab (see .stamp[data-home]). */
+  --label: var(--tab);
+  color: var(--label);
   font-family: var(--headline-font);
   font-weight: 700;
   font-size: 1.25rem;
@@ -60,9 +64,40 @@
 }
 
 /* "Alle" edge case (the old home tab): its motto colour IS the tab background,
-   so motto-coloured text would vanish — pin its label to paper at all times. */
+   so motto-coloured text would vanish — pin its label to paper at all times.
+   Set through --label so the hover swap picks the same colour up. */
 .stamp[data-home] {
-  color: var(--paper);
+  --label: var(--paper);
+}
+
+/* ── Hover: the tab inverts ──────────────────────────────────────────
+   Resting, a tab is its label's colour on the black bar. Pointing at one
+   turns the whole rectangle that colour and drops the label to ink — the
+   tab lights up, and the row finally says out loud that it can be clicked
+   (the 5px extension above is a hint, not a statement).
+
+   Written against --label, not --tab, so the home tab inverts correctly:
+   it is the one tab whose resting label is paper rather than its motto
+   colour, so paper is what it must fill with. Reading --tab here would
+   fill it ink-on-ink and put black type on a black field.
+
+   Last of the .stamp rules on purpose: :hover, [aria-pressed] and
+   [data-home] all weigh the same, so source order is what lets the hover
+   answer arrive over a pressed or home tab rather than under it.
+
+   Gated on (hover: hover) — on a touch screen :hover latches after a tap
+   and would strand a tab looking permanently lit. */
+@media (hover: hover) {
+  .stamp:hover {
+    background: var(--label);
+    color: var(--ink);
+    /* Quicker in than the 0.45s press fill: this is feedback, and feedback
+       that takes half a second reads as lag. Leaving on the base ease. */
+    transition:
+      background-color 0.18s ease,
+      color 0.18s ease,
+      box-shadow 0.18s ease;
+  }
 }
 
 .stamp:focus-visible {
