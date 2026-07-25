@@ -1,5 +1,8 @@
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Registration from "@/components/print/Registration";
+import { TAB_COLORS } from "@/lib/colors";
 import { getMediaSize } from "@/lib/mediaSizes";
 import type { Work, WorkKind } from "@/lib/works";
 import WorkAnno, { workAnnotation, type WorkAnnotation } from "./WorkAnno";
@@ -42,7 +45,13 @@ export default function WorkCard({ item }: { item: WallItem }) {
   const { width, height } = getMediaSize(item.thumb);
 
   return (
-    <Link href={`/arbeiten/${item.slug}`} className={styles.card}>
+    <Link
+      href={`/arbeiten/${item.slug}`}
+      className={styles.card}
+      // The colour this work's kind wears in the filter bar. Only the
+      // annotation's kind word ever spends it, and only under the pointer.
+      style={{ "--nk-kind": TAB_COLORS[item.kind] } as CSSProperties}
+    >
       <span className={styles.frame}>
         <Image
           src={item.thumb}
@@ -52,6 +61,9 @@ export default function WorkCard({ item }: { item: WallItem }) {
           sizes="(max-width: 767px) 92vw, (max-width: 1100px) 55vw, 640px"
           className={styles.img}
         />
+        {/* A registration mark struck on the sheet's corner as you reach for
+            it — the press vocabulary, held back until the card is addressed. */}
+        <Registration className={styles.reg} />
       </span>
       <span className={styles.caption}>
         <span className={styles.title}>{item.title}</span>

@@ -11,3 +11,27 @@
 export const PAPER = "#e9e0ce";
 export const INK = "#1a1a18";
 export const RED = "#b83636";
+
+/* ── The filter's six colours ─────────────────────────────────────────
+   The one palette outside the three above, and it is a quotation, not a
+   theme: the old site's tab bar wore the three branch colours plus the clay
+   and slate of the earlier motto palette, and "Alle" wore the home tab's ink.
+   They are confined to the filter bar and to the one word they name — a
+   card's kind stamp picks its colour up on hover, so pointing at a sheet says
+   which register it belongs to. They never touch a surface, an image or a
+   page. Kept here (rather than in the wall) because two components read them.
+
+   Type-only import of WorkKind: erased at compile, so nothing in this module
+   pulls the work list into a bundle that only wants a hex value. */
+import type { WorkKind } from "./works";
+
+export const TAB_COLORS: Record<WorkKind, string> = {
+  rendering: "#4b5cbe", // cobalt — the archviz colour
+  editorial: RED, // red — the design/print colour
+  cad: "#5f6f53", // green — the line-print colour
+  study: "#b0664a", // clay
+  manual: "#4e6076", // slate
+};
+
+/** "Alle" — the old home tab. */
+export const ALL_TAB_COLOR = INK;

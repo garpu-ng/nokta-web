@@ -93,6 +93,21 @@ textarea {
   opacity: 0.7;
 }
 
+/* ── The annotation's kind stamp ─────────────────────────────────────
+   The one word of a work's annotation line that another component is allowed
+   to colour: on the wall a card lends its kind the colour that kind wears in
+   the filter bar (components/work/WorkCard.module.css). Everywhere else the
+   word is simply ink — this global hook carries no colour of its own, only
+   the ease so the borrowed one arrives rather than snaps. */
+.nk-anno-kind {
+  transition: color 0.25s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .nk-anno-kind {
+    transition: none;
+  }
+}
+
 /* ── Xerox-grain overlay ─────────────────────────────────────────────
    Adds print texture to poster surfaces (moodbook: photocopy grain).
    Pure CSS overlay — an SVG feTurbulence noise tile as a data URI,

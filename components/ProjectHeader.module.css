@@ -2,37 +2,62 @@
    once you scroll past the real header. Sits in the same 1100px content frame
    as the wall and as the detail bodies below it. */
 
+/* A work opens like a plate: the way back is stated first, the title lands at
+   plate scale, the annotation settles under it. One entrance, three beats,
+   pure CSS — `backwards` fill holds the pre-state through each delay and then
+   hands the element back to its own styles, so nothing stays transformed. */
 .header {
   max-width: 1100px;
   margin: 0 auto;
-  padding: clamp(2.5rem, 7vh, 5rem) clamp(20px, 5vw, 48px) clamp(1.5rem, 4vh, 2.5rem);
+  padding: clamp(3rem, 9vh, 6rem) clamp(20px, 5vw, 48px) clamp(1.75rem, 5vh, 3rem);
 }
 
 .header h1 {
-  font-size: clamp(1.8rem, 4vw, 3rem);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  margin: 1rem 0 0.5rem;
+  /* Righteous is a single-weight face: at this scale a synthesised bold only
+     smears the curves, so the title is set at its own weight. */
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  text-wrap: balance;
+  margin: 1.1rem 0 0.75rem;
   color: var(--ink);
+  animation: nk-plate-in 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 90ms backwards;
 }
 
 .anno {
   margin: 0;
   color: var(--ink);
   opacity: 0.85;
+  animation: nk-plate-in 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 240ms backwards;
 }
 
 .back {
+  display: inline-block;
   font-size: 0.72rem;
   color: var(--ink);
   opacity: 0.7;
   text-decoration: none;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  transition: opacity 0.2s ease;
+  animation: nk-plate-in 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
 }
 
-.back:hover {
+.back:hover,
+.back:focus-visible {
   opacity: 1;
+}
+
+@keyframes nk-plate-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* Project sticky header — slides in from top, centered. */
@@ -80,5 +105,19 @@
   .sticky {
     min-width: 0;
     max-width: 88vw;
+  }
+}
+
+/* Reduced motion: the plate is printed, not laid down, and the floating card
+   is simply there or not — it keeps its offscreen parking transform (that is
+   how it hides) but crosses the distance with no animation. */
+@media (prefers-reduced-motion: reduce) {
+  .header h1,
+  .anno,
+  .back {
+    animation: none;
+  }
+  .sticky {
+    transition: none;
   }
 }

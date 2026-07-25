@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ProjectHeader from "@/components/ProjectHeader";
+import Reveal from "@/components/Reveal";
 import ArtPlate from "@/components/nokta/ArtPlate";
 import CaseStudy from "@/components/nokta/CaseStudy";
 import Leuchtturm from "@/components/nokta/Leuchtturm";
@@ -82,14 +83,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 /* ── Bodies ─────────────────────────────────────────────────────────── */
 
-/** Rendering: the images, stacked, at full width. */
+/** Rendering: the images, stacked, at full width. Each plate opens on the way
+    down the stack — a soft wipe from its bottom edge, never a fade of the
+    first one (it is the page's preloaded image and is already on screen). */
 function imageStack(project: Project, title: string) {
   return (
     <div className="wa-project-images">
       {project.images.map((src, i) => {
         const { width, height } = getMediaSize(src);
         return (
-          <div key={src} className="wa-image-window">
+          <Reveal key={src} variant="wipe" className="wa-image-window">
             <Image
               src={src}
               alt={`${title}, Bild ${i + 1}`}
@@ -99,7 +102,7 @@ function imageStack(project: Project, title: string) {
               preload={i === 0}
               className="wa-project-img"
             />
-          </div>
+          </Reveal>
         );
       })}
     </div>
@@ -249,11 +252,17 @@ export default async function WorkPage({ params }: Props) {
 
       {workBody(work, t)}
 
+      {/* The neighbours are plates of their own: a mono kicker over a title set
+          at reading-across-the-room scale. The arrows are marks, not words —
+          aria-hidden, so the link is announced by its title alone. */}
       <nav className={styles.nav}>
         {prev ? (
           <Link href={`/arbeiten/${prev.slug}`} className={styles.navLink}>
             <span className="nk-mono-caption">{t("work.prev")}</span>
-            <span className={styles.navTitle}>← {prev.title}</span>
+            <span className={styles.navTitle}>
+              <span className={styles.navArrow} aria-hidden="true">←</span>
+              <span className={styles.navName}>{prev.title}</span>
+            </span>
           </Link>
         ) : (
           <span />
@@ -261,7 +270,10 @@ export default async function WorkPage({ params }: Props) {
         {next ? (
           <Link href={`/arbeiten/${next.slug}`} className={`${styles.navLink} ${styles.navNext}`}>
             <span className="nk-mono-caption">{t("work.next")}</span>
-            <span className={styles.navTitle}>{next.title} →</span>
+            <span className={styles.navTitle}>
+              <span className={styles.navName}>{next.title}</span>
+              <span className={styles.navArrow} aria-hidden="true">→</span>
+            </span>
           </Link>
         ) : (
           <span />

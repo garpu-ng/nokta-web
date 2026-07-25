@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Reveal from "@/components/Reveal";
+import { ALL_TAB_COLOR, TAB_COLORS } from "@/lib/colors";
 import type { WorkKind } from "@/lib/works";
 import WorkCard, { type WallItem } from "./WorkCard";
 import styles from "./WorkWall.module.css";
@@ -12,18 +14,12 @@ import styles from "./WorkWall.module.css";
    filter row is simply inert without JS.
 
    The filter wears the old site's tab dress: a segmented black bar, each tab's
-   label in its own motto colour, the pressed tab filling with it. The colours
-   come from the site's own history — the three branch colours plus the clay
-   and slate of the earlier motto palette; "Alle" is the ink of the old home
-   tab. They colour the filter only, never a page. */
-const TAB_COLORS: Record<WorkKind, string> = {
-  rendering: "#4b5cbe", // cobalt — the archviz colour
-  editorial: "#b83636", // red — the design/print colour
-  cad: "#5f6f53", // green — the line-print colour
-  study: "#b0664a", // clay
-  manual: "#4e6076", // slate
-};
-const ALL_TAB_COLOR = "#1a1a18"; // ink — the old home tab
+   label in its own motto colour, the pressed tab filling with it. The six
+   colours live in lib/colors.ts (the card's kind stamp borrows its own on
+   hover); they colour the filter and that one word, never a page.
+
+   The cards enter through the shared Reveal primitive, staggered left-then-
+   right so a row lands as a pair rather than a block. */
 
 export default function WorkWall({
   items,
@@ -70,7 +66,7 @@ export default function WorkWall({
         className={`${styles.grid}${active ? ` ${styles.aligned}` : ""}`}
         aria-label={listLabel}
       >
-        {items.map((item) => (
+        {items.map((item, i) => (
           <li
             key={item.slug}
             className={`${styles.cell} ${styles[`span${item.span}`]}${
@@ -78,7 +74,11 @@ export default function WorkWall({
             }`}
             style={{ "--lift": `${item.lift}rem` } as React.CSSProperties}
           >
-            <WorkCard item={item} />
+            {/* The wall reads two-up, so the stagger alternates: the left sheet
+                is pinned, then the right one a beat later. */}
+            <Reveal delay={(i % 2) * 90}>
+              <WorkCard item={item} />
+            </Reveal>
           </li>
         ))}
       </ul>

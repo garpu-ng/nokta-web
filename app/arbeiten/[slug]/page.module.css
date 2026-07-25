@@ -108,14 +108,18 @@
   cursor: pointer;
 }
 
-/* ── Prev / next — the wall's running order, one step at a time ─────── */
+/* ── Prev / next — the wall's running order, one step at a time ───────
+   Two plates, not two links: a mono kicker over a title set large enough to
+   be the next thing you look at. Reaching for one sweeps a red rule under the
+   title and steps the arrow the way it points. */
 .nav {
   display: flex;
+  align-items: start;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: clamp(1.5rem, 4vw, 3rem);
   max-width: 1100px;
-  margin: clamp(3rem, 8svh, 5rem) auto 0;
-  padding: 1.5rem clamp(20px, 5vw, 48px) clamp(4rem, 9svh, 6rem);
+  margin: clamp(3.5rem, 9svh, 5.5rem) auto 0;
+  padding: clamp(1.75rem, 4svh, 2.75rem) clamp(20px, 5vw, 48px) clamp(4rem, 9svh, 6rem);
   border-top: 1px solid color-mix(in srgb, var(--ink) 25%, transparent);
 }
 
@@ -123,24 +127,88 @@
   display: flex;
   min-width: 0;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: 0.6rem;
   color: var(--ink);
   text-decoration: none;
 }
 .navNext {
   text-align: right;
 }
+.navLink:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 6px;
+}
 
 .navTitle {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  min-width: 0;
   font-family: var(--display-font);
-  font-size: clamp(1rem, 1.8vw, 1.3rem);
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  opacity: 0.85;
-  transition: opacity 0.2s ease;
+  /* Righteous is single-weight; at plate scale it needs no synthetic bold. */
+  font-size: clamp(1.3rem, 3.2vw, 2.4rem);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
 }
-.navLink:hover .navTitle {
+.navNext .navTitle {
+  justify-content: flex-end;
+}
+
+/* The title carries the sweep, so the rule stops at the word and not at the
+   plate's edge. */
+.navName {
+  position: relative;
+  min-width: 0;
+}
+.navName::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.14em;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.42s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.navNext .navName::after {
+  transform-origin: right center;
+}
+.navLink:hover .navName::after,
+.navLink:focus-visible .navName::after {
+  transform: scaleX(1);
+}
+
+.navArrow {
+  flex: none;
+  opacity: 0.55;
+  transition:
+    transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
+    opacity 0.25s ease;
+}
+.navLink:hover .navArrow,
+.navLink:focus-visible .navArrow {
   opacity: 1;
+  transform: translateX(-7px);
+}
+.navNext:hover .navArrow,
+.navNext:focus-visible .navArrow {
+  transform: translateX(7px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navName::after,
+  .navArrow {
+    transition: none;
+  }
+  .navLink:hover .navArrow,
+  .navLink:focus-visible .navArrow,
+  .navNext:hover .navArrow,
+  .navNext:focus-visible .navArrow {
+    transform: none;
+  }
 }
 
 /* ── Mobile ─────────────────────────────────────────────────────────── */

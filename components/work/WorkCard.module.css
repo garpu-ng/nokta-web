@@ -14,11 +14,31 @@
 /* The image keeps its own ratio — architecture leads the wall by ratio, so no
    card crops its work into a common shape. */
 .frame {
+  position: relative;
   display: block;
   overflow: hidden;
   outline: 1px solid color-mix(in srgb, var(--ink) 55%, transparent);
   background: var(--paper);
   transition: outline-color 0.25s ease;
+}
+
+/* The registration mark on the sheet's top-right corner. Struck in paper with
+   a soft ink halo so it reads on a bright rendering and on a dark cover alike,
+   and held at zero until the card is under the pointer or focused. */
+.reg {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 26px;
+  height: 26px;
+  --reg-opacity: 0.95;
+  color: var(--paper);
+  filter: drop-shadow(0 0 2px rgba(26, 26, 24, 0.55));
+  opacity: 0;
+  transform: scale(0.82);
+  transition:
+    opacity 0.28s ease,
+    transform 0.28s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 .img {
@@ -48,14 +68,31 @@
 }
 
 /* Restrained hover: the frame's hairline goes to full ink and the sheet edges
-   a hair closer. Nothing floods, nothing recolours. */
+   a hair closer. Then two press details arrive — the registration mark is
+   struck on the corner, and the annotation's kind stamp picks up the colour
+   that kind wears in the filter above. Still nothing floods and nothing
+   recolours: one word and one hairline mark. */
 .card:hover .frame,
 .card:focus-visible .frame {
   outline-color: var(--ink);
 }
 
-.card:hover .img {
-  transform: scale(1.02);
+.card:hover .img,
+.card:focus-visible .img {
+  transform: scale(1.03);
+}
+
+.card:hover .reg,
+.card:focus-visible .reg {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* The kind word is printed by WorkAnno, which knows nothing about the wall —
+   it carries a global hook so the card can lend it a colour from here. */
+.card:hover :global(.nk-anno-kind),
+.card:focus-visible :global(.nk-anno-kind) {
+  color: var(--nk-kind, inherit);
 }
 
 .card:focus-visible {
@@ -65,8 +102,17 @@
 
 @media (prefers-reduced-motion: reduce) {
   .img,
-  .card:hover .img {
+  .card:hover .img,
+  .card:focus-visible .img {
     transform: none;
     transition: none;
+  }
+  .reg {
+    transform: none;
+    transition: opacity 0.28s ease;
+  }
+  .card:hover .reg,
+  .card:focus-visible .reg {
+    transform: none;
   }
 }

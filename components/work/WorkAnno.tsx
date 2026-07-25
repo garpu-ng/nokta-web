@@ -30,7 +30,11 @@ export function workAnnotation(work: Work, t: (key: string) => string): WorkAnno
 export default function WorkAnno({ anno }: { anno: WorkAnnotation }) {
   return (
     <span className={`nk-mono-caption ${styles.anno}`}>
-      {anno.kind} · {anno.year} · {anno.client}
+      {/* The kind stamp is the one word of the line another component styles —
+          a wall card lends it the filter's colour for that kind while the
+          sheet is under the pointer. Hence a global hook, not a module class:
+          the annotation itself stays ink wherever it is printed. */}
+      <span className="nk-anno-kind">{anno.kind}</span> · {anno.year} · {anno.client}
     </span>
   );
 }
