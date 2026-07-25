@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Reveal from "@/components/Reveal";
 import { getT } from "@/lib/i18n";
 
 /* The process overview — four cards, one per material, mirroring the studio's
@@ -33,7 +34,7 @@ export default async function ProzessPage() {
       </div>
 
       <ul className="wa-prozess-cards">
-        {CARDS.map(({ svc, href }) => {
+        {CARDS.map(({ svc, href }, i) => {
           const folio = String(svc + 1).padStart(2, "0");
           const body = (
             <>
@@ -51,7 +52,8 @@ export default async function ProzessPage() {
             </>
           );
           return (
-            <li key={svc} className="wa-prozess-card-cell">
+            // Two-up, so the cards arrive in pairs — left, then right.
+            <Reveal as="li" key={svc} className="wa-prozess-card-cell" delay={(i % 2) * 90}>
               {href ? (
                 <Link href={href} className="wa-prozess-card wa-prozess-card--link">
                   {body}
@@ -59,7 +61,7 @@ export default async function ProzessPage() {
               ) : (
                 <div className="wa-prozess-card">{body}</div>
               )}
-            </li>
+            </Reveal>
           );
         })}
       </ul>

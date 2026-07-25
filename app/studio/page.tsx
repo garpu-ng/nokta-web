@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import GifVideo from "@/components/GifVideo";
+import Reveal from "@/components/Reveal";
 import Registration from "@/components/print/Registration";
 import ServiceIndex from "@/components/nokta/ServiceIndex";
 import TeaserVideo from "@/components/TeaserVideo";
@@ -42,25 +43,26 @@ export default async function StudioPage() {
         {/* ── Team ────────────────────────────────────────────────── */}
         <section className="wa-studio-section">
           <div className="wa-studio-label">{t("studio.team")}</div>
+          {/* The three portraits are pinned up one after the other. */}
           <div className="wa-team-grid">
 
-            <div className="wa-team-card">
+            <Reveal className="wa-team-card">
               <GifVideo src="/flymekaan.mp4" label="Kaan" width={502} height={1014} className="wa-team-gif" />
               <div className="wa-team-info">
                 <div className="wa-team-name">Kaan</div>
                 <div className="wa-team-role">{t("studio.role.kaan")}</div>
               </div>
-            </div>
+            </Reveal>
 
-            <div className="wa-team-card">
+            <Reveal className="wa-team-card" delay={100}>
               <GifVideo src="/flymehammed.mp4" label="Mohammed" width={502} height={1014} className="wa-team-gif" />
               <div className="wa-team-info">
                 <div className="wa-team-name">Mohammed</div>
                 <div className="wa-team-role">{t("studio.role.mohammed")}</div>
               </div>
-            </div>
+            </Reveal>
 
-            <div className="wa-team-card">
+            <Reveal className="wa-team-card" delay={200}>
               {/* Mert's portrait asset isn't in /public yet — there's no
                   /flymemert.mp4 (the old /flymemert.gif 404'd too), so the other
                   cards' <GifVideo> here rendered an empty frame. Until the asset
@@ -80,7 +82,7 @@ export default async function StudioPage() {
                 <div className="wa-team-name">Mert</div>
                 <div className="wa-team-role">{t("studio.role.mert")}</div>
               </div>
-            </div>
+            </Reveal>
 
           </div>
         </section>

@@ -23,6 +23,18 @@ type Props = {
   label?: string;
 };
 
+/* An empty box is not a poster. `preload="metadata"` alone only promises the
+   duration and the dimensions — a browser is free to paint nothing at all
+   until playback starts, which is exactly what these frames did before the
+   effect's play() landed (and permanently when autoplay is blocked, or when
+   the reader has asked for reduced motion and we deliberately never call it).
+   A media fragment pointing a hair past zero makes the request a seek: the
+   browser fetches that frame and paints it. So the first frame IS the poster,
+   at no extra asset. */
+function firstFrame(src: string): string {
+  return src.includes("#") ? src : `${src}#t=0.001`;
+}
+
 export default function GifVideo({ src, className, width, height, label }: Props) {
   const ref = useRef<HTMLVideoElement>(null);
 
@@ -55,7 +67,7 @@ export default function GifVideo({ src, className, width, height, label }: Props
       aria-label={label}
       aria-hidden={label ? undefined : true}
     >
-      <source src={src} type="video/mp4" />
+      <source src={firstFrame(src)} type="video/mp4" />
     </video>
   );
 }

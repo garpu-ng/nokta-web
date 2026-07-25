@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import GifVideo from "@/components/GifVideo";
+import Reveal from "@/components/Reveal";
 import { getMediaSize } from "@/lib/mediaSizes";
 import { getT } from "@/lib/i18n";
 
@@ -55,7 +56,7 @@ export default async function Prozess3dPage() {
       {/* ── Steps ───────────────────────────────────────────────── */}
       <div className="wa-prozess-steps">
         {steps.map((step, i) => (
-          <div
+          <Reveal
             key={step.number}
             className={`wa-prozess-step${i % 2 === 1 ? " wa-prozess-step--reverse" : ""}`}
           >
@@ -74,7 +75,7 @@ export default async function Prozess3dPage() {
               <h2 className="wa-prozess-title">{step.title}</h2>
               <p className="wa-prozess-body">{step.text}</p>
             </div>
-          </div>
+          </Reveal>
         ))}
       </div>
 

@@ -38,9 +38,29 @@
   color: inherit;
   text-decoration: none;
 }
-/* The wordmark's closing period — the footer's one accent mark. */
+/* The wordmark's closing period — the footer's one accent mark, and the quiet
+   door to /punkt. Reaching for it swells the dot a little: the only hint that
+   the period is a place. It grows from its own baseline so the wordmark's
+   line never shifts. */
 .mark .punkt {
+  display: inline-block;
   color: var(--accent);
+  transform-origin: 50% 82%;
+  transition: transform 0.28s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.mark .punkt:hover,
+.mark .punkt:focus-visible {
+  transform: scale(1.3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mark .punkt {
+    transition: none;
+  }
+  .mark .punkt:hover,
+  .mark .punkt:focus-visible {
+    transform: none;
+  }
 }
 .tag {
   margin: 1.25rem 0 1.5rem;

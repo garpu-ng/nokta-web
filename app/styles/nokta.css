@@ -365,6 +365,14 @@
   font-size: 0.62rem;
   letter-spacing: 0.16em;
   opacity: 0.55;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+/* The folio goes to the accent when the card is addressed — the same tell the
+   service register uses for its own numbers. */
+.wa-prozess-card--link:hover .wa-prozess-card-folio,
+.wa-prozess-card--link:focus-visible .wa-prozess-card-folio {
+  color: var(--accent);
+  opacity: 1;
 }
 
 .wa-prozess-card-title {
@@ -390,9 +398,18 @@
 .wa-prozess-card-cta {
   margin-top: auto;
   padding-top: 0.75rem;
+  transition: color 0.2s ease;
 }
-.wa-prozess-card--link:hover .wa-prozess-card-cta {
+.wa-prozess-card--link:hover .wa-prozess-card-cta,
+.wa-prozess-card--link:focus-visible .wa-prozess-card-cta {
   color: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wa-prozess-card-folio,
+  .wa-prozess-card-cta {
+    transition: none;
+  }
 }
 
 @media (max-width: 767px) {
@@ -675,11 +692,15 @@
   }
 }
 
-/* ── The wall ─────────────────────────────────────────────────────── */
+/* ── The wall ─────────────────────────────────────────────────────────
+   The page breathes unevenly on purpose: a long pause between the statement
+   and the wall (the mark's own bottom margin, this top padding and the label's
+   rule, together), then a closer rhythm once you are inside it — the sheets
+   are hung on one wall, not filed on separate pages. */
 .nk-wall {
   max-width: 1100px;
   margin: 0 auto;
-  padding: clamp(1rem, 3svh, 2rem) clamp(20px, 5vw, 48px) clamp(4rem, 10svh, 7rem);
+  padding: clamp(1.5rem, 5svh, 3.25rem) clamp(20px, 5vw, 48px) clamp(4rem, 10svh, 7rem);
 }
 
 /* Names the wall, does not sort it: a plain annotation on a trim rule, never a

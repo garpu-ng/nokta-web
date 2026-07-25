@@ -1,3 +1,4 @@
+import Reveal from "@/components/Reveal";
 import { getT } from "@/lib/i18n";
 import styles from "./ServiceIndex.module.css";
 
@@ -19,8 +20,9 @@ export default async function ServiceIndex() {
       <div className={styles.inner}>
         <h2 className={styles.label}>{t("nokta.index.label")}</h2>
         <div className={styles.entries}>
-          {services.map((service) => (
-            <article className={styles.entry} key={service.folio}>
+          {/* The register rules itself in, one row after the next. */}
+          {services.map((service, i) => (
+            <Reveal as="article" className={styles.entry} key={service.folio} delay={i * 70}>
               <div className={styles.row}>
                 <span className={styles.folio}>{service.folio}</span>
                 <h3 className={styles.title}>{service.title}</h3>
@@ -34,7 +36,7 @@ export default async function ServiceIndex() {
                   {service.evidence}
                 </p>
               ) : null}
-            </article>
+            </Reveal>
           ))}
         </div>
       </div>
