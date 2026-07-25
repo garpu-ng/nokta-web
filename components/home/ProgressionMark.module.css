@@ -65,10 +65,16 @@
    `backwards` fill holds the closed state through the delay and then hands the
    rect back to its own geometry, so at rest the clip is simply the full band.
    The delay chains onto the masthead's arrival: --nk-lead-landed is published
-   by .nk-statement, the block this mark closes. */
+   by .nk-statement, the block this mark closes.
+
+   The pen only makes its pass as part of the masthead ceremony, which plays
+   once a session (see app/styles/nokta.css and the arming script in
+   app/page.tsx). Without that class the diagram is simply printed. */
 .sweep {
   transform-box: fill-box;
   transform-origin: 0% 50%;
+}
+:global(.nk-ceremony) .sweep {
   animation: nk-mark-sweep 2s linear backwards;
   animation-delay: calc(var(--nk-lead-landed, 0ms) + 260ms);
 }
@@ -84,7 +90,7 @@
 
 /* Reduced motion: the diagram is printed, not drawn. */
 @media (prefers-reduced-motion: reduce) {
-  .sweep {
+  :global(.nk-ceremony) .sweep {
     animation: none;
   }
 }

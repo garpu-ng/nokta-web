@@ -48,6 +48,9 @@ export default function WorkCard({ item }: { item: WallItem }) {
     <Link
       href={`/arbeiten/${item.slug}`}
       className={styles.card}
+      // What the sheet is made of. The card is identical for every kind — only
+      // the way the material answers the hand differs (see the module CSS).
+      data-kind={item.kind}
       // Reaching for a sheet turns the plotted pointer into the same
       // registration mark this card strikes on its corner (DotCursor.tsx).
       data-nk-cursor="registration"

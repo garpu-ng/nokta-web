@@ -606,7 +606,14 @@
    headline's words rise a beat apart, then the annotation, the motto and the
    drawn progression follow. Everything below the headline queues off
    --nk-lead-steps (the headline's word count, capped, set inline by the page),
-   so the arrival keeps its rhythm in every locale. */
+   so the arrival keeps its rhythm in every locale.
+
+   ONCE PER SESSION. A ceremony repeated on every visit stops being one, so
+   every rule below is gated on .nk-ceremony, a class put on <html> by the
+   inline script in app/page.tsx before the masthead is even parsed — and only
+   when this session has not seen it. The finished state is what the markup
+   states, so a second visit, a reader without JS and a reader who asked for
+   stillness all get the same thing: the sheet, printed. */
 .nk-statement {
   /* the beat the whole arrival is counted in */
   --nk-step: 70ms;
@@ -633,6 +640,8 @@
    real spaces between the spans still do the line breaking. */
 .nk-statement-word {
   display: inline-block;
+}
+.nk-ceremony .nk-statement-word {
   animation: nk-rise-in 0.62s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
   animation-delay: calc(var(--i, 0) * var(--nk-step));
 }
@@ -641,6 +650,8 @@
 .nk-statement-sub {
   margin: 1.35rem 0 0;
   color: var(--ink);
+}
+.nk-ceremony .nk-statement-sub {
   animation: nk-rise-in 0.62s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
   animation-delay: calc(var(--nk-lead-landed) + 120ms);
 }
@@ -673,6 +684,8 @@
   line-height: 1.15;
   text-wrap: balance;
   color: var(--ink);
+}
+.nk-ceremony .nk-statement-motto {
   animation: nk-rise-in 0.62s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
   animation-delay: calc(var(--nk-lead-landed) + 210ms);
 }
@@ -683,11 +696,12 @@
 }
 
 /* Reduced motion: the masthead is simply printed — no entrance at all. The
-   finished state is the elements' own, so dropping the animation is enough. */
+   finished state is the elements' own, so dropping the animation is enough.
+   (Second line of defence: the arming script does not read the media query.) */
 @media (prefers-reduced-motion: reduce) {
-  .nk-statement-word,
-  .nk-statement-sub,
-  .nk-statement-motto {
+  .nk-ceremony .nk-statement-word,
+  .nk-ceremony .nk-statement-sub,
+  .nk-ceremony .nk-statement-motto {
     animation: none;
   }
 }

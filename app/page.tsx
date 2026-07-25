@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import HomeContact from "@/components/HomeContact";
+import MottoDot from "@/components/home/MottoDot";
 import ProgressionMark from "@/components/home/ProgressionMark";
 import { toWallItem } from "@/components/work/WorkCard";
 import WorkWall from "@/components/work/WorkWall";
@@ -39,6 +40,24 @@ function motto(t: (key: string) => string): string {
    the arrival out. */
 const STAGGER_CAP = 5;
 
+/* Arms the masthead ceremony — once per session, and before the browser has
+   painted a single word of it.
+
+   The markup below states the FINISHED masthead; every entrance rule is gated
+   on .nk-ceremony (app/styles/nokta.css, components/home/ProgressionMark.module
+   .css). This runs inline, during parsing, above the statement it governs, so
+   the class is already on <html> when those rules are matched — there is no
+   moment where the finished sheet is painted and then pulled back to restart.
+   Without JS, in a session that has already seen it, or if sessionStorage is
+   unavailable (private modes, blocked storage), nothing is armed and the sheet
+   is simply printed.
+
+   The class is dropped again four seconds later, comfortably after the last
+   stroke of the progression mark: a client-side navigation back to this page
+   remounts the statement, and a class left on <html> would replay the whole
+   arrival every time the reader came home. */
+const ARM_CEREMONY = `try{var d=document,k='nk-ceremony';if(!sessionStorage.getItem(k)){sessionStorage.setItem(k,'1');d.documentElement.classList.add(k);setTimeout(function(){d.documentElement.classList.remove(k)},4000)}}catch(e){}`;
+
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getT();
   const locale = await getLocale();
@@ -73,6 +92,8 @@ export default async function HomePage() {
 
   return (
     <main className="nk-home">
+      {/* Runs before the statement below it is parsed — see ARM_CEREMONY. */}
+      <script dangerouslySetInnerHTML={{ __html: ARM_CEREMONY }} />
       <section
         className="nk-statement"
         style={{ "--nk-lead-steps": leadSteps } as CSSProperties}
@@ -93,7 +114,8 @@ export default async function HomePage() {
         <p className="nk-mono-caption nk-statement-sub">{t("home.sub")}</p>
         <p className="nk-statement-motto">
           {motto(t)}
-          <span className="nk-statement-dot">.</span>
+          {/* The one coloured mark on the page — and the one that wanders. */}
+          <MottoDot />
         </p>
         {/* The same progression, drawn. */}
         <ProgressionMark colors={MARK_COLORS} />
