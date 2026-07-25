@@ -48,6 +48,9 @@ export default function WorkCard({ item }: { item: WallItem }) {
     <Link
       href={`/arbeiten/${item.slug}`}
       className={styles.card}
+      // Reaching for a sheet turns the plotted pointer into the same
+      // registration mark this card strikes on its corner (DotCursor.tsx).
+      data-nk-cursor="registration"
       // The colour this work's kind wears in the filter bar. Only the
       // annotation's kind word ever spends it, and only under the pointer.
       style={{ "--nk-kind": TAB_COLORS[item.kind] } as CSSProperties}

@@ -5,6 +5,7 @@ import Image from "next/image";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import LanguageToggle from "@/components/LanguageToggle";
+import DotCursor from "@/components/plotter/DotCursor";
 import { getLocale, getT } from "@/lib/i18n";
 import { socialMetadata } from "@/lib/socialMeta";
 import styles from "./layout.module.css";
@@ -112,6 +113,11 @@ export default async function RootLayout({
         {children}
 
         <Footer />
+
+        {/* Chrome that belongs to the sheet rather than to any one page. Both
+            are decorative overlays: aria-hidden, pointer-events none, and both
+            render nothing at all until JS has read the environment. */}
+        <DotCursor />
       </body>
     </html>
   );

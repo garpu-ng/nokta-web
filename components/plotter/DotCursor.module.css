@@ -1,0 +1,79 @@
+/* Paint for the plotted pointer (see DotCursor.tsx). Everything here is an
+   overlay: fixed, never interactive, and it exists only once JS has decided
+   the reader has a fine pointer and has not asked for stillness.
+
+   Only transform and opacity move — the layer can never shift the page. */
+
+.layer {
+  position: fixed;
+  inset: 0;
+  z-index: 2600;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+/* Before the hand has moved, and whenever it leaves the window or asks for a
+   text field, the whole layer is simply not there. */
+.layer[data-parked],
+.layer[data-mode="off"] {
+  opacity: 0;
+}
+
+.trail {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* The pen itself — a zero-size anchor moved by transform; its marks hang off
+   it, each centred on the point. */
+.pen {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  will-change: transform;
+}
+
+/* The dot. The studio's red, the size of the period after the wordmark. */
+.point {
+  position: absolute;
+  left: -5.5px;
+  top: -5.5px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--accent);
+  transition: transform 0.2s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* Over a handle it swells; over a work it shrinks to the centre point of the
+   registration mark that arrives around it. */
+.layer[data-mode="link"] .point {
+  transform: scale(1.6);
+}
+.layer[data-mode="registration"] .point {
+  transform: scale(0.36);
+}
+
+/* The registration crosshair — struck in ink, hairline, centred on the point. */
+.cross {
+  position: absolute;
+  left: -16px;
+  top: -16px;
+  width: 32px;
+  height: 32px;
+  --reg-opacity: 0.9;
+  color: var(--ink);
+  opacity: 0;
+  transform: scale(0.6);
+  transition:
+    opacity 0.18s ease,
+    transform 0.24s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.layer[data-mode="registration"] .cross {
+  opacity: 1;
+  transform: none;
+}

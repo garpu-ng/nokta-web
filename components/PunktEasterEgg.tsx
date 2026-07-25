@@ -189,7 +189,9 @@ export default function PunktEasterEgg() {
   if (!mounted) return null;
 
   return createPortal(
-    <div ref={rootRef} className={styles.root}>
+    // This canvas states its own pointer (a crosshair), so the plotted dot
+    // stands down here — see components/plotter/DotCursor.tsx.
+    <div ref={rootRef} className={styles.root} data-nk-cursor="native">
       <canvas ref={canvasRef} className={styles.canvas} />
       <Link href="/" className={styles.back}>
         ← zurück
