@@ -90,8 +90,8 @@ const en: Record<string, string> = {
   "point.case.facts.discipline.value": "Editorial · Layout · Prepress",
   "point.case.facts.credit.label": "Design",
   "point.case.facts.credit.value": "Mert Büyüktüfekci (nokta)",
-  "point.case.pdf": "View the report (PDF · 7.9 MB)",
   "point.case.web": "kikommission.de",
+  "point.case.webHint": "The report is there to download.",
   "point.case.narrative1": "The brief: a 216-page government report with eight chapters, 20 recommendations, principles, a scientific report and the opinions and essays of the commission members — as one document you can read front to back without getting lost.",
   "point.case.narrative2": "nokta built the layout system for it: a continuous grid with numbered chapters and folios, cyan wayfinding for the text types, two-column body text for the science, distinct registers for opinion and quote. What ships at the end is the print-ready file — bleed, colour space and sequence all in order.",
 

@@ -93,8 +93,8 @@ const de: Record<string, string> = {
   "point.case.facts.discipline.value": "Editorial · Layout · Druckvorstufe",
   "point.case.facts.credit.label": "Gestaltung",
   "point.case.facts.credit.value": "Mert Büyüktüfekci (nokta)",
-  "point.case.pdf": "Report ansehen (PDF · 7,9 MB)",
   "point.case.web": "kikommission.de",
+  "point.case.webHint": "Dort steht der Report zum Download.",
   "point.case.narrative1": "Die Aufgabe: ein 216-seitiger Regierungsbericht mit acht Kapiteln, 20 Handlungsempfehlungen, Prinzipien, wissenschaftlichem Report und den Meinungen und Essays der Kommissionsmitglieder — als ein Dokument, das man von vorne bis hinten lesen kann, ohne sich zu verlaufen.",
   "point.case.narrative2": "nokta hat dafür das Layoutsystem gebaut: ein durchgehendes Raster mit nummerierten Kapiteln und Folios, cyanfarbene Wegweiser für die Textsorten, zweispaltiger Fließtext für die Wissenschaft, eigene Register für Meinung und Zitat. Am Ende steht die druckreife Datei — Beschnitt, Farbraum und Reihenfolge stimmen.",
 

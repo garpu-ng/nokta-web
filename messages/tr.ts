@@ -82,8 +82,8 @@ const tr: Record<string, string> = {
   "point.case.facts.discipline.value": "Editoryal · Mizanpaj · Baskı öncesi",
   "point.case.facts.credit.label": "Tasarım",
   "point.case.facts.credit.value": "Mert Büyüktüfekci (nokta)",
-  "point.case.pdf": "Raporu görüntüle (PDF · 7,9 MB)",
   "point.case.web": "kikommission.de",
+  "point.case.webHint": "Rapor orada indirilebilir.",
   "point.case.narrative1": "Görev: sekiz bölüm, 20 öneri, ilkeler, bilimsel bir rapor ve komisyon üyelerinin görüş ve makalelerinden oluşan 216 sayfalık bir hükümet raporu — baştan sona, kaybolmadan okunabilen tek bir belge olarak.",
   "point.case.narrative2": "nokta bunun için mizanpaj sistemini kurdu: numaralı bölümler ve folyolarla sürekli bir ızgara, metin türleri için camgöbeği yönlendirme, bilim için iki sütunlu ana metin, görüş ve alıntı için ayrı kayıtlar. Sonunda teslim edilen, baskıya hazır dosya — taşma payı, renk uzayı ve sıralama yerli yerinde.",
 

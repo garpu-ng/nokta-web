@@ -148,34 +148,43 @@
   line-height: 1.5;
 }
 
+/* One way out of this block now, not two: the report is downloaded at the
+   commission's own address, so the black button carries that address and the
+   line under it says what is waiting there. The button keeps the shape and the
+   accent-on-hover the PDF button had — only its destination changed. */
 .links {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem 1.5rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
   margin: 1.5rem 0 0;
 }
-.pdf,
-.web {
+.site {
   font-family: var(--mono-font);
   font-size: 0.72rem;
   letter-spacing: 0.06em;
   text-decoration: none;
-}
-.pdf {
   color: var(--paper);
   background: var(--ink);
   padding: 0.7rem 1.1rem;
   transition: background 0.2s ease;
 }
-.pdf:hover,
-.pdf:focus-visible {
+.site:hover,
+.site:focus-visible {
   background: var(--accent);
 }
-.web {
-  align-self: center;
-  color: var(--case-cyan);
-  border-bottom: 1px solid currentColor;
-  padding-bottom: 2px;
+
+/* The note under the button. Mono like every other annotation on the sheet,
+   but left in sentence case — it is a sentence, not a caption, so it does not
+   take .nk-mono-caption's lowercase. */
+.hint {
+  max-width: 34ch;
+  color: var(--ink);
+  font-family: var(--mono-font);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+  opacity: 0.65;
 }
 
 .narrative p {

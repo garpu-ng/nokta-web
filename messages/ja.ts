@@ -84,8 +84,8 @@ const ja: Record<string, string> = {
   "point.case.facts.discipline.value": "エディトリアル · レイアウト · 製版",
   "point.case.facts.credit.label": "デザイン",
   "point.case.facts.credit.value": "Mert Büyüktüfekci (nokta)",
-  "point.case.pdf": "報告書を見る（PDF · 7.9 MB）",
   "point.case.web": "kikommission.de",
+  "point.case.webHint": "報告書はそちらからダウンロードできます。",
   "point.case.narrative1": "課題は、8章・20の勧告・原則・学術報告、そして委員たちの意見とエッセイからなる216ページの政府報告書を、迷わず最初から最後まで読み通せる一冊の文書にすること。",
   "point.case.narrative2": "nokta はそのためにレイアウトシステムを構築しました。番号付きの章とノンブルによる一貫したグリッド、テキストの種類を示すシアンの案内、学術本文の二段組、意見と引用のための独自レジスター。最後に納品されるのは印刷可能なデータ — 塗り足し、カラースペース、面付け順まで整っています。",
 

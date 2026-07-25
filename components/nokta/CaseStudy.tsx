@@ -23,7 +23,11 @@ const SPREADS = [
 
 const FACTS = ["client", "year", "scope", "discipline", "credit"] as const;
 
-const PDF_HREF = "/point/abschlussbericht-ki-kommission-2026.pdf";
+/* The report is not rehosted here. It is a government publication and it lives
+   at the commission's own address — that is where it is downloaded, so that is
+   where the button points; the line under it says what waits at the other end.
+   (Until 2026-07-25 a 7.9 MB copy of the PDF sat in public/point/ and the black
+   button pulled it down from us. Both are gone.) */
 const WEB_HREF = "https://kikommission.de";
 
 export default async function CaseStudy() {
@@ -86,12 +90,11 @@ export default async function CaseStudy() {
               </div>
             ))}
             <div className={styles.links}>
-              <a className={styles.pdf} href={PDF_HREF} target="_blank" rel="noopener noreferrer">
-                {t("point.case.pdf")}
-              </a>
-              <a className={styles.web} href={WEB_HREF} target="_blank" rel="noopener noreferrer">
+              <a className={styles.site} href={WEB_HREF} target="_blank" rel="noopener noreferrer">
                 {t("point.case.web")}
               </a>
+              {/* span, not p: this block sits inside the facts <dl>. */}
+              <span className={styles.hint}>{t("point.case.webHint")}</span>
             </div>
           </dl>
 
