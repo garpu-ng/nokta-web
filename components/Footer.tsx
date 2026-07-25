@@ -4,9 +4,11 @@ import { getT } from "@/lib/i18n";
 import Registration from "@/components/print/Registration";
 import styles from "./Footer.module.css";
 
-// Global footer — the colophon slab: ink, full width, under every page. Two
-// short link columns (the pages, then the legal ones) plus the contact block.
-// Social links are placeholders (href="#") until the real profiles exist.
+// Global footer — the colophon of the sheet, and the masthead's counterpart:
+// the same ink bar, the same 1100px frame, the same wordmark asset, so the
+// header's left edge and this one are the single left edge of the page.
+// Two short link columns (the pages, then the legal ones) plus the contact
+// block. Social links are placeholders (href="#") until the real profiles exist.
 export default async function Footer() {
   const t = await getT();
   return (
@@ -15,10 +17,31 @@ export default async function Footer() {
         <div className={styles.top}>
           <div className={styles.brand}>
             <span className={styles.mark}>
-              <Link href="/">nokta</Link>
-              {/* The wordmark's period is the accent mark of the footer — and
-                  the quiet door to the easter egg at /punkt. */}
-              <Link href="/punkt" className={styles.punkt} aria-label={t("aria.punkt")}>
+              <Link
+                href="/"
+                className={styles.markLink}
+                aria-label={t("aria.home")}
+              >
+                {/* The same wordmark the masthead carries, flipped to paper by
+                    the same filter. Below the fold on every page, so unlike the
+                    header's copy it is left to load lazily. */}
+                <Image
+                  src="/nokta_logo.png"
+                  alt="nokta"
+                  width={2000}
+                  height={410}
+                  className={styles.markLogo}
+                />
+              </Link>
+              {/* The wordmark's closing period — the footer's one coloured mark,
+                  and the quiet door to the easter egg at /punkt. The asset
+                  carries no period of its own, so the dot is set beside it the
+                  way the Schriftfeld sets its own. */}
+              <Link
+                href="/punkt"
+                className={styles.punkt}
+                aria-label={t("aria.punkt")}
+              >
                 .
               </Link>
             </span>
@@ -31,20 +54,6 @@ export default async function Footer() {
               hallo@nokta-studio.de
             </a>
           </div>
-
-          {/* Decorative dot-row animation, sits between the brand block and
-              the link columns. Transparent-background *animated* WebP — next/image
-              can't optimize animated frames, so `unoptimized` passes it through
-              as-is (the file itself was already resized down to 600×200). */}
-          <Image
-            src="/nokta_dots_row.webp"
-            alt=""
-            aria-hidden="true"
-            width={600}
-            height={200}
-            unoptimized
-            className={styles.dotsRow}
-          />
 
           <nav className={styles.cols} aria-label="Footer">
             {/* The pages. "Arbeiten" is the home page — the work is the site,

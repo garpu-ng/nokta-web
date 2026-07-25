@@ -1,86 +1,109 @@
-/* Global footer — pure black, mirrors the header's centred column. */
+/* Global footer — the colophon slab: ink, full width, under every page.
+
+   It is the masthead read from the other end, so it borrows the masthead's
+   frame rather than inventing one: the same 1100px column and the same side
+   padding as app/layout.module.css, the statement, the wall and the work
+   pages. The wordmark that opens the sheet and the wordmark that closes it
+   therefore stand on one left edge.
+
+   Colour comes from the three tokens only. The retired three-branch palette
+   (the rust/slate/olive dot row that used to sit between the brand block and
+   the columns) is gone with the branches it belonged to — lib/colors.ts keeps
+   the quotation of those colours confined to the filter bar's one word, and
+   forbids them a surface or an image. */
 
 .footer {
   flex-shrink: 0;
-  background: #1a1a18;
-  color: #e9e0ce;
+  background: var(--ink);
+  color: var(--paper);
   line-height: 1.5; /* comfortable footer leading, overriding the body's 20px (base.css) for the footer's looser blocks */
 }
 
 .inner {
-  max-width: 1600px;
+  /* The masthead's column, to the pixel (layout.module.css .inner). */
+  max-width: 1100px;
   margin: 0 auto;
-  padding: clamp(3rem, 7vw, 6rem) clamp(16px, 4vw, 40px) 2rem;
+  padding: clamp(3rem, 7vw, 6rem) clamp(20px, 5vw, 48px) 2rem;
 }
 
 .top {
-  position: relative;
   display: flex;
   justify-content: space-between;
   gap: clamp(2.5rem, 6vw, 5rem);
   flex-wrap: wrap;
 }
 
-/* Brand block (mirrors the header logo, left side) */
+/* ── Brand block (mirrors the masthead logo, left side) ──────────────── */
 .brand {
   max-width: 340px;
 }
+
+/* The wordmark and its period share a baseline row. The logo is an image and
+   the period is type, so they are aligned at the foot rather than by any
+   baseline the two do not share. */
 .mark {
-  display: inline-block;
-  font-size: clamp(2.6rem, 5vw, 4rem);
-  font-weight: 700;
-  letter-spacing: -0.05em;
-  line-height: 0.85;
-  color: #e9e0ce;
-  text-decoration: none;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.06em;
+  line-height: 0;
 }
-.mark a {
+.markLink {
+  display: block;
   color: inherit;
   text-decoration: none;
 }
-/* The wordmark's closing period — the footer's one accent mark, and the quiet
-   door to /punkt. Reaching for it swells the dot a little: the only hint that
-   the period is a place. It grows from its own baseline so the wordmark's
-   line never shifts. */
-.mark .punkt {
-  display: inline-block;
+/* Same asset, same treatment as the masthead: black on transparent, flipped to
+   paper (invert to white, then a touch of sepia to land on the warm paper
+   tone). Set a step larger than the header's — the colophon is the sign-off. */
+.markLogo {
+  display: block;
+  height: clamp(2rem, 5vw, 3.2rem);
+  width: auto;
+  user-select: none;
+  filter: invert(1) sepia(0.14) brightness(0.97);
+}
+
+/* The closing period — the one coloured mark on the slab, and the door to
+   /punkt. Sized off the logo's own height so the two scale together. Reaching
+   for it swells the dot a little: the only hint that the period is a place. It
+   grows from its own baseline so the wordmark's line never shifts. */
+.punkt {
+  display: block;
+  font-family: var(--headline-font);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  line-height: 0.72;
   color: var(--accent);
+  text-decoration: none;
   transform-origin: 50% 82%;
   transition: transform 0.28s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-.mark .punkt:hover,
-.mark .punkt:focus-visible {
+.punkt:hover,
+.punkt:focus-visible {
   transform: scale(1.3);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .mark .punkt {
-    transition: none;
-  }
-  .mark .punkt:hover,
-  .mark .punkt:focus-visible {
-    transform: none;
-  }
-}
 .tag {
-  margin: 1.25rem 0 1.5rem;
+  margin: 1.5rem 0;
   font-size: 0.9rem;
   line-height: 1.6;
-  color: #e9e0ce;
+  color: var(--paper);
 }
+
+/* The one underlined thing on the slab — it reads as an address, not a link
+   in a list. The rule under it is paper held back, and fills in on approach. */
 .email {
   font-size: 1rem;
-  color: #e9e0ce;
+  color: var(--paper);
   text-decoration: none;
-  border-bottom: 1px solid rgba(233, 224, 206, 0.4);
+  border-bottom: 1px solid color-mix(in srgb, var(--paper) 40%, transparent);
   padding-bottom: 2px;
   transition: border-color 0.2s ease;
 }
 .email:hover {
-  border-color: #e9e0ce;
+  border-color: var(--paper);
 }
 
-/* Link columns (right side) */
+/* ── Link columns (right side) ───────────────────────────────────────── */
 .cols {
   display: flex;
   gap: clamp(2rem, 5vw, 4.5rem);
@@ -91,38 +114,54 @@
   flex-direction: column;
   gap: 0.7rem;
 }
+
+/* The section label of the rest of the sheet (ServiceIndex .label), inverted
+   for ink: Righteous, wide caps, sitting on its own hairline rule. */
 .colH {
   margin-bottom: 0.5rem;
-  font-size: 0.65rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--paper) 45%, transparent);
+  color: var(--paper);
+  font-family: var(--headline-font);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: #e9e0ce;
 }
+
+/* Links carry the wall's hover instead of the old fade to 60%: pointing at a
+   row resolves it to the accent, the same answer every other index on the site
+   gives the hand. */
 .link {
   width: fit-content;
   font-size: 0.92rem;
-  color: #e9e0ce;
+  color: var(--paper);
   text-decoration: none;
-  transition: opacity 0.18s ease;
+  transition: color 0.2s ease;
 }
 .link:hover {
-  opacity: 0.6;
+  color: var(--accent);
 }
 
-/* Bottom line: copyright + tagline */
+/* ── Bottom line: copyright + disciplines ────────────────────────────── */
 .bottom {
   /* position: relative anchors the registration mark to this bar. */
   position: relative;
   margin-top: clamp(3rem, 6vw, 5rem);
   padding-top: 1.5rem;
-  border-top: 1px solid rgba(233, 224, 206, 0.12);
+  border-top: 1px solid color-mix(in srgb, var(--paper) 12%, transparent);
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 0.75rem;
-  font-size: 0.72rem;
-  letter-spacing: 0.03em;
-  color: #e9e0ce;
+  /* The technical-annotation voice the rest of the sheet uses for its smallest
+     line (.nk-mono-caption), set here rather than borrowed so the colophon can
+     keep its own casing — a copyright line is not lowercase. */
+  font-family: var(--mono-font);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: var(--paper);
+  opacity: 0.7;
 }
 
 /* Registration mark centred on the colophon's hairline trim, in the gap between
@@ -139,30 +178,18 @@
   opacity: 0.28;
 }
 
-/* Decorative dot-row animation — pinned to the true horizontal centre of the
-   footer (the .inner column is centred in the viewport, so 50% of .top is the
-   screen centre), independent of the brand/columns widths. Transparent WebP,
-   so it drops cleanly onto the black footer with no colour box. */
-.dotsRow {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: clamp(160px, 20vw, 260px);
-  height: auto;
-  pointer-events: none;
-  user-select: none;
-}
-
 @media (max-width: 767px) {
   .top {
     flex-direction: column;
   }
-  /* Stacked layout: return the row to normal flow, centred in the column so it
-     can't overlap the brand block or link columns. */
-  .dotsRow {
-    position: static;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .punkt {
+    transition: none;
+  }
+  .punkt:hover,
+  .punkt:focus-visible {
     transform: none;
-    align-self: center;
   }
 }
