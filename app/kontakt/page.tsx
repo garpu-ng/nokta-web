@@ -33,7 +33,12 @@ export default async function KontaktPage() {
             step1: t("kontakt.form.step1"),
             step2: t("kontakt.form.step2"),
             step3: t("kontakt.form.step3"),
-            kinds: [0, 1, 2, 3].map((i) => t(`kontakt.form.kind.${i}`)),
+            // The id is what the route validates; the label is what the
+            // reader reads. Order matches kontakt.form.kind.0–3.
+            kinds: ["visualisierung", "editorial", "druck", "cad"].map((id, i) => ({
+              id,
+              label: t(`kontakt.form.kind.${i}`),
+            })),
             name: t("kontakt.form.name"),
             email: t("kontakt.form.email"),
             message: t("kontakt.form.message"),

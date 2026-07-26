@@ -12,11 +12,16 @@ import styles from "./InquiryForm.module.css";
    a group — the chips are styling on top of a control, not a control made of
    divs. */
 
+/* A chip: the stable id the route validates against, and the translated word
+   the reader actually sees. The two are kept apart on purpose — the route
+   cannot whitelist display text without rejecting every non-German visitor. */
+export type Kind = { id: string; label: string };
+
 type Copy = {
   step1: string;
   step2: string;
   step3: string;
-  kinds: string[];
+  kinds: Kind[];
   name: string;
   email: string;
   message: string;
@@ -35,12 +40,12 @@ type State = "idle" | "sending" | "sent" | "error";
 const EMPTY = { name: "", email: "", message: "" };
 
 export default function InquiryForm({ copy }: { copy: Copy }) {
-  const [kind, setKind] = useState(copy.kinds[0]);
+  const [kind, setKind] = useState(copy.kinds[0].id);
   const [fields, setFields] = useState(EMPTY);
   const [state, setState] = useState<State>("idle");
 
   function reset() {
-    setKind(copy.kinds[0]);
+    setKind(copy.kinds[0].id);
     setFields(EMPTY);
     setState("idle");
   }
@@ -92,22 +97,22 @@ export default function InquiryForm({ copy }: { copy: Copy }) {
       <fieldset className={styles.fieldset}>
         <legend className={styles.step}>{copy.step1}</legend>
         <div className={styles.chips}>
-          {copy.kinds.map((option) => (
-            <label key={option} className={styles.chip}>
+          {copy.kinds.map(({ id, label }) => (
+            <label key={id} className={styles.chip}>
               <input
                 type="radio"
                 name="kind"
-                value={option}
-                checked={kind === option}
-                onChange={() => setKind(option)}
+                value={id}
+                checked={kind === id}
+                onChange={() => setKind(id)}
                 className={styles.chipInput}
               />
-              <span className={styles.chipLabel}>{option}</span>
+              <span className={styles.chipLabel}>{label}</span>
               {/* The selected frame is drawn inset by a pixel over the chip's
                   own border rather than thickening it, so choosing a chip
                   never nudges the row. The frame is a second signal beside
                   the colour — red alone would not carry the state. */}
-              {kind === option ? (
+              {kind === id ? (
                 <span className={styles.chipFrame} aria-hidden="true" />
               ) : null}
             </label>

@@ -26,8 +26,19 @@ const TO = process.env.KONTAKT_TO ?? "hallo@nokta-studio.de";
 const FROM = process.env.KONTAKT_FROM;
 const API_KEY = process.env.KONTAKT_API_KEY;
 
-/** The four things the form can be about; anything else is not from our form. */
-const KINDS = new Set(["Visualisierung", "Editorial", "Druck", "CAD-Plan"]);
+/* The four things the form can be about, keyed by the stable id the form
+   sends — NOT by the label the reader saw. The chips are translated, so
+   whitelisting display text would accept German and reject the same click
+   from an English, Turkish or Japanese visitor.
+
+   The value here is what the mail says, so an inquiry always arrives in the
+   studio's own vocabulary whatever language it was written in. */
+const KINDS: Record<string, string> = {
+  visualisierung: "Visualisierung",
+  editorial: "Editorial",
+  druck: "Druck",
+  cad: "CAD-Plan",
+};
 
 /* Field caps. Long enough for a real briefing, short enough that the route is
    never asked to relay a payload. */
@@ -136,7 +147,8 @@ export async function POST(request: Request) {
   const email = field(data.email, MAX.email);
   const message = field(data.message, MAX.message);
 
-  if (!name || !message || !EMAIL.test(email) || !KINDS.has(kind)) {
+  const kindLabel = KINDS[kind];
+  if (!name || !message || !EMAIL.test(email) || !kindLabel) {
     return Response.json({ ok: false }, { status: 422 });
   }
 
@@ -144,7 +156,7 @@ export async function POST(request: Request) {
     return Response.json({ ok: false }, { status: 429 });
   }
 
-  const delivered = await sendMail({ kind, name, email, message });
+  const delivered = await sendMail({ kind: kindLabel, name, email, message });
   if (!delivered) {
     return Response.json({ ok: false }, { status: 503 });
   }
