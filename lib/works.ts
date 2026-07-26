@@ -132,6 +132,21 @@ export const WORKS: Work[] = [
   fromPrint("osaka", 4, 6),
 ];
 
+/** The five kinds, as a runtime set — the type alone cannot be checked
+    against a URL. Used to decide whether /arbeiten?kind=… named a real
+    material before it is handed to the wall as a filter. */
+const KINDS = new Set<string>([
+  "rendering",
+  "cad",
+  "editorial",
+  "study",
+  "manual",
+]);
+
+export function isWorkKind(value: unknown): value is WorkKind {
+  return typeof value === "string" && KINDS.has(value);
+}
+
 /** The wall's running order reduced to bare slugs. Handed to the live title
     block so a client component can number the sheet you are on without the
     whole work catalogue (and the projects and prints behind it) crossing into

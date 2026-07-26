@@ -19,21 +19,29 @@ import styles from "./WorkWall.module.css";
    spent nowhere on the site at all.
 
    The cards enter through the shared Reveal primitive, staggered left-then-
-   right so a row lands as a pair rather than a block. */
+   right so a row lands as a pair rather than a block.
+
+   The filter can arrive already set: /arbeiten?kind=rendering renders the
+   filtered wall on the server, so the homepage's three doors land on a wall
+   that is already showing their material rather than flashing the full set
+   and then narrowing it. */
 
 export default function WorkWall({
   items,
   kinds,
   allLabel,
   listLabel,
+  initialKind = null,
 }: {
   items: WallItem[];
   /** the kinds present on the wall, in wall order, with their translated stamps */
   kinds: { kind: WorkKind; label: string }[];
   allLabel: string;
   listLabel: string;
+  /** the kind the URL asked for, if it named a real one */
+  initialKind?: WorkKind | null;
 }) {
-  const [active, setActive] = useState<WorkKind | null>(null);
+  const [active, setActive] = useState<WorkKind | null>(initialKind);
 
   return (
     <>

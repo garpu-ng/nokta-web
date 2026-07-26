@@ -32,12 +32,21 @@
   text-wrap: pretty;
 }
 
-/* ── Three service rows ────────────────────────────────────────────
-   Each row is a rule with a word on it. Hovering steps the whole row in by
-   12px — the only thing that moves, so the page reads as a set of drawers
-   rather than as a set of buttons. */
+/* ── Three service fields ──────────────────────────────────────────
+   Each row is a solid field in its material's motto colour and a door into
+   the wall, already filtered to that material. This is the one place on the
+   site where anything but the red is a surface — the rest of the sheet is
+   ink, paper and one accent, and these three exist to break that once.
+
+   The field colour arrives per-row as --nk-field (app/page.tsx). Type is
+   paper on all three: the colours in lib/colors.ts are the motto values
+   nudged down a few percent precisely so 16px body copy clears 4.5:1 on
+   them, so nothing here needs a per-colour exception. */
 
 .services {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
   padding: 40px var(--nk-gutter) 120px;
 }
 
@@ -46,18 +55,19 @@
   grid-template-columns: 74px 1fr 420px 44px;
   gap: 32px;
   align-items: center;
-  padding: 46px 8px;
-  border-top: 1px solid var(--nk-hair);
+  padding: 46px 32px;
+  background: var(--nk-field);
   color: var(--paper);
   text-decoration: none;
-  transition: padding 0.2s ease;
+  transition: padding 0.2s ease, filter 0.2s ease;
 }
-.service:last-child {
-  border-bottom: 1px solid var(--nk-hair);
-}
+
+/* Reaching for a row steps it in and lifts the field a shade — the colour
+   answers the hand without becoming another colour. */
 .service:hover {
-  padding-left: 20px;
+  padding-left: 44px;
   color: var(--paper);
+  filter: brightness(1.12);
 }
 
 /* A grid item's automatic minimum size is its min-content width, so a 34px
@@ -68,11 +78,13 @@
   min-width: 0;
 }
 
+/* On a field the folio can no longer be the red — it would vanish into two of
+   the three. Paper, held back, so it still reads as an index number. */
 .serviceFolio {
   font-family: var(--mono-font);
   font-size: 11px;
   letter-spacing: 0.08em;
-  color: var(--accent);
+  opacity: 0.75;
 }
 
 .serviceTitle {
@@ -83,17 +95,26 @@
   letter-spacing: -0.015em;
 }
 
+/* Full strength, not the .7 the ink rows used: on a colour the same opacity
+   would drop this under the contrast it needs to be read. */
 .serviceText {
   font-size: 16px;
   line-height: 1.5;
-  opacity: 0.7;
+  opacity: 0.92;
   text-wrap: pretty;
 }
 
 .serviceArrow {
   font-size: 22px;
   text-align: right;
-  opacity: 0.6;
+  opacity: 0.8;
+}
+
+/* The focus ring is paper here — the accent would sit on its own colour in
+   the middle field and disappear. */
+.service:focus-visible {
+  outline: 2px solid var(--paper);
+  outline-offset: -6px;
 }
 
 /* ── Selected works ────────────────────────────────────────────────── */
@@ -280,6 +301,7 @@
     grid-template-columns: 56px 1fr 44px;
     gap: 24px;
     row-gap: 12px;
+    padding-inline: 28px;
   }
   .serviceText {
     grid-column: 2 / 3;
@@ -321,10 +343,10 @@
   .service {
     grid-template-columns: 44px 1fr 32px;
     gap: 16px;
-    padding: 34px 4px;
+    padding: 32px 20px;
   }
   .service:hover {
-    padding-left: 12px;
+    padding-left: 28px;
   }
 
   /* "Ausgewählte Arbeiten" and "alle 13 arbeiten ↗" do not share a 320px

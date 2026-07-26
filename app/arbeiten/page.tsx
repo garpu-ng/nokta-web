@@ -3,7 +3,7 @@ import { toWallItem } from "@/components/work/WorkCard";
 import WorkWall from "@/components/work/WorkWall";
 import { getLocale, getT } from "@/lib/i18n";
 import { socialMetadata } from "@/lib/socialMeta";
-import { WORKS, type WorkKind } from "@/lib/works";
+import { WORKS, isWorkKind, type WorkKind } from "@/lib/works";
 import styles from "./page.module.css";
 
 /* The wall — one body of work, all thirteen sheets. It used to be the second
@@ -11,6 +11,12 @@ import styles from "./page.module.css";
    and the full set lives here, at the route every detail URL already implies
    (/arbeiten/teahouse advertises /arbeiten as its directory, and people try
    it). The label names the wall, it does not sort it.
+
+   ?kind= narrows it to one material, which is where the homepage's three
+   doors land. The filter is read here rather than in the browser, so the
+   narrowed wall is what the server sends — no flash of the full set, and the
+   URL is shareable. An unknown kind is simply ignored and the whole wall is
+   shown; a filter is not worth a 404.
 
    NOTE: this route previously answered with a 308 permanentRedirect to "/".
    Browsers cache permanent redirects hard, so a reader who hit /arbeiten
@@ -30,8 +36,14 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function ArbeitenPage() {
+export default async function ArbeitenPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
   const t = await getT();
+  const requested = (await searchParams).kind;
+  const initialKind = isWorkKind(requested) ? requested : null;
 
   // Every string the wall shows is translated here: WorkWall is a client
   // component and never reaches for a dictionary itself.
@@ -51,7 +63,14 @@ export default async function ArbeitenPage() {
           <span className={styles.period}>.</span>
         </h1>
         <p className={styles.count}>
-          {t("home.selected.all").replace("{count}", String(WORKS.length))}
+          {t("home.selected.all").replace(
+            "{count}",
+            String(
+              initialKind
+                ? WORKS.filter((w) => w.kind === initialKind).length
+                : WORKS.length,
+            ),
+          )}
         </p>
       </div>
 
@@ -63,6 +82,7 @@ export default async function ArbeitenPage() {
           kinds={kinds}
           allLabel={t("work.filter.all")}
           listLabel={t("home.wall.aria")}
+          initialKind={initialKind}
         />
       </div>
     </main>

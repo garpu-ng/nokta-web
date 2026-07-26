@@ -1,12 +1,14 @@
+import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import HomeContact from "@/components/HomeContact";
 import TeaserVideo from "@/components/TeaserVideo";
+import { KIND_FIELD } from "@/lib/colors";
 import { getLocale, getT, type Translate } from "@/lib/i18n";
 import { getMediaSize } from "@/lib/mediaSizes";
 import { socialMetadata } from "@/lib/socialMeta";
-import { WORKS, getWork, type Work } from "@/lib/works";
+import { WORKS, getWork, type Work, type WorkKind } from "@/lib/works";
 import styles from "./page.module.css";
 
 /* The homepage states what the studio does, proves it with four works shown
@@ -30,9 +32,19 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 /* The three rows under the hero — the four services on /studio compressed to
-   three lines, each one a door into the process rather than into a service
-   page (there are none; /prozess is where the work is described). */
-const SERVICES = [0, 1, 2] as const;
+   three, and each one a door into the WORK rather than into the process: a
+   reader who wants renderings wants to see renderings, not to read how they
+   are made. Each row lands on the wall already filtered to its material, and
+   wears that material's motto colour as a solid field.
+
+   The colours are the old site's palette, back for this one job. It is the
+   single place on the site where anything other than the red is a surface —
+   which is why they are here and nowhere else. */
+const SERVICES: { kind: WorkKind }[] = [
+  { kind: "rendering" }, // Visualisierung
+  { kind: "editorial" }, // Editorial & Satz
+  { kind: "cad" }, // Druck & CAD
+];
 
 /* The four works the homepage shows, by slug and in the order they appear.
    Named rather than derived: the selection is an editorial decision — one
@@ -91,10 +103,16 @@ export default async function HomePage() {
         <p className={styles.introBody}>{t("home.intro.body")}</p>
       </section>
 
-      {/* ── What we sell, in three lines ──────────────────────────── */}
+      {/* ── What we sell, in three fields ─────────────────────────── */}
       <section className={styles.services} aria-label={t("home.services.aria")}>
-        {SERVICES.map((i) => (
-          <Link key={i} href="/prozess" className={styles.service}>
+        {SERVICES.map(({ kind }, i) => (
+          <Link
+            key={kind}
+            href={`/arbeiten?kind=${kind}`}
+            className={styles.service}
+            // The material's own colour, spent as the field it stands on.
+            style={{ "--nk-field": KIND_FIELD[kind] } as CSSProperties}
+          >
             <span className={styles.serviceFolio}>
               {String(i + 1).padStart(2, "0")}
             </span>
