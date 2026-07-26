@@ -24,7 +24,7 @@
   font: inherit;
   font-size: 0.72rem;
   line-height: 1.2;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.02em;
   /* Inherit the ground's ink — the toggle sits on the header's ink bar today,
      and follows whatever surface hosts it. */
   color: inherit;

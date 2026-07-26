@@ -23,9 +23,8 @@ const ja: Record<string, string> = {
   "home.motto.line": "線",
   "home.motto.form": "形",
   // ── Kolonnade: トップのヒーロー、導入、三つのサービス行 ─────────
-  "home.hero.lead1": "建てられる前に、",
-  "home.hero.lead2": "描かれる",
-  "home.hero.teaser": "スタジオティーザー · 音声なし",
+  "home.hero.lead1": "nokta は「点」",
+  "home.hero.lead2": "すべては一つの点から始まりました",
   "home.intro.statement": "nokta はデュッセルドルフのデザインスタジオです。建築を見えるようにします — 画像として、本として、印刷物として。",
   "home.intro.body": "設計事務所、出版社、文化施設、公共の発注者のために働いています。完成した図面を持って来る人もいれば、ナプキン一枚の人もいます。どちらも始まりです。線になる点、そして形になる線。",
   "home.services.aria": "サービス",

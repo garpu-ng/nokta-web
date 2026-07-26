@@ -17,8 +17,8 @@
      the rest of the site's headlines use — the old 400 here was a workaround
      for Righteous being a single-weight face. */
   font-size: clamp(2.2rem, 6vw, 4.5rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
+  font-weight: 700;
+  letter-spacing: -0.015em;
   line-height: 1;
   text-wrap: balance;
   margin: 1.1rem 0 0.75rem;
@@ -39,7 +39,7 @@
   color: var(--paper);
   opacity: 0.7;
   text-decoration: none;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   transition: opacity 0.2s ease;
   animation: nk-plate-in 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
@@ -85,7 +85,7 @@
   font-family: var(--headline-font);
   font-size: 0.95rem;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em;
   margin-bottom: 4px;
 }
 
@@ -97,7 +97,7 @@
 }
 .stickyAnno :global(.nk-mono-caption) {
   font-size: 0.6rem;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.07em;
 }
 
 @media (max-width: 767px) {

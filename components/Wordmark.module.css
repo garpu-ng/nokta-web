@@ -1,0 +1,14 @@
+/* The wordmark as a mask: the PNG gives the shape, the background gives the
+   colour. The consumer sets `height`; the aspect ratio holds the width, so
+   the mark never needs a hardcoded width anywhere. */
+
+.mark {
+  display: block;
+  /* The source PNG's own proportion. */
+  aspect-ratio: 2000 / 410;
+  height: 100%;
+  background-color: var(--paper);
+  user-select: none;
+  -webkit-mask: url("/nokta_logo.png") no-repeat center / contain;
+  mask: url("/nokta_logo.png") no-repeat center / contain;
+}

@@ -32,7 +32,7 @@
   color: var(--paper);
   font-family: var(--mono-font);
   font-size: 12px;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   white-space: nowrap;
   cursor: pointer;
@@ -134,6 +134,6 @@
   .stamp {
     padding: 12px 14px;
     font-size: 11px;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.05em;
   }
 }

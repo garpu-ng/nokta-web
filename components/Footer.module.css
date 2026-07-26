@@ -46,14 +46,9 @@
   text-decoration: none;
   line-height: 0;
 }
-/* Same asset and same treatment as the masthead, a step smaller: black on
-   transparent, flipped to paper by a plain invert. */
+/* Same mark as the masthead, a step smaller. */
 .markLogo {
-  display: block;
   height: 24px;
-  width: auto;
-  user-select: none;
-  filter: invert(1);
 }
 
 /* The closing period — the footer's one coloured mark, and the door to
@@ -88,7 +83,7 @@
   margin-top: 16px;
   font-family: var(--mono-font);
   font-size: 12px;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.06em;
   color: var(--paper);
   text-decoration: none;
   transition: color 0.2s ease;
@@ -114,7 +109,7 @@
   margin-bottom: 5px; /* + the 9px column gap = the 14px the design asks for */
   font-family: var(--mono-font);
   font-size: 10px;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   opacity: 0.5;
 }
@@ -141,7 +136,7 @@
   padding: 18px var(--nk-gutter) 26px;
   font-family: var(--mono-font);
   font-size: 11px;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
   opacity: 0.5;
 }

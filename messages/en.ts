@@ -29,9 +29,8 @@ const en: Record<string, string> = {
   "home.motto.line": "line",
   "home.motto.form": "form",
   // ── Kolonnade: homepage hero, intro, the three service rows ───────
-  "home.hero.lead1": "Before it is built,",
-  "home.hero.lead2": "it is drawn",
-  "home.hero.teaser": "Studio teaser · no sound",
+  "home.hero.lead1": "Nokta means dot",
+  "home.hero.lead2": "And it all began with a dot",
   "home.intro.statement": "nokta is a design studio in Düsseldorf. We make architecture visible — as an image, as a book, as a print.",
   "home.intro.body": "We work for architecture practices, publishers, cultural institutions and public clients. Some arrive with a finished plan, others with a napkin. Both are a beginning: a point that becomes a line, and a line that becomes a form.",
   "home.services.aria": "Services",

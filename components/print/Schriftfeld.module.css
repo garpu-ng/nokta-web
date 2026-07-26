@@ -15,7 +15,7 @@
   color: var(--ink);
   font-family: var(--mono-font);
   font-size: 0.58rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.05em;
   line-height: 1.2;
   transition: opacity 0.28s ease;
 }

@@ -32,15 +32,11 @@
   text-decoration: none;
 }
 
-/* Wordmark logo. The asset is black on transparent and the ground is now ink
-   for the whole page, so a plain invert is all it takes — no sepia correction
-   any more, the warm paper tone comes from the type around it. */
+/* Wordmark. Colour and silhouette are the Wordmark component's business
+   (a mask filled with var(--paper), so it is the same creme as the type);
+   all the header sets is how tall it stands. */
 .brandLogo {
-  display: block;
   height: 28px;
-  width: auto;
-  user-select: none;
-  filter: invert(1);
 }
 
 /* The pages, then the language — one group, right-aligned. */

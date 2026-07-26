@@ -83,11 +83,7 @@ export default async function HomePage() {
 
   return (
     <main>
-      <TeaserVideo
-        lead1={t("home.hero.lead1")}
-        lead2={t("home.hero.lead2")}
-        teaserLabel={t("home.hero.teaser")}
-      />
+      <TeaserVideo lead1={t("home.hero.lead1")} lead2={t("home.hero.lead2")} />
 
       {/* ── Intro: the claim left, the practice right ─────────────── */}
       <section className={styles.intro}>

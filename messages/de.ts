@@ -31,9 +31,8 @@ const de: Record<string, string> = {
   "home.motto.line": "Linie",
   "home.motto.form": "Form",
   // ── Kolonnade: homepage hero, intro, the three service rows ───────
-  "home.hero.lead1": "Bevor gebaut wird,",
-  "home.hero.lead2": "wird gezeichnet",
-  "home.hero.teaser": "Studio-Teaser · ohne Ton",
+  "home.hero.lead1": "Nokta heißt Punkt",
+  "home.hero.lead2": "Und mit einem Punkt hat alles begonnen",
   "home.intro.statement": "nokta ist ein Designstudio in Düsseldorf. Wir machen Architektur sichtbar — als Bild, als Buch, als Druck.",
   "home.intro.body": "Wir arbeiten für Architekturbüros, Verlage, Kulturinstitutionen und öffentliche Auftraggeber. Manche kommen mit einem fertigen Plan, andere mit einer Serviette. Beides ist ein Anfang: ein Punkt, aus dem eine Linie wird, aus der eine Form wird.",
   "home.services.aria": "Leistungen",

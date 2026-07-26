@@ -21,11 +21,9 @@ import styles from "./TeaserVideo.module.css";
 export default function TeaserVideo({
   lead1,
   lead2,
-  teaserLabel,
 }: {
   lead1: string;
   lead2: string;
-  teaserLabel: string;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
 
@@ -64,20 +62,20 @@ export default function TeaserVideo({
       <div className={styles.scrim} aria-hidden="true" />
       <div className={styles.overlay}>
         <h1 className={styles.lead}>
-          {/* Two block-level lines, broken by the markup rather than by
-              white-space:nowrap — at a narrow width the clamp takes the size
-              down and each line still wraps if it has to, instead of being
-              clipped by the frame. */}
-          <span className={styles.leadLine}>{lead1}</span>
+          {/* Two sentences, two block-level lines, broken by the markup rather
+              than by white-space:nowrap — at a narrow width the clamp takes the
+              size down and each line still wraps if it has to, instead of being
+              clipped by the frame. The line is about the point, so each
+              sentence closes on one, in the studio's red. */}
+          <span className={styles.leadLine}>
+            {lead1}
+            <span className={styles.period}>.</span>
+          </span>
           <span className={styles.leadLine}>
             {lead2}
             <span className={styles.period}>.</span>
           </span>
         </h1>
-        <p className={styles.teaser}>
-          <span className={styles.pulse} aria-hidden="true" />
-          {teaserLabel}
-        </p>
       </div>
     </section>
   );

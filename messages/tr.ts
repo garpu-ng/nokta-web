@@ -23,9 +23,8 @@ const tr: Record<string, string> = {
   "home.motto.line": "çizgi",
   "home.motto.form": "form",
   // ── Kolonnade: ana sayfa hero, giriş, üç hizmet satırı ────────────
-  "home.hero.lead1": "İnşa edilmeden önce,",
-  "home.hero.lead2": "çizilir",
-  "home.hero.teaser": "Stüdyo tanıtımı · sessiz",
+  "home.hero.lead1": "Nokta, nokta demek",
+  "home.hero.lead2": "Ve her şey bir noktayla başladı",
   "home.intro.statement": "nokta, Düsseldorf’ta bir tasarım stüdyosu. Mimariyi görünür kılıyoruz — görüntü olarak, kitap olarak, baskı olarak.",
   "home.intro.body": "Mimarlık ofisleri, yayınevleri, kültür kurumları ve kamu işverenleri için çalışıyoruz. Kimi elinde bitmiş bir planla geliyor, kimi bir peçeteyle. İkisi de bir başlangıç: çizgiye dönüşen bir nokta, biçime dönüşen bir çizgi.",
   "home.services.aria": "Hizmetler",

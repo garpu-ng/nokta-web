@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { DM_Sans, Space_Mono, Syne } from "next/font/google";
 import Link from "next/link";
-import Image from "next/image";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import LanguageToggle from "@/components/LanguageToggle";
 import NavLinks from "@/components/NavLinks";
+import Wordmark from "@/components/Wordmark";
 import Schriftfeld from "@/components/print/Schriftfeld";
 import DotCursor from "@/components/plotter/DotCursor";
 import { getLocale, getT } from "@/lib/i18n";
@@ -89,17 +89,9 @@ export default async function RootLayout({
           <div className={styles.row}>
             {/* The logo links home, and home is the work. */}
             <Link href="/" className={styles.brandWord} aria-label={t("aria.home")}>
-              {/* Brand wordmark — above the fold on every page, so preload it.
-                  Intrinsic size is the source PNG; .brandLogo CSS (height,
-                  width auto) governs the rendered size. */}
-              <Image
-                src="/nokta_logo.png"
-                alt="nokta"
-                width={2000}
-                height={410}
-                preload
-                className={styles.brandLogo}
-              />
+              {/* Drawn as a mask so it is exactly the paper the type is set
+                  in — see components/Wordmark.tsx. */}
+              <Wordmark className={styles.brandLogo} />
             </Link>
             <div className={styles.right}>
               <NavLinks

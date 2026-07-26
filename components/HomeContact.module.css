@@ -25,8 +25,8 @@
   margin: 0;
   font-family: var(--headline-font);
   font-size: clamp(42px, 5.6vw, 76px);
-  font-weight: 800;
-  letter-spacing: -0.04em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   line-height: 0.98;
   text-wrap: balance;
 }
@@ -52,7 +52,7 @@
   color: var(--paper);
   font-family: var(--mono-font);
   font-size: 12px;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
   transition: transform 0.18s ease;

@@ -1,7 +1,7 @@
 import Link from "next/link";
-import Image from "next/image";
 import { getT } from "@/lib/i18n";
 import Registration from "@/components/print/Registration";
+import Wordmark from "@/components/Wordmark";
 import styles from "./Footer.module.css";
 
 // Global footer — the colophon of the sheet, and the masthead's counterpart:
@@ -18,16 +18,9 @@ export default async function Footer() {
         <div className={styles.brand}>
           <span className={styles.mark}>
             <Link href="/" className={styles.markLink} aria-label={t("aria.home")}>
-              {/* The same wordmark the masthead carries, flipped to paper by
-                  the same filter. Below the fold on every page, so unlike the
-                  header's copy it is left to load lazily. */}
-              <Image
-                src="/nokta_logo.png"
-                alt="nokta"
-                width={2000}
-                height={410}
-                className={styles.markLogo}
-              />
+              {/* The same masked wordmark the masthead carries, a step
+                  smaller — see components/Wordmark.tsx. */}
+              <Wordmark className={styles.markLogo} />
             </Link>
             {/* The wordmark's closing period — the footer's one coloured mark,
                 and the quiet door to the easter egg at /punkt. The asset

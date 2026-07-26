@@ -20,9 +20,9 @@
   margin: 0;
   font-family: var(--headline-font);
   font-size: clamp(64px, 8vw, 112px);
-  font-weight: 800;
+  font-weight: 700;
   line-height: 0.92;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.02em;
 }
 
 .period {
@@ -38,7 +38,7 @@
   flex-shrink: 0;
   font-family: var(--mono-font);
   font-size: 11px;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
   opacity: 0.6;
 }

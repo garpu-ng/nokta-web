@@ -34,21 +34,17 @@
   position: absolute;
   left: var(--nk-gutter);
   right: var(--nk-gutter);
-  bottom: 52px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 48px;
+  bottom: 64px;
 }
 
 .lead {
   margin: 0;
-  max-width: 960px;
+  max-width: 22ch;
   font-family: var(--headline-font);
-  font-size: clamp(40px, 5vw, 64px);
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: -0.035em;
+  font-size: clamp(38px, 4.4vw, 58px);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.005em;
 }
 
 .leadLine {
@@ -59,55 +55,16 @@
   color: var(--accent);
 }
 
-.teaser {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 0;
-  flex-shrink: 0;
-  font-family: var(--mono-font);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  opacity: 0.85;
-  white-space: nowrap;
-}
-
-/* The studio's dot, breathing. The one animation on the homepage that isn't
-   an entrance — it says the film is running, which is the only thing the
-   caption beside it can't. */
-.pulse {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--accent);
-  animation: nk-pulse 2.4s ease-in-out infinite;
-}
-
-@keyframes nk-pulse {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(0.7);
-    opacity: 0.55;
-  }
-}
-
 /* ── Tablet ──────────────────────────────────────────────────────── */
 @media (max-width: 1199px) {
   .overlay {
-    bottom: 40px;
-    gap: 32px;
+    bottom: 48px;
   }
 }
 
 /* ── Phone ───────────────────────────────────────────────────────────
    A 2.52:1 letterbox is a slot on a phone, so the band turns portrait and
-   the clip is cropped to its centre instead. The caption drops under the
-   headline rather than beside it. */
+   the clip is cropped to its centre instead. */
 @media (max-width: 899px) {
   .hero {
     aspect-ratio: 4 / 5;
@@ -116,20 +73,10 @@
     object-position: center;
   }
   .overlay {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 20px;
-    bottom: 32px;
+    bottom: 36px;
   }
   .lead {
-    font-size: clamp(32px, 9vw, 48px);
-  }
-}
-
-/* Reduced motion: the poster frame stays (the effect never calls play()) and
-   the dot simply is a dot. */
-@media (prefers-reduced-motion: reduce) {
-  .pulse {
-    animation: none;
+    max-width: none;
+    font-size: clamp(28px, 7.4vw, 40px);
   }
 }

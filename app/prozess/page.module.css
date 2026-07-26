@@ -16,9 +16,9 @@
   margin: 0;
   font-family: var(--headline-font);
   font-size: clamp(56px, 7.4vw, 104px);
-  font-weight: 800;
+  font-weight: 700;
   line-height: 0.92;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.02em;
 }
 
 .period {
@@ -70,7 +70,7 @@
 .cardFolio {
   font-family: var(--mono-font);
   font-size: 11px;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.08em;
   color: var(--accent);
 }
 
@@ -80,7 +80,7 @@
   font-size: 24px;
   font-weight: 700;
   line-height: 1.15;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 .cardText {
@@ -111,8 +111,8 @@
   overflow-wrap: break-word;
   font-family: var(--headline-font);
   font-size: clamp(28px, 3.2vw, 40px);
-  font-weight: 800;
-  letter-spacing: -0.03em;
+  font-weight: 700;
+  letter-spacing: -0.015em;
   text-wrap: balance;
 }
 
@@ -121,7 +121,7 @@
   flex-shrink: 0;
   font-family: var(--mono-font);
   font-size: 11px;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   opacity: 0.6;
 }
@@ -146,8 +146,11 @@
   order: 2;
 }
 
+/* The photographs are 1304 × 1761, so the plate takes their proportion
+   instead of a height of its own — at 440px tall with object-fit:cover more
+   than half of each frame was being thrown away. */
 .stepPlate {
-  height: 440px;
+  aspect-ratio: 1304 / 1761;
   overflow: hidden;
   background: var(--nk-media);
 }
@@ -156,7 +159,7 @@
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 /* "Schritt 01" and then a rule running to the edge of the column — the step
@@ -171,7 +174,7 @@
 .stepNumber {
   font-family: var(--mono-font);
   font-size: 11px;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.08em;
   color: var(--accent);
   white-space: nowrap;
 }
@@ -188,7 +191,7 @@
   font-size: clamp(30px, 3.4vw, 42px);
   font-weight: 700;
   line-height: 1.05;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.015em;
 }
 
 .stepBody {
@@ -218,9 +221,9 @@
   max-width: 760px;
   font-family: var(--headline-font);
   font-size: clamp(32px, 4vw, 52px);
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.02;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.02em;
   text-wrap: balance;
 }
 
@@ -231,7 +234,7 @@
   color: var(--paper);
   font-family: var(--mono-font);
   font-size: 12px;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
   white-space: nowrap;
@@ -257,9 +260,6 @@
   }
   .step {
     gap: 40px;
-  }
-  .stepPlate {
-    height: 360px;
   }
 }
 
@@ -308,9 +308,6 @@
   }
   .stepMirror .stepPlate {
     order: 0;
-  }
-  .stepPlate {
-    height: 300px;
   }
 
   .cta {
