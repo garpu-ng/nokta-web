@@ -1,39 +1,135 @@
-/* Teaser banner — capped at the shared content width (= the four tabs), the
-   calm footage with the nokta. wordmark centred on it. */
-.teaser {
-  container-type: inline-size; /* so the wordmark scales with the video width */
+/* The homepage's opening band — edge to edge, no gutter, no radius, no frame.
+   The clip's own 1280 × 507 proportion governs the height (at the 1440px the
+   design was drawn at that computes to 570px), so the band never crops the
+   film into a shape it wasn't cut for. */
+
+.hero {
   position: relative;
-  flex-shrink: 0;
-  width: 100%;
-  max-width: var(--content-max);
-  margin: 0 auto;
+  aspect-ratio: 1280 / 507;
   overflow: hidden;
-  background: #1a1a18;
+  /* A shade under ink, so the band is already the right darkness before a
+     single frame has decoded. */
+  background: #0f0f0d;
 }
 
 .video {
   display: block;
   width: 100%;
-  height: clamp(190px, 46vh, 480px);
+  height: 100%;
   object-fit: cover;
 }
 
-/* Centred wordmark logo, scaling with the video width (container query units). */
-.logo {
+.scrim {
   position: absolute;
   inset: 0;
-  z-index: 2;
+  background: linear-gradient(
+    180deg,
+    rgba(26, 26, 24, 0.42) 0%,
+    rgba(26, 26, 24, 0.1) 40%,
+    rgba(26, 26, 24, 0.9) 100%
+  );
+}
+
+.overlay {
+  position: absolute;
+  left: var(--nk-gutter);
+  right: var(--nk-gutter);
+  bottom: 52px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 48px;
+}
+
+.lead {
+  margin: 0;
+  max-width: 960px;
+  font-family: var(--headline-font);
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+
+.leadLine {
+  display: block;
+}
+
+.period {
+  color: var(--accent);
+}
+
+.teaser {
   display: flex;
   align-items: center;
-  justify-content: center;
-  pointer-events: none;
+  gap: 10px;
+  margin: 0;
+  flex-shrink: 0;
+  font-family: var(--mono-font);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  white-space: nowrap;
 }
-/* Wordmark logo. The asset is black, so invert it to white for the dark
-   footage; the drop-shadow lifts it off busy frames. */
-.logoImg {
-  width: 54cqw;
-  max-width: 82%;
-  height: auto;
-  filter: invert(1) drop-shadow(0 2px 40px rgba(26, 26, 24, 0.55));
-  user-select: none;
+
+/* The studio's dot, breathing. The one animation on the homepage that isn't
+   an entrance — it says the film is running, which is the only thing the
+   caption beside it can't. */
+.pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: nk-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes nk-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.7);
+    opacity: 0.55;
+  }
+}
+
+/* ── Tablet ──────────────────────────────────────────────────────── */
+@media (max-width: 1199px) {
+  .overlay {
+    bottom: 40px;
+    gap: 32px;
+  }
+}
+
+/* ── Phone ───────────────────────────────────────────────────────────
+   A 2.52:1 letterbox is a slot on a phone, so the band turns portrait and
+   the clip is cropped to its centre instead. The caption drops under the
+   headline rather than beside it. */
+@media (max-width: 899px) {
+  .hero {
+    aspect-ratio: 4 / 5;
+  }
+  .video {
+    object-position: center;
+  }
+  .overlay {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+    bottom: 32px;
+  }
+  .lead {
+    font-size: clamp(32px, 9vw, 48px);
+  }
+}
+
+/* Reduced motion: the poster frame stays (the effect never calls play()) and
+   the dot simply is a dot. */
+@media (prefers-reduced-motion: reduce) {
+  .pulse {
+    animation: none;
+  }
 }

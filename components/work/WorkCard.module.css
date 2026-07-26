@@ -1,13 +1,18 @@
 /* A sheet on the wall. Print vocabulary throughout: a hairline frame, a rule
    under it, the title in the display face and the mono annotation beneath.
    Every kind of work wears the same card — nothing here is branded per kind,
-   and there is no colour on it. */
+   and there is no colour on it.
+
+   Since Kolonnade the wall hangs on ink, so the card is the same card read the
+   other way round: paper type, paper hairlines, and the frame's ground the
+   media grey rather than the sheet. The work itself is the only bright thing
+   on it, which is the point. */
 
 .card {
   display: flex;
   min-width: 0;
   flex-direction: column;
-  color: var(--ink);
+  color: var(--paper);
   text-decoration: none;
 }
 
@@ -17,8 +22,8 @@
   position: relative;
   display: block;
   overflow: hidden;
-  outline: 1px solid color-mix(in srgb, var(--ink) 55%, transparent);
-  background: var(--paper);
+  outline: 1px solid var(--nk-hair);
+  background: var(--nk-media);
   transition: outline-color 0.25s ease;
 }
 
@@ -55,7 +60,7 @@
   gap: 0.4rem;
   margin-top: 0.9rem;
   padding-top: 0.75rem;
-  border-top: 1px solid color-mix(in srgb, var(--ink) 55%, transparent);
+  border-top: 1px solid var(--nk-hair);
 }
 
 .title {
@@ -74,7 +79,7 @@
    recolours: one word and one hairline mark. */
 .card:hover .frame,
 .card:focus-visible .frame {
-  outline-color: var(--ink);
+  outline-color: var(--paper);
 }
 
 .card:hover .img,
@@ -88,15 +93,8 @@
   transform: scale(1);
 }
 
-/* The kind word is printed by WorkAnno, which knows nothing about the wall —
-   it carries a global hook so the card can lend it a colour from here. */
-.card:hover :global(.nk-anno-kind),
-.card:focus-visible :global(.nk-anno-kind) {
-  color: var(--nk-kind, inherit);
-}
-
 .card:focus-visible {
-  outline: 2px solid var(--ink);
+  outline: 2px solid var(--accent);
   outline-offset: 5px;
 }
 
@@ -153,7 +151,7 @@
     opacity: 0;
     background: linear-gradient(
       to left,
-      color-mix(in srgb, var(--ink) 45%, transparent),
+      color-mix(in srgb, var(--ink) 62%, transparent),
       transparent 74%
     );
     transform: translateX(70%);

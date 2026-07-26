@@ -1,0 +1,55 @@
+/* The page names, set in the display face at caption size — small, but Syne,
+   so they belong to the headlines rather than to the body copy. */
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.link {
+  position: relative;
+  padding-bottom: 4px;
+  color: var(--paper);
+  font-family: var(--headline-font);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.18s ease;
+}
+
+/* Only an inactive page offers itself; the one you are on stays paper. */
+.link:hover:not([aria-current="page"]) {
+  color: var(--accent);
+}
+
+.rule {
+  position: absolute;
+  left: 0;
+  right: 6px;
+  bottom: 0;
+  height: 2px;
+  background: var(--accent);
+}
+
+/* ── Phone ───────────────────────────────────────────────────────────
+   The words tighten and gain vertical padding so each one clears the 44px
+   tap target even though the type stays at 15px. */
+@media (max-width: 899px) {
+  /* Four words plus the language switch do not fit one 390px line, and the
+     words cannot shrink — they are set nowrap so a page name never breaks
+     mid-word. So the row is allowed to wrap instead of overflowing. */
+  .nav {
+    flex-wrap: wrap;
+    column-gap: 18px;
+    row-gap: 0;
+  }
+  .link {
+    padding-block: 12px 14px;
+  }
+  .rule {
+    bottom: 10px;
+  }
+}

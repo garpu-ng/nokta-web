@@ -174,9 +174,9 @@
   font-size: 0.72rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #1a1a18;
+  color: var(--paper);
   text-decoration: none;
-  border-bottom: 1px solid #1a1a18;
+  border-bottom: 1px solid var(--paper);
   padding-bottom: 2px;
 }
 
@@ -190,25 +190,29 @@
 
 .wa-page h1 {
   font-size: clamp(2rem, 4vw, 3.5rem);
-  font-weight: 600;
+  font-weight: 800;
   line-height: 1.1;
   margin: 0 0 2rem;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.035em;
 }
 
 .wa-page p {
   font-size: 1rem;
   line-height: 1.75;
-  color: rgba(26, 26, 24, 0.8);
+  color: rgba(233, 224, 206, 0.8);
   margin-bottom: 1.25rem;
 }
 
 .wa-page a {
-  color: #1a1a18;
+  color: var(--paper);
   font-weight: 600;
   text-decoration: none;
-  border-bottom: 1px solid #1a1a18;
+  border-bottom: 1px solid var(--nk-hair);
   padding-bottom: 1px;
+  transition: border-color 0.2s ease;
+}
+.wa-page a:hover {
+  border-color: var(--paper);
 }
 
 /* ── Kontakt page (reuses .wa-prozess-* below) ────────────────── */
@@ -765,7 +769,7 @@
   font-size: var(--nk-404-digit);
   font-weight: 700;
   letter-spacing: -0.04em;
-  color: var(--ink);
+  color: var(--paper);
 }
 
 .nk-404__dot {
@@ -773,7 +777,7 @@
   width: auto;
   flex: none;
   display: block;
-  color: var(--ink);
+  color: var(--accent);
   /* Tight, letter-spacing-like snug so the trio reads as "4 0 4". */
   margin-inline: calc(var(--nk-404-digit) * -0.02);
 }
@@ -784,14 +788,14 @@
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.15;
-  color: var(--ink);
+  color: var(--paper);
   margin: clamp(1.5rem, 4vh, 2.5rem) 0 0;
 }
 
 .nk-404__text {
   font-size: 0.95rem;
   line-height: 1.8;
-  color: rgba(26, 26, 24, 0.72);
+  color: rgba(233, 224, 206, 0.72);
   max-width: 46ch;
   margin: 1rem 0 0;
 }
@@ -802,8 +806,8 @@
   font-size: 0.72rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #1a1a18;
+  color: var(--paper);
   text-decoration: none;
-  border-bottom: 1px solid #1a1a18;
+  border-bottom: 1px solid var(--paper);
   padding-bottom: 2px;
 }

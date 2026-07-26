@@ -1,0 +1,336 @@
+/* /prozess — the h1 block, four material cards, the first workflow written
+   out in four spreads, and the red CTA band that closes the page. */
+
+/* ── Header ────────────────────────────────────────────────────────── */
+
+.head {
+  display: grid;
+  grid-template-columns: 1fr 460px;
+  gap: 80px;
+  align-items: end;
+  padding: 56px var(--nk-gutter);
+  border-bottom: 1px solid var(--nk-hair);
+}
+
+.heading {
+  margin: 0;
+  font-family: var(--headline-font);
+  font-size: clamp(56px, 7.4vw, 104px);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+}
+
+.period {
+  color: var(--accent);
+}
+
+.intro {
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.6;
+  opacity: 0.75;
+  text-wrap: pretty;
+}
+
+/* ── Four material cards ───────────────────────────────────────────── */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin: 0;
+  padding: 48px var(--nk-gutter) 72px;
+  list-style: none;
+}
+
+.cardCell {
+  min-width: 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+  min-height: 230px;
+  padding: 26px 22px 24px;
+  border: 1px solid var(--nk-hair);
+  color: var(--paper);
+  text-decoration: none;
+  transition: border-color 0.18s ease;
+}
+
+/* Only card 01 goes anywhere, so only card 01 answers the hand. */
+.cardLink:hover {
+  border-color: rgba(233, 224, 206, 0.5);
+  color: var(--paper);
+}
+
+.cardFolio {
+  font-family: var(--mono-font);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+}
+
+.cardTitle {
+  margin: 0;
+  font-family: var(--headline-font);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.cardText {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  opacity: 0.68;
+  text-wrap: pretty;
+}
+
+/* ── Ablauf 01 ─────────────────────────────────────────────────────── */
+
+.ablaufHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 0 var(--nk-gutter);
+  padding-top: 26px;
+  border-top: 2px solid var(--nk-hair);
+  /* The h2 is a scroll target (card 01 aims at it), so hold it clear of the
+     header that would otherwise sit on top of it after the jump. */
+  scroll-margin-top: 24px;
+}
+
+.ablaufTitle {
+  margin: 0;
+  overflow-wrap: break-word;
+  font-family: var(--headline-font);
+  font-size: clamp(28px, 3.2vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.ablaufNote {
+  margin: 0;
+  flex-shrink: 0;
+  font-family: var(--mono-font);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  padding: 32px var(--nk-gutter) 88px;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+/* The plate crosses to the right without the source order changing, so the
+   heading still follows its own image in the reading order. */
+.stepMirror .stepPlate {
+  order: 2;
+}
+
+.stepPlate {
+  height: 440px;
+  overflow: hidden;
+  background: var(--nk-media);
+}
+
+.stepImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* "Schritt 01" and then a rule running to the edge of the column — the step
+   is numbered the way a drawing is, not the way a list is. */
+.stepRule {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0 0 14px;
+}
+
+.stepNumber {
+  font-family: var(--mono-font);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.stepHair {
+  flex: 1;
+  height: 1px;
+  background: var(--nk-hair);
+}
+
+.stepTitle {
+  margin: 0 0 16px;
+  font-family: var(--headline-font);
+  font-size: clamp(30px, 3.4vw, 42px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.stepBody {
+  margin: 0;
+  max-width: 520px;
+  font-size: 17px;
+  line-height: 1.65;
+  opacity: 0.75;
+  text-wrap: pretty;
+}
+
+/* ── CTA ───────────────────────────────────────────────────────────
+   The page's one red field. */
+
+.cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+  padding: 72px var(--nk-gutter);
+  background: var(--accent);
+  color: var(--paper);
+}
+
+.ctaText {
+  margin: 0;
+  max-width: 760px;
+  font-family: var(--headline-font);
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+.ctaLink {
+  flex-shrink: 0;
+  padding: 20px 32px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--mono-font);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 0.18s ease;
+}
+.ctaLink:hover {
+  transform: translateY(-3px);
+  color: var(--paper);
+}
+.ctaLink:focus-visible {
+  outline: 2px solid var(--paper);
+  outline-offset: 4px;
+}
+
+/* ── Tablet ────────────────────────────────────────────────────────── */
+@media (max-width: 1199px) {
+  .head {
+    grid-template-columns: 1fr 360px;
+    gap: 48px;
+  }
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .step {
+    gap: 40px;
+  }
+  .stepPlate {
+    height: 360px;
+  }
+}
+
+/* ── Phone ─────────────────────────────────────────────────────────── */
+@media (max-width: 899px) {
+  .head {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding-block: 40px;
+    align-items: start;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+    padding-block: 32px 48px;
+  }
+  .card {
+    min-height: 0;
+  }
+
+  .heading {
+    font-size: clamp(36px, 12vw, 56px);
+  }
+  .ablaufHead {
+    flex-direction: column;
+  /* stretch, not flex-start: in a column flex container flex-start sizes a
+     child to its max-content, so a heading would lay out on one line at its
+     natural width and run off the sheet instead of wrapping. */
+    align-items: stretch;
+    gap: 10px;
+  }
+  .ablaufTitle {
+    font-size: clamp(22px, 6.4vw, 28px);
+  }
+
+  .steps {
+    gap: 48px;
+    padding-bottom: 56px;
+  }
+  /* Stacked, every step reads image-then-text — the alternation is a
+     two-column idea and has nothing to say in one column. */
+  .step,
+  .stepMirror {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .stepMirror .stepPlate {
+    order: 0;
+  }
+  .stepPlate {
+    height: 300px;
+  }
+
+  .cta {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 32px;
+    padding-block: 56px;
+  }
+  /* The button keeps its own width; only the statement fills the column. */
+  .ctaLink {
+    align-self: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .ctaLink {
+    transition: none;
+  }
+  .ctaLink:hover {
+    transform: none;
+  }
+}

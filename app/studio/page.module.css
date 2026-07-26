@@ -1,0 +1,286 @@
+/* /studio — the h1 block, three portraits, the paper register (its own
+   component), then the one CTA on the page that spends the red. */
+
+/* ── Header ────────────────────────────────────────────────────────── */
+
+.head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+  padding: 56px var(--nk-gutter) 64px;
+  border-bottom: 1px solid var(--nk-hair);
+}
+
+.heading {
+  margin: 0 0 18px;
+  font-family: var(--headline-font);
+  font-size: clamp(64px, 8vw, 112px);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+}
+
+.period {
+  color: var(--accent);
+}
+
+.caption {
+  margin: 0;
+  font-family: var(--mono-font);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.headText {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-size: 17px;
+  line-height: 1.65;
+  opacity: 0.8;
+}
+.headText p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+/* ── Team ──────────────────────────────────────────────────────────── */
+
+.team {
+  padding: 64px var(--nk-gutter) 80px;
+}
+
+.label {
+  margin: 0 0 28px;
+  font-family: var(--mono-font);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.teamGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.card {
+  min-width: 0;
+}
+
+/* The portrait plate. Tall, because the clips are (502 × 1014) and the
+   design gives them room rather than cropping them into a square. */
+.portrait {
+  height: 640px;
+  overflow: hidden;
+  background: var(--nk-media);
+}
+
+.portraitMedia {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* The frame that is deliberately waiting. Same height as a portrait, so the
+   row of three keeps one baseline — the gap in the team is visible, which is
+   the point, but it isn't a gap in the layout. */
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  height: 640px;
+  background: var(--nk-frame);
+  border: 1px solid var(--nk-hair);
+}
+
+/* A registration crosshair: a circle with two hairlines through its centre,
+   drawn in CSS so it costs no asset. */
+.crosshair {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  border: 1px solid rgba(233, 224, 206, 0.5);
+  border-radius: 50%;
+}
+.crosshair::before,
+.crosshair::after {
+  content: "";
+  position: absolute;
+  background: rgba(233, 224, 206, 0.5);
+}
+.crosshair::before {
+  left: 50%;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+}
+.crosshair::after {
+  top: 50%;
+  left: 8px;
+  right: 8px;
+  height: 1px;
+}
+
+.placeholderLabel {
+  font-family: var(--mono-font);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.5;
+}
+
+/* Name left, role right, over the hairline that closes the plate. */
+.cardRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--nk-hair);
+}
+
+.name {
+  font-family: var(--headline-font);
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.role {
+  flex-shrink: 0;
+  font-family: var(--mono-font);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-align: right;
+  opacity: 0.6;
+}
+
+/* ── CTA ───────────────────────────────────────────────────────────── */
+
+.cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+  padding: 72px var(--nk-gutter);
+}
+
+.ctaText {
+  margin: 0;
+  font-family: var(--headline-font);
+  font-size: clamp(34px, 4.2vw, 56px);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+}
+
+.ctaLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.ctaOutline,
+.ctaFill {
+  padding: 17px 26px;
+  font-family: var(--mono-font);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: border-color 0.18s ease, transform 0.18s ease;
+}
+
+.ctaOutline {
+  border: 1px solid var(--nk-hair);
+  color: var(--paper);
+}
+.ctaOutline:hover {
+  border-color: var(--paper);
+  color: var(--paper);
+}
+
+/* The page's one red field — small, but a field. */
+.ctaFill {
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--paper);
+}
+.ctaFill:hover {
+  transform: translateY(-3px);
+  color: var(--paper);
+}
+
+/* ── Tablet ────────────────────────────────────────────────────────── */
+@media (max-width: 1199px) {
+  .head {
+    gap: 48px;
+  }
+  .teamGrid {
+    gap: 24px;
+  }
+  .portrait,
+  .placeholder {
+    height: 520px;
+  }
+  .name {
+    font-size: 22px;
+  }
+}
+
+/* ── Phone ─────────────────────────────────────────────────────────── */
+@media (max-width: 899px) {
+  .head {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding-block: 40px 48px;
+  }
+  .heading {
+    font-size: clamp(44px, 15vw, 72px);
+  }
+
+  .team {
+    padding-block: 48px 56px;
+  }
+  .teamGrid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .portrait,
+  .placeholder {
+    height: 480px;
+  }
+
+  .cta {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 32px;
+    padding-block: 56px;
+  }
+  .ctaLinks {
+    align-self: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ctaOutline,
+  .ctaFill {
+    transition: none;
+  }
+  .ctaFill:hover {
+    transform: none;
+  }
+}

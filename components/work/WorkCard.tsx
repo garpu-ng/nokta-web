@@ -1,8 +1,6 @@
-import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Registration from "@/components/print/Registration";
-import { TAB_COLORS } from "@/lib/colors";
 import { getMediaSize } from "@/lib/mediaSizes";
 import type { Work, WorkKind } from "@/lib/works";
 import WorkAnno, { workAnnotation, type WorkAnnotation } from "./WorkAnno";
@@ -54,9 +52,9 @@ export default function WorkCard({ item }: { item: WallItem }) {
       // Reaching for a sheet turns the plotted pointer into the same
       // registration mark this card strikes on its corner (DotCursor.tsx).
       data-nk-cursor="registration"
-      // The colour this work's kind wears in the filter bar. Only the
-      // annotation's kind word ever spends it, and only under the pointer.
-      style={{ "--nk-kind": TAB_COLORS[item.kind] } as CSSProperties}
+      // The card's kind word used to borrow the colour that kind wore in the
+      // filter bar. The filter is hairline chips now and spends no colour, so
+      // the word is simply paper — like everything else on the sheet.
     >
       <span className={styles.frame}>
         <Image

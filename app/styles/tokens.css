@@ -1,12 +1,14 @@
 /* ══════════════════════════════════════════════════════════════════
    Design tokens — the single source of truth for colour + type.
 
-   Three colours, no themes. The page is always paper, the type is always ink,
-   and --accent is the studio's red: one coloured mark per view (the dot after
-   the wordmark, the motto's closing period, a label's trailing point), never a
-   surface. Dark sections (footer, the contact band) are ink, not accent.
-   One deliberate exception: the contact band's disc is the brand dot at scale
-   — the single place the accent is allowed to be a field.
+   Three colours, no themes — but since the Kolonnade redesign the sheet is
+   turned over: the page is always INK and the type is always PAPER. Paper
+   survives as a field for the one section that is still printed the old way
+   round (the Leistungen register on /studio), and --accent is the studio's
+   red. The red's rule loosened by exactly one notch: it may now be a FIELD
+   (the /prozess CTA band, the /studio → kontakt button, the contact disc),
+   but never more than one such field per page — everywhere else it stays a
+   dot, a folio or a closing period.
    Every module reads these variables rather than hardcoding a colour.
    NOTE: the same three values live in lib/colors.ts for the places that need a
    literal (the generated OG cards, inline SVG marks) — keep them in sync.
@@ -17,17 +19,44 @@
   /* Mono display face — sets the two big 4s on the 404 page (the "0" between
      them isn't type at all, it's the brand <Dot> SVG). */
   --mono-font: var(--font-space-mono), ui-monospace, 'SFMono-Regular', Menlo, monospace;
-  /* Shared headline face — used by semantic headings and display titles. */
-  --headline-font: var(--font-righteous), Arial, sans-serif;
+  /* Shared headline face — used by semantic headings and display titles.
+     Syne carries the whole display register now; every headline size in the
+     design assumes its negative tracking, so no rule sets it at 0. */
+  --headline-font: var(--font-syne), Arial, sans-serif;
   /* Keep the existing display token as an alias for component-scoped styles. */
   --display-font: var(--headline-font);
 
   /* The studio's colours. */
-  --paper: #e9e0ce; /* the sheet — the background of every page */
-  --ink: #1a1a18;   /* the type, the rules, the dark sections */
-  --accent: #b83636; /* the red mark — a dot, never a wash */
+  --paper: #e9e0ce; /* the type — and the ground of the one paper section */
+  --ink: #1a1a18;   /* the page, top to bottom */
+  --accent: #b83636; /* the red mark — a dot, and now at most one field a page */
+
+  /* Every hairline rule drawn on the ink ground. Its counterpart on paper is
+     rgba(26,26,24,.22) — same weight, other way round. */
+  --nk-hair: rgba(233, 224, 206, 0.22);
+  /* Media ground: what sits behind an image or a video while it loads, so a
+     frame is never a hole in the page. */
+  --nk-media: #242420;
+  /* Empty-frame ground — a plate that is deliberately, visibly waiting. */
+  --nk-frame: #1f1f1c;
+
+  /* The page gutter. 40px is the design's figure; it tightens twice on the
+     way down to a phone. */
+  --nk-gutter: 40px;
 
   /* Shared max content width for the full-bleed chrome (the footer column).
      Page content itself runs in a narrower 1100px frame. */
   --content-max: 1600px;
+}
+
+@media (max-width: 1199px) {
+  :root {
+    --nk-gutter: 32px;
+  }
+}
+
+@media (max-width: 899px) {
+  :root {
+    --nk-gutter: 20px;
+  }
 }

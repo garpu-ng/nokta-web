@@ -2,7 +2,11 @@
    from the retired nokta.line product page. The renderings' image stack keeps
    using the global .wa-project-images vocabulary; the pieces bring their own
    sections (CaseStudy, ArtPlate, Leuchtturm), all of them already paper-backed
-   and set in this same 1100px measure. */
+   and set in this same 1100px measure.
+
+   Since Kolonnade the page around them is ink, so everything set directly on
+   it is paper. The one thing that stays the other way round is the mounting
+   frame below: a print is shown pinned to a sheet, and the sheet is paper. */
 
 .body {
   max-width: 1100px;
@@ -37,16 +41,16 @@
 }
 
 .info {
-  color: var(--ink);
+  color: var(--paper);
 }
 
 /* Schriftfeld — the data engraved on the sheet, restated as the product's
    centrepiece: a hairline-ruled box of mono, uppercase dt/dd pairs. */
 .passport {
   margin: 0;
-  border: 1px solid var(--ink);
-  background: color-mix(in srgb, var(--ink) 5%, transparent);
-  color: var(--ink);
+  border: 1px solid var(--nk-hair);
+  background: rgba(233, 224, 206, 0.04);
+  color: var(--paper);
   font-family: var(--mono-font);
   font-size: 0.62rem;
   letter-spacing: 0.1em;
@@ -60,7 +64,7 @@
   padding: 0.5rem 0.85rem;
 }
 .passport > div + div {
-  border-top: 1px solid color-mix(in srgb, var(--ink) 30%, transparent);
+  border-top: 1px solid var(--nk-hair);
 }
 .passport dt {
   flex: none;
@@ -79,8 +83,8 @@
   max-width: 52ch;
   font-size: 0.95rem;
   line-height: 1.7;
-  color: var(--ink);
-  opacity: 0.9;
+  color: var(--paper);
+  opacity: 0.8;
 }
 
 .buy {
@@ -92,13 +96,13 @@
 .price {
   font-size: 1.6rem;
   font-weight: 700;
-  color: var(--ink);
+  color: var(--paper);
 }
 
 .btn {
   padding: 8px 16px;
   border: none;
-  background: var(--ink);
+  background: var(--accent);
   color: var(--paper);
   font-size: 0.72rem;
   font-weight: 600;
@@ -120,7 +124,7 @@
   max-width: 1100px;
   margin: clamp(3.5rem, 9svh, 5.5rem) auto 0;
   padding: clamp(1.75rem, 4svh, 2.75rem) clamp(20px, 5vw, 48px) clamp(4rem, 9svh, 6rem);
-  border-top: 1px solid color-mix(in srgb, var(--ink) 25%, transparent);
+  border-top: 1px solid var(--nk-hair);
 }
 
 .navLink {
@@ -128,14 +132,14 @@
   min-width: 0;
   flex-direction: column;
   gap: 0.6rem;
-  color: var(--ink);
+  color: var(--paper);
   text-decoration: none;
 }
 .navNext {
   text-align: right;
 }
 .navLink:focus-visible {
-  outline: 2px solid var(--ink);
+  outline: 2px solid var(--accent);
   outline-offset: 6px;
 }
 
@@ -145,9 +149,8 @@
   gap: 0.55rem;
   min-width: 0;
   font-family: var(--display-font);
-  /* Righteous is single-weight; at plate scale it needs no synthetic bold. */
   font-size: clamp(1.3rem, 3.2vw, 2.4rem);
-  font-weight: 400;
+  font-weight: 700;
   letter-spacing: -0.025em;
   line-height: 1.05;
 }

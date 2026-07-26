@@ -2,8 +2,13 @@ import Reveal from "@/components/Reveal";
 import { getT } from "@/lib/i18n";
 import styles from "./ServiceIndex.module.css";
 
-/* The two services the flagship commission proves get a one-line evidence hook
-   linking them back to the case study above. */
+/* The Leistungen register — the one PAPER section left in the site. Since
+   Kolonnade the page is ink, so turning this one block back over is what
+   makes it read as the printed index it is: four ruled rows, each stated as a
+   deliverable, on the sheet the rest of the site used to be.
+
+   The two services the flagship commission proves get a one-line evidence
+   hook linking them back to the case study. */
 const EVIDENCE = new Set([1, 2]);
 
 export default async function ServiceIndex() {
@@ -16,30 +21,26 @@ export default async function ServiceIndex() {
   }));
 
   return (
-    <section className={styles.section}>
-      <div className={styles.inner}>
-        <h2 className={styles.label}>{t("nokta.index.label")}</h2>
-        <div className={styles.entries}>
-          {/* The register rules itself in, one row after the next. */}
-          {services.map((service, i) => (
-            <Reveal as="article" className={styles.entry} key={service.folio} delay={i * 70}>
-              <div className={styles.row}>
-                <span className={styles.folio}>{service.folio}</span>
-                <h3 className={styles.title}>{service.title}</h3>
-                <span className={styles.leader} aria-hidden="true" />
-                <span className={`${styles.folio} ${styles.folioEnd}`}>{service.folio}</span>
-              </div>
-              <p className={styles.text}>{service.text}</p>
-              {service.evidence ? (
-                <p className={`nk-mono-caption ${styles.evidence}`}>
-                  <span className={styles.evidenceMark} aria-hidden="true">↳</span>
-                  {service.evidence}
-                </p>
-              ) : null}
-            </Reveal>
-          ))}
-        </div>
+    <section className={styles.section} aria-labelledby="nk-leistungen">
+      <div className={styles.head}>
+        <h2 id="nk-leistungen" className={styles.label}>
+          {t("nokta.index.label")}
+        </h2>
+        <p className={styles.note}>{t("studio.services.note")}</p>
       </div>
+      {/* The register rules itself in, one row after the next. */}
+      {services.map((service, i) => (
+        <Reveal as="article" className={styles.row} key={service.folio} delay={i * 70}>
+          <span className={styles.folio}>{service.folio}</span>
+          <h3 className={styles.title}>{service.title}</h3>
+          <div>
+            <p className={styles.text}>{service.text}</p>
+            {service.evidence ? (
+              <p className={styles.evidence}>{service.evidence}</p>
+            ) : null}
+          </div>
+        </Reveal>
+      ))}
     </section>
   );
 }

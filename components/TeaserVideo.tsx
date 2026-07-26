@@ -1,15 +1,32 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
 import styles from "./TeaserVideo.module.css";
 
-// Muted-autoplay teaser banner with the nokta. wordmark centred on it. Sets
-// muted via the property (more reliable than the attribute across browsers) and
-// kicks off play() on mount. Autoplay is driven from the effect rather than the
-// native `autoplay` attribute so it can be suppressed under prefers-reduced-motion
-// (the poster stays visible).
-export default function TeaserVideo() {
+/* The studio teaser, full-bleed, opening the homepage.
+
+   The clip is 1280 × 507 (2.52:1) and is shown at exactly that ratio rather
+   than cropped into a taller box — an aspect-ratio box, not a fixed height,
+   so the band keeps its proportion at every width. The overlay carries the
+   page's h1, which is why the copy arrives as props: the video is a client
+   component and never reaches for a dictionary itself.
+
+   House pattern for every clip on the site: `muted` set via the property
+   (more reliable than the attribute across browsers), and play() kicked off
+   from an effect rather than the native `autoplay` attribute so it can be
+   suppressed under prefers-reduced-motion — in which case the poster frame
+   simply stays. The video carries no information the headline doesn't, so it
+   is decorative: aria-hidden, no captions. */
+
+export default function TeaserVideo({
+  lead1,
+  lead2,
+  teaserLabel,
+}: {
+  lead1: string;
+  lead2: string;
+  teaserLabel: string;
+}) {
   const ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -29,7 +46,7 @@ export default function TeaserVideo() {
   }, []);
 
   return (
-    <div className={styles.teaser} aria-hidden="true">
+    <section className={styles.hero}>
       <video
         ref={ref}
         className={styles.video}
@@ -38,19 +55,30 @@ export default function TeaserVideo() {
         loop
         playsInline
         preload="auto"
+        aria-hidden="true"
       >
         <source src="/noktateaser.mp4?v=29" type="video/mp4" />
       </video>
-      <span className={styles.logo}>
-        <Image
-          src="/nokta_logo.png"
-          alt=""
-          aria-hidden="true"
-          width={2000}
-          height={410}
-          className={styles.logoImg}
-        />
-      </span>
-    </div>
+      {/* Reads the foot of the frame down into ink so the headline sits on a
+          ground rather than on whatever the clip happens to be showing. */}
+      <div className={styles.scrim} aria-hidden="true" />
+      <div className={styles.overlay}>
+        <h1 className={styles.lead}>
+          {/* Two block-level lines, broken by the markup rather than by
+              white-space:nowrap — at a narrow width the clamp takes the size
+              down and each line still wraps if it has to, instead of being
+              clipped by the frame. */}
+          <span className={styles.leadLine}>{lead1}</span>
+          <span className={styles.leadLine}>
+            {lead2}
+            <span className={styles.period}>.</span>
+          </span>
+        </h1>
+        <p className={styles.teaser}>
+          <span className={styles.pulse} aria-hidden="true" />
+          {teaserLabel}
+        </p>
+      </div>
+    </section>
   );
 }

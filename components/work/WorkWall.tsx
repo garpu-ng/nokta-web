@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Reveal from "@/components/Reveal";
-import { ALL_TAB_COLOR, TAB_COLORS } from "@/lib/colors";
 import type { WorkKind } from "@/lib/works";
 import WorkCard, { type WallItem } from "./WorkCard";
 import styles from "./WorkWall.module.css";
@@ -13,10 +12,11 @@ import styles from "./WorkWall.module.css";
    with the initial state "all", the full wall renders server-side and the
    filter row is simply inert without JS.
 
-   The filter wears the old site's tab dress: a segmented black bar, each tab's
-   label in its own motto colour, the pressed tab filling with it. The six
-   colours live in lib/colors.ts (the card's kind stamp borrows its own on
-   hover); they colour the filter and that one word, never a page.
+   The filter used to wear the old site's tab dress — a segmented black bar,
+   each tab's label in the motto colour of the branch it came from. Since
+   Kolonnade that black IS the page, so the row is restated as the same
+   hairline chips the /kontakt form uses, and the retired branch colours are
+   spent nowhere on the site at all.
 
    The cards enter through the shared Reveal primitive, staggered left-then-
    right so a row lands as a pair rather than a block. */
@@ -41,8 +41,6 @@ export default function WorkWall({
         <button
           type="button"
           className={styles.stamp}
-          style={{ "--tab": ALL_TAB_COLOR } as React.CSSProperties}
-          data-home=""
           aria-pressed={active === null}
           onClick={() => setActive(null)}
         >
@@ -53,7 +51,6 @@ export default function WorkWall({
             key={kind}
             type="button"
             className={styles.stamp}
-            style={{ "--tab": TAB_COLORS[kind] } as React.CSSProperties}
             aria-pressed={active === kind}
             onClick={() => setActive(kind)}
           >

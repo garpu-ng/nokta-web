@@ -2,10 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import GifVideo from "@/components/GifVideo";
 import Reveal from "@/components/Reveal";
-import Registration from "@/components/print/Registration";
 import ServiceIndex from "@/components/nokta/ServiceIndex";
-import TeaserVideo from "@/components/TeaserVideo";
 import { getT } from "@/lib/i18n";
+import styles from "./page.module.css";
+
+/* The studio page: who we are, then what you get. The teaser no longer opens
+   this page — it opens the homepage — so the h1 block is the first thing on
+   the sheet. */
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getT();
@@ -18,93 +21,108 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function StudioPage() {
   const t = await getT();
   return (
-    <>
-      {/* ── The film ─────────────────────────────────────────────
-          The studio, before a word about it: the teaser runs directly under
-          the header, full plate width, and the page starts underneath. */}
-      <TeaserVideo />
+    <main>
+      {/* ── Header: the name left, the practice right ─────────────── */}
+      <section className={styles.head}>
+        <div>
+          <h1 className={styles.heading}>
+            {t("studio.heading")}
+            <span className={styles.period}>.</span>
+          </h1>
+          <p className={styles.caption}>{t("studio.caption")}</p>
+        </div>
+        <div className={styles.headText}>
+          <p>{t("studio.p1")}</p>
+          <p>{t("studio.p2")}</p>
+          <p>{t("studio.p3")}</p>
+        </div>
+      </section>
 
-      <div className="wa-studio">
+      {/* ── Team ───────────────────────────────────────────────────
+          Three portraits, pinned up one after the other. */}
+      <section className={styles.team} aria-labelledby="nk-team">
+        <h2 id="nk-team" className={styles.label}>
+          {t("studio.team")}
+        </h2>
+        <div className={styles.teamGrid}>
+          <Reveal className={styles.card}>
+            <div className={styles.portrait}>
+              <GifVideo
+                src="/flymekaan.mp4"
+                label="Kaan"
+                width={502}
+                height={1014}
+                className={styles.portraitMedia}
+              />
+            </div>
+            <div className={styles.cardRow}>
+              <span className={styles.name}>Kaan</span>
+              <span className={styles.role}>{t("studio.role.kaan")}</span>
+            </div>
+          </Reveal>
 
-        {/* ── Hero: heading left, text right ──────────────────────── */}
-        <section className="wa-studio-hero">
-          <div className="wa-studio-hero-headline">
-            <h1 className="wa-studio-hero-heading">{t("studio.heading")}</h1>
-            {/* Space Mono micro-caption, the studio's technical annotation voice. */}
-            <p className="nk-mono-caption wa-studio-hero-caption">{t("studio.caption")}</p>
-          </div>
-          <div className="wa-studio-hero-text">
-            <p>{t("studio.p1")}</p>
-            <p>{t("studio.p2")}</p>
-            <p>{t("studio.p3")}</p>
-          </div>
-        </section>
+          <Reveal className={styles.card} delay={100}>
+            <div className={styles.portrait}>
+              <GifVideo
+                src="/flymehammed.mp4"
+                label="Mohammed"
+                width={502}
+                height={1014}
+                className={styles.portraitMedia}
+              />
+            </div>
+            <div className={styles.cardRow}>
+              <span className={styles.name}>Mohammed</span>
+              <span className={styles.role}>{t("studio.role.mohammed")}</span>
+            </div>
+          </Reveal>
 
-        {/* ── Team ────────────────────────────────────────────────── */}
-        <section className="wa-studio-section">
-          <div className="wa-studio-label">{t("studio.team")}</div>
-          {/* The three portraits are pinned up one after the other. */}
-          <div className="wa-team-grid">
+          <Reveal className={styles.card} delay={200}>
+            {/* Mert's portrait asset isn't in /public yet — there's no
+                /flymemert.mp4 (the old /flymemert.gif 404'd too), so a
+                <GifVideo> here would render an empty frame. Until it lands,
+                the frame says so in the press-sheet vocabulary: an outlined
+                plate with a centred crosshair and a mono caption.
 
-            <Reveal className="wa-team-card">
-              <GifVideo src="/flymekaan.mp4" label="Kaan" width={502} height={1014} className="wa-team-gif" />
-              <div className="wa-team-info">
-                <div className="wa-team-name">Kaan</div>
-                <div className="wa-team-role">{t("studio.role.kaan")}</div>
-              </div>
-            </Reveal>
+                TO SWAP IN THE REAL PORTRAIT: drop the converted clip at
+                public/flymemert.mp4 and replace this whole <div.placeholder>
+                with the same two lines the other cards use:
+                  <div className={styles.portrait}>
+                    <GifVideo src="/flymemert.mp4" label="Mert" width={502}
+                              height={1014} className={styles.portraitMedia} />
+                  </div> */}
+            <div className={styles.placeholder} aria-hidden="true">
+              <span className={styles.crosshair} />
+              <span className={styles.placeholderLabel}>
+                {t("studio.mert.placeholder")}
+              </span>
+            </div>
+            <div className={styles.cardRow}>
+              <span className={styles.name}>Mert</span>
+              <span className={styles.role}>{t("studio.role.mert")}</span>
+            </div>
+          </Reveal>
+        </div>
+      </section>
 
-            <Reveal className="wa-team-card" delay={100}>
-              <GifVideo src="/flymehammed.mp4" label="Mohammed" width={502} height={1014} className="wa-team-gif" />
-              <div className="wa-team-info">
-                <div className="wa-team-name">Mohammed</div>
-                <div className="wa-team-role">{t("studio.role.mohammed")}</div>
-              </div>
-            </Reveal>
-
-            <Reveal className="wa-team-card" delay={200}>
-              {/* Mert's portrait asset isn't in /public yet — there's no
-                  /flymemert.mp4 (the old /flymemert.gif 404'd too), so the other
-                  cards' <GifVideo> here rendered an empty frame. Until the asset
-                  lands, show a deliberate placeholder in the press-sheet vocabulary
-                  instead: an outlined portrait frame with a centred registration
-                  mark and a mono caption.
-
-                  TO SWAP IN THE REAL PORTRAIT: drop the converted clip at
-                  public/flymemert.mp4 and replace this whole <div.wa-team-placeholder>
-                  with the same line the other two cards use:
-                    <GifVideo src="/flymemert.mp4" label="Mert" width={502} height={1014} className="wa-team-gif" /> */}
-              <div className="wa-team-placeholder" aria-hidden="true">
-                <Registration className="wa-team-placeholder-reg" />
-                <span className="nk-mono-caption">{t("studio.mert.placeholder")}</span>
-              </div>
-              <div className="wa-team-info">
-                <div className="wa-team-name">Mert</div>
-                <div className="wa-team-role">{t("studio.role.mert")}</div>
-              </div>
-            </Reveal>
-
-          </div>
-        </section>
-
-      </div>
-
-      {/* ── What we do ───────────────────────────────────────────
-          The service index, ruled like a register: four rows, each stated as a
-          deliverable. It carries its own full-width frame, so it sits outside
-          the studio column. */}
+      {/* ── What you get ───────────────────────────────────────────
+          The one paper section in the whole site: four rows, each stated as a
+          deliverable. It carries its own full-width field. */}
       <ServiceIndex />
 
-      {/* ── CTA ─────────────────────────────────────────────────── */}
-      <div className="wa-studio wa-studio-tail">
-        <section className="wa-studio-cta">
-          <span className="wa-studio-cta-text">{t("studio.cta")}</span>
-          <div className="wa-studio-cta-links">
-            <Link href="/prozess" className="wa-studio-cta-link">{t("studio.ctaProcess")}</Link>
-            <Link href="/kontakt" className="wa-studio-cta-link">{t("studio.ctaWrite")}</Link>
-          </div>
-        </section>
-      </div>
-    </>
+      {/* ── CTA ────────────────────────────────────────────────────── */}
+      <section className={styles.cta}>
+        <p className={styles.ctaText}>{t("studio.cta")}</p>
+        <div className={styles.ctaLinks}>
+          <Link href="/prozess" className={styles.ctaOutline}>
+            {t("studio.ctaProcess")}
+          </Link>
+          <Link href="/kontakt" className={styles.ctaFill}>
+            {t("studio.ctaWrite")}
+            <span aria-hidden="true"> ↗</span>
+          </Link>
+        </div>
+      </section>
+    </main>
   );
 }

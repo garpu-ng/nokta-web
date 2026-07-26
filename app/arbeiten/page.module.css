@@ -1,0 +1,65 @@
+/* The wall's own page. The header block is the same construction every
+   Kolonnade page uses — display h1 with its red period on the left, a mono
+   count on the right, one hairline underneath — and then the wall itself is
+   handed the page unchanged. */
+
+.page {
+  padding-bottom: 88px;
+}
+
+.head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 48px;
+  padding: 56px var(--nk-gutter);
+  border-bottom: 1px solid var(--nk-hair);
+}
+
+.heading {
+  margin: 0;
+  font-family: var(--headline-font);
+  font-size: clamp(64px, 8vw, 112px);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+}
+
+.period {
+  color: var(--accent);
+}
+
+.wall {
+  padding: 40px var(--nk-gutter) 0;
+}
+
+.count {
+  margin: 0 0 8px;
+  flex-shrink: 0;
+  font-family: var(--mono-font);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+@media (max-width: 899px) {
+  .head {
+    flex-direction: column;
+  /* stretch, not flex-start: in a column flex container flex-start sizes a
+     child to its max-content, so a heading would lay out on one line at its
+     natural width and run off the sheet instead of wrapping. */
+    align-items: stretch;
+    gap: 20px;
+    padding-block: 40px 32px;
+  }
+  .count {
+    margin-bottom: 0;
+  }
+  /* The desktop clamp bottoms out at 64px, which is wider than a phone —
+     "Arbeiten" alone runs 430px there. German sets long words; the display
+     sizes need their own floor once the screen is narrower than one. */
+  .heading {
+    font-size: clamp(38px, 13vw, 64px);
+  }
+}

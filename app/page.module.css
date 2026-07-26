@@ -1,0 +1,362 @@
+/* The homepage, under the teaser band: a two-column claim, three service
+   rows, then four works given as much of the page as they will take.
+
+   Everything sits on the page gutter (--nk-gutter, 40px on the desktop the
+   design was drawn at) except the teaser itself, which is full-bleed. */
+
+/* ── Intro ─────────────────────────────────────────────────────────── */
+
+.intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+  padding: 72px var(--nk-gutter) 40px;
+}
+
+.introStatement {
+  margin: 0;
+  font-family: var(--headline-font);
+  font-size: clamp(26px, 2.6vw, 34px);
+  font-weight: 600;
+  line-height: 1.28;
+  letter-spacing: -0.02em;
+  text-wrap: pretty;
+}
+
+.introBody {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.65;
+  opacity: 0.72;
+  text-wrap: pretty;
+}
+
+/* ── Three service rows ────────────────────────────────────────────
+   Each row is a rule with a word on it. Hovering steps the whole row in by
+   12px — the only thing that moves, so the page reads as a set of drawers
+   rather than as a set of buttons. */
+
+.services {
+  padding: 32px var(--nk-gutter) 80px;
+}
+
+.service {
+  display: grid;
+  grid-template-columns: 74px 1fr 420px 44px;
+  gap: 32px;
+  align-items: center;
+  padding: 34px 8px;
+  border-top: 1px solid var(--nk-hair);
+  color: var(--paper);
+  text-decoration: none;
+  transition: padding 0.2s ease;
+}
+.service:last-child {
+  border-bottom: 1px solid var(--nk-hair);
+}
+.service:hover {
+  padding-left: 20px;
+  color: var(--paper);
+}
+
+/* A grid item's automatic minimum size is its min-content width, so a 34px
+   headline would hold the row wider than the screen rather than wrap. Zeroing
+   it lets the track shrink and the type reflow — the one rule that keeps every
+   grid on this page inside the sheet. */
+.service > * {
+  min-width: 0;
+}
+
+.serviceFolio {
+  font-family: var(--mono-font);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+}
+
+.serviceTitle {
+  font-family: var(--headline-font);
+  font-size: clamp(34px, 4vw, 52px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.serviceText {
+  font-size: 16px;
+  line-height: 1.5;
+  opacity: 0.7;
+  text-wrap: pretty;
+}
+
+.serviceArrow {
+  font-size: 22px;
+  text-align: right;
+  opacity: 0.6;
+}
+
+/* ── Selected works ────────────────────────────────────────────────── */
+
+.works {
+  padding-bottom: 88px;
+}
+
+.worksHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 0 var(--nk-gutter) 40px;
+}
+
+.worksTitle {
+  margin: 0;
+  font-family: var(--headline-font);
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.worksAll {
+  flex-shrink: 0;
+  font-family: var(--mono-font);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--paper);
+  text-decoration: none;
+  opacity: 0.6;
+  transition: opacity 0.18s ease;
+}
+.worksAll:hover {
+  color: var(--paper);
+  opacity: 1;
+}
+
+/* A spread: one plate, one caption, aligned on the plate's bottom edge. */
+.spread {
+  display: grid;
+  grid-template-columns: 820px 1fr;
+  gap: 48px;
+  align-items: end;
+  padding: 0 var(--nk-gutter) 40px;
+}
+.spreadMirror {
+  grid-template-columns: 1fr 820px;
+}
+
+.spread > * {
+  min-width: 0;
+}
+
+.spreadPlate {
+  display: block;
+  text-decoration: none;
+}
+
+/* The plate itself — a fixed-height window the image fills. The ground shows
+   only while the image decodes, so a frame is never a hole in the page. */
+.plate {
+  display: block;
+  height: 560px;
+  overflow: hidden;
+  background: var(--nk-media);
+}
+
+.plateImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.spreadPlate:hover .plateImg,
+.pairItem:hover .plateImg {
+  transform: scale(1.04);
+}
+
+.caption {
+  padding-bottom: 12px;
+}
+
+.kicker {
+  margin: 0 0 14px;
+  font-family: var(--mono-font);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.captionTitle {
+  margin: 0 0 14px;
+  overflow-wrap: break-word;
+  font-family: var(--headline-font);
+  font-size: clamp(32px, 3.4vw, 44px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.captionLink {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.18s ease;
+}
+.captionLink:hover {
+  color: var(--accent);
+}
+
+.captionText {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  opacity: 0.7;
+  text-wrap: pretty;
+}
+
+/* The pair — two plates, each with a single mono row under it. */
+.pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  padding: 0 var(--nk-gutter);
+}
+
+.pairItem {
+  display: block;
+  color: var(--paper);
+  text-decoration: none;
+}
+.pairItem .plate {
+  height: 520px;
+}
+
+.pairRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 14px;
+  font-family: var(--mono-font);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.pairMeta {
+  opacity: 0.6;
+  text-align: right;
+}
+
+/* The 820px plate and a caption beside it need about 1250px of sheet; below
+   that the spread goes single-column a breakpoint ahead of everything else,
+   rather than squeezing the caption to nothing. */
+@media (max-width: 1279px) {
+  .spread,
+  .spreadMirror {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  .spreadMirror .caption {
+    order: 2;
+  }
+  .spreadMirror .spreadPlate {
+    order: 1;
+  }
+}
+
+/* ── Tablet ──────────────────────────────────────────────────────────
+   The service rows give up their description column — the text drops to a
+   second line under the title. */
+@media (max-width: 1199px) {
+  .intro {
+    gap: 48px;
+  }
+
+  .service {
+    grid-template-columns: 56px 1fr 44px;
+    gap: 24px;
+    row-gap: 12px;
+  }
+  .serviceText {
+    grid-column: 2 / 3;
+  }
+
+  .spread,
+  .spreadMirror {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  /* Mirrored or not, the plate leads once the columns collapse. */
+  .spreadMirror .caption {
+    order: 2;
+  }
+  .spreadMirror .spreadPlate {
+    order: 1;
+  }
+
+  .plate {
+    height: 460px;
+  }
+  .pairItem .plate {
+    height: 420px;
+  }
+}
+
+/* ── Phone ───────────────────────────────────────────────────────── */
+@media (max-width: 899px) {
+  .intro {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding-top: 48px;
+  }
+
+  .services {
+    padding-bottom: 56px;
+  }
+  .service {
+    grid-template-columns: 44px 1fr 32px;
+    gap: 16px;
+    padding: 26px 4px;
+  }
+  .service:hover {
+    padding-left: 12px;
+  }
+
+  /* "Ausgewählte Arbeiten" and "alle 13 arbeiten ↗" do not share a 320px
+     line; the link drops under the label rather than being squeezed. */
+  .worksHead {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-bottom: 24px;
+  }
+
+  .pair {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .plate,
+  .pairItem .plate {
+    height: 380px;
+  }
+}
+
+/* Reduced motion: rows still step in on hover (it is a layout answer, not an
+   animation), but nothing eases and no plate zooms. */
+@media (prefers-reduced-motion: reduce) {
+  .service,
+  .plateImg,
+  .captionLink,
+  .worksAll {
+    transition: none;
+  }
+  .spreadPlate:hover .plateImg,
+  .pairItem:hover .plateImg {
+    transform: none;
+  }
+}

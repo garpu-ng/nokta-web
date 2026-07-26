@@ -24,7 +24,7 @@
 html {
   margin: 0;
   padding: 0;
-  background: var(--paper);
+  background: var(--ink);
   scroll-behavior: smooth;
   /* Stop mobile browsers inflating text on orientation change. */
   -webkit-text-size-adjust: 100%;
@@ -33,10 +33,13 @@ html {
 body {
   margin: 0;
   padding: 0;
-  /* One studio, one sheet: every page is paper, top to bottom. Dark sections
-     (footer, contact band) paint ink over it; nothing ever washes the page. */
-  background: var(--paper);
-  color: var(--ink);
+  /* One studio, one sheet — turned over. Since Kolonnade every page is ink
+     top to bottom and the type is paper. The few sections that are still
+     printed the old way round (the Leistungen register on /studio, the work
+     plates) paint paper over it and set their own ink type; nothing else
+     washes the page. */
+  background: var(--ink);
+  color: var(--paper);
   /* Everything renders in DM Sans. A plain body rule suffices now that the old
      Webflow reset (html{font-family:sans-serif}) is gone: content inherits
      this, and class rules that need another face (e.g. .nk-404__digit's mono)
@@ -74,6 +77,15 @@ input,
 select,
 textarea {
   font-family: inherit;
+}
+
+/* One focus ring for the whole site, in the studio's red, held two pixels off
+   the element so it reads on ink and on the paper register alike. Set on
+   :focus-visible only, so a mouse click never draws it — but every keyboard
+   tab does, on links, buttons, chips and fields without exception. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 /* Selecting text is the one moment the reader marks up the sheet, so it is

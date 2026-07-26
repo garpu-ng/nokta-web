@@ -13,21 +13,22 @@
 }
 
 .header h1 {
-  /* Righteous is a single-weight face: at this scale a synthesised bold only
-     smears the curves, so the title is set at its own weight. */
+  /* Syne has real weights, so the plate title is set at the display weight
+     the rest of the site's headlines use — the old 400 here was a workaround
+     for Righteous being a single-weight face. */
   font-size: clamp(2.2rem, 6vw, 4.5rem);
-  font-weight: 400;
+  font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 1;
   text-wrap: balance;
   margin: 1.1rem 0 0.75rem;
-  color: var(--ink);
+  color: var(--paper);
   animation: nk-plate-in 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 90ms backwards;
 }
 
 .anno {
   margin: 0;
-  color: var(--ink);
+  color: var(--paper);
   opacity: 0.85;
   animation: nk-plate-in 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 240ms backwards;
 }
@@ -35,7 +36,7 @@
 .back {
   display: inline-block;
   font-size: 0.72rem;
-  color: var(--ink);
+  color: var(--paper);
   opacity: 0.7;
   text-decoration: none;
   letter-spacing: 0.1em;
@@ -66,8 +67,9 @@
   top: 30px;
   left: 50%;
   transform: translateX(-50%) translateY(calc(-100% - 40px));
-  background: #e9e0ce;
-  border: 1px solid #1a1a18;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  color: var(--ink);
   padding: 14px 32px;
   z-index: 100;
   transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
@@ -90,7 +92,7 @@
 /* The floating card is always paper, so its annotation is always ink — and a
    size smaller than on the page, to keep the card tight. */
 .stickyAnno {
-  color: #1a1a18;
+  color: var(--ink);
   opacity: 0.6;
 }
 .stickyAnno :global(.nk-mono-caption) {

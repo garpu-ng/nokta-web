@@ -1,0 +1,156 @@
+/* /kontakt — the same header block every Kolonnade page uses, then the form
+   with the studio's address in a rail beside it. */
+
+.head {
+  display: grid;
+  grid-template-columns: 1fr 460px;
+  gap: 80px;
+  align-items: end;
+  padding: 56px var(--nk-gutter);
+  border-bottom: 1px solid var(--nk-hair);
+}
+
+.heading {
+  margin: 0;
+  font-family: var(--headline-font);
+  font-size: clamp(56px, 7.4vw, 104px);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+}
+
+.period {
+  color: var(--accent);
+}
+
+.intro {
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.6;
+  opacity: 0.75;
+  text-wrap: pretty;
+}
+
+.body {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 80px;
+  align-items: start;
+  padding: 64px var(--nk-gutter) 88px;
+}
+
+/* ── Rail ──────────────────────────────────────────────────────────── */
+
+.rail {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* The brand dot at signature scale, and a link — 200px of red that answers
+   the hand before a word has been read. */
+.disc {
+  display: block;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: var(--accent);
+  transition: transform 0.28s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.disc:hover {
+  transform: scale(1.04);
+}
+
+.railLabel {
+  margin: 0 0 10px;
+  font-family: var(--mono-font);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+
+.railMail {
+  font-family: var(--headline-font);
+  font-size: clamp(20px, 2vw, 26px);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--paper);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: color 0.18s ease;
+}
+.railMail:hover {
+  color: var(--accent);
+}
+
+.hair {
+  height: 1px;
+  margin: 0;
+  border: none;
+  background: var(--nk-hair);
+}
+
+.address {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.7;
+  opacity: 0.7;
+}
+
+.coords {
+  margin: 0;
+  font-family: var(--mono-font);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.5;
+}
+
+/* ── Tablet ────────────────────────────────────────────────────────── */
+@media (max-width: 1199px) {
+  .head {
+    grid-template-columns: 1fr 360px;
+    gap: 48px;
+  }
+  .body {
+    grid-template-columns: 1fr 320px;
+    gap: 48px;
+  }
+  .disc {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+/* ── Phone ─────────────────────────────────────────────────────────── */
+@media (max-width: 899px) {
+  .head {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding-block: 40px;
+    align-items: start;
+  }
+  .heading {
+    font-size: clamp(36px, 12vw, 56px);
+  }
+  .body {
+    grid-template-columns: 1fr;
+    gap: 56px;
+    padding-block: 48px 56px;
+  }
+  .disc {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .disc,
+  .railMail {
+    transition: none;
+  }
+  .disc:hover {
+    transform: none;
+  }
+}

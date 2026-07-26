@@ -1,39 +1,32 @@
-/* Global footer — the colophon slab: ink, full width, under every page.
+/* Global footer — the colophon of the sheet, and the masthead's counterpart.
 
-   It is the masthead read from the other end, so it borrows the masthead's
-   frame rather than inventing one: the same 1100px column and the same side
-   padding as app/layout.module.css, the statement, the wall and the work
-   pages. The wordmark that opens the sheet and the wordmark that closes it
-   therefore stand on one left edge.
+   It sits on the page's own ink and is separated from the page by a single
+   hairline rather than by a change of colour: since Kolonnade the whole sheet
+   is ink, so the footer is no longer a slab laid onto the page — it is the
+   foot of the page. It shares the masthead's full-bleed gutter, so the
+   wordmark that opens the sheet and the one that closes it stand on the same
+   left edge.
 
-   Colour comes from the three tokens only. The retired three-branch palette
-   (the rust/slate/olive dot row that used to sit between the brand block and
-   the columns) is gone with the branches it belonged to — lib/colors.ts keeps
-   the quotation of those colours confined to the filter bar's one word, and
-   forbids them a surface or an image. */
+   Colour comes from the three tokens only. */
 
 .footer {
   flex-shrink: 0;
-  background: var(--ink);
+  border-top: 1px solid var(--nk-hair);
   color: var(--paper);
-  line-height: 1.5; /* comfortable footer leading, overriding the body's 20px (base.css) for the footer's looser blocks */
+  line-height: 1.5; /* comfortable footer leading, overriding the body's 20px (base.css) */
 }
 
+/* Brand block, then the three link columns — four columns on one row, the
+   brand taking whatever the fixed three leave it. */
 .inner {
-  /* The masthead's column, to the pixel (layout.module.css .inner). */
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: clamp(3rem, 7vw, 6rem) clamp(20px, 5vw, 48px) 2rem;
+  display: grid;
+  grid-template-columns: 1fr 160px 160px 200px;
+  gap: 48px;
+  align-items: start;
+  padding: 56px var(--nk-gutter) 24px;
 }
 
-.top {
-  display: flex;
-  justify-content: space-between;
-  gap: clamp(2.5rem, 6vw, 5rem);
-  flex-wrap: wrap;
-}
-
-/* ── Brand block (mirrors the masthead logo, left side) ──────────────── */
+/* ── Brand block ─────────────────────────────────────────────────────── */
 .brand {
   max-width: 340px;
 }
@@ -43,35 +36,36 @@
    baseline the two do not share. */
 .mark {
   display: flex;
-  align-items: flex-end;
-  gap: 0.06em;
+  align-items: baseline;
+  gap: 2px;
   line-height: 0;
 }
 .markLink {
   display: block;
   color: inherit;
   text-decoration: none;
+  line-height: 0;
 }
-/* Same asset, same treatment as the masthead: black on transparent, flipped to
-   paper (invert to white, then a touch of sepia to land on the warm paper
-   tone). Set a step larger than the header's — the colophon is the sign-off. */
+/* Same asset and same treatment as the masthead, a step smaller: black on
+   transparent, flipped to paper by a plain invert. */
 .markLogo {
   display: block;
-  height: clamp(2rem, 5vw, 3.2rem);
+  height: 24px;
   width: auto;
   user-select: none;
-  filter: invert(1) sepia(0.14) brightness(0.97);
+  filter: invert(1);
 }
 
-/* The closing period — the one coloured mark on the slab, and the door to
-   /punkt. Sized off the logo's own height so the two scale together. Reaching
-   for it swells the dot a little: the only hint that the period is a place. It
-   grows from its own baseline so the wordmark's line never shifts. */
+/* The closing period — the footer's one coloured mark, and the door to
+   /punkt. Reaching for it swells the dot a little: the only hint that the
+   period is a place. It grows from its own baseline so the wordmark's line
+   never shifts. */
 .punkt {
   display: block;
   font-family: var(--headline-font);
-  font-size: clamp(2rem, 5vw, 3.2rem);
-  line-height: 0.72;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 0.6;
   color: var(--accent);
   text-decoration: none;
   transform-origin: 50% 82%;
@@ -83,58 +77,51 @@
 }
 
 .tag {
-  margin: 1.5rem 0;
-  font-size: 0.9rem;
+  margin: 18px 0 0;
+  font-size: 16px;
   line-height: 1.6;
-  color: var(--paper);
+  opacity: 0.7;
 }
 
-/* The one underlined thing on the slab — it reads as an address, not a link
-   in a list. The rule under it is paper held back, and fills in on approach. */
 .email {
-  font-size: 1rem;
+  display: inline-block;
+  margin-top: 16px;
+  font-family: var(--mono-font);
+  font-size: 12px;
+  letter-spacing: 0.12em;
   color: var(--paper);
   text-decoration: none;
-  border-bottom: 1px solid color-mix(in srgb, var(--paper) 40%, transparent);
-  padding-bottom: 2px;
-  transition: border-color 0.2s ease;
+  transition: color 0.2s ease;
 }
 .email:hover {
-  border-color: var(--paper);
+  color: var(--accent);
 }
 
-/* ── Link columns (right side) ───────────────────────────────────────── */
+/* ── Link columns ────────────────────────────────────────────────────
+   The <nav> keeps its landmark but gives up its box, so its three columns
+   become items of the footer's own grid rather than a nested flex row. */
 .cols {
-  display: flex;
-  gap: clamp(2rem, 5vw, 4.5rem);
-  flex-wrap: wrap;
+  display: contents;
 }
+
 .col {
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
+  gap: 9px;
 }
 
-/* The section label of the rest of the sheet (ServiceIndex .label), inverted
-   for ink: Righteous, wide caps, sitting on its own hairline rule. */
 .colH {
-  margin-bottom: 0.5rem;
-  padding-bottom: 0.7rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--paper) 45%, transparent);
-  color: var(--paper);
-  font-family: var(--headline-font);
-  font-size: 0.7rem;
-  font-weight: 400;
-  letter-spacing: 0.22em;
+  margin-bottom: 5px; /* + the 9px column gap = the 14px the design asks for */
+  font-family: var(--mono-font);
+  font-size: 10px;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
+  opacity: 0.5;
 }
 
-/* Links carry the wall's hover instead of the old fade to 60%: pointing at a
-   row resolves it to the accent, the same answer every other index on the site
-   gives the hand. */
 .link {
   width: fit-content;
-  font-size: 0.92rem;
+  font-size: 15px;
   color: var(--paper);
   text-decoration: none;
   transition: color 0.2s ease;
@@ -147,25 +134,20 @@
 .bottom {
   /* position: relative anchors the registration mark to this bar. */
   position: relative;
-  margin-top: clamp(3rem, 6vw, 5rem);
-  padding-top: 1.5rem;
-  border-top: 1px solid color-mix(in srgb, var(--paper) 12%, transparent);
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 0.75rem;
-  /* The technical-annotation voice the rest of the sheet uses for its smallest
-     line (.nk-mono-caption), set here rather than borrowed so the colophon can
-     keep its own casing — a copyright line is not lowercase. */
+  gap: 12px;
+  padding: 18px var(--nk-gutter) 26px;
   font-family: var(--mono-font);
-  font-size: 0.68rem;
-  letter-spacing: 0.08em;
-  color: var(--paper);
-  opacity: 0.7;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.5;
 }
 
-/* Registration mark centred on the colophon's hairline trim, in the gap between
-   the copyright (far left) and disciplines (far right). Paper stroke via
+/* Registration mark centred on the colophon's trim, in the gap between the
+   copyright (far left) and the disciplines (far right). Paper stroke via
    currentColor, held to a whisper — a print detail, not a UI element. */
 .regMark {
   position: absolute;
@@ -175,12 +157,34 @@
   width: 22px;
   height: 22px;
   --reg-opacity: 0.9;
-  opacity: 0.28;
+  opacity: 0.4;
 }
 
-@media (max-width: 767px) {
-  .top {
+/* ── Tablet: the three fixed columns pair up under the brand ────────── */
+@media (max-width: 1199px) {
+  .inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  .brand {
+    grid-column: 1 / -1;
+    max-width: none;
+  }
+}
+
+/* ── Phone ───────────────────────────────────────────────────────────── */
+@media (max-width: 599px) {
+  .inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding-top: 40px;
+  }
+  .bottom {
     flex-direction: column;
+    gap: 8px;
+  }
+  .regMark {
+    display: none;
   }
 }
 

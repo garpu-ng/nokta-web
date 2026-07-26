@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { DM_Sans, Space_Mono, Righteous } from "next/font/google";
+import { DM_Sans, Space_Mono, Syne } from "next/font/google";
 import Link from "next/link";
 import Image from "next/image";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import LanguageToggle from "@/components/LanguageToggle";
+import NavLinks from "@/components/NavLinks";
 import Schriftfeld from "@/components/print/Schriftfeld";
 import DotCursor from "@/components/plotter/DotCursor";
 import { getLocale, getT } from "@/lib/i18n";
@@ -32,13 +33,13 @@ const spaceMono = Space_Mono({
 });
 
 // Headline face used throughout the site, including the browser tabs.
-// Righteous is a static single-weight face, so explicitly request its only
-// available weight while keeping the same self-hosted, swap-loading setup.
-const righteous = Righteous({
+// Syne is a variable font (wght 400–800), so — like DM Sans above and unlike
+// the single-weight Righteous it replaced — no weight list is needed: the one
+// variable woff2 covers the 600 / 700 / 800 the display scale asks for.
+const syne = Syne({
   subsets: ["latin"],
-  weight: "400",
   display: "swap",
-  variable: "--font-righteous",
+  variable: "--font-syne",
 });
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -72,43 +73,45 @@ export default async function RootLayout({
     <html
       lang={locale}
       data-scroll-behavior="smooth"
-      className={`${dmSans.variable} ${spaceMono.variable} ${righteous.variable}`}
+      className={`${dmSans.variable} ${spaceMono.variable} ${syne.variable}`}
     >
       {/* suppressHydrationWarning: browser extensions (e.g. asbplayer) inject
           attributes on <body> before React hydrates; this scopes the warning
           to <body> only and doesn't hide real mismatches elsewhere. */}
       <body suppressHydrationWarning>
         {/* The header is the title block of a sheet, not an app bar: the
-            wordmark left, three pages and the language right, one hairline
-            underneath. It scrolls away with the page — nothing sticks.
-            Impressum and Datenschutz are not pages you navigate to, they are
-            pages you look up: they stay in the footer. */}
+            wordmark left, the four pages and the language right. It scrolls
+            away with the page — nothing sticks. No hairline underneath: the
+            page's own first edge (the hero, or the h1 block's rule) is the
+            trim line. Impressum and Datenschutz are not pages you navigate
+            to, they are pages you look up: they stay in the footer. */}
         <header className={styles.header}>
-          <div className={styles.inner}>
-            <div className={styles.row}>
-              {/* The logo links home, and home is the work. */}
-              <div className={styles.brand}>
-                <Link href="/" className={styles.brandWord} aria-label={t("aria.home")}>
-                  {/* Brand wordmark — above the fold on every page, so preload it.
-                      Intrinsic size is the source PNG; .brandLogo CSS (height clamp,
-                      width auto) governs the rendered size. */}
-                  <Image
-                    src="/nokta_logo.png"
-                    alt="nokta"
-                    width={2000}
-                    height={410}
-                    preload
-                    className={styles.brandLogo}
-                  />
-                </Link>
-              </div>
-              <nav className={styles.nav} aria-label={t("aria.mainNav")}>
-                <Link href="/" className={styles.navLink}>{t("nav.home")}</Link>
-                <Link href="/studio" className={styles.navLink}>{t("nav.studio")}</Link>
-                <Link href="/prozess" className={styles.navLink}>{t("nav.prozess")}</Link>
-                <Link href="/kontakt" className={styles.navLink}>{t("nav.contact")}</Link>
-                <LanguageToggle current={locale} label={t("aria.language")} />
-              </nav>
+          <div className={styles.row}>
+            {/* The logo links home, and home is the work. */}
+            <Link href="/" className={styles.brandWord} aria-label={t("aria.home")}>
+              {/* Brand wordmark — above the fold on every page, so preload it.
+                  Intrinsic size is the source PNG; .brandLogo CSS (height,
+                  width auto) governs the rendered size. */}
+              <Image
+                src="/nokta_logo.png"
+                alt="nokta"
+                width={2000}
+                height={410}
+                preload
+                className={styles.brandLogo}
+              />
+            </Link>
+            <div className={styles.right}>
+              <NavLinks
+                navLabel={t("aria.mainNav")}
+                items={[
+                  { href: "/", label: t("nav.home") },
+                  { href: "/studio", label: t("nav.studio") },
+                  { href: "/prozess", label: t("nav.prozess") },
+                  { href: "/kontakt", label: t("nav.contact") },
+                ]}
+              />
+              <LanguageToggle current={locale} label={t("aria.language")} />
             </div>
           </div>
         </header>
