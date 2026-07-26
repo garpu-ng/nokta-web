@@ -5,8 +5,8 @@ import Dot from "@/components/Dot";
 // Root not-found — rendered inside the root layout for any unmatched route.
 // The "404" is drawn as 4 · dot · 4, where the middle "0" is our brand dot
 // (inline <Dot> SVG) and the two 4s are set in the mono display face. The
-// .nk-404__dot CSS sets an explicit ink colour, which the Dot's
-// fill=currentColor resolves to on the paper page.
+// .nk-404__dot CSS sets the accent, which the Dot's fill=currentColor picks
+// up — the page's one red mark.
 export default async function NotFound() {
   const t = await getT();
   return (

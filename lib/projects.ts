@@ -1,13 +1,14 @@
+// The archviz projects: slugs, clients, and the image stacks their detail
+// pages render. Wall placement (span/lift) is curated in lib/works.ts, and the
+// reader-facing descriptions are locale copy (messages/*, projects.desc.*) —
+// neither belongs to this record.
 export type Project = {
   slug: string;
   title: string;
   client: string;
   year: string;
-  category: string;
-  description: string;
   thumb: string;
   images: string[];
-  span: 3 | 4 | 6 | 12; // grid-column span in 12-col grid
 };
 
 export const PROJECTS: Project[] = [
@@ -16,10 +17,7 @@ export const PROJECTS: Project[] = [
     title: "Sanktgores Residence",
     client: "Privatkunde",
     year: "2024",
-    category: "Wohnbau",
-    description: "Fotorealistische Außenvisualisierung eines modernen Einfamilienhauses in NRW.",
     thumb: "/projects/sanktgores/thumb.jpg",
-    span: 6,
     images: [
       "/projects/sanktgores/01.jpg",
       "/projects/sanktgores/02.jpg",
@@ -34,10 +32,7 @@ export const PROJECTS: Project[] = [
     title: "Teahouse",
     client: "Privatkunde",
     year: "2024",
-    category: "Gartenarchitektur",
-    description: "Stimmungsvolle Visualisierung eines japanisch inspirierten Teehauses.",
     thumb: "/projects/teahouse/thumb.jpg",
-    span: 6,
     images: [
       "/projects/teahouse/01.jpg",
       "/projects/teahouse/02.jpg",
@@ -53,10 +48,7 @@ export const PROJECTS: Project[] = [
     title: "Beat Building",
     client: "Architekturbüro",
     year: "2023",
-    category: "Gewerbebau",
-    description: "Visualisierung eines urbanen Kulturgebäudes mit markanter Fassade.",
     thumb: "/projects/beatbuilding/thumb.jpg",
-    span: 6,
     images: [
       "/projects/beatbuilding/01.jpg",
       "/projects/beatbuilding/02.jpg",
@@ -69,10 +61,7 @@ export const PROJECTS: Project[] = [
     title: "Binome",
     client: "Binome Architekten",
     year: "2023",
-    category: "Wohnbau",
-    description: "Innen- und Außenvisualisierung eines minimalistischen Wohnprojekts.",
     thumb: "/projects/binome/thumb.jpg",
-    span: 6,
     images: [
       "/projects/binome/01.jpg",
       "/projects/binome/02.jpg",
@@ -87,10 +76,7 @@ export const PROJECTS: Project[] = [
     title: "IPE House",
     client: "Privatkunde",
     year: "2023",
-    category: "Wohnbau",
-    description: "Elegante Visualisierung eines modernen Hauses mit Ipe-Holzfassade.",
     thumb: "/projects/ipehouse/thumb.jpg",
-    span: 6,
     images: [
       "/projects/ipehouse/01.jpg",
       "/projects/ipehouse/02.jpg",
@@ -103,17 +89,10 @@ export const PROJECTS: Project[] = [
     title: "Velostation",
     client: "Stadtplanung NRW",
     year: "2022",
-    category: "Infrastruktur",
-    description: "Architekturvisualisierung einer modernen Fahrradstation im urbanen Raum.",
     thumb: "/projects/velostation/thumb.jpg",
-    span: 6,
     images: [
       "/projects/velostation/01.jpg",
       "/projects/velostation/02.jpg",
     ],
   },
 ];
-
-export function getProject(slug: string): Project | undefined {
-  return PROJECTS.find((p) => p.slug === slug);
-}

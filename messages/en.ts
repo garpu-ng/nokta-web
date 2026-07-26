@@ -12,22 +12,12 @@ const en: Record<string, string> = {
   "meta.studio.title": "Studio · nokta",
   "meta.studio.desc": "The studio behind the work: three people in Düsseldorf. Architectural visualisation, editorial and typesetting, print production and CAD plans.",
   "meta.prozess.title": "Process · nokta",
-  "meta.prozess3d.title": "3D process · nokta",
   "meta.kontakt.title": "Contact · nokta",
   "meta.arbeiten.title": "Work · nokta",
 
   // ── Home ──────────────────────────────────────────────────────────
-  "home.lead": "We draw buildings, books and prints.",
-  "home.sub": "Design studio · Düsseldorf",
   "home.wall.label": "Work",
   "home.wall.aria": "All work",
-  // Closing motto — the {point} {line} {form} tokens are substituted in
-  // app/page.tsx and must survive verbatim; the sentence's final period is
-  // dropped there and re-set as the red studio dot.
-  "home.motto": "From the {point} to the {line} to the {form}.",
-  "home.motto.point": "dot",
-  "home.motto.line": "line",
-  "home.motto.form": "form",
   // ── Kolonnade: homepage hero, intro, the three service rows ───────
   "home.hero.lead1": "Nokta means dot",
   "home.hero.lead2": "And it all began with a dot",
@@ -144,7 +134,6 @@ const en: Record<string, string> = {
   "studio.ctaWrite": "Write us",
 
   // ── Process ───────────────────────────────────────────────────────
-  "prozess.heading": "How we work",
   "prozess.index.intro": "Four workflows, one per material. The first is written out — architectural visualisation, where most of our projects start.",
   "prozess.heading.line1": "How we",
   "prozess.heading.line2": "work",
@@ -156,10 +145,6 @@ const en: Record<string, string> = {
   "nokta.svc.1.short": "Grid, typography, picture editing — from manuscript to prepress.",
   "nokta.svc.2.short": "Paper, sheet, run — agreed with the printer.",
   "nokta.svc.3.short": "Floor plans, elevations, sections — as a file or framed in A1.",
-  "prozess.card.cta": "See the workflow",
-  "prozess.3d.heading": "Architectural visualisation",
-  "prozess.intro": "From the first sketch to the finished image: a clear flow. With our own setup we get to many variations, and you decide.",
-  "prozess.gifAlt": "Process at a glance",
   "prozess.step.1.title": "Concept & References",
   "prozess.step.1.text": "It starts with your idea. You send us plans, sketches and references, and together we work out how the image should feel. That’s the base, before we get going.",
   "prozess.step.2.title": "3D modelling",
@@ -172,7 +157,6 @@ const en: Record<string, string> = {
   // ── Contact ───────────────────────────────────────────────────────
   "kontakt.heading": "Contact",
   "kontakt.intro": "Got a project in the works? We’d love to hear from you.",
-  "kontakt.infoLead": "For enquiries, quotes or just to say hi: write us. We’ll get back to you within 24 hours.",
   "kontakt.direct": "Direct",
   "kontakt.form.step1": "01 · What is it about?",
   "kontakt.form.step2": "02 · Who is writing?",

@@ -48,9 +48,12 @@
   border-color: var(--paper);
 }
 
-/* The radio itself is the control; it is hidden from sight, never from the
-   keyboard or from the accessibility tree. */
-.chipInput {
+/* The visually-hidden recipe, worn twice on this form: .chipInput hides the
+   radio that IS each chip's control, .hidden (step 02/03) hides the written
+   label over each field. Hidden from sight only — never from the keyboard or
+   the accessibility tree, and placeholders are not labels. */
+.chipInput,
+.hidden {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -98,19 +101,8 @@
   display: block;
 }
 
-/* Visually hidden, and only visually: the label is still read out and still
-   what the field is announced by. Placeholders are not labels. */
-.hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  border: 0;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
+/* (.hidden — the fields' visually-hidden labels — is declared beside
+   .chipInput above: one recipe, stated once.) */
 
 .input {
   width: 100%;

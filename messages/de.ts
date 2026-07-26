@@ -13,23 +13,14 @@ const de: Record<string, string> = {
   "meta.studio.title": "Studio · nokta",
   "meta.studio.desc": "Das Studio hinter den Arbeiten: drei Leute in Düsseldorf. Architekturvisualisierung, Editorial und Satz, Druckproduktion und CAD-Pläne.",
   "meta.prozess.title": "Prozess · nokta",
-  "meta.prozess3d.title": "3D-Prozess · nokta",
   "meta.kontakt.title": "Kontakt · nokta",
   "meta.arbeiten.title": "Arbeiten · nokta",
 
   // ── Home ──────────────────────────────────────────────────────────
-  "home.lead": "Wir zeichnen Gebäude, Bücher und Drucke.",
-  "home.sub": "Designstudio · Düsseldorf",
+  // wall.label/aria head the one wall, which hangs at /arbeiten since
+  // Kolonnade — the "home" prefix is where it used to hang.
   "home.wall.label": "Arbeiten",
   "home.wall.aria": "Alle Arbeiten",
-  // Closing motto — the {tokens} let each locale phrase the progression its own
-  // way (German chains "vom … zur …", Turkish attaches case suffixes, Japanese
-  // uses particles). All three words are ink; the sentence's final period is
-  // dropped in app/page.tsx and re-set as the red studio dot.
-  "home.motto": "Vom {point} zur {line} zur {form}.",
-  "home.motto.point": "Punkt",
-  "home.motto.line": "Linie",
-  "home.motto.form": "Form",
   // ── Kolonnade: homepage hero, intro, the three service rows ───────
   "home.hero.lead1": "Nokta heißt Punkt",
   "home.hero.lead2": "Und mit einem Punkt hat alles begonnen",
@@ -149,7 +140,6 @@ const de: Record<string, string> = {
   "studio.ctaWrite": "Schreib uns",
 
   // ── Prozess ───────────────────────────────────────────────────────
-  "prozess.heading": "Wie wir arbeiten",
   "prozess.index.intro": "Vier Abläufe, einer je Material. Ausgeschrieben ist der erste — die Architekturvisualisierung, mit der bei uns die meisten Projekte anfangen.",
   "prozess.heading.line1": "Wie wir",
   "prozess.heading.line2": "arbeiten",
@@ -161,10 +151,6 @@ const de: Record<string, string> = {
   "nokta.svc.1.short": "Raster, Typografie, Bildredaktion — vom Manuskript bis zur Vorstufe.",
   "nokta.svc.2.short": "Papier, Bogen, Auflage — abgestimmt mit der Druckerei.",
   "nokta.svc.3.short": "Grundrisse, Ansichten, Schnitte — als Datei oder gerahmt in A1.",
-  "prozess.card.cta": "Zum Ablauf",
-  "prozess.3d.heading": "Architekturvisualisierung",
-  "prozess.intro": "Von der ersten Skizze bis zum fertigen Bild: ein klarer Ablauf. Mit eigenem Setup kommen wir zu vielen Varianten, du entscheidest.",
-  "prozess.gifAlt": "Prozess im Überblick",
   "prozess.step.1.title": "Konzept & Referenzen",
   "prozess.step.1.text": "Am Anfang steht deine Idee. Du schickst uns Pläne, Skizzen und Referenzen, und wir klären gemeinsam, wie das Bild später wirken soll. So steht die Basis, bevor wir loslegen.",
   "prozess.step.2.title": "3D-Modellierung",
@@ -177,7 +163,6 @@ const de: Record<string, string> = {
   // ── Kontakt ───────────────────────────────────────────────────────
   "kontakt.heading": "Kontakt",
   "kontakt.intro": "Du hast ein Projekt in Planung? Wir freuen uns, von dir zu hören.",
-  "kontakt.infoLead": "Für Anfragen, Angebote oder einfach so: schreib uns. Wir melden uns innerhalb von 24 Stunden.",
   "kontakt.direct": "Direkt",
   "kontakt.form.step1": "01 · Worum geht es?",
   "kontakt.form.step2": "02 · Wer schreibt?",

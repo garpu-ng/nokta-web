@@ -246,7 +246,10 @@ export default async function WorkPage({ params }: Props) {
       <ProjectHeader
         title={work.title}
         anno={<WorkAnno anno={workAnnotation(work, t)} />}
-        backHref="/"
+        // The label promises the wall ("Alle Arbeiten"), so the link keeps
+        // that promise: since Kolonnade the wall hangs at /arbeiten, not on
+        // the homepage this pointed at when the route was cut.
+        backHref="/arbeiten"
         backLabel={t("work.back")}
       />
 

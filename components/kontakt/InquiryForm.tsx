@@ -47,18 +47,20 @@ export default function InquiryForm({ copy }: { copy: Copy }) {
 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    // The honeypot is read off the DOM at send time, never from state: the
+    // field is uncontrolled on purpose, so something filling every input it
+    // can find fills this one too. A real browser sends it empty. (Sending a
+    // literal "" here would blind the server's check to exactly the bots the
+    // field exists to catch.)
+    const website =
+      (event.currentTarget.elements.namedItem("website") as HTMLInputElement | null)
+        ?.value ?? "";
     setState("sending");
     try {
       const response = await fetch("/api/kontakt", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          kind,
-          ...fields,
-          // The honeypot travels empty from a real browser; only something
-          // filling every input it can find puts anything in it.
-          website: "",
-        }),
+        body: JSON.stringify({ kind, ...fields, website }),
       });
       setState(response.ok ? "sent" : "error");
     } catch {

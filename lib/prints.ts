@@ -80,7 +80,3 @@ export const PRINTS: Print[] = [
     paymentLink: undefined, // paste the Stripe Payment Link to go live
   },
 ];
-
-export function getPrint(slug: string): Print | undefined {
-  return PRINTS.find((p) => p.slug === slug);
-}

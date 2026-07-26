@@ -28,13 +28,12 @@ export function workAnnotation(work: Work, t: (key: string) => string): WorkAnno
 }
 
 export default function WorkAnno({ anno }: { anno: WorkAnnotation }) {
+  // No colour and no per-word markup: the kind stamp used to borrow the old
+  // filter bar's kind colour on hover, but since Kolonnade the filter spends
+  // no colour and the whole line is simply set in the surrounding ink.
   return (
     <span className={`nk-mono-caption ${styles.anno}`}>
-      {/* The kind stamp is the one word of the line another component styles —
-          a wall card lends it the filter's colour for that kind while the
-          sheet is under the pointer. Hence a global hook, not a module class:
-          the annotation itself stays ink wherever it is printed. */}
-      <span className="nk-anno-kind">{anno.kind}</span> · {anno.year} · {anno.client}
+      {anno.kind} · {anno.year} · {anno.client}
     </span>
   );
 }

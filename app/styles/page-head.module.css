@@ -1,0 +1,17 @@
+/* The Kolonnade h1 — the display voice every page under the masthead opens
+   in: the headline face at full display weight, tight leading, the site-wide
+   negative tracking, and the red period that closes the word. Stated once and
+   composed into each page module's own .heading/.period. Only the voice lives
+   here — scale, margins and the grid around the block stay with the pages,
+   which genuinely differ (two clamp sizes, one bottom margin). */
+
+.heading {
+  font-family: var(--headline-font);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+}
+
+.period {
+  color: var(--accent);
+}

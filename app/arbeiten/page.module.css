@@ -17,16 +17,13 @@
 }
 
 .heading {
+  composes: heading from "../styles/page-head.module.css";
   margin: 0;
-  font-family: var(--headline-font);
   font-size: clamp(64px, 8vw, 112px);
-  font-weight: 700;
-  line-height: 0.92;
-  letter-spacing: -0.02em;
 }
 
 .period {
-  color: var(--accent);
+  composes: period from "../styles/page-head.module.css";
 }
 
 .wall {

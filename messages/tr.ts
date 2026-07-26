@@ -7,21 +7,12 @@ const tr: Record<string, string> = {
   "meta.studio.title": "Stüdyo · nokta",
   "meta.studio.desc": "İşlerin arkasındaki stüdyo: Düsseldorf’ta üç kişi. Mimari görselleştirme, editoryal ve dizgi, baskı üretimi ve CAD planları.",
   "meta.prozess.title": "Süreç · nokta",
-  "meta.prozess3d.title": "3B süreç · nokta",
   "meta.kontakt.title": "İletişim · nokta",
   "meta.arbeiten.title": "İşler · nokta",
 
   // ── Ana sayfa ─────────────────────────────────────────────────────
-  "home.lead": "Yapılar, kitaplar ve baskılar çiziyoruz.",
-  "home.sub": "tasarım stüdyosu · düsseldorf",
   "home.wall.label": "işler",
   "home.wall.aria": "Tüm işler",
-  // Turkish attaches the case suffixes to the words, so they ride just outside
-  // the {tokens}: "{point}dan {line}ye, {line}den {form}a."
-  "home.motto": "{point}dan {line}ye, {line}den {form}a.",
-  "home.motto.point": "Nokta",
-  "home.motto.line": "çizgi",
-  "home.motto.form": "form",
   // ── Kolonnade: ana sayfa hero, giriş, üç hizmet satırı ────────────
   "home.hero.lead1": "Nokta, nokta demek",
   "home.hero.lead2": "Ve her şey bir noktayla başladı",
@@ -135,7 +126,6 @@ const tr: Record<string, string> = {
   "studio.ctaWrite": "Bize yaz",
 
   // ── Süreç ─────────────────────────────────────────────────────────
-  "prozess.heading": "Nasıl çalışıyoruz",
   "prozess.index.intro": "Dört akış, her malzemeye bir tane. İlki yazıldı — projelerimizin çoğunun başladığı yer olan mimari görselleştirme.",
   "prozess.heading.line1": "Nasıl",
   "prozess.heading.line2": "çalışıyoruz",
@@ -147,10 +137,6 @@ const tr: Record<string, string> = {
   "nokta.svc.1.short": "Grid, tipografi, görsel editörlüğü — müsveddeden baskı öncesine.",
   "nokta.svc.2.short": "Kâğıt, forma, tiraj — matbaayla birlikte kararlaştırılır.",
   "nokta.svc.3.short": "Planlar, görünüşler, kesitler — dosya olarak ya da A1 çerçeveli.",
-  "prozess.card.cta": "Akışı gör",
-  "prozess.3d.heading": "Mimari görselleştirme",
-  "prozess.intro": "İlk eskizden bitmiş görsele: net bir akış. Kendi kurulumumuzla birçok varyasyona ulaşıyoruz, kararı sen veriyorsun.",
-  "prozess.gifAlt": "Sürece genel bakış",
   "prozess.step.1.title": "Konsept & Referanslar",
   "prozess.step.1.text": "Her şey senin fikrinle başlar. Bize planları, eskizleri ve referansları gönderirsin, görselin nasıl bir his vermesi gerektiğini birlikte netleştiririz. Başlamadan önce temel böyle oturur.",
   "prozess.step.2.title": "3B modelleme",
@@ -163,7 +149,6 @@ const tr: Record<string, string> = {
   // ── İletişim ──────────────────────────────────────────────────────
   "kontakt.heading": "İletişim",
   "kontakt.intro": "Aklında bir proje mi var? Senden haber almayı çok isteriz.",
-  "kontakt.infoLead": "Talepler, teklifler ya da sadece merhaba demek için: bize yaz. 24 saat içinde dönüş yaparız.",
   "kontakt.direct": "Doğrudan",
   "kontakt.form.step1": "01 · Konu ne?",
   "kontakt.form.step2": "02 · Kim yazıyor?",

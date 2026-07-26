@@ -72,11 +72,9 @@
   line-height: 1.1;
 }
 
-/* Restrained hover: the frame's hairline goes to full ink and the sheet edges
-   a hair closer. Then two press details arrive — the registration mark is
-   struck on the corner, and the annotation's kind stamp picks up the colour
-   that kind wears in the filter above. Still nothing floods and nothing
-   recolours: one word and one hairline mark. */
+/* Restrained hover: the frame's hairline goes to full paper and the sheet
+   edges a hair closer, and the one press detail arrives — the registration
+   mark struck on the corner. Nothing floods and nothing recolours. */
 .card:hover .frame,
 .card:focus-visible .frame {
   outline-color: var(--paper);

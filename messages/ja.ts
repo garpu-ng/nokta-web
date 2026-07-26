@@ -7,21 +7,12 @@ const ja: Record<string, string> = {
   "meta.studio.title": "スタジオ · nokta",
   "meta.studio.desc": "作品の背後にあるスタジオ：デュッセルドルフの三人。建築ビジュアライゼーション、エディトリアルと組版、印刷制作、CAD図面。",
   "meta.prozess.title": "プロセス · nokta",
-  "meta.prozess3d.title": "3Dプロセス · nokta",
   "meta.kontakt.title": "お問い合わせ · nokta",
   "meta.arbeiten.title": "仕事 · nokta",
 
   // ── ホーム ────────────────────────────────────────────────────────
-  "home.lead": "私たちは建物、本、プリントを描きます。",
-  "home.sub": "デザインスタジオ · デュッセルドルフ",
   "home.wall.label": "作品",
   "home.wall.aria": "すべての作品",
-  // Particles ride outside the {tokens}. Vocabulary matches footer.tag2:
-  // 点 (point) · 線 (line) · 形 (form).
-  "home.motto": "{point}から{line}へ、{line}から{form}へ。",
-  "home.motto.point": "点",
-  "home.motto.line": "線",
-  "home.motto.form": "形",
   // ── Kolonnade: トップのヒーロー、導入、三つのサービス行 ─────────
   "home.hero.lead1": "nokta は「点」",
   "home.hero.lead2": "すべては一つの点から始まりました",
@@ -138,7 +129,6 @@ const ja: Record<string, string> = {
   "studio.ctaWrite": "ご連絡ください",
 
   // ── プロセス ──────────────────────────────────────────────────────
-  "prozess.heading": "私たちの進め方",
   "prozess.index.intro": "四つの流れ。素材ごとに一つ。書き出したのは最初の一つ — 多くのプロジェクトが始まる建築ビジュアライゼーションです。",
   "prozess.heading.line1": "私たちの",
   "prozess.heading.line2": "進め方",
@@ -150,10 +140,6 @@ const ja: Record<string, string> = {
   "nokta.svc.1.short": "グリッド、タイポグラフィ、写真編集 — 原稿から印刷前工程まで。",
   "nokta.svc.2.short": "紙、折り、部数 — 印刷所と詰めます。",
   "nokta.svc.3.short": "平面、立面、断面 — データまたは A1 額装で。",
-  "prozess.card.cta": "流れを見る",
-  "prozess.3d.heading": "建築ビジュアライゼーション",
-  "prozess.intro": "最初のスケッチから完成画像まで、明快な流れ。自前のセットアップで多くのバリエーションに到達し、決めるのはあなたです。",
-  "prozess.gifAlt": "プロセスの概要",
   "prozess.step.1.title": "コンセプト & リファレンス",
   "prozess.step.1.text": "すべてはあなたのアイデアから始まります。図面、スケッチ、リファレンスを送っていただき、画像がどんな印象であるべきかを一緒に固めます。動き出す前の土台です。",
   "prozess.step.2.title": "3Dモデリング",
@@ -166,7 +152,6 @@ const ja: Record<string, string> = {
   // ── お問い合わせ ──────────────────────────────────────────────────
   "kontakt.heading": "お問い合わせ",
   "kontakt.intro": "進行中のプロジェクトはありますか？ ぜひお聞かせください。",
-  "kontakt.infoLead": "お問い合わせ、お見積り、ちょっとした挨拶でも、ご連絡ください。24時間以内にお返事します。",
   "kontakt.direct": "直接",
   "kontakt.form.step1": "01 · どんなご用件ですか？",
   "kontakt.form.step2": "02 · どなたですか？",
