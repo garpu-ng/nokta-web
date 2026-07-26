@@ -44,9 +44,12 @@
      way down to a phone. */
   --nk-gutter: 40px;
 
-  /* Shared max content width for the full-bleed chrome (the footer column).
-     Page content itself runs in a narrower 1100px frame. */
-  --content-max: 1600px;
+  /* The sheet's width. Everything the reader sees — masthead, page, colophon,
+     the full-bleed film and the coloured bands alike — is laid on a column
+     this wide and centred (app/layout.module.css .shell). Past this width the
+     ink simply continues to the edges of the screen, so a large monitor shows
+     a sheet on a ground rather than a layout stretched to fit it. */
+  --content-max: 1500px;
 }
 
 @media (max-width: 1199px) {

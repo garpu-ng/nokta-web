@@ -3,9 +3,16 @@
    mono at its smallest legible size. Desktop only — on a phone the corner
    belongs to the reader's thumb. */
 
+/* Fixed to the screen, but held to the SHEET's right edge rather than the
+   monitor's: past --content-max the max() picks up the margin the centred
+   column leaves, so the block stays on the paper it annotates instead of
+   drifting off into the ink beside it. */
 .block {
   position: fixed;
-  right: clamp(16px, 2vw, 28px);
+  right: max(
+    clamp(16px, 2vw, 28px),
+    calc((100vw - var(--content-max)) / 2 + clamp(16px, 2vw, 28px))
+  );
   bottom: clamp(16px, 2vw, 28px);
   z-index: 2400;
   width: 180px;

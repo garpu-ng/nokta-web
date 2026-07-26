@@ -79,38 +79,44 @@ export default async function RootLayout({
           attributes on <body> before React hydrates; this scopes the warning
           to <body> only and doesn't hide real mismatches elsewhere. */}
       <body suppressHydrationWarning>
-        {/* The header is the title block of a sheet, not an app bar: the
-            wordmark left, the four pages and the language right. It scrolls
-            away with the page — nothing sticks. No hairline underneath: the
-            page's own first edge (the hero, or the h1 block's rule) is the
-            trim line. Impressum and Datenschutz are not pages you navigate
-            to, they are pages you look up: they stay in the footer. */}
-        <header className={styles.header}>
-          <div className={styles.row}>
-            {/* The logo links home, and home is the work. */}
-            <Link href="/" className={styles.brandWord} aria-label={t("aria.home")}>
-              {/* Drawn as a mask so it is exactly the paper the type is set
-                  in — see components/Wordmark.tsx. */}
-              <Wordmark className={styles.brandLogo} />
-            </Link>
-            <div className={styles.right}>
-              <NavLinks
-                navLabel={t("aria.mainNav")}
-                items={[
-                  { href: "/", label: t("nav.home") },
-                  { href: "/studio", label: t("nav.studio") },
-                  { href: "/prozess", label: t("nav.prozess") },
-                  { href: "/kontakt", label: t("nav.contact") },
-                ]}
-              />
-              <LanguageToggle current={locale} label={t("aria.language")} />
+        {/* The sheet. Masthead, page and colophon are laid on one centred
+            column capped at --content-max; past that the ink runs on to the
+            edges of the screen, so a wide monitor shows a sheet on a ground
+            instead of a layout stretched to fill it. */}
+        <div className={styles.shell}>
+          {/* The header is the title block of a sheet, not an app bar: the
+              wordmark left, the four pages and the language right. It scrolls
+              away with the page — nothing sticks. No hairline underneath: the
+              page's own first edge (the hero, or the h1 block's rule) is the
+              trim line. Impressum and Datenschutz are not pages you navigate
+              to, they are pages you look up: they stay in the footer. */}
+          <header className={styles.header}>
+            <div className={styles.row}>
+              {/* The logo links home, and home is the work. */}
+              <Link href="/" className={styles.brandWord} aria-label={t("aria.home")}>
+                {/* Drawn as a mask so it is exactly the paper the type is set
+                    in — see components/Wordmark.tsx. */}
+                <Wordmark className={styles.brandLogo} />
+              </Link>
+              <div className={styles.right}>
+                <NavLinks
+                  navLabel={t("aria.mainNav")}
+                  items={[
+                    { href: "/", label: t("nav.home") },
+                    { href: "/studio", label: t("nav.studio") },
+                    { href: "/prozess", label: t("nav.prozess") },
+                    { href: "/kontakt", label: t("nav.contact") },
+                  ]}
+                />
+                <LanguageToggle current={locale} label={t("aria.language")} />
+              </div>
             </div>
-          </div>
-        </header>
+          </header>
 
-        {children}
+          {children}
 
-        <Footer />
+          <Footer />
+        </div>
 
         {/* Chrome that belongs to the sheet rather than to any one page. Both
             are decorative overlays: aria-hidden and pointer-events none. The

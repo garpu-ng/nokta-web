@@ -1,3 +1,20 @@
+/* The sheet: the whole site on one centred column.
+
+   It is the flex column that used to be <body> — the page box inside it grows
+   (.nk-page-fade, flex: 1 0 auto) and pushes the colophon to the bottom, so a
+   short page still has its footer at the foot of the screen. Everything is
+   inside: the full-bleed film and the red bands stop at this edge too, which
+   is the point — "full-bleed" means to the edge of the sheet, not of the
+   monitor. */
+.shell {
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+}
+
 /* The site header — the title block of the sheet.
 
    One row on the page's own ink: the wordmark on the left, the four pages and
