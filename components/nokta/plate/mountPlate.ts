@@ -59,16 +59,31 @@ export function mountPlate(
 
   let width = 0;
   let height = 0;
+  /** The box the plate was last laid out for. A mount otherwise fits the type
+      and reads the mask back THREE times over: once from the call below, once
+      more when the ResizeObserver delivers its guaranteed initial observation
+      at the same size, and a third time when the webfont lands. The first two
+      are byte-identical work; only the third has anything new to say. */
+  let lastW = 0;
+  let lastH = 0;
+  let lastDpr = 0;
   let raf = 0;
   let running = false;
   let start = performance.now();
   /** Seconds of plate-time already played, carried across a pause. */
   let elapsed = 0;
 
-  const paintOnce = () =>
-    plate.draw(still ? 0 : (performance.now() - start) / 1000);
+  /** Only ever called while the loop is stopped, so plate-time is exactly the
+      time already played — reading the live clock here would hand the plate
+      the length of the pause as well. */
+  const paintOnce = () => plate.draw(still ? 0 : elapsed);
 
-  const resize = () => {
+  /**
+   * Re-fit for the current box. `force` re-runs the plate's own `resize` at an
+   * unchanged size, which is what the webfont landing needs: the box is the
+   * same, the type in it is not.
+   */
+  const resize = (force = false) => {
     const rect = canvas.getBoundingClientRect();
     if (rect.width === 0 || rect.height === 0) return;
     const asked = parseFloat(
@@ -76,6 +91,12 @@ export function mountPlate(
     );
     const cap = Number.isFinite(asked) && asked > 0 ? asked : MAX_DPR;
     const dpr = Math.min(window.devicePixelRatio || 1, cap);
+    if (!force && rect.width === lastW && rect.height === lastH && dpr === lastDpr) {
+      return;
+    }
+    lastW = rect.width;
+    lastH = rect.height;
+    lastDpr = dpr;
     width = rect.width;
     height = rect.height;
     canvas.width = Math.round(width * dpr);
@@ -111,16 +132,20 @@ export function mountPlate(
   resize();
 
   /* A plate that sets type may have measured it in the fallback face. Once the
-     real one is in, measure and cut again. Every plate gets this for free
-     because it arrives as a resize, which is the one thing they all handle. */
+     real one is in, measure and cut again — forced, because the box has not
+     changed and the guard above would otherwise skip the one re-fit that
+     matters. Every plate gets this for free because it arrives as a resize,
+     which is the one thing they all handle. */
   let dead = false;
   if (typeof document.fonts?.ready?.then === "function") {
     document.fonts.ready.then(() => {
-      if (!dead) resize();
+      if (!dead) resize(true);
     });
   }
 
-  const ro = new ResizeObserver(resize);
+  // Wrapped, not passed: an observer hands its callback the entry list, which
+  // as a first argument would read as `force` and defeat the guard entirely.
+  const ro = new ResizeObserver(() => resize());
   ro.observe(canvas);
 
   // On screen or not — the only question that decides whether we burn a frame
@@ -164,8 +189,15 @@ export function interference(
   k: number,
   t: number,
 ): number {
-  const da = Math.hypot(x - ax, y - ay);
-  const db = Math.hypot(x - bx, y - by);
+  // sqrt of the sum, not Math.hypot: hypot guards against overflow by scaling
+  // its arguments, which costs about 5× per call and buys nothing here, where
+  // both legs are screen distances a few thousand units at most.
+  const dx1 = x - ax;
+  const dy1 = y - ay;
+  const dx2 = x - bx;
+  const dy2 = y - by;
+  const da = Math.sqrt(dx1 * dx1 + dy1 * dy1);
+  const db = Math.sqrt(dx2 * dx2 + dy2 * dy2);
   return (Math.sin(k * da - t * 1.1) + Math.sin(k * db - t * 0.9) + 2) / 4;
 }
 

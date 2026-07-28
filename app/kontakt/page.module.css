@@ -1,43 +1,12 @@
 /* /kontakt — the page's title knocked into its own plate, then the intro,
    then the form with the studio's address in a rail beside it. */
 
-/* ── The plate, which is also the masthead ─────────────────────────
-   Same raster, same physics as the homepage's, asked the other question —
-   see the "meeting" variant in components/nokta/InterferenceField.tsx. The
-   title is cut into it rather than set above it, so the page opens on one
-   object instead of on a heading and a decoration.
-
-   Proportion rather than a fixed height, and a squarer one on a phone: the
-   plate's own fitter sets the title at the largest size its HEIGHT will take,
-   so a shallow band on a narrow screen would quietly shrink the page's h1 to
-   a caption. Which is also why these two numbers move together — trimming the
-   plate trims the title with it, by the same fraction. */
-.plateHead {
-  margin: 0;
-  padding: 40px var(--nk-gutter) 0;
-}
-
-.fieldPlate {
-  aspect-ratio: 3;
-  background: var(--nk-frame);
-  border: 1px solid var(--nk-hair);
-  overflow: hidden;
-}
-
-/* The real h1, kept for the outline and for anything that does not run a
-   canvas. Off-screen rather than display:none — the latter would take it out
-   of the accessibility tree, which is the one thing it exists for. */
-.srOnly {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-  border: 0;
-}
+/* The masthead is not here: the plate, its frame and the real h1 all moved to
+   components/nokta/PlateHead.module.css when every page started wearing one.
+   This file used to keep its own .plateHead, .fieldPlate and .srOnly next to
+   them, referenced by nothing — and the stale .fieldPlate still claimed
+   aspect-ratio: 3 where the page has rendered at 4.44 for some time, which is
+   the kind of leftover somebody eventually trusts. */
 
 .head {
   padding: 40px var(--nk-gutter) 48px;
@@ -136,9 +105,6 @@
 @media (max-width: 899px) {
   .head {
     padding-block: 28px 36px;
-  }
-  .fieldPlate {
-    aspect-ratio: 1.875;
   }
   .body {
     grid-template-columns: 1fr;

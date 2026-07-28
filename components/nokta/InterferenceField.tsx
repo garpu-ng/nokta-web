@@ -142,7 +142,9 @@ export default function InterferenceField({
           ctx.clearRect(0, 0, w, h);
 
           const path = new Path2D();
-          const struck = new Path2D();
+          // Only the meeting variant strikes anything, so only it pays for a
+          // second path.
+          const struck = meeting ? new Path2D() : path;
           const maxR = pitch * MAX_DOT;
           // The lattice is rotated, so it has to be generated over a disc wide
           // enough to still cover the corners once turned.
@@ -163,7 +165,7 @@ export default function InterferenceField({
               const r = maxR * Math.pow(amp, GAMMA);
               if (r <= 0.18) continue;
 
-              const into = meeting && amp > AGREEMENT ? struck : path;
+              const into = amp > AGREEMENT ? struck : path;
               into.moveTo(x + r, y);
               into.arc(x, y, r, 0, Math.PI * 2);
             }

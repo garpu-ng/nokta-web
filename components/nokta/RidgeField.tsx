@@ -63,6 +63,13 @@ export default function RidgeField({
           h = height;
           cut?.layout(width, height, dpr);
           k = (2 * Math.PI) / (WAVELENGTH * Math.max(0.5, w / REFERENCE_W));
+          // The pen is the same pen on every frame. Set HERE and not at mount:
+          // resizing the backing store resets the context's whole state, so a
+          // pen set once at mount would be lost the first time the box moved.
+          ctx.strokeStyle = paper;
+          ctx.lineWidth = 1;
+          ctx.lineJoin = "round";
+          ctx.lineCap = "butt";
         },
 
         draw(t) {
@@ -78,10 +85,6 @@ export default function RidgeField({
           const by = cy + 0.33 * h * Math.sin(t * 0.039 + 1.5);
 
           ctx.clearRect(0, 0, w, h);
-          ctx.strokeStyle = paper;
-          ctx.lineWidth = 1;
-          ctx.lineJoin = "round";
-          ctx.lineCap = "butt";
 
           const path = new Path2D();
           for (let y = SPACING / 2; y < h + SPACING; y += SPACING) {

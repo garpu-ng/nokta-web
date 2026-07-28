@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import InquiryForm from "@/components/kontakt/InquiryForm";
 import InterferenceField from "@/components/nokta/InterferenceField";
 import PlateHead from "@/components/nokta/PlateHead";
-import { getT } from "@/lib/i18n";
+import { getLocale, getT } from "@/lib/i18n";
+import { socialMetadata } from "@/lib/socialMeta";
 import styles from "./page.module.css";
 
 /* The page the site is for. Until Kolonnade it offered a mailto link and
@@ -19,7 +20,17 @@ import styles from "./page.module.css";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getT();
-  return { title: t("meta.kontakt.title") };
+  const locale = await getLocale();
+  const title = t("meta.kontakt.title");
+  const description = t("meta.site.desc");
+  // As on /studio: its own canonical, and its own social block rather than the
+  // root layout's, which shared this page under the site's title.
+  return {
+    title,
+    description,
+    alternates: { canonical: "/kontakt" },
+    ...socialMetadata({ title, description, locale, path: "/kontakt" }),
+  };
 }
 
 export default async function KontaktPage() {

@@ -5,7 +5,8 @@ import Reveal from "@/components/Reveal";
 import PlateHead from "@/components/nokta/PlateHead";
 import RidgeField from "@/components/nokta/RidgeField";
 import ServiceIndex from "@/components/nokta/ServiceIndex";
-import { getT } from "@/lib/i18n";
+import { getLocale, getT } from "@/lib/i18n";
+import { socialMetadata } from "@/lib/socialMeta";
 import styles from "./page.module.css";
 
 /* The studio page: who we are, then what you get. The teaser no longer opens
@@ -14,9 +15,17 @@ import styles from "./page.module.css";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getT();
+  const locale = await getLocale();
+  const title = t("meta.studio.title");
+  const description = t("meta.studio.desc");
+  // One URL serves four cookie-picked languages, so the canonical is not a
+  // formality. Without its own social block the page also inherited the root
+  // layout's, and shared itself under the site's title rather than its own.
   return {
-    title: t("meta.studio.title"),
-    description: t("meta.studio.desc"),
+    title,
+    description,
+    alternates: { canonical: "/studio" },
+    ...socialMetadata({ title, description, locale, path: "/studio" }),
   };
 }
 

@@ -113,6 +113,10 @@ const ROOM_STEPS = 6;
 const ROOM_MIN = 0.07;
 
 const TAU = Math.PI * 2;
+/** The eight directions the dodge test samples in. Constants, so they are a
+    table rather than three thousand sine calls a second. */
+const RING_COS = Array.from({ length: 8 }, (_, a) => Math.cos((a / 8) * TAU));
+const RING_SIN = Array.from({ length: 8 }, (_, a) => Math.sin((a / 8) * TAU));
 /** The R₂ low-discrepancy sequence. Two irrational strides that between them
     never repeat and never clump: it fills the plate far more evenly than a
     hash does, which matters when there are eighty marks and a hole shows. */
@@ -193,12 +197,55 @@ export default function DiscField({
       let turn = new Float64Array(0);
       let spin = new Float64Array(0);
       let rollRate = new Float64Array(0);
+      /** The wander and the roll's starting angle, hashed once at layout.
+          These used to be five `hash()` calls per disc per frame — a thousand
+          a second to recompute numbers that never change. */
+      let wobRateX = new Float64Array(0);
+      let wobPhaseX = new Float64Array(0);
+      let wobRateY = new Float64Array(0);
+      let wobPhaseY = new Float64Array(0);
+      let roll0 = new Float64Array(0);
       let lastT = -1;
+      /** The backing store's ratio, kept so a disc's transform can be set
+          outright instead of pushed and popped off the state stack. */
+      let ratio = 1;
+
+      /* Scratch the dodge test reads. `fits` is built ONCE here rather than
+         freshly for every disc of every frame — at 190 discs that was eleven
+         thousand closures a second, and all of them garbage. */
+      let tx = 0;
+      let ty = 0;
+      let tr = 0;
+      let tcos = 0;
+      let tcs = 1;
+      let tsn = 0;
+
+      /* Sampled off the mask, on the disc's own outline, because a mark this
+         big cannot be judged by its centre. */
+      const fits = (close: number, shrink: number) => {
+        if (!cut) return true;
+        const r = tr * shrink;
+        const co = tcos * close;
+        const minor = r * co + (r * THICK * Math.sqrt(1 - co * co)) / 2;
+        if (cut.dodged(tx, ty)) return false;
+        for (let g = 0; g < 2; g++) {
+          const f = g === 0 ? 1 : 0.58;
+          for (let a = 0; a < 8; a++) {
+            const lx = RING_COS[a] * minor * f;
+            const ly = RING_SIN[a] * r * f;
+            if (cut.dodged(tx + lx * tcs - ly * tsn, ty + lx * tsn + ly * tcs)) {
+              return false;
+            }
+          }
+        }
+        return true;
+      };
 
       const plate: Plate = {
         resize(width, height, dpr) {
           w = width;
           h = height;
+          ratio = dpr;
           cut?.layout(width, height, dpr);
           k = TAU / (WAVELENGTH * width);
 
@@ -214,6 +261,11 @@ export default function DiscField({
           ring = new Uint8Array(count);
           spin = new Float64Array(count);
           rollRate = new Float64Array(count);
+          wobRateX = new Float64Array(count);
+          wobPhaseX = new Float64Array(count);
+          wobRateY = new Float64Array(count);
+          wobPhaseY = new Float64Array(count);
+          roll0 = new Float64Array(count);
           order = [];
           // Carried across a resize where it can be: the webfont landing
           // re-lays the plate a moment after it appears, and a field that
@@ -248,6 +300,11 @@ export default function DiscField({
             rollRate[i] =
               (TAU / (ROLL_SLOW * (0.45 + hash(i, 10) * 0.55))) *
               (hash(i, 11) < 0.5 ? -1 : 1);
+            roll0[i] = hash(i, 12) * TAU;
+            wobRateX[i] = 0.06 + hash(i, 6) * 0.05;
+            wobPhaseX[i] = hash(i, 7) * TAU;
+            wobRateY[i] = 0.05 + hash(i, 8) * 0.05;
+            wobPhaseY[i] = hash(i, 9) * TAU;
             turn[i] = i < held.length ? held[i] : hash(i, 1) * TAU;
             order[i] = i;
           }
@@ -275,6 +332,9 @@ export default function DiscField({
           if (!(dt > 0) || dt > 0.25) dt = 0;
           lastT = t;
 
+          // The last disc of the previous frame left its own transform on the
+          // context, so the base one is restated before anything is cleared.
+          ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
           ctx.clearRect(0, 0, w, h);
 
           for (let n = 0; n < count; n++) {
@@ -283,8 +343,8 @@ export default function DiscField({
 
             // Where it hangs, plus a slow wander of its own.
             const dr = r0 * DRIFT;
-            const sx = hx[i] + dr * Math.sin(t * (0.06 + hash(i, 6) * 0.05) + hash(i, 7) * TAU);
-            const sy = hy[i] + dr * 0.6 * Math.cos(t * (0.05 + hash(i, 8) * 0.05) + hash(i, 9) * TAU);
+            const sx = hx[i] + dr * Math.sin(t * wobRateX[i] + wobPhaseX[i]);
+            const sy = hy[i] + dr * 0.6 * Math.cos(t * wobRateY[i] + wobPhaseY[i]);
 
             /* The angle, which is the whole plate — INTEGRATED, so it only
                ever goes one way. The wave is in the rate: over a crest a disc
@@ -294,7 +354,7 @@ export default function DiscField({
             const wave = interference(sx, sy, ax, ay, bx, by, k, t);
             turn[i] += dt * spin[i] * (1 + WAVE_GAIN * (wave * 2 - 1));
             const tilt = turn[i];
-            const roll = hash(i, 12) * TAU + t * rollRate[i];
+            const roll = roll0[i] + t * rollRate[i];
 
             // Signed, both of them. The sign of the cosine is which FACE is
             // towards the reader and the sign of the sine is which side of the
@@ -308,34 +368,29 @@ export default function DiscField({
             const sn = Math.sin(roll);
 
             /* ── Out of the way ────────────────────────────────────────
-               Sampled off the mask, on the disc's own outline, because a mark
-               this big cannot be judged by its centre. First it tries to stay
-               its size and turn edge on; only if a bare edge still will not fit
-               does it draw smaller; and if there is no room at all it does not
-               draw. Nothing is cut, so nothing wears a rim of half-marks. */
-            const fits = (close: number, shrink: number) => {
-              if (!cut) return true;
-              const r = r0 * shrink;
-              const co = cosT * close;
-              const minor = r * co + (r * THICK * Math.sqrt(1 - co * co)) / 2;
-              if (cut.dodged(sx, sy)) return false;
-              for (let g = 0; g < 2; g++) {
-                const f = g === 0 ? 1 : 0.58;
-                for (let a = 0; a < 8; a++) {
-                  const th = (a / 8) * TAU;
-                  const lx = Math.cos(th) * minor * f;
-                  const ly = Math.sin(th) * r * f;
-                  if (cut.dodged(sx + lx * cs - ly * sn, sy + lx * sn + ly * cs)) {
-                    return false;
-                  }
-                }
-              }
-              return true;
-            };
+               First it tries to stay its size and turn edge on; only if a bare
+               edge still will not fit does it draw smaller; and if there is no
+               room at all it does not draw. Nothing is cut, so nothing wears a
+               rim of half-marks.
+
+               Most discs are nowhere near the line, and one box test throws
+               them out before any of the seventeen point lookups: the major
+               axis plus half the slab's depth bounds the silhouette exactly,
+               whatever angle the disc is at. */
+            tx = sx;
+            ty = sy;
+            tr = r0;
+            tcos = cosT;
+            tcs = cs;
+            tsn = sn;
+            const bound = r0 * (1 + THICK / 2);
+            const near =
+              cut !== null &&
+              cut.mayTouch(sx - bound, sy - bound, sx + bound, sy + bound);
 
             let close = 1;
             let shrink = 1;
-            if (!fits(1, 1)) {
+            if (near && !fits(1, 1)) {
               // Both of these shrink the region tested, so both are monotone
               // and a plain bisection finds the edge of the room available.
               let lo = 0;
@@ -375,9 +430,23 @@ export default function DiscField({
             const shade = stock[ink[i]][band[i]];
             const litFace = shade.face[Math.round((AMBIENT + (1 - AMBIENT) * co) * STEPS)];
 
-            ctx.save();
-            ctx.translate(sx, sy);
-            ctx.rotate(roll);
+            /* The disc's own frame, set outright. save/restore around every
+               disc cost as much per frame as the whole of the rest of this
+               loop, and nothing in here needs the state stack: the fill and
+               stroke styles are set per disc anyway.
+
+               NOT bit-identical to pushing translate/rotate onto the stack.
+               Composing the matrix here rounds differently from the way the
+               canvas composes it internally, which lands 1341 subpixels of a
+               2720×614 plate up to 9/255 away from where they were — the
+               outermost ring of antialiasing on some curves, and nothing else.
+               Measured against a control that renders bit-for-bit identically
+               twice, so that figure is the change and not the renderer. */
+            ctx.setTransform(
+              ratio * cs, ratio * sn,
+              -ratio * sn, ratio * cs,
+              ratio * sx, ratio * sy,
+            );
 
             if (ring[i]) {
               // An open one: no rim to speak of, just the wall of the ring,
@@ -407,9 +476,10 @@ export default function DiscField({
               ctx.fillStyle = litFace;
               ctx.fill();
             }
-            ctx.restore();
           }
 
+          // Back to the plate's own frame for the type.
+          ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
           // Nothing to erase: the clearing was made by turning away from it.
           cut?.paint(ctx);
         },

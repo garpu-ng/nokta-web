@@ -97,18 +97,6 @@ textarea {
   color: var(--paper);
 }
 
-/* ── The plotted pointer ─────────────────────────────────────────────
-   components/plotter/DotCursor.tsx puts this class on <body> — and it is the
-   ONLY thing that ever does. No stylesheet hides the native cursor on its own,
-   so if the script never runs, throws, or is switched off, the pointer is
-   simply the browser's own. The universal selector is needed because the
-   handles set their own `cursor: pointer`, which would otherwise win over a
-   plain body rule. Removed again the moment the pointer meets a text field. */
-body.nk-cursor-off,
-body.nk-cursor-off * {
-  cursor: none;
-}
-
 /* ── Cross-cutting utilities ─────────────────────────────────────────── */
 
 /* ── Space Mono micro-caption ────────────────────────────────────────

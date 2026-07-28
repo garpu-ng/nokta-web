@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type CSSProperties } from "react";
+import { useState } from "react";
 import Reveal from "@/components/Reveal";
 import type { WorkKind } from "@/lib/works";
 import WorkCard, { type WallItem } from "./WorkCard";
@@ -12,19 +12,16 @@ import styles from "./WorkWall.module.css";
    with the initial state "all", the full wall renders server-side and the
    filter row is simply inert without JS.
 
-   The filter wears the doors. Each chip is a field of its own material's
-   colour with a paper label on it — the same dress the homepage's service
-   doors wear, at chip size, so the door you came through and the chip that
-   holds you there are visibly the same thing. (It has been through two other
-   dresses: the old site's segmented black bar, then a row of hairline chips
-   from the /kontakt form. The hairlines were honest and said nothing.)
+   The filter spends no colour. Six materials would have meant six fields,
+   and a row of six colours is a paint chart — it out-shouted the thirteen
+   works it exists to sort, which is the wrong way round. So the chips are
+   hairline outlines, and the ONE that is pressed is filled creme with ink
+   type on it. Nothing else on the row moves. You can read which filter is on
+   from across the room and there is exactly one thing to read.
 
-   ALLE is the exception and has to be: it is not a material, so it has no
-   colour to wear. Paper field, ink label — the one chip on the row that is
-   the page turned over, which is exactly what "no filter" means.
-
-   Which chip is pressed is a 2px ring, in paper on the colours and in ink on
-   ALLE. Not the accent: a red ring on a red chip is not a ring.
+   The label is set in the headline face, not the mono the row used to wear —
+   the same voice the homepage's service doors use, because these chips lead
+   to the same materials those doors do.
 
    The cards enter through the shared Reveal primitive, staggered left-then-
    right so a row lands as a pair rather than a block.
@@ -42,9 +39,8 @@ export default function WorkWall({
   initialKind = null,
 }: {
   items: WallItem[];
-  /** the kinds present on the wall, in wall order, with their translated
-      stamps and the field colour each one is struck in */
-  kinds: { kind: WorkKind; label: string; field: string }[];
+  /** the kinds present on the wall, in wall order, with their translated stamps */
+  kinds: { kind: WorkKind; label: string }[];
   allLabel: string;
   listLabel: string;
   /** the kind the URL asked for, if it named a real one */
@@ -57,20 +53,17 @@ export default function WorkWall({
       <div className={styles.filter}>
         <button
           type="button"
-          className={`${styles.stamp} ${styles.stampAll}`}
+          className={styles.stamp}
           aria-pressed={active === null}
           onClick={() => setActive(null)}
         >
           {allLabel}
         </button>
-        {kinds.map(({ kind, label, field }) => (
+        {kinds.map(({ kind, label }) => (
           <button
             key={kind}
             type="button"
             className={styles.stamp}
-            // The material's own colour, spent as the field it stands on —
-            // the same custom property the homepage doors are handed.
-            style={{ "--nk-field": field } as CSSProperties}
             aria-pressed={active === kind}
             onClick={() => setActive(kind)}
           >

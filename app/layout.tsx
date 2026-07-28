@@ -6,7 +6,6 @@ import Footer from "@/components/Footer";
 import LanguageToggle from "@/components/LanguageToggle";
 import NavLinks from "@/components/NavLinks";
 import Wordmark from "@/components/Wordmark";
-import DotCursor from "@/components/plotter/DotCursor";
 import { getLocale, getT } from "@/lib/i18n";
 import { socialMetadata } from "@/lib/socialMeta";
 import styles from "./layout.module.css";
@@ -15,9 +14,14 @@ import styles from "./layout.module.css";
    talks to Google Fonts). Exposed as CSS variables consumed by tokens.css. */
 const dmSans = DM_Sans({
   // DM Sans is a variable font — no weight list needed; the variable woff2
-  // covers the full weight range. Italic is a separate file, so list both styles.
+  // covers the full weight range.
+  //
+  // NORMAL ONLY. Italic is a separate 38.9KB file, it was being fetched on
+  // every cold load, and nothing on this site is ever set in it: no <em>, no
+  // <i>, no rule that computes font-style: italic anywhere in the repo. That
+  // was 30% of the site's whole font transfer spent on a face the browser
+  // never matched. Add "italic" back the day italic copy exists.
   subsets: ["latin"],
-  style: ["normal", "italic"],
   display: "swap",
   variable: "--font-dm-sans",
 });
@@ -116,16 +120,14 @@ export default async function RootLayout({
           <Footer />
         </div>
 
-        {/* Chrome that belongs to the sheet rather than to any one page: a
-            decorative overlay, aria-hidden and pointer-events none.
-
-            (A live Schriftfeld — the technical drawing's title block, pinned
-            bottom-right, ticking 1:500 down to 1:1 as you read — used to stand
-            beside it. It was retired: it followed the reader down every page
-            and sat over whatever happened to be in that corner. The per-page
-            title blocks that are part of a layout rather than floating above
-            it stay, on /kontakt and on the print pages.) */}
-        <DotCursor />
+        {/* Nothing floats over the sheet any more. A plotted pointer — an
+            accent dot on a trailing pen, swelling on links and shrinking to a
+            registration mark on the work cards — used to live here, and a live
+            Schriftfeld ticking 1:500 down to 1:1 before it. Both followed the
+            reader down every page and sat over whatever happened to be in that
+            corner. The pointer is the browser's own now. The per-page title
+            blocks, which are part of a layout rather than floating above one,
+            stay. */}
       </body>
     </html>
   );

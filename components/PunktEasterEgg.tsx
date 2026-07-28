@@ -84,6 +84,27 @@ export default function PunktEasterEgg() {
     let tgtCol = PALETTE[0].slice() as [number, number, number];
 
     const N = 120;
+    /* The angles never change and neither does a shape's radius at one of
+       them, so both are tables. The morph target used to be re-derived from
+       trigonometry — three pows and two trig calls for the square alone —
+       120 times a frame, to look up one of three fixed answers. */
+    const ANG = new Float64Array(N);
+    for (let i = 0; i < N; i++) ANG[i] = (i / N) * Math.PI * 2;
+    const SHAPES = [0, 1, 2].map((shape) => {
+      const table = new Float64Array(N);
+      for (let i = 0; i < N; i++) table[i] = shapeRadius(shape, ANG[i]);
+      return table;
+    });
+    const COS = new Float64Array(N);
+    const SIN = new Float64Array(N);
+    for (let i = 0; i < N; i++) {
+      COS[i] = Math.cos(ANG[i]);
+      SIN[i] = Math.sin(ANG[i]);
+    }
+    /* One pair of buffers for the outline instead of 120 fresh two-element
+       arrays every frame. */
+    const px = new Float64Array(N);
+    const py = new Float64Array(N);
     // current (morphing) shape radius factor per point
     const rad = new Array(N).fill(1);
     for (let i = 0; i < N; i++) rad[i] = shapeRadius(0, (i / N) * Math.PI * 2);
@@ -127,11 +148,11 @@ export default function PunktEasterEgg() {
       const dist = Math.hypot(mx - cx, my - cy);
       const pull = Math.min(1, dist / (base * 1.5));
 
-      const pts: [number, number][] = [];
+      const target = SHAPES[ci % SHAPES.length];
       for (let i = 0; i < N; i++) {
-        const a = (i / N) * Math.PI * 2;
+        const a = ANG[i];
         // morph the form radius toward the current shape
-        rad[i] = lerp(rad[i], shapeRadius(ci, a), 0.08);
+        rad[i] = lerp(rad[i], target[i], 0.08);
         let r =
           base *
           rad[i] *
@@ -143,15 +164,15 @@ export default function PunktEasterEgg() {
         let d = Math.cos(a - ang);
         if (d < 0) d = 0;
         r += base * 0.16 * d * d * d * pull;
-        pts.push([cx + ox + Math.cos(a) * r, cy + oy + Math.sin(a) * r]);
+        px[i] = cx + ox + COS[i] * r;
+        py[i] = cy + oy + SIN[i] * r;
       }
 
       ctx.beginPath();
-      ctx.moveTo((pts[0][0] + pts[N - 1][0]) / 2, (pts[0][1] + pts[N - 1][1]) / 2);
+      ctx.moveTo((px[0] + px[N - 1]) / 2, (py[0] + py[N - 1]) / 2);
       for (let i = 0; i < N; i++) {
-        const p = pts[i];
-        const n = pts[(i + 1) % N];
-        ctx.quadraticCurveTo(p[0], p[1], (p[0] + n[0]) / 2, (p[1] + n[1]) / 2);
+        const j = (i + 1) % N;
+        ctx.quadraticCurveTo(px[i], py[i], (px[i] + px[j]) / 2, (py[i] + py[j]) / 2);
       }
       ctx.closePath();
       const rgb = `${Math.round(col[0])},${Math.round(col[1])},${Math.round(col[2])}`;
@@ -189,9 +210,7 @@ export default function PunktEasterEgg() {
   if (!mounted) return null;
 
   return createPortal(
-    // This canvas states its own pointer (a crosshair), so the plotted dot
-    // stands down here — see components/plotter/DotCursor.tsx.
-    <div ref={rootRef} className={styles.root} data-nk-cursor="native">
+    <div ref={rootRef} className={styles.root}>
       <canvas ref={canvasRef} className={styles.canvas} />
       <Link href="/" className={styles.back}>
         ← zurück

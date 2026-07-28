@@ -32,12 +32,16 @@
    centre: the plate samples its own shape and asks about several points, which
    is its business rather than this file's.
 
-   It is not free, though, and the naive version of it is expensive: blitting
-   a full-plate bitmap every frame costs a couple of million pixels of fill on
-   a wide masthead and took a third off the frame rate of three pages. The
-   mask is almost entirely empty — the type is a fifth of the plate at most —
-   so `layout` records the dilated block's bounding box and `punch` composites
-   only that. Same result, a fraction of the fill.
+   THE BOUNDING BOX IS THE WHOLE FILE'S ONE OPTIMISATION, and it is worth
+   twice. The mask is almost entirely empty — the type is a fifth of the plate
+   at most — so `layout` records the dilated block's box, `punch` composites
+   only that (blitting the full plate every frame took a third off the frame
+   rate of three pages), and `layout` reads back only that (reading the full
+   plate cost 6.4MB per fit at 1440×900@2x against 2.1MB for the box, and it
+   grows with the square of both the viewport and the ratio — 22MB at
+   2560×1440@2x, and a second of dragging a window edge is thirty fits).
+   `dodged` therefore indexes a buffer that starts at the box's corner, and
+   has to say so: outside it there is no array rather than a transparent one.
 
    The mask is rebuilt only when the plate is resized or the webfont finally
    lands — never per frame. */
@@ -75,6 +79,11 @@ export type Knockout = {
   /** Is this point inside the type's clear space? For art made of small
       independent marks, which can simply decline to draw one. CSS pixels. */
   dodged: (x: number, y: number) => boolean;
+  /** Could anything inside this box reach the type's clear space? One AABB
+      test against the dilated block, so art that samples several points per
+      mark can throw out the great majority of its marks — the ones nowhere
+      near the line — before asking about any of them. CSS pixels. */
+  mayTouch: (x0: number, y0: number, x1: number, y1: number) => boolean;
   /** Paint the type into the hole. Its closing character takes the accent —
       the same move the hero headline and the footer wordmark make. */
   paint: (ctx: CanvasRenderingContext2D) => void;
@@ -95,15 +104,19 @@ export function makeKnockout(
   let fontSize = 0;
   let step = 0;
   let firstBaseline = 0;
+  /** Width of the closing line minus its last character — where the accent
+      period starts. Fixed the moment the type is fitted, so `paint` does not
+      measure text on every frame of every plate to find out. */
+  let bodyWidth = 0;
   /** The dilated type's bounding box, in DEVICE pixels — the only part of the
       mask that has anything in it, and so the only part worth compositing. */
   let bx = 0;
   let by = 0;
   let bw = 0;
   let bh = 0;
-  /** The mask's alpha, kept for `dodged`. */
+  /** The mask's alpha over the bounding box ONLY, kept for `dodged`. Its
+      origin is (bx, by), not (0, 0). */
   let alpha: Uint8ClampedArray | null = null;
-  let maskW = 0;
   let scale = 1;
 
   /** Greedy wrap at a given size. Languages that do not space their words
@@ -171,6 +184,8 @@ export function makeKnockout(
 
     mc.font = `700 ${fontSize}px ${face}`;
     lineX = lines.map((s) => (width - mc!.measureText(s).width) / 2);
+    const closing = lines[lines.length - 1] ?? "";
+    bodyWidth = mc.measureText(closing.slice(0, -1)).width;
 
     // Stroke-then-fill with a fat round pen dilates every glyph by exactly
     // the margin the art must keep off it.
@@ -198,11 +213,11 @@ export function makeKnockout(
     by = Math.max(0, Math.floor(top * dpr));
     bw = Math.min(off.width - bx, Math.ceil((right - left) * dpr) + 1);
     bh = Math.min(off.height - by, Math.ceil((bottom - top) * dpr) + 1);
-    // Read back once, so `dodged` is an array index rather than a canvas call.
-    alpha = mc.getImageData(0, 0, off.width, off.height).data;
-    maskW = off.width;
-    scale = dpr;
     ready = bw > 0 && bh > 0;
+    // Read back once, so `dodged` is an array index rather than a canvas call
+    // — and only the box, which is the only part of the mask with ink in it.
+    alpha = ready ? mc.getImageData(bx, by, bw, bh).data : null;
+    scale = dpr;
   };
 
   const punch = (ctx: CanvasRenderingContext2D) => {
@@ -219,11 +234,24 @@ export function makeKnockout(
 
   const dodged = (x: number, y: number) => {
     if (!ready || !alpha) return false;
-    const ix = (x * scale) | 0;
-    const iy = (y * scale) | 0;
-    if (ix < 0 || iy < 0 || ix >= maskW) return false;
-    const a = alpha[(iy * maskW + ix) * 4 + 3];
-    return a !== undefined && a > 8;
+    // Into the box's own frame. Every bound is checked here rather than left
+    // to an out-of-range read returning undefined: the buffer no longer spans
+    // the plate, so a point past its edge would land on a real pixel of some
+    // other row instead of on nothing.
+    const ix = ((x * scale) | 0) - bx;
+    const iy = ((y * scale) | 0) - by;
+    if (ix < 0 || iy < 0 || ix >= bw || iy >= bh) return false;
+    return alpha[(iy * bw + ix) * 4 + 3] > 8;
+  };
+
+  const mayTouch = (x0: number, y0: number, x1: number, y1: number) => {
+    if (!ready) return false;
+    return !(
+      x1 * scale < bx ||
+      x0 * scale > bx + bw ||
+      y1 * scale < by ||
+      y0 * scale > by + bh
+    );
   };
 
   const paint = (ctx: CanvasRenderingContext2D) => {
@@ -238,12 +266,12 @@ export function makeKnockout(
       ctx.fillText(body, lineX[i], y);
       if (last && s.length) {
         ctx.fillStyle = accent;
-        ctx.fillText(s.slice(-1), lineX[i] + ctx.measureText(body).width, y);
+        ctx.fillText(s.slice(-1), lineX[i] + bodyWidth, y);
       }
     });
   };
 
-  return { layout, punch, dodged, paint };
+  return { layout, punch, dodged, mayTouch, paint };
 }
 
 /** The face and the two colours every plate reads off its own canvas. */
