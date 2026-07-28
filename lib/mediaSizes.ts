@@ -33,7 +33,7 @@ const SIZES: Record<string, MediaSize> = {
   "/projects/sanktgores/06.jpg": { width: 1125, height: 1500 },
   "/projects/sanktgores/thumb.jpg": { width: 1125, height: 1500 },
   "/projects/teahouse/01.jpg": { width: 3017, height: 1420 },
-  "/projects/teahouse/02.jpg": { width: 1823, height: 1025 },
+  "/projects/teahouse/02.jpg": { width: 1920, height: 1080 },
   "/projects/teahouse/03.jpg": { width: 1920, height: 1080 },
   "/projects/teahouse/04.jpg": { width: 1920, height: 1080 },
   "/projects/teahouse/05.jpg": { width: 1920, height: 1080 },
