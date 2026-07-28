@@ -28,12 +28,7 @@ export default async function KontaktPage() {
 
   return (
     <main>
-      {/* Shallower than the other three, and back to the band this plate was
-          composed as: its two sources sit at a fraction of the plate's HEIGHT,
-          so a shallow frame shows a narrow slice of the interference — clean
-          near-vertical fringes marching across — while a tall one shows the
-          hyperbolic curvature and the fringes bow and clump. */}
-      <PlateHead title={title} ratio={4.44}>
+      <PlateHead title={title}>
         <InterferenceField variant="meeting" motto={title} />
       </PlateHead>
 

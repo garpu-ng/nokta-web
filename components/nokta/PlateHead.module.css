@@ -9,10 +9,15 @@
    plate's fitter sets the title at the largest size the plate's HEIGHT will
    take (see plate/knockout.ts), so a shallow band on a narrow screen would
    quietly demote the page's h1 to a caption. These two numbers therefore move
-   together: trimming the plate trims the title with it, by the same fraction. */
+   together: trimming the plate trims the title with it, by the same fraction.
+
+   One figure for every masthead, and it is the shallow one the meeting raster
+   was composed at: a band shows a narrow slice of the interference, where the
+   fringes march as clean near-vertical columns, and height only reveals the
+   hyperbolic curvature and makes them bow. What suits that plate turns out to
+   suit the register of the whole site — every page opens on the same band. */
 .plate {
-  /* Per page, via PlateHead's `ratio`; 3 when nothing asks for anything. */
-  aspect-ratio: var(--nk-plate-ratio, 3);
+  aspect-ratio: 4.44;
   background: var(--nk-frame);
   border: 1px solid var(--nk-hair);
   overflow: hidden;
