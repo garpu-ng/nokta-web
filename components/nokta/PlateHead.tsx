@@ -12,7 +12,7 @@ import styles from "./PlateHead.module.css";
    without the other stopping making sense.
 
    Which plate is the page's own business — the raster on the homepage and
-   /kontakt, the turning model on /arbeiten, the ruled field on /studio. All
+   /kontakt, the turning discs on /arbeiten, the ruled field on /studio. All
    this owns is the frame they hang in, the one proportion they all hang at,
    and the rule that the real heading survives.
 

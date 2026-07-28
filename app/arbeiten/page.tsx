@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
+import DiscField from "@/components/nokta/DiscField";
 import PlateHead from "@/components/nokta/PlateHead";
-import TurntableField from "@/components/nokta/TurntableField";
 import { toWallItem } from "@/components/work/WorkCard";
 import WorkWall from "@/components/work/WorkWall";
 import { KIND_FIELD } from "@/lib/colors";
@@ -26,8 +26,8 @@ import styles from "./page.module.css";
    before this change may keep landing on the homepage until they clear it —
    the redirect is gone from the code, but not from their browser. */
 
-/* The three materials the wall is made of, handed to the massing model behind
-   it. Module scope so the plate is given one array reference for the life of
+/* The three materials the wall is made of, handed to the plate in the
+   masthead. Module scope so it is given one array reference for the life of
    the page rather than a fresh one on each render. */
 const DOOR_COLOURS = [KIND_FIELD.rendering, KIND_FIELD.editorial, KIND_FIELD.cad];
 
@@ -67,13 +67,12 @@ export default async function ArbeitenPage({
 
   return (
     <main className={styles.page}>
-      {/* A block model on a turntable, with the wall's own name standing in
-          the middle of it. The model does not run behind the word and it is
-          not cut around it: the plots under the line are left as ground and
-          the towers beside it stop short, so the clearing the title stands in
-          is a plaza the city was built around. */}
+      {/* The studio's motto, turned into geometry: a field of discs hanging
+          in depth, each of them a point, a line or a form depending only on
+          how far round it has swung. Nothing is cut around the title — the
+          discs nearest it have turned edge on to make the room. */}
       <PlateHead title={title}>
-        <TurntableField palette={DOOR_COLOURS} motto={title} />
+        <DiscField palette={DOOR_COLOURS} motto={title} />
       </PlateHead>
 
       <div className={styles.head}>
