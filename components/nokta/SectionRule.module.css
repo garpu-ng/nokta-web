@@ -7,57 +7,37 @@
    the same artefact a printer gets from two screens at the wrong pitch, here
    asked for on purpose. */
 
+/* The band runs the full measure; the folio and the label are laid over it.
+   That is what lets the label sit at the TRUE centre of the sheet — with the
+   folio taking a column of its own, centre-of-band and centre-of-page would
+   be two different places, and the eye can tell. */
 .rule {
-  display: flex;
-  align-items: center;
-  gap: 20px;
+  position: relative;
   padding: 0 var(--nk-gutter);
 }
 
-.folio,
-.label {
-  flex-shrink: 0;
-  margin: 0;
-  font-family: var(--mono-font);
-  font-size: 11px;
-  font-weight: 400;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
-}
-
-/* The folio is a mark, and marks on this site are red. */
-.folio {
-  color: var(--accent);
-}
-
-/* An <h2> — the heading rule in base.css would otherwise set it in the display
-   face at browser-default size, so both are overridden above. */
-.label {
-  opacity: 0.62;
-}
-
-/* The band takes whatever the two captions leave it. `overflow: hidden` is
-   load-bearing — the screens run wider than the band so the sliding one never
-   drags an edge into view, and this is what trims them back to the rule. */
+/* `overflow: hidden` is load-bearing — the screens run wider than the band so
+   the sliding one never drags an edge into view, and this is what trims them
+   back to the rule. */
 .band {
   position: relative;
-  flex: 1;
-  height: 40px;
+  display: block;
+  height: 44px;
   overflow: hidden;
   /* A printed rule ends; a texture doesn't. Fading both ends stops the band
      from reading as wallpaper that happens to be cropped by the gutter. */
   -webkit-mask-image: linear-gradient(
     90deg,
     transparent,
-    #000 14%,
-    #000 86%,
+    #000 12%,
+    #000 88%,
     transparent
   );
   mask-image: linear-gradient(
     90deg,
     transparent,
-    #000 14%,
-    #000 86%,
+    #000 12%,
+    #000 88%,
     transparent
   );
 }
@@ -84,7 +64,7 @@
    pitch beat at p₁p₂/|p₁−p₂|, here 210px, and because both rulings stay
    vertical the fringes come out vertical too and travel ALONG the rule. A
    rotation would have worked as well in principle, but its fringes run
-   perpendicular to the lines — horizontal, on a 40px band, at a period far
+   perpendicular to the lines — horizontal, on a 44px band, at a period far
    taller than the band itself, so not one whole fringe would ever be visible.
    Wide short band, vertical fringes. */
 .screenTurned {
@@ -108,20 +88,61 @@
   }
 }
 
+/* ── The knockouts ─────────────────────────────────────────────────
+   Both marks are laid over the band on the page's own ground, with air either
+   side, so the ruling stops at their edge and picks up again after them. */
+
+.folio,
+.label {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0;
+  background: var(--ink);
+  font-family: var(--mono-font);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.folio {
+  left: var(--nk-gutter);
+  /* Air above and below as well as beside: a knockout that hugs the type is a
+     sticker laid on the rule, not a clearing cut into it. */
+  padding: 6px 16px 6px 0;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.11em;
+  /* The folio is a mark, and marks on this site are red. */
+  color: var(--accent);
+}
+
+/* The section's heading. Set at the size a heading is set at rather than the
+   size a caption is: full paper, bold, and generously tracked, because this
+   is the one word that tells a reader which part of the page they are in. */
+.label {
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 6px 22px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--paper);
+}
+
 @media (max-width: 899px) {
-  .rule {
-    gap: 12px;
-  }
   .band {
-    height: 30px;
+    height: 34px;
   }
-  /* The label tightens but never leaves: it is the section's heading, and
-     `display: none` would take it out of the accessibility tree along with
-     the aria-labelledby that points at it. */
-  .folio,
-  .label {
+  /* The label keeps its clearing but gives up tracking and a couple of points
+     before it would collide with the folio on a 320px sheet. */
+  .folio {
     font-size: 10px;
-    letter-spacing: 0.08em;
+    padding: 5px 10px 5px 0;
+  }
+  .label {
+    padding: 5px 12px;
+    font-size: 10px;
+    letter-spacing: 0.1em;
   }
 }
 
