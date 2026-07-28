@@ -8,16 +8,17 @@
    object instead of on a heading and a decoration.
 
    Proportion rather than a fixed height, and a squarer one on a phone: the
-   plate's own fitter sets the title at the largest size its height will take,
+   plate's own fitter sets the title at the largest size its HEIGHT will take,
    so a shallow band on a narrow screen would quietly shrink the page's h1 to
-   a caption. */
+   a caption. Which is also why these two numbers move together — trimming the
+   plate trims the title with it, by the same fraction. */
 .plateHead {
   margin: 0;
   padding: 40px var(--nk-gutter) 0;
 }
 
 .fieldPlate {
-  aspect-ratio: 2.4;
+  aspect-ratio: 3;
   background: var(--nk-frame);
   border: 1px solid var(--nk-hair);
   overflow: hidden;
@@ -137,7 +138,7 @@
     padding-block: 28px 36px;
   }
   .fieldPlate {
-    aspect-ratio: 1.5;
+    aspect-ratio: 1.875;
   }
   .body {
     grid-template-columns: 1fr;

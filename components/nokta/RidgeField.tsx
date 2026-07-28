@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { makeKnockout, plateInk } from "./plate/knockout";
 import { interference, mountPlate, type Plate } from "./plate/mountPlate";
 import styles from "./InterferenceField.module.css";
 
@@ -34,7 +35,14 @@ const LIFT = 17;
 const WAVELENGTH = 260;
 const REFERENCE_W = 1600;
 
-export default function RidgeField({ className }: { className?: string }) {
+export default function RidgeField({
+  motto,
+  className,
+}: {
+  /** A title to knock out of the ruling. Already translated by the caller. */
+  motto?: string;
+  className?: string;
+}) {
   const ref = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -42,17 +50,18 @@ export default function RidgeField({ className }: { className?: string }) {
     if (!canvas) return;
 
     return mountPlate(canvas, (ctx) => {
-      const css = getComputedStyle(canvas);
-      const paper = css.getPropertyValue("--nk-field-ink").trim() || "#e9e0ce";
+      const { paper, accent, face } = plateInk(canvas);
+      const cut = motto ? makeKnockout(motto, face, paper, accent) : null;
 
       let w = 0;
       let h = 0;
       let k = (2 * Math.PI) / WAVELENGTH;
 
       const plate: Plate = {
-        resize(width, height) {
+        resize(width, height, dpr) {
           w = width;
           h = height;
+          cut?.layout(width, height, dpr);
           k = (2 * Math.PI) / (WAVELENGTH * Math.max(0.5, w / REFERENCE_W));
         },
 
@@ -91,12 +100,16 @@ export default function RidgeField({ className }: { className?: string }) {
           // Every rule in one path and one stroke: they share a colour and a
           // weight, so there is nothing to be gained by stroking them apart.
           ctx.stroke(path);
+
+          // The title, cut out of the ruling rather than laid on top of it.
+          cut?.punch(ctx);
+          cut?.paint(ctx);
         },
       };
 
       return plate;
     });
-  }, []);
+  }, [motto]);
 
   return (
     <canvas

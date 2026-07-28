@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import GifVideo from "@/components/GifVideo";
 import Reveal from "@/components/Reveal";
-import Backdrop from "@/components/nokta/Backdrop";
+import PlateHead from "@/components/nokta/PlateHead";
 import RidgeField from "@/components/nokta/RidgeField";
 import ServiceIndex from "@/components/nokta/ServiceIndex";
 import { getT } from "@/lib/i18n";
@@ -22,22 +22,18 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function StudioPage() {
   const t = await getT();
+  const title = `${t("studio.heading")}.`;
   return (
     <main>
-      {/* The quiet member of the family: ruled lines, barely displaced, no
-          colour. A page about three people reading past it all day is not the
-          place for the loud one. */}
-      <Backdrop dim={0.16}>
-        <RidgeField />
-      </Backdrop>
+      {/* The quiet member of the family, no longer behind the page but
+          heading it, with the studio's name cut out of the ruling. */}
+      <PlateHead title={title}>
+        <RidgeField motto={title} />
+      </PlateHead>
 
-      {/* ── Header: the name left, the practice right ─────────────── */}
+      {/* ── Header: the caption left, the practice right ───────────── */}
       <section className={styles.head}>
         <div>
-          <h1 className={styles.heading}>
-            {t("studio.heading")}
-            <span className={styles.period}>.</span>
-          </h1>
           <p className={styles.caption}>{t("studio.caption")}</p>
         </div>
         <div className={styles.headText}>

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Backdrop from "@/components/nokta/Backdrop";
 import MassingField from "@/components/nokta/MassingField";
+import PlateHead from "@/components/nokta/PlateHead";
 import { toWallItem } from "@/components/work/WorkCard";
 import WorkWall from "@/components/work/WorkWall";
 import { KIND_FIELD } from "@/lib/colors";
@@ -63,19 +63,17 @@ export default async function ArbeitenPage({
     return acc;
   }, []);
 
+  const title = `${t("home.wall.label")}.`;
+
   return (
     <main className={styles.page}>
-      {/* The wall stands on a site. Pinned to the viewport rather than to the
-          document, so the thirteen sheets slide over it as you read down. */}
-      <Backdrop dim={0.2}>
-        <MassingField palette={DOOR_COLOURS} />
-      </Backdrop>
+      {/* The wall stands on a site — and says so in the masthead, with its
+          own name cut out of the model. */}
+      <PlateHead title={title}>
+        <MassingField palette={DOOR_COLOURS} motto={title} />
+      </PlateHead>
 
       <div className={styles.head}>
-        <h1 className={styles.heading}>
-          {t("home.wall.label")}
-          <span className={styles.period}>.</span>
-        </h1>
         <p className={styles.count}>
           {t("home.selected.all").replace(
             "{count}",

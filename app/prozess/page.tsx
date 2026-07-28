@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
+import PlateHead from "@/components/nokta/PlateHead";
+import PlotField from "@/components/nokta/PlotField";
 import { getT } from "@/lib/i18n";
 import { getMediaSize } from "@/lib/mediaSizes";
 import styles from "./page.module.css";
@@ -42,16 +44,21 @@ export default async function ProzessPage() {
     image,
   }));
 
+  // Two lines in the markup it replaces; one line in the plate, which wraps
+  // it itself if the plate is too narrow to set it across.
+  const title = `${t("prozess.heading.line1")} ${t("prozess.heading.line2")}.`;
+
   return (
     <main>
-      {/* ── Header ─────────────────────────────────────────────────── */}
+      {/* The page about how the work gets made is headed by the only plate in
+          the family that is not a picture of a state: pens walking the field,
+          dragging finite trails, so the drawing is always in the middle of
+          happening. See components/nokta/PlotField.tsx. */}
+      <PlateHead title={title}>
+        <PlotField motto={title} />
+      </PlateHead>
+
       <section className={styles.head}>
-        <h1 className={styles.heading}>
-          {t("prozess.heading.line1")}
-          <br />
-          {t("prozess.heading.line2")}
-          <span className={styles.period}>.</span>
-        </h1>
         <p className={styles.intro}>{t("prozess.index.intro")}</p>
       </section>
 

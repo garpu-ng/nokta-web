@@ -12,16 +12,6 @@
   border-bottom: 1px solid var(--nk-hair);
 }
 
-.heading {
-  composes: heading from "../styles/page-head.module.css";
-  margin: 0;
-  font-size: clamp(56px, 7.4vw, 104px);
-}
-
-.period {
-  composes: period from "../styles/page-head.module.css";
-}
-
 .intro {
   margin: 0;
   font-size: 19px;
@@ -277,9 +267,6 @@
     min-height: 0;
   }
 
-  .heading {
-    font-size: clamp(36px, 12vw, 56px);
-  }
   .ablaufHead {
     flex-direction: column;
   /* stretch, not flex-start: in a column flex container flex-start sizes a

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Reveal from "@/components/Reveal";
 import InquiryForm from "@/components/kontakt/InquiryForm";
 import InterferenceField from "@/components/nokta/InterferenceField";
+import PlateHead from "@/components/nokta/PlateHead";
 import { getT } from "@/lib/i18n";
 import styles from "./page.module.css";
 
@@ -24,25 +24,13 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function KontaktPage() {
   const t = await getT();
+  const title = `${t("kontakt.heading")}.`;
 
   return (
     <main>
-      {/* ── Header ───────────────────────────────────────────────────
-          The page's title does not sit above the plate, it sits INSIDE it —
-          knocked out of the raster the way the studio's motto is knocked out
-          of the homepage's. So the header of this page is the artwork, and
-          the artwork is the thing that says what the page is. */}
-      <Reveal as="header" className={styles.plateHead} variant="wipe">
-        <div className={styles.fieldPlate}>
-          <InterferenceField variant="meeting" motto={`${t("kontakt.heading")}.`} />
-        </div>
-        {/* The canvas is decoration and hidden from assistive tech, so the
-            page's h1 is still a real h1 — off-screen, not display:none, so it
-            keeps its place in the document outline and in every crawler that
-            has never run a canvas. A page's title is the last thing that may
-            exist only as pixels. */}
-        <h1 className={styles.srOnly}>{t("kontakt.heading")}.</h1>
-      </Reveal>
+      <PlateHead title={title}>
+        <InterferenceField variant="meeting" motto={title} />
+      </PlateHead>
 
       <section className={styles.head}>
         <p className={styles.intro}>{t("kontakt.intro")}</p>

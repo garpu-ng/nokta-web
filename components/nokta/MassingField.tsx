@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { makeKnockout, plateInk } from "./plate/knockout";
 import { interference, mix, mountPlate, type Plate } from "./plate/mountPlate";
 import styles from "./InterferenceField.module.css";
 
@@ -61,10 +62,13 @@ const REFERENCE_W = 1420;
 
 export default function MassingField({
   palette,
+  motto,
   className,
 }: {
   /** Motto colours the risen volumes are drawn in. */
   palette: string[];
+  /** A title to knock out of the model. Already translated by the caller. */
+  motto?: string;
   className?: string;
 }) {
   const ref = useRef<HTMLCanvasElement>(null);
@@ -78,9 +82,8 @@ export default function MassingField({
     const colours = key.split("|");
 
     return mountPlate(canvas, (ctx) => {
-      const css = getComputedStyle(canvas);
-      const paper = css.getPropertyValue("--nk-field-ink").trim() || "#e9e0ce";
-      const ground = css.getPropertyValue("--nk-field-ground").trim() || "#1f1f1c";
+      const { paper, accent, ground, face } = plateInk(canvas);
+      const cut = motto ? makeKnockout(motto, face, paper, accent) : null;
 
       /* Faces are shaded by MIXING, never by alpha. Painter's algorithm only
          occludes if what it paints is opaque; with globalAlpha every block
@@ -105,9 +108,10 @@ export default function MassingField({
       let oy = 0;
 
       const plate: Plate = {
-        resize(width, height) {
+        resize(width, height, dpr) {
           w = width;
           h = height;
+          cut?.layout(width, height, dpr);
           // The model keeps roughly the same number of plots across at every
           // width, so a narrow plate gets a smaller tile rather than four
           // enormous blocks.
@@ -164,7 +168,7 @@ export default function MassingField({
                 lit.push({ x: sx, y: sy, ht, ci });
                 continue;
               }
-              face(top, left, right, sx, sy, ht, tw, td);
+              block(top, left, right, sx, sy, ht, tw, td);
             }
 
             // One row of plain, in three fills.
@@ -180,7 +184,7 @@ export default function MassingField({
               const tp = new Path2D();
               const lf = new Path2D();
               const rt = new Path2D();
-              face(tp, lf, rt, v.x, v.y, v.ht, tw, td);
+              block(tp, lf, rt, v.x, v.y, v.ht, tw, td);
               const sh = lithue[v.ci];
               ctx.fillStyle = sh[0];
               ctx.fill(tp);
@@ -190,12 +194,16 @@ export default function MassingField({
               ctx.fill(rt);
             }
           }
+
+          // The title, cut out of the model rather than laid on top of it.
+          cut?.punch(ctx);
+          cut?.paint(ctx);
         },
       };
 
       return plate;
     });
-  }, [key]);
+  }, [key, motto]);
 
   return (
     <canvas
@@ -208,7 +216,7 @@ export default function MassingField({
 
 /** One block, as its three visible quadrilaterals. The top face is the tile
     lifted by `ht`; the other two are the walls that appear underneath it. */
-function face(
+function block(
   top: Path2D,
   left: Path2D,
   right: Path2D,

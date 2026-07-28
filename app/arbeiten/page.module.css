@@ -16,16 +16,6 @@
   border-bottom: 1px solid var(--nk-hair);
 }
 
-.heading {
-  composes: heading from "../styles/page-head.module.css";
-  margin: 0;
-  font-size: clamp(64px, 8vw, 112px);
-}
-
-.period {
-  composes: period from "../styles/page-head.module.css";
-}
-
 .wall {
   padding: 40px var(--nk-gutter) 0;
 }
@@ -56,7 +46,4 @@
   /* The desktop clamp bottoms out at 64px, which is wider than a phone —
      "Arbeiten" alone runs 430px there. German sets long words; the display
      sizes need their own floor once the screen is narrower than one. */
-  .heading {
-    font-size: clamp(38px, 13vw, 64px);
-  }
 }

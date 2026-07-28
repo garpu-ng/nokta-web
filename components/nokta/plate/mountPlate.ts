@@ -19,17 +19,19 @@
 /** Never rasterise more than this — a retina 4K plate would otherwise ask for
     four times the fill rate it needs to look identical.
 
-    A plate may lower it further by declaring `--nk-field-dpr` on its canvas.
-    That is how a BACKDROP pays for itself: sitting at a fifth opacity behind a
-    page's content, it gains nothing from a retina backing store and costs four
-    times the fill rate to have one. Expressed in CSS rather than as a prop
-    because it is a presentational decision, and because it then applies to
-    whichever plate is hung there without any of them knowing. */
+    A plate may lower it further by declaring `--nk-field-dpr` on its canvas —
+    for anything shown faint, at low opacity or behind other content, where a
+    retina backing store buys nothing and costs four times the fill rate to
+    have. Expressed in CSS rather than as a prop because it is a presentational
+    decision, and because it then applies to whichever plate is placed there
+    without any of them knowing. */
 const MAX_DPR = 2;
 
 export type Plate = {
-  /** Rebuild anything that depends on the box's size. CSS pixels. */
-  resize?: (width: number, height: number) => void;
+  /** Rebuild anything that depends on the box's size. Width and height are
+      CSS pixels; `dpr` is the backing store's ratio, which a plate needs only
+      if it cuts a mask that will be composited at device resolution. */
+  resize?: (width: number, height: number, dpr: number) => void;
   /** Paint one frame. `t` is seconds of plate-time, which excludes any time
       the plate spent paused off-screen. */
   draw: (t: number) => void;
@@ -81,7 +83,7 @@ export function mountPlate(
     // Everything downstream draws in CSS pixels; the transform carries the
     // device ratio, so no renderer ever has to think about it.
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    plate.resize?.(width, height);
+    plate.resize?.(width, height, dpr);
     if (!running) paintOnce();
   };
 
@@ -108,6 +110,16 @@ export function mountPlate(
 
   resize();
 
+  /* A plate that sets type may have measured it in the fallback face. Once the
+     real one is in, measure and cut again. Every plate gets this for free
+     because it arrives as a resize, which is the one thing they all handle. */
+  let dead = false;
+  if (typeof document.fonts?.ready?.then === "function") {
+    document.fonts.ready.then(() => {
+      if (!dead) resize();
+    });
+  }
+
   const ro = new ResizeObserver(resize);
   ro.observe(canvas);
 
@@ -131,6 +143,7 @@ export function mountPlate(
   document.addEventListener("visibilitychange", onVisibility);
 
   return () => {
+    dead = true;
     pause();
     io.disconnect();
     ro.disconnect();

@@ -12,16 +12,6 @@
   border-bottom: 1px solid var(--nk-hair);
 }
 
-.heading {
-  composes: heading from "../styles/page-head.module.css";
-  margin: 0 0 18px;
-  font-size: clamp(64px, 8vw, 112px);
-}
-
-.period {
-  composes: period from "../styles/page-head.module.css";
-}
-
 .caption {
   margin: 0;
   font-family: var(--mono-font);
@@ -244,9 +234,6 @@
     grid-template-columns: 1fr;
     gap: 32px;
     padding-block: 40px 48px;
-  }
-  .heading {
-    font-size: clamp(44px, 15vw, 72px);
   }
 
   .team {
