@@ -102,7 +102,7 @@ export default async function RootLayout({
                   items={[
                     { href: "/", label: t("nav.home") },
                     { href: "/studio", label: t("nav.studio") },
-                    { href: "/prozess", label: t("nav.prozess") },
+                    { href: "/arbeiten", label: t("nav.arbeiten") },
                     { href: "/kontakt", label: t("nav.contact") },
                   ]}
                 />

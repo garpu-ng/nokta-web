@@ -12,9 +12,9 @@ import styles from "./PlateHead.module.css";
    without the other stopping making sense.
 
    Which plate is the page's own business — the raster on the homepage and
-   /kontakt, the massing model on /arbeiten, the ruled field on /studio, the
-   plotter on /prozess. All this owns is the frame they hang in, the one
-   proportion they all hang at, and the rule that the real heading survives.
+   /kontakt, the massing model on /arbeiten, the ruled field on /studio. All
+   this owns is the frame they hang in, the one proportion they all hang at,
+   and the rule that the real heading survives.
 
    THE HEADING IS REAL. The canvas is decoration and hidden from assistive
    tech, so the h1 is rendered as text and hidden VISUALLY instead —

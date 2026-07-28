@@ -11,7 +11,6 @@ const en: Record<string, string> = {
   "meta.home.title": "nokta — buildings, books, prints",
   "meta.studio.title": "Studio · nokta",
   "meta.studio.desc": "The studio behind the work: three people in Düsseldorf. Architectural visualisation, editorial and typesetting, print production and CAD plans.",
-  "meta.prozess.title": "Process · nokta",
   "meta.kontakt.title": "Contact · nokta",
   "meta.arbeiten.title": "Work · nokta",
 
@@ -131,29 +130,7 @@ const en: Record<string, string> = {
   // Placeholder caption on Mert's team card until his portrait clip lands.
   "studio.mert.placeholder": "portrait to follow",
   "studio.cta": "Got a project in the works?",
-  "studio.ctaProcess": "Our process",
   "studio.ctaWrite": "Write us",
-
-  // ── Process ───────────────────────────────────────────────────────
-  "prozess.index.intro": "Four workflows, one per material. The first is written out — architectural visualisation, where most of our projects start.",
-  "prozess.heading.line1": "How we",
-  "prozess.heading.line2": "work",
-  "prozess.step.label": "Step",
-  "prozess.ablauf.title": "Workflow 01 · Architectural visualisation",
-  "prozess.ablauf.note": "four steps · you decide",
-  "prozess.cta": "Does that sound like your project?",
-  "nokta.svc.0.short": "Model, light, image — inside and out, at print resolution.",
-  "nokta.svc.1.short": "Grid, typography, picture editing — from manuscript to prepress.",
-  "nokta.svc.2.short": "Paper, sheet, run — agreed with the printer.",
-  "nokta.svc.3.short": "Floor plans, elevations, sections — as a file or framed in A1.",
-  "prozess.step.1.title": "Concept & References",
-  "prozess.step.1.text": "It starts with your idea. You send us plans, sketches and references, and together we work out how the image should feel. That’s the base, before we get going.",
-  "prozess.step.2.title": "3D modelling",
-  "prozess.step.2.text": "From your material we build a detailed 3D model of the building and its surroundings, with clean proportions and geometry. You get first raw views (“clay renders”) so we can lock in perspective and framing together.",
-  "prozess.step.3.title": "Materials & Light",
-  "prozess.step.3.text": "Now the model comes to life. We apply photorealistic materials and set the light so the mood fits: sometimes the warm light of a summer day, sometimes dusk.",
-  "prozess.step.4.title": "Final & Post-Production",
-  "prozess.step.4.text": "Once you sign off, we render at high resolution. In post we push colours, contrast and details until the image sits and shows your project exactly the way it should.",
 
   // ── Contact ───────────────────────────────────────────────────────
   "kontakt.heading": "Contact",
@@ -219,7 +196,6 @@ const en: Record<string, string> = {
   "footer.col.social": "Social",
   "footer.link.arbeiten": "work",
   "footer.link.studio": "studio",
-  "footer.link.prozess": "process",
   "footer.link.kontakt": "contact",
   "footer.link.impressum": "imprint",
   "footer.link.datenschutz": "privacy",
@@ -234,7 +210,7 @@ const en: Record<string, string> = {
   // ── Header nav / aria ─────────────────────────────────────────────
   "nav.home": "home.",
   "nav.studio": "studio.",
-  "nav.prozess": "process.",
+  "nav.arbeiten": "work.",
   "nav.contact": "contact.",
   "aria.home": "nokta, home",
   "aria.punkt": "The dot",

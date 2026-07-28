@@ -118,10 +118,11 @@ export default async function StudioPage() {
       {/* ── CTA ────────────────────────────────────────────────────── */}
       <section className={styles.cta}>
         <p className={styles.ctaText}>{t("studio.cta")}</p>
+        {/* One button. It used to be two — the second pointed at /prozess,
+            which is retired, and the pair was always an outline standing next
+            to a fill anyway: a real choice offered where there is only one
+            thing to do here. */}
         <div className={styles.ctaLinks}>
-          <Link href="/prozess" className={styles.ctaOutline}>
-            {t("studio.ctaProcess")}
-          </Link>
           <Link href="/kontakt" className={styles.ctaFill}>
             {t("studio.ctaWrite")}
             <span aria-hidden="true"> ↗</span>

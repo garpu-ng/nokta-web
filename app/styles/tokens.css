@@ -6,8 +6,8 @@
    survives as a field for the one section that is still printed the old way
    round (the Leistungen register on /studio), and --accent is the studio's
    red. The red's rule loosened by exactly one notch: it may now be a FIELD
-   (the /prozess CTA band, the /studio → kontakt button, the contact disc),
-   but never more than one such field per page — everywhere else it stays a
+   (the /studio → kontakt button, the contact disc), but never more than one
+   such field per page — everywhere else it stays a
    dot, a folio or a closing period.
    Every module reads these variables rather than hardcoding a colour.
    NOTE: the same three values live in lib/colors.ts for the places that need a

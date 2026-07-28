@@ -6,7 +6,6 @@ const ja: Record<string, string> = {
   "meta.home.title": "nokta — 建物、本、プリント",
   "meta.studio.title": "スタジオ · nokta",
   "meta.studio.desc": "作品の背後にあるスタジオ：デュッセルドルフの三人。建築ビジュアライゼーション、エディトリアルと組版、印刷制作、CAD図面。",
-  "meta.prozess.title": "プロセス · nokta",
   "meta.kontakt.title": "お問い合わせ · nokta",
   "meta.arbeiten.title": "仕事 · nokta",
 
@@ -126,29 +125,7 @@ const ja: Record<string, string> = {
   // Mert のポートレートが揃うまでのプレースホルダー。
   "studio.mert.placeholder": "ポートレート準備中",
   "studio.cta": "進行中のプロジェクトはありますか？",
-  "studio.ctaProcess": "私たちのプロセス",
   "studio.ctaWrite": "ご連絡ください",
-
-  // ── プロセス ──────────────────────────────────────────────────────
-  "prozess.index.intro": "四つの流れ。素材ごとに一つ。書き出したのは最初の一つ — 多くのプロジェクトが始まる建築ビジュアライゼーションです。",
-  "prozess.heading.line1": "私たちの",
-  "prozess.heading.line2": "進め方",
-  "prozess.step.label": "ステップ",
-  "prozess.ablauf.title": "流れ 01 · 建築ビジュアライゼーション",
-  "prozess.ablauf.note": "四つのステップ · 決めるのはあなた",
-  "prozess.cta": "あなたのプロジェクトに聞こえますか？",
-  "nokta.svc.0.short": "モデル、光、画像 — 内も外も、印刷解像度で。",
-  "nokta.svc.1.short": "グリッド、タイポグラフィ、写真編集 — 原稿から印刷前工程まで。",
-  "nokta.svc.2.short": "紙、折り、部数 — 印刷所と詰めます。",
-  "nokta.svc.3.short": "平面、立面、断面 — データまたは A1 額装で。",
-  "prozess.step.1.title": "コンセプト & リファレンス",
-  "prozess.step.1.text": "すべてはあなたのアイデアから始まります。図面、スケッチ、リファレンスを送っていただき、画像がどんな印象であるべきかを一緒に固めます。動き出す前の土台です。",
-  "prozess.step.2.title": "3Dモデリング",
-  "prozess.step.2.text": "資料をもとに、建物と周辺の詳細な3Dモデルを、きれいなプロポーションとジオメトリで作ります。まず粗いプレビュー（「クレイレンダー」）をお渡しし、視点と構図を一緒に決めます。",
-  "prozess.step.3.title": "マテリアル & ライティング",
-  "prozess.step.3.text": "ここでモデルに命が宿ります。フォトリアルなマテリアルを設定し、雰囲気に合うようライティングを組みます。夏の日の暖かい光のときも、夕暮れのときも。",
-  "prozess.step.4.title": "ファイナル & ポストプロダクション",
-  "prozess.step.4.text": "ご承認後、高解像度でレンダリング。ポストで色・コントラスト・ディテールを追い込み、画像が決まり、プロジェクトが思い通りに見えるまで仕上げます。",
 
   // ── お問い合わせ ──────────────────────────────────────────────────
   "kontakt.heading": "お問い合わせ",
@@ -214,7 +191,6 @@ const ja: Record<string, string> = {
   "footer.col.social": "ソーシャル",
   "footer.link.arbeiten": "作品",
   "footer.link.studio": "スタジオ",
-  "footer.link.prozess": "プロセス",
   "footer.link.kontakt": "お問い合わせ",
   "footer.link.impressum": "会社概要",
   "footer.link.datenschutz": "プライバシー",
@@ -229,7 +205,7 @@ const ja: Record<string, string> = {
   // ── ヘッダーナビ / aria ───────────────────────────────────────────
   "nav.home": "ホーム",
   "nav.studio": "スタジオ",
-  "nav.prozess": "プロセス",
+  "nav.arbeiten": "作品",
   "nav.contact": "お問い合わせ",
   "aria.home": "nokta、ホーム",
   "aria.punkt": "点",

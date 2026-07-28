@@ -12,7 +12,6 @@ const de: Record<string, string> = {
   "meta.home.title": "nokta — Gebäude, Bücher, Drucke",
   "meta.studio.title": "Studio · nokta",
   "meta.studio.desc": "Das Studio hinter den Arbeiten: drei Leute in Düsseldorf. Architekturvisualisierung, Editorial und Satz, Druckproduktion und CAD-Pläne.",
-  "meta.prozess.title": "Prozess · nokta",
   "meta.kontakt.title": "Kontakt · nokta",
   "meta.arbeiten.title": "Arbeiten · nokta",
 
@@ -137,29 +136,7 @@ const de: Record<string, string> = {
   // Placeholder caption on Mert's team card until his portrait clip lands.
   "studio.mert.placeholder": "portrait folgt",
   "studio.cta": "Projekt in Planung?",
-  "studio.ctaProcess": "Unser Prozess",
   "studio.ctaWrite": "Schreib uns",
-
-  // ── Prozess ───────────────────────────────────────────────────────
-  "prozess.index.intro": "Vier Abläufe, einer je Material. Ausgeschrieben ist der erste — die Architekturvisualisierung, mit der bei uns die meisten Projekte anfangen.",
-  "prozess.heading.line1": "Wie wir",
-  "prozess.heading.line2": "arbeiten",
-  "prozess.step.label": "Schritt",
-  "prozess.ablauf.title": "Ablauf 01 · Architekturvisualisierung",
-  "prozess.ablauf.note": "vier schritte · du entscheidest",
-  "prozess.cta": "Klingt das nach deinem Projekt?",
-  "nokta.svc.0.short": "Modell, Licht, Bild — innen und außen, in Druckauflösung.",
-  "nokta.svc.1.short": "Raster, Typografie, Bildredaktion — vom Manuskript bis zur Vorstufe.",
-  "nokta.svc.2.short": "Papier, Bogen, Auflage — abgestimmt mit der Druckerei.",
-  "nokta.svc.3.short": "Grundrisse, Ansichten, Schnitte — als Datei oder gerahmt in A1.",
-  "prozess.step.1.title": "Konzept & Referenzen",
-  "prozess.step.1.text": "Am Anfang steht deine Idee. Du schickst uns Pläne, Skizzen und Referenzen, und wir klären gemeinsam, wie das Bild später wirken soll. So steht die Basis, bevor wir loslegen.",
-  "prozess.step.2.title": "3D-Modellierung",
-  "prozess.step.2.text": "Aus deinen Unterlagen bauen wir ein detailliertes 3D-Modell von Gebäude und Umgebung, mit sauberen Proportionen und Geometrien. Du bekommst erste Rohansichten („Clay Renders“), damit wir Perspektive und Bildausschnitt gemeinsam festlegen.",
-  "prozess.step.3.title": "Materialien & Licht",
-  "prozess.step.3.text": "Jetzt kommt Leben ins Modell. Wir legen fotorealistische Materialien an und setzen das Licht so, dass die Stimmung passt: mal das warme Licht eines Sommertags, mal die Dämmerung.",
-  "prozess.step.4.title": "Finale & Post-Production",
-  "prozess.step.4.text": "Nach deiner Freigabe rendern wir in hoher Auflösung. In der Post-Production ziehen wir Farben, Kontraste und Details nach, bis das Bild sitzt und dein Projekt genau so zeigt, wie es soll.",
 
   // ── Kontakt ───────────────────────────────────────────────────────
   "kontakt.heading": "Kontakt",
@@ -225,7 +202,6 @@ const de: Record<string, string> = {
   "footer.col.social": "Social",
   "footer.link.arbeiten": "arbeiten",
   "footer.link.studio": "studio",
-  "footer.link.prozess": "prozess",
   "footer.link.kontakt": "kontakt",
   "footer.link.impressum": "impressum",
   "footer.link.datenschutz": "datenschutz",
@@ -240,7 +216,7 @@ const de: Record<string, string> = {
   // ── Header nav / aria ─────────────────────────────────────────────
   "nav.home": "start.",
   "nav.studio": "studio.",
-  "nav.prozess": "prozess.",
+  "nav.arbeiten": "arbeiten.",
   "nav.contact": "kontakt.",
   "aria.home": "nokta, Startseite",
   "aria.punkt": "Der Punkt",

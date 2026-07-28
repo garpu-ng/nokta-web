@@ -55,10 +55,6 @@ const SIZES: Record<string, MediaSize> = {
   "/line/eiffel.webp": { width: 1600, height: 2355 },
   "/line/empire-state.webp": { width: 1600, height: 2433 },
   "/line/osaka.webp": { width: 1600, height: 2400 },
-  "/prozess/step1.jpg": { width: 1304, height: 1761 },
-  "/prozess/step2.jpg": { width: 1304, height: 1761 },
-  "/prozess/step3.jpg": { width: 1304, height: 1761 },
-  "/prozess/step4.jpg": { width: 1304, height: 1761 },
 };
 
 // Fallback keeps a wrong path from crashing the build; aspect ratio defaults to

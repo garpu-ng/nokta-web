@@ -28,8 +28,9 @@ export default function NavLinks({
     <nav className={styles.nav} aria-label={navLabel}>
       {items.map(({ href, label }) => {
         // "/" matches only itself; every other page also owns its subtree, so
-        // /arbeiten/teahouse still marks "start." — the work IS the homepage's
-        // subject — while /prozess/3d marks "prozess.".
+        // /arbeiten/teahouse marks "arbeiten." — a work is not a page you
+        // arrived at sideways, it is one of the things hanging on the wall the
+        // nav item names.
         const active =
           href === "/" ? pathname === "/" : pathname.startsWith(href);
         return (
