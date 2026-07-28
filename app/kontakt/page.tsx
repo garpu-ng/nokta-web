@@ -43,9 +43,6 @@ export default async function KontaktPage() {
         <div className={styles.fieldPlate}>
           <InterferenceField variant="meeting" />
         </div>
-        <figcaption className={styles.figCaption}>
-          {t("kontakt.figure.caption")}
-        </figcaption>
       </Reveal>
 
       <div className={styles.body}>

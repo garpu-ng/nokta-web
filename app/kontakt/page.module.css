@@ -45,14 +45,6 @@
   overflow: hidden;
 }
 
-.figCaption {
-  margin-top: 14px;
-  font-family: var(--mono-font);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  opacity: 0.5;
-}
-
 .body {
   display: grid;
   grid-template-columns: 1fr 420px;

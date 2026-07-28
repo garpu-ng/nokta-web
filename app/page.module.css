@@ -14,16 +14,15 @@
   padding-top: 104px;
 }
 
-/* ── 01 · The claim and the square ──────────────────────────────────
-   Words left, plate right. The plate is square because the raster is: two
-   sources throwing rings in every direction want a format with no long axis
-   to favour, and a band crops exactly the fringes that make the picture. It
-   sits BESIDE the type, never behind it — a reader should never have to read
-   across something that is moving. */
+/* ── 01 · The claim, then the plate ─────────────────────────────────
+   The claim and its supporting line share the measure; the plate takes the
+   whole of it underneath. The plate is where the studio's own sentence is
+   set, so it is given the width a statement deserves rather than a column
+   beside something else. */
 
 .opening {
   display: grid;
-  grid-template-columns: 1fr 520px;
+  grid-template-columns: 1.3fr 1fr;
   gap: 88px;
   align-items: start;
   padding: 56px var(--nk-gutter) 0;
@@ -31,12 +30,6 @@
 
 .opening > * {
   min-width: 0;
-}
-
-.words {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
 }
 
 .claim {
@@ -58,28 +51,38 @@
   text-wrap: pretty;
 }
 
-/* The plate. A figure in a book: the image, then its caption, set small. */
+/* The plate, across the sheet. */
 .figure {
-  margin: 0;
+  margin: 72px 0 0;
+  padding: 0 var(--nk-gutter);
 }
 
-/* The window the raster is printed in — square, by aspect-ratio rather than
-   by a fixed height, so it stays square at every width the column takes. The
-   ground is the site's empty-frame ink, so the plate is a surface even before
-   the canvas has drawn a frame — and stays one if the script never runs. */
+/* The window the raster is printed in. Proportion rather than a fixed height,
+   so the plate keeps its format at every width — and a squarer one on a phone,
+   where a 2.5:1 band would leave the line no room to be set at any size worth
+   reading. The ground is the site's empty-frame ink, so the plate is a surface
+   even before the canvas has drawn a frame — and stays one if the script never
+   runs at all. */
 .fieldPlate {
-  aspect-ratio: 1;
+  aspect-ratio: 2.5;
   background: var(--nk-frame);
   border: 1px solid var(--nk-hair);
   overflow: hidden;
 }
 
-.figCaption {
-  margin-top: 14px;
-  font-family: var(--mono-font);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  opacity: 0.5;
+/* The plate's line, kept for screen readers only. Off-screen rather than
+   display:none — the latter would take it out of the accessibility tree,
+   which is the one thing this element exists for. */
+.figHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* ── 02 · The three doors ──────────────────────────────────────────
@@ -355,8 +358,7 @@
   }
 
   .opening {
-    grid-template-columns: 1fr 400px;
-    gap: 48px;
+    gap: 56px;
   }
 
   .door {
@@ -389,11 +391,15 @@
 
   .opening {
     grid-template-columns: 1fr;
-    gap: 44px;
+    gap: 28px;
     padding-top: 36px;
   }
-  .words {
-    gap: 22px;
+
+  .figure {
+    margin-top: 48px;
+  }
+  .fieldPlate {
+    aspect-ratio: 1.35;
   }
 
   /* The door becomes a small card: the mark down the left, the folio and the

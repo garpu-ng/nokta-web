@@ -1,12 +1,16 @@
 /* The plate the raster is printed on (see InterferenceField.tsx).
 
-   The canvas is given its two colours here rather than in the script, so the
-   plate's ink is the same token as the page's type and can never drift out of
-   sync with tokens.css. The script reads them back off the computed style. */
+   The canvas is given its colours and its face here rather than in the
+   script, so the plate's ink is the same token as the page's type and its
+   knocked-out line is set in the same face as every heading on the site. The
+   script reads all three back off the computed style. */
 
 .field {
   --nk-field-ink: var(--paper);
   --nk-field-mark: var(--accent);
+  /* Resolves to the next/font family behind --headline-font, which is what
+     ctx.font needs — a canvas cannot read a CSS custom property by name. */
+  --nk-field-face: var(--headline-font);
 
   display: block;
   width: 100%;

@@ -113,29 +113,31 @@ export default async function HomePage() {
       <TeaserVideo lead1={t("home.hero.lead1")} lead2={t("home.hero.lead2")} />
 
       {/* ── 01 · Studio ────────────────────────────────────────────────
-          The claim and the plate, side by side. The plate is a SQUARE — the
-          format the raster was drawn for, and the one that lets the fringes
-          run out in every direction instead of being cropped to a band. Type
-          sits beside it and never on it: the reader is never asked to read
-          across something that is moving. */}
+          The claim, then the plate across the full measure of the sheet, with
+          the studio's line standing inside it. The raster does not run behind
+          the type — it is knocked out around it, the way this page would be
+          printed, so the line is read on clean ground and the field is still
+          moving everywhere else. */}
       <section className={styles.section} aria-labelledby="nk-reg-01">
         <SectionRule id="nk-reg-01" folio="01" label={t("home.reg.studio")} />
 
         <div className={styles.opening}>
-          <div className={styles.words}>
-            <p className={styles.claim}>{t("home.intro.statement")}</p>
-            <p className={styles.body}>{t("home.intro.body")}</p>
-          </div>
-
-          <Reveal as="figure" className={styles.figure} variant="wipe">
-            <div className={styles.fieldPlate}>
-              <InterferenceField />
-            </div>
-            <figcaption className={styles.figCaption}>
-              {t("home.figure.caption")}
-            </figcaption>
-          </Reveal>
+          <p className={styles.claim}>{t("home.intro.statement")}</p>
+          <p className={styles.body}>{t("home.intro.body")}</p>
         </div>
+
+        <Reveal as="figure" className={styles.figure} variant="wipe">
+          <div className={styles.fieldPlate}>
+            <InterferenceField motto={t("home.figure.motto")} />
+          </div>
+          {/* The canvas is decoration and hidden from assistive tech, so the
+              line it carries is also rendered as real text — off-screen, not
+              display:none, so a screen reader still reaches it. Nothing on
+              this site is ever spoken only by a canvas. */}
+          <figcaption className={styles.figHidden}>
+            {t("home.figure.motto")}
+          </figcaption>
+        </Reveal>
       </section>
 
       {/* ── 02 · Leistungen ───────────────────────────────────────────
