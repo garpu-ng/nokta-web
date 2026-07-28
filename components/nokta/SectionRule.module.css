@@ -7,10 +7,10 @@
    the same artefact a printer gets from two screens at the wrong pitch, here
    asked for on purpose. */
 
-/* The band runs the full measure; the folio and the label are laid over it.
-   That is what lets the label sit at the TRUE centre of the sheet — with the
-   folio taking a column of its own, centre-of-band and centre-of-page would
-   be two different places, and the eye can tell. */
+/* The band runs the full measure and the name is laid over it, which is what
+   lets the name sit at the TRUE centre of the sheet: given a column of its
+   own it would be centred in whatever the band had left, and the eye can tell
+   the difference. */
 .rule {
   position: relative;
   padding: 0 var(--nk-gutter);
@@ -88,9 +88,9 @@
   }
 }
 
-/* ── The knockouts ─────────────────────────────────────────────────
-   Both marks are laid over the band on the page's own ground, so the ruling
-   stops at their edge and picks up again after them.
+/* ── The knockout ──────────────────────────────────────────────────
+   The name is laid over the band on the page's own ground, so the ruling
+   stops at its edge and picks up again after it.
 
    Full height of the band, not the height of the type. A clearing sized to
    the text leaves ruling running above and below it, and the eye reads that
@@ -100,7 +100,6 @@
    the full height: everything in this band is either the ruling or the
    absence of it. */
 
-.folio,
 .label {
   position: absolute;
   top: 0;
@@ -112,16 +111,6 @@
   font-family: var(--mono-font);
   text-transform: uppercase;
   white-space: nowrap;
-}
-
-.folio {
-  left: var(--nk-gutter);
-  padding-right: 16px;
-  font-size: 11px;
-  font-weight: 400;
-  letter-spacing: 0.11em;
-  /* The folio is a mark, and marks on this site are red. */
-  color: var(--accent);
 }
 
 /* The section's heading. Set at the size a heading is set at rather than the
@@ -141,12 +130,8 @@
   .band {
     height: 34px;
   }
-  /* The label keeps its clearing but gives up tracking and a couple of points
-     before it would collide with the folio on a 320px sheet. */
-  .folio {
-    font-size: 10px;
-    padding-right: 10px;
-  }
+  /* The name keeps its clearing but gives up tracking and a couple of points
+     so a long one still sits inside the band's faded ends on a 320px sheet. */
   .label {
     padding: 0 12px;
     font-size: 10px;

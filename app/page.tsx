@@ -17,10 +17,10 @@ import styles from "./page.module.css";
 
 /* The homepage, as a numbered register.
 
-   Three sections, each opened by a Registerband that states its folio and its
-   name (components/nokta/SectionRule). That is the whole clarity argument: a
-   reader lands, sees 01 / 02 / 03, and knows both where they are and that the
-   page ends. Nothing on this page is a surprise about its own length.
+   Three sections, each opened by a Registerband that names it
+   (components/nokta/SectionRule). That is the whole clarity argument: the
+   name stands in a break in the rule, so a reader always knows which part of
+   the page they are in and where one part ends.
 
    The motion argument sits inside the same frame. Every animated thing here
    is a drawn abstraction of something the studio actually does — a halftone
@@ -119,7 +119,7 @@ export default async function HomePage() {
           printed, so the line is read on clean ground and the field is still
           moving everywhere else. */}
       <section className={styles.section} aria-labelledby="nk-reg-01">
-        <SectionRule id="nk-reg-01" folio="01" label={t("home.reg.studio")} />
+        <SectionRule id="nk-reg-01" label={t("home.reg.studio")} />
 
         <div className={styles.opening}>
           <p className={styles.claim}>{t("home.intro.statement")}</p>
@@ -145,7 +145,7 @@ export default async function HomePage() {
           wants renderings wants to see renderings, not to read how they are
           made. Each one carries its material's own drawn mark. */}
       <section className={styles.section} aria-labelledby="nk-reg-02">
-        <SectionRule id="nk-reg-02" folio="02" label={t("home.services.aria")} />
+        <SectionRule id="nk-reg-02" label={t("home.services.aria")} />
 
         <div className={styles.doors}>
           {SERVICES.map(({ kind }, i) => (
@@ -183,7 +183,7 @@ export default async function HomePage() {
       {/* ── 03 · Ausgewählte Arbeiten ─────────────────────────────────
           Two spreads and a pair, then the door to all thirteen. */}
       <section className={styles.section} aria-labelledby="nk-reg-03">
-        <SectionRule id="nk-reg-03" folio="03" label={t("home.selected")} />
+        <SectionRule id="nk-reg-03" label={t("home.selected")} />
 
         {/* Spread one — plate left, caption right, both sitting on the same
             baseline so the caption reads as a note in the plate's margin. */}
