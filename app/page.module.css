@@ -14,21 +14,29 @@
   padding-top: 104px;
 }
 
-/* ── 01 · The claim ─────────────────────────────────────────────────
-   Type first, unobstructed. The abstraction goes under it as a plate, never
-   behind it as a ground: a reader should never have to read across something
-   that is moving. */
+/* ── 01 · The claim and the square ──────────────────────────────────
+   Words left, plate right. The plate is square because the raster is: two
+   sources throwing rings in every direction want a format with no long axis
+   to favour, and a band crops exactly the fringes that make the picture. It
+   sits BESIDE the type, never behind it — a reader should never have to read
+   across something that is moving. */
 
-.statement {
+.opening {
   display: grid;
-  grid-template-columns: 1.3fr 1fr;
+  grid-template-columns: 1fr 520px;
   gap: 88px;
   align-items: start;
   padding: 56px var(--nk-gutter) 0;
 }
 
-.statement > * {
+.opening > * {
   min-width: 0;
+}
+
+.words {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 
 .claim {
@@ -52,15 +60,15 @@
 
 /* The plate. A figure in a book: the image, then its caption, set small. */
 .figure {
-  margin: 76px 0 0;
-  padding: 0 var(--nk-gutter);
+  margin: 0;
 }
 
-/* The window the raster is printed in. The ground is the site's empty-frame
-   ink, so the plate is a surface even before the canvas has drawn a frame —
-   and stays one if the script never runs at all. */
+/* The window the raster is printed in — square, by aspect-ratio rather than
+   by a fixed height, so it stays square at every width the column takes. The
+   ground is the site's empty-frame ink, so the plate is a surface even before
+   the canvas has drawn a frame — and stays one if the script never runs. */
 .fieldPlate {
-  height: clamp(260px, 32vw, 440px);
+  aspect-ratio: 1;
   background: var(--nk-frame);
   border: 1px solid var(--nk-hair);
   overflow: hidden;
@@ -346,8 +354,9 @@
     padding-top: 88px;
   }
 
-  .statement {
-    gap: 56px;
+  .opening {
+    grid-template-columns: 1fr 400px;
+    gap: 48px;
   }
 
   .door {
@@ -378,14 +387,13 @@
     padding-top: 64px;
   }
 
-  .statement {
+  .opening {
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 44px;
     padding-top: 36px;
   }
-
-  .figure {
-    margin-top: 48px;
+  .words {
+    gap: 22px;
   }
 
   /* The door becomes a small card: the mark down the left, the folio and the

@@ -19,7 +19,7 @@ const ja: Record<string, string> = {
   "home.intro.statement": "nokta はデュッセルドルフのデザインスタジオです。建築を見えるようにします — 画像として、本として、印刷物として。",
   "home.intro.body": "設計事務所、出版社、文化施設、公共の発注者のために働いています。完成した図面を持って来る人もいれば、ナプキン一枚の人もいます。どちらも始まりです。線になる点、そして形になる線。",
   "home.reg.studio": "スタジオ",
-  "home.figure.caption": "図 01 — 干渉。2つの波源、15度の網点、ひとつの点。",
+  "home.figure.caption": "図 01 — 干渉。2つの波源、ひとつの網点、ひとつの点。",
   "home.services.aria": "サービス",
   "home.svc.0.title": "ビジュアライゼーション",
   "home.svc.0.short": "レンダリング、クレイレンダー、スタディ — コンペ、販売、申請のために。",
@@ -154,6 +154,7 @@ const ja: Record<string, string> = {
   // ── お問い合わせ ──────────────────────────────────────────────────
   "kontakt.heading": "お問い合わせ",
   "kontakt.intro": "進行中のプロジェクトはありますか？ ぜひお聞かせください。",
+  "kontakt.figure.caption": "図 02 — 出会い。2つの波源、重なるところが赤。",
   "kontakt.direct": "直接",
   "kontakt.form.step1": "01 · どんなご用件ですか？",
   "kontakt.form.step2": "02 · どなたですか？",

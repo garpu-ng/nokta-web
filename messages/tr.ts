@@ -19,7 +19,7 @@ const tr: Record<string, string> = {
   "home.intro.statement": "nokta, Düsseldorf’ta bir tasarım stüdyosu. Mimariyi görünür kılıyoruz — görüntü olarak, kitap olarak, baskı olarak.",
   "home.intro.body": "Mimarlık ofisleri, yayınevleri, kültür kurumları ve kamu işverenleri için çalışıyoruz. Kimi elinde bitmiş bir planla geliyor, kimi bir peçeteyle. İkisi de bir başlangıç: çizgiye dönüşen bir nokta, biçime dönüşen bir çizgi.",
   "home.reg.studio": "Stüdyo",
-  "home.figure.caption": "Şek. 01 — Girişim. İki dalga kaynağı, 15° açıyla bir tram, bir nokta.",
+  "home.figure.caption": "Şek. 01 — Girişim. İki kaynak, bir tram, bir nokta.",
   "home.services.aria": "Hizmetler",
   "home.svc.0.title": "Görselleştirme",
   "home.svc.0.short": "Render’lar, clay render’lar ve çalışmalar — yarışma, pazarlama ve ruhsat için.",
@@ -151,6 +151,7 @@ const tr: Record<string, string> = {
   // ── İletişim ──────────────────────────────────────────────────────
   "kontakt.heading": "İletişim",
   "kontakt.intro": "Aklında bir proje mi var? Senden haber almayı çok isteriz.",
+  "kontakt.figure.caption": "Şek. 02 — Karşılaşma. İki kaynak; buluştukları yerde kırmızı.",
   "kontakt.direct": "Doğrudan",
   "kontakt.form.step1": "01 · Konu ne?",
   "kontakt.form.step2": "02 · Kim yazıyor?",

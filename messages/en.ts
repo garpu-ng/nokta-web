@@ -24,7 +24,7 @@ const en: Record<string, string> = {
   "home.intro.statement": "nokta is a design studio in Düsseldorf. We make architecture visible — as an image, as a book, as a print.",
   "home.intro.body": "We work for architecture practices, publishers, cultural institutions and public clients. Some arrive with a finished plan, others with a napkin. Both are a beginning: a point that becomes a line, and a line that becomes a form.",
   "home.reg.studio": "Studio",
-  "home.figure.caption": "Fig. 01 — Interference. Two wave sources, one raster at 15°, one point.",
+  "home.figure.caption": "Fig. 01 — Interference. Two sources, one raster, one point.",
   "home.services.aria": "Services",
   "home.svc.0.title": "Visualisation",
   "home.svc.0.short": "Renderings, clay renders and studies — for competitions, marketing and planning permission.",
@@ -159,6 +159,7 @@ const en: Record<string, string> = {
   // ── Contact ───────────────────────────────────────────────────────
   "kontakt.heading": "Contact",
   "kontakt.intro": "Got a project in the works? We’d love to hear from you.",
+  "kontakt.figure.caption": "Fig. 02 — Encounter. Two sources; red where they meet.",
   "kontakt.direct": "Direct",
   "kontakt.form.step1": "01 · What is it about?",
   "kontakt.form.step2": "02 · Who is writing?",

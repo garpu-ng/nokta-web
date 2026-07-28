@@ -27,7 +27,7 @@ const de: Record<string, string> = {
   "home.intro.statement": "nokta ist ein Designstudio in Düsseldorf. Wir machen Architektur sichtbar — als Bild, als Buch, als Druck.",
   "home.intro.body": "Wir arbeiten für Architekturbüros, Verlage, Kulturinstitutionen und öffentliche Auftraggeber. Manche kommen mit einem fertigen Plan, andere mit einer Serviette. Beides ist ein Anfang: ein Punkt, aus dem eine Linie wird, aus der eine Form wird.",
   "home.reg.studio": "Studio",
-  "home.figure.caption": "Abb. 01 — Interferenz. Zwei Wellenquellen, ein Raster bei 15°, ein Punkt.",
+  "home.figure.caption": "Abb. 01 — Interferenz. Zwei Quellen, ein Raster, ein Punkt.",
   "home.services.aria": "Leistungen",
   "home.svc.0.title": "Visualisierung",
   "home.svc.0.short": "Renderings, Clay-Renders und Studien — für Wettbewerb, Vermarktung und Genehmigung.",
@@ -165,6 +165,7 @@ const de: Record<string, string> = {
   // ── Kontakt ───────────────────────────────────────────────────────
   "kontakt.heading": "Kontakt",
   "kontakt.intro": "Du hast ein Projekt in Planung? Wir freuen uns, von dir zu hören.",
+  "kontakt.figure.caption": "Abb. 02 — Begegnung. Zwei Quellen; rot, wo sie sich treffen.",
   "kontakt.direct": "Direkt",
   "kontakt.form.step1": "01 · Worum geht es?",
   "kontakt.form.step2": "02 · Wer schreibt?",

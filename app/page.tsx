@@ -113,25 +113,29 @@ export default async function HomePage() {
       <TeaserVideo lead1={t("home.hero.lead1")} lead2={t("home.hero.lead2")} />
 
       {/* ── 01 · Studio ────────────────────────────────────────────────
-          The claim, then the plate. Type first and unobstructed — the reader
-          never has to read across a moving ground — and the abstraction under
-          it, given the full width of the sheet, as a plate in a book is. */}
+          The claim and the plate, side by side. The plate is a SQUARE — the
+          format the raster was drawn for, and the one that lets the fringes
+          run out in every direction instead of being cropped to a band. Type
+          sits beside it and never on it: the reader is never asked to read
+          across something that is moving. */}
       <section className={styles.section} aria-labelledby="nk-reg-01">
         <SectionRule id="nk-reg-01" folio="01" label={t("home.reg.studio")} />
 
-        <div className={styles.statement}>
-          <p className={styles.claim}>{t("home.intro.statement")}</p>
-          <p className={styles.body}>{t("home.intro.body")}</p>
-        </div>
-
-        <Reveal as="figure" className={styles.figure} variant="wipe">
-          <div className={styles.fieldPlate}>
-            <InterferenceField />
+        <div className={styles.opening}>
+          <div className={styles.words}>
+            <p className={styles.claim}>{t("home.intro.statement")}</p>
+            <p className={styles.body}>{t("home.intro.body")}</p>
           </div>
-          <figcaption className={styles.figCaption}>
-            {t("home.figure.caption")}
-          </figcaption>
-        </Reveal>
+
+          <Reveal as="figure" className={styles.figure} variant="wipe">
+            <div className={styles.fieldPlate}>
+              <InterferenceField />
+            </div>
+            <figcaption className={styles.figCaption}>
+              {t("home.figure.caption")}
+            </figcaption>
+          </Reveal>
+        </div>
       </section>
 
       {/* ── 02 · Leistungen ───────────────────────────────────────────

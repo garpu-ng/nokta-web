@@ -1,12 +1,21 @@
 import type { Metadata } from "next";
+import Reveal from "@/components/Reveal";
 import InquiryForm from "@/components/kontakt/InquiryForm";
+import InterferenceField from "@/components/nokta/InterferenceField";
 import { getT } from "@/lib/i18n";
 import styles from "./page.module.css";
 
 /* The page the site is for. Until Kolonnade it offered a mailto link and
    nothing else, which is where the inquiries were going: the form is the
    change, and the rail beside it keeps the direct address for anyone who
-   would rather write from their own mail client. */
+   would rather write from their own mail client.
+
+   Since the plate became the house pattern this page carries one too, in the
+   variant written for it: two sources that approach and part, and the accent
+   struck on every dot where BOTH waves crest. On the page where two parties
+   are meant to find each other, the red is exactly the set of places they
+   agree — and it is dots, so the page's one sanctioned red FIELD is still the
+   rail's disc and nothing here spends it twice. */
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getT();
@@ -26,6 +35,18 @@ export default async function KontaktPage() {
         </h1>
         <p className={styles.intro}>{t("kontakt.intro")}</p>
       </section>
+
+      {/* A band rather than the homepage's square: the same physics in the
+          page's own format, so the two plates read as a series and not as a
+          repeat. */}
+      <Reveal as="figure" className={styles.figure} variant="wipe">
+        <div className={styles.fieldPlate}>
+          <InterferenceField variant="meeting" />
+        </div>
+        <figcaption className={styles.figCaption}>
+          {t("kontakt.figure.caption")}
+        </figcaption>
+      </Reveal>
 
       <div className={styles.body}>
         <InquiryForm
