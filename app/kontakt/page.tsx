@@ -99,8 +99,6 @@ export default async function KontaktPage() {
             <br />
             {t("kontakt.addr.vat")}
           </p>
-          {/* The Schriftfeld voice: where the studio is, at what scale. */}
-          <p className={styles.coords}>51°14′N 6°47′E · /1:500</p>
         </aside>
       </div>
     </main>
