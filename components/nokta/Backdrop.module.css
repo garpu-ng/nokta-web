@@ -1,0 +1,18 @@
+/* Paint for the backdrop (see Backdrop.tsx). */
+
+.backdrop {
+  /* One device pixel per CSS pixel. A backdrop is behind a page at a fifth
+     opacity; a retina backing store would quadruple its fill rate to say
+     exactly the same thing. Read by plate/mountPlate.ts. */
+  --nk-field-dpr: 1;
+
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  /* Never in the way of a click, and never in the way of a scroll. */
+  pointer-events: none;
+}
+
+/* Reduced motion is already honoured inside every plate — each draws exactly
+   one frame and starts no loop. Nothing extra is needed here: a still plate
+   behind a page is a texture, and a texture is not a motion problem. */

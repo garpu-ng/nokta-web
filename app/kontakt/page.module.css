@@ -160,24 +160,3 @@
   }
 }
 
-/* ── The closing plate ─────────────────────────────────────────────
-   The same field as the band at the head of the page, drawn as contour line
-   instead of as halftone dot — see components/nokta/ContourField.tsx. */
-
-.figureFoot {
-  margin: 0;
-  padding: 0 var(--nk-gutter) 96px;
-}
-
-.fieldPlateFoot {
-  height: clamp(220px, 26vw, 360px);
-  background: var(--nk-frame);
-  border: 1px solid var(--nk-hair);
-  overflow: hidden;
-}
-
-@media (max-width: 899px) {
-  .figureFoot {
-    padding-bottom: 64px;
-  }
-}

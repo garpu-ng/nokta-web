@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import Backdrop from "@/components/nokta/Backdrop";
+import MassingField from "@/components/nokta/MassingField";
 import { toWallItem } from "@/components/work/WorkCard";
 import WorkWall from "@/components/work/WorkWall";
+import { KIND_FIELD } from "@/lib/colors";
 import { getLocale, getT } from "@/lib/i18n";
 import { socialMetadata } from "@/lib/socialMeta";
 import { WORKS, isWorkKind, type WorkKind } from "@/lib/works";
@@ -22,6 +25,11 @@ import styles from "./page.module.css";
    Browsers cache permanent redirects hard, so a reader who hit /arbeiten
    before this change may keep landing on the homepage until they clear it —
    the redirect is gone from the code, but not from their browser. */
+
+/* The three materials the wall is made of, handed to the massing model behind
+   it. Module scope so the plate is given one array reference for the life of
+   the page rather than a fresh one on each render. */
+const DOOR_COLOURS = [KIND_FIELD.rendering, KIND_FIELD.editorial, KIND_FIELD.cad];
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getT();
@@ -57,6 +65,12 @@ export default async function ArbeitenPage({
 
   return (
     <main className={styles.page}>
+      {/* The wall stands on a site. Pinned to the viewport rather than to the
+          document, so the thirteen sheets slide over it as you read down. */}
+      <Backdrop dim={0.2}>
+        <MassingField palette={DOOR_COLOURS} />
+      </Backdrop>
+
       <div className={styles.head}>
         <h1 className={styles.heading}>
           {t("home.wall.label")}

@@ -17,7 +17,14 @@
    the dependencies it actually has. */
 
 /** Never rasterise more than this — a retina 4K plate would otherwise ask for
-    four times the fill rate it needs to look identical. */
+    four times the fill rate it needs to look identical.
+
+    A plate may lower it further by declaring `--nk-field-dpr` on its canvas.
+    That is how a BACKDROP pays for itself: sitting at a fifth opacity behind a
+    page's content, it gains nothing from a retina backing store and costs four
+    times the fill rate to have one. Expressed in CSS rather than as a prop
+    because it is a presentational decision, and because it then applies to
+    whichever plate is hung there without any of them knowing. */
 const MAX_DPR = 2;
 
 export type Plate = {
@@ -62,7 +69,11 @@ export function mountPlate(
   const resize = () => {
     const rect = canvas.getBoundingClientRect();
     if (rect.width === 0 || rect.height === 0) return;
-    const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
+    const asked = parseFloat(
+      getComputedStyle(canvas).getPropertyValue("--nk-field-dpr"),
+    );
+    const cap = Number.isFinite(asked) && asked > 0 ? asked : MAX_DPR;
+    const dpr = Math.min(window.devicePixelRatio || 1, cap);
     width = rect.width;
     height = rect.height;
     canvas.width = Math.round(width * dpr);

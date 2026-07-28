@@ -7,7 +7,6 @@ import Reveal from "@/components/Reveal";
 import TeaserVideo from "@/components/TeaserVideo";
 import InterferenceField from "@/components/nokta/InterferenceField";
 import KindMark, { type DoorKind } from "@/components/nokta/KindMark";
-import MassingField from "@/components/nokta/MassingField";
 import SectionRule from "@/components/nokta/SectionRule";
 import { KIND_FIELD } from "@/lib/colors";
 import { getLocale, getT, type Translate } from "@/lib/i18n";
@@ -45,17 +44,6 @@ const SERVICES: { kind: DoorKind }[] = [
   { kind: "rendering" }, // Visualisierung
   { kind: "editorial" }, // Editorial & Satz
   { kind: "cad" }, // Druck & CAD
-];
-
-/* The same three colours the doors wear, in the same order — handed to the
-   massing plate that closes the page so the volumes standing out of its plain
-   are the studio's three materials. Module scope, so the plate is given one
-   array reference for the life of the page rather than a fresh one each
-   render. */
-const DOOR_COLOURS = [
-  KIND_FIELD.rendering,
-  KIND_FIELD.editorial,
-  KIND_FIELD.cad,
 ];
 
 /* The four works the homepage shows, by slug and in the order they appear.
@@ -244,17 +232,6 @@ export default async function HomePage() {
             </Reveal>
           ))}
         </div>
-
-        {/* The section closes on the third reading of the same field: not
-            printed and not drawn this time but BUILT — a massing model, the
-            first drawing a studio that visualises architecture ever makes.
-            The volumes that rise wear the three colours the doors above wear,
-            so the page's own palette is what stands up out of the plain. */}
-        <Reveal as="figure" className={styles.massing} variant="wipe">
-          <div className={styles.massingPlate}>
-            <MassingField palette={DOOR_COLOURS} />
-          </div>
-        </Reveal>
 
         {/* The way on. A full-width row rather than a link in a heading: by the
             time a reader is under the fourth plate, "all thirteen" is the next

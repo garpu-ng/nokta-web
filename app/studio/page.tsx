@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import GifVideo from "@/components/GifVideo";
 import Reveal from "@/components/Reveal";
+import Backdrop from "@/components/nokta/Backdrop";
+import RidgeField from "@/components/nokta/RidgeField";
 import ServiceIndex from "@/components/nokta/ServiceIndex";
 import { getT } from "@/lib/i18n";
 import styles from "./page.module.css";
@@ -22,6 +24,13 @@ export default async function StudioPage() {
   const t = await getT();
   return (
     <main>
+      {/* The quiet member of the family: ruled lines, barely displaced, no
+          colour. A page about three people reading past it all day is not the
+          place for the loud one. */}
+      <Backdrop dim={0.16}>
+        <RidgeField />
+      </Backdrop>
+
       {/* ── Header: the name left, the practice right ─────────────── */}
       <section className={styles.head}>
         <div>
