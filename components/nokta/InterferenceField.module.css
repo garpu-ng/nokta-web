@@ -8,6 +8,9 @@
 .field {
   --nk-field-ink: var(--paper);
   --nk-field-mark: var(--accent);
+  /* What a face is shaded TOWARD — the plate's own ground, so a block's dark
+     side meets the ink it stands on instead of going muddy. */
+  --nk-field-ground: var(--nk-frame);
   /* Resolves to the next/font family behind --headline-font, which is what
      ctx.font needs — a canvas cannot read a CSS custom property by name. */
   --nk-field-face: var(--headline-font);

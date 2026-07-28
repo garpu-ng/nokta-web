@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
 import InquiryForm from "@/components/kontakt/InquiryForm";
+import ContourField from "@/components/nokta/ContourField";
 import InterferenceField from "@/components/nokta/InterferenceField";
+import { KIND_FIELD } from "@/lib/colors";
 import { getT } from "@/lib/i18n";
 import styles from "./page.module.css";
 
@@ -16,6 +18,12 @@ import styles from "./page.module.css";
    are meant to find each other, the red is exactly the set of places they
    agree — and it is dots, so the page's one sanctioned red FIELD is still the
    rail's disc and nothing here spends it twice. */
+
+/* Cobalt, clay and slate for the plan's lifted levels. The red is deliberately
+   absent: this page already spends its one sanctioned red field on the rail's
+   disc, and a contour drawn in it would be a second. Module scope so the plate
+   gets one array reference rather than a fresh one each render. */
+const PLAN_COLOURS = [KIND_FIELD.rendering, KIND_FIELD.study, KIND_FIELD.manual];
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getT();
@@ -98,6 +106,17 @@ export default async function KontaktPage() {
           </p>
         </aside>
       </div>
+
+      {/* The page closes on the same field the band at the top opens with,
+          read as line instead of as dot: every place the two waves reach the
+          same value, joined up — which is a contour, and a sheet of them is a
+          plan. The lifted levels take cobalt, clay and slate; the red stays
+          out of it, because on this page the red is the rail's disc. */}
+      <Reveal as="figure" className={styles.figureFoot} variant="wipe">
+        <div className={styles.fieldPlateFoot}>
+          <ContourField palette={PLAN_COLOURS} />
+        </div>
+      </Reveal>
     </main>
   );
 }

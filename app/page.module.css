@@ -462,3 +462,29 @@
     transform: none;
   }
 }
+
+/* ── The massing plate ──────────────────────────────────────────────
+   Closes section 03. Shallower than the opening plate: an axonometric wants
+   a horizon, and a tall box would put the model's far edge in the middle of
+   the sheet with nothing above it. */
+
+.massing {
+  margin: 72px 0 0;
+  padding: 0 var(--nk-gutter);
+}
+
+.massingPlate {
+  aspect-ratio: 3.4;
+  background: var(--nk-frame);
+  border: 1px solid var(--nk-hair);
+  overflow: hidden;
+}
+
+@media (max-width: 899px) {
+  .massing {
+    margin-top: 48px;
+  }
+  .massingPlate {
+    aspect-ratio: 1.7;
+  }
+}
