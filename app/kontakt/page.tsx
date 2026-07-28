@@ -27,23 +27,26 @@ export default async function KontaktPage() {
 
   return (
     <main>
-      {/* ── Header ─────────────────────────────────────────────────── */}
+      {/* ── Header ───────────────────────────────────────────────────
+          The page's title does not sit above the plate, it sits INSIDE it —
+          knocked out of the raster the way the studio's motto is knocked out
+          of the homepage's. So the header of this page is the artwork, and
+          the artwork is the thing that says what the page is. */}
+      <Reveal as="header" className={styles.plateHead} variant="wipe">
+        <div className={styles.fieldPlate}>
+          <InterferenceField variant="meeting" motto={`${t("kontakt.heading")}.`} />
+        </div>
+        {/* The canvas is decoration and hidden from assistive tech, so the
+            page's h1 is still a real h1 — off-screen, not display:none, so it
+            keeps its place in the document outline and in every crawler that
+            has never run a canvas. A page's title is the last thing that may
+            exist only as pixels. */}
+        <h1 className={styles.srOnly}>{t("kontakt.heading")}.</h1>
+      </Reveal>
+
       <section className={styles.head}>
-        <h1 className={styles.heading}>
-          {t("kontakt.heading")}
-          <span className={styles.period}>.</span>
-        </h1>
         <p className={styles.intro}>{t("kontakt.intro")}</p>
       </section>
-
-      {/* A band rather than the homepage's square: the same physics in the
-          page's own format, so the two plates read as a series and not as a
-          repeat. */}
-      <Reveal as="figure" className={styles.figure} variant="wipe">
-        <div className={styles.fieldPlate}>
-          <InterferenceField variant="meeting" />
-        </div>
-      </Reveal>
 
       <div className={styles.body}>
         <InquiryForm
