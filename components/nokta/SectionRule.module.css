@@ -89,14 +89,24 @@
 }
 
 /* ── The knockouts ─────────────────────────────────────────────────
-   Both marks are laid over the band on the page's own ground, with air either
-   side, so the ruling stops at their edge and picks up again after them. */
+   Both marks are laid over the band on the page's own ground, so the ruling
+   stops at their edge and picks up again after them.
+
+   Full height of the band, not the height of the type. A clearing sized to
+   the text leaves ruling running above and below it, and the eye reads that
+   as a label floating on top of the rule; carried the whole depth of the band
+   it is a BREAK in the rule instead — the ruling genuinely stops, the name
+   stands in the gap, and the ruling resumes. Same reason the creme lines run
+   the full height: everything in this band is either the ruling or the
+   absence of it. */
 
 .folio,
 .label {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
   margin: 0;
   background: var(--ink);
   font-family: var(--mono-font);
@@ -106,9 +116,7 @@
 
 .folio {
   left: var(--nk-gutter);
-  /* Air above and below as well as beside: a knockout that hugs the type is a
-     sticker laid on the rule, not a clearing cut into it. */
-  padding: 6px 16px 6px 0;
+  padding-right: 16px;
   font-size: 11px;
   font-weight: 400;
   letter-spacing: 0.11em;
@@ -121,8 +129,8 @@
    is the one word that tells a reader which part of the page they are in. */
 .label {
   left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 6px 22px;
+  transform: translateX(-50%);
+  padding: 0 22px;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.16em;
@@ -137,10 +145,10 @@
      before it would collide with the folio on a 320px sheet. */
   .folio {
     font-size: 10px;
-    padding: 5px 10px 5px 0;
+    padding-right: 10px;
   }
   .label {
-    padding: 5px 12px;
+    padding: 0 12px;
     font-size: 10px;
     letter-spacing: 0.1em;
   }
