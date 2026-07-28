@@ -134,14 +134,16 @@
 }
 
 /* On a field the folio can no longer be the red — it would vanish into two of
-   the three. Paper, held back, so it still reads as an index number. */
+   the three. Paper, at full strength: the fields in lib/colors.ts were darkened
+   precisely so paper clears 4.5:1 on them (they land at 4.51–4.56), and any
+   opacity at all spends that margin — .75 put an 11px number at 3.2:1. It is
+   held back by its size and its tracking instead, which costs nothing. */
 .doorFolio {
   grid-area: folio;
   align-self: start;
   font-family: var(--mono-font);
   font-size: 11px;
   letter-spacing: 0.08em;
-  opacity: 0.75;
 }
 
 /* The mark's frame. It has to carry a height of its own: the SVG inside is
@@ -162,13 +164,13 @@
   letter-spacing: -0.015em;
 }
 
-/* Full strength, not the .7 the ink rows used: on a colour the same opacity
-   would drop this under the contrast it needs to be read. */
+/* Full strength — and .92 was not it. The field colours are cut so that 16px
+   paper lands at 4.51–4.56:1, which leaves no room at all: at .92 this read
+   4.04–4.14:1 and failed the very threshold the colours were chosen for. */
 .doorText {
   grid-area: text;
   font-size: 16px;
   line-height: 1.5;
-  opacity: 0.92;
   text-wrap: pretty;
 }
 
@@ -234,13 +236,16 @@
   padding-bottom: 20px;
 }
 
+/* The one place on the sheet where the red sets words rather than striking a
+   mark, so it takes the tint cut for type: --accent itself is 3.00:1 on ink,
+   which an 11px line cannot be read at. */
 .kicker {
   margin: 0 0 14px;
   font-family: var(--mono-font);
   font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-on-ink);
 }
 
 .captionTitle {
@@ -324,7 +329,7 @@
 }
 .allWorks:hover {
   padding-inline: 14px;
-  color: var(--accent);
+  color: var(--accent-on-ink);
 }
 
 /* ── Desktop down ──────────────────────────────────────────────────

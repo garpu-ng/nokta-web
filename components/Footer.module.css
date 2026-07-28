@@ -89,7 +89,7 @@
   transition: color 0.2s ease;
 }
 .email:hover {
-  color: var(--accent);
+  color: var(--accent-on-ink);
 }
 
 /* ── Link columns ────────────────────────────────────────────────────
@@ -105,24 +105,32 @@
   gap: 9px;
 }
 
+/* .5 read 4.26:1 on this ink — under AA at 10px. */
 .colH {
   margin-bottom: 5px; /* + the 9px column gap = the 14px the design asks for */
   font-family: var(--mono-font);
   font-size: 10px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  opacity: 0.5;
+  opacity: 0.62;
 }
 
+/* padding-block gives the colophon's links a 44px target on a phone without
+   opening the column up: the negative margin hands the space back to the grid,
+   so the rows sit exactly where they did. */
 .link {
   width: fit-content;
+  padding-block: 11px;
+  margin-block: -11px;
   font-size: 15px;
   color: var(--paper);
   text-decoration: none;
   transition: color 0.2s ease;
 }
+/* --accent is 3.00:1 on ink; the hover took a 15px link under AA precisely
+   when the reader was pointing at it. The type tint holds the same red. */
 .link:hover {
-  color: var(--accent);
+  color: var(--accent-on-ink);
 }
 
 /* ── Bottom line: copyright + disciplines ────────────────────────────── */
@@ -138,7 +146,7 @@
   font-size: 11px;
   letter-spacing: 0.07em;
   text-transform: uppercase;
-  opacity: 0.5;
+  opacity: 0.62;
 }
 
 /* Registration mark centred on the colophon's trim, in the gap between the

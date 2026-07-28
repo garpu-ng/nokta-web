@@ -85,6 +85,12 @@ export default async function RootLayout({
             column capped at --content-max; past that the ink runs on to the
             edges of the screen, so a wide monitor shows a sheet on a ground
             instead of a layout stretched to fill it. */}
+        {/* First in the tab order on every page: without it a keyboard reader
+            walked the wordmark, four nav links and four language buttons again
+            on every single navigation before reaching the page itself. */}
+        <a href="#nk-main" className="nk-skip">
+          {t("aria.skip")}
+        </a>
         <div className={styles.shell}>
           {/* The header is the title block of a sheet, not an app bar: the
               wordmark left, the four pages and the language right. It scrolls

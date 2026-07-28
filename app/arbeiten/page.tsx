@@ -75,30 +75,23 @@ export default async function ArbeitenPage({
         <DiscField palette={DOOR_COLOURS} motto={title} />
       </PlateHead>
 
-      <div className={styles.head}>
-        <p className={styles.count}>
-          {t("home.selected.all").replace(
-            "{count}",
-            String(
-              initialKind
-                ? WORKS.filter((w) => w.kind === initialKind).length
-                : WORKS.length,
-            ),
-          )}
-        </p>
-      </div>
-
-      {/* The wall carries no gutter of its own — it is handed one, the same
-          one every other block on the page stands on. */}
-      <div className={styles.wall}>
-        <WorkWall
-          items={items}
-          kinds={kinds}
-          allLabel={t("work.filter.all")}
-          listLabel={t("home.wall.aria")}
-          initialKind={initialKind}
-        />
-      </div>
+      {/* The header block and the wall are both rendered by WorkWall now: the
+          count is client state (a server-rendered figure went on saying "alle
+          13 arbeiten" while six were shown), and the head has to stay OUTSIDE
+          the wall's gutter or the padding doubles. The page still owns the
+          look — it hands its own three class names down, so the markup and the
+          styling are exactly what they were. */}
+      <WorkWall
+        items={items}
+        kinds={kinds}
+        allLabel={t("work.filter.all")}
+        listLabel={t("home.wall.aria")}
+        initialKind={initialKind}
+        countTemplate={t("home.selected.all")}
+        headClassName={styles.head}
+        countClassName={styles.count}
+        wallClassName={styles.wall}
+      />
     </main>
   );
 }

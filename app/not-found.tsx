@@ -17,7 +17,10 @@ export default async function NotFound() {
         <span className="nk-404__digit" aria-hidden="true">4</span>
       </div>
 
-      <p className="nk-404__title">{t("notfound.title")}</p>
+      {/* The page's h1. It was a <p>, which left the 404 as the one route on
+          the site with no heading at all — the mark above is an aria-label on
+          a role="img", not a heading, so nothing named this page. */}
+      <h1 className="nk-404__title">{t("notfound.title")}</h1>
       <p className="nk-404__text">{t("notfound.text")}</p>
 
       <Link href="/" className="nk-404__cta">

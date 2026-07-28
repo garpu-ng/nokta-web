@@ -159,6 +159,10 @@ const de: Record<string, string> = {
   "kontakt.form.done.body": "Wir lesen mit und melden uns innerhalb von 24 Stunden — mit den richtigen Fragen, nicht mit einem Angebotsformular.",
   "kontakt.form.again": "Noch eine Anfrage",
   "kontakt.form.error": "Das hat nicht geklappt. Schreib uns direkt: hallo@nokta-studio.de",
+  // Die Anfrage kam nie beim Server an — der Fehler liegt im Formular selbst,
+  // also nennt diese Zeile die Studio-Adresse NICHT: es gibt nichts zu umgehen.
+  "kontakt.form.error.fields": "Name, E-Mail und Nachricht fehlen noch — oder die Adresse hat einen Tippfehler.",
+  "kontakt.form.error.busy": "Es kamen gerade sehr viele Anfragen von hier. Bitte in einer Stunde noch einmal.",
   "kontakt.form.nojs": "Das Formular braucht JavaScript. Schreib uns direkt: hallo@nokta-studio.de",
   "kontakt.addr.region": "Nordrhein-Westfalen, Deutschland",
   "kontakt.addr.vat": "USt-IdNr.: auf Anfrage",
@@ -219,6 +223,7 @@ const de: Record<string, string> = {
   "nav.arbeiten": "arbeiten.",
   "nav.contact": "kontakt.",
   "aria.home": "nokta, Startseite",
+  "aria.skip": "Zum Inhalt",
   "aria.punkt": "Der Punkt",
   "aria.mainNav": "Hauptnavigation",
   "aria.language": "Sprache wählen",

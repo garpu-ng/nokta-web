@@ -31,6 +31,15 @@
   --ink: #1a1a18;   /* the page, top to bottom */
   --accent: #b83636; /* the red mark — a dot, and now at most one field a page */
 
+  /* The same red, at the two lightnesses small TYPE needs to be legible in it.
+     #b83636 is 3.00:1 on ink and 4.43:1 on paper: fine for a mark (a dot, a
+     folio, a closing period all clear the 3:1 that non-text and large type
+     ask), and under AA the moment it sets an 11px mono line. Same hue, same
+     saturation, lightness moved until each ground clears 4.5:1 —
+     4.64:1 on ink, 4.85:1 on paper. Use --accent for marks, these for words. */
+  --accent-on-ink: #d16161;
+  --accent-on-paper: #ae3232;
+
   /* Every hairline rule drawn on the ink ground. Its counterpart on paper is
      rgba(26,26,24,.22) — same weight, other way round. */
   --nk-hair: rgba(233, 224, 206, 0.22);

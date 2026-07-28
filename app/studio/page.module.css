@@ -121,12 +121,14 @@
   height: 1px;
 }
 
+/* .5 read 4.17:1 on the empty-frame ink — under AA at 11px, and this label is
+   the only thing telling the reader the frame is waiting rather than broken. */
 .placeholderLabel {
   font-family: var(--mono-font);
   font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  opacity: 0.5;
+  opacity: 0.66;
 }
 
 /* Name left, role right, over the hairline that closes the plate. */

@@ -72,7 +72,7 @@
   transition: color 0.18s ease;
 }
 .railMail:hover {
-  color: var(--accent);
+  color: var(--accent-on-ink);
 }
 
 .hair {

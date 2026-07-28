@@ -52,7 +52,12 @@ export default function TeaserVideo({
         muted
         loop
         playsInline
-        preload="auto"
+        /* metadata, not auto: the clip is 2.25 MB and sits above the fold, so
+           `auto` pulled the whole file down on every cold homepage load before
+           the reader had done anything. The poster (24 KB) is what carries the
+           band until the video is actually wanted, and under
+           prefers-reduced-motion the file is never fetched at all. */
+        preload="metadata"
         aria-hidden="true"
       >
         <source src="/noktateaser.mp4?v=29" type="video/mp4" />

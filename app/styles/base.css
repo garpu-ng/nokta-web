@@ -88,6 +88,35 @@ textarea {
   outline-offset: 2px;
 }
 
+/* The skip link. Off-screen until it is tabbed to, then it sits down on the
+   masthead as a plain paper chip — the first stop in the tab order on every
+   page, so a keyboard reader is not walked through the whole nav and the
+   language row before reaching the page. Nothing else on the site moves. */
+.nk-skip {
+  position: absolute;
+  left: var(--nk-gutter);
+  top: 0;
+  z-index: 50;
+  transform: translateY(-120%);
+  padding: 12px 18px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--mono-font);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: transform 0.16s ease;
+}
+.nk-skip:focus-visible {
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .nk-skip {
+    transition: none;
+  }
+}
+
 /* Selecting text is the one moment the reader marks up the sheet, so it is
    marked in the studio's own ink: the accent as the field, paper as the type.
    The single place the red is allowed to be a surface besides the contact

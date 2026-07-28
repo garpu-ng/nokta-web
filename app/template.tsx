@@ -9,7 +9,12 @@ export default function Template({ children }: { children: React.ReactNode }) {
   return (
     <>
       <PressRoller />
-      <div className="nk-page-fade">{children}</div>
+      {/* id: the skip link's target. It goes on this box rather than a wrapper
+          of its own — .nk-page-fade is the flex child .shell sizes, and another
+          div between them would take the flex sizing away from it. */}
+      <div className="nk-page-fade" id="nk-main">
+        {children}
+      </div>
     </>
   );
 }

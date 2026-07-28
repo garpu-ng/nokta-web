@@ -87,14 +87,19 @@ function annotation(work: Work, t: Translate): string {
   return `${t(`work.kind.${work.kind}`)} · ${work.year}`;
 }
 
-/** A work's plate, sized from its real thumbnail so nothing shifts on load. */
-function Plate({ work, sizes }: { work: Work; sizes: string }) {
+/** A work's plate, sized from its real thumbnail so nothing shifts on load.
+
+    `labelled` says whether the link around this plate already carries the
+    work's title as text. On the pair it does, so the alt is dropped rather
+    than announced twice; on a spread the plate is alone inside its link, and
+    without the alt that link would have no accessible name at all. */
+function Plate({ work, sizes, labelled = false }: { work: Work; sizes: string; labelled?: boolean }) {
   const { width, height } = getMediaSize(work.thumb);
   return (
     <span className={styles.plate}>
       <Image
         src={work.thumb}
-        alt={work.title}
+        alt={labelled ? "" : work.title}
         width={width}
         height={height}
         sizes={sizes}
@@ -223,7 +228,7 @@ export default async function HomePage() {
           {pair.map((work, i) => (
             <Reveal key={work.slug} delay={i * 90}>
               <Link href={`/arbeiten/${work.slug}`} className={styles.pairItem}>
-                <Plate work={work} sizes="(max-width: 899px) 100vw, 46vw" />
+                <Plate work={work} sizes="(max-width: 899px) 100vw, 46vw" labelled />
                 <span className={styles.pairRow}>
                   <span>{work.title}</span>
                   <span className={styles.pairMeta}>{annotation(work, t)}</span>

@@ -69,6 +69,8 @@ export default async function KontaktPage() {
             doneBody: t("kontakt.form.done.body"),
             again: t("kontakt.form.again"),
             error: t("kontakt.form.error"),
+            errorFields: t("kontakt.form.error.fields"),
+            errorBusy: t("kontakt.form.error.busy"),
             fallback: t("kontakt.form.nojs"),
           }}
         />

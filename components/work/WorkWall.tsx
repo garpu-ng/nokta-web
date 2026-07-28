@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Reveal from "@/components/Reveal";
 import type { WorkKind } from "@/lib/works";
 import WorkCard, { type WallItem } from "./WorkCard";
@@ -37,6 +37,10 @@ export default function WorkWall({
   allLabel,
   listLabel,
   initialKind = null,
+  countTemplate,
+  headClassName,
+  countClassName,
+  wallClassName,
 }: {
   items: WallItem[];
   /** the kinds present on the wall, in wall order, with their translated stamps */
@@ -45,53 +49,90 @@ export default function WorkWall({
   listLabel: string;
   /** the kind the URL asked for, if it named a real one */
   initialKind?: WorkKind | null;
+  /** the count line's template, carrying a literal {count} */
+  countTemplate: string;
+  /** the page's own class names — the wall renders the header block so the
+      count can follow the filter, but the page keeps owning how it looks */
+  headClassName: string;
+  countClassName: string;
+  wallClassName: string;
 }) {
   const [active, setActive] = useState<WorkKind | null>(initialKind);
 
+  const shown = active ? items.filter((i) => i.kind === active).length : items.length;
+  const count = countTemplate.replace("{count}", String(shown));
+
+  /* Keep the URL honest about what is on screen, so a narrowed wall can be
+     copied out of the address bar — the server already reads ?kind= and
+     renders the same set. replaceState rather than the router: this is the
+     same page with a different filter, and a real navigation would refetch it
+     and cost a flash. History is replaced, not pushed, so the back button
+     still leaves the wall instead of walking back through filter states. */
+  const first = useRef(true);
+  useEffect(() => {
+    if (first.current) {
+      first.current = false;
+      return;
+    }
+    const url = active ? `?kind=${active}` : window.location.pathname;
+    window.history.replaceState(null, "", url);
+  }, [active]);
+
   return (
     <>
-      <div className={styles.filter}>
-        <button
-          type="button"
-          className={styles.stamp}
-          aria-pressed={active === null}
-          onClick={() => setActive(null)}
-        >
-          {allLabel}
-        </button>
-        {kinds.map(({ kind, label }) => (
-          <button
-            key={kind}
-            type="button"
-            className={styles.stamp}
-            aria-pressed={active === kind}
-            onClick={() => setActive(kind)}
-          >
-            {label}
-          </button>
-        ))}
+      <div className={headClassName}>
+        {/* aria-live: the filter is the one control on this page that changes
+            the page rather than navigating, and the count is the only thing
+            that reports what it did. */}
+        <p className={countClassName} aria-live="polite">
+          {count}
+        </p>
       </div>
 
-      <ul
-        className={`${styles.grid}${active ? ` ${styles.aligned}` : ""}`}
-        aria-label={listLabel}
-      >
-        {items.map((item, i) => (
-          <li
-            key={item.slug}
-            className={`${styles.cell} ${styles[`span${item.span}`]}${
-              active && item.kind !== active ? ` ${styles.filteredOut}` : ""
-            }`}
-            style={{ "--lift": `${item.lift}rem` } as React.CSSProperties}
+      <div className={wallClassName}>
+        <div className={styles.filter}>
+          <button
+            type="button"
+            className={styles.stamp}
+            aria-pressed={active === null}
+            onClick={() => setActive(null)}
           >
-            {/* The wall reads two-up, so the stagger alternates: the left sheet
-                is pinned, then the right one a beat later. */}
-            <Reveal delay={(i % 2) * 90}>
-              <WorkCard item={item} />
-            </Reveal>
-          </li>
-        ))}
-      </ul>
+            {allLabel}
+          </button>
+          {kinds.map(({ kind, label }) => (
+            <button
+              key={kind}
+              type="button"
+              className={styles.stamp}
+              aria-pressed={active === kind}
+              onClick={() => setActive(kind)}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+
+        <ul
+          className={`${styles.grid}${active ? ` ${styles.aligned}` : ""}`}
+          aria-label={listLabel}
+        >
+          {items.map((item, i) => (
+            <li
+              key={item.slug}
+              className={`${styles.cell} ${styles[`span${item.span}`]}${
+                active && item.kind !== active ? ` ${styles.filteredOut}` : ""
+              }`}
+              style={{ "--lift": `${item.lift}rem` } as React.CSSProperties}
+            >
+              {/* The wall reads two-up, so the stagger alternates: the left
+                  sheet is pinned, then the right one a beat later. */}
+              <Reveal delay={(i % 2) * 90}>
+                <WorkCard item={item} />
+              </Reveal>
+            </li>
+          ))}
+        </ul>
+      </div>
     </>
   );
 }

@@ -31,12 +31,14 @@
   text-wrap: balance;
 }
 
+/* Paper on the red field is 4.43:1 at full strength — the whole budget, with
+   nothing to spend on a fade. At .9 this sat at 3.86:1, and it is the line
+   that asks for the project. */
 .body {
   max-width: 560px;
   margin: 24px 0 0;
   font-size: 19px;
   line-height: 1.55;
-  opacity: 0.9;
   text-wrap: pretty;
 }
 

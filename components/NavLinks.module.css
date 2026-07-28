@@ -22,7 +22,7 @@
 
 /* Only an inactive page offers itself; the one you are on stays paper. */
 .link:hover:not([aria-current="page"]) {
-  color: var(--accent);
+  color: var(--accent-on-ink);
 }
 
 .rule {

@@ -125,9 +125,20 @@
   outline-offset: 4px;
 }
 
+/* The real labels are visually hidden (see .hidden), so on this form the
+   placeholder is the ONLY label a sighted reader ever sees — it has to clear
+   4.5:1 like any other body text, not sit at the .4 a decorative hint could.
+   On this ink, paper below ~0.55 fails; .62 lands at 4.9:1. */
 .input::placeholder,
 .textarea::placeholder {
-  color: rgba(233, 224, 206, 0.4);
+  color: rgba(233, 224, 206, 0.62);
+}
+
+/* A field the reader has been sent back to. The rule is the signal — colour
+   alone would not carry it — and it is only ever set after a send attempt. */
+.input[aria-invalid="true"],
+.textarea[aria-invalid="true"] {
+  border-color: var(--accent);
 }
 
 /* ── 03 · the message ──────────────────────────────────────────────── */
@@ -193,12 +204,15 @@
   opacity: 0.7;
 }
 
+/* The 24-hour promise beside the button. It was set at .5, which on this ink
+   is 4.26:1 — under AA for 11px, and this is the one line on the page that
+   answers "what happens after I press send". */
 .sla {
   font-family: var(--mono-font);
   font-size: 11px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  opacity: 0.5;
+  opacity: 0.62;
 }
 
 /* Failure, in the same voice as the success panel: an accent rule and a mono

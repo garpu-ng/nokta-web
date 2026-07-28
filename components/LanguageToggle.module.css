@@ -15,11 +15,16 @@
   background: currentColor;
   opacity: 0.25;
 }
+/* Padding, not nothing: at font-size alone each option was about 15 × 14 px,
+   which fails WCAG 2.5.8 even with the spacing exception and is a coin-toss
+   under a thumb. The block padding gives the row a 44px target without moving
+   the type, since the header lays it out on its own baseline. */
 .opt {
   appearance: none;
   background: none;
   border: none;
-  padding: 0;
+  padding: 15px 6px;
+  margin: -15px 0;
   cursor: pointer;
   font: inherit;
   font-size: 0.72rem;
@@ -28,7 +33,8 @@
   /* Inherit the ground's ink — the toggle sits on the header's ink bar today,
      and follows whatever surface hosts it. */
   color: inherit;
-  opacity: 0.5;
+  /* .5 was 4.26:1 on this ink — under AA for 11.5px. */
+  opacity: 0.62;
   transition: opacity 0.18s ease;
 }
 .opt:hover {

@@ -66,7 +66,11 @@ export default function WorkCard({ item }: { item: WallItem }) {
       <span className={styles.frame}>
         <Image
           src={item.thumb}
-          alt={item.title}
+          /* Empty on purpose: the title is set as real text inside this same
+             link, two lines down. Repeating it here made a screen reader
+             announce every work twice — thirteen times over on the wall. The
+             link still has an accessible name; it comes from the caption. */
+          alt=""
           width={item.width}
           height={item.height}
           sizes="(max-width: 767px) 92vw, (max-width: 1100px) 55vw, 640px"
