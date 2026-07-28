@@ -13,23 +13,31 @@
    erases exactly the dilated glyph shape and nothing else. Finally the type
    is painted into the hole it just made.
 
-   TWO WAYS OUT OF THE WAY, and a plate must pick the right one.
+   THREE WAYS OUT OF THE WAY, and a plate must pick the right one.
 
    `punch` composites, and compositing CUTS. It erases pixels, so any mark
    straddling the mask's edge is sliced in half and the survivors form a hard
    rim following the letterforms — the type ends up wearing a visible contour
-   made of clipped marks. On a massing model or a ruled field that is
-   invisible, because a sliced block edge or a cut rule looks like any other
-   block edge or rule. On a DOT raster it is glaring: half a dot is not a dot,
-   and a hundred half-dots in a row are an outline.
+   made of clipped marks. It is the cheap answer, and it looks it: on anything
+   dense the rim reads as a sticker stuck over the picture rather than as a
+   hole in it. Left for the ruled field, where a cut rule looks like any other
+   rule, and for nothing else.
 
-   `dodged` is for those. It answers whether a point lies in the type's clear
-   space, so a raster can decline to draw the dot at all — whole dots absent,
-   a ragged clearing that follows the lattice instead of the glyph, and no rim.
-   It only works for art that is made of small independent marks whose position
-   is known before it is drawn; a block that may rise into the title from a
-   plot well below it, or a polyline crossing the whole plate, cannot answer
-   the question cheaply, which is what `punch` is for.
+   `dodged` answers whether a point lies in the type's clear space, so a raster
+   can decline to draw the dot at all — whole dots absent, a ragged clearing
+   that follows the lattice instead of the glyph, and no rim. It works for art
+   made of small independent marks whose position is known before it is drawn.
+
+   `headroom` is for art made of things that STAND. A tower does not occupy the
+   point it is planted on; it occupies everything straight up from there, and
+   it cannot know how far up it may go by asking about one pixel. So the mask
+   also records, per screen column, how far the clear space reaches — and a
+   solid asks, once, what its plot is allowed: nothing at all (it is standing
+   in the clearing), as much as it likes (the title is nowhere above it), or a
+   given number of pixels, at which point it stops short and its own roof
+   becomes the edge of the hole. Nothing is ever cut, so nothing has a rim, and
+   the type is not a shape laid over a picture — it is the reason the skyline
+   has the profile it has.
 
    It is not free, though, and the naive version of it is expensive: blitting
    a full-plate bitmap every frame costs a couple of million pixels of fill on
@@ -74,6 +82,12 @@ export type Knockout = {
   /** Is this point inside the type's clear space? For art made of small
       independent marks, which can simply decline to draw one. CSS pixels. */
   dodged: (x: number, y: number) => boolean;
+  /** How far a thing standing on the footprint `x0..x1, y0..y1` may rise
+      before its roof would enter the type's clear space, in CSS pixels
+      measured straight up the screen from `y0`.
+      `Infinity` — the title is not above this plot; build as tall as you like.
+      `-1`       — the plot is IN the clearing; do not draw it at all. */
+  headroom: (x0: number, y0: number, x1: number, y1: number) => number;
   /** Paint the type into the hole. Its closing character takes the accent —
       the same move the hero headline and the footer wordmark make. */
   paint: (ctx: CanvasRenderingContext2D) => void;
@@ -104,6 +118,13 @@ export function makeKnockout(
   let alpha: Uint8ClampedArray | null = null;
   let maskW = 0;
   let scale = 1;
+  /** The clear space collapsed onto its columns: for each device column, the
+      first and last row the type reaches. Two small arrays are all a standing
+      solid needs, and they turn `headroom` into a scan of a few dozen ints
+      instead of a walk up a bitmap. */
+  let colTop: Int32Array | null = null;
+  let colBot: Int32Array | null = null;
+  const NO_ROW = 1 << 28;
 
   /** Greedy wrap at a given size. Languages that do not space their words
       (the Japanese line) are broken by character instead. */
@@ -202,6 +223,20 @@ export function makeKnockout(
     maskW = off.width;
     scale = dpr;
     ready = bw > 0 && bh > 0;
+
+    // Collapse the clear space onto its columns, once. Only the bounding box
+    // is walked, because the rest of the mask is empty by construction.
+    colTop = new Int32Array(maskW).fill(NO_ROW);
+    colBot = new Int32Array(maskW).fill(-1);
+    for (let y = by; y < by + bh; y++) {
+      const row = y * maskW;
+      for (let x = bx; x < bx + bw; x++) {
+        if (alpha[(row + x) * 4 + 3] > 8) {
+          if (colTop[x] === NO_ROW) colTop[x] = y;
+          colBot[x] = y;
+        }
+      }
+    }
   };
 
   const punch = (ctx: CanvasRenderingContext2D) => {
@@ -225,6 +260,34 @@ export function makeKnockout(
     return a !== undefined && a > 8;
   };
 
+  const headroom = (x0: number, y0: number, x1: number, y1: number) => {
+    if (!ready || !colTop || !colBot) return Infinity;
+    let i0 = Math.floor(x0 * scale);
+    let i1 = Math.ceil(x1 * scale);
+    // Nowhere near the type's columns — the overwhelming majority of plots,
+    // and the reason this is cheap.
+    if (i1 < bx || i0 >= bx + bw) return Infinity;
+    if (i0 < bx) i0 = bx;
+    if (i1 > bx + bw - 1) i1 = bx + bw - 1;
+
+    let first = NO_ROW;
+    let last = -1;
+    for (let i = i0; i <= i1; i++) {
+      if (colTop[i] < first) first = colTop[i];
+      if (colBot[i] > last) last = colBot[i];
+    }
+    if (last < 0) return Infinity; // between two letters
+
+    // The clear space is treated as one band per plot rather than as separate
+    // runs. A tower threading the eye of an "e" would be technically legal and
+    // visually a mistake, so the counters stay empty too.
+    const top = y0 * scale;
+    const bottom = y1 * scale;
+    if (bottom < first) return Infinity; // the plot is behind the line
+    if (top <= last) return -1; // …or standing in it
+    return (top - last) / scale;
+  };
+
   const paint = (ctx: CanvasRenderingContext2D) => {
     if (!ready) return;
     ctx.font = `700 ${fontSize}px ${face}`;
@@ -242,7 +305,7 @@ export function makeKnockout(
     });
   };
 
-  return { layout, punch, dodged, paint };
+  return { layout, punch, dodged, headroom, paint };
 }
 
 /** The face and the two colours every plate reads off its own canvas. */

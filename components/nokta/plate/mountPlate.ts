@@ -172,7 +172,14 @@ export function interference(
 /** Blend two #rrggbb colours, `amt` of the way from `hex` toward `toward`.
     Returns an opaque colour: shading by mixing rather than by alpha is what
     lets a painter's-algorithm plate actually occlude, and what lets a line
-    colour be lifted off the ink without going translucent. */
+    colour be lifted off the ink without going translucent.
+
+    Returns #rrggbb, and takes it — so a mix can be mixed again, which is the
+    whole point of having a ramp per colour per depth. It used to hand back
+    `rgb(r,g,b)`, which every caller could draw with and no caller could feed
+    back in: the hex parser read "rgb(116,131,196)" as a colour and came out
+    with near-black, so a plate that lightened a hue and then shaded it drew
+    the entire district in the dark. */
 export function mix(hex: string, toward: string, amt: number): string {
   const parse = (h: string) => {
     const v = h.trim().replace("#", "");
@@ -184,6 +191,10 @@ export function mix(hex: string, toward: string, amt: number): string {
   };
   const a = parse(hex);
   const b = parse(toward);
-  const c = a.map((v, i) => Math.round(v + (b[i] - v) * amt));
-  return `rgb(${c[0]},${c[1]},${c[2]})`;
+  let out = "#";
+  for (let i = 0; i < 3; i++) {
+    const v = Math.max(0, Math.min(255, Math.round(a[i] + (b[i] - a[i]) * amt)));
+    out += v.toString(16).padStart(2, "0");
+  }
+  return out;
 }

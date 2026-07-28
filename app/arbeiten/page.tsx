@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import MassingField from "@/components/nokta/MassingField";
 import PlateHead from "@/components/nokta/PlateHead";
+import TurntableField from "@/components/nokta/TurntableField";
 import { toWallItem } from "@/components/work/WorkCard";
 import WorkWall from "@/components/work/WorkWall";
 import { KIND_FIELD } from "@/lib/colors";
@@ -67,10 +67,13 @@ export default async function ArbeitenPage({
 
   return (
     <main className={styles.page}>
-      {/* The wall stands on a site — and says so in the masthead, with its
-          own name cut out of the model. */}
+      {/* A block model on a turntable, with the wall's own name standing in
+          the middle of it. The model does not run behind the word and it is
+          not cut around it: the plots under the line are left as ground and
+          the towers beside it stop short, so the clearing the title stands in
+          is a plaza the city was built around. */}
       <PlateHead title={title}>
-        <MassingField palette={DOOR_COLOURS} motto={title} />
+        <TurntableField palette={DOOR_COLOURS} motto={title} />
       </PlateHead>
 
       <div className={styles.head}>
