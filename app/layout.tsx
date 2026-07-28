@@ -6,11 +6,9 @@ import Footer from "@/components/Footer";
 import LanguageToggle from "@/components/LanguageToggle";
 import NavLinks from "@/components/NavLinks";
 import Wordmark from "@/components/Wordmark";
-import Schriftfeld from "@/components/print/Schriftfeld";
 import DotCursor from "@/components/plotter/DotCursor";
 import { getLocale, getT } from "@/lib/i18n";
 import { socialMetadata } from "@/lib/socialMeta";
-import { WORK_SLUGS } from "@/lib/works";
 import styles from "./layout.module.css";
 
 /* Fonts are self-hosted at build time via next/font (GDPR: the browser never
@@ -118,11 +116,15 @@ export default async function RootLayout({
           <Footer />
         </div>
 
-        {/* Chrome that belongs to the sheet rather than to any one page. Both
-            are decorative overlays: aria-hidden and pointer-events none. The
-            sheet numbers are handed over as plain slugs so the client bundle
-            never pulls in the work data itself. */}
-        <Schriftfeld locale={locale} sheets={WORK_SLUGS} />
+        {/* Chrome that belongs to the sheet rather than to any one page: a
+            decorative overlay, aria-hidden and pointer-events none.
+
+            (A live Schriftfeld — the technical drawing's title block, pinned
+            bottom-right, ticking 1:500 down to 1:1 as you read — used to stand
+            beside it. It was retired: it followed the reader down every page
+            and sat over whatever happened to be in that corner. The per-page
+            title blocks that are part of a layout rather than floating above
+            it stay, on /kontakt and on the print pages.) */}
         <DotCursor />
       </body>
     </html>

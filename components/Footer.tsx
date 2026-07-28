@@ -24,8 +24,7 @@ export default async function Footer() {
             </Link>
             {/* The wordmark's closing period — the footer's one coloured mark,
                 and the quiet door to the easter egg at /punkt. The asset
-                carries no period of its own, so the dot is set beside it the
-                way the Schriftfeld sets its own. */}
+                carries no period of its own, so the dot is set beside it. */}
             <Link href="/punkt" className={styles.punkt} aria-label={t("aria.punkt")}>
               .
             </Link>
