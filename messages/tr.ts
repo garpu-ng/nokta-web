@@ -19,7 +19,6 @@ const tr: Record<string, string> = {
   "home.intro.statement": "nokta, Düsseldorf’ta bir tasarım stüdyosu. Mimariyi görünür kılıyoruz — görüntü olarak, kitap olarak, baskı olarak.",
   "home.intro.body": "Mimarlık ofisleri, yayınevleri, kültür kurumları ve kamu işverenleri için çalışıyoruz. Kimi elinde bitmiş bir planla geliyor, kimi bir peçeteyle. İkisi de bir başlangıç: çizgiye dönüşen bir nokta, biçime dönüşen bir çizgi.",
   "home.reg.studio": "Stüdyo",
-  "home.figure.motto": "Noktadan çizgiye, çizgiden forma.",
   "home.services.aria": "Hizmetler",
   "home.svc.0.title": "Görselleştirme",
   "home.svc.0.short": "Render’lar, clay render’lar ve çalışmalar — yarışma, pazarlama ve ruhsat için.",
@@ -202,7 +201,9 @@ const tr: Record<string, string> = {
 
   // ── Alt bilgi ─────────────────────────────────────────────────────
   "footer.tag1": "Düsseldorf’ta tasarım stüdyosu.",
-  "footer.tag2": "Noktadan çizgiye, çizgiden forma.",
+  // The studio's line. One string, three places: the footer, the
+  // generated social card, and the homepage plate it is knocked into.
+  "studio.motto": "Noktadan çizgiye, çizgiden forma.",
   "footer.col.seiten": "Sayfalar",
   "footer.col.rechtliches": "Yasal",
   "footer.col.social": "Sosyal",

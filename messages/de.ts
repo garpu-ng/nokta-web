@@ -27,7 +27,6 @@ const de: Record<string, string> = {
   "home.intro.statement": "nokta ist ein Designstudio in Düsseldorf. Wir machen Architektur sichtbar — als Bild, als Buch, als Druck.",
   "home.intro.body": "Wir arbeiten für Architekturbüros, Verlage, Kulturinstitutionen und öffentliche Auftraggeber. Manche kommen mit einem fertigen Plan, andere mit einer Serviette. Beides ist ein Anfang: ein Punkt, aus dem eine Linie wird, aus der eine Form wird.",
   "home.reg.studio": "Studio",
-  "home.figure.motto": "Vom Punkt über die Linie zur Form.",
   "home.services.aria": "Leistungen",
   "home.svc.0.title": "Visualisierung",
   "home.svc.0.short": "Renderings, Clay-Renders und Studien — für Wettbewerb, Vermarktung und Genehmigung.",
@@ -218,7 +217,9 @@ const de: Record<string, string> = {
   // tag1 + tag2 stack in the colophon brand block; tag2 also becomes the root
   // social card caption (app/opengraph-image.tsx, lowercased).
   "footer.tag1": "Designstudio in Düsseldorf.",
-  "footer.tag2": "Vom Punkt zur Linie zur Form.",
+  // The studio's line. One string, three places: the footer, the
+  // generated social card, and the homepage plate it is knocked into.
+  "studio.motto": "Vom Punkt über die Linie zur Form.",
   "footer.col.seiten": "Seiten",
   "footer.col.rechtliches": "Rechtliches",
   "footer.col.social": "Social",

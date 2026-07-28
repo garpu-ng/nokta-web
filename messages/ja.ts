@@ -19,7 +19,6 @@ const ja: Record<string, string> = {
   "home.intro.statement": "nokta はデュッセルドルフのデザインスタジオです。建築を見えるようにします — 画像として、本として、印刷物として。",
   "home.intro.body": "設計事務所、出版社、文化施設、公共の発注者のために働いています。完成した図面を持って来る人もいれば、ナプキン一枚の人もいます。どちらも始まりです。線になる点、そして形になる線。",
   "home.reg.studio": "スタジオ",
-  "home.figure.motto": "点から線を経て形へ。",
   "home.services.aria": "サービス",
   "home.svc.0.title": "ビジュアライゼーション",
   "home.svc.0.short": "レンダリング、クレイレンダー、スタディ — コンペ、販売、申請のために。",
@@ -207,7 +206,9 @@ const ja: Record<string, string> = {
   // tag1 と tag2 は奥付のブランドブロックに積まれる。tag2 はルートの
   // ソーシャルカードのキャプションにもなる（app/opengraph-image.tsx）。
   "footer.tag1": "デュッセルドルフのデザインスタジオ。",
-  "footer.tag2": "点から線へ、線から形へ。",
+  // The studio's line. One string, three places: the footer, the
+  // generated social card, and the homepage plate it is knocked into.
+  "studio.motto": "点から線を経て形へ。",
   "footer.col.seiten": "ページ",
   "footer.col.rechtliches": "法的事項",
   "footer.col.social": "ソーシャル",

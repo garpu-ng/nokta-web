@@ -128,14 +128,14 @@ export default async function HomePage() {
 
         <Reveal as="figure" className={styles.figure} variant="wipe">
           <div className={styles.fieldPlate}>
-            <InterferenceField motto={t("home.figure.motto")} />
+            <InterferenceField motto={t("studio.motto")} />
           </div>
           {/* The canvas is decoration and hidden from assistive tech, so the
               line it carries is also rendered as real text — off-screen, not
               display:none, so a screen reader still reaches it. Nothing on
               this site is ever spoken only by a canvas. */}
           <figcaption className={styles.figHidden}>
-            {t("home.figure.motto")}
+            {t("studio.motto")}
           </figcaption>
         </Reveal>
       </section>

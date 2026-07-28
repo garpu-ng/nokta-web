@@ -21,7 +21,7 @@ export const contentType = OG_CONTENT_TYPE;
 export default function Image() {
   return renderOgImage({
     wordmark: "nokta.",
-    caption: t("footer.tag2").toLowerCase(),
+    caption: t("studio.motto").toLowerCase(),
     background: INK,
   });
 }

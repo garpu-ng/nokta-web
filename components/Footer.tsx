@@ -32,7 +32,7 @@ export default async function Footer() {
           <p className={styles.tag}>
             {t("footer.tag1")}
             <br />
-            {t("footer.tag2")}
+            {t("studio.motto")}
           </p>
           <a href="mailto:hallo@nokta-studio.de" className={styles.email}>
             hallo@nokta-studio.de
