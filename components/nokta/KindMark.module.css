@@ -1,0 +1,125 @@
+/* Paint for the three door marks (see KindMark.tsx).
+
+   Every animation here is slow on purpose. A door is a thing you read, not a
+   thing that performs at you, so the resting state is barely moving — the
+   marks are alive rather than animated. The hover state is where they answer,
+   and even then it is a change of degree, not of behaviour. */
+
+.mark {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  opacity: 0.75;
+  transition: opacity 0.3s ease;
+}
+
+/* The door lifts its mark when it is reached for. The parent sets .nk-door-lit
+   (a global class, because a CSS module can't see its consumer's hover). */
+:global(.nk-door):hover .mark,
+:global(.nk-door):focus-visible .mark {
+  opacity: 1;
+}
+
+/* ── Visualisierung: the contour stack ─────────────────────────────── */
+
+.rings circle {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: nk-ring 5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@keyframes nk-ring {
+  0%,
+  100% {
+    transform: scale(0.86);
+    opacity: 0.45;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 1;
+  }
+}
+
+:global(.nk-door):hover .rings circle {
+  animation-duration: 2.6s;
+}
+
+/* ── Editorial: the column being set ───────────────────────────────── */
+
+.lines line {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: nk-set 4.4s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+/* Each rule is drawn out to its measure and eased back — a line being set,
+   over and over. scaleX only, so nothing here can shift the layout. */
+@keyframes nk-set {
+  0%,
+  100% {
+    transform: scaleX(0.72);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+:global(.nk-door):hover .lines line {
+  animation-duration: 2.2s;
+}
+
+/* ── Druck & CAD: the plan and its section line ────────────────────── */
+
+.grid line {
+  opacity: 0.5;
+}
+
+/* 57 is a shade over the diagonal's true length (√(40²+40²) ≈ 56.6), so the
+   dash clears the line completely at both ends of the sweep. */
+.section {
+  stroke: var(--accent);
+  stroke-dasharray: 57;
+  animation: nk-plot 4.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@keyframes nk-plot {
+  0% {
+    stroke-dashoffset: 57;
+  }
+  45%,
+  55% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -57;
+  }
+}
+
+:global(.nk-door):hover .section {
+  animation-duration: 2.4s;
+}
+
+/* Reduced motion: every mark holds its finished state. The contour stack sits
+   open, the column sits set, the section line sits drawn — each one is still
+   the drawing it was, it has simply stopped being made. */
+@media (prefers-reduced-motion: reduce) {
+  .rings circle,
+  .lines line,
+  .section,
+  :global(.nk-door):hover .rings circle,
+  :global(.nk-door):hover .lines line,
+  :global(.nk-door):hover .section {
+    animation: none;
+  }
+  .rings circle,
+  .lines line {
+    transform: none;
+    opacity: 1;
+  }
+  .section {
+    stroke-dashoffset: 0;
+  }
+}

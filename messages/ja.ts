@@ -18,6 +18,8 @@ const ja: Record<string, string> = {
   "home.hero.lead2": "すべては一つの点から始まりました",
   "home.intro.statement": "nokta はデュッセルドルフのデザインスタジオです。建築を見えるようにします — 画像として、本として、印刷物として。",
   "home.intro.body": "設計事務所、出版社、文化施設、公共の発注者のために働いています。完成した図面を持って来る人もいれば、ナプキン一枚の人もいます。どちらも始まりです。線になる点、そして形になる線。",
+  "home.reg.studio": "スタジオ",
+  "home.figure.caption": "図 01 — 干渉。2つの波源、15度の網点、ひとつの点。",
   "home.services.aria": "サービス",
   "home.svc.0.title": "ビジュアライゼーション",
   "home.svc.0.short": "レンダリング、クレイレンダー、スタディ — コンペ、販売、申請のために。",

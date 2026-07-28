@@ -23,6 +23,8 @@ const en: Record<string, string> = {
   "home.hero.lead2": "And it all began with a dot",
   "home.intro.statement": "nokta is a design studio in Düsseldorf. We make architecture visible — as an image, as a book, as a print.",
   "home.intro.body": "We work for architecture practices, publishers, cultural institutions and public clients. Some arrive with a finished plan, others with a napkin. Both are a beginning: a point that becomes a line, and a line that becomes a form.",
+  "home.reg.studio": "Studio",
+  "home.figure.caption": "Fig. 01 — Interference. Two wave sources, one raster at 15°, one point.",
   "home.services.aria": "Services",
   "home.svc.0.title": "Visualisation",
   "home.svc.0.short": "Renderings, clay renders and studies — for competitions, marketing and planning permission.",

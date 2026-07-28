@@ -3,44 +3,44 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import HomeContact from "@/components/HomeContact";
+import Reveal from "@/components/Reveal";
 import TeaserVideo from "@/components/TeaserVideo";
+import InterferenceField from "@/components/nokta/InterferenceField";
+import KindMark, { type DoorKind } from "@/components/nokta/KindMark";
+import SectionRule from "@/components/nokta/SectionRule";
 import { KIND_FIELD } from "@/lib/colors";
 import { getLocale, getT, type Translate } from "@/lib/i18n";
 import { getMediaSize } from "@/lib/mediaSizes";
 import { socialMetadata } from "@/lib/socialMeta";
-import { WORKS, getWork, type Work, type WorkKind } from "@/lib/works";
+import { WORKS, getWork, type Work } from "@/lib/works";
 import styles from "./page.module.css";
 
-/* The homepage states what the studio does, proves it with four works shown
-   large, and asks for the project. The full thirteen-work wall lives at
-   /arbeiten — this page shows the fewest works it can get away with, at the
-   biggest size it can give them. */
+/* The homepage, as a numbered register.
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getT();
-  const locale = await getLocale();
-  const title = t("meta.home.title");
-  // No dedicated home description key — the studio blurb reads as the landing
-  // summary, so reuse it for the <meta> + og/twitter description.
-  const description = t("meta.site.desc");
-  return {
-    title,
-    description,
-    alternates: { canonical: "/" },
-    ...socialMetadata({ title, description, locale, path: "/" }),
-  };
-}
+   Three sections, each opened by a Registerband that states its folio and its
+   name (components/nokta/SectionRule). That is the whole clarity argument: a
+   reader lands, sees 01 / 02 / 03, and knows both where they are and that the
+   page ends. Nothing on this page is a surprise about its own length.
 
-/* The three rows under the hero — the four services on /studio compressed to
-   three, and each one a door into the WORK rather than into the process: a
-   reader who wants renderings wants to see renderings, not to read how they
-   are made. Each row lands on the wall already filtered to its material, and
-   wears that material's motto colour as a solid field.
+   The motion argument sits inside the same frame. Every animated thing here
+   is a drawn abstraction of something the studio actually does — a halftone
+   raster with two wave sources through it (01), a moiré band that is two line
+   screens hung out of register (every rule), three marks that are a contour
+   stack, a set column and a plan (02). None of it is ornament borrowed from
+   elsewhere; it is the studio's own material, moving. The teaser film still
+   opens the page above all of it.
+
+   The full thirteen-work wall lives at /arbeiten — this page shows the fewest
+   works it can get away with, at the biggest size it can give them. */
+
+/* The three doors. Each lands on the wall already filtered to its material,
+   wears that material's motto colour as a solid field, and carries the mark
+   drawn for it in components/nokta/KindMark.
 
    The colours are the old site's palette, back for this one job. It is the
    single place on the site where anything other than the red is a surface —
    which is why they are here and nowhere else. */
-const SERVICES: { kind: WorkKind }[] = [
+const SERVICES: { kind: DoorKind }[] = [
   { kind: "rendering" }, // Visualisierung
   { kind: "editorial" }, // Editorial & Satz
   { kind: "cad" }, // Druck & CAD
@@ -58,6 +58,21 @@ const FEATURED = [
   "eiffel",
   "leuchtturm",
 ] as const;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getT();
+  const locale = await getLocale();
+  const title = t("meta.home.title");
+  // No dedicated home description key — the studio blurb reads as the landing
+  // summary, so reuse it for the <meta> + og/twitter description.
+  const description = t("meta.site.desc");
+  return {
+    title,
+    description,
+    alternates: { canonical: "/" },
+    ...socialMetadata({ title, description, locale, path: "/" }),
+  };
+}
 
 function featured(): Work[] {
   return FEATURED.map((slug) => {
@@ -97,49 +112,76 @@ export default async function HomePage() {
     <main>
       <TeaserVideo lead1={t("home.hero.lead1")} lead2={t("home.hero.lead2")} />
 
-      {/* ── Intro: the claim left, the practice right ─────────────── */}
-      <section className={styles.intro}>
-        <p className={styles.introStatement}>{t("home.intro.statement")}</p>
-        <p className={styles.introBody}>{t("home.intro.body")}</p>
-      </section>
+      {/* ── 01 · Studio ────────────────────────────────────────────────
+          The claim, then the plate. Type first and unobstructed — the reader
+          never has to read across a moving ground — and the abstraction under
+          it, given the full width of the sheet, as a plate in a book is. */}
+      <section className={styles.section} aria-labelledby="nk-reg-01">
+        <SectionRule id="nk-reg-01" folio="01" label={t("home.reg.studio")} />
 
-      {/* ── What we sell, in three fields ─────────────────────────── */}
-      <section className={styles.services} aria-label={t("home.services.aria")}>
-        {SERVICES.map(({ kind }, i) => (
-          <Link
-            key={kind}
-            href={`/arbeiten?kind=${kind}`}
-            className={styles.service}
-            // The material's own colour, spent as the field it stands on.
-            style={{ "--nk-field": KIND_FIELD[kind] } as CSSProperties}
-          >
-            <span className={styles.serviceFolio}>
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <span className={styles.serviceTitle}>{t(`home.svc.${i}.title`)}</span>
-            <span className={styles.serviceText}>{t(`home.svc.${i}.short`)}</span>
-            <span className={styles.serviceArrow} aria-hidden="true">
-              ↗
-            </span>
-          </Link>
-        ))}
-      </section>
-
-      {/* ── Four works, large ─────────────────────────────────────── */}
-      <section className={styles.works} aria-labelledby="nk-selected">
-        <div className={styles.worksHead}>
-          <h2 id="nk-selected" className={styles.worksTitle}>
-            {t("home.selected")}
-          </h2>
-          <Link href="/arbeiten" className={styles.worksAll}>
-            {t("home.selected.all").replace("{count}", String(WORKS.length))}
-            <span aria-hidden="true"> ↗</span>
-          </Link>
+        <div className={styles.statement}>
+          <p className={styles.claim}>{t("home.intro.statement")}</p>
+          <p className={styles.body}>{t("home.intro.body")}</p>
         </div>
+
+        <Reveal as="figure" className={styles.figure} variant="wipe">
+          <div className={styles.fieldPlate}>
+            <InterferenceField />
+          </div>
+          <figcaption className={styles.figCaption}>
+            {t("home.figure.caption")}
+          </figcaption>
+        </Reveal>
+      </section>
+
+      {/* ── 02 · Leistungen ───────────────────────────────────────────
+          Three doors into the work rather than into the process: a reader who
+          wants renderings wants to see renderings, not to read how they are
+          made. Each one carries its material's own drawn mark. */}
+      <section className={styles.section} aria-labelledby="nk-reg-02">
+        <SectionRule id="nk-reg-02" folio="02" label={t("home.services.aria")} />
+
+        <div className={styles.doors}>
+          {SERVICES.map(({ kind }, i) => (
+            <Reveal key={kind} delay={i * 90}>
+              <Link
+                href={`/arbeiten?kind=${kind}`}
+                // nk-door is a global hook, not decoration: the mark's own
+                // stylesheet keys its hover state off it (a CSS module cannot
+                // see the class its consumer hovers).
+                className={`${styles.door} nk-door`}
+                // The material's own colour, spent as the field it stands on.
+                style={{ "--nk-field": KIND_FIELD[kind] } as CSSProperties}
+              >
+                <span className={styles.doorFolio}>
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className={styles.doorMark}>
+                  <KindMark kind={kind} />
+                </span>
+                <span className={styles.doorTitle}>
+                  {t(`home.svc.${i}.title`)}
+                </span>
+                <span className={styles.doorText}>
+                  {t(`home.svc.${i}.short`)}
+                </span>
+                <span className={styles.doorArrow} aria-hidden="true">
+                  ↗
+                </span>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* ── 03 · Ausgewählte Arbeiten ─────────────────────────────────
+          Two spreads and a pair, then the door to all thirteen. */}
+      <section className={styles.section} aria-labelledby="nk-reg-03">
+        <SectionRule id="nk-reg-03" folio="03" label={t("home.selected")} />
 
         {/* Spread one — plate left, caption right, both sitting on the same
             baseline so the caption reads as a note in the plate's margin. */}
-        <article className={styles.spread}>
+        <Reveal as="article" className={styles.spread}>
           <Link href={`/arbeiten/${first.slug}`} className={styles.spreadPlate}>
             <Plate work={first} sizes="(max-width: 899px) 100vw, 57vw" />
           </Link>
@@ -152,10 +194,10 @@ export default async function HomePage() {
             </h3>
             <p className={styles.captionText}>{t(`home.work.${first.slug}.text`)}</p>
           </div>
-        </article>
+        </Reveal>
 
         {/* Spread two — mirrored, so the page never settles into a rhythm. */}
-        <article className={`${styles.spread} ${styles.spreadMirror}`}>
+        <Reveal as="article" className={`${styles.spread} ${styles.spreadMirror}`}>
           <div className={styles.caption}>
             <p className={styles.kicker}>{annotation(second, t)}</p>
             <h3 className={styles.captionTitle}>
@@ -168,24 +210,30 @@ export default async function HomePage() {
           <Link href={`/arbeiten/${second.slug}`} className={styles.spreadPlate}>
             <Plate work={second} sizes="(max-width: 899px) 100vw, 57vw" />
           </Link>
-        </article>
+        </Reveal>
 
         {/* The pair — two plates side by side, each captioned in one mono row. */}
         <div className={styles.pair}>
-          {pair.map((work) => (
-            <Link
-              key={work.slug}
-              href={`/arbeiten/${work.slug}`}
-              className={styles.pairItem}
-            >
-              <Plate work={work} sizes="(max-width: 899px) 100vw, 46vw" />
-              <span className={styles.pairRow}>
-                <span>{work.title}</span>
-                <span className={styles.pairMeta}>{annotation(work, t)}</span>
-              </span>
-            </Link>
+          {pair.map((work, i) => (
+            <Reveal key={work.slug} delay={i * 90}>
+              <Link href={`/arbeiten/${work.slug}`} className={styles.pairItem}>
+                <Plate work={work} sizes="(max-width: 899px) 100vw, 46vw" />
+                <span className={styles.pairRow}>
+                  <span>{work.title}</span>
+                  <span className={styles.pairMeta}>{annotation(work, t)}</span>
+                </span>
+              </Link>
+            </Reveal>
           ))}
         </div>
+
+        {/* The way on. A full-width row rather than a link in a heading: by the
+            time a reader is under the fourth plate, "all thirteen" is the next
+            thing they want, and it should be the size of that want. */}
+        <Link href="/arbeiten" className={styles.allWorks}>
+          <span>{t("home.selected.all").replace("{count}", String(WORKS.length))}</span>
+          <span aria-hidden="true">↗</span>
+        </Link>
       </section>
 
       <HomeContact

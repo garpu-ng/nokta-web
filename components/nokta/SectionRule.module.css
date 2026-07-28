@@ -1,0 +1,134 @@
+/* Paint for the Registerband (see SectionRule.tsx).
+
+   The two line screens are the whole trick: near-identical rulings, 14px
+   against 15px. Where their lines coincide the band goes dark, where they
+   fall between each other it fills in and goes light, and because the second
+   screen creeps sideways those bands travel. That travelling beat is moiré —
+   the same artefact a printer gets from two screens at the wrong pitch, here
+   asked for on purpose. */
+
+.rule {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 var(--nk-gutter);
+}
+
+.folio,
+.label {
+  flex-shrink: 0;
+  margin: 0;
+  font-family: var(--mono-font);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+/* The folio is a mark, and marks on this site are red. */
+.folio {
+  color: var(--accent);
+}
+
+/* An <h2> — the heading rule in base.css would otherwise set it in the display
+   face at browser-default size, so both are overridden above. */
+.label {
+  opacity: 0.62;
+}
+
+/* The band takes whatever the two captions leave it. `overflow: hidden` is
+   load-bearing — the screens run wider than the band so the sliding one never
+   drags an edge into view, and this is what trims them back to the rule. */
+.band {
+  position: relative;
+  flex: 1;
+  height: 40px;
+  overflow: hidden;
+  /* A printed rule ends; a texture doesn't. Fading both ends stops the band
+     from reading as wallpaper that happens to be cropped by the gutter. */
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 14%,
+    #000 86%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 14%,
+    #000 86%,
+    transparent
+  );
+}
+
+/* The first screen: 6px of paper every 14px. Coarse on purpose — a fine
+   ruling lands between device pixels and the browser's own anti-aliasing adds
+   a second, unwanted beat on top of the intended one. At this pitch every
+   line resolves cleanly at 1x and 2x alike, and the only pattern in the band
+   is the one that was asked for. Inset past the band's left and right edges
+   so the sliding copy always has material to bring in. */
+.screen {
+  position: absolute;
+  inset: 0 -24px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--paper) 0 6px,
+    transparent 6px 14px
+  );
+  opacity: 0.34;
+}
+
+/* The second screen, out of register by pitch rather than by angle — 15px
+   against 14px. That difference is the whole effect: two gratings of unequal
+   pitch beat at p₁p₂/|p₁−p₂|, here 210px, and because both rulings stay
+   vertical the fringes come out vertical too and travel ALONG the rule. A
+   rotation would have worked as well in principle, but its fringes run
+   perpendicular to the lines — horizontal, on a 40px band, at a period far
+   taller than the band itself, so not one whole fringe would ever be visible.
+   Wide short band, vertical fringes. */
+.screenTurned {
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--paper) 0 6.4px,
+    transparent 6.4px 15px
+  );
+  animation: nk-moire 10s linear infinite;
+}
+
+/* Sliding the second screen by exactly one of its own pitches returns it to
+   an identical ruling, so the loop closes seamlessly — while the beat pattern
+   it makes with the first has travelled one full 210px fringe. */
+@keyframes nk-moire {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(15px);
+  }
+}
+
+@media (max-width: 899px) {
+  .rule {
+    gap: 12px;
+  }
+  .band {
+    height: 30px;
+  }
+  /* The label tightens but never leaves: it is the section's heading, and
+     `display: none` would take it out of the accessibility tree along with
+     the aria-labelledby that points at it. */
+  .folio,
+  .label {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+  }
+}
+
+/* Reduced motion: the two screens stay out of register — the moiré is a fact
+   of the two rulings, not an animation — but the fringes stop travelling. */
+@media (prefers-reduced-motion: reduce) {
+  .screenTurned {
+    animation: none;
+  }
+}

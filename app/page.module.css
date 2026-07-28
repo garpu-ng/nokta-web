@@ -1,38 +1,80 @@
-/* The homepage, under the teaser band: a two-column claim, three service
-   rows, then four works given as much of the page as they will take.
+/* The homepage, under the teaser band.
 
-   Everything sits on the page gutter (--nk-gutter, 40px on the desktop the
-   design was drawn at) except the teaser itself, which is full-bleed. */
+   Three numbered sections, each opened by a Registerband
+   (components/nokta/SectionRule): 01 the claim and its plate, 02 the three
+   doors, 03 the selected works. Everything sits on the page gutter
+   (--nk-gutter, 40px on the desktop the design was drawn at) except the
+   teaser itself, which is full-bleed.
 
-/* ── Intro ─────────────────────────────────────────────────────────── */
+   The vertical rhythm is one figure: a section opens 104px below the last
+   one, and the block under a Registerband starts 56px below it. Nothing on
+   this page picks its own spacing. */
 
-.intro {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 112px;
-  align-items: start;
-  padding: 112px var(--nk-gutter) 72px;
+.section {
+  padding-top: 104px;
 }
 
-.introStatement {
+/* ── 01 · The claim ─────────────────────────────────────────────────
+   Type first, unobstructed. The abstraction goes under it as a plate, never
+   behind it as a ground: a reader should never have to read across something
+   that is moving. */
+
+.statement {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 88px;
+  align-items: start;
+  padding: 56px var(--nk-gutter) 0;
+}
+
+.statement > * {
+  min-width: 0;
+}
+
+.claim {
   margin: 0;
   font-family: var(--headline-font);
-  font-size: clamp(26px, 2.6vw, 34px);
-  font-weight: 600;
-  line-height: 1.28;
-  letter-spacing: -0.01em;
+  font-size: clamp(28px, 3.3vw, 44px);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.018em;
   text-wrap: pretty;
 }
 
-.introBody {
+.body {
   margin: 0;
-  font-size: 18px;
-  line-height: 1.65;
-  opacity: 0.72;
+  max-width: 52ch;
+  font-size: 17px;
+  line-height: 1.68;
+  opacity: 0.68;
   text-wrap: pretty;
 }
 
-/* ── Three service fields ──────────────────────────────────────────
+/* The plate. A figure in a book: the image, then its caption, set small. */
+.figure {
+  margin: 76px 0 0;
+  padding: 0 var(--nk-gutter);
+}
+
+/* The window the raster is printed in. The ground is the site's empty-frame
+   ink, so the plate is a surface even before the canvas has drawn a frame —
+   and stays one if the script never runs at all. */
+.fieldPlate {
+  height: clamp(260px, 32vw, 440px);
+  background: var(--nk-frame);
+  border: 1px solid var(--nk-hair);
+  overflow: hidden;
+}
+
+.figCaption {
+  margin-top: 14px;
+  font-family: var(--mono-font);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  opacity: 0.5;
+}
+
+/* ── 02 · The three doors ──────────────────────────────────────────
    Each row is a solid field in its material's motto colour and a door into
    the wall, already filtered to that material. This is the one place on the
    site where anything but the red is a surface — the rest of the sheet is
@@ -43,19 +85,20 @@
    nudged down a few percent precisely so 16px body copy clears 4.5:1 on
    them, so nothing here needs a per-colour exception. */
 
-.services {
+.doors {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  padding: 40px var(--nk-gutter) 120px;
+  padding: 56px var(--nk-gutter) 0;
 }
 
-.service {
+.door {
   display: grid;
-  grid-template-columns: 74px 1fr 420px 44px;
-  gap: 32px;
+  grid-template-columns: 44px 76px 1fr 380px 44px;
+  grid-template-areas: "folio mark title text arrow";
+  gap: 28px;
   align-items: center;
-  padding: 46px 32px;
+  padding: 40px 32px;
   background: var(--nk-field);
   color: var(--paper);
   text-decoration: none;
@@ -63,31 +106,44 @@
 }
 
 /* Reaching for a row steps it in and lifts the field a shade — the colour
-   answers the hand without becoming another colour. */
-.service:hover {
+   answers the hand without becoming another colour. The mark answers too, in
+   its own stylesheet (KindMark.module.css keys off the .nk-door class). */
+.door:hover {
   padding-left: 44px;
   color: var(--paper);
   filter: brightness(1.12);
 }
 
-/* A grid item's automatic minimum size is its min-content width, so a 34px
+/* A grid item's automatic minimum size is its min-content width, so a 52px
    headline would hold the row wider than the screen rather than wrap. Zeroing
    it lets the track shrink and the type reflow — the one rule that keeps every
    grid on this page inside the sheet. */
-.service > * {
+.door > * {
   min-width: 0;
 }
 
 /* On a field the folio can no longer be the red — it would vanish into two of
    the three. Paper, held back, so it still reads as an index number. */
-.serviceFolio {
+.doorFolio {
+  grid-area: folio;
+  align-self: start;
   font-family: var(--mono-font);
   font-size: 11px;
   letter-spacing: 0.08em;
   opacity: 0.75;
 }
 
-.serviceTitle {
+/* The mark's frame. It has to carry a height of its own: the SVG inside is
+   sized in percent, and a grid track only ever gives it a width. */
+.doorMark {
+  grid-area: mark;
+  display: block;
+  width: 76px;
+  height: 76px;
+}
+
+.doorTitle {
+  grid-area: title;
   font-family: var(--headline-font);
   font-size: clamp(34px, 4vw, 52px);
   font-weight: 700;
@@ -97,14 +153,16 @@
 
 /* Full strength, not the .7 the ink rows used: on a colour the same opacity
    would drop this under the contrast it needs to be read. */
-.serviceText {
+.doorText {
+  grid-area: text;
   font-size: 16px;
   line-height: 1.5;
   opacity: 0.92;
   text-wrap: pretty;
 }
 
-.serviceArrow {
+.doorArrow {
+  grid-area: arrow;
   font-size: 22px;
   text-align: right;
   opacity: 0.8;
@@ -112,48 +170,12 @@
 
 /* The focus ring is paper here — the accent would sit on its own colour in
    the middle field and disappear. */
-.service:focus-visible {
+.door:focus-visible {
   outline: 2px solid var(--paper);
   outline-offset: -6px;
 }
 
-/* ── Selected works ────────────────────────────────────────────────── */
-
-.works {
-  padding-bottom: 128px;
-}
-
-.worksHead {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 24px;
-  padding: 0 var(--nk-gutter) 56px;
-}
-
-.worksTitle {
-  margin: 0;
-  font-family: var(--headline-font);
-  font-size: 26px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-}
-
-.worksAll {
-  flex-shrink: 0;
-  font-family: var(--mono-font);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--paper);
-  text-decoration: none;
-  opacity: 0.6;
-  transition: opacity 0.18s ease;
-}
-.worksAll:hover {
-  color: var(--paper);
-  opacity: 1;
-}
+/* ── 03 · Selected works ───────────────────────────────────────────── */
 
 /* A spread: one plate, one caption, aligned on the plate's bottom edge. */
 .spread {
@@ -161,7 +183,7 @@
   grid-template-columns: 820px 1fr;
   gap: 56px;
   align-items: end;
-  padding: 0 var(--nk-gutter) 72px;
+  padding: 56px var(--nk-gutter) 0;
 }
 .spreadMirror {
   grid-template-columns: 1fr 820px;
@@ -242,7 +264,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 56px;
-  padding: 0 var(--nk-gutter);
+  padding: 56px var(--nk-gutter) 0;
 }
 
 .pairItem {
@@ -271,7 +293,31 @@
   text-align: right;
 }
 
-/* The 820px plate and a caption beside it need about 1250px of sheet; below
+/* The way on. A rule the width of the sheet, not a link in a heading. */
+.allWorks {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin: 88px var(--nk-gutter) 128px;
+  padding: 32px 0;
+  border-top: 1px solid var(--nk-hair);
+  border-bottom: 1px solid var(--nk-hair);
+  color: var(--paper);
+  font-family: var(--mono-font);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: padding 0.22s ease, color 0.22s ease;
+}
+.allWorks:hover {
+  padding-inline: 14px;
+  color: var(--accent);
+}
+
+/* ── Desktop down ──────────────────────────────────────────────────
+   The 820px plate and a caption beside it need about 1250px of sheet; below
    that the spread goes single-column a breakpoint ahead of everything else,
    rather than squeezing the caption to nothing. */
 @media (max-width: 1279px) {
@@ -291,22 +337,31 @@
 }
 
 /* ── Tablet ──────────────────────────────────────────────────────────
-   The service rows give up their description column — the text drops to a
-   second line under the title. (The spreads are already single-column here:
-   their own 1279px block above collapsed them a breakpoint earlier.) */
+   The doors give up their description column — the text drops to a second
+   line under the title, with the mark holding both rows. (The spreads are
+   already single-column here: their own 1279px block above collapsed them a
+   breakpoint earlier.) */
 @media (max-width: 1199px) {
-  .intro {
-    gap: 64px;
+  .section {
+    padding-top: 88px;
   }
 
-  .service {
-    grid-template-columns: 56px 1fr 44px;
-    gap: 24px;
-    row-gap: 12px;
+  .statement {
+    gap: 56px;
+  }
+
+  .door {
+    grid-template-columns: 40px 64px 1fr 40px;
+    grid-template-areas:
+      "folio mark title arrow"
+      ".     mark text  .";
+    gap: 10px 22px;
     padding-inline: 28px;
   }
-  .serviceText {
-    grid-column: 2 / 3;
+  .doorMark {
+    width: 64px;
+    height: 64px;
+    align-self: center;
   }
 
   .plate {
@@ -319,30 +374,48 @@
 
 /* ── Phone ───────────────────────────────────────────────────────── */
 @media (max-width: 899px) {
-  .intro {
+  .section {
+    padding-top: 64px;
+  }
+
+  .statement {
     grid-template-columns: 1fr;
-    gap: 36px;
-    padding-block: 72px 48px;
+    gap: 28px;
+    padding-top: 36px;
   }
 
-  .services {
-    padding-bottom: 80px;
-  }
-  .service {
-    grid-template-columns: 44px 1fr 32px;
-    gap: 16px;
-    padding: 32px 20px;
-  }
-  .service:hover {
-    padding-left: 28px;
+  .figure {
+    margin-top: 48px;
   }
 
-  /* "Ausgewählte Arbeiten" and "alle 13 arbeiten ↗" do not share a 320px
-     line; the link drops under the label rather than being squeezed. */
-  .worksHead {
-    flex-wrap: wrap;
-    gap: 10px;
-    padding-bottom: 24px;
+  /* The door becomes a small card: the mark down the left, the folio and the
+     title beside it, the description across the foot. The arrow goes — the
+     whole row is the link, and on a phone it was only ever decoration. */
+  .doors {
+    padding-top: 36px;
+  }
+  .door {
+    grid-template-columns: 44px 1fr;
+    grid-template-areas:
+      "mark folio"
+      "mark title"
+      "text text";
+    gap: 6px 16px;
+    padding: 26px 20px;
+  }
+  .door:hover {
+    padding-left: 26px;
+  }
+  .doorMark {
+    width: 44px;
+    height: 44px;
+    align-self: start;
+  }
+  .doorText {
+    margin-top: 10px;
+  }
+  .doorArrow {
+    display: none;
   }
 
   .pair {
@@ -354,15 +427,20 @@
   .pairItem .plate {
     height: 380px;
   }
+
+  .allWorks {
+    margin-block: 64px 88px;
+    font-size: 12px;
+  }
 }
 
 /* Reduced motion: rows still step in on hover (it is a layout answer, not an
    animation), but nothing eases and no plate zooms. */
 @media (prefers-reduced-motion: reduce) {
-  .service,
+  .door,
   .plateImg,
   .captionLink,
-  .worksAll {
+  .allWorks {
     transition: none;
   }
   .spreadPlate:hover .plateImg,
