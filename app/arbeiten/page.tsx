@@ -56,12 +56,22 @@ export default async function ArbeitenPage({
   // Every string the wall shows is translated here: WorkWall is a client
   // component and never reaches for a dictionary itself.
   const items = WORKS.map((work) => toWallItem(work, t));
-  const kinds = WORKS.reduce<{ kind: WorkKind; label: string }[]>((acc, work) => {
-    if (!acc.some((k) => k.kind === work.kind)) {
-      acc.push({ kind: work.kind, label: t(`work.kind.${work.kind}`) });
-    }
-    return acc;
-  }, []);
+  // …including each kind's own field colour, resolved here rather than in the
+  // wall: the filter chip and the homepage door that leads to it are the same
+  // material and have to be the same colour, and this is where that is known.
+  const kinds = WORKS.reduce<{ kind: WorkKind; label: string; field: string }[]>(
+    (acc, work) => {
+      if (!acc.some((k) => k.kind === work.kind)) {
+        acc.push({
+          kind: work.kind,
+          label: t(`work.kind.${work.kind}`),
+          field: KIND_FIELD[work.kind],
+        });
+      }
+      return acc;
+    },
+    [],
+  );
 
   const title = `${t("home.wall.label")}.`;
 

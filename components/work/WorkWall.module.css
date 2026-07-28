@@ -20,6 +20,9 @@
   margin: 0 0 clamp(2rem, 5vh, 3rem);
 }
 
+/* A door at chip size. Same box as the hairline chip it replaces — the 1px
+   border stays, in the field's own colour, so the metrics do not move by a
+   pixel and the row keeps its height, its gaps and its wrapping. */
 .stamp {
   position: relative;
   display: flex;
@@ -27,8 +30,8 @@
   justify-content: center;
   min-height: 46px;
   padding: 14px 20px;
-  background: none;
-  border: 1px solid var(--nk-hair);
+  background: var(--nk-field);
+  border: 1px solid var(--nk-field);
   color: var(--paper);
   font-family: var(--mono-font);
   font-size: 12px;
@@ -36,24 +39,53 @@
   text-transform: uppercase;
   white-space: nowrap;
   cursor: pointer;
-  transition: border-color 0.18s ease;
+  transition: filter 0.18s ease;
 }
 
+/* The doors' own answer to the hand: the colour lifts a shade without
+   becoming another colour. They also step their padding in, which a chip in a
+   wrapping flex row cannot do — it would shove its neighbours along the line
+   and reflow the row on hover. */
 .stamp:hover {
+  filter: brightness(1.12);
+}
+
+/* ALLE is not a material and has no colour to wear. The page turned over:
+   paper field, ink label — which is what "no filter" looks like. */
+.stampAll {
+  background: var(--paper);
   border-color: var(--paper);
+  color: var(--ink);
+}
+
+.stamp[aria-pressed="true"] {
+  filter: brightness(1.12);
 }
 
 .stamp[aria-pressed="true"]::after {
   content: "";
   position: absolute;
   inset: -1px;
-  border: 2px solid var(--accent);
+  border: 2px solid var(--paper);
   pointer-events: none;
 }
 
+/* Paper on paper is not a ring. */
+.stampAll[aria-pressed="true"]::after,
+.stampAll:focus-visible {
+  border-color: var(--ink);
+  outline-color: var(--ink);
+}
+
 .stamp:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--paper);
   outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stamp {
+    transition: none;
+  }
 }
 
 /* ── The grid ────────────────────────────────────────────────────────── */
