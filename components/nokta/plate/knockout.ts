@@ -13,12 +13,23 @@
    erases exactly the dilated glyph shape and nothing else. Finally the type
    is painted into the hole it just made.
 
-   Compositing rather than asking each primitive whether it is inside the type
-   is the whole reason this is shareable. A raster can cheaply test a dot's
-   centre; a massing model cannot cheaply test a block, because a block is
-   three quadrilaterals that may rise into the title from a plot well below
-   it, and a ruled field cannot cheaply test a polyline at all. Erasing after
-   the fact asks nothing of the art, and is exact for all three.
+   TWO WAYS OUT OF THE WAY, and a plate must pick the right one.
+
+   `punch` composites, and compositing CUTS. It erases pixels, so any mark
+   straddling the mask's edge is sliced in half and the survivors form a hard
+   rim following the letterforms — the type ends up wearing a visible contour
+   made of clipped marks. On a massing model or a ruled field that is
+   invisible, because a sliced block edge or a cut rule looks like any other
+   block edge or rule. On a DOT raster it is glaring: half a dot is not a dot,
+   and a hundred half-dots in a row are an outline.
+
+   `dodged` is for those. It answers whether a point lies in the type's clear
+   space, so a raster can decline to draw the dot at all — whole dots absent,
+   a ragged clearing that follows the lattice instead of the glyph, and no rim.
+   It only works for art that is made of small independent marks whose position
+   is known before it is drawn; a block that may rise into the title from a
+   plot well below it, or a polyline crossing the whole plate, cannot answer
+   the question cheaply, which is what `punch` is for.
 
    It is not free, though, and the naive version of it is expensive: blitting
    a full-plate bitmap every frame costs a couple of million pixels of fill on
@@ -57,8 +68,12 @@ export type Knockout = {
   /** Re-fit the type and re-cut the mask. CSS pixels, plus the backing
       store's ratio so the mask is cut at the resolution it will erase at. */
   layout: (width: number, height: number, dpr: number) => void;
-  /** Erase the type's clear space out of everything drawn so far. */
+  /** Erase the type's clear space out of everything drawn so far. Cuts
+      whatever it lands on — right for volumes and rules, wrong for dots. */
   punch: (ctx: CanvasRenderingContext2D) => void;
+  /** Is this point inside the type's clear space? For art made of small
+      independent marks, which can simply decline to draw one. CSS pixels. */
+  dodged: (x: number, y: number) => boolean;
   /** Paint the type into the hole. Its closing character takes the accent —
       the same move the hero headline and the footer wordmark make. */
   paint: (ctx: CanvasRenderingContext2D) => void;
@@ -85,6 +100,10 @@ export function makeKnockout(
   let by = 0;
   let bw = 0;
   let bh = 0;
+  /** The mask's alpha, kept for `dodged`. */
+  let alpha: Uint8ClampedArray | null = null;
+  let maskW = 0;
+  let scale = 1;
 
   /** Greedy wrap at a given size. Languages that do not space their words
       (the Japanese line) are broken by character instead. */
@@ -178,6 +197,10 @@ export function makeKnockout(
     by = Math.max(0, Math.floor(top * dpr));
     bw = Math.min(off.width - bx, Math.ceil((right - left) * dpr) + 1);
     bh = Math.min(off.height - by, Math.ceil((bottom - top) * dpr) + 1);
+    // Read back once, so `dodged` is an array index rather than a canvas call.
+    alpha = mc.getImageData(0, 0, off.width, off.height).data;
+    maskW = off.width;
+    scale = dpr;
     ready = bw > 0 && bh > 0;
   };
 
@@ -191,6 +214,15 @@ export function makeKnockout(
     ctx.globalCompositeOperation = "destination-out";
     ctx.drawImage(off, bx, by, bw, bh, bx, by, bw, bh);
     ctx.restore();
+  };
+
+  const dodged = (x: number, y: number) => {
+    if (!ready || !alpha) return false;
+    const ix = (x * scale) | 0;
+    const iy = (y * scale) | 0;
+    if (ix < 0 || iy < 0 || ix >= maskW) return false;
+    const a = alpha[(iy * maskW + ix) * 4 + 3];
+    return a !== undefined && a > 8;
   };
 
   const paint = (ctx: CanvasRenderingContext2D) => {
@@ -210,7 +242,7 @@ export function makeKnockout(
     });
   };
 
-  return { layout, punch, paint };
+  return { layout, punch, dodged, paint };
 }
 
 /** The face and the two colours every plate reads off its own canvas. */

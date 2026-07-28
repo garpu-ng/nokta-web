@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import Reveal from "@/components/Reveal";
 import styles from "./PlateHead.module.css";
 
@@ -25,16 +25,34 @@ import styles from "./PlateHead.module.css";
 
 export default function PlateHead({
   title,
+  ratio,
   children,
 }: {
   /** The page's heading, exactly as the plate is drawing it. */
   title: string;
+  /** Width ÷ height of the plate. Per page, because the plates are not
+      interchangeable: a massing model wants height for its towers to rise
+      into and a plotter wants room to wander, while the meeting raster was
+      composed as a shallow band and its fringes bow and clump the moment it
+      is given height it never asked for. Default 3. */
+  ratio?: number;
   /** The plate. Give it the same string as `motto`. */
   children: ReactNode;
 }) {
   return (
     <Reveal as="header" className={styles.head} variant="wipe">
-      <div className={styles.plate}>{children}</div>
+      {/* Handed over as a custom property, not as an inline `aspect-ratio`.
+          An inline declaration beats a stylesheet rule outright, including the
+          phone media query below it — which would have held /kontakt's 4.44
+          on a 350px screen and left the plate 79px tall with the title set to
+          match. As a variable it feeds the default rule and the phone override
+          still wins on source order, which is the behaviour wanted. */}
+      <div
+        className={styles.plate}
+        style={ratio ? ({ "--nk-plate-ratio": String(ratio) } as CSSProperties) : undefined}
+      >
+        {children}
+      </div>
       <h1 className={styles.srOnly}>{title}</h1>
     </Reveal>
   );

@@ -154,6 +154,10 @@ export default function InterferenceField({
               const y = cy + ix * pitch * sin + iy * pitch * cos;
               if (x < -pitch || x > w + pitch) continue;
               if (y < -pitch || y > h + pitch) continue;
+              // Whole dots, or none. Erasing the raster afterwards would slice
+              // every dot on the boundary in half and those halves would line
+              // up into a contour around the letters — see plate/knockout.ts.
+              if (cut?.dodged(x, y)) continue;
 
               const amp = interference(x, y, ax, ay, bx, by, k, t);
               const r = maxR * Math.pow(amp, GAMMA);
@@ -177,8 +181,8 @@ export default function InterferenceField({
             ctx.fill(struck);
           }
 
-          // The title, cut out of the raster rather than laid over it.
-          cut?.punch(ctx);
+          // The clearing was made by not drawing into it, so there is nothing
+          // to erase — only the type to set in it.
           cut?.paint(ctx);
         },
       };

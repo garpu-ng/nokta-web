@@ -11,7 +11,8 @@
    quietly demote the page's h1 to a caption. These two numbers therefore move
    together: trimming the plate trims the title with it, by the same fraction. */
 .plate {
-  aspect-ratio: 3;
+  /* Per page, via PlateHead's `ratio`; 3 when nothing asks for anything. */
+  aspect-ratio: var(--nk-plate-ratio, 3);
   background: var(--nk-frame);
   border: 1px solid var(--nk-hair);
   overflow: hidden;
@@ -36,6 +37,10 @@
   .head {
     padding-top: 24px;
   }
+  /* On a phone every plate is squarer, whatever it asked for on the desktop:
+     the title is fitted to the plate's height, so a shallow band at 350px
+     wide would demote the page's h1 to a caption. Set outright rather than
+     through the variable, so it wins. */
   .plate {
     aspect-ratio: 1.875;
   }
