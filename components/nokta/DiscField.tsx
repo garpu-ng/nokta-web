@@ -58,17 +58,32 @@ const R_CURVE = 3.2;
 /** A disc's thickness, as a fraction of its radius. Thin enough to read as a
     slab rather than a drum, thick enough that edge-on is a bar you can see. */
 const THICK = 0.19;
-/** How far round the wave swings a disc, in turns. Just over a half turn: a
-    crest passing over the field takes every disc from edge on, through open,
-    and back, which is the whole sentence in one pass. */
-const SWING = 0.62;
 /** Wavelength of the standing field, in units of the plate's width. */
 const WAVELENGTH = 0.5;
-/** How fast a disc tumbles on its own account, on top of the wave, and how
-    fast the plane it lies in rolls round. Both slow, both different per disc,
-    so the field never falls into step with itself. */
-const TUMBLE = 0.055;
-const ROLL = 0.05;
+/** Seconds for one full revolution, slowest and fastest. A disc TURNS: the
+    angle is integrated from a rate that never changes sign, so it goes round
+    and round and cannot swing back.
+
+    It used to be an expression — a big term driven straight off the wave plus
+    a small one driven off the clock — and that was simply wrong. The wave term
+    swung nearly four radians with a period of about six seconds while the
+    clock term advanced a twentieth of a radian a second, so the sum was an
+    oscillation with a slight drift on it: every disc rocked back and forth
+    about a fixed angle and none of them ever turned. Nothing driven off a
+    value that goes up and down can be a rotation. */
+const SPIN_SLOW = 62;
+const SPIN_FAST = 24;
+/** How much a crest of the wave speeds a disc up, as a fraction of its own
+    rate. Kept under 1, which is what guarantees the rate never crosses zero —
+    the field is still in the motion, it is just in the SPEED of it now and
+    not in the position, so a crest is a place where the turning quickens
+    rather than a place where it reverses. */
+const WAVE_GAIN = 0.72;
+/** Seconds for the plane a disc lies in to roll once round, at its laziest.
+    Signed per disc, and never near zero: a disc whose plane does not roll
+    presents its edge along the same line for ever and reads as stuck even
+    while it is turning perfectly well. */
+const ROLL_SLOW = 150;
 /** How far a disc wanders from where it hangs, as a fraction of its radius. */
 const DRIFT = 0.5;
 /** Light: how much of a disc's face survives being turned edge on. The face
@@ -87,12 +102,15 @@ const RING_WALL = 0.1;
 /** Share of the field that carries a motto colour. */
 const COLOURED = 0.3;
 
-/** Closing a disc towards its edge is the FIRST thing tried when it lands on
-    the title: it is the move that keeps the disc, and turning away is a more
-    honest reason to be out of the way than being deleted. Only when even a
-    bare edge will not fit does it start drawing smaller. */
-const CLOSE_LADDER = [0.62, 0.36, 0.18, 0.07, 0];
-const SHRINK_LADDER = [0.66, 0.44, 0.27, 0.13];
+/** How many halvings are spent finding how much room a disc has beside the
+    title. Searched rather than picked off a list of five fixed sizes: a disc
+    sitting near the edge of the clear space crosses the boundary continually,
+    and off a list it jumps between two rungs each time it does — which is
+    exactly the stutter it looks like. Six halvings put the answer within a
+    hundredth, which is under a pixel on anything here. */
+const ROOM_STEPS = 6;
+/** Below this much of itself a disc is not worth drawing at all. */
+const ROOM_MIN = 0.07;
 
 const TAU = Math.PI * 2;
 /** The R₂ low-discrepancy sequence. Two irrational strides that between them
@@ -168,6 +186,14 @@ export default function DiscField({
       let ink = new Int32Array(0);
       let ring = new Uint8Array(0);
       let order: number[] = [];
+      /** The angle each disc has actually turned through, integrated frame by
+          frame, and the rates it is turning and rolling at. State, because a
+          rotation is the integral of a rate and there is no expression in `t`
+          that gives you one without also giving you a way to go backwards. */
+      let turn = new Float64Array(0);
+      let spin = new Float64Array(0);
+      let rollRate = new Float64Array(0);
+      let lastT = -1;
 
       const plate: Plate = {
         resize(width, height, dpr) {
@@ -186,7 +212,14 @@ export default function DiscField({
           band = new Int32Array(count);
           ink = new Int32Array(count);
           ring = new Uint8Array(count);
+          spin = new Float64Array(count);
+          rollRate = new Float64Array(count);
           order = [];
+          // Carried across a resize where it can be: the webfont landing
+          // re-lays the plate a moment after it appears, and a field that
+          // snapped back to its opening angles then would be seen doing it.
+          const held = turn;
+          turn = new Float64Array(count);
 
           for (let i = 0; i < count; i++) {
             // Even cover first, then a little noise on top of it, so the field
@@ -208,6 +241,14 @@ export default function DiscField({
                 ? 0
                 : 1 + Math.min(colours.length - 1, Math.floor((c / COLOURED) * colours.length));
             ring[i] = hash(i, 5) < RINGS ? 1 : 0;
+
+            // Its own rate, its own direction, and where it had got to.
+            const period = SPIN_SLOW + (SPIN_FAST - SPIN_SLOW) * hash(i, 6);
+            spin[i] = (TAU / period) * (hash(i, 7) < 0.5 ? -1 : 1);
+            rollRate[i] =
+              (TAU / (ROLL_SLOW * (0.45 + hash(i, 10) * 0.55))) *
+              (hash(i, 11) < 0.5 ? -1 : 1);
+            turn[i] = i < held.length ? held[i] : hash(i, 1) * TAU;
             order[i] = i;
           }
           // Far ones first, and the near ones over them. Depth is fixed, so
@@ -226,6 +267,14 @@ export default function DiscField({
           const bx = cx + 0.36 * w * Math.cos(t * 0.041 + 2.3);
           const by = cy + 0.5 * h * Math.sin(t * 0.061 + 1.2);
 
+          /* How much time this frame is worth. Clamped, and thrown away
+             outright if it is not a sane forward step — the clock is rebased
+             when the plate resumes from off-screen and re-laid when it
+             resizes, and a rotation integrated off a bad delta jumps. */
+          let dt = lastT < 0 ? 0 : t - lastT;
+          if (!(dt > 0) || dt > 0.25) dt = 0;
+          lastT = t;
+
           ctx.clearRect(0, 0, w, h);
 
           for (let n = 0; n < count; n++) {
@@ -237,16 +286,24 @@ export default function DiscField({
             const sx = hx[i] + dr * Math.sin(t * (0.06 + hash(i, 6) * 0.05) + hash(i, 7) * TAU);
             const sy = hy[i] + dr * 0.6 * Math.cos(t * (0.05 + hash(i, 8) * 0.05) + hash(i, 9) * TAU);
 
-            /* The angle, which is the whole plate. The wave sets how far round
-               the disc has swung; its own slow tumble keeps neighbours from
-               moving as one; the roll turns the plane the disc lies in, so it
-               presents its edge along a different line as it goes. */
+            /* The angle, which is the whole plate — INTEGRATED, so it only
+               ever goes one way. The wave is in the rate: over a crest a disc
+               turns half again as fast, in a trough it idles, and because the
+               gain is under one the rate never reaches zero and the disc never
+               hesitates, let alone reverses. */
             const wave = interference(sx, sy, ax, ay, bx, by, k, t);
-            const tilt =
-              hash(i, 1) * TAU + SWING * TAU * wave + t * TUMBLE * (0.5 + hash(i, 2));
-            const roll = hash(i, 10) * TAU + t * ROLL * (hash(i, 11) - 0.5) * 2;
+            turn[i] += dt * spin[i] * (1 + WAVE_GAIN * (wave * 2 - 1));
+            const tilt = turn[i];
+            const roll = hash(i, 12) * TAU + t * rollRate[i];
 
-            const cosT = Math.abs(Math.cos(tilt));
+            // Signed, both of them. The sign of the cosine is which FACE is
+            // towards the reader and the sign of the sine is which side of the
+            // slab that face sits on; drop either and the disc mirrors back
+            // through edge-on instead of carrying on round, which looks
+            // exactly like a rotation running backwards.
+            const cT = Math.cos(tilt);
+            const sT = Math.sin(tilt);
+            const cosT = Math.abs(cT);
             const cs = Math.cos(roll);
             const sn = Math.sin(roll);
 
@@ -279,34 +336,40 @@ export default function DiscField({
             let close = 1;
             let shrink = 1;
             if (!fits(1, 1)) {
-              let ok = false;
-              for (const c of CLOSE_LADDER) {
-                if (fits(c, 1)) {
-                  close = c;
-                  ok = true;
-                  break;
+              // Both of these shrink the region tested, so both are monotone
+              // and a plain bisection finds the edge of the room available.
+              let lo = 0;
+              let hi = 1;
+              if (fits(0, 1)) {
+                for (let it = 0; it < ROOM_STEPS; it++) {
+                  const mid = (lo + hi) / 2;
+                  if (fits(mid, 1)) lo = mid;
+                  else hi = mid;
                 }
-              }
-              if (!ok) {
+                close = lo;
+              } else {
                 close = 0;
-                for (const s of SHRINK_LADDER) {
-                  if (fits(0, s)) {
-                    shrink = s;
-                    ok = true;
-                    break;
-                  }
+                hi = 1;
+                for (let it = 0; it < ROOM_STEPS; it++) {
+                  const mid = (lo + hi) / 2;
+                  if (fits(0, mid)) lo = mid;
+                  else hi = mid;
                 }
+                if (lo < ROOM_MIN) continue;
+                shrink = lo;
               }
-              if (!ok) continue;
             }
 
             const r = r0 * shrink;
             const co = cosT * close;
-            const si = Math.sqrt(1 - co * co);
             const minor = r * co;
-            // Half the slab's thickness as it appears — zero when the disc
-            // faces you, its full depth when it stands on edge.
-            const lift = (r * THICK * si) / 2;
+            /* Where the near face sits on the slab, signed. Zero when the disc
+               faces the reader, half the slab's depth when it stands on edge,
+               and it crosses to the OTHER side as the disc turns past edge-on
+               — which is the one cue that says the thing kept going round.
+               The silhouette itself is symmetric and takes the magnitude. */
+            const lift = ((r * THICK * sT) / 2) * (cT < 0 ? -1 : 1);
+            const half = Math.abs(lift);
             if (r < 1.2) continue;
 
             const shade = stock[ink[i]][band[i]];
@@ -331,8 +394,8 @@ export default function DiscField({
                  on top of each other and it is a circle; edge on, they are two
                  lines and it is a bar. */
               ctx.beginPath();
-              ctx.ellipse(-lift, 0, Math.max(0.01, minor), r, 0, Math.PI / 2, -Math.PI / 2);
-              ctx.ellipse(lift, 0, Math.max(0.01, minor), r, 0, -Math.PI / 2, Math.PI / 2);
+              ctx.ellipse(-half, 0, Math.max(0.01, minor), r, 0, Math.PI / 2, -Math.PI / 2);
+              ctx.ellipse(half, 0, Math.max(0.01, minor), r, 0, -Math.PI / 2, Math.PI / 2);
               ctx.closePath();
               ctx.fillStyle = shade.rim;
               ctx.fill();
