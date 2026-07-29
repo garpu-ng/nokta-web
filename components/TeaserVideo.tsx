@@ -7,9 +7,9 @@ import styles from "./TeaserVideo.module.css";
 
    The clip is 1280 × 507 (2.52:1) and is shown at exactly that ratio rather
    than cropped into a taller box — an aspect-ratio box, not a fixed height,
-   so the band keeps its proportion at every width. The overlay carries the
-   page's h1, which is why the copy arrives as props: the video is a client
-   component and never reaches for a dictionary itself.
+   so the band keeps its proportion at every width. The band carries the
+   page's h1 off-screen, which is why the copy still arrives as props: the
+   video is a client component and never reaches for a dictionary itself.
 
    House pattern for every clip on the site: `muted` set via the property
    (more reliable than the attribute across browsers), and play() kicked off
@@ -62,26 +62,12 @@ export default function TeaserVideo({
       >
         <source src="/noktateaser.mp4?v=29" type="video/mp4" />
       </video>
-      {/* Reads the foot of the frame down into ink so the headline sits on a
-          ground rather than on whatever the clip happens to be showing. */}
-      <div className={styles.scrim} aria-hidden="true" />
-      <div className={styles.overlay}>
-        <h1 className={styles.lead}>
-          {/* Two sentences, two block-level lines, broken by the markup rather
-              than by white-space:nowrap — at a narrow width the clamp takes the
-              size down and each line still wraps if it has to, instead of being
-              clipped by the frame. The line is about the point, so each
-              sentence closes on one, in the studio's red. */}
-          <span className={styles.leadLine}>
-            {lead1}
-            <span className={styles.period}>.</span>
-          </span>
-          <span className={styles.leadLine}>
-            {lead2}
-            <span className={styles.period}>.</span>
-          </span>
-        </h1>
-      </div>
+      {/* The band shows the film and nothing else — no scrim, no set headline
+          over the frame. The page's h1 stays, off-screen rather than
+          display:none, so the document still opens on a heading for the
+          outline and for a screen reader: the two sentences, each closing on
+          its point, as they used to be set. */}
+      <h1 className={styles.srOnly}>{`${lead1}. ${lead2}.`}</h1>
     </section>
   );
 }

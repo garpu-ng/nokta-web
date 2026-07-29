@@ -19,47 +19,20 @@
   object-fit: cover;
 }
 
-.scrim {
+/* The page's h1, kept for the outline and for a screen reader — nothing is
+   set over the film itself. Off-screen rather than display:none: the latter
+   would take it out of the accessibility tree, which is the one thing it
+   exists for. */
+.srOnly {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(26, 26, 24, 0.42) 0%,
-    rgba(26, 26, 24, 0.1) 40%,
-    rgba(26, 26, 24, 0.9) 100%
-  );
-}
-
-.overlay {
-  position: absolute;
-  left: var(--nk-gutter);
-  right: var(--nk-gutter);
-  bottom: 64px;
-}
-
-.lead {
-  margin: 0;
-  max-width: 22ch;
-  font-family: var(--headline-font);
-  font-size: clamp(38px, 4.4vw, 58px);
-  font-weight: 700;
-  line-height: 1.06;
-  letter-spacing: -0.005em;
-}
-
-.leadLine {
-  display: block;
-}
-
-.period {
-  color: var(--accent);
-}
-
-/* ── Tablet ──────────────────────────────────────────────────────── */
-@media (max-width: 1199px) {
-  .overlay {
-    bottom: 48px;
-  }
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* ── Phone ───────────────────────────────────────────────────────────
@@ -71,12 +44,5 @@
   }
   .video {
     object-position: center;
-  }
-  .overlay {
-    bottom: 36px;
-  }
-  .lead {
-    max-width: none;
-    font-size: clamp(28px, 7.4vw, 40px);
   }
 }
