@@ -1,7 +1,9 @@
 // The CAD line-print catalogue — framed line-art prints of iconic buildings.
-// Display artwork lives in /public/line/<slug>.webp (a screen-resolution
-// preview on white paper — the print-ready vector master is kept out of the
-// public bundle since the prints are a paid product). Metadata
+// Display artwork lives in /public/line/<slug>.png (a screen-resolution preview
+// on white paper — the print-ready vector master is kept out of the public
+// bundle since the prints are a paid product). Lossless, and deliberately so:
+// these are line drawings sold as prints, and a lossy master would ring along
+// every hairline before the optimiser ever saw it. Metadata
 // (year/architect/coordinates) mirrors the title block drawn on each print.
 
 export type Print = {
@@ -16,7 +18,7 @@ export type Print = {
   coordinates: string;
   /** price in EUR */
   price: number;
-  /** display artwork (webp, white paper) under /public */
+  /** display artwork (png, white paper) under /public */
   image: string;
   /**
    * Stripe Payment Link for this print's checkout.
@@ -43,7 +45,7 @@ export const PRINTS: Print[] = [
     architect: "Gustave Eiffel",
     coordinates: "48° 51 30 N · 2° 17 40 O",
     price: 100,
-    image: "/line/eiffel.webp",
+    image: "/line/eiffel.png",
     paymentLink: undefined, // paste the Stripe Payment Link to go live
   },
   {
@@ -54,7 +56,7 @@ export const PRINTS: Print[] = [
     architect: "William Van Alen",
     coordinates: "40° 45 5.78 N · 73° 58 31.27 W",
     price: 100,
-    image: "/line/chrysler.webp",
+    image: "/line/chrysler.png",
     paymentLink: undefined, // paste the Stripe Payment Link to go live
   },
   {
@@ -65,7 +67,7 @@ export const PRINTS: Print[] = [
     architect: "Shreve, Lamb & Harmon",
     coordinates: "40° 44 54 N · 73° 59 09 W",
     price: 100,
-    image: "/line/empire-state.webp",
+    image: "/line/empire-state.png",
     paymentLink: undefined, // paste the Stripe Payment Link to go live
   },
   {
@@ -76,7 +78,7 @@ export const PRINTS: Print[] = [
     architect: "Toyotomi Hideyoshi",
     coordinates: "34° 41 14 N · 135° 31 33 O",
     price: 100,
-    image: "/line/osaka.webp",
+    image: "/line/osaka.png",
     paymentLink: undefined, // paste the Stripe Payment Link to go live
   },
 ];

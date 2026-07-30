@@ -57,10 +57,13 @@ const SIZES: Record<string, MediaSize> = {
   "/point/abschlussbericht/termine.webp": { width: 1477, height: 2085 },
   "/point/n-study.png": { width: 536, height: 918 },
   "/point/leuchtturm-cover.webp": { width: 1194, height: 1701 },
-  "/line/chrysler.webp": { width: 1600, height: 2400 },
-  "/line/eiffel.webp": { width: 1600, height: 2355 },
-  "/line/empire-state.webp": { width: 1600, height: 2433 },
-  "/line/osaka.webp": { width: 1600, height: 2400 },
+  // The four CAD prints, re-drawn to one sheet: same proportion for all of them
+  // now, where they used to differ by a few percent each. Wider than any page
+  // renders them — the largest is some 480px, on a tablet's two-up home page.
+  "/line/chrysler.png": { width: 1080, height: 1618 },
+  "/line/eiffel.png": { width: 1080, height: 1618 },
+  "/line/empire-state.png": { width: 1080, height: 1618 },
+  "/line/osaka.png": { width: 1080, height: 1618 },
 };
 
 // Fallback keeps a wrong path from crashing the build; aspect ratio defaults to
