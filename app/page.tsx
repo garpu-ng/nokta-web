@@ -87,22 +87,62 @@ function annotation(work: Work, t: Translate): string {
   return `${t(`work.kind.${work.kind}`)} · ${work.year}`;
 }
 
-/** A work's plate, sized from its real thumbnail so nothing shifts on load.
+/* The heights app/page.module.css cuts a plate to above the phone breakpoint —
+   the desktop figure and the tablet one (≤1199px) — for a spread and for the
+   pair. They are named here as well because a plate is no longer a share of the
+   sheet but its height times its work's ratio, so `sizes` has to be stated in
+   pixels (see plateSizes). Keep them in step with --plate-h in the stylesheet;
+   nothing but the hint is wrong if they drift. */
+const PLATE_H = {
+  spread: [560, 460],
+  pair: [520, 420],
+} as const;
+
+/** What the browser needs to choose a source: the plate's rendered width. Above
+    the phone breakpoint that is the capped height times the work's own ratio;
+    on a phone the plate takes the full measure — the sheet less its two 20px
+    gutters — and the height follows from the ratio instead. */
+function plateSizes([wide, tablet]: readonly [number, number], ratio: number): string {
+  return [
+    "(max-width: 899px) calc(100vw - 40px)",
+    `(max-width: 1199px) ${Math.round(tablet * ratio)}px`,
+    `${Math.round(wide * ratio)}px`,
+  ].join(", ");
+}
+
+/** A work's plate, cut to the work's own proportion.
+
+    The thumbnail's real dimensions do three jobs: they reserve the right space
+    so nothing shifts on load, they hand the stylesheet the work's ratio as
+    --nk-ratio (`w / h`, which is both the plate's aspect-ratio and the width it
+    derives from its height), and they size the `sizes` hint. `heights` is the
+    plate's height in this context, from PLATE_H above.
 
     `labelled` says whether the link around this plate already carries the
     work's title as text. On the pair it does, so the alt is dropped rather
     than announced twice; on a spread the plate is alone inside its link, and
     without the alt that link would have no accessible name at all. */
-function Plate({ work, sizes, labelled = false }: { work: Work; sizes: string; labelled?: boolean }) {
+function Plate({
+  work,
+  heights,
+  labelled = false,
+}: {
+  work: Work;
+  heights: readonly [number, number];
+  labelled?: boolean;
+}) {
   const { width, height } = getMediaSize(work.thumb);
   return (
-    <span className={styles.plate}>
+    <span
+      className={styles.plate}
+      style={{ "--nk-ratio": `${width} / ${height}` } as CSSProperties}
+    >
       <Image
         src={work.thumb}
         alt={labelled ? "" : work.title}
         width={width}
         height={height}
-        sizes={sizes}
+        sizes={plateSizes(heights, width / height)}
         className={styles.plateImg}
       />
     </span>
@@ -194,7 +234,7 @@ export default async function HomePage() {
             baseline so the caption reads as a note in the plate's margin. */}
         <Reveal as="article" className={styles.spread}>
           <Link href={`/arbeiten/${first.slug}`} className={styles.spreadPlate}>
-            <Plate work={first} sizes="(max-width: 899px) 100vw, 57vw" />
+            <Plate work={first} heights={PLATE_H.spread} />
           </Link>
           <div className={styles.caption}>
             <p className={styles.kicker}>{annotation(first, t)}</p>
@@ -219,7 +259,7 @@ export default async function HomePage() {
             <p className={styles.captionText}>{t(`home.work.${second.slug}.text`)}</p>
           </div>
           <Link href={`/arbeiten/${second.slug}`} className={styles.spreadPlate}>
-            <Plate work={second} sizes="(max-width: 899px) 100vw, 57vw" />
+            <Plate work={second} heights={PLATE_H.spread} />
           </Link>
         </Reveal>
 
@@ -228,7 +268,7 @@ export default async function HomePage() {
           {pair.map((work, i) => (
             <Reveal key={work.slug} delay={i * 90}>
               <Link href={`/arbeiten/${work.slug}`} className={styles.pairItem}>
-                <Plate work={work} sizes="(max-width: 899px) 100vw, 46vw" labelled />
+                <Plate work={work} heights={PLATE_H.pair} labelled />
                 <span className={styles.pairRow}>
                   <span>{work.title}</span>
                   <span className={styles.pairMeta}>{annotation(work, t)}</span>

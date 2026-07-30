@@ -190,16 +190,29 @@
 
 /* ── 03 · Selected works ───────────────────────────────────────────── */
 
-/* A spread: one plate, one caption, aligned on the plate's bottom edge. */
+/* A spread: one plate, one caption, aligned on the plate's bottom edge.
+
+   The plate's column is sized to the plate rather than to a figure of its own
+   (it used to be a flat 820px, which every plate filled): a plate is now as
+   wide as its work's ratio makes it, and a fixed column would open a hole
+   between a portrait plate and the caption that belongs to it.
+
+   So the caption's measure is the fixed figure instead, and the pair of them is
+   packed against the gutter the plate stands at — left on a spread, right on a
+   mirrored one. The slack collects outboard, where it reads as the margin of a
+   sheet; between plate and caption there is never more than the gap. */
 .spread {
+  --caption-measure: 544px;
   display: grid;
-  grid-template-columns: 820px 1fr;
+  grid-template-columns: auto minmax(0, var(--caption-measure));
+  justify-content: start;
   gap: 56px;
   align-items: end;
   padding: 56px var(--nk-gutter) 0;
 }
 .spreadMirror {
-  grid-template-columns: 1fr 820px;
+  grid-template-columns: minmax(0, var(--caption-measure)) auto;
+  justify-content: end;
 }
 
 .spread > * {
@@ -211,20 +224,43 @@
   text-decoration: none;
 }
 
-/* The plate itself — a fixed-height window the image fills. The ground shows
-   only while the image decodes, so a frame is never a hole in the page. */
+/* The plate itself — a window cut to the work's own proportion.
+
+   The height is the figure (--plate-h, per context and breakpoint); the width
+   follows from the work's ratio, which arrives per plate as --nk-ratio from
+   app/page.tsx as the thumbnail's own `w / h` — one number the box spends
+   twice, once as its aspect-ratio and once as the width it derives from its
+   height. So a plate is the size it was, and it no longer crops a square
+   rendering or a portrait cover into a landscape slice: the wall shows a work
+   at its own ratio (components/work/WorkCard.module.css), and this section is
+   the wall's four-work preview.
+
+   Two plates side by side therefore stand at different widths on one baseline,
+   which is what a row of plates does on a sheet — and their mono caption rows
+   still align, because the height is the thing they share.
+
+   The ground shows only while the image decodes, so a frame is never a hole in
+   the page. max-width keeps a landscape work inside its column: the height
+   gives way and the ratio holds. */
 .plate {
+  --plate-h: 560px;
   display: block;
-  height: 560px;
+  width: calc(var(--plate-h) * var(--nk-ratio));
+  max-width: 100%;
+  aspect-ratio: var(--nk-ratio);
   overflow: hidden;
   background: var(--nk-media);
 }
 
+/* `contain`, not `cover`: the window is already cut to the image's ratio, so
+   there is nothing left to crop — and if a thumbnail ever misses its row in
+   lib/mediaSizes.ts and falls back to 3:4, it letterboxes on the media ground
+   instead of quietly cropping again. */
 .plateImg {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 0.6s ease;
 }
 .spreadPlate:hover .plateImg,
@@ -232,7 +268,12 @@
   transform: scale(1.04);
 }
 
+/* --caption-measure (on .spread) is the measure the caption had beside an 820px
+   plate on the full 1500px sheet: 1420 − 820 − 56. Its column carries it above
+   the phone breakpoint; the max-width is what holds the line once the spread is
+   one column and the column is the whole sheet. */
 .caption {
+  max-width: var(--caption-measure);
   padding-bottom: 20px;
 }
 
@@ -275,10 +316,16 @@
   text-wrap: pretty;
 }
 
-/* The pair — two plates, each with a single mono row under it. */
+/* The pair — two plates, each with a single mono row under it. Both columns are
+   sized to their plate and stand together at the gutter, rather than each
+   holding half the sheet: two portrait plates set in half-sheet columns would
+   hang a third of a metre apart and stop being a pair, and each mono row would
+   read out across the empty half of its column instead of to its plate's edge.
+   They share the fixed height, so the two rows still sit on one line. */
 .pair {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: auto auto;
+  justify-content: start;
   gap: 56px;
   padding: 56px var(--nk-gutter) 0;
 }
@@ -289,7 +336,7 @@
   text-decoration: none;
 }
 .pairItem .plate {
-  height: 520px;
+  --plate-h: 520px;
 }
 
 .pairRow {
@@ -332,31 +379,15 @@
   color: var(--accent-on-ink);
 }
 
-/* ── Desktop down ──────────────────────────────────────────────────
-   The 820px plate and a caption beside it need about 1250px of sheet; below
-   that the spread goes single-column a breakpoint ahead of everything else,
-   rather than squeezing the caption to nothing. */
-@media (max-width: 1279px) {
-  .spread,
-  .spreadMirror {
-    grid-template-columns: 1fr;
-    gap: 24px;
-    align-items: start;
-  }
-  /* Mirrored or not, the plate leads once the columns collapse. */
-  .spreadMirror .caption {
-    order: 2;
-  }
-  .spreadMirror .spreadPlate {
-    order: 1;
-  }
-}
-
 /* ── Tablet ──────────────────────────────────────────────────────────
    The doors give up their description column — the text drops to a second
-   line under the title, with the mark holding both rows. (The spreads are
-   already single-column here: their own 1279px block above collapsed them a
-   breakpoint earlier.) */
+   line under the title, with the mark holding both rows.
+
+   The spreads used to collapse to one column at 1279px: an 820px plate and a
+   caption beside it needed about 1250px of sheet. A plate cut to its work's
+   ratio needs some 400px, so the spread now holds its two columns the whole way
+   down to the phone — a portrait plate alone on a tablet sheet would have left
+   the caption stranded under it with half the sheet empty beside both. */
 @media (max-width: 1199px) {
   .section {
     padding-top: 88px;
@@ -381,10 +412,10 @@
   }
 
   .plate {
-    height: 460px;
+    --plate-h: 460px;
   }
   .pairItem .plate {
-    height: 420px;
+    --plate-h: 420px;
   }
 }
 
@@ -405,6 +436,21 @@
   }
   .fieldPlate {
     aspect-ratio: 1.35;
+  }
+
+  /* One column at last, and the plate leads it whether the spread is mirrored
+     or not. */
+  .spread,
+  .spreadMirror {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  .spreadMirror .caption {
+    order: 2;
+  }
+  .spreadMirror .spreadPlate {
+    order: 1;
   }
 
   /* The door becomes a small card: the mark down the left, the folio and the
@@ -442,9 +488,11 @@
     gap: 44px;
   }
 
-  .plate,
-  .pairItem .plate {
-    height: 380px;
+  /* The measure of the sheet is the figure here and the height is whatever the
+     ratio makes it — the wall's phone column, where a work is as wide as the
+     sheet and as tall as it is. */
+  .plate {
+    width: 100%;
   }
 
   .allWorks {
