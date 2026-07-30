@@ -188,79 +188,38 @@
   outline-offset: -6px;
 }
 
-/* ── 03 · Selected works ───────────────────────────────────────────── */
+/* ── 03 · Selected works ─────────────────────────────────────────────
+   One lead and one set, and the same caption under both.
 
-/* A spread: one plate, one caption, aligned on the plate's bottom edge.
+   This section used to be three grammars: a spread with its caption beside it,
+   a mirrored one, and a strip captioned in a line of mono. A reader had to learn
+   each of them, no two plates stood on the same baseline, and — because a plate
+   is cut to its work's own ratio while a caption keeps a fixed measure — both
+   spreads left some 400px of ink standing empty beside them.
 
-   The plate's column is sized to the plate rather than to a figure of its own
-   (it used to be a flat 820px, which every plate filled): a plate is now as
-   wide as its work's ratio makes it, and a fixed column would open a hole
-   between a portrait plate and the caption that belongs to it.
+   So it is one grammar now: a plate, a hairline, a title, a mono line of facts.
+   The lead takes the whole measure of the sheet and is the one work introduced
+   with a sentence; the rest stand in a row justified to that same measure. What
+   varies between them is scale, not vocabulary. */
 
-   So the caption's measure is the fixed figure instead, and the pair of them is
-   packed against the gutter the plate stands at — left on a spread, right on a
-   mirrored one. The slack collects outboard, where it reads as the margin of a
-   sheet; between plate and caption there is never more than the gap.
-
-   Both columns can be shrunk below what they ask for (minmax(0, …)), which is
-   what settles a landscape plate: a panorama asks for more than the row has, so
-   the row is shared out instead — the caption is served its measure first and
-   the plate takes what is left, which on the full sheet is the 820px the plate
-   column used to be, and on a narrower one is an even split. The plate follows
-   its column (max-width below) and its height gives way, so the ratio holds. */
-.spread {
-  --caption-measure: 544px;
-  display: grid;
-  grid-template-columns: minmax(0, auto) minmax(0, var(--caption-measure));
-  justify-content: start;
-  gap: 56px;
-  align-items: end;
-  padding: 56px var(--nk-gutter) 0;
-}
-.spreadMirror {
-  grid-template-columns: minmax(0, var(--caption-measure)) minmax(0, auto);
-  justify-content: end;
-}
-
-.spread > * {
-  min-width: 0;
-}
-
-.spreadPlate {
-  display: block;
-  text-decoration: none;
-}
-
-/* The plate itself — a window cut to the work's own proportion.
-
-   The height is the figure (--plate-h, per context and breakpoint); the width
-   follows from the work's ratio, which arrives per plate as --nk-ratio from
-   app/page.tsx as the thumbnail's own `w / h` — one number the box spends
-   twice, once as its aspect-ratio and once as the width it derives from its
-   height. So a plate is the size it was, and it no longer crops a square
-   rendering or a portrait cover into a landscape slice: the wall shows a work
-   at its own ratio (components/work/WorkCard.module.css), and this section is
-   the wall's four-work preview.
-
-   Two plates side by side therefore stand at different widths on one baseline,
-   which is what a row of plates does on a sheet — and their mono caption rows
-   still align, because the height is the thing they share.
-
-   The ground shows only while the image decodes, so a frame is never a hole in
-   the page. max-width keeps a landscape work inside its column: the height
-   gives way and the ratio holds. */
+/* ── The plate ───────────────────────────────────────────────────────
+   A window cut to the work's own proportion: it fills whatever box it is given
+   and takes its height from the ratio, which arrives per plate as --nk-ratio
+   from app/page.tsx as the image's own `w / h`. So nothing is cropped to a
+   common shape — the wall shows a work at its own ratio too
+   (components/work/WorkCard.module.css) and this section is its five-work
+   preview. The ground shows only while the image decodes, so a frame is never a
+   hole in the page. */
 .plate {
-  --plate-h: 560px;
   display: block;
-  width: calc(var(--plate-h) * var(--nk-ratio));
-  max-width: 100%;
+  width: 100%;
   aspect-ratio: var(--nk-ratio);
   overflow: hidden;
   background: var(--nk-media);
 }
 
 /* `contain`, not `cover`: the window is already cut to the image's ratio, so
-   there is nothing left to crop — and if a thumbnail ever misses its row in
+   there is nothing left to crop — and if an image ever misses its row in
    lib/mediaSizes.ts and falls back to 3:4, it letterboxes on the media ground
    instead of quietly cropping again. */
 .plateImg {
@@ -270,34 +229,47 @@
   object-fit: contain;
   transition: transform 0.6s ease;
 }
-.spreadPlate:hover .plateImg,
-.stripLink:hover .plateImg {
+.plateLink:hover .plateImg,
+.setLink:hover .plateImg {
   transform: scale(1.04);
 }
 
-/* --caption-measure (on .spread) is the measure the caption had beside an 820px
-   plate on the full 1500px sheet: 1420 − 820 − 56. Its column carries it above
-   the phone breakpoint; the max-width is what holds the line once the spread is
-   one column and the column is the whole sheet. */
-.caption {
-  max-width: var(--caption-measure);
-  padding-bottom: 20px;
+.plateLink {
+  display: block;
+  text-decoration: none;
 }
 
-/* The one place on the sheet where the red sets words rather than striking a
-   mark, so it takes the tint cut for type: --accent itself is 3.00:1 on ink,
-   which an 11px line cannot be read at. */
-.kicker {
-  margin: 0 0 14px;
-  font-family: var(--mono-font);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--accent-on-ink);
+/* ── The lead ────────────────────────────────────────────────────────
+   The first work of the selection, across the measure. --lead-h is the tallest
+   it may stand: a landscape work reaches both gutters long before it (the
+   teahouse panorama would want 1487px at 700 tall, and takes the sheet's 1420),
+   while a portrait one stops at the figure instead of running two thousand
+   pixels down the page. */
+.lead {
+  --lead-h: 700px;
+  padding: 56px var(--nk-gutter) 0;
 }
 
-.captionTitle {
-  margin: 0 0 14px;
+.lead .plate {
+  max-width: calc(var(--lead-h) * var(--nk-ratio));
+}
+
+/* A plate caption, set the way a plate caption is set: a rule the width of the
+   work, the title under it, and the facts in the margin beside it. Two columns
+   rather than one so the sentence is never set across a metre of sheet — the
+   note keeps the 544px measure the caption has always had in this section. */
+.leadCaption {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 544px);
+  gap: 24px 56px;
+  align-items: start;
+  margin-top: 22px;
+  padding-top: 22px;
+  border-top: 1px solid var(--nk-hair);
+}
+
+.leadTitle {
+  margin: 0;
   overflow-wrap: break-word;
   font-family: var(--headline-font);
   font-size: clamp(32px, 3.4vw, 44px);
@@ -306,83 +278,118 @@
   letter-spacing: -0.015em;
 }
 
-.captionLink {
+.titleLink {
   color: inherit;
   text-decoration: none;
   transition: color 0.18s ease;
 }
-.captionLink:hover {
+.titleLink:hover {
   color: var(--accent);
 }
 
-.captionText {
-  margin: 0;
+.leadText {
+  margin: 12px 0 0;
   font-size: 16px;
   line-height: 1.6;
   opacity: 0.7;
   text-wrap: pretty;
 }
 
-/* ── The strip ──────────────────────────────────────────────────────
-   The works that close the section: plates side by side on one baseline, each
-   with a single mono row under it, justified to the measure of the sheet.
+/* ── The set ─────────────────────────────────────────────────────────
+   The rest of the selection, in a row justified to the measure. Each item's
+   share of the row is its work's own ratio — flex-grow and flex-basis both
+   proportional to --nk-ratio, with calc() turning `w / h` into the number they
+   want. Share a row out in proportion to the ratios and every plate in it comes
+   out the same height whatever shape it is, which is the whole reason to set it
+   this way: one top edge, one bottom edge, and the hairlines under them reading
+   as one ruled line across the sheet.
 
-   Each item's share of the row is its work's own ratio (flex-grow, from a zero
-   basis — the ratio arrives as --nk-ratio on the item, and calc() is what turns
-   `w / h` into the number flex-grow wants). Share a row out in proportion to the
-   ratios and every plate in it comes out the same height, whatever shape it is,
-   which is the whole reason to do it this way: three plates of three
-   proportions, one top edge, one bottom edge, and the mono rows on one line.
-
-   No plate is taller than the figure, though — max-width holds each item to
-   what its own ratio makes of --plate-h. Because every item's cap stands in the
-   same proportion to its share, they all reach it at the same moment, so the
-   heights stay equal either way: a wide sheet shows the plates at the figure
-   with the slack left outboard, a narrow one shows them justified and shorter.
-   Nothing overflows, and no figure here has to know how many plates the strip
-   holds or what shapes the selection put in it. */
-.strip {
+   --row-h is the height the row is nominally set at, and the only figure that
+   decides where it breaks: each basis is that height's worth of its own plate,
+   so the row wraps as soon as the sheet can no longer hold them all at it. Four
+   across on a desktop sheet; two to a row from the tablet down, where the figure
+   rises so fewer fit; one on a phone. Nothing here has to know how many plates
+   the set holds or what shapes the selection put in it. */
+.set {
   display: flex;
+  flex-wrap: wrap;
   gap: 56px;
-  padding: 56px var(--nk-gutter) 0;
+  padding: 88px var(--nk-gutter) 0;
 }
 
-.stripItem {
-  --plate-h: 520px;
+.setItem {
+  --row-h: 300px;
   flex-grow: calc(var(--nk-ratio));
   flex-shrink: 1;
-  flex-basis: 0;
+  flex-basis: calc(var(--row-h) * var(--nk-ratio));
   min-width: 0;
-  max-width: calc(var(--plate-h) * var(--nk-ratio));
 }
 
-.stripLink {
+.setLink {
   display: block;
   color: var(--paper);
   text-decoration: none;
 }
 
-/* In the strip the item is what carries the width, so the plate simply fills it
-   — its own height figure is spent on the item's cap above. */
-.stripItem .plate {
-  width: 100%;
+/* The lead's caption again, at the size the row gives it. */
+.setCaption {
+  display: block;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--nk-hair);
 }
 
-.stripRow {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 16px;
-  margin-top: 14px;
+.setTitle {
+  display: block;
+  font-family: var(--headline-font);
+  font-size: clamp(17px, 1.35vw, 21px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  text-wrap: pretty;
+  transition: color 0.18s ease;
+}
+.setLink:hover .setTitle {
+  color: var(--accent);
+}
+
+/* Four to a row, a title is narrow enough to turn — and one title turning
+   would drop its facts a line below the other three, in the one place on the
+   sheet where three mono lines are meant to read as one. So above the breakpoint
+   where the row holds more than two, every title is given both lines whether it
+   uses them or not: the rules under the plates stay one line, and so do the
+   lines of facts under the titles. Below it the columns are half a sheet wide,
+   the titles sit on one line, and the reservation would only add air. */
+@media (min-width: 1200px) {
+  .setTitle {
+    min-height: 2.3em;
+  }
+}
+
+/* The facts, in the mono this site annotates work with everywhere: mode of
+   representation · year · who it was for, word for word what the wall and the
+   detail pages carry (components/work/WorkAnno.tsx). It replaces a line that
+   said kind and year only — the client is the third fact a reader wants, and it
+   was already written and already translated. */
+.anno {
+  display: block;
+  margin: 0;
   font-family: var(--mono-font);
   font-size: 11px;
+  line-height: 1.5;
   letter-spacing: 0.07em;
   text-transform: uppercase;
 }
 
-.stripMeta {
+/* Under the lead this is the one red mark in the section, and it takes the tint
+   cut for type: --accent itself is 3.00:1 on ink, which an 11px line cannot be
+   read at. In the set the same line is simply held back. */
+.leadAnno {
+  color: var(--accent-on-ink);
+}
+.setAnno {
+  margin-top: 10px;
   opacity: 0.6;
-  text-align: right;
 }
 
 /* The way on. A rule the width of the sheet, not a link in a heading. */
@@ -408,39 +415,18 @@
   color: var(--accent-on-ink);
 }
 
-/* ── Desktop down ──────────────────────────────────────────────────
-   A spread whose plate is a landscape one (.spreadWide, set in app/page.tsx
-   from the work's own ratio) goes single-column here, plate first. Sharing a row
-   costs a wide plate its height rather than the caption its measure — 820 × 386
-   on the full sheet is a band, but the same split at 900px is 390 × 184, a strip
-   of a panorama — so below the sheet the old 820px plate needed, the work takes
-   the whole measure and the caption reads underneath. A portrait or square plate
-   never gets here: it asks for less width than the column already gives it, and
-   holds its two columns down to the phone. */
-@media (max-width: 1279px) {
-  .spreadWide {
-    grid-template-columns: 1fr;
-    gap: 24px;
-    align-items: start;
-  }
-  .spreadWide .caption {
-    order: 2;
-  }
-  .spreadWide .spreadPlate {
-    order: 1;
-  }
-}
-
 /* ── Tablet ──────────────────────────────────────────────────────────
    The doors give up their description column — the text drops to a second
    line under the title, with the mark holding both rows.
 
-   Every spread used to collapse to one column at 1279px, because an 820px plate
-   and a caption beside it needed about 1250px of sheet. A portrait or square
-   plate cut to its work's ratio asks for some 400px, so it keeps its two columns
-   the whole way down to the phone: alone on a tablet sheet it would have left the
-   caption stranded under it with half the sheet empty beside both. Only a wide
-   plate still needs that breakpoint, and only it takes it (see .spreadWide). */
+   The set goes two to a row here: at 300px a row of four still fits a 1200px
+   sheet, and below that they would be reduced to thumbnails, so the figure rises
+   and the row breaks itself in half. Two portrait plates justified across a
+   tablet sheet stand about 740px tall — the size the wall gives them two-up.
+
+   The lead's caption gives up its second column: the title would be squeezed to
+   a third of the sheet to keep the note's measure beside it, so the note drops
+   under the title and keeps that measure there. */
 @media (max-width: 1199px) {
   .section {
     padding-top: 88px;
@@ -464,11 +450,12 @@
     align-self: center;
   }
 
-  .plate {
-    --plate-h: 460px;
+  .setItem {
+    --row-h: 500px;
   }
-  .stripItem {
-    --plate-h: 420px;
+
+  .leadCaption {
+    grid-template-columns: minmax(0, 544px);
   }
 }
 
@@ -489,21 +476,6 @@
   }
   .fieldPlate {
     aspect-ratio: 1.35;
-  }
-
-  /* One column at last, and the plate leads it whether the spread is mirrored
-     or not. */
-  .spread,
-  .spreadMirror {
-    grid-template-columns: 1fr;
-    gap: 24px;
-    align-items: start;
-  }
-  .spreadMirror .caption {
-    order: 2;
-  }
-  .spreadMirror .spreadPlate {
-    order: 1;
   }
 
   /* The door becomes a small card: the mark down the left, the folio and the
@@ -536,23 +508,17 @@
     display: none;
   }
 
-  /* The strip stops being a row: one plate under the next, each taking the
-     measure. Nothing is shared out down a column, so the item gives up its
-     share and its cap and is simply as tall as its plate. */
-  .strip {
+  /* The set stops being a row: one plate under the next, each taking the whole
+     measure and standing as tall as its ratio makes it — the wall's phone
+     column. Nothing is shared out down a column, so an item gives up its share
+     of one and is simply as tall as what is in it. */
+  .set {
     flex-direction: column;
     gap: 44px;
+    padding-top: 64px;
   }
-  .stripItem {
+  .setItem {
     flex: 0 0 auto;
-    max-width: none;
-  }
-
-  /* The measure of the sheet is the figure here and the height is whatever the
-     ratio makes it — the wall's phone column, where a work is as wide as the
-     sheet and as tall as it is. */
-  .plate {
-    width: 100%;
   }
 
   .allWorks {
@@ -566,12 +532,13 @@
 @media (prefers-reduced-motion: reduce) {
   .door,
   .plateImg,
-  .captionLink,
+  .titleLink,
+  .setTitle,
   .allWorks {
     transition: none;
   }
-  .spreadPlate:hover .plateImg,
-  .stripLink:hover .plateImg {
+  .plateLink:hover .plateImg,
+  .setLink:hover .plateImg {
     transform: none;
   }
 }

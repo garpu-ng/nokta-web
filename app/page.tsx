@@ -8,6 +8,7 @@ import TeaserVideo from "@/components/TeaserVideo";
 import InterferenceField from "@/components/nokta/InterferenceField";
 import KindMark, { type DoorKind } from "@/components/nokta/KindMark";
 import SectionRule from "@/components/nokta/SectionRule";
+import { workAnnotation } from "@/components/work/WorkAnno";
 import { KIND_FIELD } from "@/lib/colors";
 import { getLocale, getT, type Translate } from "@/lib/i18n";
 import { getMediaSize } from "@/lib/mediaSizes";
@@ -46,8 +47,9 @@ const SERVICES: { kind: DoorKind }[] = [
   { kind: "cad" }, // Druck & CAD
 ];
 
-/* The works the homepage shows, in the order they appear: the first two take a
-   spread each, the rest stand together in the strip that closes the section.
+/* The works the homepage shows, in the order they appear: the first takes the
+   lead — the whole measure of the sheet, and the one work introduced with a line
+   of its own — and the rest stand together in the row that closes the section.
    Named rather than derived: the selection is an editorial decision — two
    renderings, one editorial commission, one print, one manual — and a rule like
    "first of each kind" would silently re-cut it the next time a work is added to
@@ -96,96 +98,95 @@ function featured(): Featured[] {
   });
 }
 
-/** kind · year — the mono line above a spread's title and beside a strip's. */
+/** kind · year · who it was for — the same annotation the wall and every detail
+    page carries, word for word, built by the same function
+    (components/work/WorkAnno.tsx). This section used to set a line of its own
+    that dropped the client; it was the third fact a reader wants, and it was
+    already written and already translated. */
 function annotation(work: Work, t: Translate): string {
-  return `${t(`work.kind.${work.kind}`)} · ${work.year}`;
+  const { kind, year, client } = workAnnotation(work, t);
+  return `${kind} · ${year} · ${client}`;
+}
+
+/** The line that tells a work, where the studio has written one. The dictionary
+    answers an unknown key with the key itself (lib/i18n.ts), which is what makes
+    this askable: a work's own description is preferred, because it states the
+    work without repeating the client that the annotation already carries, and
+    the home page's own line stands in for works that are not projects. Only the
+    lead is introduced this way — eiffel and leuchtturm have no such line in any
+    locale, and a set where one plate of four is explained and three are not
+    reads as an omission rather than a rhythm. */
+function description(work: Featured, t: Translate): string | undefined {
+  for (const key of [`projects.desc.${work.slug}`, `home.work.${work.slug}.text`]) {
+    const line = t(key);
+    if (line !== key) return line;
+  }
+  return undefined;
 }
 
 /** The work's own proportion, in the form CSS spends it: `w / h`, which is at
-    once the plate's aspect-ratio, the width it derives from its height, and (in
-    the strip) its share of the row. */
+    once the plate's aspect-ratio and (in the set) its share of the row. */
 function ratio(work: Featured): CSSProperties {
   const { width, height } = getMediaSize(work.plate);
   return { "--nk-ratio": `${width} / ${height}` } as CSSProperties;
 }
 
-/* What app/page.module.css cuts a plate to above the phone breakpoint, per
-   context and in two steps: the desktop figure and the tablet one (≤1199px).
-   `h` is the height; `max` is the widest the plate's column gets on that sheet,
-   where a column caps it — a plate renders at the smaller of h × ratio and that.
-   (A spread's plate shares the row with the caption's measure; a strip's plate is
-   only ever capped by its own height.)
-
-   They are named here because a plate is no longer a share of the sheet but its
-   height times its work's ratio, so `sizes` has to be stated in pixels. Keep
-   them in step with --plate-h in the stylesheet; nothing but the hint is wrong
-   if they drift. */
-const PLATE = {
-  spread: [{ h: 560, max: 820 }, { h: 460, max: 540 }],
-  strip: [{ h: 520 }, { h: 420 }],
-} as const;
-
-type PlateStep = { readonly h: number; readonly max?: number };
-
-/** What the browser needs to choose a source: the plate's rendered width, per
-    sheet. Where the plate stands in a column it is that column's figure — its
-    height times the work's own ratio, held to what the column allows. Where it
-    takes the whole measure it is the sheet less its two gutters, and the gutter
-    tightens twice on the way down to a phone (see --nk-gutter in
-    app/styles/tokens.css): a plate is full-measure on a phone, and a wide-plated
-    spread is full-measure from the breakpoint it stacks at. */
-function plateSizes(work: Featured, at: keyof typeof PLATE): string {
+function ratioOf(work: Featured): number {
   const { width, height } = getMediaSize(work.plate);
-  const r = width / height;
-  const [desktop, tablet] = PLATE[at];
-  const px = ({ h, max }: PlateStep) => Math.round(Math.min(h * r, max ?? Infinity));
-  const measure = ["(max-width: 899px) calc(100vw - 40px)"];
-  if (at === "spread" && isWide(work)) {
-    measure.push(
-      "(max-width: 1199px) calc(100vw - 64px)",
-      "(max-width: 1279px) calc(100vw - 80px)",
-    );
-  } else {
-    measure.push(`(max-width: 1199px) ${px(tablet)}px`);
-  }
-  return [...measure, `${px(desktop)}px`].join(", ");
+  return width / height;
 }
 
-/** A plate is wide when its own ratio asks for more width than the column the
-    caption leaves it — the point at which sharing the row starts costing the
-    plate its height instead of costing the caption its measure. A spread with
-    one stacks a breakpoint early (see .spreadWide in the stylesheet), rather
-    than shrinking a panorama to a strip of itself on a middling sheet. */
-function isWide(work: Featured): boolean {
-  const { width, height } = getMediaSize(work.plate);
-  const [{ h, max }] = PLATE.spread;
-  return width / height > max / h;
+/* The measure of the sheet at the width the design was drawn at: --content-max
+   less its two gutters, and the gap between plates in the set
+   (app/styles/tokens.css, app/page.module.css). `sizes` has to be stated in
+   pixels now that a plate is not a share of the viewport but a share of a row,
+   so these two figures are named here as well. Nothing but the hint is wrong if
+   they drift. */
+const MEASURE = 1420;
+const GAP = 56;
+
+/** The lead takes the measure, so its hint is the measure: the gutter tightens
+    twice on the way down to a phone, and the sheet stops growing at
+    --content-max. */
+function leadSizes(): string {
+  return [
+    "(max-width: 899px) calc(100vw - 40px)",
+    "(max-width: 1199px) calc(100vw - 64px)",
+    "(max-width: 1500px) calc(100vw - 80px)",
+    `${MEASURE}px`,
+  ].join(", ");
 }
 
-/** The classes a spread wears: mirrored or not, and wide-plated or not. */
-function spreadClass(work: Featured, mirror = false): string {
-  return [styles.spread, mirror && styles.spreadMirror, isWide(work) && styles.spreadWide]
-    .filter(Boolean)
-    .join(" ");
+/** A plate in the set is its share of a justified row — the row's width divided
+    in proportion to the ratios standing in it. One row of all of them on a
+    desktop sheet, two to a row below 1200px, one per row on a phone. */
+function setSizes(work: Featured, set: Featured[]): string {
+  const sum = set.reduce((total, w) => total + ratioOf(w), 0);
+  const row = MEASURE - GAP * (set.length - 1);
+  return [
+    "(max-width: 899px) calc(100vw - 40px)",
+    `(max-width: 1199px) calc((100vw - ${64 + GAP}px) / 2)`,
+    `${Math.round((row * ratioOf(work)) / sum)}px`,
+  ].join(", ");
 }
 
 /** A work's plate, cut to the work's own proportion.
 
     The image's real dimensions do three jobs: they reserve the right space so
     nothing shifts on load, they hand the stylesheet the work's ratio, and they
-    size the `sizes` hint. `at` says which context's figures to hint with.
+    size the `sizes` hint the caller passes in.
 
-    `labelled` says whether the link around this plate already carries the
-    work's title as text. In the strip it does, so the alt is dropped rather
-    than announced twice; on a spread the plate is alone inside its link, and
-    without the alt that link would have no accessible name at all. */
+    `labelled` says whether the link around this plate already carries the work's
+    title as text. In the set it does, so the alt is dropped rather than announced
+    twice; the lead's plate is alone inside its link, and without the alt that
+    link would have no accessible name at all. */
 function Plate({
   work,
-  at,
+  sizes,
   labelled = false,
 }: {
   work: Featured;
-  at: keyof typeof PLATE;
+  sizes: string;
   labelled?: boolean;
 }) {
   const { width, height } = getMediaSize(work.plate);
@@ -196,7 +197,7 @@ function Plate({
         alt={labelled ? "" : work.title}
         width={width}
         height={height}
-        sizes={plateSizes(work, at)}
+        sizes={sizes}
         className={styles.plateImg}
       />
     </span>
@@ -205,7 +206,8 @@ function Plate({
 
 export default async function HomePage() {
   const t = await getT();
-  const [first, second, ...strip] = featured();
+  const [lead, ...set] = featured();
+  const leadText = description(lead, t);
 
   return (
     <main>
@@ -280,65 +282,54 @@ export default async function HomePage() {
       </section>
 
       {/* ── 03 · Ausgewählte Arbeiten ─────────────────────────────────
-          Two spreads and a strip, then the door to all thirteen. */}
+          A lead and a set, and the same caption under both: a plate, a hairline,
+          a title, a line of facts. The lead takes the measure of the sheet and is
+          the one work introduced with a sentence; the rest stand in a row
+          justified to that same measure, so they come out one height whatever
+          their proportions. Then the door to all thirteen. */}
       <section className={styles.section} aria-labelledby="nk-reg-03">
         <SectionRule id="nk-reg-03" label={t("home.selected")} />
 
-        {/* Spread one — plate left, caption right, both sitting on the same
-            baseline so the caption reads as a note in the plate's margin. */}
-        <Reveal as="article" className={spreadClass(first)}>
-          <Link href={`/arbeiten/${first.slug}`} className={styles.spreadPlate}>
-            <Plate work={first} at="spread" />
+        <Reveal as="article" className={styles.lead}>
+          <Link href={`/arbeiten/${lead.slug}`} className={styles.plateLink}>
+            <Plate work={lead} sizes={leadSizes()} />
           </Link>
-          <div className={styles.caption}>
-            <p className={styles.kicker}>{annotation(first, t)}</p>
-            <h3 className={styles.captionTitle}>
-              <Link href={`/arbeiten/${first.slug}`} className={styles.captionLink}>
-                {first.title}
+          <div className={styles.leadCaption}>
+            <h3 className={styles.leadTitle}>
+              <Link href={`/arbeiten/${lead.slug}`} className={styles.titleLink}>
+                {lead.title}
               </Link>
             </h3>
-            <p className={styles.captionText}>{t(`home.work.${first.slug}.text`)}</p>
+            <div>
+              <p className={`${styles.anno} ${styles.leadAnno}`}>{annotation(lead, t)}</p>
+              {leadText ? <p className={styles.leadText}>{leadText}</p> : null}
+            </div>
           </div>
         </Reveal>
 
-        {/* Spread two — mirrored, so the page never settles into a rhythm. */}
-        <Reveal as="article" className={spreadClass(second, true)}>
-          <div className={styles.caption}>
-            <p className={styles.kicker}>{annotation(second, t)}</p>
-            <h3 className={styles.captionTitle}>
-              <Link href={`/arbeiten/${second.slug}`} className={styles.captionLink}>
-                {second.title}
-              </Link>
-            </h3>
-            <p className={styles.captionText}>{t(`home.work.${second.slug}.text`)}</p>
-          </div>
-          <Link href={`/arbeiten/${second.slug}`} className={styles.spreadPlate}>
-            <Plate work={second} at="spread" />
-          </Link>
-        </Reveal>
-
-        {/* The strip — the rest of the selection, side by side on one baseline,
-            each plate captioned in a single mono row. Every item carries its
-            work's ratio because that is its share of the row: the strip is
-            justified to the measure, so the plates come out the same height
-            whatever their proportions (see .strip in the stylesheet). */}
-        <div className={styles.strip}>
-          {strip.map((work, i) => (
-            <Reveal key={work.slug} className={styles.stripItem} delay={i * 90} style={ratio(work)}>
-              <Link href={`/arbeiten/${work.slug}`} className={styles.stripLink}>
-                <Plate work={work} at="strip" labelled />
-                <span className={styles.stripRow}>
-                  <span>{work.title}</span>
-                  <span className={styles.stripMeta}>{annotation(work, t)}</span>
+        <div className={styles.set}>
+          {set.map((work, i) => (
+            <Reveal
+              key={work.slug}
+              className={styles.setItem}
+              delay={i * 90}
+              // The ratio is the item's share of the row, so it is wanted here as
+              // well as on the plate inside — see .setItem in the stylesheet.
+              style={ratio(work)}
+            >
+              <Link href={`/arbeiten/${work.slug}`} className={styles.setLink}>
+                <Plate work={work} sizes={setSizes(work, set)} labelled />
+                <span className={styles.setCaption}>
+                  <span className={styles.setTitle}>{work.title}</span>
+                  <span className={`${styles.anno} ${styles.setAnno}`}>
+                    {annotation(work, t)}
+                  </span>
                 </span>
               </Link>
             </Reveal>
           ))}
         </div>
 
-        {/* The way on. A full-width row rather than a link in a heading: by the
-            time a reader is under the fourth plate, "all thirteen" is the next
-            thing they want, and it should be the size of that want. */}
         <Link href="/arbeiten" className={styles.allWorks}>
           <span>{t("home.selected.all").replace("{count}", String(WORKS.length))}</span>
           <span aria-hidden="true">↗</span>
