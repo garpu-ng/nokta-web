@@ -39,6 +39,10 @@ const SIZES: Record<string, MediaSize> = {
   "/projects/teahouse/05.jpg": { width: 1920, height: 1080 },
   "/projects/teahouse/06.jpg": { width: 1920, height: 1080 },
   "/projects/teahouse/07.jpg": { width: 1920, height: 1080 },
+  // The home page's plate for this work: 01.jpg resized and recompressed. Its
+  // thumbnail is a square the client cropped, which is the wall's shape but not
+  // a proportion the work was ever photographed in (see FEATURED in app/page.tsx).
+  "/projects/teahouse/plate.jpg": { width: 1800, height: 847 },
   "/projects/teahouse/thumb.jpg": { width: 1415, height: 1415 },
   "/projects/velostation/01.jpg": { width: 3754, height: 2112 },
   "/projects/velostation/02.jpg": { width: 3562, height: 2004 },

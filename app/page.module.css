@@ -200,18 +200,25 @@
    So the caption's measure is the fixed figure instead, and the pair of them is
    packed against the gutter the plate stands at — left on a spread, right on a
    mirrored one. The slack collects outboard, where it reads as the margin of a
-   sheet; between plate and caption there is never more than the gap. */
+   sheet; between plate and caption there is never more than the gap.
+
+   Both columns can be shrunk below what they ask for (minmax(0, …)), which is
+   what settles a landscape plate: a panorama asks for more than the row has, so
+   the row is shared out instead — the caption is served its measure first and
+   the plate takes what is left, which on the full sheet is the 820px the plate
+   column used to be, and on a narrower one is an even split. The plate follows
+   its column (max-width below) and its height gives way, so the ratio holds. */
 .spread {
   --caption-measure: 544px;
   display: grid;
-  grid-template-columns: auto minmax(0, var(--caption-measure));
+  grid-template-columns: minmax(0, auto) minmax(0, var(--caption-measure));
   justify-content: start;
   gap: 56px;
   align-items: end;
   padding: 56px var(--nk-gutter) 0;
 }
 .spreadMirror {
-  grid-template-columns: minmax(0, var(--caption-measure)) auto;
+  grid-template-columns: minmax(0, var(--caption-measure)) minmax(0, auto);
   justify-content: end;
 }
 
@@ -264,7 +271,7 @@
   transition: transform 0.6s ease;
 }
 .spreadPlate:hover .plateImg,
-.pairItem:hover .plateImg {
+.stripLink:hover .plateImg {
   transform: scale(1.04);
 }
 
@@ -316,30 +323,52 @@
   text-wrap: pretty;
 }
 
-/* The pair — two plates, each with a single mono row under it. Both columns are
-   sized to their plate and stand together at the gutter, rather than each
-   holding half the sheet: two portrait plates set in half-sheet columns would
-   hang a third of a metre apart and stop being a pair, and each mono row would
-   read out across the empty half of its column instead of to its plate's edge.
-   They share the fixed height, so the two rows still sit on one line. */
-.pair {
-  display: grid;
-  grid-template-columns: auto auto;
-  justify-content: start;
+/* ── The strip ──────────────────────────────────────────────────────
+   The works that close the section: plates side by side on one baseline, each
+   with a single mono row under it, justified to the measure of the sheet.
+
+   Each item's share of the row is its work's own ratio (flex-grow, from a zero
+   basis — the ratio arrives as --nk-ratio on the item, and calc() is what turns
+   `w / h` into the number flex-grow wants). Share a row out in proportion to the
+   ratios and every plate in it comes out the same height, whatever shape it is,
+   which is the whole reason to do it this way: three plates of three
+   proportions, one top edge, one bottom edge, and the mono rows on one line.
+
+   No plate is taller than the figure, though — max-width holds each item to
+   what its own ratio makes of --plate-h. Because every item's cap stands in the
+   same proportion to its share, they all reach it at the same moment, so the
+   heights stay equal either way: a wide sheet shows the plates at the figure
+   with the slack left outboard, a narrow one shows them justified and shorter.
+   Nothing overflows, and no figure here has to know how many plates the strip
+   holds or what shapes the selection put in it. */
+.strip {
+  display: flex;
   gap: 56px;
   padding: 56px var(--nk-gutter) 0;
 }
 
-.pairItem {
+.stripItem {
+  --plate-h: 520px;
+  flex-grow: calc(var(--nk-ratio));
+  flex-shrink: 1;
+  flex-basis: 0;
+  min-width: 0;
+  max-width: calc(var(--plate-h) * var(--nk-ratio));
+}
+
+.stripLink {
   display: block;
   color: var(--paper);
   text-decoration: none;
 }
-.pairItem .plate {
-  --plate-h: 520px;
+
+/* In the strip the item is what carries the width, so the plate simply fills it
+   — its own height figure is spent on the item's cap above. */
+.stripItem .plate {
+  width: 100%;
 }
 
-.pairRow {
+.stripRow {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -351,7 +380,7 @@
   text-transform: uppercase;
 }
 
-.pairMeta {
+.stripMeta {
   opacity: 0.6;
   text-align: right;
 }
@@ -379,15 +408,39 @@
   color: var(--accent-on-ink);
 }
 
+/* ── Desktop down ──────────────────────────────────────────────────
+   A spread whose plate is a landscape one (.spreadWide, set in app/page.tsx
+   from the work's own ratio) goes single-column here, plate first. Sharing a row
+   costs a wide plate its height rather than the caption its measure — 820 × 386
+   on the full sheet is a band, but the same split at 900px is 390 × 184, a strip
+   of a panorama — so below the sheet the old 820px plate needed, the work takes
+   the whole measure and the caption reads underneath. A portrait or square plate
+   never gets here: it asks for less width than the column already gives it, and
+   holds its two columns down to the phone. */
+@media (max-width: 1279px) {
+  .spreadWide {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  .spreadWide .caption {
+    order: 2;
+  }
+  .spreadWide .spreadPlate {
+    order: 1;
+  }
+}
+
 /* ── Tablet ──────────────────────────────────────────────────────────
    The doors give up their description column — the text drops to a second
    line under the title, with the mark holding both rows.
 
-   The spreads used to collapse to one column at 1279px: an 820px plate and a
-   caption beside it needed about 1250px of sheet. A plate cut to its work's
-   ratio needs some 400px, so the spread now holds its two columns the whole way
-   down to the phone — a portrait plate alone on a tablet sheet would have left
-   the caption stranded under it with half the sheet empty beside both. */
+   Every spread used to collapse to one column at 1279px, because an 820px plate
+   and a caption beside it needed about 1250px of sheet. A portrait or square
+   plate cut to its work's ratio asks for some 400px, so it keeps its two columns
+   the whole way down to the phone: alone on a tablet sheet it would have left the
+   caption stranded under it with half the sheet empty beside both. Only a wide
+   plate still needs that breakpoint, and only it takes it (see .spreadWide). */
 @media (max-width: 1199px) {
   .section {
     padding-top: 88px;
@@ -414,7 +467,7 @@
   .plate {
     --plate-h: 460px;
   }
-  .pairItem .plate {
+  .stripItem {
     --plate-h: 420px;
   }
 }
@@ -483,9 +536,16 @@
     display: none;
   }
 
-  .pair {
-    grid-template-columns: 1fr;
+  /* The strip stops being a row: one plate under the next, each taking the
+     measure. Nothing is shared out down a column, so the item gives up its
+     share and its cap and is simply as tall as its plate. */
+  .strip {
+    flex-direction: column;
     gap: 44px;
+  }
+  .stripItem {
+    flex: 0 0 auto;
+    max-width: none;
   }
 
   /* The measure of the sheet is the figure here and the height is whatever the
@@ -511,7 +571,7 @@
     transition: none;
   }
   .spreadPlate:hover .plateImg,
-  .pairItem:hover .plateImg {
+  .stripLink:hover .plateImg {
     transform: none;
   }
 }
