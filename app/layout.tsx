@@ -109,10 +109,15 @@ export default async function RootLayout({
               <div className={styles.right}>
                 <NavLinks
                   navLabel={t("aria.mainNav")}
+                  // The work comes before the studio: a reader who has just met
+                  // the wordmark wants to see what was made, not who made it.
+                  // The order is set once here, so every locale reads it the
+                  // same way round — and it is the order the colophon already
+                  // lists them in (components/Footer.tsx).
                   items={[
                     { href: "/", label: t("nav.home") },
-                    { href: "/studio", label: t("nav.studio") },
                     { href: "/arbeiten", label: t("nav.arbeiten") },
+                    { href: "/studio", label: t("nav.studio") },
                     { href: "/kontakt", label: t("nav.contact") },
                   ]}
                 />
