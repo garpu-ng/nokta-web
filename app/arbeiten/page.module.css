@@ -1,7 +1,7 @@
-/* The wall's own page. The header block is the same construction every
-   Kolonnade page uses — display h1 with its red period on the left, a mono
-   count on the right, one hairline underneath — and then the wall itself is
-   handed the page unchanged. */
+/* The wall's own page. The h1 sits in the plate at the top of the sheet
+   (components/nokta/PlateHead), so what is left here is the block under it:
+   the mono count on the right, one hairline underneath — and then the wall
+   itself is handed the page unchanged. */
 
 .page {
   padding-bottom: 88px;
@@ -33,9 +33,9 @@
 @media (max-width: 899px) {
   .head {
     flex-direction: column;
-  /* stretch, not flex-start: in a column flex container flex-start sizes a
-     child to its max-content, so a heading would lay out on one line at its
-     natural width and run off the sheet instead of wrapping. */
+    /* stretch, not flex-start: in a column flex container flex-start sizes a
+       child to its max-content, so a child would lay out on one line at its
+       natural width and run off the sheet instead of wrapping. */
     align-items: stretch;
     gap: 20px;
     padding-block: 40px 32px;
@@ -43,7 +43,4 @@
   .count {
     margin-bottom: 0;
   }
-  /* The desktop clamp bottoms out at 64px, which is wider than a phone —
-     "Arbeiten" alone runs 430px there. German sets long words; the display
-     sizes need their own floor once the screen is narrower than one. */
 }

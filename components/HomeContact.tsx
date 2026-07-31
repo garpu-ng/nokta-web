@@ -12,7 +12,6 @@ export default function HomeContact({
 }) {
   return (
     <section className={styles.contact} aria-labelledby="home-contact-title">
-      <div className={styles.dot} aria-hidden="true" />
       <h2 id="home-contact-title">{title}</h2>
       <p className={styles.body}>{body}</p>
       <Link href="/kontakt" className={styles.link}>

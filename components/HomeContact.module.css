@@ -13,13 +13,6 @@
   color: var(--paper);
 }
 
-/* The band is the field, so the old oversized disc has nothing left to do —
-   it would be red on red. Kept out of the flow rather than deleted from the
-   markup so the section's structure still reads the same everywhere. */
-.dot {
-  display: none;
-}
-
 .contact h2 {
   max-width: 900px;
   margin: 0;

@@ -4,7 +4,13 @@
 
 .mark {
   display: block;
-  /* The source PNG's own proportion. */
+  /* The artwork's own proportion — and the mask file's, which is cut to
+     600 × 123 for exactly that reason (600 × 410 = 123 × 2000). It used to
+     ship at 2000 × 410 and 44.6 KB to be drawn 28px tall in the masthead and
+     24px in the colophon: 84 device pixels at 3× DPR, from a file carrying
+     twenty times the detail. Being a mask, it bypasses the image optimizer
+     entirely, so that was 44.6 KB of chrome on every cold load. At the size it
+     is actually drawn the downscale differs by a mean alpha of 0.3/255. */
   aspect-ratio: 2000 / 410;
   height: 100%;
   background-color: var(--paper);

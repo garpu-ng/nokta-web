@@ -71,9 +71,10 @@ const SIZES: Record<string, MediaSize> = {
   // .portrait in app/studio/page.module.css) rather than crop a border away.
   //
   // Kaan's is the exception twice over: it is the last frame of the reveal
-  // clip that plays in his plate (public/team/kaan.mp4), so it carries that
-  // drawing's ink ground rather than white, and it is padded to exactly the
-  // plate's 30:37 — the clip is padded to the same, so neither ever letterboxes.
+  // that runs in his plate (the sprite sheet public/team/kaan-reveal.webp), so
+  // it carries that drawing's ink ground rather than white, and it is padded to
+  // exactly the plate's 30:37 — every frame of the sheet is padded to the same,
+  // so neither the still nor the reveal ever letterboxes.
   "/team/kaan.png": { width: 900, height: 1110 },
   "/team/mohammed.png": { width: 450, height: 555 },
   "/team/mert.png": { width: 449, height: 555 },

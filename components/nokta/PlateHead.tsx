@@ -35,7 +35,7 @@ export default function PlateHead({
   return (
     <Reveal as="header" className={styles.head} variant="wipe">
       <div className={styles.plate}>{children}</div>
-      <h1 className={styles.srOnly}>{title}</h1>
+      <h1 className="nk-sr-only">{title}</h1>
     </Reveal>
   );
 }

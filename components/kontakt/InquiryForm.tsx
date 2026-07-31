@@ -170,7 +170,7 @@ export default function InquiryForm({ copy }: { copy: Copy }) {
                 value={id}
                 checked={kind === id}
                 onChange={() => setKind(id)}
-                className={styles.chipInput}
+                className={`nk-sr-only ${styles.chipInput}`}
               />
               <span className={styles.chipLabel}>{label}</span>
               {/* The selected frame is drawn inset by a pixel over the chip's
@@ -189,7 +189,7 @@ export default function InquiryForm({ copy }: { copy: Copy }) {
       <p className={styles.step}>{copy.step2}</p>
       <div className={styles.pair}>
         <label className={styles.underline}>
-          <span className={styles.hidden}>{copy.name}</span>
+          <span className="nk-sr-only">{copy.name}</span>
           <input
             type="text"
             name="name"
@@ -204,7 +204,7 @@ export default function InquiryForm({ copy }: { copy: Copy }) {
           />
         </label>
         <label className={styles.underline}>
-          <span className={styles.hidden}>{copy.email}</span>
+          <span className="nk-sr-only">{copy.email}</span>
           <input
             type="email"
             name="email"
@@ -223,7 +223,7 @@ export default function InquiryForm({ copy }: { copy: Copy }) {
       {/* ── 03 · the point we start from ──────────────────────────── */}
       <p className={styles.step}>{copy.step3}</p>
       <label>
-        <span className={styles.hidden}>{copy.step3}</span>
+        <span className="nk-sr-only">{copy.step3}</span>
         <textarea
           name="message"
           rows={5}

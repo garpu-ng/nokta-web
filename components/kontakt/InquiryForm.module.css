@@ -1,6 +1,12 @@
 /* The inquiry form. Underlines and hairlines only — no filled fields, no
    rounded corners, nothing that reads as a web form rather than as a sheet
-   waiting to be written on. */
+   waiting to be written on.
+
+   Two things on it are hidden and neither is styled here: the radio that IS
+   each chip's control (step 01) and the written label over each field (steps
+   02/03) both wear the global .nk-sr-only (app/styles/base.css). Hidden from
+   sight only — never from the keyboard or the accessibility tree, and
+   placeholders are not labels. */
 
 .form {
   display: block;
@@ -48,23 +54,6 @@
   border-color: var(--paper);
 }
 
-/* The visually-hidden recipe, worn twice on this form: .chipInput hides the
-   radio that IS each chip's control, .hidden (step 02/03) hides the written
-   label over each field. Hidden from sight only — never from the keyboard or
-   the accessibility tree, and placeholders are not labels. */
-.chipInput,
-.hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  border: 0;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
 .chipLabel {
   font-family: var(--mono-font);
   font-size: 12px;
@@ -82,7 +71,9 @@
   pointer-events: none;
 }
 
-/* The focus ring belongs to the chip, not to the pixel-sized input inside it. */
+/* The focus ring belongs to the chip, not to the pixel-sized input inside it.
+   This is the only thing .chipInput is now — a name for the chip to find its
+   own radio by, the hiding having moved to .nk-sr-only. */
 .chip:has(.chipInput:focus-visible) {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
@@ -100,9 +91,6 @@
 .underline {
   display: block;
 }
-
-/* (.hidden — the fields' visually-hidden labels — is declared beside
-   .chipInput above: one recipe, stated once.) */
 
 .input {
   width: 100%;
@@ -125,7 +113,7 @@
   outline-offset: 4px;
 }
 
-/* The real labels are visually hidden (see .hidden), so on this form the
+/* The real labels are visually hidden (.nk-sr-only), so on this form the
    placeholder is the ONLY label a sighted reader ever sees — it has to clear
    4.5:1 like any other body text, not sit at the .4 a decorative hint could.
    On this ink, paper below ~0.55 fails; .62 lands at 4.9:1. */

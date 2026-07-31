@@ -63,10 +63,11 @@
 /* The portrait plate. The frame carries the DRAWING's own proportion rather
    than a height of its own, so the whole sheet is on the page — a fixed height
    plus object-fit:cover was cutting a fifth off the top and bottom of every
-   one back when these were 1:2 clips. The three drawings land within two
-   pixels of each other (451 × 554, 450 × 555, 449 × 555) and one shared ratio
-   holds the row of cards on a single baseline; `contain` spends the odd
-   sub-pixel on the media ground rather than shaving a ruled border off. */
+   one back when these were 1:2 clips. Mohammed and Mert land within a pixel of
+   each other (450 × 555, 449 × 555) and Kaan's is cut to 900 × 1110, which is
+   the same 30:37 exactly; one shared ratio holds the row of cards on a single
+   baseline, and `contain` spends the odd sub-pixel on the plate ground rather
+   than shaving a ruled border off. */
 .portrait {
   aspect-ratio: 450 / 555;
   overflow: hidden;

@@ -65,13 +65,26 @@
   width: 100%;
 }
 
+/* The box has to exist before the bytes do. lib/mediaSizes.ts gives every one
+   of these images a real width/height so the browser can reserve its space —
+   and `width: auto` used to throw that away: with no definite width there is
+   nothing to apply the ratio to, so each shot laid out near-collapsed and the
+   whole stack below it jumped as the files decoded. Measured on a cold image
+   cache — the first visitor after a deploy, which is exactly the shared link
+   an Architekturbüro opens — that cost CLS 0.71 on /arbeiten/ipehouse and 0.36
+   on /arbeiten/sanktgores, against a 0.1 threshold for "good".
+
+   So the width is stated instead of inferred, in the same terms the old
+   max-width/max-height pair implied: never wider than the sheet, never taller
+   than 900px (which, at the work's own proportion, is a width of 900 × ratio —
+   the idiom the home page already spends on its plates). The rendered box is
+   unchanged; it simply exists from the first paint, and `height: auto` then
+   takes the ratio off the width/height attributes. */
 .wa-project-img {
   display: block;
-  max-width: min(1500px, 100%);
-  max-height: 900px;
-  width: auto;
+  width: min(100%, 1500px, calc(900px * var(--nk-ratio)));
   height: auto;
-  outline: 1px solid #1a1a18;
+  outline: 1px solid var(--ink);
 }
 
 /* ══════════════════════════════════════════════════════════════════

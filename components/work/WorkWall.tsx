@@ -59,6 +59,15 @@ export default function WorkWall({
 }) {
   const [active, setActive] = useState<WorkKind | null>(initialKind);
 
+  /* Which card the reader actually sees first, and therefore which image is
+     the page's LCP. Filtering only hides cards, so it is the first item the
+     server-rendered filter leaves standing — /arbeiten?kind=rendering must
+     hand its priority to the first rendering, not to the first card in the
+     wall order. Read from initialKind rather than the live filter: this
+     decides the FIRST paint, and pressing a chip later must not re-prioritise
+     images the browser has already fetched. */
+  const lead = items.findIndex((item) => !initialKind || item.kind === initialKind);
+
   const shown = active ? items.filter((i) => i.kind === active).length : items.length;
   const count = countTemplate.replace("{count}", String(shown));
 
@@ -127,7 +136,7 @@ export default function WorkWall({
               {/* The wall reads two-up, so the stagger alternates: the left
                   sheet is pinned, then the right one a beat later. */}
               <Reveal delay={(i % 2) * 90}>
-                <WorkCard item={item} />
+                <WorkCard item={item} lead={i === lead} />
               </Reveal>
             </li>
           ))}

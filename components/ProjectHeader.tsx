@@ -19,6 +19,9 @@ interface Props {
   backLabel: string;
 }
 
+/** How far past the header's bottom edge the floating card takes over, in px. */
+const LEAD = 500;
+
 export default function ProjectHeader({ title, anno, backHref, backLabel }: Props) {
   const headerRef = useRef<HTMLDivElement>(null);
   const [fixed, setFixed] = useState(false);
@@ -26,13 +29,28 @@ export default function ProjectHeader({ title, anno, backHref, backLabel }: Prop
   useEffect(() => {
     const header = headerRef.current;
     if (!header) return;
+    if (typeof IntersectionObserver === "undefined") return;
 
-    // Trigger after scrolling past the header bottom + 500px extra
-    const threshold = header.offsetTop + header.offsetHeight + 500;
+    /* Where the card takes over is a fact about the layout, so the layout is
+       what answers: the root grows LEAD px upward and the header is the target,
+       so it stops intersecting exactly LEAD px past its own bottom edge — a
+       line that follows a resize, a rotation or a late webfont. The threshold
+       this replaces was measured once at mount and never again; it also read
+       offsetTop against the nearest positioned ancestor rather than the page,
+       so the lead ran short by the height of the masthead on top of that.
 
-    const onScroll = () => setFixed(window.scrollY > threshold);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+       The bottom-edge test is what makes !isIntersecting mean "scrolled past"
+       rather than "not reached yet" — both read as not intersecting. No
+       sentinel: the header is itself the thing the reader scrolls past. */
+    const io = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[entries.length - 1];
+        setFixed(!entry.isIntersecting && entry.boundingClientRect.bottom < 0);
+      },
+      { rootMargin: `${LEAD}px 0px 0px 0px`, threshold: 0 },
+    );
+    io.observe(header);
+    return () => io.disconnect();
   }, []);
 
   return (

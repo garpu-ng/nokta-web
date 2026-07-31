@@ -168,6 +168,8 @@ const ja: Record<string, string> = {
   "line.order": "注文する",
   "line.buy": "購入",
   "line.altSuffix": "ベクター化したCADラインプリント",
+  // 積み重ねたプロジェクト画像の代替テキスト。{n} は通し番号。
+  "projects.imageAlt": "画像 {n}",
   "line.metaDescSuffix": "ベクター化したCADラインプリント、A1印刷・額装。",
 
   // ── プロジェクト（レンダリング） ──────────────────────────────────
@@ -180,8 +182,9 @@ const ja: Record<string, string> = {
   "projects.desc.velostation": "都市空間における現代的な駐輪ステーションの建築ビジュアライゼーション。",
 
   // ── フッター ──────────────────────────────────────────────────────
-  // tag1 と tag2 は奥付のブランドブロックに積まれる。tag2 はルートの
-  // ソーシャルカードのキャプションにもなる（app/opengraph-image.tsx）。
+  // tag1 は奥付のブランドブロックで studio.motto の上に積まれる
+  // （components/Footer.tsx）。motto はルートのソーシャルカードの
+  // キャプションにもなる（app/opengraph-image.tsx）。
   "footer.tag1": "デュッセルドルフのデザインスタジオ。",
   // The studio's line. One string, three places: the footer, the
   // generated social card, and the homepage plate it is knocked into.

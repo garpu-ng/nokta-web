@@ -166,6 +166,7 @@ const tr: Record<string, string> = {
   "line.order": "Sipariş ver",
   "line.buy": "Satın al",
   "line.altSuffix": "vektörleştirilmiş CAD çizgi baskısı",
+  "projects.imageAlt": "görsel {n}",
   "line.metaDescSuffix": "Vektörleştirilmiş CAD çizgi baskısı, A1 basılmış ve çerçeveli.",
 
   // ── Projeler (render’lar) ─────────────────────────────────────────

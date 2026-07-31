@@ -181,6 +181,8 @@ const de: Record<string, string> = {
   "line.order": "Bestellen",
   "line.buy": "Kaufen",
   "line.altSuffix": "vektorisierter CAD-Liniendruck",
+  // Alt-Text der gestapelten Projektbilder; {n} ist die laufende Nummer.
+  "projects.imageAlt": "Bild {n}",
   "line.metaDescSuffix": "Vektorisierter CAD-Liniendruck, gedruckt in A1 und gerahmt.",
 
   // ── Projekte (Renderings) ─────────────────────────────────────────
@@ -193,8 +195,9 @@ const de: Record<string, string> = {
   "projects.desc.velostation": "Architekturvisualisierung einer modernen Fahrradstation im urbanen Raum.",
 
   // ── Footer ────────────────────────────────────────────────────────
-  // tag1 + tag2 stack in the colophon brand block; tag2 also becomes the root
-  // social card caption (app/opengraph-image.tsx, lowercased).
+  // tag1 stacks over studio.motto in the colophon brand block
+  // (components/Footer.tsx); the motto is also the root social card caption
+  // (app/opengraph-image.tsx, lowercased).
   "footer.tag1": "Designstudio in Düsseldorf.",
   // The studio's line. One string, three places: the footer, the
   // generated social card, and the homepage plate it is knocked into.

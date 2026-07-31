@@ -67,7 +67,7 @@ export default function TeaserVideo({
           display:none, so the document still opens on a heading for the
           outline and for a screen reader: the two sentences, each closing on
           its point, as they used to be set. */}
-      <h1 className={styles.srOnly}>{`${lead1}. ${lead2}.`}</h1>
+      <h1 className="nk-sr-only">{`${lead1}. ${lead2}.`}</h1>
     </section>
   );
 }

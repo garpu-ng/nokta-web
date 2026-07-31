@@ -1,10 +1,14 @@
 /* Full-screen takeover for the /punkt easter egg — sits above the header,
-   tabs and footer (z above 900) so it reads as its own little world. */
+   tabs and footer (z above 900) so it reads as its own little world.
+
+   It is portalled to <body>, which changes nothing here: the tokens are set on
+   :root, so they inherit down to the portal's own subtree exactly as they do
+   to the page's. */
 .root {
   position: fixed;
   inset: 0;
   z-index: 2000;
-  background: #1a1a18;
+  background: var(--ink);
   overflow: hidden;
   cursor: crosshair;
 }
@@ -28,7 +32,7 @@
   font-weight: 700;
   letter-spacing: -0.025em;
   line-height: 1;
-  color: #e9e0ce;
+  color: var(--paper);
   font-size: clamp(2rem, 7vw, 5rem);
   user-select: none;
 }
@@ -40,7 +44,7 @@
   display: inline-block;
   width: 0.2em;
   height: auto;
-  color: #1a1a18;
+  color: var(--ink);
   margin-left: 0.06em;
   vertical-align: -0.02em;
 }
@@ -53,7 +57,7 @@
   font-size: 0.72rem;
   letter-spacing: 0.07em;
   text-transform: uppercase;
-  color: #e9e0ce;
+  color: var(--paper);
   opacity: 0.5;
   text-decoration: none;
   transition: opacity 0.2s ease;

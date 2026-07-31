@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -86,16 +87,27 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 /** Rendering: the images, stacked, at full width. Each plate opens on the way
     down the stack — a soft wipe from its bottom edge, never a fade of the
     first one (it is the page's preloaded image and is already on screen). */
-function imageStack(project: Project, title: string) {
+function imageStack(project: Project, title: string, t: Translate) {
   return (
     <div className="wa-project-images">
       {project.images.map((src, i) => {
         const { width, height } = getMediaSize(src);
         return (
-          <Reveal key={src} variant="wipe" className="wa-image-window">
+          <Reveal
+            key={src}
+            variant="wipe"
+            className="wa-image-window"
+            /* The shot's own proportion, in the form CSS spends it — the same
+               `w / h` the home page hands its plates. It is what lets
+               .wa-project-img state a width rather than wait for the file to
+               arrive and tell it one. */
+            style={{ "--nk-ratio": `${width} / ${height}` } as CSSProperties}
+          >
             <Image
               src={src}
-              alt={`${title}, Bild ${i + 1}`}
+              /* The neighbouring print body already translates its alt; this
+                 one used to say "Bild n" to an EN/TR/JA reader. */
+              alt={`${title}, ${t("projects.imageAlt").replace("{n}", String(i + 1))}`}
               width={width}
               height={height}
               sizes="(max-width: 1500px) 100vw, 1500px"
@@ -223,7 +235,7 @@ function pieceBody(slug: string, t: Translate) {
 function workBody(work: Work, t: Translate) {
   switch (work.source.type) {
     case "project":
-      return imageStack(work.source.project, work.title);
+      return imageStack(work.source.project, work.title, t);
     case "print":
       return printPassport(work.source.print, t);
     case "piece":

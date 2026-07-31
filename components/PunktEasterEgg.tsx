@@ -3,17 +3,30 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
+import { KIND_FIELD, RED } from "@/lib/colors";
 import Dot from "./Dot";
 import styles from "./PunktEasterEgg.module.css";
 
 // Each brand colour maps to a form — "Vom Punkt zur Linie zur Form":
-//   0 red   #b83636 → round blob
-//   1 blue  #4b5cbe → rounded square
-//   2 green #5f6f53 → rounded triangle
+//   0 the studio's red → round blob
+//   1 cobalt           → rounded square
+//   2 green            → rounded triangle
+//
+// The frame loop lerps between colours channel by channel, so the palette has
+// to be RGB triples rather than the hex the rest of the site speaks. They are
+// parsed out of lib/colors.ts — the one sanctioned literal mirror — instead of
+// typed out again here: typing them out is how the cobalt and the green came
+// to sit behind the darkening pass that gave the doors their 4.5:1, the green
+// by 6 per channel.
+const rgb = (hex: string): [number, number, number] => [
+  parseInt(hex.slice(1, 3), 16),
+  parseInt(hex.slice(3, 5), 16),
+  parseInt(hex.slice(5, 7), 16),
+];
 const PALETTE: [number, number, number][] = [
-  [184, 54, 54],
-  [75, 92, 190],
-  [95, 111, 83],
+  rgb(RED),
+  rgb(KIND_FIELD.rendering),
+  rgb(KIND_FIELD.cad),
 ];
 
 // Normalised polar radius of the current form at angle `a` (before wobble).

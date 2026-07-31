@@ -12,7 +12,7 @@
    text-size-adjust guard.
 
    Also holds the cross-cutting utilities used across pages (.nk-mono-caption,
-   .nk-grain) and the per-navigation content fade (.nk-page-fade).
+   .nk-sr-only, .nk-grain) and the per-navigation content fade (.nk-page-fade).
    ══════════════════════════════════════════════════════════════════ */
 
 /* Document reset — border-box everywhere. The whole site is laid out for it;
@@ -141,6 +141,33 @@ textarea {
   text-transform: lowercase;
   color: currentColor;
   opacity: 0.7;
+}
+
+/* ── Visually hidden, still spoken ───────────────────────────────────
+   Worn by everything that is on the page only for the accessibility tree: the
+   h1 a plate or the teaser film draws instead of setting (PlateHead,
+   TeaserVideo), the figcaption a canvas cannot speak (app/page.tsx), and the
+   real labels behind the kontakt form's placeholders. Four modules had each
+   pasted the same nine declarations. Promoted to a global utility so the
+   pattern lives in one place.
+
+   Off-screen, NOT display:none or visibility:hidden — either would take the
+   element out of the accessibility tree, which is the one thing it is there
+   for. The 1px box is lifted out of the flow by the -1px margin, clip-path
+   hides the glyphs that would still paint inside it, and nowrap keeps a long
+   line from being reflowed into a 1px-wide column. border:0 is for the one of
+   these that is a form control — the kontakt form's radio, which would
+   otherwise carry its own default border into that 1px box. */
+.nk-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* ── Xerox-grain overlay ─────────────────────────────────────────────

@@ -1,6 +1,6 @@
 # nokta-web — Handoff / Project Notes
 
-Current as of **2026-07-28**, on `main`. The one-studio restructure and the
+Current as of **2026-07-31**, on `main`. The one-studio restructure and the
 Kolonnade redesign that followed it are both merged; earlier states of this
 file described a three-branch site (point / cube / line) and then a paper-ground
 one. Both are gone — their history lives in git.
@@ -101,7 +101,7 @@ Leuchtturm). `client` absent ⇒ the UI annotates **Eigenprojekt**.
 | `/` | teaser film → 01 statement + interference plate → 02 three doors → 03 two spreads + a pair + the way on → `HomeContact` |
 | `/arbeiten` | the wall: all thirteen works, `?kind=` filter (server-read, and kept in the URL as you click) |
 | `/arbeiten/[slug]` | one detail route for all 13: shared `ProjectHeader` + per-kind body — image stack (renderings), technical passport incl. price + buy (prints), `CaseStudy` (report), `ArtPlate` (n-Studie), `Leuchtturm` (manual) — + prev/next crossing kinds |
-| `/studio` | hero, team (Mert = deliberate "portrait folgt" placeholder), `ServiceIndex` (4 deliverable rows, the one paper section), CTA |
+| `/studio` | hero, team (three drawn portraits; Kaan's is a hover-once CSS sprite reveal — see README), `ServiceIndex` (4 deliverable rows, the one paper section), CTA |
 | `/kontakt` | `InquiryForm` + a rail carrying the direct address |
 | `/impressum`, `/datenschutz` | **placeholder text, German only** — see §5 |
 | `/punkt` | easter egg; its door is the red period of the footer wordmark |
@@ -137,7 +137,8 @@ holds the three door colours, deliberately darkened so 16px paper copy clears
 anything set on a door.
 
 `globals.css` imports `tokens.css` → `base.css` (reset, `.nk-mono-caption`,
-`.nk-grain`, `.nk-page-fade`, the focus ring, `.nk-skip`) → `nokta.css` (page
+`.nk-sr-only`, `.nk-grain`, `.nk-page-fade`, the focus ring, `.nk-skip`)
+→ `nokta.css` (page
 layouts). Components carry colocated `*.module.css`.
 
 ### Motion
@@ -217,10 +218,10 @@ through it) + `lib/og.tsx` render the root card; work detail pages override
 - [ ] **Social links** — footer Instagram/LinkedIn/Behance are `#`.
 - [x] **Mert's portrait** — done. All three cards carry a drawn portrait from
       `public/team/`; the waiting plate and the two flying-head clips are gone.
-- [ ] **The homepage crops portrait work.** `.plate` is a fixed 560px landscape
-      window with `object-fit: cover`: the KI-Kommission cover loses 52%, the
-      Eiffel print 45%, Leuchtturm 43%, Teahouse 32%. The `/arbeiten` wall
-      already does the right thing and honours each image's true ratio.
+- [x] **The homepage crops portrait work** — fixed. `.plate` used to be a fixed
+      560px landscape window with `object-fit: cover`. It now cuts every plate
+      to its work's own ratio (`aspect-ratio: var(--nk-ratio)`, `contain`), the
+      same thing the `/arbeiten` wall does; nothing on the homepage is cropped.
 - [ ] **Paper on the red field is 4.43:1** — the contact band's body copy and
       both CTA buttons ("Schreib uns", "Anfrage senden") sit just under AA.
       Deepening `--accent` to `#ae3232` fixes all three at once and is a

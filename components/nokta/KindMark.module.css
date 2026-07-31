@@ -14,8 +14,9 @@
   transition: opacity 0.3s ease;
 }
 
-/* The door lifts its mark when it is reached for. The parent sets .nk-door-lit
-   (a global class, because a CSS module can't see its consumer's hover). */
+/* The door lifts its mark when it is reached for. The hover is read off the
+   door itself, which carries the global .nk-door — a CSS module can't see its
+   consumer's hover any other way. */
 :global(.nk-door):hover .mark,
 :global(.nk-door):focus-visible .mark {
   opacity: 1;

@@ -51,7 +51,39 @@ export function toWallItem(work: Work, t: (key: string) => string): WallItem {
   };
 }
 
-export default function WorkCard({ item }: { item: WallItem }) {
+/* The wall's measure and its column gap, named here the way app/page.tsx names
+   the home sheet's: `sizes` has to be stated in pixels, because a card is not a
+   share of the viewport but a share of a twelve-column grid. --content-max less
+   its two gutters, and the gap at the width the design was drawn at (the
+   clamp in WorkWall.module.css tops out at 1.5rem from 1200px up). Nothing but
+   the hint is wrong if they drift. */
+const MEASURE = 1420;
+const COLUMNS = 12;
+const GAP = 24;
+
+/** What a card of this span actually renders at on a full sheet. The hint used
+    to end in a flat 640px for every card, which under-declared the widest ones
+    by nearly a third — a span-7 rendering takes ~818px, so a 1× screen picked
+    the 640w candidate and upscaled it. The lead pieces on the wall were the
+    soft ones. */
+function cardSizes(span: WallItem["span"]): string {
+  const column = (MEASURE - GAP * (COLUMNS - 1)) / COLUMNS;
+  const width = Math.round(span * column + GAP * (span - 1));
+  return [
+    "(max-width: 767px) 92vw",
+    "(max-width: 1100px) 55vw",
+    `${width}px`,
+  ].join(", ");
+}
+
+export default function WorkCard({
+  item,
+  /** the first card the wall actually shows — its image is the page's LCP */
+  lead = false,
+}: {
+  item: WallItem;
+  lead?: boolean;
+}) {
   return (
     <Link
       href={`/arbeiten/${item.slug}`}
@@ -73,7 +105,15 @@ export default function WorkCard({ item }: { item: WallItem }) {
           alt=""
           width={item.width}
           height={item.height}
-          sizes="(max-width: 767px) 92vw, (max-width: 1100px) 55vw, 640px"
+          sizes={cardSizes(item.span)}
+          /* This one image is the wall's LCP element, and every card on the
+             wall was lazy — so the browser deprioritised the one thing the
+             page is measured on until layout settled. Eager + high rather than
+             `preload`: the shipped docs steer to these "in most cases", and
+             warn off preload precisely when the LCP candidate can change,
+             which here it does the moment a kind filter is pressed. */
+          loading={lead ? "eager" : "lazy"}
+          fetchPriority={lead ? "high" : undefined}
           className={styles.img}
         />
         {/* A registration mark struck on the sheet's corner as you reach for
