@@ -111,6 +111,15 @@
   display: none;
 }
 
+/* Both halves of Kaan's plate are drawn on ink, so the plate's own ground has
+   to be ink under them rather than the media grey every other plate loads
+   against — a fluid box has a fractional height (452 × 37/30 = 557.453px) and
+   a child at 100% of it can round a device pixel short. */
+.clip,
+.still {
+  background-color: var(--ink);
+}
+
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   .clip {
     display: block;
@@ -120,10 +129,20 @@
        home page hands its plates a --nk-ratio. */
     background-image: var(--nk-reveal);
     background-repeat: no-repeat;
-    /* 17 frames stacked, so the sheet is 17 plate-heights tall. Both this and
+    /* 17 frames in a ROW, so the sheet is 17 plate-widths wide. Both this and
        the step count below are that frame count — change the sheet, change
-       both. */
-    background-size: 100% 1700%;
+       both.
+
+       Side by side rather than stacked, and that is the fix for the hairline
+       that used to flicker along the top edge. A step lands on a fractional
+       device pixel — unavoidable in a fluid box — so the sampled window can
+       reach one pixel into the NEIGHBOURING frame. Stacked, the neighbour's
+       adjoining row was the bottom of the drawing, where the jumper runs off
+       the edge: a bright line, blinking on and off as the reveal stepped.
+       In a row, the frames adjoin along their left and right margins, and
+       every frame's outer column is the same pure ink. The bleed still
+       happens; there is simply nothing there to see. */
+    background-size: 1700% 100%;
     background-position: 0% 0%;
     animation-name: reveal;
     animation-duration: 0.51s;
@@ -142,15 +161,15 @@
   }
 }
 
-/* 0% puts the sheet's top frame in the plate; 100% puts its bottom one there.
+/* 0% puts the sheet's first frame in the plate; 100% puts its last one there.
    Every stop in between lands on a frame exactly, because the sheet is a whole
-   number of plate-heights tall. */
+   number of plate-widths wide. */
 @keyframes reveal {
   from {
     background-position: 0% 0%;
   }
   to {
-    background-position: 0% 100%;
+    background-position: 100% 0%;
   }
 }
 

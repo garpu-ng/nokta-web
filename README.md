@@ -67,8 +67,9 @@ Neue Texte immer zuerst in `messages/de.ts` anlegen, dann in den anderen Sprache
   Tinte, der rote Akzent — dieselben Werte in `lib/colors.ts`).
 - Der rote Punkt der Fußzeilen-Wortmarke verlinkt auf ein Easter Egg unter `/punkt`.
 - **Kaans Portrait auf `/studio` bewegt sich.** `public/team/kaan-reveal.webp`
-  ist ein **Sprite-Sheet mit 17 Bildern** (untereinander, verlustfrei WebP),
-  das eine CSS-`steps()`-Animation durchschaltet — bewusst **kein Video**:
+  ist ein **Sprite-Sheet mit 17 Bildern** (**nebeneinander**, verlustfrei
+  WebP), das eine CSS-`steps()`-Animation durchschaltet — bewusst **kein
+  Video**:
   als `<video>` lief es in Chromium und blieb in Safari schwarz, und ein
   Codec, der in einem nicht testbaren Browser stimmen muss, ist eine Wette.
   Verhalten kommt komplett aus CSS, **ohne JavaScript**: bei Hover läuft es
@@ -81,5 +82,14 @@ Neue Texte immer zuerst in `messages/de.ts` anlegen, dann in den anderen Sprache
   des Sheets. Umschaltung in CSS (`.clip` / `.still` in
   `app/studio/page.module.css`) — dadurch lädt ein Handy das Sheet nie
   (ein `background-image` in `display:none` wird nicht geholt).
+  **Nebeneinander ist Absicht, nicht Geschmack:** ein Schritt landet in einer
+  fluiden Box zwangsläufig auf einem Bruchteil-Pixel, das Sample greift also
+  ein Pixel ins Nachbarbild. Nebeneinander stoßen die Bilder an ihren linken
+  und rechten Rändern aneinander, und die sind in jedem Bild dieselbe reine
+  Tinte — man sieht nichts. Untereinander stieß man an die Unterkante der
+  Zeichnung, wo der Pulli aus dem Bild läuft: eine helle Linie, die mit jedem
+  Schritt an- und ausging.
   **Neues Sheet = Bildzahl an drei Stellen anpassen:** `background-size`,
-  `steps(...)` und ggf. `animation-duration`.
+  `steps(...)` und ggf. `animation-duration`. Beim Skalieren die Werte auf den
+  Farbumfang der Vorlage klemmen — Lanczos/Mitchell überschwingen an harten
+  Kanten und legen sonst eine zu helle 1-px-Zeile an den Bildrand.
