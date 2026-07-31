@@ -69,7 +69,12 @@ const SIZES: Record<string, MediaSize> = {
   // They are within a couple of pixels of each other but not identical, so the
   // plate holds one shared proportion and lets the odd pixel letterbox (see
   // .portrait in app/studio/page.module.css) rather than crop a border away.
-  "/team/kaan.png": { width: 451, height: 554 },
+  //
+  // Kaan's is the exception twice over: it is the last frame of the reveal
+  // clip that plays in his plate (public/team/kaan.mp4), so it carries that
+  // drawing's ink ground rather than white, and it is padded to exactly the
+  // plate's 30:37 — the clip is padded to the same, so neither ever letterboxes.
+  "/team/kaan.png": { width: 900, height: 1110 },
   "/team/mohammed.png": { width: 450, height: 555 },
   "/team/mert.png": { width: 449, height: 555 },
 };

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import PortraitClip from "@/components/PortraitClip";
 import Reveal from "@/components/Reveal";
 import PlateHead from "@/components/nokta/PlateHead";
 import RidgeField from "@/components/nokta/RidgeField";
@@ -15,12 +16,41 @@ import styles from "./page.module.css";
    the sheet. */
 
 /* The three of us, in the order the studio lists itself. The portraits are
-   drawn rather than photographed: one line figure per person on white, inside
-   a ruled border in that person's colour. They replace the flying-head clips
-   the first two cards used to autoplay — and they finally give Mert a card
-   like everyone else's instead of an empty plate. */
-const TEAM = [
-  { name: "Kaan", role: "studio.role.kaan", src: "/team/kaan.png" },
+   drawn rather than photographed: one line figure per person, inside a ruled
+   border in that person's colour.
+
+   Kaan's is drawn twice. `clip` is the reveal — the halftone version coming
+   into focus — and `src` is that same drawing's LAST frame. The clip plays
+   once under a pointer and then holds exactly what `src` shows, so the two
+   are one portrait at two moments, not two portraits. Everywhere the clip
+   doesn't belong (a touch screen, a reader who asked for less motion) the
+   still stands in and nothing is missing but the motion. */
+type Member = {
+  name: string;
+  role: string;
+  src: string;
+  /** a play-once reveal for this plate; the still is its final frame */
+  clip?: {
+    sources: { src: string; type: string }[];
+    width: number;
+    height: number;
+  };
+};
+
+const TEAM: Member[] = [
+  {
+    name: "Kaan",
+    role: "studio.role.kaan",
+    src: "/team/kaan.png",
+    clip: {
+      sources: [
+        { src: "/team/kaan.webm", type: "video/webm" },
+        { src: "/team/kaan.mp4", type: "video/mp4" },
+      ],
+      width: 720,
+      height: 888,
+    },
+  },
   { name: "Mohammed", role: "studio.role.mohammed", src: "/team/mohammed.png" },
   { name: "Mert", role: "studio.role.mert", src: "/team/mert.png" },
 ];
@@ -86,8 +116,26 @@ export default async function StudioPage() {
                     width={width}
                     height={height}
                     sizes="(max-width: 899px) 320px, (max-width: 1199px) 33vw, 452px"
-                    className={styles.portraitMedia}
+                    /* .still only where there is a clip to stand down for.
+                       On a plate with no clip it is the portrait, full stop —
+                       marking it .still would hide it on every desktop. */
+                    className={
+                      member.clip
+                        ? `${styles.portraitMedia} ${styles.still}`
+                        : styles.portraitMedia
+                    }
                   />
+                  {/* Only one of the two is ever in the box — the CSS decides
+                      which, so a plate without a pointer never waits on JS to
+                      show a portrait. */}
+                  {member.clip ? (
+                    <PortraitClip
+                      sources={member.clip.sources}
+                      width={member.clip.width}
+                      height={member.clip.height}
+                      className={`${styles.portraitMedia} ${styles.clip}`}
+                    />
+                  ) : null}
                 </div>
                 <div className={styles.cardRow}>
                   <span className={styles.name}>{member.name}</span>

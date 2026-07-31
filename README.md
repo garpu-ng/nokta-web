@@ -25,6 +25,11 @@ abhaken (`[x]`), Neues unten anhängen.
 - [x] **Team / Mert:** Erledigt. Alle drei Karten zeigen jetzt gezeichnete
       Portraits (`public/team/{kaan,mohammed,mert}.png`); der Platzhalter und
       die alten Clips (`flymekaan.mp4`, `flymehammed.mp4`) sind raus.
+- [ ] **Team / einheitlicher Grund:** Kaans Portrait steht auf Tinte
+      (`--ink`, aus dem Reveal-Clip), Mohammed und Mert stehen auf Weiß mit
+      gezeichnetem Rahmen. Nebeneinander sind das zwei verschiedene Sorten
+      Karte — entweder die beiden anderen auf Tinte nachziehen oder Kaan
+      auf Weiß.
 - [ ] **Alt-Routen aufräumen:** `/point`, `/cube`, `/line`, `/arch`, `/nokta`
       sind `permanentRedirect`-Stubs auf `/`; `/line/[slug]` + `/projekte/[slug]`
       leiten auf `/arbeiten/[slug]` — irgendwann entfernen, wenn nichts mehr
@@ -61,3 +66,10 @@ Neue Texte immer zuerst in `messages/de.ts` anlegen, dann in den anderen Sprache
 - Design-Tokens & Farbpalette: `app/styles/tokens.css` (drei Farben: Papier,
   Tinte, der rote Akzent — dieselben Werte in `lib/colors.ts`).
 - Der rote Punkt der Fußzeilen-Wortmarke verlinkt auf ein Easter Egg unter `/punkt`.
+- **Kaans Portrait auf `/studio` bewegt sich.** `public/team/kaan.{webm,mp4}`
+  ist ein Reveal-Clip, der bei Hover **einmal** läuft und danach auf seinem
+  letzten Bild stehen bleibt — pro Seitenaufruf genau einmal, kein Loop, kein
+  Neustart. Ohne echten Zeiger (Touch) oder bei `prefers-reduced-motion`
+  läuft er gar nicht erst: dann steht `public/team/kaan.png` da, und das
+  **ist** das letzte Bild des Clips. Umschaltung passiert in CSS
+  (`.clip` / `.still` in `app/studio/page.module.css`), nicht in JS.

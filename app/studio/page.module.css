@@ -80,6 +80,29 @@
   object-fit: contain;
 }
 
+/* One plate holds a clip that plays itself once. The clip and the still are
+   the same drawing at two moments — the clip's last frame IS the still — so
+   only one of them is ever displayed and swapping which costs no layout and
+   no second asset to keep in sync.
+
+   The clip is worth having only where there is a real pointer to run it with
+   and the reader hasn't asked for less motion. A touch screen has no hover to
+   spend, so it gets the still: the drawing as the clip would have left it,
+   which is the portrait proper. That decision is made here rather than in JS
+   so a phone paints the right frame on the first pass, before hydration. */
+.clip {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .clip {
+    display: block;
+  }
+  .still {
+    display: none;
+  }
+}
+
 /* Name left, role right, over the hairline that closes the plate. */
 .cardRow {
   display: flex;
