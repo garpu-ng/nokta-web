@@ -80,16 +80,33 @@
   object-fit: contain;
 }
 
-/* One plate holds a clip that plays itself once. The clip and the still are
-   the same drawing at two moments — the clip's last frame IS the still — so
-   only one of them is ever displayed and swapping which costs no layout and
-   no second asset to keep in sync.
+/* ── The one plate that moves ───────────────────────────────────────────
+   Kaan's portrait is a 17-frame reveal, and it is a SPRITE STEPPED BY CSS
+   rather than a video. That is a deliberate second attempt: shipped as a
+   <video> it played in Chromium and painted nothing at all in Safari, and a
+   codec that has to be right in a browser we cannot test is a bet, not an
+   implementation. A stack of frames in one image and a steps() animation has
+   no codec to get wrong — and it states the behaviour asked for directly,
+   without a line of JavaScript:
 
-   The clip is worth having only where there is a real pointer to run it with
-   and the reader hasn't asked for less motion. A touch screen has no hover to
-   spend, so it gets the still: the drawing as the clip would have left it,
-   which is the portrait proper. That decision is made here rather than in JS
-   so a phone paints the right frame on the first pass, before hydration. */
+     iteration-count 1  → it never loops
+     play-state paused  → nothing moves until a pointer is on it
+     :hover running     → it only ever advances under that pointer, and
+                          leaving mid-reveal holds the frame it reached
+     fill-mode forwards → when it runs out, the last frame stays. A finished
+                          animation cannot be restarted by hovering again, so
+                          it is done for the page view. That is the whole ask.
+
+   The clip and the still are the same drawing at two moments — the sheet's
+   last frame IS /team/kaan.png — so only one of them is ever displayed and
+   there is no second artwork to keep in sync.
+
+   The clip is worth having only where a pointer can run it and the reader
+   hasn't asked for less motion. A touch screen has no hover to spend, so it
+   gets the still: the drawing as the reveal would have left it, which is the
+   portrait proper. Deciding that here rather than in JS means a phone paints
+   the right frame on the first pass, and never downloads the sheet at all —
+   a background-image inside display:none is not fetched. */
 .clip {
   display: none;
 }
@@ -97,9 +114,43 @@
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   .clip {
     display: block;
+    width: 100%;
+    height: 100%;
+    /* The sheet's URL rides in from the team data as --nk-reveal, the way the
+       home page hands its plates a --nk-ratio. */
+    background-image: var(--nk-reveal);
+    background-repeat: no-repeat;
+    /* 17 frames stacked, so the sheet is 17 plate-heights tall. Both this and
+       the step count below are that frame count — change the sheet, change
+       both. */
+    background-size: 100% 1700%;
+    background-position: 0% 0%;
+    animation-name: reveal;
+    animation-duration: 0.51s;
+    /* jump-none is the one that lands on BOTH ends: 17 frames means 17 stops
+       including the last. Plain steps(17) would stop a frame short. */
+    animation-timing-function: steps(17, jump-none);
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
+  }
+  .clip:hover {
+    animation-play-state: running;
   }
   .still {
     display: none;
+  }
+}
+
+/* 0% puts the sheet's top frame in the plate; 100% puts its bottom one there.
+   Every stop in between lands on a frame exactly, because the sheet is a whole
+   number of plate-heights tall. */
+@keyframes reveal {
+  from {
+    background-position: 0% 0%;
+  }
+  to {
+    background-position: 0% 100%;
   }
 }
 

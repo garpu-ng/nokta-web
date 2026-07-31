@@ -66,10 +66,20 @@ Neue Texte immer zuerst in `messages/de.ts` anlegen, dann in den anderen Sprache
 - Design-Tokens & Farbpalette: `app/styles/tokens.css` (drei Farben: Papier,
   Tinte, der rote Akzent — dieselben Werte in `lib/colors.ts`).
 - Der rote Punkt der Fußzeilen-Wortmarke verlinkt auf ein Easter Egg unter `/punkt`.
-- **Kaans Portrait auf `/studio` bewegt sich.** `public/team/kaan.{webm,mp4}`
-  ist ein Reveal-Clip, der bei Hover **einmal** läuft und danach auf seinem
-  letzten Bild stehen bleibt — pro Seitenaufruf genau einmal, kein Loop, kein
-  Neustart. Ohne echten Zeiger (Touch) oder bei `prefers-reduced-motion`
-  läuft er gar nicht erst: dann steht `public/team/kaan.png` da, und das
-  **ist** das letzte Bild des Clips. Umschaltung passiert in CSS
-  (`.clip` / `.still` in `app/studio/page.module.css`), nicht in JS.
+- **Kaans Portrait auf `/studio` bewegt sich.** `public/team/kaan-reveal.webp`
+  ist ein **Sprite-Sheet mit 17 Bildern** (untereinander, verlustfrei WebP),
+  das eine CSS-`steps()`-Animation durchschaltet — bewusst **kein Video**:
+  als `<video>` lief es in Chromium und blieb in Safari schwarz, und ein
+  Codec, der in einem nicht testbaren Browser stimmen muss, ist eine Wette.
+  Verhalten kommt komplett aus CSS, **ohne JavaScript**: bei Hover läuft es
+  **einmal** (`iteration-count: 1`), pausiert beim Verlassen auf dem
+  erreichten Bild, macht beim erneuten Hover dort weiter — und bleibt am Ende
+  auf dem letzten Bild stehen (`fill-mode: forwards`). Eine fertige Animation
+  startet nicht neu, also pro Seitenaufruf genau einmal.
+  Ohne echten Zeiger (Touch) oder bei `prefers-reduced-motion` läuft sie gar
+  nicht: dann steht `public/team/kaan.png` da, und das **ist** das letzte Bild
+  des Sheets. Umschaltung in CSS (`.clip` / `.still` in
+  `app/studio/page.module.css`) — dadurch lädt ein Handy das Sheet nie
+  (ein `background-image` in `display:none` wird nicht geholt).
+  **Neues Sheet = Bildzahl an drei Stellen anpassen:** `background-size`,
+  `steps(...)` und ggf. `animation-duration`.

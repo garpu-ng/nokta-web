@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import PortraitClip from "@/components/PortraitClip";
 import Reveal from "@/components/Reveal";
 import PlateHead from "@/components/nokta/PlateHead";
 import RidgeField from "@/components/nokta/RidgeField";
@@ -19,22 +18,19 @@ import styles from "./page.module.css";
    drawn rather than photographed: one line figure per person, inside a ruled
    border in that person's colour.
 
-   Kaan's is drawn twice. `clip` is the reveal — the halftone version coming
-   into focus — and `src` is that same drawing's LAST frame. The clip plays
-   once under a pointer and then holds exactly what `src` shows, so the two
-   are one portrait at two moments, not two portraits. Everywhere the clip
-   doesn't belong (a touch screen, a reader who asked for less motion) the
-   still stands in and nothing is missing but the motion. */
+   Kaan's is drawn twice. `reveal` is the sheet of 17 frames the halftone
+   version comes into focus across, and `src` is that same drawing's LAST
+   frame. The reveal steps once under a pointer and then holds exactly what
+   `src` shows, so the two are one portrait at two moments, not two
+   portraits. Everywhere the reveal doesn't belong (a touch screen, a reader
+   who asked for less motion) the still stands in and nothing is missing but
+   the motion. The stepping itself is CSS — see .clip in the page's module. */
 type Member = {
   name: string;
   role: string;
   src: string;
-  /** a play-once reveal for this plate; the still is its final frame */
-  clip?: {
-    sources: { src: string; type: string }[];
-    width: number;
-    height: number;
-  };
+  /** sprite sheet for a play-once reveal; the still is its final frame */
+  reveal?: string;
 };
 
 const TEAM: Member[] = [
@@ -42,14 +38,7 @@ const TEAM: Member[] = [
     name: "Kaan",
     role: "studio.role.kaan",
     src: "/team/kaan.png",
-    clip: {
-      sources: [
-        { src: "/team/kaan.webm", type: "video/webm" },
-        { src: "/team/kaan.mp4", type: "video/mp4" },
-      ],
-      width: 720,
-      height: 888,
-    },
+    reveal: "/team/kaan-reveal.webp",
   },
   { name: "Mohammed", role: "studio.role.mohammed", src: "/team/mohammed.png" },
   { name: "Mert", role: "studio.role.mert", src: "/team/mert.png" },
@@ -116,24 +105,28 @@ export default async function StudioPage() {
                     width={width}
                     height={height}
                     sizes="(max-width: 899px) 320px, (max-width: 1199px) 33vw, 452px"
-                    /* .still only where there is a clip to stand down for.
-                       On a plate with no clip it is the portrait, full stop —
+                    /* .still only where there is a reveal to stand down for.
+                       On a plate with no reveal it is the portrait, full stop —
                        marking it .still would hide it on every desktop. */
                     className={
-                      member.clip
+                      member.reveal
                         ? `${styles.portraitMedia} ${styles.still}`
                         : styles.portraitMedia
                     }
                   />
                   {/* Only one of the two is ever in the box — the CSS decides
                       which, so a plate without a pointer never waits on JS to
-                      show a portrait. */}
-                  {member.clip ? (
-                    <PortraitClip
-                      sources={member.clip.sources}
-                      width={member.clip.width}
-                      height={member.clip.height}
-                      className={`${styles.portraitMedia} ${styles.clip}`}
+                      show a portrait. Decorative: the name is real text below,
+                      and the last frame of this sheet is the still above. */}
+                  {member.reveal ? (
+                    <span
+                      className={styles.clip}
+                      style={
+                        {
+                          "--nk-reveal": `url(${member.reveal})`,
+                        } as React.CSSProperties
+                      }
+                      aria-hidden="true"
                     />
                   ) : null}
                 </div>
