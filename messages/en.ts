@@ -127,8 +127,6 @@ const en: Record<string, string> = {
   "studio.role.kaan": "Design · Concept",
   "studio.role.mohammed": "3D · Visualisation",
   "studio.role.mert": "Layout · Print",
-  // Placeholder caption on Mert's team card until his portrait clip lands.
-  "studio.mert.placeholder": "portrait to follow",
   "studio.cta": "Got a project in the works?",
   "studio.ctaWrite": "Write us",
 

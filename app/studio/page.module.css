@@ -60,14 +60,15 @@
   min-width: 0;
 }
 
-/* The portrait plate. The frame carries the CLIP's own 502 × 1014 proportion
-   rather than a height of its own, so the whole take is on the sheet — a
-   fixed height plus object-fit:cover was cutting a fifth off the top and
-   bottom of every one. `contain` is belt and braces: if a future clip is cut
-   to a different ratio it letterboxes on the media ground instead of
-   silently cropping again. */
+/* The portrait plate. The frame carries the DRAWING's own proportion rather
+   than a height of its own, so the whole sheet is on the page — a fixed height
+   plus object-fit:cover was cutting a fifth off the top and bottom of every
+   one back when these were 1:2 clips. The three drawings land within two
+   pixels of each other (451 × 554, 450 × 555, 449 × 555) and one shared ratio
+   holds the row of cards on a single baseline; `contain` spends the odd
+   sub-pixel on the media ground rather than shaving a ruled border off. */
 .portrait {
-  aspect-ratio: 502 / 1014;
+  aspect-ratio: 450 / 555;
   overflow: hidden;
   background: var(--nk-media);
 }
@@ -77,58 +78,6 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-}
-
-/* The frame that is deliberately waiting. Same proportion as a portrait, so
-   the row of three keeps one baseline — the gap in the team is visible, which
-   is the point, but it isn't a gap in the layout. */
-.placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 18px;
-  aspect-ratio: 502 / 1014;
-  background: var(--nk-frame);
-  border: 1px solid var(--nk-hair);
-}
-
-/* A registration crosshair: a circle with two hairlines through its centre,
-   drawn in CSS so it costs no asset. */
-.crosshair {
-  position: relative;
-  width: 64px;
-  height: 64px;
-  border: 1px solid rgba(233, 224, 206, 0.5);
-  border-radius: 50%;
-}
-.crosshair::before,
-.crosshair::after {
-  content: "";
-  position: absolute;
-  background: rgba(233, 224, 206, 0.5);
-}
-.crosshair::before {
-  left: 50%;
-  top: 8px;
-  bottom: 8px;
-  width: 1px;
-}
-.crosshair::after {
-  top: 50%;
-  left: 8px;
-  right: 8px;
-  height: 1px;
-}
-
-/* .5 read 4.17:1 on the empty-frame ink — under AA at 11px, and this label is
-   the only thing telling the reader the frame is waiting rather than broken. */
-.placeholderLabel {
-  font-family: var(--mono-font);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  opacity: 0.66;
 }
 
 /* Name left, role right, over the hairline that closes the plate. */
@@ -228,8 +177,9 @@
   .team {
     padding-block: 48px 56px;
   }
-  /* One per row, but a 1:2 clip at full phone width is a tower — hold the
-     card to a readable measure and centre it. */
+  /* One per row — but this breakpoint runs up to 899px, and a portrait taking
+     that whole measure is a poster, not a team card. Hold it to a plate you
+     can take in at a glance. */
   .teamGrid {
     grid-template-columns: 1fr;
     gap: 40px;

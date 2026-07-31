@@ -120,7 +120,6 @@ const tr: Record<string, string> = {
   "studio.role.kaan": "Tasarım · Konsept",
   "studio.role.mohammed": "3B · Görselleştirme",
   "studio.role.mert": "Dizgi · Baskı",
-  "studio.mert.placeholder": "portre yakında",
   "studio.cta": "Aklında bir proje mi var?",
   "studio.ctaWrite": "Bize yaz",
 

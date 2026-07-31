@@ -215,8 +215,8 @@ through it) + `lib/og.tsx` render the root card; work detail pages override
       code change. Until then the button says "Bestellen" and opens the generic
       inquiry form, which orders nothing.
 - [ ] **Social links** — footer Instagram/LinkedIn/Behance are `#`.
-- [ ] **Mert's portrait** — swap the placeholder card for the `<GifVideo>` row
-      once `public/flymemert.mp4` exists (comment in `app/studio/page.tsx`).
+- [x] **Mert's portrait** — done. All three cards carry a drawn portrait from
+      `public/team/`; the waiting plate and the two flying-head clips are gone.
 - [ ] **The homepage crops portrait work.** `.plate` is a fixed 560px landscape
       window with `object-fit: cover`: the KI-Kommission cover loses 52%, the
       Eiffel print 45%, Leuchtturm 43%, Teahouse 32%. The `/arbeiten` wall

@@ -64,6 +64,14 @@ const SIZES: Record<string, MediaSize> = {
   "/line/eiffel.png": { width: 1080, height: 1618 },
   "/line/empire-state.png": { width: 1080, height: 1618 },
   "/line/osaka.png": { width: 1080, height: 1618 },
+  // The three studio portraits on /studio. Drawn, not photographed: each is a
+  // line figure on white inside its own ruled border, in that person's colour.
+  // They are within a couple of pixels of each other but not identical, so the
+  // plate holds one shared proportion and lets the odd pixel letterbox (see
+  // .portrait in app/studio/page.module.css) rather than crop a border away.
+  "/team/kaan.png": { width: 451, height: 554 },
+  "/team/mohammed.png": { width: 450, height: 555 },
+  "/team/mert.png": { width: 449, height: 555 },
 };
 
 // Fallback keeps a wrong path from crashing the build; aspect ratio defaults to

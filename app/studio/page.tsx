@@ -1,17 +1,29 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import GifVideo from "@/components/GifVideo";
 import Reveal from "@/components/Reveal";
 import PlateHead from "@/components/nokta/PlateHead";
 import RidgeField from "@/components/nokta/RidgeField";
 import ServiceIndex from "@/components/nokta/ServiceIndex";
 import { getLocale, getT } from "@/lib/i18n";
+import { getMediaSize } from "@/lib/mediaSizes";
 import { socialMetadata } from "@/lib/socialMeta";
 import styles from "./page.module.css";
 
 /* The studio page: who we are, then what you get. The teaser no longer opens
    this page — it opens the homepage — so the h1 block is the first thing on
    the sheet. */
+
+/* The three of us, in the order the studio lists itself. The portraits are
+   drawn rather than photographed: one line figure per person on white, inside
+   a ruled border in that person's colour. They replace the flying-head clips
+   the first two cards used to autoplay — and they finally give Mert a card
+   like everyone else's instead of an empty plate. */
+const TEAM = [
+  { name: "Kaan", role: "studio.role.kaan", src: "/team/kaan.png" },
+  { name: "Mohammed", role: "studio.role.mohammed", src: "/team/mohammed.png" },
+  { name: "Mert", role: "studio.role.mert", src: "/team/mert.png" },
+];
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getT();
@@ -59,63 +71,31 @@ export default async function StudioPage() {
           {t("studio.team")}
         </h2>
         <div className={styles.teamGrid}>
-          <Reveal className={styles.card}>
-            <div className={styles.portrait}>
-              <GifVideo
-                src="/flymekaan.mp4"
-                label="Kaan"
-                width={502}
-                height={1014}
-                className={styles.portraitMedia}
-              />
-            </div>
-            <div className={styles.cardRow}>
-              <span className={styles.name}>Kaan</span>
-              <span className={styles.role}>{t("studio.role.kaan")}</span>
-            </div>
-          </Reveal>
-
-          <Reveal className={styles.card} delay={100}>
-            <div className={styles.portrait}>
-              <GifVideo
-                src="/flymehammed.mp4"
-                label="Mohammed"
-                width={502}
-                height={1014}
-                className={styles.portraitMedia}
-              />
-            </div>
-            <div className={styles.cardRow}>
-              <span className={styles.name}>Mohammed</span>
-              <span className={styles.role}>{t("studio.role.mohammed")}</span>
-            </div>
-          </Reveal>
-
-          <Reveal className={styles.card} delay={200}>
-            {/* Mert's portrait asset isn't in /public yet — there's no
-                /flymemert.mp4 (the old /flymemert.gif 404'd too), so a
-                <GifVideo> here would render an empty frame. Until it lands,
-                the frame says so in the press-sheet vocabulary: an outlined
-                plate with a centred crosshair and a mono caption.
-
-                TO SWAP IN THE REAL PORTRAIT: drop the converted clip at
-                public/flymemert.mp4 and replace this whole <div.placeholder>
-                with the same two lines the other cards use:
-                  <div className={styles.portrait}>
-                    <GifVideo src="/flymemert.mp4" label="Mert" width={502}
-                              height={1014} className={styles.portraitMedia} />
-                  </div> */}
-            <div className={styles.placeholder} aria-hidden="true">
-              <span className={styles.crosshair} />
-              <span className={styles.placeholderLabel}>
-                {t("studio.mert.placeholder")}
-              </span>
-            </div>
-            <div className={styles.cardRow}>
-              <span className={styles.name}>Mert</span>
-              <span className={styles.role}>{t("studio.role.mert")}</span>
-            </div>
-          </Reveal>
+          {TEAM.map((member, i) => {
+            const { width, height } = getMediaSize(member.src);
+            return (
+              <Reveal className={styles.card} key={member.name} delay={i * 100}>
+                <div className={styles.portrait}>
+                  <Image
+                    src={member.src}
+                    /* Empty on purpose: the name is set as real text two lines
+                       down, in this same card, and the drawing says nothing the
+                       caption doesn't. An alt here would announce each of us
+                       twice. */
+                    alt=""
+                    width={width}
+                    height={height}
+                    sizes="(max-width: 899px) 320px, (max-width: 1199px) 33vw, 452px"
+                    className={styles.portraitMedia}
+                  />
+                </div>
+                <div className={styles.cardRow}>
+                  <span className={styles.name}>{member.name}</span>
+                  <span className={styles.role}>{t(member.role)}</span>
+                </div>
+              </Reveal>
+            );
+          })}
         </div>
       </section>
 

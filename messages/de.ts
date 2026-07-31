@@ -133,8 +133,6 @@ const de: Record<string, string> = {
   "studio.role.kaan": "Design · Konzept",
   "studio.role.mohammed": "3D · Visualisierung",
   "studio.role.mert": "Layout · Druck",
-  // Placeholder caption on Mert's team card until his portrait clip lands.
-  "studio.mert.placeholder": "portrait folgt",
   "studio.cta": "Projekt in Planung?",
   "studio.ctaWrite": "Schreib uns",
 

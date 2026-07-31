@@ -122,8 +122,6 @@ const ja: Record<string, string> = {
   "studio.role.kaan": "デザイン · コンセプト",
   "studio.role.mohammed": "3D · ビジュアライゼーション",
   "studio.role.mert": "レイアウト · 印刷",
-  // Mert のポートレートが揃うまでのプレースホルダー。
-  "studio.mert.placeholder": "ポートレート準備中",
   "studio.cta": "進行中のプロジェクトはありますか？",
   "studio.ctaWrite": "ご連絡ください",
 

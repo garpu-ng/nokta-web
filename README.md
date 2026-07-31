@@ -22,10 +22,9 @@ abhaken (`[x]`), Neues unten anhängen.
 - [ ] **Impressum & Datenschutz:** echte, geprüfte Rechtstexte einsetzen
       (aktuell Platzhalter, nur Deutsch).
 - [ ] **Social-Links:** Instagram / LinkedIn / Behance im Footer sind noch `#`.
-- [ ] **Team / Mert:** Die Mert-Karte ist jetzt bewusst ein „portrait folgt"-
-      Platzhalter (i18n, alle vier Sprachen). Echtes Portrait unter
-      `public/flymemert.mp4` nachreichen und die Karte gegen die `<GifVideo>`-Zeile
-      der anderen tauschen (Kommentar in `app/studio/page.tsx`).
+- [x] **Team / Mert:** Erledigt. Alle drei Karten zeigen jetzt gezeichnete
+      Portraits (`public/team/{kaan,mohammed,mert}.png`); der Platzhalter und
+      die alten Clips (`flymekaan.mp4`, `flymehammed.mp4`) sind raus.
 - [ ] **Alt-Routen aufräumen:** `/point`, `/cube`, `/line`, `/arch`, `/nokta`
       sind `permanentRedirect`-Stubs auf `/`; `/line/[slug]` + `/projekte/[slug]`
       leiten auf `/arbeiten/[slug]` — irgendwann entfernen, wenn nichts mehr
