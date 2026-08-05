@@ -54,7 +54,6 @@
 
 .railLabel {
   margin: 0 0 10px;
-  font-family: var(--mono-font);
   font-size: 11px;
   letter-spacing: 0.09em;
   text-transform: uppercase;

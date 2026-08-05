@@ -45,7 +45,6 @@
   padding: 20px 34px;
   background: var(--ink);
   color: var(--paper);
-  font-family: var(--mono-font);
   font-size: 12px;
   letter-spacing: 0.08em;
   text-transform: uppercase;

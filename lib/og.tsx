@@ -7,11 +7,11 @@
 // No binary assets: the image is built entirely from JSX + CSS by ImageResponse
 // (satori under the hood), so nothing ships to the repo. It also uses no custom
 // font files — satori's bundled default face carries the type. That means the
-// wordmark is not literally Syne and the caption is not literally Space Mono;
-// the poster reads bold through scale + flat high-contrast colour instead, and
-// letter-spacing + lowercasing evoke the mono caption. Wiring the real brand
-// faces would mean adding woff binaries (or a build-time network fetch), which
-// this deliberately avoids.
+// wordmark is not literally Syne; the poster reads bold through scale + flat
+// high-contrast colour instead, and letter-spacing + lowercasing carry the
+// caption the way the site's own .nk-caption does. Wiring the real brand face
+// would mean adding woff binaries (or a build-time network fetch), which this
+// deliberately avoids.
 
 import { ImageResponse } from "next/og";
 import { PAPER } from "@/lib/colors";

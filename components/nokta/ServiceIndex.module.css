@@ -35,7 +35,6 @@
 .note {
   margin: 0;
   flex-shrink: 0;
-  font-family: var(--mono-font);
   font-size: 11px;
   letter-spacing: 0.09em;
   text-transform: uppercase;
@@ -61,10 +60,12 @@
 
 .folio {
   padding-top: 8px;
-  font-family: var(--mono-font);
   font-size: 11px;
   letter-spacing: 0.08em;
   color: var(--accent-on-paper);
+  /* Four folios ruled down the register — tabular figures hold the column
+     the mono used to hold on its own. */
+  font-variant-numeric: tabular-nums;
 }
 
 .title {
@@ -95,7 +96,6 @@
    the red. Set in the tint cut for type on paper: 4.85:1. */
 .evidence {
   margin: 12px 0 0;
-  font-family: var(--mono-font);
   font-size: 11px;
   letter-spacing: 0.06em;
   text-transform: uppercase;

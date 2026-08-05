@@ -129,9 +129,11 @@
 .doorFolio {
   grid-area: folio;
   align-self: start;
-  font-family: var(--mono-font);
   font-size: 11px;
   letter-spacing: 0.08em;
+  /* Three folios in a column, and the mono that used to keep them the same
+     width is gone. Tabular figures are what that width actually was. */
+  font-variant-numeric: tabular-nums;
 }
 
 /* The mark's frame. It has to carry a height of its own: the SVG inside is
@@ -180,12 +182,13 @@
    One lead and one set, and the same caption under both.
 
    This section used to be three grammars: a spread with its caption beside it,
-   a mirrored one, and a strip captioned in a line of mono. A reader had to learn
+   a mirrored one, and a strip captioned in a line of small caps. A reader had to
+   learn
    each of them, no two plates stood on the same baseline, and — because a plate
    is cut to its work's own ratio while a caption keeps a fixed measure — both
    spreads left some 400px of ink standing empty beside them.
 
-   So it is one grammar now: a plate, a hairline, a title, a mono line of facts.
+   So it is one grammar now: a plate, a hairline, a title, a line of facts.
    The lead takes the whole measure of the sheet and is the one work introduced
    with a sentence; the rest stand in a row justified to that same measure. What
    varies between them is scale, not vocabulary. */
@@ -343,7 +346,8 @@
 
 /* Four to a row, a title is narrow enough to turn — and one title turning
    would drop its facts a line below the other three, in the one place on the
-   sheet where three mono lines are meant to read as one. So above the breakpoint
+   sheet where three lines of facts are meant to read as one. So above the
+   breakpoint
    where the row holds more than two, every title is given both lines whether it
    uses them or not: the rules under the plates stay one line, and so do the
    lines of facts under the titles. Below it the columns are half a sheet wide,
@@ -354,7 +358,7 @@
   }
 }
 
-/* The facts, in the mono this site annotates work with everywhere: mode of
+/* The facts, in the voice this site annotates work with everywhere: mode of
    representation · year · who it was for, word for word what the wall and the
    detail pages carry (components/work/WorkAnno.tsx). It replaces a line that
    said kind and year only — the client is the third fact a reader wants, and it
@@ -362,7 +366,6 @@
 .anno {
   display: block;
   margin: 0;
-  font-family: var(--mono-font);
   font-size: 11px;
   line-height: 1.5;
   letter-spacing: 0.07em;
@@ -391,7 +394,6 @@
   border-top: 1px solid var(--nk-hair);
   border-bottom: 1px solid var(--nk-hair);
   color: var(--paper);
-  font-family: var(--mono-font);
   font-size: 13px;
   letter-spacing: 0.1em;
   text-transform: uppercase;

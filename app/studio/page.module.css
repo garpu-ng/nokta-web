@@ -14,7 +14,6 @@
 
 .caption {
   margin: 0;
-  font-family: var(--mono-font);
   font-size: 11px;
   letter-spacing: 0.09em;
   text-transform: uppercase;
@@ -42,7 +41,6 @@
 
 .label {
   margin: 0 0 28px;
-  font-family: var(--mono-font);
   font-size: 11px;
   font-weight: 400;
   letter-spacing: 0.1em;
@@ -194,7 +192,6 @@
 
 .role {
   flex-shrink: 0;
-  font-family: var(--mono-font);
   font-size: 11px;
   letter-spacing: 0.07em;
   text-transform: uppercase;
@@ -231,7 +228,6 @@
 /* The page's one red field — small, but a field. */
 .ctaFill {
   padding: 17px 26px;
-  font-family: var(--mono-font);
   font-size: 12px;
   letter-spacing: 0.08em;
   text-transform: uppercase;

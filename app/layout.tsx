@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, Space_Mono, Syne } from "next/font/google";
+import { DM_Sans, Syne } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
 import Footer from "@/components/Footer";
@@ -11,7 +11,15 @@ import { socialMetadata } from "@/lib/socialMeta";
 import styles from "./layout.module.css";
 
 /* Fonts are self-hosted at build time via next/font (GDPR: the browser never
-   talks to Google Fonts). Exposed as CSS variables consumed by tokens.css. */
+   talks to Google Fonts). Exposed as CSS variables consumed by tokens.css.
+
+   TWO faces, and that is the whole of it: DM Sans sets everything the reader
+   reads, Syne everything the sheet announces. Space Mono was the third — the
+   technical-annotation voice on every folio, spec line, count and caption —
+   and it is gone. A studio that draws buildings, books and prints does not
+   annotate them in a typewriter; the annotations keep their size, their
+   tracking and their case, and simply speak in the site's own voice. That is
+   also 2 static weights of a non-variable face no longer fetched. */
 const dmSans = DM_Sans({
   // DM Sans is a variable font — no weight list needed; the variable woff2
   // covers the full weight range.
@@ -24,14 +32,6 @@ const dmSans = DM_Sans({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-dm-sans",
-});
-
-const spaceMono = Space_Mono({
-  // Space Mono is NOT variable — its static weights must be listed.
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  display: "swap",
-  variable: "--font-space-mono",
 });
 
 // Headline face used throughout the site, including the browser tabs.
@@ -75,7 +75,7 @@ export default async function RootLayout({
     <html
       lang={locale}
       data-scroll-behavior="smooth"
-      className={`${dmSans.variable} ${spaceMono.variable} ${syne.variable}`}
+      className={`${dmSans.variable} ${syne.variable}`}
     >
       {/* suppressHydrationWarning: browser extensions (e.g. asbplayer) inject
           attributes on <body> before React hydrates; this scopes the warning

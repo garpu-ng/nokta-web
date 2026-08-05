@@ -1,6 +1,6 @@
 /* Art plate — the n-study specimen mounted like a print sample. The PNG is the
    authoritative artwork and is capped at its native 536px so it never pixelates;
-   the frame carries a mono spec line, the text sits beside it. */
+   the frame carries a spec line, the text sits beside it. */
 .plate {
   background: var(--paper);
   padding: clamp(3rem, 8svh, 5.5rem) clamp(20px, 5vw, 48px);

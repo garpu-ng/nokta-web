@@ -32,7 +32,7 @@ export default function WorkAnno({ anno }: { anno: WorkAnnotation }) {
   // filter bar's kind colour on hover, but since Kolonnade the filter spends
   // no colour and the whole line is simply set in the surrounding ink.
   return (
-    <span className={`nk-mono-caption ${styles.anno}`}>
+    <span className={`nk-caption ${styles.anno}`}>
       {anno.kind} · {anno.year} · {anno.client}
     </span>
   );

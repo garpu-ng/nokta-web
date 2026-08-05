@@ -162,24 +162,25 @@ export default function InquiryForm({ copy }: { copy: Copy }) {
       <fieldset className={styles.fieldset}>
         <legend className={styles.step}>{copy.step1}</legend>
         <div className={styles.chips}>
+          {/* The site's chip (.nk-chip, app/styles/base.css) — the identical
+              object the wall's material filter is made of, because it is the
+              identical offer: pick one of a short, closed set. The chosen one
+              is filled creme and nothing moves; the radio inside is the real
+              control and is hidden from sight only. */}
           {copy.kinds.map(({ id, label }) => (
-            <label key={id} className={styles.chip}>
+            /* No "chosen" class or attribute: the radio inside is checked,
+               and .nk-chip reads that with :has() — one state, stated once.
+               See app/styles/base.css. */
+            <label key={id} className="nk-chip">
               <input
                 type="radio"
                 name="kind"
                 value={id}
                 checked={kind === id}
                 onChange={() => setKind(id)}
-                className={`nk-sr-only ${styles.chipInput}`}
+                className="nk-sr-only"
               />
-              <span className={styles.chipLabel}>{label}</span>
-              {/* The selected frame is drawn inset by a pixel over the chip's
-                  own border rather than thickening it, so choosing a chip
-                  never nudges the row. The frame is a second signal beside
-                  the colour — red alone would not carry the state. */}
-              {kind === id ? (
-                <span className={styles.chipFrame} aria-hidden="true" />
-              ) : null}
+              {label}
             </label>
           ))}
         </div>
@@ -257,7 +258,7 @@ export default function InquiryForm({ copy }: { copy: Copy }) {
       </div>
 
       {/* The trouble line wears the success panel's language — an accent rule
-          and a mono line — so a failure reads as part of the sheet rather than
+          and a line of small caps — so a failure reads as part of the sheet rather than
           as a browser alert. Only the delivery case names the studio address,
           because only there is writing directly the actual answer.
 

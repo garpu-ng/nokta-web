@@ -1,6 +1,6 @@
 /* Leuchtturm — the house manual as a quiet specimen. The scanned cover brings
    its own photocopy grain, so the section under-decorates: paper ground, one
-   mono spec line. Mirrors ArtPlate's plate layout with the columns swapped
+   spec line. Mirrors ArtPlate's plate layout with the columns swapped
    (text left, cover right) for an alternating rhythm. */
 .manual {
   background: var(--paper);

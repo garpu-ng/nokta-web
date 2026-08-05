@@ -90,7 +90,7 @@
 /* ══════════════════════════════════════════════════════════════════
    404 / not-found page
 
-   The "404" reads as 4 · dot · 4: the two 4s in the mono display face,
+   The "404" reads as 4 · dot · 4: the two 4s in the display face,
    the middle "0" is the brand <Dot> SVG, struck in the accent — on a page
    that has nothing else to say, the dot is allowed to be the one mark.
    ══════════════════════════════════════════════════════════════════ */
@@ -108,20 +108,28 @@
 
 .nk-404__mark {
   /* Digit size drives everything. The <Dot> SVG is cropped tight to the blob,
-     so its box height is set directly to ~0.72× the digit size to make it read
-     as a "0" of roughly the same height as the two mono 4s. */
+     so its box height is set directly as a fraction of the digit size to make
+     it read as a "0" of roughly the same height as the two 4s.
+
+     The fraction is a property of the face, and the face changed: Space Mono
+     set a 4 at ~0.70 of its size, Syne sets one at 0.649 (measured), so the
+     0.72 that used to match left the dot standing 11% over the digits. 0.67 is
+     that cap height plus the ~3% a round glyph overshoots a flat-topped one
+     by — which is what a real 0 does between two real 4s. */
   --nk-404-digit: clamp(6rem, 24vw, 13rem);
-  --nk-404-dot: calc(var(--nk-404-digit) * 0.72);
+  --nk-404-dot: calc(var(--nk-404-digit) * 0.67);
   display: flex;
   align-items: center;
   justify-content: center;
   line-height: 1;
 }
 
-/* The mono display face for the digits. A plain class rule beats the DM Sans
-   body font on specificity (no !important needed). */
+/* The display face for the digits. A plain class rule beats the DM Sans body
+   font on specificity (no !important needed). They were set in Space Mono,
+   which the site no longer carries; Syne is the face everything this size is
+   set in, and the two 4s are the largest type on the page. */
 .nk-404__digit {
-  font-family: var(--mono-font);
+  font-family: var(--headline-font);
   font-size: var(--nk-404-digit);
   font-weight: 700;
   letter-spacing: -0.02em;

@@ -6,71 +6,16 @@
    This was a segmented bar of black tabs, each label set in the motto colour
    its branch used to wear. Those branches are gone and the bar's black is now
    the page itself, so the row is restated in the vocabulary the /kontakt form
-   uses for the same job: hairline chips, mono caps, and a 2px accent frame on
-   the one that is pressed.
-
-   The frame is drawn inset by a pixel over the chip's own border rather than
-   thickening it, so pressing a chip never nudges the row — and it is a second
-   signal beside the colour, which a red-only state would not be. */
+   uses for the same job — and it is now literally the same object: the chip
+   itself is .nk-chip in app/styles/base.css, worn by both rows. All that is
+   left here is how they are laid out. One is always pressed: the wall stands
+   on a material, never on "all". */
 .filter {
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
   gap: 10px;
   margin: 0 0 clamp(2rem, 5vh, 3rem);
-}
-
-/* The row spends no colour. Five materials would have been five fields, and
-   five fields is a paint chart — it out-shouted the works it exists to sort.
-   So every chip is a hairline outline and the pressed one is filled creme,
-   which is the only mark on the row and needs no second one. One chip is
-   always pressed: the wall stands on a material, never on "all".
-
-   Set in the headline face rather than the mono this row used to wear: these
-   chips lead to the same materials the homepage's service doors do, so they
-   speak in the same voice. Sized to hold the box the mono held — same 46px,
-   same padding, same gaps, same wrapping. */
-.stamp {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 46px;
-  padding: 14px 20px;
-  background: none;
-  border: 1px solid var(--nk-hair);
-  color: var(--paper);
-  font-family: var(--headline-font);
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: -0.01em;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: border-color 0.18s ease, background-color 0.18s ease,
-    color 0.18s ease;
-}
-
-.stamp:hover {
-  border-color: var(--paper);
-}
-
-/* Creme, and that is the whole of it. */
-.stamp[aria-pressed="true"] {
-  background: var(--paper);
-  border-color: var(--paper);
-  color: var(--ink);
-}
-
-.stamp:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .stamp {
-    transition: none;
-  }
 }
 
 /* ── The grid ────────────────────────────────────────────────────────── */
@@ -147,14 +92,9 @@
     row-gap: clamp(2.5rem, 6svh, 3.5rem);
   }
 
-  /* Five chips wrap onto two rows on a phone; they only need to tighten,
-     not to scroll. */
+  /* Five chips wrap onto two rows on a phone (the chip does its own
+     tightening — see .nk-chip in base.css). */
   .filter {
     gap: 8px;
-  }
-  .stamp {
-    padding: 12px 14px;
-    font-size: 11px;
-    letter-spacing: 0.05em;
   }
 }

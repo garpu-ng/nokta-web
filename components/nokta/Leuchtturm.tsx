@@ -8,7 +8,7 @@ import styles from "./Leuchtturm.module.css";
    obtainable — it's the internal rulebook every job starts from, and the copy
    says exactly that. The scanned cover (grainy photocopy aesthetic, the five
    nokta glyphs stacked vertically) is the hero and carries its own texture, so
-   the frame around it stays quiet: one mono spec line. Layout mirrors ArtPlate
+   the frame around it stays quiet: one spec line. Layout mirrors ArtPlate
    (text left, plate right) for an alternating rhythm. */
 const SRC = "/point/leuchtturm-cover.webp";
 
@@ -20,7 +20,7 @@ export default async function Leuchtturm() {
     <section className={`${styles.manual} nk-grain`}>
       <div className={styles.inner}>
         <header className={styles.head}>
-          <p className={`nk-mono-caption ${styles.kicker}`}>{t("point.manual.kicker")}</p>
+          <p className={`nk-caption ${styles.kicker}`}>{t("point.manual.kicker")}</p>
           <h2 className={styles.label}>
             {t("point.manual.label")}
             <span className={styles.labelDot}>.</span>
@@ -41,7 +41,7 @@ export default async function Leuchtturm() {
                 className={styles.art}
               />
             </div>
-            <figcaption className={`nk-mono-caption ${styles.spec}`}>
+            <figcaption className={`nk-caption ${styles.spec}`}>
               {t("point.manual.spec")}
             </figcaption>
           </figure>

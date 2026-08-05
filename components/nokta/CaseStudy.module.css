@@ -134,7 +134,6 @@
 .factLabel {
   margin: 0;
   color: var(--ink);
-  font-family: var(--mono-font);
   font-size: 0.62rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -160,7 +159,6 @@
   margin: 1.5rem 0 0;
 }
 .site {
-  font-family: var(--mono-font);
   font-size: 0.72rem;
   letter-spacing: 0.035em;
   text-decoration: none;
@@ -174,13 +172,12 @@
   background: var(--accent);
 }
 
-/* The note under the button. Mono like every other annotation on the sheet,
-   but left in sentence case — it is a sentence, not a caption, so it does not
-   take .nk-mono-caption's lowercase. */
+/* The note under the button. Held back like every other annotation on the
+   sheet, but left in sentence case — it is a sentence, not a caption, so it does not
+   take .nk-caption's lowercase. */
 .hint {
   max-width: 34ch;
   color: var(--ink);
-  font-family: var(--mono-font);
   font-size: 0.68rem;
   letter-spacing: 0.025em;
   line-height: 1.5;

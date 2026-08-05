@@ -95,7 +95,7 @@
   color: var(--ink);
   opacity: 0.6;
 }
-.stickyAnno :global(.nk-mono-caption) {
+.stickyAnno :global(.nk-caption) {
   font-size: 0.6rem;
   letter-spacing: 0.07em;
 }

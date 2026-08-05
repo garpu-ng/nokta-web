@@ -1,6 +1,6 @@
 /* The wall's own page. The h1 sits in the plate at the top of the sheet
    (components/nokta/PlateHead), so what is left here is the block under it:
-   the mono count on the right, one hairline underneath — and then the wall
+   the count on the right, one hairline underneath — and then the wall
    itself is handed the page unchanged. */
 
 .page {
@@ -23,7 +23,6 @@
 .count {
   margin: 0 0 8px;
   flex-shrink: 0;
-  font-family: var(--mono-font);
   font-size: 11px;
   letter-spacing: 0.09em;
   text-transform: uppercase;

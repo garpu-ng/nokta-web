@@ -267,13 +267,13 @@ export default async function WorkPage({ params }: Props) {
 
       {workBody(work, t)}
 
-      {/* The neighbours are plates of their own: a mono kicker over a title set
+      {/* The neighbours are plates of their own: a caption kicker over a title set
           at reading-across-the-room scale. The arrows are marks, not words —
           aria-hidden, so the link is announced by its title alone. */}
       <nav className={styles.nav}>
         {prev ? (
           <Link href={`/arbeiten/${prev.slug}`} className={styles.navLink}>
-            <span className="nk-mono-caption">{t("work.prev")}</span>
+            <span className="nk-caption">{t("work.prev")}</span>
             <span className={styles.navTitle}>
               <span className={styles.navArrow} aria-hidden="true">←</span>
               <span className={styles.navName}>{prev.title}</span>
@@ -284,7 +284,7 @@ export default async function WorkPage({ params }: Props) {
         )}
         {next ? (
           <Link href={`/arbeiten/${next.slug}`} className={`${styles.navLink} ${styles.navNext}`}>
-            <span className="nk-mono-caption">{t("work.next")}</span>
+            <span className="nk-caption">{t("work.next")}</span>
             <span className={styles.navTitle}>
               <span className={styles.navName}>{next.title}</span>
               <span className={styles.navArrow} aria-hidden="true">→</span>

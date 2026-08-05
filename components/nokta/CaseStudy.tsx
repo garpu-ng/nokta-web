@@ -8,7 +8,7 @@ import styles from "./CaseStudy.module.css";
    tells, what the studio does. Six spreads from the KI-Kommission
    Abschlussbericht are laid out as a horizontal proof-sheet strip: a plain
    scroll-snap list (no carousel state), keyboard-scrollable and fully rendered
-   without JS. Each proof carries a mono caption naming the design decision it
+   without JS. Each proof carries a caption naming the design decision it
    demonstrates. Below sit the prepress facts, the honest PDF/web links and the
    narrative of what was delivered. The report's own cyan wayfinding accent is
    borrowed here — and only here — as a project-specific colour. */
@@ -37,7 +37,7 @@ export default async function CaseStudy() {
     <section className={`${styles.case} nk-grain`}>
       <div className={styles.inner}>
         <header className={styles.head}>
-          <p className={`nk-mono-caption ${styles.kicker}`}>{t("point.case.kicker")}</p>
+          <p className={`nk-caption ${styles.kicker}`}>{t("point.case.kicker")}</p>
           <h2 className={styles.label}>
             {t("point.case.label")}
             <span className={styles.labelDot}>.</span>
@@ -69,7 +69,7 @@ export default async function CaseStudy() {
                     />
                     <Registration className={styles.reg} />
                   </div>
-                  <figcaption className={`nk-mono-caption ${styles.caption}`}>
+                  <figcaption className={`nk-caption ${styles.caption}`}>
                     <span className={styles.folio}>
                       {String(index + 1).padStart(2, "0")}
                     </span>

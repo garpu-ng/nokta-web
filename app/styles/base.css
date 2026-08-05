@@ -11,8 +11,9 @@
    layout is designed for the border-box model) plus the mobile
    text-size-adjust guard.
 
-   Also holds the cross-cutting utilities used across pages (.nk-mono-caption,
-   .nk-sr-only, .nk-grain) and the per-navigation content fade (.nk-page-fade).
+   Also holds the cross-cutting utilities used across pages (.nk-caption,
+   .nk-chip, .nk-sr-only, .nk-grain) and the per-navigation content fade
+   (.nk-page-fade).
    ══════════════════════════════════════════════════════════════════ */
 
 /* Document reset — border-box everywhere. The whole site is laid out for it;
@@ -42,8 +43,10 @@ body {
   color: var(--paper);
   /* Everything renders in DM Sans. A plain body rule suffices now that the old
      Webflow reset (html{font-family:sans-serif}) is gone: content inherits
-     this, and class rules that need another face (e.g. .nk-404__digit's mono)
-     simply win on specificity. */
+     this, and the class rules that want the headline face instead (headings,
+     .nk-chip, .nk-404__digit) simply win on specificity. Since Space Mono was
+     retired, inheriting this IS the annotation voice — no rule has to name a
+     face to get it. */
   font-family: var(--wa-font);
   /* Carried over from the old Webflow body reset (mir.css set
      `body{font-size:14px;line-height:20px}`). It once anchored the em-based
@@ -101,7 +104,6 @@ textarea {
   padding: 12px 18px;
   background: var(--paper);
   color: var(--ink);
-  font-family: var(--mono-font);
   font-size: 12px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -128,19 +130,108 @@ textarea {
 
 /* ── Cross-cutting utilities ─────────────────────────────────────────── */
 
-/* ── Space Mono micro-caption ────────────────────────────────────────
-   The lowercase technical-annotation voice worn by every branch hero
-   (nokta / arch / line captions all repeat this exact recipe). Promoted to a
-   global utility so the pattern lives in one place. Colour is left as
-   currentColor — it reads on paper or ink — and opacity keeps it a quiet
-   annotation; the consumer sets the surrounding colour. */
-.nk-mono-caption {
-  font-family: var(--mono-font);
+/* ── Micro-caption ───────────────────────────────────────────────────
+   The lowercase technical-annotation voice worn by every plate's kicker and
+   spec line. Promoted to a global utility so the pattern lives in one place.
+   Colour is left as currentColor — it reads on paper or ink — and opacity
+   keeps it a quiet annotation; the consumer sets the surrounding colour.
+
+   It was .nk-mono-caption and it set Space Mono. The face is gone; the voice
+   is not, because it never lived in the face — it is the size, the tracking
+   and the lowercase that make this a note in the margin rather than a line of
+   copy, and all three are unchanged. */
+.nk-caption {
   font-size: 0.7rem;
   letter-spacing: 0.11em;
   text-transform: lowercase;
   color: currentColor;
   opacity: 0.7;
+}
+
+/* ── The chip ────────────────────────────────────────────────────────
+   One control, two rows: the material filter on /arbeiten and "what is it
+   about" on /kontakt. They are the same offer — pick one of a short, closed
+   set — so they are now the same object, promoted here rather than described
+   twice and left to drift (which is exactly what had happened: one row was
+   hairline-and-creme in the headline face, the other hairline-and-red-frame
+   in mono).
+
+   The row spends no colour. Every chip is a hairline outline and the ONE that
+   is chosen is filled creme with ink type on it — the fill is the whole
+   signal, and an inversion is not a colour-only one, so nothing else has to
+   move. You can read which chip is on from across the room.
+
+   Set in the headline face, the same voice the homepage's service doors use,
+   because these chips lead to the same materials those doors do.
+
+   Two consumers, two ways of saying "chosen", and each says it with what it
+   already has: /arbeiten presses a <button>, so aria-pressed is the state;
+   /kontakt checks the radio its <label> wraps, so :checked is. The radio is
+   .nk-sr-only — the chip is the only thing there is to see — but it is still
+   the control, and reading it here means the form carries no second attribute
+   that could fall out of step with it.
+
+   Verified on the form through all four ways the checked radio can change:
+   pointer, keyboard (it is a real radio group, so the arrows walk it), a
+   scripted click, and the reset after a successful send, which re-checks
+   kinds[0] with no interaction at all. Measure that with the transition
+   running and every one of them looks broken — the 180ms cross-fade leaves
+   both chips holding a background — so measure it with transitions off. */
+.nk-chip {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 14px 20px;
+  background: none;
+  border: 1px solid var(--nk-hair);
+  color: var(--paper);
+  font-family: var(--headline-font);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  user-select: none;
+  cursor: pointer;
+  transition: border-color 0.18s ease, background-color 0.18s ease,
+    color 0.18s ease;
+}
+
+.nk-chip:hover {
+  border-color: var(--paper);
+}
+
+/* Creme, and that is the whole of it. */
+.nk-chip[aria-pressed="true"],
+.nk-chip:has(input:checked) {
+  background: var(--paper);
+  border-color: var(--paper);
+  color: var(--ink);
+}
+
+/* The ring belongs to the chip, never to the pixel-sized radio inside it. */
+.nk-chip:focus-visible,
+.nk-chip:has(input:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* A phone takes the row on two lines; it only needs to tighten, not to
+   scroll. */
+@media (max-width: 767px) {
+  .nk-chip {
+    padding: 12px 14px;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nk-chip {
+    transition: none;
+  }
 }
 
 /* ── Visually hidden, still spoken ───────────────────────────────────

@@ -7,7 +7,7 @@ import styles from "./ArtPlate.module.css";
    what nokta likes: a system and one deliberate deviation. n-study.png is the
    authoritative artwork (a grid of chunky italic "n"s with a single cobalt one
    breaking rank); it is shown at its native size inside a framed print-specimen
-   plate with a mono spec caption, never scaled past 536px where it would
+   plate with a spec caption, never scaled past 536px where it would
    pixelate. */
 const SRC = "/point/n-study.png";
 
@@ -19,7 +19,7 @@ export default async function ArtPlate() {
     <section className={`${styles.plate} nk-grain`}>
       <div className={styles.inner}>
         <header className={styles.head}>
-          <p className={`nk-mono-caption ${styles.kicker}`}>{t("point.plate.kicker")}</p>
+          <p className={`nk-caption ${styles.kicker}`}>{t("point.plate.kicker")}</p>
           <h2 className={styles.label}>
             {t("point.plate.label")}
             <span className={styles.labelDot}>.</span>
@@ -38,7 +38,7 @@ export default async function ArtPlate() {
                 className={styles.art}
               />
             </div>
-            <figcaption className={`nk-mono-caption ${styles.spec}`}>
+            <figcaption className={`nk-caption ${styles.spec}`}>
               {t("point.plate.spec")}
             </figcaption>
           </figure>

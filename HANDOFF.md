@@ -29,8 +29,11 @@ initiated work is annotated `Eigenprojekt` and hangs as an equal.
 
 Tech: **Next.js 16.2.1** (App Router, Turbopack), **React 19**, plain CSS
 (tokens + CSS modules), TypeScript. Fonts self-hosted via `next/font`
-(DM Sans, Space Mono, Syne). No other runtime dependencies — `three` was
-dropped when the last WebGL plate was retired.
+(DM Sans for everything read, Syne for everything announced). There is no
+third face: **nothing on the site is set in mono** — Space Mono used to carry
+every folio, count, spec line and caption, and those lines now keep their
+size, tracking and case in DM Sans. No other runtime dependencies — `three`
+was dropped when the last WebGL plate was retired.
 
 > ⚠️ **Read `AGENTS.md`** — this Next.js version has breaking changes vs older
 > docs (`proxy.ts` not middleware, `preload` not `priority`, `params` is a
@@ -138,10 +141,12 @@ holds the three door colours, deliberately darkened so 16px paper copy clears
 4.5:1 on them; they land at 4.51–4.56, which leaves **no room for opacity** on
 anything set on a door.
 
-`globals.css` imports `tokens.css` → `base.css` (reset, `.nk-mono-caption`,
-`.nk-sr-only`, `.nk-grain`, `.nk-page-fade`, the focus ring, `.nk-skip`)
-→ `nokta.css` (page
-layouts). Components carry colocated `*.module.css`.
+`globals.css` imports `tokens.css` → `base.css` (reset, `.nk-caption`,
+`.nk-chip`, `.nk-sr-only`, `.nk-grain`, `.nk-page-fade`, the focus ring,
+`.nk-skip`) → `nokta.css` (page layouts). Components carry colocated
+`*.module.css`. `.nk-chip` is the one chip the site has — the material filter
+on `/arbeiten` and the subject row on `/kontakt` are the same object, hairline
+outline with a creme fill on the chosen one.
 
 ### Motion
 `components/Reveal.tsx` is the one entrance primitive, and its contract
@@ -233,7 +238,7 @@ through it) + `lib/og.tsx` render the root card; work detail pages override
       redirect), plus byte-identical duplicates: `01.jpg` == `thumb.jpg` in
       beatbuilding, sanktgores and ipehouse.
 - [ ] **OG display font** — generated cards render in `next/og`'s default face,
-      not Syne/Space Mono (would need shipping woff binaries).
+      not Syne (would need shipping woff binaries).
 - [ ] **The academic slot** — when the floor plans / isometrics / collages are
       compiled, add them as `drawing` / `collage` works in `lib/works.ts`.
 

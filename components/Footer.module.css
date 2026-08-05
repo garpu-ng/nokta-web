@@ -81,7 +81,6 @@
 .email {
   display: inline-block;
   margin-top: 16px;
-  font-family: var(--mono-font);
   font-size: 12px;
   letter-spacing: 0.06em;
   color: var(--paper);
@@ -108,7 +107,6 @@
 /* .5 read 4.26:1 on this ink — under AA at 10px. */
 .colH {
   margin-bottom: 5px; /* + the 9px column gap = the 14px the design asks for */
-  font-family: var(--mono-font);
   font-size: 10px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -142,7 +140,6 @@
   flex-wrap: wrap;
   gap: 12px;
   padding: 18px var(--nk-gutter) 26px;
-  font-family: var(--mono-font);
   font-size: 11px;
   letter-spacing: 0.07em;
   text-transform: uppercase;

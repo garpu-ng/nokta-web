@@ -15,10 +15,12 @@
    ══════════════════════════════════════════════════════════════════ */
 
 :root {
+  /* Two faces. DM Sans sets everything that is read — body, and every
+     annotation, folio, spec line and label that used to be set in Space Mono
+     (which is gone: see app/layout.tsx). Those lines keep their size, their
+     tracking and their case, so the technical-annotation voice survives the
+     face that used to carry it. */
   --wa-font: var(--font-dm-sans), Arial, sans-serif;
-  /* Mono display face — sets the two big 4s on the 404 page (the "0" between
-     them isn't type at all, it's the brand <Dot> SVG). */
-  --mono-font: var(--font-space-mono), ui-monospace, 'SFMono-Regular', Menlo, monospace;
   /* Shared headline face — used by semantic headings and display titles.
      Syne carries the whole display register now; every headline size in the
      design assumes its negative tracking, so no rule sets it at 0. */
@@ -34,7 +36,7 @@
   /* The same red, at the two lightnesses small TYPE needs to be legible in it.
      #b83636 is 3.00:1 on ink and 4.43:1 on paper: fine for a mark (a dot, a
      folio, a closing period all clear the 3:1 that non-text and large type
-     ask), and under AA the moment it sets an 11px mono line. Same hue, same
+     ask), and under AA the moment it sets an 11px line. Same hue, same
      saturation, lightness moved until each ground clears 4.5:1 —
      4.64:1 on ink, 4.85:1 on paper. Use --accent for marks, these for words. */
   --accent-on-ink: #d16161;

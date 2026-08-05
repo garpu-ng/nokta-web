@@ -45,16 +45,21 @@
 }
 
 /* Schriftfeld — the data engraved on the sheet, restated as the product's
-   centrepiece: a hairline-ruled box of mono, uppercase dt/dd pairs. */
+   centrepiece: a hairline-ruled box of small, uppercase dt/dd pairs.
+
+   It was set in Space Mono, which held every figure to one width for free.
+   The face is gone, so the one thing that mattered about it here is asked for
+   by name: a year, a coordinate and a sheet size read as measurements, and
+   measurements in a stacked column have to sit on the same rhythm. */
 .passport {
   margin: 0;
   border: 1px solid var(--nk-hair);
   background: rgba(233, 224, 206, 0.04);
   color: var(--paper);
-  font-family: var(--mono-font);
   font-size: 0.62rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
 }
 .passport > div {
   display: flex;
@@ -113,7 +118,7 @@
 }
 
 /* ── Prev / next — the wall's running order, one step at a time ───────
-   Two plates, not two links: a mono kicker over a title set large enough to
+   Two plates, not two links: a caption kicker over a title set large enough to
    be the next thing you look at. Reaching for one sweeps a red rule under the
    title and steps the arrow the way it points. */
 .nav {

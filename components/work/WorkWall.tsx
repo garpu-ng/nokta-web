@@ -21,12 +21,9 @@ import styles from "./WorkWall.module.css";
    and a row of five colours is a paint chart — it out-shouted the works it
    exists to sort, which is the wrong way round. So the chips are hairline
    outlines, and the ONE that is pressed is filled creme with ink type on it.
-   Nothing else on the row moves. You can read which filter is on from across
-   the room and there is exactly one thing to read.
-
-   The label is set in the headline face, not the mono the row used to wear —
-   the same voice the homepage's service doors use, because these chips lead
-   to the same materials those doors do.
+   Nothing else on the row moves. The chip itself is the site's .nk-chip
+   (app/styles/base.css) — the same object /kontakt offers its four subjects
+   with, because it is the same offer: pick one of a short, closed set.
 
    The cards enter through the shared Reveal primitive, staggered left-then-
    right so a row lands as a pair rather than a block.
@@ -125,7 +122,7 @@ export default function WorkWall({
             <button
               key={kind}
               type="button"
-              className={styles.stamp}
+              className="nk-chip"
               aria-pressed={active === kind}
               onClick={() => setActive(kind)}
             >

@@ -108,7 +108,6 @@
   align-items: center;
   margin: 0;
   background: var(--ink);
-  font-family: var(--mono-font);
   text-transform: uppercase;
   white-space: nowrap;
 }
