@@ -31,7 +31,6 @@ const en: Record<string, string> = {
   "home.svc.2.title": "Print & CAD",
   "home.svc.2.short": "Print-ready files, CAD plans and vectorised line prints — as a file or framed in A1.",
   "home.selected": "Selected work",
-  "home.selected.all": "all {count} works",
   "home.work.teahouse.text": "Visualisation of a Japanese-inspired tea house in a garden. Private client.",
   "home.work.abschlussbericht-ki-kommission.text": "216 pages, 8 chapters, 20 recommendations — layout system through to the print-ready file. BMWE.",
   "home.contact.title": "Have a point to start from?",
@@ -43,7 +42,11 @@ const en: Record<string, string> = {
   // annotated "Self-initiated" and stands beside the commissions, unexplained.
   "work.own": "Self-initiated",
   "work.back": "All work",
-  "work.filter.all": "All",
+  // The count line: the wall always stands on one material, and three of the
+  // five hold exactly one work. On the homepage the same line counts the whole
+  // body of work (13) and leads to the wall.
+  "work.count": "{count} works",
+  "work.count.one": "{count} work",
   "work.kind.rendering": "Rendering",
   "work.kind.cad": "CAD print",
   "work.kind.editorial": "Editorial",

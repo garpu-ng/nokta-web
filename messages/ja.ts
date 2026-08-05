@@ -26,7 +26,6 @@ const ja: Record<string, string> = {
   "home.svc.2.title": "印刷 & CAD",
   "home.svc.2.short": "印刷可能なデータ、CAD 図面、ベクター化した線画 — データまたは A1 額装で。",
   "home.selected": "選ばれた仕事",
-  "home.selected.all": "全 {count} 件の仕事",
   "home.work.teahouse.text": "庭に建つ、日本から着想を得た茶室のビジュアライゼーション。個人のお客様。",
   "home.work.abschlussbericht-ki-kommission.text": "216 ページ、8 章、20 の提言 — レイアウトシステムから印刷可能なデータまで。BMWE。",
   "home.contact.title": "始まりの点はありますか？",
@@ -38,7 +37,10 @@ const ja: Record<string, string> = {
   // 「自主プロジェクト」とだけ記され、受注作品と並んで立つ。
   "work.own": "自主プロジェクト",
   "work.back": "すべての作品",
-  "work.filter.all": "すべて",
+  // 点数の行 — 壁は常にひとつの素材の上に立ち、「すべて」はない。日本語は数詞の
+  // 後で複数形にしないので、単数の行は複数の行と同じ。キーを揃えるために置く。
+  "work.count": "{count} 件の仕事",
+  "work.count.one": "{count} 件の仕事",
   "work.kind.rendering": "レンダリング",
   "work.kind.cad": "CADプリント",
   "work.kind.editorial": "エディトリアル",

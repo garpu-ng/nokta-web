@@ -19,7 +19,9 @@ claim, 02 three doors into the work, 03 four selected works — and the full
 thirteen-work wall lives at `/arbeiten`. Every work has a detail page under
 `/arbeiten/[slug]`. Modes of representation (Rendering, CAD-Druck, Editorial,
 Studie, Handbuch) are **stamps on a piece and a filter over the whole — never
-sections**. Architecture leads by ratio and running order, not by a label.
+sections**. The wall stands on one of them at a time: there is no "Alle" chip,
+because a rendering, a line print and a 216-page report are not one view.
+Architecture leads by ratio and running order, not by a label.
 
 Register rule for all copy, in every language: **say what it is, never why it
 is allowed.** Facts, no defence, no superlatives, never "Student". Self-
@@ -99,7 +101,7 @@ Leuchtturm). `client` absent ⇒ the UI annotates **Eigenprojekt**.
 | Route | What |
 |---|---|
 | `/` | teaser film → 01 statement + interference plate → 02 three doors → 03 two spreads + a pair + the way on → `HomeContact` |
-| `/arbeiten` | the wall: all thirteen works, `?kind=` filter (server-read, and kept in the URL as you click) |
+| `/arbeiten` | the wall: one material at a time, `?kind=` (server-read, and kept in the URL as you click); no kind ⇒ the first in wall order. Two-up contact sheet, no "Alle" |
 | `/arbeiten/[slug]` | one detail route for all 13: shared `ProjectHeader` + per-kind body — image stack (renderings), technical passport incl. price + buy (prints), `CaseStudy` (report), `ArtPlate` (n-Studie), `Leuchtturm` (manual) — + prev/next crossing kinds |
 | `/studio` | hero, team (three drawn portraits; Kaan's is a hover-once CSS sprite reveal — see README), `ServiceIndex` (4 deliverable rows, the one paper section), CTA |
 | `/kontakt` | `InquiryForm` + a rail carrying the direct address |

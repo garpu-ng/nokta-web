@@ -34,7 +34,6 @@ const de: Record<string, string> = {
   "home.svc.2.title": "Druck & CAD",
   "home.svc.2.short": "Druckreife Dateien, CAD-Pläne und vektorisierte Liniendrucke — als Datei oder gerahmt in A1.",
   "home.selected": "Ausgewählte Arbeiten",
-  "home.selected.all": "alle {count} arbeiten",
   // The two spreads' caption copy. The pair below them carries no body text —
   // title and annotation are the whole caption there.
   "home.work.teahouse.text": "Visualisierung eines japanisch inspirierten Teehauses im Garten. Privatkunde.",
@@ -48,7 +47,12 @@ const de: Record<string, string> = {
   // annotated "Eigenprojekt" and stands beside the commissions, unexplained.
   "work.own": "Eigenprojekt",
   "work.back": "Alle Arbeiten",
-  "work.filter.all": "Alle",
+  // Zählt, was gerade auf der Wand hängt — die Wand steht immer auf einem
+  // Material, es gibt kein "Alle". Auf der Startseite zählt dieselbe Zeile
+  // das ganze Werk (13) und führt zur Wand. Drei der fünf Materialien halten
+  // genau eine Arbeit, deshalb die zweite Zeile.
+  "work.count": "{count} arbeiten",
+  "work.count.one": "{count} arbeit",
   "work.kind.rendering": "Rendering",
   "work.kind.cad": "CAD-Druck",
   "work.kind.editorial": "Editorial",

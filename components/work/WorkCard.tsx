@@ -61,11 +61,18 @@ const MEASURE = 1420;
 const COLUMNS = 12;
 const GAP = 24;
 
+/** The columns a card actually takes on the wall. Not the work's own curated
+    span: the wall stands on one material at a time and hangs it two-up
+    (.aligned in WorkWall.module.css), so a span-4 print and a span-7 rendering
+    are both six columns wide there. */
+const WALL_SPAN: WallItem["span"] = 6;
+
 /** What a card of this span actually renders at on a full sheet. The hint used
     to end in a flat 640px for every card, which under-declared the widest ones
     by nearly a third — a span-7 rendering takes ~818px, so a 1× screen picked
     the 640w candidate and upscaled it. The lead pieces on the wall were the
-    soft ones. */
+    soft ones. Declaring each work's curated span instead would now under-
+    declare the narrow ones by the same third, from the other end. */
 function cardSizes(span: WallItem["span"]): string {
   const column = (MEASURE - GAP * (COLUMNS - 1)) / COLUMNS;
   const width = Math.round(span * column + GAP * (span - 1));
@@ -75,6 +82,8 @@ function cardSizes(span: WallItem["span"]): string {
     `${width}px`,
   ].join(", ");
 }
+
+const CARD_SIZES = cardSizes(WALL_SPAN);
 
 export default function WorkCard({
   item,
@@ -105,7 +114,7 @@ export default function WorkCard({
           alt=""
           width={item.width}
           height={item.height}
-          sizes={cardSizes(item.span)}
+          sizes={CARD_SIZES}
           /* This one image is the wall's LCP element, and every card on the
              wall was lazy — so the browser deprioritised the one thing the
              page is measured on until layout settled. Eager + high rather than

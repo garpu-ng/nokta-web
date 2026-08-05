@@ -26,7 +26,6 @@ const tr: Record<string, string> = {
   "home.svc.2.title": "Baskı & CAD",
   "home.svc.2.short": "Baskıya hazır dosyalar, CAD planları ve vektörel çizgi baskılar — dosya olarak ya da A1 çerçeveli.",
   "home.selected": "Seçilmiş işler",
-  "home.selected.all": "tüm {count} iş",
   "home.work.teahouse.text": "Bahçede, Japon esintili bir çay evinin görselleştirmesi. Özel müşteri.",
   "home.work.abschlussbericht-ki-kommission.text": "216 sayfa, 8 bölüm, 20 öneri — mizanpaj sisteminden baskıya hazır dosyaya. BMWE.",
   "home.contact.title": "Başlayabileceğimiz bir noktan var mı?",
@@ -38,7 +37,11 @@ const tr: Record<string, string> = {
   // "Kendi projemiz" diye künyelenir ve siparişlerin yanında öylece durur.
   "work.own": "Kendi projemiz",
   "work.back": "Tüm işler",
-  "work.filter.all": "Tümü",
+  // Sayı satırı: duvar her zaman tek bir malzemenin üzerinde durur, "Tümü"
+  // yok. Türkçede sayıdan sonra çoğul eki gelmediği için tekil satır çoğulun
+  // aynısıdır; anahtar eşliği için duruyor.
+  "work.count": "{count} iş",
+  "work.count.one": "{count} iş",
   "work.kind.rendering": "Render",
   "work.kind.cad": "CAD baskı",
   "work.kind.editorial": "Editoryal",

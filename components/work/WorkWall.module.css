@@ -20,10 +20,11 @@
   margin: 0 0 clamp(2rem, 5vh, 3rem);
 }
 
-/* The row spends no colour. Six materials would have been six fields, and six
-   fields is a paint chart — it out-shouted the thirteen works it exists to
-   sort. So every chip is a hairline outline and the pressed one is filled
-   creme, which is the only mark on the row and needs no second one.
+/* The row spends no colour. Five materials would have been five fields, and
+   five fields is a paint chart — it out-shouted the works it exists to sort.
+   So every chip is a hairline outline and the pressed one is filled creme,
+   which is the only mark on the row and needs no second one. One chip is
+   always pressed: the wall stands on a material, never on "all".
 
    Set in the headline face rather than the mono this row used to wear: these
    chips lead to the same materials the homepage's service doors do, so they
@@ -98,8 +99,12 @@
     margin-top: var(--lift, 0rem);
   }
 
-  /* A pressed kind-tab shows a ruled contact sheet instead: uniform two-up
-     cards, no lifts — the hand-pinned hanging belongs to "Alle" only. */
+  /* A material is a ruled contact sheet: uniform two-up cards, no lifts. The
+     curated spans and lifts were drawn for the mixed wall — thirteen works of
+     five kinds in one running order — and the wall has stood on one material
+     at a time since "Alle" was dropped, so .aligned is now on every render
+     (see WorkWall.tsx) and this is what the wall looks like. The rules above
+     are what it would fall back to if a mixed view ever returns. */
   .aligned .cell {
     margin-top: 0;
     grid-column: span 6;
@@ -142,8 +147,8 @@
     row-gap: clamp(2.5rem, 6svh, 3.5rem);
   }
 
-  /* Six chips wrap onto two or three rows on a phone; they only need to
-     tighten, not to scroll. */
+  /* Five chips wrap onto two rows on a phone; they only need to tighten,
+     not to scroll. */
   .filter {
     gap: 8px;
   }

@@ -331,7 +331,10 @@ export default async function HomePage() {
         </div>
 
         <Link href="/arbeiten" className={styles.allWorks}>
-          <span>{t("home.selected.all").replace("{count}", String(WORKS.length))}</span>
+          {/* The way on. It used to promise "alle 13 arbeiten", which the wall
+              no longer answers with: /arbeiten stands on one material at a
+              time. The figure still says how much work is over there. */}
+          <span>{t("work.count").replace("{count}", String(WORKS.length))}</span>
           <span aria-hidden="true">↗</span>
         </Link>
       </section>

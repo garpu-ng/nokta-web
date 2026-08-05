@@ -15,11 +15,12 @@ import styles from "./page.module.css";
    (/arbeiten/teahouse advertises /arbeiten as its directory, and people try
    it). The label names the wall, it does not sort it.
 
-   ?kind= narrows it to one material, which is where the homepage's three
-   doors land. The filter is read here rather than in the browser, so the
-   narrowed wall is what the server sends — no flash of the full set, and the
-   URL is shareable. An unknown kind is simply ignored and the whole wall is
-   shown; a filter is not worth a 404.
+   The wall stands on one material at a time — there is no "all". ?kind= says
+   which, which is where the homepage's three doors land. The filter is read
+   here rather than in the browser, so the narrowed wall is what the server
+   sends — no flash of another material, and the URL is shareable. A missing
+   or unknown kind falls back to the first material in wall order rather than
+   404ing: a filter is not worth a 404.
 
    NOTE: this route previously answered with a 308 permanentRedirect to "/".
    Browsers cache permanent redirects hard, so a reader who hit /arbeiten
@@ -51,7 +52,6 @@ export default async function ArbeitenPage({
 }) {
   const t = await getT();
   const requested = (await searchParams).kind;
-  const initialKind = isWorkKind(requested) ? requested : null;
 
   // Every string the wall shows is translated here: WorkWall is a client
   // component and never reaches for a dictionary itself.
@@ -62,6 +62,10 @@ export default async function ArbeitenPage({
     }
     return acc;
   }, []);
+
+  // The material the wall opens on. kinds[0] is whatever leads the curated
+  // order in lib/works.ts — no second list to keep in step with the wall.
+  const initialKind = isWorkKind(requested) ? requested : kinds[0].kind;
 
   const title = `${t("home.wall.label")}.`;
 
@@ -76,18 +80,18 @@ export default async function ArbeitenPage({
       </PlateHead>
 
       {/* The header block and the wall are both rendered by WorkWall now: the
-          count is client state (a server-rendered figure went on saying "alle
-          13 arbeiten" while six were shown), and the head has to stay OUTSIDE
+          count is client state (a server-rendered figure went on naming
+          thirteen works while six were shown), and the head has to stay OUTSIDE
           the wall's gutter or the padding doubles. The page still owns the
           look — it hands its own three class names down, so the markup and the
           styling are exactly what they were. */}
       <WorkWall
         items={items}
         kinds={kinds}
-        allLabel={t("work.filter.all")}
         listLabel={t("home.wall.aria")}
         initialKind={initialKind}
-        countTemplate={t("home.selected.all")}
+        countTemplate={t("work.count")}
+        countOneTemplate={t("work.count.one")}
         headClassName={styles.head}
         countClassName={styles.count}
         wallClassName={styles.wall}
