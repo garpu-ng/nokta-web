@@ -26,7 +26,7 @@ import styles from "./Reveal.module.css";
 
    The two state classes are put on the node imperatively rather than through
    React state: the pre-state is a fact about the viewport, not about the tree,
-   and a wall of thirteen cards should not re-render thirteen times on the way
+   and a wall of cards should not re-render once per card on the way
    down the page. React leaves the class attribute alone as long as the
    rendered className string doesn't change — and it never does here. */
 

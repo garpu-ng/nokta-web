@@ -9,7 +9,7 @@ import { socialMetadata } from "@/lib/socialMeta";
 import { WORKS, isWorkKind, type WorkKind } from "@/lib/works";
 import styles from "./page.module.css";
 
-/* The wall — one body of work, all thirteen sheets. It used to be the second
+/* The wall — one body of work, every sheet of it. It used to be the second
    half of the homepage; since Kolonnade the homepage shows four works large
    and the full set lives here, at the route every detail URL already implies
    (/arbeiten/teahouse advertises /arbeiten as its directory, and people try
@@ -80,8 +80,8 @@ export default async function ArbeitenPage({
       </PlateHead>
 
       {/* The header block and the wall are both rendered by WorkWall now: the
-          count is client state (a server-rendered figure went on naming
-          thirteen works while six were shown), and the head has to stay OUTSIDE
+          count is client state (a server-rendered figure went on naming the
+          whole wall while one material was shown), and the head has to stay OUTSIDE
           the wall's gutter or the padding doubles. The page still owns the
           look — it hands its own three class names down, so the markup and the
           styling are exactly what they were. */}

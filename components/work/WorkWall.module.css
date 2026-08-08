@@ -45,7 +45,7 @@
   }
 
   /* A material is a ruled contact sheet: uniform two-up cards, no lifts. The
-     curated spans and lifts were drawn for the mixed wall — thirteen works of
+     curated spans and lifts were drawn for the mixed wall — every work of the
      five kinds in one running order — and the wall has stood on one material
      at a time since "Alle" was dropped, so .aligned is now on every render
      (see WorkWall.tsx) and this is what the wall looks like. The rules above

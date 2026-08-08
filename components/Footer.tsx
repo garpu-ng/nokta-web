@@ -42,8 +42,8 @@ export default async function Footer() {
         {/* The nav keeps its landmark but gives up its box (display:contents),
             so its three columns are items of the footer grid above. */}
         <nav className={styles.cols} aria-label="Footer">
-          {/* The pages. "Arbeiten" is the full thirteen-work wall, which since
-              Kolonnade lives at its own route — the homepage shows four. */}
+          {/* The pages. "Arbeiten" is the full wall, which since Kolonnade
+              lives at its own route — the homepage shows four. */}
           <div className={styles.col}>
             <span className={styles.colH}>{t("footer.col.seiten")}</span>
             <Link href="/arbeiten" className={styles.link}>{t("footer.link.arbeiten")}</Link>

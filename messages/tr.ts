@@ -50,6 +50,9 @@ const tr: Record<string, string> = {
   "work.prev": "önceki iş",
   "work.next": "sonraki iş",
   "work.nstudie.lead": "Küçük n üzerine tipografik bir çalışma. Çizildi, ızgaraya oturtuldu, baskı olarak çıkarıldı.",
+  "work.lichtspiel.lead": "Kendi işaretimizle bir ışık denemesi: su üzerinde hareket eden spotlar, aralarında duran logo. Kuruldu, render alındı, kurgulandı.",
+  "work.lichtspiel.spec": "lichtspiel · 1920 × 1080 px · 24 fps",
+  "work.lichtspiel.noVideo": "Tarayıcınız bu videoyu oynatamıyor.",
 
   // ── Hizmetler (ServiceIndex, /studio) ─────────────────────────────
   "nokta.index.label": "Hizmetler",

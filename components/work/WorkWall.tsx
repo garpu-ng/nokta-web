@@ -51,8 +51,8 @@ export default function WorkWall({
   initialKind: WorkKind;
   /** the count line's templates, each carrying a literal {count}. Two of them,
       because three of the five materials hold exactly one work — "1 arbeiten"
-      is a bug the old wall never showed, since it only ever counted all
-      thirteen. German and English take the singular; Turkish and Japanese do
+      is a bug the old wall never showed, since it only ever counted the whole
+      body of work. German and English take the singular; Turkish and Japanese do
       not inflect after a numeral and simply repeat the plural string. */
   countTemplate: string;
   countOneTemplate: string;

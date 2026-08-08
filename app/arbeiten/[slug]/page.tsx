@@ -7,6 +7,7 @@ import ProjectHeader from "@/components/ProjectHeader";
 import Reveal from "@/components/Reveal";
 import ArtPlate from "@/components/nokta/ArtPlate";
 import CaseStudy from "@/components/nokta/CaseStudy";
+import FilmPlate from "@/components/nokta/FilmPlate";
 import Leuchtturm from "@/components/nokta/Leuchtturm";
 import WorkAnno, { workAnnotation } from "@/components/work/WorkAnno";
 import { getLocale, getT, type Translate } from "@/lib/i18n";
@@ -52,6 +53,7 @@ function describe(work: Work, t: Translate): string {
 const PIECE_DESC: Record<string, string> = {
   "abschlussbericht-ki-kommission": "point.case.lead",
   "n-studie": "work.nstudie.lead",
+  lichtspiel: "work.lichtspiel.lead",
   leuchtturm: "point.manual.text",
 };
 
@@ -222,6 +224,15 @@ function pieceBody(slug: string, t: Translate) {
             <p className={styles.lead}>{t("work.nstudie.lead")}</p>
           </div>
           <ArtPlate />
+        </>
+      );
+    case "lichtspiel":
+      return (
+        <>
+          <div className={styles.body}>
+            <p className={styles.lead}>{t("work.lichtspiel.lead")}</p>
+          </div>
+          <FilmPlate />
         </>
       );
     case "leuchtturm":

@@ -31,6 +31,12 @@ export type Work = {
   client?: string;
   /** wall thumbnail (must exist in lib/mediaSizes.ts) */
   thumb: string;
+  /** a moving version of the thumbnail, for work that is itself moving. The
+      wall plays it in the frame where the thumb would hang; `thumb` stays
+      required and stays the clip's own first frame, because it is still what
+      reserves the card's space, what the social card carries, and what a
+      reader who has asked for reduced motion is left looking at. */
+  clip?: string;
   /** 12-col grid span on the wall (desktop); phone is always one column */
   span: 3 | 4 | 5 | 6 | 7;
   /** vertical drop (rem) on the desktop wall — the works hang at varied
@@ -99,6 +105,18 @@ export const WORKS: Work[] = [
     thumb: "/point/abschlussbericht/cover.webp",
     span: 5,
     lift: 3.5,
+    source: { type: "piece" },
+  },
+  {
+    slug: "lichtspiel",
+    title: "Lichtspiel",
+    kind: "study",
+    year: "2026",
+    // No client: the studio's own experiment → annotated "Eigenprojekt".
+    thumb: "/lichtspiel/still.jpg",
+    clip: "/lichtspiel/wall.mp4",
+    span: 6,
+    lift: 2.5,
     source: { type: "piece" },
   },
   fromProject("teahouse", 6, 0),

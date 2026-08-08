@@ -49,6 +49,9 @@ const ja: Record<string, string> = {
   "work.prev": "前の作品",
   "work.next": "次の作品",
   "work.nstudie.lead": "小文字の n をめぐるタイポグラフィのスタディ。描き、格子に並べ、プリントとして刷りました。",
+  "work.lichtspiel.lead": "自らのマークによる光の実験。水面を動くスポットライト、その間に立つロゴ。組み、レンダリングし、編集しました。",
+  "work.lichtspiel.spec": "lichtspiel · 1920 × 1080 px · 24 fps",
+  "work.lichtspiel.noVideo": "お使いのブラウザはこの動画を再生できません。",
 
   // ── サービス（ServiceIndex, /studio） ─────────────────────────────
   // 四つの行、それぞれを成果物として記す。1行目と2行目には主要案件を事実として

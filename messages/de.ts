@@ -61,6 +61,11 @@ const de: Record<string, string> = {
   "work.prev": "Vorherige Arbeit",
   "work.next": "Nächste Arbeit",
   "work.nstudie.lead": "Eine typografische Studie über das kleine n. Gezeichnet, gerastert, als Druck aufgelegt.",
+  "work.lichtspiel.lead": "Ein Lichtversuch mit dem eigenen Zeichen: bewegte Scheinwerfer über Wasser, das Signet dazwischen. Gebaut, gerendert, geschnitten.",
+  // The spec line names what the film is, the way the art plate's names what
+  // the print is. It states no sound: the file on the plate has none yet.
+  "work.lichtspiel.spec": "lichtspiel · 1920 × 1080 px · 24 bilder/s",
+  "work.lichtspiel.noVideo": "Ihr Browser kann dieses Video nicht abspielen.",
 
   // ── Leistungen (ServiceIndex, /studio) ────────────────────────────
   // Four rows, each stated as a deliverable. Keys svc.1 and svc.2 (zero-indexed

@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { WORKS } from "@/lib/works";
 
-// One URL per page that exists: the wall, the thirteen works, the studio pages
+// One URL per page that exists: the wall, every work on it, the studio pages
 // and the legal pages. The legacy paths 308-redirect and stay out — including
 // /prozess and /prozess/3d, which both now land on /studio.
 //

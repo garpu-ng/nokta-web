@@ -1,0 +1,40 @@
+/* The film hangs in the project stack's own window, so almost everything here
+   is inherited from .wa-project-img — the width formula, the ink hairline. Two
+   things a <video> needs that an <img> does not. */
+
+/* A <figure> arrives with the browser's own margin on it; the stack it borrows
+   its layout from is a plain div and never had to say so. */
+.plate {
+  margin: 0;
+}
+
+.film {
+  /* An image is as tall as its bytes; a video without a stated height collapses
+     to 150px until metadata arrives, and the page under it jumps. The window's
+     --nk-ratio is already the film's, so the box is right before a byte lands. */
+  aspect-ratio: var(--nk-ratio);
+  height: auto;
+  /* A shade under ink behind the poster, so the plate is the right darkness
+     from the first paint — the same ground the homepage band stands on. */
+  background: #0f0f0d;
+}
+
+/* The spec line under the plate. It takes the page's text column rather than
+   the plate's edge — the same measure and the same gutter the lead paragraph
+   above it stands in (.body on the detail page), so all the prose on this page
+   reads down one column and only the film is full-bleed. Aligned to the plate
+   instead, it would have had to start hard against the viewport edge at every
+   width up to 1500px, which is where the plate stops growing. */
+.spec {
+  box-sizing: border-box;
+  /* align-self + an explicit width, not `margin: auto`: the stack is a flex
+     column, where an auto cross-axis margin shrinks the item to its own text
+     and centres that instead — which put this line in the middle of the page. */
+  align-self: center;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0.9rem 0 0;
+  padding: 0 clamp(20px, 5vw, 48px);
+  color: var(--paper);
+  opacity: 0.62;
+}

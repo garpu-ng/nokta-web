@@ -31,7 +31,7 @@ import styles from "./page.module.css";
    elsewhere; it is the studio's own material, moving. The teaser film still
    opens the page above all of it.
 
-   The full thirteen-work wall lives at /arbeiten — this page shows the fewest
+   The full wall lives at /arbeiten — this page shows the fewest
    works it can get away with, at the biggest size it can give them. */
 
 /* The three doors. Each lands on the wall already filtered to its material,
@@ -58,7 +58,7 @@ const SERVICES: { kind: DoorKind }[] = [
 
    `plate` overrides the image a work is shown at plate size with, for the case
    where its wall thumbnail is the wrong shape to be given a whole plate. The
-   wall wants one small image per work and hangs thirteen of them by ratio;
+   wall wants one small image per work and hangs them all by ratio;
    teahouse's is a square the client cropped, which is a shape the interior was
    never shot in, so the home page shows the project's first image instead
    (resized and recompressed to plate size). The wall keeps its square: its
@@ -286,7 +286,7 @@ export default async function HomePage() {
           a title, a line of facts. The lead takes the measure of the sheet and is
           the one work introduced with a sentence; the rest stand in a row
           justified to that same measure, so they come out one height whatever
-          their proportions. Then the door to all thirteen. */}
+          their proportions. Then the door to the rest. */}
       <section className={styles.section} aria-labelledby="nk-reg-03">
         <SectionRule id="nk-reg-03" label={t("home.selected")} />
 

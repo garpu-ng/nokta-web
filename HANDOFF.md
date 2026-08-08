@@ -16,7 +16,7 @@ Form.**
 
 One studio, one body of work. The homepage is a numbered register — 01 the
 claim, 02 three doors into the work, 03 four selected works — and the full
-thirteen-work wall lives at `/arbeiten`. Every work has a detail page under
+wall lives at `/arbeiten`. Every work has a detail page under
 `/arbeiten/[slug]`. Modes of representation (Rendering, CAD-Druck, Editorial,
 Studie, Handbuch) are **stamps on a piece and a filter over the whole — never
 sections**. The wall stands on one of them at a time: there is no "Alle" chip,

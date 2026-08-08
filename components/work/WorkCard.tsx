@@ -4,6 +4,7 @@ import Registration from "@/components/print/Registration";
 import { getMediaSize } from "@/lib/mediaSizes";
 import type { Work, WorkKind } from "@/lib/works";
 import WorkAnno, { workAnnotation, type WorkAnnotation } from "./WorkAnno";
+import WorkClip from "./WorkClip";
 import styles from "./WorkCard.module.css";
 
 /* One sheet on the wall: the work's own image at its own ratio inside a
@@ -18,13 +19,15 @@ import styles from "./WorkCard.module.css";
     The thumbnail's intrinsic size is two of those fields rather than a lookup
     the card does for itself. It used to call getMediaSize() here, which put
     the whole 44-entry table — every path in /public, most of them for pages
-    the wall never shows — into the client chunk to answer thirteen questions
-    that were already answerable on the server. */
+    the wall never shows — into the client chunk to answer one question per
+    card that was already answerable on the server. */
 export type WallItem = {
   slug: string;
   title: string;
   kind: WorkKind;
   thumb: string;
+  /** the moving version of the thumbnail, where the work is itself moving */
+  clip?: string;
   /** the thumbnail's intrinsic size, resolved server-side */
   width: number;
   height: number;
@@ -43,6 +46,7 @@ export function toWallItem(work: Work, t: (key: string) => string): WallItem {
     title: work.title,
     kind: work.kind,
     thumb: work.thumb,
+    clip: work.clip,
     width,
     height,
     span: work.span,
@@ -105,11 +109,24 @@ export default function WorkCard({
       // like everything else on the sheet.
     >
       <span className={styles.frame}>
+        {/* A work that moves hangs its film here, in the same frame and wearing
+            the same class as the still it stands in for. It is never the wall's
+            LCP candidate — a clip is not fetched until it is on screen (see
+            WorkClip), so the lead priority below stays with a real image. */}
+        {item.clip ? (
+          <WorkClip
+            src={item.clip}
+            poster={item.thumb}
+            width={item.width}
+            height={item.height}
+            className={styles.img}
+          />
+        ) : (
         <Image
           src={item.thumb}
           /* Empty on purpose: the title is set as real text inside this same
              link, two lines down. Repeating it here made a screen reader
-             announce every work twice — thirteen times over on the wall. The
+             announce every work twice — once over for every card on the wall. The
              link still has an accessible name; it comes from the caption. */
           alt=""
           width={item.width}
@@ -125,6 +142,7 @@ export default function WorkCard({
           fetchPriority={lead ? "high" : undefined}
           className={styles.img}
         />
+        )}
         {/* A registration mark struck on the sheet's corner as you reach for
             it — the press vocabulary, held back until the card is addressed. */}
         <Registration className={styles.reg} />
