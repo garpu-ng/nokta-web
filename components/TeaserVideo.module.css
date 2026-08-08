@@ -1,7 +1,9 @@
 /* The homepage's opening band — edge to edge, no gutter, no radius, no frame.
-   The clip's own 1280 × 507 proportion governs the height (at the 1440px the
-   design was drawn at that computes to 570px), so the band never crops the
-   film into a shape it wasn't cut for. */
+   1280 / 507 governs the height (at the 1440px the design was drawn at that
+   computes to 570px). The figure came from the first teaser film's own
+   proportion and has outlived it: it is the band's measure now, and a clip is
+   cut to it. `object-fit: cover` does the cutting, from the centre, so a film
+   wider or taller than 2.52:1 loses its edges rather than the band its shape. */
 
 .hero {
   position: relative;
@@ -25,7 +27,9 @@
 
 /* ── Phone ───────────────────────────────────────────────────────────
    A 2.52:1 letterbox is a slot on a phone, so the band turns portrait and
-   the clip is cropped to its centre instead. */
+   the clip is cropped to its centre instead — the crop turns from horizontal
+   to vertical, which is the reason a 16:9 film is shipped whole rather than
+   pre-cut to the desktop band: here the height it kept is what fills the box. */
 @media (max-width: 899px) {
   .hero {
     aspect-ratio: 4 / 5;
