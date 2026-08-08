@@ -49,8 +49,9 @@ const ja: Record<string, string> = {
   "work.prev": "前の作品",
   "work.next": "次の作品",
   "work.nstudie.lead": "小文字の n をめぐるタイポグラフィのスタディ。描き、格子に並べ、プリントとして刷りました。",
-  "work.lichtspiel.lead": "自らのマークによる光の実験。水面を動くスポットライト、その間に立つロゴ。組み、レンダリングし、編集しました。",
-  "work.lichtspiel.spec": "lichtspiel · 1920 × 1080 px · 24 fps",
+  "work.lichtspiel.lead": "自らのマークによる光の実験。水面を動くスポットライト、その間に立つロゴ。組み、レンダリングし、音をつけました。",
+  "work.lichtspiel.spec": "lichtspiel · 1920 × 1080 px · 24 fps · 1:45、音声あり",
+  "work.lichtspiel.player": "Lichtspiel — 音声つきの映像",
   "work.lichtspiel.noVideo": "お使いのブラウザはこの動画を再生できません。",
 
   // ── サービス（ServiceIndex, /studio） ─────────────────────────────

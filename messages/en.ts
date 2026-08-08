@@ -55,8 +55,9 @@ const en: Record<string, string> = {
   "work.prev": "Previous work",
   "work.next": "Next work",
   "work.nstudie.lead": "A typographic study of the lowercase n. Drawn, set in a grid, issued as a print.",
-  "work.lichtspiel.lead": "A light experiment with the studio's own mark: moving spotlights over water, the logotype standing between them. Built, rendered, cut.",
-  "work.lichtspiel.spec": "lichtspiel · 1920 × 1080 px · 24 fps",
+  "work.lichtspiel.lead": "A light experiment with the studio's own mark: moving spotlights over water, the logotype standing between them. Built, rendered, scored.",
+  "work.lichtspiel.spec": "lichtspiel · 1920 × 1080 px · 24 fps · 1:45 with sound",
+  "work.lichtspiel.player": "Lichtspiel — film with sound",
   "work.lichtspiel.noVideo": "Your browser cannot play this video.",
 
   // ── Services (ServiceIndex, /studio) ──────────────────────────────
