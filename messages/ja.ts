@@ -50,8 +50,12 @@ const ja: Record<string, string> = {
   "work.next": "次の作品",
   "work.nstudie.lead": "小文字の n をめぐるタイポグラフィのスタディ。描き、格子に並べ、プリントとして刷りました。",
   "work.lichtspiel.lead": "自らのマークによる光の実験。水面を動くスポットライト、その間に立つロゴ。組み、レンダリングし、音をつけました。",
-  "work.lichtspiel.spec": "lichtspiel · 1920 × 1080 px · 24 fps · 1:45、音声あり",
-  "work.lichtspiel.player": "Lichtspiel — 音声つきの映像",
+  // The name is transliterated rather than translated — リヒトシュピール is how
+  // "Lichtspiel" is read, not what it means. Same treatment n-Studie already
+  // gets two lines down in the spec line it wears as "n スタディ": the work
+  // keeps its German title on the sheet, and Japanese is told how to say it.
+  "work.lichtspiel.spec": "リヒトシュピール · 1920 × 1080 px · 24 fps · 1:45、音声あり",
+  "work.lichtspiel.player": "リヒトシュピール — 音声つきの映像",
   "work.lichtspiel.noVideo": "お使いのブラウザはこの動画を再生できません。",
 
   // ── サービス（ServiceIndex, /studio） ─────────────────────────────
