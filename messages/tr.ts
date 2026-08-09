@@ -51,7 +51,7 @@ const tr: Record<string, string> = {
   "work.next": "sonraki iş",
   "work.nstudie.lead": "Küçük n üzerine tipografik bir çalışma. Çizildi, ızgaraya oturtuldu, baskı olarak çıkarıldı.",
   "work.lichtspiel.lead": "Kendi işaretimizle bir ışık denemesi: su üzerinde hareket eden spotlar, aralarında duran logo. Kuruldu, render alındı, müziklendirildi.",
-  "work.lichtspiel.spec": "lichtspiel · 1920 × 1080 px · 24 fps · 1:45, sesli",
+  "work.lichtspiel.spec": "lichtspiel · 1920 × 912 px · 24 fps · 1:45, sesli",
   "work.lichtspiel.player": "Lichtspiel — sesli film",
   "work.lichtspiel.noVideo": "Tarayıcınız bu videoyu oynatamıyor.",
 

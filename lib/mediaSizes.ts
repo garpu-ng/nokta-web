@@ -58,10 +58,11 @@ const SIZES: Record<string, MediaSize> = {
   "/point/n-study.png": { width: 536, height: 918 },
   "/point/leuchtturm-cover.webp": { width: 1194, height: 1701 },
   // The Lichtspiel's first frame. It is the only entry here cut from a film
-  // rather than measured off a photograph, and it carries the film's whole
-  // proportion (16:9) because that is the box every view of the piece stands
-  // in — the wall card, the social card, and the still under reduced motion.
-  "/lichtspiel/still.jpg": { width: 1280, height: 720 },
+  // rather than measured off a photograph, and it carries the finished cut's
+  // proportion — 2.105:1, not the 16:9 of the render it came from — because
+  // that is the box every view of the piece stands in: the wall card, the
+  // social card, and the still a reader is left with under reduced motion.
+  "/lichtspiel/still.jpg": { width: 1280, height: 608 },
   // The four CAD prints, re-drawn to one sheet: same proportion for all of them
   // now, where they used to differ by a few percent each. Wider than any page
   // renders them — the largest is some 480px, on a tablet's two-up home page.

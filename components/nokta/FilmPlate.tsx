@@ -30,8 +30,11 @@ import styles from "./FilmPlate.module.css";
    hangs and the image the social card carries — one frame doing three jobs, so
    the piece looks the same wherever it is met. */
 
-/** The film's own proportion, spent the way .wa-project-img wants it. */
-const RATIO = { width: 1280, height: 720 };
+/** The film's own proportion, spent the way .wa-project-img wants it. Not 16:9:
+    the finished cut is 1920 × 912 (2.105:1), tighter than the render it came
+    from. The still, the wall's loop and this plate are all cut to it, so the
+    piece is one shape wherever it is met. */
+const RATIO = { width: 1920, height: 912 };
 
 /** The film, in the order a browser should prefer it: the first entry whose
     codecs it recognises is the one it fetches, and it never downloads the
@@ -40,13 +43,13 @@ const RATIO = { width: 1280, height: 720 };
     browser that plays WebM but not AV1 would accept the source and then fail
     on it, with no second chance at the fallback below. */
 const SOURCES: { src: string; type: string }[] = [
-  // AV1 + Opus: 8.3 MB against the mp4's 22.1, at a marginally *better* SSIM
-  // against the master (0.9865 vs 0.9854). One file's worth of repo for a third
-  // of the download, wherever the browser can take it.
+  // AV1 + Opus — a third of the mp4's weight, which on a 1:45 film is the
+  // difference between a page that starts playing and one that buffers.
   { src: "/lichtspiel/film.webm", type: 'video/webm; codecs="av01.0.08M.08, opus"' },
-  // H.264 High @ L4.0 + the master's own AAC, copied rather than re-encoded.
-  // Safari only decodes AV1 on hardware that has it (M3 / A17 and later), so
-  // this is not a legacy fallback — it is what a good many Macs will play.
+  // H.264 High @ L4.0, carrying the source's own AAC rather than a second pass
+  // over the music. Safari only decodes AV1 on hardware that has it (M3 / A17
+  // and later), so this is not a legacy fallback — it is what a good many Macs
+  // will play.
   { src: "/lichtspiel/film.mp4", type: 'video/mp4; codecs="avc1.640028, mp4a.40.2"' },
 ];
 

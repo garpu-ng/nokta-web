@@ -54,7 +54,7 @@ const ja: Record<string, string> = {
   // "Lichtspiel" is read, not what it means. Same treatment n-Studie already
   // gets two lines down in the spec line it wears as "n スタディ": the work
   // keeps its German title on the sheet, and Japanese is told how to say it.
-  "work.lichtspiel.spec": "リヒトシュピール · 1920 × 1080 px · 24 fps · 1:45、音声あり",
+  "work.lichtspiel.spec": "リヒトシュピール · 1920 × 912 px · 24 fps · 1:45、音声あり",
   "work.lichtspiel.player": "リヒトシュピール — 音声つきの映像",
   "work.lichtspiel.noVideo": "お使いのブラウザはこの動画を再生できません。",
 

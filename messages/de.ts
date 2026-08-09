@@ -64,7 +64,7 @@ const de: Record<string, string> = {
   "work.lichtspiel.lead": "Ein Lichtversuch mit dem eigenen Zeichen: bewegte Scheinwerfer über Wasser, das Signet dazwischen. Gebaut, gerendert, vertont.",
   // The spec line names what the film is, the way the art plate's names what
   // the print is.
-  "work.lichtspiel.spec": "lichtspiel · 1920 × 1080 px · 24 bilder/s · 1:45 mit ton",
+  "work.lichtspiel.spec": "lichtspiel · 1920 × 912 px · 24 bilder/s · 1:45 mit ton",
   "work.lichtspiel.player": "Lichtspiel — Film mit Ton",
   "work.lichtspiel.noVideo": "Ihr Browser kann dieses Video nicht abspielen.",
 
