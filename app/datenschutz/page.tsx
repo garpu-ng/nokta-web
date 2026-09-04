@@ -12,7 +12,8 @@ export default function DatenschutzPage() {
       <p>
         <strong>1. Verantwortlicher</strong>
         <br />
-        nokta Studio, [Name, Anschrift], Nordrhein-Westfalen. Kontakt:{" "}
+        Kaan Özden — nokta studio, Messerstraße 31, 42657 Solingen,
+        Deutschland. Kontakt:{" "}
         <a href="mailto:hallo@nokta-studio.de">hallo@nokta-studio.de</a>.
       </p>
 
@@ -21,7 +22,10 @@ export default function DatenschutzPage() {
         <br />
         Beim Besuch dieser Website werden durch den Hosting-Anbieter automatisch
         technische Zugriffsdaten (z. B. IP-Adresse, Zeitpunkt, aufgerufene Seite)
-        verarbeitet, soweit dies zum Betrieb erforderlich ist.
+        verarbeitet, soweit dies zum Betrieb erforderlich ist. Die Website wird
+        bei der Vercel Inc. gehostet; Rechtsgrundlage ist unser berechtigtes
+        Interesse an einem sicheren und stabilen Betrieb (Art. 6 Abs. 1 lit. f
+        DSGVO).
       </p>
 
       <p>
@@ -56,11 +60,6 @@ export default function DatenschutzPage() {
         Aufsichtsbehörde.
       </p>
 
-      <p style={{ opacity: 0.55, fontSize: "0.8rem", marginTop: "3rem" }}>
-        Platzhalter: bitte vor Veröffentlichung durch eine vollständige,
-        geprüfte Datenschutzerklärung ersetzen (Hosting, Cookies, ggf.
-        Zahlungsdienstleister für die Drucke etc.).
-      </p>
     </main>
   );
 }

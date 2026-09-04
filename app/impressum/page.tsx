@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Impressum · nokta",
@@ -9,18 +10,16 @@ export default function ImpressumPage() {
     <main className="wa-page">
       <h1>Impressum</h1>
 
-      <p>Angaben gemäß § 5 TMG / § 18 MStV</p>
+      <p>Angaben gemäß § 5 DDG und § 18 Abs. 2 MStV</p>
 
       <p>
-        nokta Studio
+        Kaan Özden — nokta studio
         <br />
-        [Vorname Nachname]
+        Messerstraße 31
         <br />
-        [Straße Hausnummer]
+        42657 Solingen
         <br />
-        [PLZ Ort]
-        <br />
-        Nordrhein-Westfalen, Deutschland
+        Deutschland
       </p>
 
       <p>
@@ -28,24 +27,20 @@ export default function ImpressumPage() {
         <br />
         E-Mail: <a href="mailto:hallo@nokta-studio.de">hallo@nokta-studio.de</a>
         <br />
-        Telefon: [Nummer]
-      </p>
-
-      <p>
-        <strong>Umsatzsteuer-ID</strong>
-        <br />
-        USt-IdNr. gemäß § 27a UStG: [auf Anfrage]
+        Anfragen auch über das <Link href="/kontakt">Kontaktformular</Link>.
       </p>
 
       <p>
         <strong>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</strong>
         <br />
-        [Name, Anschrift wie oben]
+        Kaan Özden, Anschrift wie oben
       </p>
 
-      <p style={{ opacity: 0.55, fontSize: "0.8rem", marginTop: "3rem" }}>
-        Platzhalter: bitte vor Veröffentlichung durch die echten rechtlichen
-        Angaben ersetzen.
+      <p>
+        <strong>Verbraucherstreitbeilegung</strong>
+        <br />
+        Wir sind nicht bereit und nicht verpflichtet, an Streitbeilegungs&shy;verfahren
+        vor einer Verbraucherschlichtungsstelle teilzunehmen.
       </p>
     </main>
   );
