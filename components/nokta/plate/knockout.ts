@@ -65,6 +65,15 @@ const TEXT_H_WIDE = 0.22;
 const TEXT_H_TALL = 0.52;
 /** Above this height-to-width ratio a plate counts as "tall". */
 const TALL_AT = 0.5;
+/** The closing characters that are drawn as a disc rather than set as a glyph.
+    Syne's full stop is a RECTANGLE — wider than it is tall — and on every one
+    of these plates it is the studio's dot, struck in the accent and read at
+    display size, where a rectangle is unmistakably a rectangle. nokta means
+    dot; the mark that closes the line has to be one, whatever the face thinks.
+    Everything else about it is the face's: the disc is centred on the glyph's
+    own bounding box and takes its diameter from it, so the line keeps its
+    metrics, its colour and its rhythm and only the corners go. */
+const STOPS = new Set([".", "\u3002", "\uFF61", "\u2024"]);
 
 export function makeKnockout(
   text: string,
@@ -87,6 +96,10 @@ export function makeKnockout(
       period starts. Fixed the moment the type is fitted, so `paint` does not
       measure text on every frame of every plate to find out. */
   let bodyWidth = 0;
+  /** The disc that stands in for a full stop, in CSS pixels relative to that
+      character's own origin. Null when the line does not close on one, or when
+      the face reports no box to sit it in. */
+  let dot: { dx: number; dy: number; r: number } | null = null;
 
   /** Greedy wrap at a given size. Languages that do not space their words
       (the Japanese line) are broken by character instead. */
@@ -157,6 +170,28 @@ export function makeKnockout(
     const closing = lines[lines.length - 1] ?? "";
     bodyWidth = mc.measureText(closing.slice(0, -1)).width;
 
+    // Where the closing dot sits, measured off the glyph it replaces. Taken
+    // here, once, because TextMetrics is a layout question and `paint` runs
+    // sixty times a second.
+    const tail = closing.slice(-1);
+    dot = null;
+    if (STOPS.has(tail)) {
+      const m = mc.measureText(tail);
+      // The box, in the glyph's own frame: left and ascent are measured
+      // BACKWARDS from the alignment point, right and descent forwards.
+      const w = m.actualBoundingBoxLeft + m.actualBoundingBoxRight;
+      const h = m.actualBoundingBoxAscent + m.actualBoundingBoxDescent;
+      if (w > 0 && h > 0) {
+        dot = {
+          dx: (m.actualBoundingBoxRight - m.actualBoundingBoxLeft) / 2,
+          dy: (m.actualBoundingBoxDescent - m.actualBoundingBoxAscent) / 2,
+          // The wider of the two, so the disc carries the ink the rectangle
+          // carried rather than the ink of the square inside it.
+          r: Math.max(w, h) / 2,
+        };
+      }
+    }
+
     // Stroke-then-fill with a fat round pen dilates every glyph by exactly
     // the margin the art must keep off it.
     mc.textBaseline = "alphabetic";
@@ -205,7 +240,14 @@ export function makeKnockout(
       ctx.fillText(body, lineX[i], y);
       if (last && s.length) {
         ctx.fillStyle = accent;
-        ctx.fillText(s.slice(-1), lineX[i] + bodyWidth, y);
+        const x = lineX[i] + bodyWidth;
+        if (dot) {
+          ctx.beginPath();
+          ctx.arc(x + dot.dx, y + dot.dy, dot.r, 0, Math.PI * 2);
+          ctx.fill();
+        } else {
+          ctx.fillText(s.slice(-1), x, y);
+        }
       }
     });
   };
