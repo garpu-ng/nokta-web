@@ -9,7 +9,9 @@ import styles from "./Footer.module.css";
 // header's left edge and this one are the single left edge of the page.
 // Three short link columns (the pages, the legal ones, the profiles) beside
 // the contact block. Social links are placeholders (href="#") until the real
-// profiles exist.
+// profiles exist. The wordmark stands on its own here — the closing period
+// used to be set beside it as type, which the headline font renders square,
+// so it was dropped rather than faked.
 export default async function Footer() {
   const t = await getT();
   return (
@@ -21,12 +23,6 @@ export default async function Footer() {
               {/* The same masked wordmark the masthead carries, a step
                   smaller — see components/Wordmark.tsx. */}
               <Wordmark className={styles.markLogo} />
-            </Link>
-            {/* The wordmark's closing period — the footer's one coloured mark,
-                and the quiet door to the easter egg at /punkt. The asset
-                carries no period of its own, so the dot is set beside it. */}
-            <Link href="/punkt" className={styles.punkt} aria-label={t("aria.punkt")}>
-              .
             </Link>
           </span>
           <p className={styles.tag}>
