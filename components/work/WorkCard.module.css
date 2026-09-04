@@ -27,25 +27,6 @@
   transition: outline-color 0.25s ease;
 }
 
-/* The registration mark on the sheet's top-right corner. Struck in paper with
-   a soft ink halo so it reads on a bright rendering and on a dark cover alike,
-   and held at zero until the card is under the pointer or focused. */
-.reg {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 26px;
-  height: 26px;
-  --reg-opacity: 0.95;
-  color: var(--paper);
-  filter: drop-shadow(0 0 2px rgba(26, 26, 24, 0.55));
-  opacity: 0;
-  transform: scale(0.82);
-  transition:
-    opacity 0.28s ease,
-    transform 0.28s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-
 .img {
   display: block;
   width: 100%;
@@ -83,12 +64,6 @@
 .card:hover .img,
 .card:focus-visible .img {
   transform: scale(1.03);
-}
-
-.card:hover .reg,
-.card:focus-visible .reg {
-  opacity: 1;
-  transform: scale(1);
 }
 
 .card:focus-visible {
@@ -247,13 +222,5 @@
   .card:focus-visible .img {
     transform: none;
     transition: none;
-  }
-  .reg {
-    transform: none;
-    transition: opacity 0.28s ease;
-  }
-  .card:hover .reg,
-  .card:focus-visible .reg {
-    transform: none;
   }
 }

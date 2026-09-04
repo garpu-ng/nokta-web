@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import Registration from "@/components/print/Registration";
 import { getMediaSize } from "@/lib/mediaSizes";
 import type { Work, WorkKind } from "@/lib/works";
 import WorkAnno, { workAnnotation, type WorkAnnotation } from "./WorkAnno";
@@ -143,9 +142,6 @@ export default function WorkCard({
           className={styles.img}
         />
         )}
-        {/* A registration mark struck on the sheet's corner as you reach for
-            it — the press vocabulary, held back until the card is addressed. */}
-        <Registration className={styles.reg} />
       </span>
       <span className={styles.caption}>
         <span className={styles.title}>{item.title}</span>

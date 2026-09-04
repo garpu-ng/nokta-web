@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { getT } from "@/lib/i18n";
 import { getMediaSize } from "@/lib/mediaSizes";
-import Registration from "@/components/print/Registration";
 import styles from "./CaseStudy.module.css";
 
 /* Featured commission — the flagship editorial job that shows, rather than
@@ -67,7 +66,6 @@ export default async function CaseStudy() {
                       sizes="(max-width: 767px) 78vw, 360px"
                       className={styles.art}
                     />
-                    <Registration className={styles.reg} />
                   </div>
                   <figcaption className={`nk-caption ${styles.caption}`}>
                     <span className={styles.folio}>

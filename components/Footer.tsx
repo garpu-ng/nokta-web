@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { getT } from "@/lib/i18n";
-import Registration from "@/components/print/Registration";
 import Wordmark from "@/components/Wordmark";
 import styles from "./Footer.module.css";
 
@@ -64,10 +63,6 @@ export default async function Footer() {
       </div>
 
       <div className={styles.bottom}>
-        {/* A quiet registration mark sitting on the colophon's trim line, the
-            one print-forensics detail on the footer. currentColor resolves to
-            the footer's paper; --reg-opacity keeps it at a whisper. */}
-        <Registration className={styles.regMark} />
         <span>© 2026 nokta · Nordrhein-Westfalen, DE</span>
         <span>{t("footer.disciplines")}</span>
       </div>
