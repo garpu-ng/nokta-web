@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { makeKnockout, plateInk } from "./plate/knockout";
+import { makeMarkKnockout } from "./plate/markKnockout";
 import { interference, mountPlate, type Plate } from "./plate/mountPlate";
 import styles from "./InterferenceField.module.css";
 
@@ -38,8 +39,11 @@ import styles from "./InterferenceField.module.css";
 
    In both variants the accent is dots, marks and periods, never a surface.
 
-   A `motto` is knocked out of the raster rather than laid over it — see
-   plate/knockout.ts, which every plate in the family now shares. */
+   A `motto`, or the studio's `mark`, is knocked out of the raster rather than
+   laid over it — see plate/knockout.ts, which every plate in the family now
+   shares, and plate/markKnockout.ts for the wordmark. The homepage carries the
+   mark: nokta is the dot, the plate is a field of dots, and the name is the
+   one shape that field leaves empty. */
 
 /** Screen angle of the raster. A printer's answer, in radians. */
 const SCREEN_ANGLE = (15 * Math.PI) / 180;
@@ -81,12 +85,17 @@ export type FieldVariant = "single" | "meeting";
 export default function InterferenceField({
   variant = "single",
   motto,
+  mark,
   className,
 }: {
   /** Which question the physics is asked — see the note above. */
   variant?: FieldVariant;
   /** A title to knock out of the raster. Already translated by the caller. */
   motto?: string;
+  /** …or an image to knock out instead of a line: the studio's wordmark, as
+      the same file the masthead wears. Takes precedence over `motto`, which
+      stays the plate's accessible name at the call site. */
+  mark?: string;
   className?: string;
 }) {
   const ref = useRef<HTMLCanvasElement>(null);
@@ -97,7 +106,10 @@ export default function InterferenceField({
 
     return mountPlate(canvas, (ctx) => {
       const { paper, accent, face } = plateInk(canvas);
-      const cut = motto ? makeKnockout(motto, face, paper, accent) : null;
+      // Held separately from `cut` only because it is the one of the two that
+      // has to be waited for.
+      const stamp = mark ? makeMarkKnockout(mark, paper) : null;
+      const cut = stamp ?? (motto ? makeKnockout(motto, face, paper, accent) : null);
       const meeting = variant === "meeting";
 
       let w = 0;
@@ -108,6 +120,10 @@ export default function InterferenceField({
       const sin = Math.sin(SCREEN_ANGLE);
 
       const plate: Plate = {
+        // An image mask is decoded asynchronously; the raster re-fits itself
+        // around the mark once it is in. Type has no such wait.
+        ready: stamp?.ready,
+
         resize(width, height, dpr) {
           w = width;
           h = height;
@@ -191,7 +207,7 @@ export default function InterferenceField({
 
       return plate;
     });
-  }, [variant, motto]);
+  }, [variant, motto, mark]);
 
   return (
     <canvas

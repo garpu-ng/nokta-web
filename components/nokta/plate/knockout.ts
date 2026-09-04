@@ -32,19 +32,16 @@
    centre: the plate samples its own shape and asks about several points, which
    is its business rather than this file's.
 
-   THE BOUNDING BOX IS THE WHOLE FILE'S ONE OPTIMISATION, and it is worth
-   twice. The mask is almost entirely empty — the type is a fifth of the plate
-   at most — so `layout` records the dilated block's box, `punch` composites
-   only that (blitting the full plate every frame took a third off the frame
-   rate of three pages), and `layout` reads back only that (reading the full
-   plate cost 6.4MB per fit at 1440×900@2x against 2.1MB for the box, and it
-   grows with the square of both the viewport and the ratio — 22MB at
-   2560×1440@2x, and a second of dragging a window edge is thirty fits).
-   `dodged` therefore indexes a buffer that starts at the box's corner, and
-   has to say so: outside it there is no array rather than a transparent one.
+   Both of those, and the bounding box that makes them cheap, are the same
+   whatever was cut — they live in plate/maskRegion.ts, which markKnockout.ts
+   shares. This file is only the fitting and the setting of TYPE.
 
    The mask is rebuilt only when the plate is resized or the webfont finally
    lands — never per frame. */
+
+import { NO_MASK, readMask, type Knockout, type MaskRegion } from "./maskRegion";
+
+export type { Knockout };
 
 /** How far the art is held off the type, as a fraction of the cap height.
     Enough that the letter has air, and no more: the clearing is drawn with a
@@ -69,26 +66,6 @@ const TEXT_H_TALL = 0.52;
 /** Above this height-to-width ratio a plate counts as "tall". */
 const TALL_AT = 0.5;
 
-export type Knockout = {
-  /** Re-fit the type and re-cut the mask. CSS pixels, plus the backing
-      store's ratio so the mask is cut at the resolution it will erase at. */
-  layout: (width: number, height: number, dpr: number) => void;
-  /** Erase the type's clear space out of everything drawn so far. Cuts
-      whatever it lands on — right for volumes and rules, wrong for dots. */
-  punch: (ctx: CanvasRenderingContext2D) => void;
-  /** Is this point inside the type's clear space? For art made of small
-      independent marks, which can simply decline to draw one. CSS pixels. */
-  dodged: (x: number, y: number) => boolean;
-  /** Could anything inside this box reach the type's clear space? One AABB
-      test against the dilated block, so art that samples several points per
-      mark can throw out the great majority of its marks — the ones nowhere
-      near the line — before asking about any of them. CSS pixels. */
-  mayTouch: (x0: number, y0: number, x1: number, y1: number) => boolean;
-  /** Paint the type into the hole. Its closing character takes the accent —
-      the same move the hero headline and the footer wordmark make. */
-  paint: (ctx: CanvasRenderingContext2D) => void;
-};
-
 export function makeKnockout(
   text: string,
   face: string,
@@ -98,6 +75,8 @@ export function makeKnockout(
   const off = document.createElement("canvas");
   let mc: CanvasRenderingContext2D | null = null;
   let ready = false;
+  /** The cut mask, once it has been read back. */
+  let mask: MaskRegion = NO_MASK;
 
   let lines: string[] = [];
   let lineX: number[] = [];
@@ -108,16 +87,6 @@ export function makeKnockout(
       period starts. Fixed the moment the type is fitted, so `paint` does not
       measure text on every frame of every plate to find out. */
   let bodyWidth = 0;
-  /** The dilated type's bounding box, in DEVICE pixels — the only part of the
-      mask that has anything in it, and so the only part worth compositing. */
-  let bx = 0;
-  let by = 0;
-  let bw = 0;
-  let bh = 0;
-  /** The mask's alpha over the bounding box ONLY, kept for `dodged`. Its
-      origin is (bx, by), not (0, 0). */
-  let alpha: Uint8ClampedArray | null = null;
-  let scale = 1;
 
   /** Greedy wrap at a given size. Languages that do not space their words
       (the Japanese line) are broken by character instead. */
@@ -143,6 +112,7 @@ export function makeKnockout(
 
   const layout = (width: number, height: number, dpr: number) => {
     ready = false;
+    mask = NO_MASK;
     if (!text || width === 0 || height === 0) return;
 
     off.width = Math.max(1, Math.round(width * dpr));
@@ -203,57 +173,26 @@ export function makeKnockout(
     });
 
     // The box the type actually occupies, grown by the dilation pen and a
-    // pixel of slack, clamped to the plate. CSS px → device px.
+    // pixel of slack. Read back once, so `dodged` is an array index rather
+    // than a canvas call — and only the box, which is the only part of the
+    // mask with ink in it.
     const widest = Math.max(...lines.map((l) => mc!.measureText(l).width));
     const left = Math.min(...lineX) - pen - 2;
     const top = firstBaseline - fontSize * 1.05 - pen - 2;
-    const right = Math.min(...lineX) + widest + pen + 2;
-    const bottom = firstBaseline + (lines.length - 1) * step + fontSize * 0.34 + pen + 2;
-    bx = Math.max(0, Math.floor(left * dpr));
-    by = Math.max(0, Math.floor(top * dpr));
-    bw = Math.min(off.width - bx, Math.ceil((right - left) * dpr) + 1);
-    bh = Math.min(off.height - by, Math.ceil((bottom - top) * dpr) + 1);
-    ready = bw > 0 && bh > 0;
-    // Read back once, so `dodged` is an array index rather than a canvas call
-    // — and only the box, which is the only part of the mask with ink in it.
-    alpha = ready ? mc.getImageData(bx, by, bw, bh).data : null;
-    scale = dpr;
-  };
-
-  const punch = (ctx: CanvasRenderingContext2D) => {
-    if (!ready) return;
-    ctx.save();
-    // The mask is already at backing-store resolution, so it is blitted 1:1
-    // rather than through the context's device transform — and only over the
-    // box the type occupies, which is the only part of it that is not empty.
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.globalCompositeOperation = "destination-out";
-    ctx.drawImage(off, bx, by, bw, bh, bx, by, bw, bh);
-    ctx.restore();
-  };
-
-  const dodged = (x: number, y: number) => {
-    if (!ready || !alpha) return false;
-    // Into the box's own frame. Every bound is checked here rather than left
-    // to an out-of-range read returning undefined: the buffer no longer spans
-    // the plate, so a point past its edge would land on a real pixel of some
-    // other row instead of on nothing.
-    const ix = ((x * scale) | 0) - bx;
-    const iy = ((y * scale) | 0) - by;
-    if (ix < 0 || iy < 0 || ix >= bw || iy >= bh) return false;
-    return alpha[(iy * bw + ix) * 4 + 3] > 8;
-  };
-
-  const mayTouch = (x0: number, y0: number, x1: number, y1: number) => {
-    if (!ready) return false;
-    return !(
-      x1 * scale < bx ||
-      x0 * scale > bx + bw ||
-      y1 * scale < by ||
-      y0 * scale > by + bh
+    mask = readMask(
+      off,
+      mc,
+      dpr,
+      left,
+      top,
+      Math.min(...lineX) + widest + pen + 2,
+      firstBaseline + (lines.length - 1) * step + fontSize * 0.34 + pen + 2,
     );
+    ready = mask !== NO_MASK;
   };
 
+  /** Paint the type into the hole. Its closing character takes the accent —
+      the same move the hero headline and the footer wordmark make. */
   const paint = (ctx: CanvasRenderingContext2D) => {
     if (!ready) return;
     ctx.font = `700 ${fontSize}px ${face}`;
@@ -271,7 +210,13 @@ export function makeKnockout(
     });
   };
 
-  return { layout, punch, dodged, mayTouch, paint };
+  return {
+    layout,
+    paint,
+    punch: (ctx) => mask.punch(ctx),
+    dodged: (x, y) => mask.dodged(x, y),
+    mayTouch: (x0, y0, x1, y1) => mask.mayTouch(x0, y0, x1, y1),
+  };
 }
 
 /** The face and the two colours every plate reads off its own canvas. */

@@ -35,6 +35,11 @@ export type Plate = {
   /** Paint one frame. `t` is seconds of plate-time, which excludes any time
       the plate spent paused off-screen. */
   draw: (t: number) => void;
+  /** Anything the plate needs loaded before it can lay itself out properly —
+      an image it cuts a mask from, say. Settling it re-runs `resize` at the
+      same size, exactly the way the webfont landing does. A plate that waits
+      on nothing leaves it undefined. */
+  ready?: Promise<unknown>;
 };
 
 /**
@@ -142,6 +147,13 @@ export function mountPlate(
       if (!dead) resize(true);
     });
   }
+
+  /* …and the same for whatever else the plate is waiting on. An image mask is
+     decoded off the main thread and lands a frame or two after the plate does;
+     until it has, the plate has laid itself out around nothing. */
+  plate.ready?.then(() => {
+    if (!dead) resize(true);
+  });
 
   // Wrapped, not passed: an observer hands its callback the entry list, which
   // as a first argument would read as `force` and defeat the guard entirely.

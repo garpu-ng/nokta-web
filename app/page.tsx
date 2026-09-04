@@ -215,10 +215,11 @@ export default async function HomePage() {
 
       {/* ── 01 · Studio ────────────────────────────────────────────────
           The claim, then the plate across the full measure of the sheet, with
-          the studio's line standing inside it. The raster does not run behind
-          the type — it is knocked out around it, the way this page would be
-          printed, so the line is read on clean ground and the field is still
-          moving everywhere else. */}
+          the studio's mark standing inside it. The raster does not run behind
+          the wordmark — it is knocked out around it, the way this page would be
+          printed, so the name is read on clean ground and the field is still
+          moving everywhere else. nokta is the dot, and the plate is a field of
+          dots: the name is the one shape those dots leave empty. */}
       <section className={styles.section} aria-labelledby="nk-reg-01">
         <SectionRule id="nk-reg-01" label={t("home.reg.studio")} />
 
@@ -229,15 +230,13 @@ export default async function HomePage() {
 
         <Reveal as="figure" className={styles.figure} variant="wipe">
           <div className={styles.fieldPlate}>
-            <InterferenceField motto={t("studio.motto")} />
+            <InterferenceField mark="/nokta_logo.png" />
           </div>
-          {/* The canvas is decoration and hidden from assistive tech, so the
-              line it carries is also rendered as real text — off-screen, not
+          {/* The canvas is decoration and hidden from assistive tech, so what
+              stands in it is also rendered as real text — off-screen, not
               display:none, so a screen reader still reaches it. Nothing on
               this site is ever spoken only by a canvas. */}
-          <figcaption className="nk-sr-only">
-            {t("studio.motto")}
-          </figcaption>
+          <figcaption className="nk-sr-only">nokta</figcaption>
         </Reveal>
       </section>
 
