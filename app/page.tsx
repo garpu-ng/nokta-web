@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import HomeContact from "@/components/HomeContact";
 import Reveal from "@/components/Reveal";
-import TeaserVideo from "@/components/TeaserVideo";
-import InterferenceField from "@/components/nokta/InterferenceField";
+import HeroPlate from "@/components/HeroPlate";
+import OneLine from "@/components/nokta/OneLine/OneLine";
 import KindMark, { type DoorKind } from "@/components/nokta/KindMark";
 import SectionRule from "@/components/nokta/SectionRule";
 import { workAnnotation } from "@/components/work/WorkAnno";
@@ -211,15 +211,15 @@ export default async function HomePage() {
 
   return (
     <main>
-      <TeaserVideo lead1={t("home.hero.lead1")} lead2={t("home.hero.lead2")} />
+      <HeroPlate lead1={t("home.hero.lead1")} lead2={t("home.hero.lead2")} />
 
       {/* ── 01 · Studio ────────────────────────────────────────────────
-          The claim, then the plate across the full measure of the sheet, with
-          the studio's mark standing inside it. The raster does not run behind
-          the wordmark — it is knocked out around it, the way this page would be
-          printed, so the name is read on clean ground and the field is still
-          moving everywhere else. nokta is the dot, and the plate is a field of
-          dots: the name is the one shape those dots leave empty. */}
+          The claim, then the plate across the full measure of the sheet. The
+          name is drawn in the band at the head of the page; what stands here
+          is the sentence that band used to carry, made literal — a single
+          point draws a whole building without lifting, holds it, and takes the
+          line back with it. Vom Punkt über die Linie zur Form, and every
+          building is generated afresh. */}
       <section className={styles.section} aria-labelledby="nk-reg-01">
         <SectionRule id="nk-reg-01" label={t("home.reg.studio")} />
 
@@ -230,13 +230,13 @@ export default async function HomePage() {
 
         <Reveal as="figure" className={styles.figure} variant="wipe">
           <div className={styles.fieldPlate}>
-            <InterferenceField mark="/nokta_logo.png" />
+            <OneLine />
           </div>
           {/* The canvas is decoration and hidden from assistive tech, so what
-              stands in it is also rendered as real text — off-screen, not
+              happens in it is also rendered as real text — off-screen, not
               display:none, so a screen reader still reaches it. Nothing on
               this site is ever spoken only by a canvas. */}
-          <figcaption className="nk-sr-only">nokta</figcaption>
+          <figcaption className="nk-sr-only">{t("home.plate.oneline")}</figcaption>
         </Reveal>
       </section>
 

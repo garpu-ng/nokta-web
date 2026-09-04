@@ -22,6 +22,9 @@ const en: Record<string, string> = {
   "home.hero.lead2": "And it all began with a dot",
   "home.intro.statement": "nokta is a design studio in Düsseldorf. We make architecture visible — as an image, as a book, as a print.",
   "home.intro.body": "We work for architecture practices, publishers, cultural institutions and public clients. Some arrive with a finished plan, others with a napkin. Both are a beginning: a point that becomes a line, and a line that becomes a form.",
+  // What happens on the plate in section 01 — for screen readers, since a
+  // canvas says nothing.
+  "home.plate.oneline": "A point draws a building in one unbroken line — and takes the line back with it. Every building is generated anew.",
   "home.reg.studio": "Studio",
   "home.services.aria": "Services",
   "home.svc.0.title": "Visualisation",

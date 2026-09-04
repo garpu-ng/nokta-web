@@ -236,8 +236,8 @@ textarea {
 
 /* ── Visually hidden, still spoken ───────────────────────────────────
    Worn by everything that is on the page only for the accessibility tree: the
-   h1 a plate or the teaser film draws instead of setting (PlateHead,
-   TeaserVideo), the figcaption a canvas cannot speak (app/page.tsx), and the
+   h1 a plate draws instead of setting (PlateHead, HeroPlate), the figcaption
+   a canvas cannot speak (app/page.tsx), and the
    real labels behind the kontakt form's placeholders. Four modules had each
    pasted the same nine declarations. Promoted to a global utility so the
    pattern lives in one place.

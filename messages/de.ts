@@ -25,6 +25,9 @@ const de: Record<string, string> = {
   "home.hero.lead2": "Und mit einem Punkt hat alles begonnen",
   "home.intro.statement": "nokta ist ein Designstudio in Düsseldorf. Wir machen Architektur sichtbar — als Bild, als Buch, als Druck.",
   "home.intro.body": "Wir arbeiten für Architekturbüros, Verlage, Kulturinstitutionen und öffentliche Auftraggeber. Manche kommen mit einem fertigen Plan, andere mit einer Serviette. Beides ist ein Anfang: ein Punkt, aus dem eine Linie wird, aus der eine Form wird.",
+  // Was auf der Platte in Abschnitt 01 geschieht — für Screenreader, weil
+  // ein Canvas nichts spricht.
+  "home.plate.oneline": "Ein Punkt zeichnet ein Gebäude in einer Linie, ohne abzusetzen — und nimmt sie wieder mit. Jedes Gebäude entsteht neu.",
   "home.reg.studio": "Studio",
   "home.services.aria": "Leistungen",
   "home.svc.0.title": "Visualisierung",

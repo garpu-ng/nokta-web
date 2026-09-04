@@ -17,6 +17,9 @@ const tr: Record<string, string> = {
   "home.hero.lead2": "Ve her şey bir noktayla başladı",
   "home.intro.statement": "nokta, Düsseldorf’ta bir tasarım stüdyosu. Mimariyi görünür kılıyoruz — görüntü olarak, kitap olarak, baskı olarak.",
   "home.intro.body": "Mimarlık ofisleri, yayınevleri, kültür kurumları ve kamu işverenleri için çalışıyoruz. Kimi elinde bitmiş bir planla geliyor, kimi bir peçeteyle. İkisi de bir başlangıç: çizgiye dönüşen bir nokta, biçime dönüşen bir çizgi.",
+  // 01’deki plakada olan şey — bir tuval hiçbir şey söylemediği için,
+  // ekran okuyucular adına.
+  "home.plate.oneline": "Bir nokta, kalemi kaldırmadan tek bir çizgiyle bir bina çiziyor — ve çizgiyi geri alıyor. Her bina yeniden oluşuyor.",
   "home.reg.studio": "Stüdyo",
   "home.services.aria": "Hizmetler",
   "home.svc.0.title": "Görselleştirme",

@@ -1,0 +1,29 @@
+/* The homepage's opening band — edge to edge, no gutter, no radius, no frame.
+   The teaser film's own 1280 × 507 proportion is kept even though the film has
+   gone: the band was cut to that shape, the masthead sits on it, and the page
+   below it was drawn against that height.
+
+   The plate's ground is the frame colour rather than the film's near-black, so
+   the raster stands on the same ink as every other plate on the site instead
+   of on a shade left over from a video. */
+
+.hero {
+  position: relative;
+  aspect-ratio: 1280 / 507;
+  overflow: hidden;
+  background: var(--nk-frame);
+}
+
+/* (The page's h1 is kept for the outline and for a screen reader — nothing is
+   set over the plate itself — and wears the global .nk-sr-only, declared once
+   in app/styles/base.css.) */
+
+/* ── Phone ───────────────────────────────────────────────────────────
+   A 2.52:1 letterbox is a slot on a phone. The band turns portrait, and the
+   plate re-fits the mark to it — a wordmark in a tall box is set wider, which
+   is markKnockout.ts's business rather than this file's. */
+@media (max-width: 899px) {
+  .hero {
+    aspect-ratio: 4 / 5;
+  }
+}

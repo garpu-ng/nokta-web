@@ -464,8 +464,11 @@
   .figure {
     margin-top: 48px;
   }
+  /* The one-line plate draws a building, and a building is a tall object: on
+     a phone the plate turns portrait so the massing has room to stand up
+     rather than being fitted into a letterbox. */
   .fieldPlate {
-    aspect-ratio: 1.35;
+    aspect-ratio: 4 / 5;
   }
 
   /* The door becomes a small card: the mark down the left, the folio and the
