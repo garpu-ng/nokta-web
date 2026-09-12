@@ -61,11 +61,11 @@
 /* The portrait plate. The frame carries the DRAWING's own proportion rather
    than a height of its own, so the whole sheet is on the page — a fixed height
    plus object-fit:cover was cutting a fifth off the top and bottom of every
-   one back when these were 1:2 clips. Mohammed and Mert land within a pixel of
-   each other (450 × 555, 449 × 555) and Kaan's is cut to 900 × 1110, which is
-   the same 30:37 exactly; one shared ratio holds the row of cards on a single
-   baseline, and `contain` spends the odd sub-pixel on the plate ground rather
-   than shaving a ruled border off. */
+   one back when these were 1:2 clips. All three stills are cut to 900 × 1110 —
+   exactly this 30:37, the same ratio their reveal sheets carry — so the row of
+   cards stands on one baseline and no plate letterboxes; `contain` stays as the
+   guard for a portrait that ever arrives off-ratio, spending the odd sub-pixel
+   on the plate ground rather than shaving an edge off. */
 .portrait {
   aspect-ratio: 450 / 555;
   overflow: hidden;
@@ -79,8 +79,8 @@
   object-fit: contain;
 }
 
-/* ── The one plate that moves ───────────────────────────────────────────
-   Kaan's portrait is a 17-frame reveal, and it is a SPRITE STEPPED BY CSS
+/* ── The plates that move ───────────────────────────────────────────────
+   Each portrait is a 17-frame reveal, and each is a SPRITE STEPPED BY CSS
    rather than a video. That is a deliberate second attempt: shipped as a
    <video> it played in Chromium and painted nothing at all in Safari, and a
    codec that has to be right in a browser we cannot test is a bet, not an
@@ -96,9 +96,9 @@
                           animation cannot be restarted by hovering again, so
                           it is done for the page view. That is the whole ask.
 
-   The clip and the still are the same drawing at two moments — the sheet's
-   last frame IS /team/kaan.png — so only one of them is ever displayed and
-   there is no second artwork to keep in sync.
+   The clip and the still are the same drawing at two moments — a sheet's last
+   frame IS that person's /team/<name>.png — so only one of them is ever
+   displayed and there is no second artwork to keep in sync.
 
    The clip is worth having only where a pointer can run it and the reader
    hasn't asked for less motion. A touch screen has no hover to spend, so it
@@ -110,10 +110,11 @@
   display: none;
 }
 
-/* Both halves of Kaan's plate are drawn on ink, so the plate's own ground has
-   to be ink under them rather than the media grey every other plate loads
-   against — a fluid box has a fractional height (452 × 37/30 = 557.453px) and
-   a child at 100% of it can round a device pixel short. */
+/* Both halves of every portrait are drawn on ink, so the plate's own ground
+   has to be ink under them rather than the media grey the other plates on the
+   site load against — a fluid box has a fractional height
+   (452 × 37/30 = 557.453px) and a child at 100% of it can round a device pixel
+   short. */
 .clip,
 .still {
   background-color: var(--ink);
@@ -124,8 +125,11 @@
     display: block;
     width: 100%;
     height: 100%;
-    /* The sheet's URL rides in from the team data as --nk-reveal, the way the
-       home page hands its plates a --nk-ratio. */
+    /* Each member's own sheet rides in from the team data as --nk-reveal, the
+       way the home page hands its plates a --nk-ratio. All three are cut to the
+       same 17 frames on the same 600 × 740 plate, so one rule drives them all;
+       a sheet with a different frame count would need its own background-size
+       and steps() — see the README. */
     background-image: var(--nk-reveal);
     background-repeat: no-repeat;
     /* 17 frames in a ROW, so the sheet is 17 plate-widths wide. Both this and
@@ -139,8 +143,9 @@
        adjoining row was the bottom of the drawing, where the jumper runs off
        the edge: a bright line, blinking on and off as the reveal stepped.
        In a row, the frames adjoin along their left and right margins, and
-       every frame's outer column is the same pure ink. The bleed still
-       happens; there is simply nothing there to see. */
+       every frame of every sheet is padded so its outer columns are the same
+       pure ink. The bleed still happens; there is simply nothing there to
+       see. */
     background-size: 1700% 100%;
     background-position: 0% 0%;
     animation-name: reveal;

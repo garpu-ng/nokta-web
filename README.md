@@ -25,11 +25,10 @@ abhaken (`[x]`), Neues unten anhängen.
 - [x] **Team / Mert:** Erledigt. Alle drei Karten zeigen jetzt gezeichnete
       Portraits (`public/team/{kaan,mohammed,mert}.png`); der Platzhalter und
       die alten Clips (`flymekaan.mp4`, `flymehammed.mp4`) sind raus.
-- [ ] **Team / einheitlicher Grund:** Kaans Portrait steht auf Tinte
-      (`--ink`, aus dem Reveal-Clip), Mohammed und Mert stehen auf Weiß mit
-      gezeichnetem Rahmen. Nebeneinander sind das zwei verschiedene Sorten
-      Karte — entweder die beiden anderen auf Tinte nachziehen oder Kaan
-      auf Weiß.
+- [x] **Team / einheitlicher Grund:** Erledigt — die beiden anderen sind auf
+      Tinte nachgezogen. Mohammed und Mert haben jetzt dieselben gezeichneten
+      Portraits auf `--ink` wie Kaan, samt eigenem Reveal-Sheet; alle drei
+      Karten sind eine Sorte Karte.
 - [ ] **Alt-Routen aufräumen:** `/point`, `/cube`, `/line`, `/arch`, `/nokta`
       sind `permanentRedirect`-Stubs auf `/`; `/line/[slug]` + `/projekte/[slug]`
       leiten auf `/arbeiten/[slug]` — irgendwann entfernen, wenn nichts mehr
@@ -66,10 +65,10 @@ Neue Texte immer zuerst in `messages/de.ts` anlegen, dann in den anderen Sprache
 - Design-Tokens & Farbpalette: `app/styles/tokens.css` (drei Farben: Papier,
   Tinte, der rote Akzent — dieselben Werte in `lib/colors.ts`).
 - Der rote Punkt der Fußzeilen-Wortmarke verlinkt auf ein Easter Egg unter `/punkt`.
-- **Kaans Portrait auf `/studio` bewegt sich.** `public/team/kaan-reveal.webp`
-  ist ein **Sprite-Sheet mit 17 Bildern** (**nebeneinander**, verlustfrei
-  WebP), das eine CSS-`steps()`-Animation durchschaltet — bewusst **kein
-  Video**:
+- **Alle drei Portraits auf `/studio` bewegen sich.**
+  `public/team/{kaan,mohammed,mert}-reveal.webp` sind je ein **Sprite-Sheet mit
+  17 Bildern** (**nebeneinander**, verlustfrei WebP), das eine
+  CSS-`steps()`-Animation durchschaltet — bewusst **kein Video**:
   als `<video>` lief es in Chromium und blieb in Safari schwarz, und ein
   Codec, der in einem nicht testbaren Browser stimmen muss, ist eine Wette.
   Verhalten kommt komplett aus CSS, **ohne JavaScript**: bei Hover läuft es
@@ -78,8 +77,8 @@ Neue Texte immer zuerst in `messages/de.ts` anlegen, dann in den anderen Sprache
   auf dem letzten Bild stehen (`fill-mode: forwards`). Eine fertige Animation
   startet nicht neu, also pro Seitenaufruf genau einmal.
   Ohne echten Zeiger (Touch) oder bei `prefers-reduced-motion` läuft sie gar
-  nicht: dann steht `public/team/kaan.png` da, und das **ist** das letzte Bild
-  des Sheets. Umschaltung in CSS (`.clip` / `.still` in
+  nicht: dann steht `public/team/<name>.png` da, und das **ist** das letzte
+  Bild des jeweiligen Sheets. Umschaltung in CSS (`.clip` / `.still` in
   `app/studio/page.module.css`) — dadurch lädt ein Handy das Sheet nie
   (ein `background-image` in `display:none` wird nicht geholt).
   **Nebeneinander ist Absicht, nicht Geschmack:** ein Schritt landet in einer
@@ -90,6 +89,16 @@ Neue Texte immer zuerst in `messages/de.ts` anlegen, dann in den anderen Sprache
   Zeichnung, wo der Pulli aus dem Bild läuft: eine helle Linie, die mit jedem
   Schritt an- und ausging.
   **Neues Sheet = Bildzahl an drei Stellen anpassen:** `background-size`,
-  `steps(...)` und ggf. `animation-duration`. Beim Skalieren die Werte auf den
-  Farbumfang der Vorlage klemmen — Lanczos/Mitchell überschwingen an harten
-  Kanten und legen sonst eine zu helle 1-px-Zeile an den Bildrand.
+  `steps(...)` und ggf. `animation-duration`. Alle drei Sheets haben dieselben
+  17 Bilder auf derselben 600 × 740-Platte, deshalb reicht heute **eine** Regel
+  für alle; ein Sheet mit anderer Bildzahl bräuchte eigene Werte.
+  **Rezept für ein neues Sheet** (so sind Mohammeds und Merts entstanden, aus
+  je einem 17-Bild-GIF):
+  Bild auf 596 × 738 skalieren, unten bündig auf eine Tinte-Platte von
+  600 × 740 setzen (2 px Tinte links und rechts), die 17 Platten nebeneinander
+  legen und verlustfrei als WebP speichern; das Standbild ist dasselbe letzte
+  Bild in 900 × 1110 (derselbe Aufbau in 1,5×). Die **2 px reine Tinte außen
+  sind der Punkt** — dorthin greift das Sample des Nachbarbildes.
+  Beim Skalieren die Werte auf den Farbumfang der Vorlage klemmen —
+  Lanczos/Mitchell überschwingen an harten Kanten und legen sonst eine zu
+  helle 1-px-Zeile an den Bildrand.

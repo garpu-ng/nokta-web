@@ -106,7 +106,7 @@ Leuchtturm). `client` absent ⇒ the UI annotates **Eigenprojekt**.
 | `/` | teaser film → 01 statement + interference plate → 02 three doors → 03 two spreads + a pair + the way on → `HomeContact` |
 | `/arbeiten` | the wall: one material at a time, `?kind=` (server-read, and kept in the URL as you click); no kind ⇒ the first in wall order. Two-up contact sheet, no "Alle" |
 | `/arbeiten/[slug]` | one detail route for all 13: shared `ProjectHeader` + per-kind body — image stack (renderings), technical passport incl. price + buy (prints), `CaseStudy` (report), `ArtPlate` (n-Studie), `Leuchtturm` (manual) — + prev/next crossing kinds |
-| `/studio` | hero, team (three drawn portraits; Kaan's is a hover-once CSS sprite reveal — see README), `ServiceIndex` (4 deliverable rows, the one paper section), CTA |
+| `/studio` | hero, team (three drawn portraits, each a hover-once CSS sprite reveal — see README), `ServiceIndex` (4 deliverable rows, the one paper section), CTA |
 | `/kontakt` | `InquiryForm` + a rail carrying the direct address |
 | `/impressum`, `/datenschutz` | **placeholder text, German only** — see §5 |
 | `/punkt` | easter egg; its door is the red period of the footer wordmark |

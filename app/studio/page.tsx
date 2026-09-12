@@ -15,16 +15,21 @@ import styles from "./page.module.css";
    the sheet. */
 
 /* The three of us, in the order the studio lists itself. The portraits are
-   drawn rather than photographed: one line figure per person, inside a ruled
-   border in that person's colour.
+   drawn rather than photographed: one line figure per person, on the same ink
+   ground, in that person's colour.
 
-   Kaan's is drawn twice. `reveal` is the sheet of 17 frames the halftone
+   Each of us is drawn twice. `reveal` is the sheet of 17 frames the halftone
    version comes into focus across, and `src` is that same drawing's LAST
    frame. The reveal steps once under a pointer and then holds exactly what
    `src` shows, so the two are one portrait at two moments, not two
    portraits. Everywhere the reveal doesn't belong (a touch screen, a reader
    who asked for less motion) the still stands in and nothing is missing but
-   the motion. The stepping itself is CSS — see .clip in the page's module. */
+   the motion. The stepping itself is CSS — see .clip in the page's module.
+
+   `reveal` stays optional: a portrait that arrives as a single drawing is a
+   plate that doesn't move, not a broken one — the still carries it alone, and
+   the CSS already only marks a plate .still when there is a reveal to stand
+   down for. */
 type Member = {
   name: string;
   role: string;
@@ -40,8 +45,18 @@ const TEAM: Member[] = [
     src: "/team/kaan.png",
     reveal: "/team/kaan-reveal.webp",
   },
-  { name: "Mohammed", role: "studio.role.mohammed", src: "/team/mohammed.png" },
-  { name: "Mert", role: "studio.role.mert", src: "/team/mert.png" },
+  {
+    name: "Mohammed",
+    role: "studio.role.mohammed",
+    src: "/team/mohammed.png",
+    reveal: "/team/mohammed-reveal.webp",
+  },
+  {
+    name: "Mert",
+    role: "studio.role.mert",
+    src: "/team/mert.png",
+    reveal: "/team/mert-reveal.webp",
+  },
 ];
 
 export async function generateMetadata(): Promise<Metadata> {
