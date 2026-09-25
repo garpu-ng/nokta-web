@@ -97,8 +97,6 @@ export default async function KontaktPage() {
             nokta Studio
             <br />
             {t("kontakt.addr.region")}
-            <br />
-            {t("kontakt.addr.vat")}
           </p>
         </aside>
       </div>
