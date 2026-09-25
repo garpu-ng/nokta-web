@@ -7,8 +7,8 @@ import styles from "./Footer.module.css";
 // the same ink, the same full-bleed gutter, the same wordmark asset, so the
 // header's left edge and this one are the single left edge of the page.
 // Three short link columns (the pages, the legal ones, the profiles) beside
-// the contact block. Social links are placeholders (href="#") until the real
-// profiles exist. The wordmark stands on its own here — the closing period
+// the contact block. Profile links (Instagram, LinkedIn, Behance) come back
+// when the profiles exist; until then the column carries mail only. The wordmark stands on its own here — the closing period
 // used to be set beside it as type, which the headline font renders square,
 // so it was dropped rather than faked.
 export default async function Footer() {
@@ -54,9 +54,6 @@ export default async function Footer() {
 
           <div className={styles.col}>
             <span className={styles.colH}>{t("footer.col.social")}</span>
-            <a href="#" className={styles.link}>Instagram</a>
-            <a href="#" className={styles.link}>LinkedIn</a>
-            <a href="#" className={styles.link}>Behance</a>
             <a href="mailto:hallo@nokta-studio.de" className={styles.link}>E-Mail</a>
           </div>
         </nav>
