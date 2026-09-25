@@ -128,7 +128,6 @@ const en: Record<string, string> = {
 
   // ── Studio ────────────────────────────────────────────────────────
   "studio.heading": "Studio",
-  "studio.caption": "design studio · düsseldorf · nrw · three of us",
   "studio.services.note": "four lines · one deliverable each",
   "studio.p1": "nokta is a design studio in Düsseldorf. There are three of us, and we draw buildings, books and prints: architectural visualisation, editorial and typesetting, print production and CAD plans.",
   "studio.p2": "We build our own tools and workflows: render setups, typesetting templates and prepress checks. At the start of a project there are several versions on the table.",

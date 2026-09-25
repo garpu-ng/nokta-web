@@ -121,7 +121,6 @@ const tr: Record<string, string> = {
 
   // ── Stüdyo ────────────────────────────────────────────────────────
   "studio.heading": "Stüdyo",
-  "studio.caption": "tasarım stüdyosu · düsseldorf · nrw · üç kişi",
   "studio.services.note": "dört satır · her birine bir sonuç",
   "studio.p1": "nokta, Düsseldorf’ta bir tasarım stüdyosu. Üç kişiyiz; yapılar, kitaplar ve baskılar çiziyoruz: mimari görselleştirme, editoryal ve dizgi, baskı üretimi ve CAD planları.",
   "studio.p2": "Araçlarımızı ve iş akışlarımızı kendimiz kuruyoruz: render kurulumları, dizgi şablonları ve baskı öncesi kontrol adımları. Bir projenin başında masada birkaç varyasyon durur.",

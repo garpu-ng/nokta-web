@@ -91,10 +91,9 @@ export default async function StudioPage() {
         <RidgeField motto={title} />
       </PlateHead>
 
-      {/* ── Header: the caption left, the practice right ───────────── */}
+      {/* ── Header: the film left, the practice right ──────────────── */}
       <section className={styles.head}>
         <div>
-          <p className={styles.caption}>{t("studio.caption")}</p>
           {/* The motto as a film: one self-contained WebGL2 page, no
               libraries, no media files — tiles that lift, fly and land back
               in place. Framed rather than inlined so its canvas, loop and

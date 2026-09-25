@@ -137,7 +137,6 @@ const de: Record<string, string> = {
 
   // ── Studio ────────────────────────────────────────────────────────
   "studio.heading": "Studio",
-  "studio.caption": "designstudio · düsseldorf · nrw · zu dritt",
   "studio.services.note": "vier zeilen · je ein ergebnis",
   "studio.p1": "nokta ist ein Designstudio in Düsseldorf. Wir sind zu dritt und zeichnen Gebäude, Bücher und Drucke: Architekturvisualisierung, Editorial und Satz, Druckproduktion und CAD-Pläne.",
   "studio.p2": "Wir bauen unsere Werkzeuge und Abläufe selbst: Render-Setups, Satzvorlagen und Prüfschritte für die Druckvorstufe. Am Anfang eines Projekts liegen mehrere Varianten auf dem Tisch.",
