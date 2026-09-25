@@ -77,7 +77,12 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function StudioPage() {
   const t = await getT();
+  const locale = await getLocale();
   const title = `${t("studio.heading")}.`;
+  // The film carries its own captions in German and English only; every
+  // other language gets the English cut rather than a German one.
+  const filmSrc =
+    locale === "de" ? "/film/nokta-film.html" : "/film/nokta-film.html?lang=en";
   return (
     <main>
       {/* The quiet member of the family, no longer behind the page but
@@ -90,6 +95,19 @@ export default async function StudioPage() {
       <section className={styles.head}>
         <div>
           <p className={styles.caption}>{t("studio.caption")}</p>
+          {/* The motto as a film: one self-contained WebGL2 page, no
+              libraries, no media files — tiles that lift, fly and land back
+              in place. Framed rather than inlined so its canvas, loop and
+              keyboard never touch the page around it. It handles reduced
+              motion and a missing WebGL2 on its own. */}
+          <div className={styles.film}>
+            <iframe
+              src={filmSrc}
+              title={t("studio.film")}
+              loading="lazy"
+              className={styles.filmFrame}
+            />
+          </div>
         </div>
         <div className={styles.headText}>
           <p>{t("studio.p1")}</p>

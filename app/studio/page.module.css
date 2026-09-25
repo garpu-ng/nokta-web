@@ -20,6 +20,23 @@
   opacity: 0.6;
 }
 
+/* The film plate under the caption. Square, because the film is: it is
+   drawn on a square plate with its own border ring, and letterboxing it would
+   paint bars of a second ground next to it. The frame colour stands in while
+   the page inside loads. */
+.film {
+  margin-top: 28px;
+  aspect-ratio: 1;
+  background: var(--nk-frame);
+}
+
+.filmFrame {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 .headText {
   display: flex;
   flex-direction: column;

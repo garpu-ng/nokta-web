@@ -143,6 +143,7 @@ const de: Record<string, string> = {
   "studio.p2": "Wir bauen unsere Werkzeuge und Abläufe selbst: Render-Setups, Satzvorlagen und Prüfschritte für die Druckvorstufe. Am Anfang eines Projekts liegen mehrere Varianten auf dem Tisch.",
   "studio.p3": "Angefangen haben wir mit Architekturvisualisierung; sie ist bis heute der größte Teil der Arbeit. Fotorealistische 3D-Renderings, innen und außen: Licht, Material, Raum. Das Projekt, wie es später aussieht — lange bevor der erste Stein liegt.",
   "studio.team": "Das Team",
+  "studio.film": "Film: Vom Punkt über die Linie zur Form",
   "studio.role.kaan": "Design · Konzept",
   "studio.role.mohammed": "3D · Visualisierung",
   "studio.role.mert": "Layout · Druck",

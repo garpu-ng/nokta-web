@@ -1,0 +1,896 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>nokta — vom punkt über die linie zur form</title>
+<meta name="description" content="Ein 80-Sekunden-Film aus losen Punkten. nokta, Designstudio in Düsseldorf.">
+<style>
+:root{
+  --ink:#1a1a18; --frame:#1f1f1c; --paper:#e9e0ce; --accent:#b83636; --hair:#e9e0ce38;
+  --face:"DM Sans","Syne",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:var(--ink);color:var(--paper)}
+body{display:grid;place-items:center;overflow:hidden;font-family:var(--face);-webkit-font-smoothing:antialiased}
+.film{position:relative;width:min(100vw,100vh);width:min(100vw,100svh);aspect-ratio:1/1;container-type:inline-size;
+  background:var(--frame);overflow:hidden;cursor:pointer;outline:none;-webkit-tap-highlight-color:transparent}
+.film:focus-visible{box-shadow:inset 0 0 0 2px var(--accent)}
+canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.cap{position:absolute;left:50%;bottom:3.5%;transform:translate(-50%,50%);margin:0;padding:.55em 1.1em;
+  background:var(--frame);color:var(--paper);white-space:nowrap;pointer-events:none;
+  font:600 clamp(9px,1.8cqw,18px)/1 var(--face);letter-spacing:.005em;
+  transition:opacity .4s cubic-bezier(.2,.7,.2,1)}
+.cap.out{opacity:0}
+.dot{display:inline-block;width:.34em;height:.34em;margin-left:.07em;border-radius:50%;background:var(--accent);vertical-align:baseline}
+.snd{position:absolute;top:3.5%;right:8%;transform:translateY(-50%);margin:0;padding:.55em 1em;border:0;border-radius:0;
+  background:var(--frame);color:var(--paper);font:600 clamp(9px,1.5cqw,15px)/1 var(--face);cursor:pointer;
+  opacity:0;transition:opacity .4s cubic-bezier(.2,.7,.2,1)}
+.film.ui .snd,.snd:focus-visible{opacity:.78}
+.snd:hover{opacity:1}
+.snd:focus-visible{outline:1px solid var(--accent);outline-offset:2px}
+.fallback{position:absolute;inset:0;display:grid;place-items:center;padding:12%;text-align:center;font:600 clamp(13px,2.4cqw,22px)/1.35 var(--face)}
+</style>
+</head>
+<body>
+<div class="film" id="film" tabindex="0" role="img" aria-label="Animierter Film: Lose Punkte zeichnen ein Haus, setzen ein Buch, drucken einen Grundriss und formen das Wort nokta.">
+  <canvas id="gl"></canvas>
+  <p class="cap" id="cap" aria-hidden="true"></p>
+  <button class="snd" id="snd" type="button" aria-pressed="false">ton an</button>
+</div>
+<script>
+'use strict';
+(() => {
+/* ============================================================
+   nokta — ein Film aus losen Punkten. 80 s, WebGL2, keine Dateien.
+   Jede Fliese ist ein Punkt: oben Papier, unten Tinte. Einer ist rot.
+   ============================================================ */
+
+const PI = Math.PI, TAU = PI * 2;
+const clamp = (x, a = 0, b = 1) => x < a ? a : x > b ? b : x;
+const mix = (a, b, t) => a + (b - a) * t;
+const sstep = (a, b, x) => { const t = clamp((x - a) / (b - a)); return t * t * (3 - 2 * t); };
+const eio = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+const bump = (x, c, w) => { const d = (x - c) / w; return Math.exp(-d * d); };
+function mulberry(a) { return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const rnd = mulberry(20260925);
+const phiOf = t => t <= 0.045 ? PI : Math.acos(Math.min(1, t));   // tone -> tilt (visible paper area = tone)
+
+/* ---------- film constants ---------- */
+const DUR = 80;
+const N = 60, F0 = 0.07, F1 = 0.93, S = (F1 - F0) / N, R = 0.40 * S;
+const BI = 0.035, NBS = 66;                     // border ring inset + tiles per side
+const NI = N * N, NBT = NBS * 4, T = NI + NBT;
+const P = 29 * N + 30;                          // der Punkt: the red tile
+const colX = i => F0 + (i + .5) * S;
+const LOGO = "0,103.2 0,110.2 0.5,110.5 1,112.2 2.2,114.5 3,115.7 5.2,117.8 6.3,118.7 8.5,119.7 10,120 48.5,120 50.3,119.7 51.8,119 52.8,118.8 56.5,116.7 58.8,114.5 72.8,95.8 83,81.8 86.7,77.2 87.8,75.3 89,74 89.8,73.5 90.8,73.3 91.8,73.7 92.8,74.5 93.5,76 93.5,77.2 84.3,106.7 84.2,107.7 84.3,111.5 85.2,114.2 86,115.7 87.2,117.2 88.8,118.7 90.7,119.7 92.8,120.2 115.5,120.3 118.8,119.8 122,118.5 125.3,116.2 127,114.5 128.7,112.3 130.7,108.5 131.7,105.7 132,103.8 132.7,102.3 133,100.5 133.7,99 134,97.2 134.8,95 135,93.8 135.8,91.7 137,87.2 137.8,85 138,83.8 138.8,81.7 138.8,81 139.7,78.8 139.8,77.7 140.5,76.2 140.8,74.3 141.7,72.3 141.8,71 142.7,69 143.3,66.2 143.7,65.7 144,63.5 145,61.2 145.5,60.8 145.8,61.5 145.8,68.7 146,68.8 146.2,72.3 147,75.8 147.2,77.5 147.8,79.3 148.2,81.2 150.2,86.7 153.2,92.8 157.2,99 161,103.7 165,107.7 168.3,110.5 172.5,113.5 177.7,116.5 180.5,117.8 181.3,118 182.3,118.7 184.2,119.2 185,119.7 186.7,120 188.2,120.7 190.2,121 192.2,121.7 196,122.2 196.8,122.5 197,122.8 211.8,122.8 212,122.5 212.8,122.2 215.7,121.8 218.5,121 220,120.8 224.2,119.5 225,119 226,118.8 234.7,114.5 241.5,109.7 247.7,103.8 251.7,99 253.8,95.5 254.5,94.8 255,95.2 255,96.3 254.2,98.5 253.8,100.5 253.2,102.2 252.5,105.3 252.5,109.2 253,111.7 254.2,114.3 255.2,115.8 257,117.7 259,118.8 261.7,119.5 293.2,119.5 297.3,118.7 299.5,117.7 302.8,115 317.7,96.5 319.2,95 320.5,94.8 322,96 322.3,97 322.3,98 321.2,102.5 320.8,104.8 320.2,106.7 319.8,108.7 319.8,112.5 320.2,114 321.2,116 323.7,118.5 326.7,119.7 357.3,119.7 359.3,119 361.2,117.8 363.5,115.2 364.5,112.8 365,110.3 365.7,108.7 366,106.5 366.7,104.8 367,102.7 367.5,101.7 368,98.8 368.7,97.3 368.8,95.8 369.7,93.5 370,91.3 370.7,89.7 371,87.5 371.7,85.8 372.2,83.2 372.7,82 373,80 374.5,75 374.8,71.8 374.5,70 373.5,67.8 371.8,66 370.2,65 368,64.5 354.3,64.5 352.8,63.3 352.5,62.5 352.5,61.3 353,60 372.7,33.7 380.8,22.3 381.3,21.8 381.7,21.8 382,22.2 381.8,23.7 381.2,25 381,26.2 380,28.8 379.8,30.2 379,32.2 378.8,33.5 378,35.5 377.8,36.8 377,38.8 377,39.5 374.3,48 374,51.2 374.2,52.5 375,54.2 376.8,55.7 379.3,56.5 381.5,56.8 383.7,56.8 383.8,57 398.3,56.8 398.5,56.7 403.3,56.8 404.3,57.3 405.2,58.2 405.8,59.5 405.8,61 405.2,63.2 404.8,65.8 404.2,67.8 403.8,70.5 403.2,72.5 402.7,75.8 402.2,77.2 401.7,80.5 401,82.7 400.7,85.2 400.3,85.8 398.8,93.7 398.2,95.8 397.8,98.3 397.2,100.5 397,102.3 396.2,105.2 395.8,107.8 395.2,109.8 395.2,113.3 396,115.7 397.5,117.5 399.5,118.7 400.8,119 406.8,119 407,119.2 435,119.2 437,118.8 439.3,117.7 441.3,115.8 442.8,113.2 443,111.8 443.7,110.2 444.2,107.2 444.8,105.3 445.2,103.2 445.8,101.3 446,99.7 446.5,98.5 447,95.7 447.7,93.8 448,91.7 450.7,81.7 451,79.5 451.5,78.3 451.8,76.2 452.7,73.7 452.8,72.2 453.8,68.8 453.8,68 454.7,65.7 455,63.3 455.5,62.2 456,59.7 457,58.3 458.5,57.3 459.8,56.8 483,56.5 486.3,55.8 488,54.8 488.7,54.8 489,55.3 489,56.5 488.7,58.7 488.5,63.5 488.7,63.7 488.7,67.7 489.2,72.3 489.7,74 490.2,77.2 491,79.5 491,80.2 491.8,82 492.2,83.5 492.8,84.7 493.2,86 496.2,92 500.2,98 502.3,100.7 506.5,105 512.2,109.7 516.8,112.7 523,115.7 524.3,116 525.5,116.7 527.3,117 528.7,117.7 531,118 533.8,118.8 539.5,119.5 542.5,119.5 542.7,119.7 580.3,119.7 583.2,118.8 585.2,117.7 587.7,115 588.8,112.7 589.7,109.3 589.8,107.5 590.7,104.7 591,102 591.5,100.7 592,97.2 592.7,95.2 593,92.5 593.7,90.5 594,87.7 594.7,85.7 595.2,82.2 595.7,81 596,78.2 596.7,76.2 597,73.5 598.7,66.5 599.2,62.7 599.5,61.8 599.8,61.7 599.8,49 599.2,47.8 598.8,45 597.8,40.7 596.7,37 594.7,32.2 591.7,26.7 589.7,23.7 586.5,19.7 581.7,14.8 579.5,13 573.7,9 571.2,7.8 570.3,7.2 569.5,7 568.2,6.2 566.8,5.8 565.7,5.2 564,4.8 562.7,4.2 557.8,3 551.3,2.2 541,2.2 533.5,3.2 531.5,3.8 530,4 528,4.8 526.3,5.2 525.2,5.8 524.2,6 517.7,9.2 512.8,12.3 509.7,14.8 504,20.3 500.5,24.7 498.7,27.7 497.7,28.5 497.3,28.3 497.3,27.7 497.7,27 498.2,24.5 498.7,23.5 499,21.5 499.8,19.2 500,17.8 500.7,16.2 500.7,15.5 501.5,12.7 501.7,8.8 500.8,6.7 499.5,5.3 496.8,4.2 493.8,3.8 399,3.5 398.8,3.7 395.3,3.7 392.2,4 390.7,4.5 390.3,4.8 388.8,5.2 387.5,4.2 386.2,3.8 369.7,3.8 369.5,3.7 352,3.5 349,4.2 347,5.2 345.2,6.8 344,8.7 324.2,35 323,36.8 322.2,37.7 310.8,53.2 309.5,54.7 308.5,55.2 307.8,55.2 307,54.8 305.8,53.5 305.7,52.7 305.8,51 306.7,49.3 310.2,39.5 312.8,33 313,32 314.7,28.2 315,26.7 315.7,25.5 316,24 316.7,22.8 317,21.3 317.7,20.2 318,18.7 318.7,17.5 319,16 319.7,14.8 320.2,13 321.5,9.8 321.8,8.3 321.7,6.3 320.3,4.7 318.8,4 284.5,3.8 283.2,4.2 281,5.3 279.5,6.8 278.2,9.2 277.7,11.5 277.2,12.5 276.7,15.2 276.2,16.3 275.8,18.3 274.2,23.8 273.7,26.3 273.2,27.5 272.8,29.5 272.3,30.7 271.8,33.3 271.3,34.3 270.8,37 270.2,38.7 268.8,44.5 268.2,46.2 267.8,48.3 267.2,49.8 266.8,52 266,54.3 265.8,56 264.5,58.7 264,58 263.8,52.3 262.7,45.5 260.7,38.8 258.8,34.8 258.7,34 255.5,28.2 251.8,22.8 247.8,18.2 243.8,14.3 238.5,10.2 233.7,7.2 229.3,5 228.8,5 227.3,4.2 225.5,3.7 224.2,3 217.5,1.2 213.7,0.7 212.5,0 198.5,0 197.3,0.7 193.5,1.2 192.2,1.7 189.5,2.2 188.5,2.7 186.8,3 185,3.8 184,4 180.3,5.8 179.2,6.2 178.3,6.8 177.3,7.2 174,9.2 168.7,13 166.3,15 162,19.3 159.2,22.7 156.7,26.5 155.5,27.8 155,27.7 155,26.5 155.5,25 155.7,23.3 155.5,20.2 154.7,16.5 153.8,14.5 152.3,11.8 149.3,8.5 147.5,7.2 145.2,6 141.3,5.2 107.7,5 107.5,5.2 105.3,5.2 100.5,6 96.8,7.2 94.3,8.3 91.7,10 90.2,11.2 87.2,14.2 65.8,45 60.2,52.3 59.5,53 58.5,53.3 58.2,52.8 58.3,52.2 58.7,51.7 59.8,48.2 60,47 60.8,45 61,43.8 61.7,42.3 61.8,41.2 62.7,39.2 62.8,38 65.8,29 66,27.8 66.8,25.8 66.8,25.2 68.7,20 69,18.2 69.7,16.8 70.8,11.7 70.8,9.8 70.5,8.3 69.8,7 68.7,5.8 67.2,5 66.3,4.8 35.8,5 34.3,5.2 31.7,6 29.2,7.3 27.3,8.8 25.7,10.7 24.3,12.7 23.2,15 22.3,17.7 21.8,20.3 21.3,21.5 20.8,24.3 20.2,26 19.8,28.2 19.2,29.8 18.8,32.2 18.2,33.8 17.8,36 17.2,37.7 17,39.2 16.2,41.7 15.7,44.3 15.2,45.5 14.8,47.7 14.3,48.8 13.7,52.2 13.2,53.3 11.8,59.3 10.3,64.3 9.8,67.2 9.2,68.8 8.8,71 8.2,72.7 8,74.3 7.2,76.7 6.8,78.8 6.2,80.5 6,82 5.3,83.8 4.8,86.7 4.2,88.3 3.8,90.5 3.2,92.2 2.8,94.3 2.2,96.2 0.7,102.7";
+
+/* ---------- copy ---------- */
+const params = new URLSearchParams(location.search);
+const LANG = (params.get('lang') || document.documentElement.lang || 'de').slice(0, 2) === 'en' ? 'en' : 'de';
+const COPY = {
+  de: { labels: [[0, 'nokta heißt punkt.'], [13.6, 'aus dem punkt wird eine linie.'], [26.8, 'aus der linie wird eine form.'], [32, 'als bild.'], [39.8, 'als buch.'], [52.8, 'als druck.'], [62.8, 'hast du einen punkt, an dem wir anfangen?'], [74.9, 'vom punkt über die linie zur form.']],
+        on: 'ton an', off: 'ton aus', pause: 'pause.', play: 'abspielen.' },
+  en: { labels: [[0, 'nokta means point.'], [13.6, 'the point becomes a line.'], [26.8, 'the line becomes a form.'], [32, 'as an image.'], [39.8, 'as a book.'], [52.8, 'as a print.'], [62.8, 'got a point we can start from?'], [74.9, 'from point to line to form.']],
+        on: 'sound on', off: 'sound off', pause: 'paused.', play: 'play.' }
+}[LANG];
+
+/* ---------- tile state ---------- */
+const F = () => new Float32Array(T);
+const hx = F(), hy = F(), seed = F(), homeAl = F(), bu = F();
+const px = F(), py = F(), pz = F(), vx = F(), vy = F(), vz = F(), ph = F(), vph = F(), al = F(), red = F(), rad = F();
+const tx = F(), ty = F(), tz = F(), tph = F(), tal = F(), tred = F(), trad = F(), tk = F(), tlift = F();
+const kin = new Uint8Array(T), air = new Uint8Array(T), bside = new Int8Array(T).fill(-1);
+
+for (let j = 0; j < N; j++) for (let i = 0; i < N; i++) {
+  const k = j * N + i; hx[k] = colX(i); hy[k] = colX(j);
+}
+for (let s = 0; s < 4; s++) for (let k = 0; k < NBS; k++) {
+  const b = NI + s * NBS + k, u = (k + .5) / NBS, L = 1 - 2 * BI;
+  if (s === 0) { hx[b] = BI + u * L; hy[b] = BI; }
+  else if (s === 1) { hx[b] = 1 - BI; hy[b] = BI + u * L; }
+  else if (s === 2) { hx[b] = 1 - BI - u * L; hy[b] = 1 - BI; }
+  else { hx[b] = BI; hy[b] = 1 - BI - u * L; }
+  bu[b] = ((s * NBS + k + .5) / NBT - 0.125 + 1) % 1;   // clockwise, starting top centre
+  bside[b] = s;
+}
+for (let i = 0; i < T; i++) { seed[i] = rnd(); homeAl[i] = rnd() * TAU; }
+
+function resetState(punktUp) {
+  for (let i = 0; i < T; i++) {
+    px[i] = hx[i]; py[i] = hy[i]; pz[i] = 0; vx[i] = vy[i] = vz[i] = vph[i] = 0;
+    ph[i] = PI; al[i] = homeAl[i]; red[i] = 0; rad[i] = i >= NI ? .72 : 1; air[i] = 0;
+  }
+  red[P] = 1; ph[P] = punktUp ? 0 : PI;
+}
+
+/* ============================================================
+   Geometry: the house (Linie → Form)
+   ============================================================ */
+const HV = { A: [0, 0, 0], B: [2, 0, 0], C: [2, 1.2, 0], D: [0, 1.2, 0], E: [0, 0, 1], F: [2, 0, 1], G: [2, 1.2, 1], H: [0, 1.2, 1], R1: [0, .6, 1.7], R2: [2, .6, 1.7] };
+const HF = { bottom: ['A', 'D', 'C', 'B'], front: ['A', 'B', 'F', 'E'], back: ['C', 'D', 'H', 'G'], right: ['B', 'C', 'G', 'R2', 'F'], left: ['D', 'A', 'E', 'R1', 'H'], roofF: ['E', 'F', 'R2', 'R1'], roofB: ['G', 'H', 'R1', 'R2'] };
+const PATH = ['G', 'R2', 'F', 'R2', 'R1', 'H', 'R1', 'E', 'A', 'E', 'F', 'B', 'C', 'G', 'H', 'D', 'C', 'B', 'A', 'D'];
+let HS = 1, HC = [.5, .6];
+const projRaw = p => { const x = p[0] - 1, y = p[1] - .6, z = p[2] - .85; return [x * .88 + y * .5, x * .24 - y * .3 - z]; };
+const proj = p => { const r = projRaw(p); return [HC[0] + r[0] * HS, HC[1] + r[1] * HS]; };
+{ let mn = [1e9, 1e9], mx = [-1e9, -1e9];
+  for (const k in HV) { const r = projRaw(HV[k]); mn = [Math.min(mn[0], r[0]), Math.min(mn[1], r[1])]; mx = [Math.max(mx[0], r[0]), Math.max(mx[1], r[1])]; }
+  HS = 0.5 / (mx[0] - mn[0]);
+  HC = [.5 - (mn[0] + mx[0]) / 2 * HS, .6 - (mn[1] + mx[1]) / 2 * HS]; }
+
+function hull(pts) {
+  const p = pts.slice().sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+  const cr = (o, a, b) => (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0]);
+  const lo = [], up = [];
+  for (const q of p) { while (lo.length > 1 && cr(lo[lo.length - 2], lo[lo.length - 1], q) <= 0) lo.pop(); lo.push(q); }
+  for (let i = p.length - 1; i >= 0; i--) { const q = p[i]; while (up.length > 1 && cr(up[up.length - 2], up[up.length - 1], q) <= 0) up.pop(); up.push(q); }
+  up.pop(); lo.pop(); return lo.concat(up);
+}
+function inPoly(poly, x, y) {  // works for any simple polygon
+  let c = false;
+  for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+    const a = poly[i], b = poly[j];
+    if ((a[1] > y) !== (b[1] > y) && x < (b[0] - a[0]) * (y - a[1]) / (b[1] - a[1]) + a[0]) c = !c;
+  }
+  return c;
+}
+function segDist(x, y, a, b) {
+  const dx = b[0] - a[0], dy = b[1] - a[1], l = dx * dx + dy * dy || 1e-9;
+  const t = clamp(((x - a[0]) * dx + (y - a[1]) * dy) / l);
+  return Math.hypot(x - a[0] - t * dx, y - a[1] - t * dy);
+}
+const sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+const norm = a => { const l = Math.hypot(a[0], a[1], a[2]); return [a[0] / l, a[1] / l, a[2] / l]; };
+const dot3 = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+
+const faces = [];            // visible faces {name, poly(screen), n(world), vmin, vmax}
+for (const name in HF) {
+  const vs = HF[name], sp = vs.map(v => proj(HV[v]));
+  let area = 0; for (let i = 0; i < sp.length; i++) { const a = sp[i], b = sp[(i + 1) % sp.length]; area += a[0] * (-b[1]) - b[0] * (-a[1]); }
+  const n = norm(cross(sub(HV[vs[1]], HV[vs[0]]), sub(HV[vs[2]], HV[vs[0]])));
+  if (area > 0) faces.push({ name, poly: sp, n, vmin: Math.min(...sp.map(p => p[1])), vmax: Math.max(...sp.map(p => p[1])) });
+}
+const visibleNames = new Set(faces.map(f => f.name));
+function edgeHidden(a, b) {
+  for (const name in HF) { const vs = HF[name];
+    for (let i = 0; i < vs.length; i++) { const u = vs[i], v = vs[(i + 1) % vs.length];
+      if ((u === a && v === b) || (u === b && v === a)) if (visibleNames.has(name)) return false; } }
+  return true;
+}
+const silhouette = hull(Object.values(HV).map(proj));
+const groundQuad = [[-1.4, -1.3, 0], [3.4, -1.3, 0], [3.4, 3.2, 0], [-1.4, 3.2, 0]].map(proj);
+const footC = proj([1, .6, 0]);
+
+/* per-tile house data */
+const faceOf = new Int8Array(T).fill(-1), faceV = F(), groundOf = new Uint8Array(T), groundD = F();
+const inSil = new Uint8Array(T), nearSil = new Uint8Array(T);
+for (let i = 0; i < NI; i++) {
+  const x = hx[i], y = hy[i];
+  for (let f = 0; f < faces.length; f++) if (inPoly(faces[f].poly, x, y)) { faceOf[i] = f; faceV[i] = (faces[f].vmax - y) / (faces[f].vmax - faces[f].vmin); break; }
+  inSil[i] = inPoly(silhouette, x, y) ? 1 : 0;
+  let md = 1; for (let k = 0; k < silhouette.length; k++) md = Math.min(md, segDist(x, y, silhouette[k], silhouette[(k + 1) % silhouette.length]));
+  nearSil[i] = (inSil[i] || md < 1.6 * S) ? 1 : 0;
+  if (!inSil[i] && inPoly(groundQuad, x, y)) { groundOf[i] = 1; groundD[i] = clamp(Math.hypot((x - footC[0]) * .8, (y - footC[1]) * 1.6) / .34); }
+}
+
+/* the one-line drawing: samples + tiles */
+const LS = [];                  // {x,y,s,hid,ang,tile,t}
+const DRAW0 = 14.9, DRAWD = 8.5, LF = 1.15;
+{
+  const pts = PATH.map(v => proj(HV[v]));
+  let acc = 0; const segs = [];
+  for (let k = 0; k < pts.length - 1; k++) { const a = pts[k], b = pts[k + 1], l = Math.hypot(b[0] - a[0], b[1] - a[1]);
+    segs.push({ a, b, l, s0: acc, hid: edgeHidden(PATH[k], PATH[k + 1]) }); acc += l; }
+  var PATH_PTS = pts, PATH_SEGS = segs, PATH_L = acc;
+  const d = 0.7 * S;
+  for (const g of segs) {
+    const n = Math.max(1, Math.round(g.l / d)); const ang = Math.atan2(g.b[1] - g.a[1], g.b[0] - g.a[0]);
+    for (let k = 0; k <= n; k++) {
+      const t = k / n, x = mix(g.a[0], g.b[0], t), y = mix(g.a[1], g.b[1], t);
+      if (LS.some(q => Math.hypot(q.x - x, q.y - y) < d * .6)) continue;   // retraced edge: already laid
+      LS.push({ x, y, s: g.s0 + t * g.l, hid: g.hid, ang });
+    }
+  }
+}
+const drawEase = (e, t = .1, n = .08) => { const r = 1 / (1 - (t + n) / 2); return e < t ? r * e * e / (2 * t) : e < 1 - n ? r * (t / 2 + (e - t)) : 1 - r * (1 - e) * (1 - e) / (2 * n); };
+function pathAt(s) {
+  s = clamp(s, 0, PATH_L);
+  for (const g of PATH_SEGS) if (s <= g.s0 + g.l + 1e-9) { const t = g.l ? (s - g.s0) / g.l : 0; return [mix(g.a[0], g.b[0], t), mix(g.a[1], g.b[1], t)]; }
+  return PATH_PTS[PATH_PTS.length - 1];
+}
+function headArc(t) { return PATH_L * drawEase(clamp((t - DRAW0) / DRAWD)); }
+const lineOf = new Int32Array(T).fill(-1);
+{
+  const lr = mulberry(4417);
+  for (let k = 0; k < LS.length; k++) {
+    const q = LS[k];
+    let lo = 0, hi = 1; for (let it = 0; it < 40; it++) { const m = (lo + hi) / 2; if (PATH_L * drawEase(m) < q.s) lo = m; else hi = m; }
+    q.t = DRAW0 + lo * DRAWD;
+    const a = lr() * TAU, r = (4 + lr() * 13) * S, ox = q.x + Math.cos(a) * r, oy = q.y + Math.sin(a) * r;
+    const near = [];                          // three nearest free sockets, take one at random: holes stay sparse
+    for (let i = 0; i < NI; i++) {
+      if (i === P || lineOf[i] >= 0 || nearSil[i] || groundOf[i]) continue;
+      const dd = (hx[i] - ox) ** 2 + (hy[i] - oy) ** 2;
+      if (near.length < 3 || dd < near[2][0]) { near.push([dd, i]); near.sort((x, y) => x[0] - y[0]); if (near.length > 3) near.pop(); }
+    }
+    const best = near[(lr() * near.length) | 0][1];
+    q.tile = best; lineOf[best] = k;
+  }
+}
+
+/* ============================================================
+   Book (Editorial & Satz): content on grid indices
+   ============================================================ */
+const toneA = F(), toneB = F(), redA = new Uint8Array(T), redB = new Uint8Array(T);
+const inBook = new Uint8Array(T), onA = F(), offB = F();
+const BOOKA = [22, 17], BOOKB = [42, 20];     // red period slots
+{
+  const br = mulberry(1905);
+  const lines = {};                          // "page:row" -> length
+  const para = (page, rows, c0, w) => rows.forEach((r, k) => { lines[page + ':' + r] = [c0, k === rows.length - 1 ? 5 + (br() * 6 | 0) : w - (br() * 4 | 0)]; });
+  para('AL', [21, 23, 25, 27], 10, 18); para('AL', [31, 33, 35, 37, 39], 10, 18); para('AL', [43, 45], 10, 18);
+  const rowOf = (lk, r, i) => { const L = lines[lk + ':' + r]; return !!L && i >= L[0] && i < L[0] + L[1]; };
+  const colLines = { a: {}, b: {} };
+  { let run = []; const fin = (c) => { run.forEach((r, k) => { colLines[c][r] = k === run.length - 1 ? 3 + (br() * 4 | 0) : 8 - (br() * 3 | 0); }); run = []; };
+    for (const c of ['a', 'b']) { for (let r = 13; r <= 45; r += 2) { if (br() < .18 && run.length > 2) { fin(c); continue; } run.push(r); } fin(c); } }
+  for (let j = 11; j <= 48; j++) for (let i = 8; i <= 51; i++) {
+    const k = j * N + i; inBook[k] = 1;
+    let a = .1, b = .1;
+    if (i === 29 || i === 30) a = b = .035;
+    if (i <= 29) {
+      /* A left: headline + body */
+      if ((j === 13 || j === 14) && i >= 10 && i <= 25) a = 1;
+      else if ((j === 16 || j === 17) && i >= 10 && i <= 20) a = 1;
+      else if (rowOf('AL', j, i)) a = .88;
+      /* B left: two columns + folio */
+      if (i >= 10 && i <= 17 && colLines.a[j] && i < 10 + colLines.a[j]) b = .88;
+      if (i >= 20 && i <= 27 && colLines.b[j] && i < 20 + colLines.b[j]) b = .88;
+      if (j === 47 && i === 10) b = .6;
+    } else {
+      /* A right: halftone sphere plate + caption */
+      if (i >= 32 && i <= 49 && j >= 13 && j <= 33) {
+        const cx = 40.2, cy = 22.5, r = 7.2, dx = (i - cx) / r, dy = (j - cy) / r, d2 = dx * dx + dy * dy;
+        if (d2 < 1) { const nz = Math.sqrt(1 - d2); a = .07 + .93 * Math.max(0, -.45 * dx - .55 * dy + .7 * nz); }
+        else { const sx = (i - cx - 3.5) / (r * 1.05), sy = (j - cy - 7.6) / (r * .32); a = (sx * sx + sy * sy < 1) ? .03 : .22; }
+      }
+      if (j === 36 && i >= 32 && i < 48) a = .88;
+      if (j === 38 && i >= 32 && i < 44) a = .88;
+      if (j === 40 && i >= 32 && i < 39) a = .88;
+      /* B right: 3-line headline + step wedge + caption */
+      if ((j === 13 || j === 14) && i >= 32 && i <= 47) b = 1;
+      else if ((j === 16 || j === 17) && i >= 32 && i <= 44) b = 1;
+      else if ((j === 19 || j === 20) && i >= 32 && i <= 40) b = 1;
+      if (j >= 38 && j <= 42 && i >= 32 && i <= 49) b = Math.max(.05, Math.floor((i - 32) / 2) / 8);
+      if (j === 45 && i >= 32 && i < 40) b = .88;
+      if (j === 47 && i === 49) b = .6;
+    }
+    toneA[k] = a; toneB[k] = b;
+    /* assembly order: paper first, then type set line by line */
+    const right = i >= 30, pageT = 40.0 + Math.abs(i - 29.5) * .012;
+    if (a > .3 && !(right && j <= 33)) onA[k] = 40.55 + ((right ? 34 : 0) + (j - 11)) * .028 + (i - (right ? 32 : 10)) * .011;
+    else if (right && j >= 13 && j <= 33 && i >= 32 && i <= 49) onA[k] = 41.1 + Math.hypot(i - 40.2, j - 22.5) * .035;
+    else onA[k] = pageT;
+    offB[k] = 50.3 + (48 - j) * .034 + br() * .2;
+  }
+}
+const slot = (c, r) => [colX(c), colX(r)];
+
+/* ============================================================
+   Print (Druck & CAD): floor plan + registration marks
+   ============================================================ */
+const plan = F();
+const REG = [[5, 5], [54, 5], [5, 54], [54, 54]];
+const regTiles = [];
+{
+  for (let j = 0; j < N; j++) for (let i = 0; i < N; i++) {
+    const k = j * N + i; let t = 0;
+    const inR = i >= 12 && i <= 47 && j >= 12 && j <= 44;
+    if (inR) {
+      const outer = i <= 13 || i >= 46 || j <= 13 || j >= 43;
+      if (outer) {
+        t = 1;
+        if (j <= 13 && ((i >= 17 && i <= 24) || (i >= 34 && i <= 41))) t = j === 12 ? .5 : 0;         // windows
+        if (i >= 46 && j >= 18 && j <= 25) t = i === 47 ? .5 : 0;
+        if (j >= 43 && i >= 25 && i <= 29) t = 0;                                                        // entrance
+      }
+      if (i === 30 && j >= 14 && j <= 31 && !(j >= 20 && j <= 23)) t = 1;
+      if (j === 31 && i >= 14 && i <= 45 && !(i >= 18 && i <= 21) && !(i >= 36 && i <= 39)) t = 1;
+      if (i >= 33 && i <= 44 && j >= 34 && j <= 41 && i % 2 === 0) t = .55;                             // stair
+      if (i >= 15 && i <= 16 && j >= 15 && j <= 29 && (i + j) % 2 === 0) t = .45;                       // counter hatch
+      for (const [cx, cy, qx, qy] of [[30, 23, -1, 1], [21, 31, 1, 1], [39, 31, -1, 1], [29, 43, -1, -1]]) {
+        const dx = i - cx, dy = j - cy, d = Math.hypot(dx, dy);
+        if (Math.abs(d - 3.2) < .5 && dx * qx >= 0 && dy * qy >= 0 && !outer) t = Math.max(t, .35);
+      }
+    }
+    if (j === 48 && i >= 12 && i <= 47) t = .45;
+    if ((i === 12 || i === 30 || i === 47) && j >= 47 && j <= 49) t = .85;
+    if (i === 51 && j >= 12 && j <= 44) t = .45;
+    if ((j === 12 || j === 31 || j === 44) && i >= 50 && i <= 52) t = .85;
+    plan[k] = t;
+    for (const [cx, cy] of REG) if (Math.hypot(i - cx, j - cy) < 5.3) regTiles.push([k, i - cx, j - cy]);
+  }
+}
+
+/* ============================================================
+   Finale: the wordmark, traced from nokta's logo outline
+   ============================================================ */
+const letterPts = [], letterOf = new Int32Array(T).fill(-1);
+let PERIOD = [.5, .5];
+{
+  const LW = 600, LH = 123, W = .78, H = W * LH / LW, rP = R * 2.3, TR = .8;
+  const x0 = .5 - (W + .018 + 2 * rP) / 2, y0 = .475 - H / 2;
+  const K = 4, cv = document.createElement('canvas'); cv.width = LW * K; cv.height = LH * K;
+  const g = cv.getContext('2d'); g.scale(K, K); g.beginPath();
+  for (const poly of LOGO.split(';')) { const p = poly.split(' ').map(s => s.split(',').map(Number)); g.moveTo(p[0][0], p[0][1]); for (let k = 1; k < p.length; k++) g.lineTo(p[k][0], p[k][1]); g.closePath(); }
+  g.fillStyle = '#fff'; g.fill();
+  const img = g.getImageData(0, 0, cv.width, cv.height).data;
+  const inside = (x, y) => { const lx = (x - x0) / W * LW, ly = (y - y0) / H * LH; if (lx < 0 || ly < 0 || lx >= LW || ly >= LH) return false; return img[((ly * K | 0) * cv.width + (lx * K | 0)) * 4 + 3] > 128; };
+  const d = .6 * S, dy = d * .866, er = R * TR * .8; let row = 0;
+  const fits = (x, y) => inside(x, y) && inside(x + er, y) && inside(x - er, y) && inside(x, y + er) && inside(x, y - er);   // eroded: keep the counters open
+  for (let y = y0 + dy * .5; y < y0 + H; y += dy, row++) for (let x = x0 + (row & 1 ? d * .5 : 0) + d * .3; x < x0 + W; x += d) if (fits(x, y)) letterPts.push([x, y]);
+  PERIOD = [x0 + W + .018 + rP, y0 + H - rP];
+  /* pair tiles with letter points by horizontal rank: the field streams in vertically */
+  const fr = mulberry(808);
+  const pool = []; for (let i = 0; i < NI; i++) if (i !== P) pool.push(i);
+  for (let i = pool.length - 1; i > 0; i--) { const j = fr() * (i + 1) | 0; [pool[i], pool[j]] = [pool[j], pool[i]]; }
+  const chosen = pool.slice(0, letterPts.length).sort((a, b) => hx[a] - hx[b]);
+  const order = letterPts.map((p, k) => k).sort((a, b) => letterPts[a][0] - letterPts[b][0]);
+  order.forEach((pk, r) => { const i = chosen[r]; letterOf[i] = pk; const q = letterPts[pk]; q.tile = i;
+    q.lt = 72.7 + fr() * .8 + Math.abs(q[0] - .5) * .45; q.rt = 78.35 + fr() * .9; });
+}
+
+/* ============================================================
+   Scenes: each writes targets for the tiles it moves
+   ============================================================ */
+let firstRun = true;
+let knock = { b0: .5, b1: .5, t0: 2, t1: 2 };   // ring knock-outs behind caption / sound button
+
+function defaults() {
+  for (let i = 0; i < T; i++) { tx[i] = hx[i]; ty[i] = hy[i]; tz[i] = 0; tph[i] = PI; tal[i] = homeAl[i]; tred[i] = 0; trad[i] = 1; tk[i] = 70; tlift[i] = 1; kin[i] = 0; }
+  tred[P] = 1; tph[P] = 0;
+}
+
+function border(t) {
+  const q = t / DUR, wipe = t > 79.15 ? 1 - (t - 79.15) / .7 : 2;
+  for (let b = NI; b < T; b++) {
+    const u = bu[b], on = u < q && u < wipe, head = Math.abs(u - q) < 1.2 / NBT;
+    tph[b] = head ? 0 : on ? phiOf(.78) : PI; tz[b] = head ? .22 : 0; trad[b] = .72; tk[b] = 90;
+    tal[b] = bside[b] % 2 ? PI / 2 : 0;
+    const s = bside[b], x = hx[b];
+    if ((s === 2 && x > knock.b0 && x < knock.b1) || (s === 0 && x > knock.t0 && x < knock.t1)) trad[b] = 0;
+  }
+}
+
+function intro(t) {
+  if (t < 4.6) {
+    const w = (t - .5) / 3.3 * 1.75 - .38;
+    for (let i = 0; i < NI; i++) { const b = bump((hx[i] + hy[i]) * .5, w, .05); if (b > .01) { tph[i] = PI - 1.15 * b; tz[i] = .1 * b; tal[i] = PI * .25; } }
+  }
+  if (firstRun) { if (t < 2.6) tph[P] = PI; else tz[P] = .6 * bump(t, 2.85, .22); }
+}
+
+function ring(i, cx, cy, t, tp, amp) {   // expanding ring bump, 0..1
+  if (t < tp) return 0;
+  const d = Math.hypot(hx[i] - cx, hy[i] - cy), r = (t - tp) * .3;
+  return amp * Math.exp(-(t - tp) * 1.1) * bump(d, r, S * 1.3);
+}
+
+function punkt(t) {
+  const PL = [6.3, 8.0, 9.7], cx = hx[P], cy = hy[P];
+  let zP = 0; for (const tp of PL) zP = Math.max(zP, bump(t, tp - .33, .17));
+  tz[P] = .8 * zP;
+  for (let i = 0; i < NI; i++) {
+    if (i === P) continue;
+    let b = 0; for (const tp of PL) b = Math.max(b, ring(i, cx, cy, t, tp, 1));
+    let rt = 0; const d = Math.hypot(hx[i] - cx, hy[i] - cy);
+    if (t > 11.2 && t < 13.8) for (let k = 0; k < 5; k++) {
+      const a = sstep(11.3 + .12 * k, 11.6 + .12 * k, t) * (1 - sstep(13.15 + .1 * k, 13.45 + .1 * k, t));
+      if (a <= 0) continue;
+      const w = .5 - .5 * Math.cos(TAU * (t - 11.3 + .5 * k) / 2.4);
+      rt = Math.max(rt, a * (.45 + .55 * w) * bump(d, (k + 1) * 3.2 * S * (.86 + .14 * w), S * .55));
+    }
+    const tone = Math.max(Math.min(1, b * 1.25), rt);
+    if (tone > .02) { tph[i] = phiOf(tone); tz[i] = .3 * b; tal[i] = Math.atan2(hy[i] - cy, hx[i] - cx) + PI / 2; }
+  }
+}
+
+function headPos(t) {
+  const start = pathAt(0), home = [hx[P], hy[P]];
+  if (t < DRAW0) { const e = eio(clamp((t - 14) / (DRAW0 - 14))); return [mix(home[0], start[0], e), mix(home[1], start[1], e)]; }
+  return pathAt(headArc(t));
+}
+
+function lineTargets(t, retract) {
+  const hp = headPos(Math.min(t, DRAW0 + DRAWD));
+  for (let k = 0; k < LS.length; k++) {
+    const q = LS[k], i = q.tile;
+    if (t < q.t - LF) continue;
+    if (retract) { const rk = q.hid ? 27.4 + (1 - q.s / PATH_L) * .5 : 37.6 + (1 - q.s / PATH_L) * 1.6; if (t >= rk) continue; }
+    if (t < q.t) {
+      const f = (q.t - t) / LF, dir = seed[i] > .5 ? 1 : -1, a = seed[i] * TAU + t * (3 + seed[i] * 2) * dir, r = S * (.8 + 3.2 * f);
+      tx[i] = hp[0] + Math.cos(a) * r; ty[i] = hp[1] + Math.sin(a) * r; tz[i] = .25 + .45 * f; tph[i] = 0; tk[i] = 140; tlift[i] = 0;
+    } else {
+      tx[i] = q.x; ty[i] = q.y; tz[i] = 0; tph[i] = q.hid ? phiOf(.34) : 0; tal[i] = q.ang; tk[i] = 180; tlift[i] = 0;
+    }
+  }
+}
+
+function linie(t) {
+  lineTargets(t, false);
+  if (t < 26.6) {
+    const hp = headPos(t); tx[P] = hp[0]; ty[P] = hp[1];
+    tz[P] = t > DRAW0 + DRAWD ? .3 + .06 * Math.sin((t - 23.4) * 3) : .32; tk[P] = 280; tlift[P] = 0;
+  } else { const s = sunPos(0); tx[P] = s[0]; ty[P] = s[1]; tz[P] = .55; tk[P] = 60; }
+}
+
+/* sun: the red point crosses the sky and lights the form */
+const sunU = t => clamp((t - 28.4) / 9);
+function sunPos(u) { const th = PI * (.9 - .8 * u); return [.5 + .36 * Math.cos(th), .31 - .19 * Math.sin(th)]; }
+function sunL(u) { const az = mix(3.6, 6.0, u), el = .3 + .75 * Math.sin(PI * u); return norm([Math.cos(az) * Math.cos(el), Math.sin(az) * Math.cos(el), Math.sin(el)]); }
+
+function form(t) {
+  lineTargets(t, true);
+  const u = sunU(t), L = sunL(u), sp = sunPos(u);
+  const fT = faces.map(f => .1 + .9 * Math.max(0, dot3(f.n, L)));
+  /* cast shadow on the ground plane */
+  const shp = []; for (const k in HV) { const p = HV[k], s = p[2] / Math.max(L[2], .12); shp.push(proj([p[0] - L[0] * s, p[1] - L[1] * s, 0])); }
+  const shadow = hull(shp);
+  const axis = Math.atan2(-(L[1]), L[0]) + PI / 2;
+  for (let i = 0; i < NI; i++) {
+    if (i === P || lineOf[i] >= 0) continue;
+    const f = faceOf[i];
+    if (f >= 0) {
+      const st = 27 + f * .35 + (1 - faceV[i]) * .9, en = 37.8 + faceV[i] * 1.2;
+      if (t < st || t > en + .35) continue;
+      const a = sstep(st, st + .25, t) * (1 - sstep(en, en + .3, t));
+      tph[i] = phiOf(fT[f] * (.8 + .2 * faceV[i]) * a); tal[i] = axis; tz[i] = 0;
+    } else if (groundOf[i]) {
+      const st = 28 + groundD[i] * 1.4, en = 37.9 + (1 - groundD[i]) * .9;
+      if (t < st || t > en + .35) continue;
+      const a = sstep(st, st + .3, t) * (1 - sstep(en, en + .3, t));
+      const lit = inPoly(shadow, hx[i], hy[i]) ? 0 : .42 * Math.pow(1 - groundD[i], 1.2);
+      tph[i] = phiOf(lit * a); tal[i] = axis;
+    } else if (t > 28.4 && t < 38.6) {   // halo around the sun, as on the site's red dot
+      const d = Math.hypot(hx[i] - sp[0], hy[i] - sp[1]);
+      if (d < 7 * S) { const g = Math.exp(-(d * d) / (2 * (2.3 * S) ** 2)) * sstep(28.4, 29.2, t) * (1 - sstep(37.8, 38.6, t)); tph[i] = phiOf(.42 * g); tred[i] = .85 * g; tal[i] = Math.atan2(hy[i] - sp[1], hx[i] - sp[0]) + PI / 2; }
+    }
+  }
+  if (t < 38.6) { tx[P] = sp[0]; ty[P] = sp[1]; tz[P] = .55; trad[P] = mix(1, 1.6, sstep(27, 28.6, t)); tk[P] = 70; tlift[P] = 0; }
+  else { const s = slot(...BOOKA); tx[P] = s[0]; ty[P] = s[1]; tz[P] = .5; trad[P] = 1.25; tk[P] = 45; }
+}
+
+function buch(t) {
+  const T0 = 45.4, TD = 2.0, tau = (t - T0) / TD;
+  for (let k = 0; k < NI; k++) {
+    if (!inBook[k] || k === P) continue;
+    if (t >= offB[k] || t < onA[k]) continue;         // not yet set / dissolving: default (home, dark)
+    const c = k % N, j = (k / N) | 0, right = c >= 30, mk = j * N + (59 - c);
+    const u = Math.abs(c - 29.5) / 22, p = eio(clamp((tau - (1 - u) * .35) / .65));
+    tal[k] = PI / 2;
+    if (p <= 0) { tph[k] = phiOf(toneA[k]); tred[k] = redA[k]; continue; }
+    if (p >= 1) { tx[k] = 1 - hx[k]; ty[k] = hy[k]; tph[k] = phiOf(toneB[mk]); tred[k] = redB[mk]; tk[k] = 120; tlift[k] = 0; continue; }
+    const pA = phiOf(toneA[k]), pB = phiOf(toneB[mk]);
+    if (right) {
+      tx[k] = .5 + (hx[k] - .5) * Math.cos(PI * p); tz[k] = (.25 + 1.3 * u) * Math.sin(PI * p);
+      tph[k] = p < .5 ? mix(pA, PI / 2, p * 2) : mix(PI / 2, pB, p * 2 - 1);
+    } else {
+      tx[k] = hx[k] + (1 - 2 * hx[k]) * p; tz[k] = -.5 * Math.sin(PI * p);
+      tph[k] = p < .5 ? mix(pA, PI, p * 2) : mix(PI, pB, p * 2 - 1);
+    }
+    ty[k] = hy[k]; kin[k] = 3;
+  }
+  /* the red point: a full stop, carried across the spread */
+  let s, z = 0;
+  if (t < 45.55) { s = slot(...BOOKA); z = .45 * (1 - sstep(40.8, 41.15, t)); }
+  else if (t < 50.4) { s = slot(...BOOKB); z = .75 * sstep(45.55, 45.85, t) * (1 - sstep(46.75, 47.15, t)) + .02; }
+  else { s = slot(...REG[0]); z = .5; }
+  tx[P] = s[0]; ty[P] = s[1]; tz[P] = Math.max(z, .02); trad[P] = 1.25; tk[P] = t < 45.55 ? 45 : 50; tlift[P] = 0;
+}
+
+function druck(t) {
+  const ry = mix(-.05, 1.05, eio(clamp((t - 54.4) / 3.8)));
+  const rho = Math.max(0, t - 58.8) * .9, er = (t - 61.6) * .42;
+  const reg = new Map();
+  if (t > 54) for (const [k, dx, dy] of regTiles) {
+    const d = Math.hypot(dx, dy), ca = Math.cos(rho), sa = Math.sin(rho);
+    const along1 = dx * ca + dy * sa, across1 = -dx * sa + dy * ca;
+    const onRing = Math.abs(d - 3.6) < .5, onCross = (Math.abs(across1) < .5 || Math.abs(along1) < .5) && d < 5.1;
+    if (onRing || onCross) reg.set(k, 1);
+  }
+  for (let i = 0; i < NI; i++) {
+    if (i === P) continue;
+    const passed = ry - hy[i];
+    const c = plan[i], rr = reg.get(i) || 0, tone = Math.max(c, rr);
+    const d = Math.hypot(hx[i] - .5, hy[i] - .5);
+    if (t > 61.6 && d < er) continue;                               // erased toward the field
+    if (passed < -.13) continue;
+    if (passed < -.02) {                                            // loose tiles rattle ahead of the roller
+      const a = sstep(-.13, -.02, passed);
+      tz[i] = .16 * a * (.5 + .5 * Math.sin(t * 37 + seed[i] * 50));
+      tph[i] = PI - .55 * a * (.5 + .5 * Math.sin(t * 23 + seed[i] * 90)); tal[i] = 0; continue;
+    }
+    const target = phiOf(tone);
+    if (passed < .04) { const pr = (passed + .02) / .06; tph[i] = PI + (target + TAU - PI) * pr; tz[i] = .38 * Math.sin(PI * pr); tal[i] = 0; kin[i] = 2; tred[i] = rr; continue; }
+    tph[i] = target; tred[i] = rr; tal[i] = rr ? Math.atan2(hy[i] - colX(5), hx[i] - colX(5)) : 0;
+  }
+  if (t < 62.5) { const s = slot(...REG[0]); tx[P] = s[0]; ty[P] = s[1]; tz[P] = .5 * (1 - sstep(53.2, 53.8, t)); trad[P] = 1.3; tk[P] = 50; tlift[P] = 0; }
+}
+
+function src1(t) { const u = t - 62.5; return [.5 + .22 * Math.cos(.5 * u + 2.4), .5 + .18 * Math.sin(.7 * u + 3.6)]; }
+function src2(t) { const u = t - 62.5; return [.5 - .24 * Math.cos(.43 * u + 1), .5 - .2 * Math.sin(.61 * u + .4)]; }
+function feld(t) {
+  const a = src1(t), b = src2(t), kw = TAU / (5.4 * S), w = 3.0, rev = (t - 62.5) * .4;
+  const fade = 1 - sstep(71.7, 72.6, t);
+  for (let i = 0; i < NI; i++) {
+    if (i === P) continue;
+    const d = Math.hypot(hx[i] - .5, hy[i] - .5), on = sstep(rev, rev - .06, d) * fade;
+    if (on <= 0) continue;
+    const d1 = Math.hypot(hx[i] - a[0], hy[i] - a[1]), d2 = Math.hypot(hx[i] - b[0], hy[i] - b[1]);
+    const p = (Math.sin(kw * d1 - 1.1 * w * t) + Math.sin(kw * d2 - .9 * w * t) + 2) / 4;   // the site's interference field
+    const pk = p > .93 ? on : 0;
+    tph[i] = phiOf(Math.pow(p, 1.7) * on); tred[i] = pk; tz[i] = .25 * Math.max(0, p - .8) * 5 * on;
+    tal[i] = Math.atan2(hy[i] - a[1], hx[i] - a[0]) + PI / 2;
+  }
+  tx[P] = a[0]; ty[P] = a[1]; tz[P] = .45; trad[P] = 1.5; tk[P] = 60; tlift[P] = 0;
+}
+
+function finale(t) {
+  for (const q of letterPts) {
+    const i = q.tile;
+    if (t < q.lt || t >= q.rt) continue;
+    tx[i] = q[0]; ty[i] = q[1]; tph[i] = 0; trad[i] = .8; tk[i] = t > q.lt + 1.4 ? 55 : 38; tlift[i] = 1.5; if (t > q.lt + 1.2) tz[i] = .3;   // letters ride above the shockwave
+    if (t > 76.3 && t < 78) { const g = bump(q[0], mix(.1, .9, (t - 76.3) / 1.5), .03); tph[i] = .75 * g; tal[i] = PI / 2; }
+  }
+  if (t > 75.1) for (let i = 0; i < NI; i++) {
+    if (letterOf[i] >= 0 || i === P) continue;
+    const b = ring(i, PERIOD[0], PERIOD[1], t, 75.15, 1.1);
+    if (b > .02) { tph[i] = phiOf(Math.min(1, b)); tz[i] = .25 * b; tal[i] = Math.atan2(hy[i] - PERIOD[1], hx[i] - PERIOD[0]) + PI / 2; }
+  }
+  if (t < 74.6) { const a = src1(Math.min(t, 72.6)); tx[P] = a[0]; ty[P] = a[1]; tz[P] = .45; trad[P] = 1.5; tlift[P] = 0; }
+  else if (t < 78.9) { tx[P] = PERIOD[0]; ty[P] = PERIOD[1]; tz[P] = .6 * (1 - sstep(74.85, 75.12, t)); trad[P] = 2.3; tk[P] = 70; tlift[P] = 0; }
+  else { tz[P] = .4 * (1 - sstep(79.4, 79.8, t)); trad[P] = 1; tk[P] = 60; tlift[P] = 0; }
+}
+
+function computeTargets(t) {
+  defaults(); border(t);
+  if (t < 6.2) intro(t);
+  if (t >= 6 && t < 14.2) punkt(t);
+  if (t >= 13.9 && t < 27.2) linie(t);
+  if (t >= 26.6 && t < 40.4) form(t);
+  if (t >= 40 && t < 53.4) buch(t);
+  if (t >= 53 && t < 64) druck(t);
+  if (t >= 62.5 && t < 72.8) feld(t);
+  if (t >= 72.5) finale(t);
+}
+
+/* ============================================================
+   Physics: springs, flight, tumble, click
+   ============================================================ */
+const VMAX = 1.05;
+const ev = { land: 0, flip: 0, xs: [] };
+function physics(h, t) {
+  for (let i = 0; i < T; i++) {
+    const kf = kin[i];
+    let spd = 0;
+    if (kf & 1) {
+      vx[i] = (tx[i] - px[i]) / h; vy[i] = (ty[i] - py[i]) / h; vz[i] = (tz[i] - pz[i]) / h;
+      px[i] = tx[i]; py[i] = ty[i]; pz[i] = tz[i];
+    } else {
+      const dx = tx[i] - px[i], dy = ty[i] - py[i], dist = Math.sqrt(dx * dx + dy * dy);
+      const k = tk[i], c = 2 * Math.sqrt(k) * .9;
+      let ax = k * dx - c * vx[i], ay = k * dy - c * vy[i];
+      const af = clamp(pz[i] * 4);
+      const fl = af * clamp(dist / (4 * S));
+      if (fl > 0) { const sd = seed[i] * 40; ax += fl * 1.6 * Math.sin(py[i] * 11 + t * 1.3 + sd); ay += fl * 1.6 * Math.cos(px[i] * 13 - t * 1.1 + sd * 1.3); }
+      vx[i] += ax * h; vy[i] += ay * h;
+      spd = Math.hypot(vx[i], vy[i]); if (spd > VMAX) { vx[i] *= VMAX / spd; vy[i] *= VMAX / spd; spd = VMAX; }
+      px[i] += vx[i] * h; py[i] += vy[i] * h;
+      const zt = tz[i] + tlift[i] * Math.min(1, dist / (6 * S)) * .75;
+      vz[i] += (95 * (zt - pz[i]) - 2 * Math.sqrt(95) * .72 * vz[i]) * h; pz[i] += vz[i] * h;
+      const floor = Math.min(0, tz[i]);
+      if (pz[i] < floor) { pz[i] = floor; vz[i] = vz[i] < -.35 ? -vz[i] * .28 : 0; }
+    }
+    if (pz[i] > .12) air[i] = 1;
+    else if (air[i] && pz[i] < .015) { air[i] = 0; ev.land++; if (ev.xs.length < 8) ev.xs.push(px[i]); }
+    const c0 = Math.cos(ph[i]);
+    if (kf & 2) { ph[i] = tph[i]; vph[i] = 0; }
+    else {
+      let g = tph[i]; const cur = ph[i]; g += TAU * Math.round((cur - g) / TAU);
+      const af = clamp(pz[i] * 4), kp = 120 * (1 - .85 * af);
+      vph[i] += (kp * (g - cur) - 2 * Math.sqrt(120) * .72 * vph[i] + af * spd * 55 * (seed[i] < .5 ? 1 : -1)) * h;
+      ph[i] += vph[i] * h;
+    }
+    if ((c0 > 0) !== (Math.cos(ph[i]) > 0)) ev.flip++;
+    let at = tal[i]; const af2 = clamp(pz[i] * 4);
+    if (af2 > .3 && spd > .06) at = Math.atan2(vy[i], vx[i]) + PI / 2;
+    let da = at - al[i]; da -= TAU * Math.round(da / TAU); al[i] += da * Math.min(1, h * 6);
+    red[i] += (tred[i] - red[i]) * Math.min(1, h * 12);
+    rad[i] += (trad[i] - rad[i]) * Math.min(1, h * 9);
+  }
+}
+
+let filmT = 0;
+function advance(dt) {
+  let rem = dt;
+  while (rem > 1e-6) {
+    const h = Math.min(rem, 1 / 120);
+    computeTargets(filmT); physics(h, filmT);
+    filmT += h; rem -= h;
+    if (filmT >= DUR) { filmT -= DUR; firstRun = false; }
+  }
+}
+function seek(target) {
+  target = ((target % DUR) + DUR) % DUR;
+  firstRun = target < 6;
+  const from = Math.max(0, target - 5);
+  resetState(!firstRun); filmT = from;
+  advance(target - from);
+  ev.land = ev.flip = 0; ev.xs.length = 0;
+}
+
+/* ============================================================
+   Sound: synthesized clicks, no files
+   ============================================================ */
+const snd = { on: false, ctx: null, buf: null, out: null };
+function sndInit() {
+  const C = window.AudioContext || window.webkitAudioContext; if (!C) return false;
+  const c = snd.ctx = new C(), n = Math.floor(c.sampleRate * .05), b = c.createBuffer(1, n, c.sampleRate), d = b.getChannelData(0);
+  for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / n, 4);
+  snd.buf = b;
+  const comp = c.createDynamicsCompressor(); comp.threshold.value = -20; comp.ratio.value = 6;
+  const g = c.createGain(); g.gain.value = .8; comp.connect(g); g.connect(c.destination); snd.out = comp;
+  return true;
+}
+function tick(when, pan, freq, vol) {
+  const c = snd.ctx, s = c.createBufferSource(), f = c.createBiquadFilter(), g = c.createGain();
+  s.buffer = snd.buf; s.playbackRate.value = .8 + Math.random() * .5;
+  f.type = 'bandpass'; f.frequency.value = freq; f.Q.value = 5;
+  g.gain.setValueAtTime(vol, when); g.gain.exponentialRampToValueAtTime(.0005, when + .04);
+  s.connect(f); f.connect(g);
+  if (c.createStereoPanner) { const p = c.createStereoPanner(); p.pan.value = clamp(pan, -1, 1); g.connect(p); p.connect(snd.out); } else g.connect(snd.out);
+  s.start(when); s.stop(when + .06);
+}
+function flushSound(dt) {
+  if (snd.on && snd.ctx && snd.ctx.state === 'running') {
+    const now = snd.ctx.currentTime + .01;
+    const nl = Math.min(ev.land, 6), vl = .1 * Math.min(1.6, .5 + .18 * Math.sqrt(ev.land));
+    for (let k = 0; k < nl; k++) tick(now + Math.random() * dt, ((ev.xs[k] ?? .5) - .5) * 1.5, 1800 + Math.random() * 2600, vl);
+    const nf = Math.min(ev.flip, 3);
+    for (let k = 0; k < nf; k++) tick(now + Math.random() * dt, (Math.random() - .5), 4800 + Math.random() * 3000, .035 * Math.min(1.5, .6 + .05 * Math.sqrt(ev.flip)));
+  }
+  ev.land = ev.flip = 0; ev.xs.length = 0;
+}
+
+/* ============================================================
+   WebGL2
+   ============================================================ */
+const film = document.getElementById('film'), cvs = document.getElementById('gl');
+const gl = cvs.getContext('webgl2', { antialias: false, alpha: false, premultipliedAlpha: false, powerPreference: 'high-performance' });
+if (!gl) { film.insertAdjacentHTML('beforeend', '<p class="fallback">Dieser Film braucht WebGL2.<br>Öffne ihn in einem aktuellen Browser.</p>'); return; }
+
+const hex = h => [parseInt(h.slice(1, 3), 16) / 255, parseInt(h.slice(3, 5), 16) / 255, parseInt(h.slice(5, 7), 16) / 255];
+const CSS = getComputedStyle(document.documentElement);
+const C_PAPER = hex(CSS.getPropertyValue('--paper').trim() || '#e9e0ce');
+const C_RED = hex(CSS.getPropertyValue('--accent').trim() || '#b83636');
+const C_GROUND = hex(CSS.getPropertyValue('--frame').trim() || '#1f1f1c');
+const C_INK = hex('#2c2b27'), C_EDGE = hex('#3d3a33');
+
+const VS_BG = `#version 300 es
+void main(){ vec2 p=vec2(float((gl_VertexID<<1)&2),float(gl_VertexID&2)); gl_Position=vec4(p*2.-1.,0.,1.); }`;
+const FS_BG = `#version 300 es
+precision highp float;
+uniform vec2 uRes; uniform float uTime; uniform vec3 uGround;
+uniform float uF0, uS, uN, uR;
+out vec4 o;
+float h21(vec2 p){ p=fract(p*vec2(123.34,456.21)); p+=dot(p,p+45.32); return fract(p.x*p.y); }
+void main(){
+  vec2 uv=gl_FragCoord.xy/uRes; uv.y=1.-uv.y;
+  vec3 col=uGround;
+  float px=1./uRes.x;
+  vec2 g=(uv-uF0)/uS; vec2 cell=floor(g);
+  if(cell.x>=0.&&cell.y>=0.&&cell.x<uN&&cell.y<uN){
+    vec2 f=(fract(g)-.5)*uS; float d=length(f);
+    float s=1.-smoothstep(uR*.92-px,uR*.92+px,d);
+    float rim=smoothstep(uR*.7,uR*.92,d)*s*clamp(dot(normalize(f+1e-6),vec2(.6,.8)),0.,1.);
+    col=mix(col,col*.72,s*.85); col+=rim*.035;
+  }
+  float v=length(uv-.5); col*=1.-.28*pow(v*1.25,2.6);
+  col+=(h21(gl_FragCoord.xy+fract(uTime)*97.)-.5)*.018;
+  o=vec4(col,1.);
+}`;
+const VS_TILE = `#version 300 es
+layout(location=0) in vec2 corner;
+layout(location=1) in vec4 i0;
+layout(location=2) in vec4 i1;
+uniform float uR; uniform int uPass;
+out vec2 vq; flat out vec4 vI0; flat out vec4 vI1; flat out float vRR;
+void main(){
+  float z=i0.z;
+  float rr=uR*i0.w*(1.+.35*max(z,-.6));
+  vec2 c=vec2(.5)+(i0.xy-vec2(.5))*(1.+.05*z);
+  float ext=1.28;
+  if(uPass==0){ c+=vec2(.35,.55)*uR*(.2+2.1*max(z,0.)); ext=1.6+1.6*max(z,0.); }
+  if(i0.w<=.001){ gl_Position=vec4(2.,2.,0.,1.); return; }
+  vec2 p=c+corner*rr*ext;
+  vq=corner*ext; vI0=i0; vI1=i1; vRR=rr;
+  gl_Position=vec4(p.x*2.-1.,1.-p.y*2.,0.,1.);
+}`;
+const FS_TILE = `#version 300 es
+precision highp float; precision highp int;
+in vec2 vq; flat in vec4 vI0; flat in vec4 vI1; flat in float vRR;
+uniform int uPass; uniform vec3 uPaper,uInk,uRed,uEdge;
+out vec4 o;
+float h11(float x){ return fract(sin(x*91.7)*43758.5); }
+float n2(vec2 p){ vec2 i=floor(p),f=fract(p); f=f*f*(3.-2.*f);
+  float a=fract(sin(dot(i,vec2(12.9,78.2)))*43758.5), b=fract(sin(dot(i+vec2(1,0),vec2(12.9,78.2)))*43758.5),
+        c=fract(sin(dot(i+vec2(0,1),vec2(12.9,78.2)))*43758.5), d=fract(sin(dot(i+vec2(1,1),vec2(12.9,78.2)))*43758.5);
+  return mix(mix(a,b,f.x),mix(c,d,f.x),f.y); }
+void main(){
+  float phi=vI1.x, alp=vI1.y, rv=vI1.z, sd=vI1.w;
+  vec2 a=vec2(cos(alp),sin(alp)), b=vec2(-a.y,a.x);
+  float qa=dot(vq,a), qb=dot(vq,b);
+  float cp=cos(phi), sp=sin(phi), m=max(abs(cp),.035);
+  if(uPass==0){
+    float z=max(vI0.z,0.), blur=.28+1.3*z;
+    float d=length(vec2(qa,qb/max(m,.3)));
+    float sh=1.-smoothstep(1.-blur*.5,1.+blur,d);
+    float al=sh*.62/(1.+1.6*z);
+    o=vec4(0.,0.,0.,al); return;
+  }
+  float fs=cp>=0.?1.:-1.;
+  float e=-fs*sp*.1;                       // coin thickness .2, visible face offset
+  float fy=(qb-e)/m;
+  float fd=length(vec2(qa,fy))-1.;
+  float fw=max(fwidth(fd),1e-4);
+  float faceA=1.-smoothstep(-fw,fw,fd);
+  float bd=max(abs(qb)-(abs(e)+m*sqrt(clamp(1.-qa*qa,0.,1.))),abs(qa)-1.);
+  float bw=max(fwidth(bd),1e-4);
+  float bodyA=1.-smoothstep(-bw,bw,bd);
+  float A=max(faceA,bodyA);
+  if(A<.004) discard;
+  vec3 n=vec3(0.,0.,1.)*cp-vec3(b,0.)*sp;
+  vec3 nv=n*fs;
+  vec3 t2=vec3(b*cp,sp);
+  vec3 nd=normalize(nv+.32*(vec3(a,0.)*qa+t2*fy*fs));
+  vec3 L=normalize(vec3(-.45,-.58,.72)), H=normalize(L+vec3(0.,0.,1.));
+  float dif=max(dot(nd,L),0.), spc=pow(max(dot(nd,H),0.),42.);
+  float var=.94+.08*h11(sd*113.);
+  float grain=.96+.07*n2(vq*5.+sd*40.);
+  vec3 face;
+  if(fs>0.){ vec3 base=mix(uPaper,uRed,rv)*var; face=base*(.5+.62*dif)*grain+vec3(1.,.96,.88)*spc*.32; }
+  else { face=uInk*var*(.62+.6*dif)+vec3(.9,.86,.78)*spc*.5; }
+  float es=clamp(dot(-b*sign(e+1e-5),vec2(-.45,-.58))*.5+.6,.25,1.1);
+  vec3 edge=mix(uEdge,mix(uPaper,uRed,rv)*.55,.35)*es;
+  vec3 col=mix(edge,face,faceA);
+  o=vec4(col*A,A);
+}`;
+
+function prog(vs, fs) {
+  const mk = (t, s) => { const sh = gl.createShader(t); gl.shaderSource(sh, s); gl.compileShader(sh); if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(sh)); return sh; };
+  const p = gl.createProgram(); gl.attachShader(p, mk(gl.VERTEX_SHADER, vs)); gl.attachShader(p, mk(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(p);
+  if (!gl.getProgramParameter(p, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(p));
+  const u = {}; const n = gl.getProgramParameter(p, gl.ACTIVE_UNIFORMS);
+  for (let k = 0; k < n; k++) { const inf = gl.getActiveUniform(p, k); u[inf.name] = gl.getUniformLocation(p, inf.name); }
+  return { p, u };
+}
+const pBg = prog(VS_BG, FS_BG), pTile = prog(VS_TILE, FS_TILE);
+const vaoBg = gl.createVertexArray();
+const vao = gl.createVertexArray(); gl.bindVertexArray(vao);
+const qb = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, qb);
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+const inst = new Float32Array(T * 8), ib = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, ib);
+gl.bufferData(gl.ARRAY_BUFFER, inst.byteLength, gl.DYNAMIC_DRAW);
+gl.enableVertexAttribArray(1); gl.vertexAttribPointer(1, 4, gl.FLOAT, false, 32, 0); gl.vertexAttribDivisor(1, 1);
+gl.enableVertexAttribArray(2); gl.vertexAttribPointer(2, 4, gl.FLOAT, false, 32, 16); gl.vertexAttribDivisor(2, 1);
+gl.bindVertexArray(null);
+const order = new Uint32Array(T); for (let i = 0; i < T; i++) order[i] = i;
+
+let W = 1;
+function resize() {
+  const r = film.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2);
+  W = Math.max(64, Math.round(r.width * dpr));
+  if (cvs.width !== W) { cvs.width = cvs.height = W; }
+  measureKnock();
+}
+function render() {
+  order.sort((a, b) => pz[a] - pz[b]);
+  for (let k = 0, o = 0; k < T; k++) { const i = order[k];
+    inst[o++] = px[i]; inst[o++] = py[i]; inst[o++] = pz[i]; inst[o++] = rad[i];
+    inst[o++] = ph[i]; inst[o++] = al[i]; inst[o++] = red[i]; inst[o++] = seed[i]; }
+  gl.viewport(0, 0, W, W);
+  gl.disable(gl.BLEND);
+  gl.useProgram(pBg.p); gl.bindVertexArray(vaoBg);
+  gl.uniform2f(pBg.u.uRes, W, W); gl.uniform1f(pBg.u.uTime, filmT); gl.uniform3fv(pBg.u.uGround, C_GROUND);
+  gl.uniform1f(pBg.u.uF0, F0); gl.uniform1f(pBg.u.uS, S); gl.uniform1f(pBg.u.uN, N); gl.uniform1f(pBg.u.uR, R);
+  gl.drawArrays(gl.TRIANGLES, 0, 3);
+  gl.enable(gl.BLEND); gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+  gl.useProgram(pTile.p); gl.bindVertexArray(vao);
+  gl.bindBuffer(gl.ARRAY_BUFFER, ib); gl.bufferSubData(gl.ARRAY_BUFFER, 0, inst);
+  gl.uniform1f(pTile.u.uR, R); gl.uniform3fv(pTile.u.uPaper, C_PAPER); gl.uniform3fv(pTile.u.uInk, C_INK);
+  gl.uniform3fv(pTile.u.uRed, C_RED); gl.uniform3fv(pTile.u.uEdge, C_EDGE);
+  gl.uniform1i(pTile.u.uPass, 0); gl.drawArraysInstanced(gl.TRIANGLE_STRIP, 0, 4, T);
+  gl.uniform1i(pTile.u.uPass, 1); gl.drawArraysInstanced(gl.TRIANGLE_STRIP, 0, 4, T);
+  gl.bindVertexArray(null);
+}
+
+/* ============================================================
+   Captions, controls, loop
+   ============================================================ */
+const cap = document.getElementById('cap'), sbtn = document.getElementById('snd');
+let capKey = null, capOverride = null, capTimer = 0;
+function setCapText(s) {
+  cap.textContent = '';
+  if (s.endsWith('.')) { cap.append(s.slice(0, -1)); const d = document.createElement('i'); d.className = 'dot'; cap.append(d); }
+  else cap.append(s);
+}
+function updateCaption() {
+  let s = COPY.labels[0][1]; for (const [t0, l] of COPY.labels) if (filmT >= t0) s = l;
+  if (capOverride) s = capOverride;
+  if (s === capKey) return;
+  capKey = s; cap.classList.add('out'); clearTimeout(capTimer);
+  capTimer = setTimeout(() => { setCapText(s); cap.classList.remove('out'); measureKnock(); }, 380);
+  knock.b0 = knock.b1 = .5;                       // let the ring close while the caption swaps
+}
+function measureKnock() {
+  const fr = film.getBoundingClientRect(); if (!fr.width) return;
+  if (!cap.classList.contains('out') && cap.textContent) {
+    const r = cap.getBoundingClientRect(); knock.b0 = (r.left - fr.left) / fr.width - .004; knock.b1 = (r.right - fr.left) / fr.width + .004;
+  }
+  if (film.classList.contains('ui') || document.activeElement === sbtn) {
+    const r = sbtn.getBoundingClientRect(); knock.t0 = (r.left - fr.left) / fr.width - .004; knock.t1 = (r.right - fr.left) / fr.width + .004;
+  } else knock.t0 = knock.t1 = 2;
+}
+
+let playing = true, last = performance.now(), uiTimer = 0;
+function showUI() { film.classList.add('ui'); measureKnock(); clearTimeout(uiTimer); uiTimer = setTimeout(() => { film.classList.remove('ui'); measureKnock(); }, 2600); }
+function setPlaying(p) {
+  playing = p; capOverride = p ? null : COPY.pause; last = performance.now();
+  if (p && snd.on && snd.ctx) snd.ctx.resume();
+}
+async function toggleSound() {
+  if (!snd.ctx && !sndInit()) return;
+  snd.on = !snd.on;
+  if (snd.on) await snd.ctx.resume(); else snd.ctx.suspend();
+  sbtn.textContent = snd.on ? COPY.off : COPY.on; sbtn.setAttribute('aria-pressed', String(snd.on));
+  requestAnimationFrame(measureKnock);
+}
+sbtn.textContent = COPY.on;
+sbtn.addEventListener('click', e => { e.stopPropagation(); toggleSound(); showUI(); });
+film.addEventListener('click', () => { setPlaying(!playing); showUI(); });
+film.addEventListener('pointermove', showUI);
+document.addEventListener('keydown', e => {
+  if (e.target === sbtn && (e.key === ' ' || e.key === 'Enter')) return;
+  if (e.key === ' ' || e.key === 'k') { e.preventDefault(); setPlaying(!playing); showUI(); }
+  else if (e.key === 'm') toggleSound();
+  else if (e.key === 'r') { firstRun = true; resetState(false); filmT = 0; setPlaying(true); }
+});
+document.addEventListener('visibilitychange', () => { last = performance.now(); });
+window.addEventListener('resize', resize);
+if (window.ResizeObserver) new ResizeObserver(resize).observe(film);
+
+/* start */
+const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+const startAt = parseFloat(params.get('t'));
+if (Number.isFinite(startAt)) seek(startAt);
+else if (reduce) { seek(76.5); playing = false; capOverride = COPY.play; }
+else { resetState(false); filmT = 0; }
+if (params.has('paused')) { playing = false; }
+resize();
+window.__film = { seek: t => { seek(t); render(); }, get t() { return filmT; }, pause: () => setPlaying(false) };
+
+function frame(now) {
+  const dt = Math.min(.05, Math.max(0, (now - last) / 1000)); last = now;
+  if (playing && !document.hidden) advance(dt);
+  flushSound(dt);
+  updateCaption();
+  render();
+  requestAnimationFrame(frame);
+}
+updateCaption();
+requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

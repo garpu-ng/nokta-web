@@ -134,6 +134,7 @@ const en: Record<string, string> = {
   "studio.p2": "We build our own tools and workflows: render setups, typesetting templates and prepress checks. At the start of a project there are several versions on the table.",
   "studio.p3": "We started with architectural visualisation; it is still the largest part of the work. Photorealistic 3D renderings, interior and exterior: light, material, space. The project as it will look — long before the first stone is laid.",
   "studio.team": "The team",
+  "studio.film": "Film: from the dot by way of the line to the form",
   "studio.role.kaan": "Design · Concept",
   "studio.role.mohammed": "3D · Visualisation",
   "studio.role.mert": "Layout · Print",

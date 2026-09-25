@@ -127,6 +127,7 @@ const tr: Record<string, string> = {
   "studio.p2": "Araçlarımızı ve iş akışlarımızı kendimiz kuruyoruz: render kurulumları, dizgi şablonları ve baskı öncesi kontrol adımları. Bir projenin başında masada birkaç varyasyon durur.",
   "studio.p3": "İşe mimari görselleştirmeyle başladık; bugün de işin en büyük bölümü o. Fotogerçekçi 3B render’lar, içeride ve dışarıda: ışık, malzeme, mekân. Proje, sonradan nasıl görünecekse öyle — ilk taş konmadan çok önce.",
   "studio.team": "Ekip",
+  "studio.film": "Film: Noktadan çizgiye, çizgiden forma",
   "studio.role.kaan": "Tasarım · Konsept",
   "studio.role.mohammed": "3B · Görselleştirme",
   "studio.role.mert": "Dizgi · Baskı",
