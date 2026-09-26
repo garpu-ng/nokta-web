@@ -3,11 +3,14 @@ const tr: Record<string, string> = {
   // ── Üst veri ──────────────────────────────────────────────────────
   "meta.site.title": "nokta — tasarım stüdyosu, Düsseldorf",
   "meta.site.desc": "Düsseldorf’ta tasarım stüdyosu. Yapılar, kitaplar ve baskılar çiziyoruz — görselleştirme, dizgi, baskı öncesi ve CAD planları.",
-  "meta.home.title": "nokta — yapılar, kitaplar, baskılar",
+  "meta.home.title": "nokta — Düsseldorf’ta mimari görselleştirme, dizgi ve baskı",
+  "meta.home.desc": "Düsseldorf’ta tasarım stüdyosu: mimari görselleştirme, editoryal ve dizgi, baskı üretimi ve CAD planları. NRW’deki mimarlık ofisleri ve inşaat şirketleri için görselleştirme, kitaplar ve faaliyet raporları için dizgi.",
   "meta.studio.title": "Stüdyo · nokta",
   "meta.studio.desc": "İşlerin arkasındaki stüdyo: Düsseldorf’ta üç kişi. Mimari görselleştirme, editoryal ve dizgi, baskı üretimi ve CAD planları.",
   "meta.kontakt.title": "İletişim · nokta",
+  "meta.kontakt.desc": "Düsseldorf’taki nokta’ya talep: mimari görselleştirme, NRW’deki inşaat şirketleri için görselleştirme, faaliyet raporu ve kitap dizgisi, baskı ve CAD planları.",
   "meta.arbeiten.title": "İşler · nokta",
+  "meta.arbeiten.desc": "nokta’nın işleri, Düsseldorf: mimari görselleştirmeler, CAD baskıları, editoryal ve dizgi, el kitapları. Malzemeye göre sıralı, her iş kendi sayfasında.",
 
   // ── Ana sayfa ─────────────────────────────────────────────────────
   "home.wall.label": "işler",

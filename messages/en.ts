@@ -8,11 +8,14 @@ const en: Record<string, string> = {
   // ── Metadata ──────────────────────────────────────────────────────
   "meta.site.title": "nokta — design studio, Düsseldorf",
   "meta.site.desc": "Design studio in Düsseldorf. We draw buildings, books and prints — visualisation, typesetting, prepress and CAD plans.",
-  "meta.home.title": "nokta — buildings, books, prints",
+  "meta.home.title": "nokta — architectural visualisation, typesetting and print in Düsseldorf",
+  "meta.home.desc": "Design studio in Düsseldorf: architectural visualisation, editorial and typesetting, print production and CAD plans. Visualisation for architects and property developers in NRW, typesetting for books and annual reports.",
   "meta.studio.title": "Studio · nokta",
   "meta.studio.desc": "The studio behind the work: three people in Düsseldorf. Architectural visualisation, editorial and typesetting, print production and CAD plans.",
   "meta.kontakt.title": "Contact · nokta",
+  "meta.kontakt.desc": "Inquiries to nokta in Düsseldorf: architectural visualisation, visualisation for property developers in NRW, typesetting of annual reports and books, print and CAD plans.",
   "meta.arbeiten.title": "Work · nokta",
+  "meta.arbeiten.desc": "Work by nokta, Düsseldorf: architectural visualisations, CAD prints, editorial and typesetting, manuals. Sorted by material, every piece on its own page.",
 
   // ── Home ──────────────────────────────────────────────────────────
   "home.wall.label": "Work",

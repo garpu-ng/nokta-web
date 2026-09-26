@@ -22,7 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const t = await getT();
   const locale = await getLocale();
   const title = t("meta.kontakt.title");
-  const description = t("meta.site.desc");
+  const description = t("meta.kontakt.desc");
   // As on /studio: its own canonical, and its own social block rather than the
   // root layout's, which shared this page under the site's title.
   return {
