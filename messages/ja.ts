@@ -163,7 +163,6 @@ const ja: Record<string, string> = {
   "kontakt.form.error.busy": "この端末から短時間に多くの送信がありました。1時間ほどおいて再度お試しください。",
   "kontakt.form.nojs": "このフォームには JavaScript が必要です。直接ご連絡ください：hallo@nokta-studio.de",
   "kontakt.addr.region": "ノルトライン＝ヴェストファーレン州、ドイツ",
-  "kontakt.addr.vat": "VAT番号：ご請求に応じて",
   "kontakt.mailAria": "メールを送る",
 
   // ── ラインプリント — 図面情報、仕様、購入（/arbeiten/[slug]） ─────

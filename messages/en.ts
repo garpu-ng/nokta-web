@@ -165,7 +165,6 @@ const en: Record<string, string> = {
   "kontakt.form.error.busy": "A lot of enquiries have just come from here. Please try again in an hour.",
   "kontakt.form.nojs": "The form needs JavaScript. Write to us directly: hallo@nokta-studio.de",
   "kontakt.addr.region": "North Rhine-Westphalia, Germany",
-  "kontakt.addr.vat": "VAT ID: on request",
   "kontakt.mailAria": "Write an email",
 
   // ── Line prints — passport, specification, purchase (/arbeiten/[slug]) ─

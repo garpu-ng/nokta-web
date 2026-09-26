@@ -198,8 +198,8 @@ through it) + `lib/og.tsx` render the root card; work detail pages override
       it in visible German. § 5 DDG makes the Impressum mandatory; this is
       direct Abmahnung exposure. Both pages are also hardcoded German with no
       `t()` calls, so they serve German under `<html lang="ja">`.
-- [ ] **`USt-IdNr.: auf Anfrage`** (`kontakt.addr.vat`, all four locales) —
-      state the number or delete the line.
+- [x] **`USt-IdNr.: auf Anfrage`** — done. The line left `/kontakt` in 7a74691,
+      and the unused `kontakt.addr.vat` key left all four locales after it.
 - [ ] **Contact mailbox** — `hallo@nokta-studio.de` is unified everywhere but
       the mailbox itself still has to be registered.
 - [ ] **`KONTAKT_API_KEY` / `KONTAKT_FROM`** — unset, so the form 503s. See §2.

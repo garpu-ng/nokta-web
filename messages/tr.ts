@@ -158,7 +158,6 @@ const tr: Record<string, string> = {
   "kontakt.form.error.busy": "Buradan az önce çok fazla talep geldi. Lütfen bir saat sonra tekrar dene.",
   "kontakt.form.nojs": "Form JavaScript gerektiriyor. Bize doğrudan yaz: hallo@nokta-studio.de",
   "kontakt.addr.region": "Kuzey Ren-Vestfalya, Almanya",
-  "kontakt.addr.vat": "Vergi No: talep üzerine",
   "kontakt.mailAria": "E-posta yaz",
 
   // ── Çizgi baskılar — künye, spesifikasyon, satın alma (/arbeiten/[slug]) ─
