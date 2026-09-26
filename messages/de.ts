@@ -9,11 +9,14 @@ const de: Record<string, string> = {
   // ── Metadata ──────────────────────────────────────────────────────
   "meta.site.title": "nokta — Designstudio, Düsseldorf",
   "meta.site.desc": "Designstudio in Düsseldorf. Wir zeichnen Gebäude, Bücher und Drucke — Visualisierung, Satz, Druckvorstufe und CAD-Pläne.",
-  "meta.home.title": "nokta — Gebäude, Bücher, Drucke",
+  "meta.home.title": "nokta — Architekturvisualisierung, Satz und Druck in Düsseldorf",
+  "meta.home.desc": "Designstudio in Düsseldorf: Architekturvisualisierung, Editorial und Satz, Druckproduktion und CAD-Pläne. Visualisierung für Architekturbüros und Bauträger in NRW, Satz für Bücher und Jahresberichte.",
   "meta.studio.title": "Studio · nokta",
   "meta.studio.desc": "Das Studio hinter den Arbeiten: drei Leute in Düsseldorf. Architekturvisualisierung, Editorial und Satz, Druckproduktion und CAD-Pläne.",
   "meta.kontakt.title": "Kontakt · nokta",
+  "meta.kontakt.desc": "Anfrage an nokta in Düsseldorf: Architekturvisualisierung, Visualisierung für Bauträger in NRW, Satz von Jahresberichten und Büchern, Druck und CAD-Pläne.",
   "meta.arbeiten.title": "Arbeiten · nokta",
+  "meta.arbeiten.desc": "Arbeiten von nokta aus Düsseldorf: Architekturvisualisierungen, CAD-Drucke, Editorial und Satz, Handbücher. Nach Material sortiert, jede Arbeit mit eigener Seite.",
 
   // ── Home ──────────────────────────────────────────────────────────
   // wall.label/aria head the one wall, which hangs at /arbeiten since

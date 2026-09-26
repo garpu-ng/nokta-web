@@ -61,6 +61,31 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+/** schema.org ProfessionalService for the studio. The url is the canonical
+    host (metadataBase above) — the bare domain 308s onto it. */
+function studioJsonLd(description: string) {
+  const site = "https://www.nokta-studio.de";
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "@id": `${site}/#studio`,
+    name: "nokta",
+    url: site,
+    description,
+    image: `${site}/opengraph-image`,
+    areaServed: [
+      { "@type": "City", name: "Düsseldorf" },
+      { "@type": "State", name: "Nordrhein-Westfalen" },
+    ],
+    knowsAbout: [
+      "Architekturvisualisierung",
+      "Editorial und Satz",
+      "Druckproduktion",
+      "CAD-Pläne",
+    ],
+  };
+}
+
 export default async function RootLayout({
   children,
 }: {
@@ -88,6 +113,17 @@ export default async function RootLayout({
         {/* First in the tab order on every page: without it a keyboard reader
             walked the wordmark, four nav links and four language buttons again
             on every single navigation before reaching the page itself. */}
+        {/* Structured data: what the studio is and where it works. No street
+            address and no phone number — the studio is a practice, not a shop
+            front, and the Impressum carries the legal address. No clients
+            either: those stand on the works themselves. `<` is escaped as the
+            Next JSON-LD guide asks (node_modules/next/dist/docs/01-app/02-guides/json-ld.md). */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(studioJsonLd(t("meta.home.desc"))).replace(/</g, "\\u003c"),
+          }}
+        />
         <a href="#nk-main" className="nk-skip">
           {t("aria.skip")}
         </a>

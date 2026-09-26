@@ -75,9 +75,9 @@ export async function generateMetadata(): Promise<Metadata> {
   const t = await getT();
   const locale = await getLocale();
   const title = t("meta.home.title");
-  // No dedicated home description key — the studio blurb reads as the landing
-  // summary, so reuse it for the <meta> + og/twitter description.
-  const description = t("meta.site.desc");
+  // The landing page names the services and the region it serves — the words a
+  // search for this studio starts with.
+  const description = t("meta.home.desc");
   return {
     title,
     description,

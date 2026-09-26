@@ -36,7 +36,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const t = await getT();
   const locale = await getLocale();
   const title = t("meta.arbeiten.title");
-  const description = t("meta.site.desc");
+  const description = t("meta.arbeiten.desc");
   return {
     title,
     description,
