@@ -15,7 +15,9 @@ const en: Record<string, string> = {
   "meta.kontakt.title": "Contact · nokta",
   "meta.kontakt.desc": "Inquiries to nokta in Düsseldorf: architectural visualisation, visualisation for property developers in NRW, typesetting of annual reports and books, print and CAD plans.",
   "meta.arbeiten.title": "Work · nokta",
-  "meta.arbeiten.desc": "Work by nokta, Düsseldorf: architectural visualisations, CAD prints, editorial and typesetting, manuals. Sorted by material, every piece on its own page.",
+  "meta.arbeiten.desc": "Work by nokta, Düsseldorf: architectural visualisations, editorial and typesetting, manuals. Sorted by material, every piece on its own page.",
+  "meta.shop.title": "Shop · nokta",
+  "meta.shop.desc": "Line prints by nokta: well-known buildings as vectorised CAD drawings, printed in A1 and framed.",
 
   // ── Home ──────────────────────────────────────────────────────────
   "home.wall.label": "Work",
@@ -48,11 +50,6 @@ const en: Record<string, string> = {
   // annotated "Self-initiated" and stands beside the commissions, unexplained.
   "work.own": "Self-initiated",
   "work.back": "All work",
-  // The count line: the wall always stands on one material, and three of the
-  // five hold exactly one work. On the homepage the same line counts the whole
-  // body of work (13) and leads to the wall.
-  "work.count": "{count} works",
-  "work.count.one": "{count} work",
   "work.kind.rendering": "Rendering",
   "work.kind.cad": "CAD print",
   "work.kind.editorial": "Editorial",
@@ -167,7 +164,7 @@ const en: Record<string, string> = {
   "kontakt.form.error.fields": "Name, email and message are still missing — or the address has a typo.",
   "kontakt.form.error.busy": "A lot of enquiries have just come from here. Please try again in an hour.",
   "kontakt.form.nojs": "The form needs JavaScript. Write to us directly: hallo@nokta-studio.de",
-  "kontakt.addr.region": "North Rhine-Westphalia, Germany",
+  "kontakt.addr.region": "Düsseldorf, Germany",
   "kontakt.mailAria": "Write an email",
 
   // ── Line prints — passport, specification, purchase (/arbeiten/[slug]) ─
@@ -189,14 +186,42 @@ const en: Record<string, string> = {
   "projects.imageAlt": "image {n}",
   "line.metaDescSuffix": "Vectorised CAD line print, printed in A1 and framed.",
 
+  // ── Shop (/shop) ──
+  "shop.heading": "Shop",
+  "shop.intro": "Line prints of well-known buildings. Every line vectorised from a CAD drawing, printed in A1 and framed.",
+  "shop.listLabel": "Line prints",
+  "shop.back": "All prints",
+
   // ── Projects (renderings) ─────────────────────────────────────────
   "projects.client.private": "Private client",
-  "projects.desc.sanktgores": "Photorealistic exterior visualisation of a modern single-family home in Germany.",
-  "projects.desc.teahouse": "Visualisation of a Japanese-inspired garden tea house.",
-  "projects.desc.beatbuilding": "Visualisation of an urban cultural building.",
-  "projects.desc.binome": "Interior and exterior visualisation of a minimalist residential project.",
-  "projects.desc.ipehouse": "Visualisation of a modern house with an ipe wood façade.",
-  "projects.desc.velostation": "Architectural visualisation of a modern bike station in an urban setting.",
+  "projects.desc.sanktgores": "Exterior and interior visualisation of a pale-brick house in Germany.",
+  "projects.desc.teahouse": "Interior visualisation of a city tea salon in the evening.",
+  "projects.desc.beatbuilding": "Visualisation of a mixed-use residential building with an exposed-concrete façade.",
+  "projects.desc.binome": "Exterior and interior visualisation of a red-brick residential building.",
+  "projects.desc.ipehouse": "Visualisation of a single-storey house with timber shutters and a deep roof overhang.",
+  "projects.desc.velostation": "Interior visualisation of a timber-built bicycle station.",
+
+  // Project page: one paragraph and two facts above the image stack.
+  "projects.label.service": "Service",
+  "projects.label.scope": "Scope",
+  "projects.text.sanktgores": "Street side, gable and façade details in soft daylight, plus a room under the roof. The focus is on the pale brick, the metal roof and the arched timber windows.",
+  "projects.service.sanktgores": "Exterior and interior visualisation",
+  "projects.scope.sanktgores": "6 images · 5 exterior, 1 interior",
+  "projects.text.teahouse": "A long tea table with floor cushions, pale wood and indirect light. The glass front looks out onto the city at night, and one view shows the lit room from the street.",
+  "projects.service.teahouse": "Interior visualisation, evening light",
+  "projects.scope.teahouse": "7 images · 6 interior, 1 exterior",
+  "projects.text.beatbuilding": "Three exterior views in daylight, from the street front to the balconies in detail. Plus an interior behind the double-height glass front.",
+  "projects.service.beatbuilding": "Exterior and interior visualisation",
+  "projects.scope.beatbuilding": "4 images · 3 exterior, 1 interior",
+  "projects.text.binome": "Façade, external stair and access gallery in brick and red-painted steel. Inside: living room and kitchen of one flat.",
+  "projects.service.binome": "Exterior and interior visualisation",
+  "projects.scope.binome": "6 images · 3 exterior, 3 interior",
+  "projects.text.ipehouse": "Two exterior views in the garden in daylight, plus two interiors: a bedroom and a desk with built-in wardrobe.",
+  "projects.service.ipehouse": "Exterior and interior visualisation",
+  "projects.scope.ipehouse": "4 images · 2 exterior, 2 interior",
+  "projects.text.velostation": "The parking hall with two-tier bike racks and the workshop with its gallery, both in timber and daylight.",
+  "projects.service.velostation": "Interior visualisation",
+  "projects.scope.velostation": "2 images · interior",
 
   // ── Footer ────────────────────────────────────────────────────────
   // tag1 stacks over studio.motto in the colophon brand block
@@ -211,6 +236,7 @@ const en: Record<string, string> = {
   "footer.col.social": "Social",
   "footer.link.arbeiten": "work",
   "footer.link.studio": "studio",
+  "footer.link.shop": "shop",
   "footer.link.kontakt": "contact",
   "footer.link.impressum": "imprint",
   "footer.link.datenschutz": "privacy",
@@ -226,6 +252,7 @@ const en: Record<string, string> = {
   "nav.home": "home.",
   "nav.studio": "studio.",
   "nav.arbeiten": "work.",
+  "nav.shop": "shop.",
   "nav.contact": "contact.",
   "aria.home": "nokta, home",
   "aria.skip": "Skip to content",

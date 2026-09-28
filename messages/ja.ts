@@ -10,7 +10,9 @@ const ja: Record<string, string> = {
   "meta.kontakt.title": "お問い合わせ · nokta",
   "meta.kontakt.desc": "デュッセルドルフのnoktaへのお問い合わせ：建築ビジュアライゼーション、NRW州のデベロッパー向けビジュアライゼーション、年次報告書と書籍の組版、印刷、CAD図面。",
   "meta.arbeiten.title": "仕事 · nokta",
-  "meta.arbeiten.desc": "デュッセルドルフのnoktaの仕事：建築ビジュアライゼーション、CADプリント、エディトリアルと組版、マニュアル。素材ごとに並び、それぞれに専用ページがあります。",
+  "meta.arbeiten.desc": "デュッセルドルフのnoktaの仕事：建築ビジュアライゼーション、エディトリアルと組版、マニュアル。素材ごとに並び、それぞれに専用ページがあります。",
+  "meta.shop.title": "ショップ · nokta",
+  "meta.shop.desc": "noktaのラインプリント：名建築をベクター化したCAD図面として、A1で印刷し額装。",
 
   // ── ホーム ────────────────────────────────────────────────────────
   "home.wall.label": "作品",
@@ -43,10 +45,6 @@ const ja: Record<string, string> = {
   // 「自主プロジェクト」とだけ記され、受注作品と並んで立つ。
   "work.own": "自主プロジェクト",
   "work.back": "すべての作品",
-  // 点数の行 — 壁は常にひとつの素材の上に立ち、「すべて」はない。日本語は数詞の
-  // 後で複数形にしないので、単数の行は複数の行と同じ。キーを揃えるために置く。
-  "work.count": "{count} 件の仕事",
-  "work.count.one": "{count} 件の仕事",
   "work.kind.rendering": "レンダリング",
   "work.kind.cad": "CADプリント",
   "work.kind.editorial": "エディトリアル",
@@ -165,7 +163,7 @@ const ja: Record<string, string> = {
   "kontakt.form.error.fields": "お名前・メールアドレス・メッセージが未入力です。アドレスの入力間違いもご確認ください。",
   "kontakt.form.error.busy": "この端末から短時間に多くの送信がありました。1時間ほどおいて再度お試しください。",
   "kontakt.form.nojs": "このフォームには JavaScript が必要です。直接ご連絡ください：hallo@nokta-studio.de",
-  "kontakt.addr.region": "ノルトライン＝ヴェストファーレン州、ドイツ",
+  "kontakt.addr.region": "デュッセルドルフ、ドイツ",
   "kontakt.mailAria": "メールを送る",
 
   // ── ラインプリント — 図面情報、仕様、購入（/arbeiten/[slug]） ─────
@@ -187,14 +185,42 @@ const ja: Record<string, string> = {
   "projects.imageAlt": "画像 {n}",
   "line.metaDescSuffix": "ベクター化したCADラインプリント、A1印刷・額装。",
 
+  // ── Shop (/shop) ──
+  "shop.heading": "ショップ",
+  "shop.intro": "名建築のラインプリント。すべての線をCAD図面からベクター化し、A1で印刷して額装しています。",
+  "shop.listLabel": "ラインプリント",
+  "shop.back": "すべてのプリント",
+
   // ── プロジェクト（レンダリング） ──────────────────────────────────
   "projects.client.private": "個人のお客様",
-  "projects.desc.sanktgores": "ドイツの現代的な戸建住宅のフォトリアルな外観ビジュアライゼーション。",
-  "projects.desc.teahouse": "日本にインスパイアされた庭の茶室のビジュアライゼーション。",
-  "projects.desc.beatbuilding": "都市の文化施設のビジュアライゼーション。",
-  "projects.desc.binome": "ミニマルな住宅プロジェクトの内外観ビジュアライゼーション。",
-  "projects.desc.ipehouse": "イペ材ファサードの現代的な住宅のビジュアライゼーション。",
-  "projects.desc.velostation": "都市空間における現代的な駐輪ステーションの建築ビジュアライゼーション。",
+  "projects.desc.sanktgores": "ドイツの淡色レンガの住宅の外観・内観ビジュアライゼーション。",
+  "projects.desc.teahouse": "夜の街にある茶房の内観ビジュアライゼーション。",
+  "projects.desc.beatbuilding": "打放しコンクリートのファサードをもつ住商複合ビルのビジュアライゼーション。",
+  "projects.desc.binome": "赤レンガの集合住宅の外観・内観ビジュアライゼーション。",
+  "projects.desc.ipehouse": "木製の鎧戸と深い軒をもつ平屋のビジュアライゼーション。",
+  "projects.desc.velostation": "木造の駐輪ステーションの内観ビジュアライゼーション。",
+
+  // Project page: one paragraph and two facts above the image stack.
+  "projects.label.service": "業務内容",
+  "projects.label.scope": "範囲",
+  "projects.text.sanktgores": "通り側の外観、妻壁、ファサードのディテールをやわらかな昼光で。屋根裏の一室も。淡色のレンガ、金属屋根、アーチ型の木製窓が主役です。",
+  "projects.service.sanktgores": "外観・内観ビジュアライゼーション",
+  "projects.scope.sanktgores": "6点 · 外観5、内観1",
+  "projects.text.teahouse": "座布団を並べた長い茶卓、明るい木材、間接照明。ガラス越しに夜の街が見えます。一点は通りから明かりの灯った店内を見たものです。",
+  "projects.service.teahouse": "内観ビジュアライゼーション、夜の光",
+  "projects.scope.teahouse": "7点 · 内観6、外観1",
+  "projects.text.beatbuilding": "昼光の外観3点、通り側の正面からバルコニーのディテールまで。さらに2層吹き抜けのガラス面の奥の内観。",
+  "projects.service.beatbuilding": "外観・内観ビジュアライゼーション",
+  "projects.scope.beatbuilding": "4点 · 外観3、内観1",
+  "projects.text.binome": "レンガと赤く塗装したスチールによるファサード、外階段、外廊下。内観は住戸のリビングとキッチン。",
+  "projects.service.binome": "外観・内観ビジュアライゼーション",
+  "projects.scope.binome": "6点 · 外観3、内観3",
+  "projects.text.ipehouse": "庭からの昼の外観2点と、内観2点：寝室と、造り付け収納のある書斎コーナー。",
+  "projects.service.ipehouse": "外観・内観ビジュアライゼーション",
+  "projects.scope.ipehouse": "4点 · 外観2、内観2",
+  "projects.text.velostation": "2段式ラックの並ぶ駐輪ホールと、ギャラリーのある工房。どちらも木と昼光の空間です。",
+  "projects.service.velostation": "内観ビジュアライゼーション",
+  "projects.scope.velostation": "2点 · 内観",
 
   // ── フッター ──────────────────────────────────────────────────────
   // tag1 は奥付のブランドブロックで studio.motto の上に積まれる
@@ -209,6 +235,7 @@ const ja: Record<string, string> = {
   "footer.col.social": "ソーシャル",
   "footer.link.arbeiten": "作品",
   "footer.link.studio": "スタジオ",
+  "footer.link.shop": "ショップ",
   "footer.link.kontakt": "お問い合わせ",
   "footer.link.impressum": "会社概要",
   "footer.link.datenschutz": "プライバシー",
@@ -224,6 +251,7 @@ const ja: Record<string, string> = {
   "nav.home": "ホーム",
   "nav.studio": "スタジオ",
   "nav.arbeiten": "作品",
+  "nav.shop": "ショップ",
   "nav.contact": "お問い合わせ",
   "aria.home": "nokta、ホーム",
   "aria.skip": "本文へスキップ",

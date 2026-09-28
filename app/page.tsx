@@ -13,7 +13,7 @@ import { KIND_FIELD } from "@/lib/colors";
 import { getLocale, getT, type Translate } from "@/lib/i18n";
 import { getMediaSize } from "@/lib/mediaSizes";
 import { socialMetadata } from "@/lib/socialMeta";
-import { WORKS, getWork, type Work } from "@/lib/works";
+import { getWork, type Work } from "@/lib/works";
 import styles from "./page.module.css";
 
 /* The homepage, as a numbered register.
@@ -67,9 +67,17 @@ const FEATURED: { slug: string; plate?: string }[] = [
   { slug: "teahouse", plate: "/projects/teahouse/plate.jpg" },
   { slug: "abschlussbericht-ki-kommission" },
   { slug: "sanktgores" },
-  { slug: "eiffel" },
+  { slug: "beatbuilding" },
   { slug: "leuchtturm" },
 ];
+
+/* Where a door leads when it is not the wall. CAD is offered as a service
+   (floor plans, sections, site plans) before there is any on the wall, so its
+   door opens the inquiry with CAD already chosen. The line prints are a shop
+   of their own (/shop), not this service. */
+const DOOR_HREF: Partial<Record<string, string>> = {
+  cad: "/kontakt?kind=cad",
+};
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getT();
@@ -113,7 +121,7 @@ function annotation(work: Work, t: Translate): string {
     this askable: a work's own description is preferred, because it states the
     work without repeating the client that the annotation already carries, and
     the home page's own line stands in for works that are not projects. Only the
-    lead is introduced this way — eiffel and leuchtturm have no such line in any
+    lead is introduced this way — leuchtturm has no such line in any
     locale, and a set where one plate of four is explained and three are not
     reads as an omission rather than a rhythm. */
 function description(work: Featured, t: Translate): string | undefined {
@@ -251,7 +259,7 @@ export default async function HomePage() {
           {SERVICES.map(({ kind }, i) => (
             <Reveal key={kind} delay={i * 90}>
               <Link
-                href={`/arbeiten?kind=${kind}`}
+                href={DOOR_HREF[kind] ?? `/arbeiten?kind=${kind}`}
                 // nk-door is a global hook, not decoration: the mark's own
                 // stylesheet keys its hover state off it (a CSS module cannot
                 // see the class its consumer hovers).
@@ -330,10 +338,9 @@ export default async function HomePage() {
         </div>
 
         <Link href="/arbeiten" className={styles.allWorks}>
-          {/* The way on. It used to promise "alle 13 arbeiten", which the wall
-              no longer answers with: /arbeiten stands on one material at a
-              time. The figure still says how much work is over there. */}
-          <span>{t("work.count").replace("{count}", String(WORKS.length))}</span>
+          {/* The way on, without a figure: the wall opens on one material, so any
+              count here named a different set than the one you land on. */}
+          <span>{t("work.back")}</span>
           <span aria-hidden="true">↗</span>
         </Link>
       </section>

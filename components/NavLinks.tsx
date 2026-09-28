@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./NavLinks.module.css";
 
-/* The four pages of the sheet. Each is set lowercase with its own trailing
+/* The pages of the sheet. Each is set lowercase with its own trailing
    period — the copy carries the period, not the CSS, so a locale is free to
    drop it (Japanese sets 。 or nothing at all).
 

@@ -2,18 +2,21 @@
 // page and for every detail page under /arbeiten/[slug].
 //
 // Architecture leads by ratio and by running order. The modes of representation
-// (rendering, CAD print, editorial, study, manual) are stamps and a filter,
-// never sections: the order below deliberately alternates them.
+// (rendering, editorial, study, manual) are stamps and a filter, never
+// sections: the order below deliberately alternates them.
+//
+// The CAD line prints are not on the wall: they are a product, and they live
+// in the shop (lib/prints.ts, /shop). "cad" stays a kind so that CAD work done
+// as a service (floor plans, sections, site plans) can hang here later.
 //
 // Adding a work is one entry here + one thumbnail + one row in
 // lib/mediaSizes.ts. No layout change is needed.
 
 import { PROJECTS, type Project } from "./projects";
-import { PRINTS, type Print } from "./prints";
 
 export type WorkKind =
   | "rendering" // archviz
-  | "cad" // CAD line prints (for sale)
+  | "cad" // CAD work as a service (none on the wall yet; the prints are in /shop)
   | "editorial" // editorial / layout / prepress
   | "study" // self-initiated studies
   | "manual"; // in-house manuals
@@ -45,14 +48,8 @@ export type Work = {
   /** where the detail body comes from */
   source:
     | { type: "project"; project: Project }
-    | { type: "print"; print: Print }
     | { type: "piece" }; // editorial / study / manual — bespoke detail bodies
 };
-
-/** The year the print series was drawn and published. A print's annotation
-    carries this, not the building's completion year — that one stays a passport
-    fact on the print's own detail page. */
-const PRINT_EDITION_YEAR = "2025";
 
 function fromProject(slug: string, span: Work["span"], lift?: number): Work {
   const project = PROJECTS.find((p) => p.slug === slug);
@@ -70,29 +67,11 @@ function fromProject(slug: string, span: Work["span"], lift?: number): Work {
   };
 }
 
-function fromPrint(slug: string, span: Work["span"], lift?: number): Work {
-  const print = PRINTS.find((p) => p.slug === slug);
-  if (!print) throw new Error(`works.ts: no print "${slug}" in lib/prints.ts`);
-  return {
-    slug: print.slug,
-    title: print.title,
-    kind: "cad",
-    year: PRINT_EDITION_YEAR,
-    // No client: the edition is the studio's own work → annotated "Eigenprojekt".
-    thumb: print.image,
-    span,
-    lift,
-    source: { type: "print", print },
-  };
-}
-
 /* The wall, in reading order. Spans are 12-col grid widths on desktop; the
    phone renders one column and ignores them. Widths follow the thumbnails'
    ratios — the two near-square archviz thumbs (teahouse 1415×1415, binome
    1150×1281) carry a column more than the plan's baseline so they hold their
-   own beside the tall portrait sheets, and the four CAD prints stand at span 4
-   so the drawings read (velostation gives up its width to close the final
-   4+4+4 row). Lifts hang the sheets at varied heights (hand-pinned, not a
+   own beside the tall portrait sheets. Lifts hang the sheets at varied heights (hand-pinned, not a
    rigid grid); tune them per row-neighbour so no two adjacent tops align. */
 export const WORKS: Work[] = [
   fromProject("sanktgores", 7, 0),
@@ -120,7 +99,6 @@ export const WORKS: Work[] = [
     source: { type: "piece" },
   },
   fromProject("teahouse", 6, 0),
-  fromPrint("eiffel", 4, 4.5),
   fromProject("beatbuilding", 7, 2),
   {
     slug: "n-studie",
@@ -133,7 +111,6 @@ export const WORKS: Work[] = [
     source: { type: "piece" },
   },
   fromProject("binome", 7, 0),
-  fromPrint("chrysler", 4, 5.5),
   fromProject("ipehouse", 7, 1.5),
   {
     slug: "leuchtturm",
@@ -145,9 +122,7 @@ export const WORKS: Work[] = [
     lift: 4,
     source: { type: "piece" },
   },
-  fromPrint("empire-state", 4, 0),
   fromProject("velostation", 4, 3),
-  fromPrint("osaka", 4, 6),
 ];
 
 /** The five kinds, as a runtime set — the type alone cannot be checked

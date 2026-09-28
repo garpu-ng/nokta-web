@@ -10,7 +10,9 @@ const tr: Record<string, string> = {
   "meta.kontakt.title": "İletişim · nokta",
   "meta.kontakt.desc": "Düsseldorf’taki nokta’ya talep: mimari görselleştirme, NRW’deki inşaat şirketleri için görselleştirme, faaliyet raporu ve kitap dizgisi, baskı ve CAD planları.",
   "meta.arbeiten.title": "İşler · nokta",
-  "meta.arbeiten.desc": "nokta’nın işleri, Düsseldorf: mimari görselleştirmeler, CAD baskıları, editoryal ve dizgi, el kitapları. Malzemeye göre sıralı, her iş kendi sayfasında.",
+  "meta.arbeiten.desc": "nokta’nın işleri, Düsseldorf: mimari görselleştirmeler, editoryal ve dizgi, el kitapları. Malzemeye göre sıralı, her iş kendi sayfasında.",
+  "meta.shop.title": "Mağaza · nokta",
+  "meta.shop.desc": "nokta’dan çizgi baskılar: tanınmış yapılar vektörel CAD çizimi olarak, A1 basılı ve çerçeveli.",
 
   // ── Ana sayfa ─────────────────────────────────────────────────────
   "home.wall.label": "işler",
@@ -43,11 +45,6 @@ const tr: Record<string, string> = {
   // "Kendi projemiz" diye künyelenir ve siparişlerin yanında öylece durur.
   "work.own": "Kendi projemiz",
   "work.back": "Tüm işler",
-  // Sayı satırı: duvar her zaman tek bir malzemenin üzerinde durur, "Tümü"
-  // yok. Türkçede sayıdan sonra çoğul eki gelmediği için tekil satır çoğulun
-  // aynısıdır; anahtar eşliği için duruyor.
-  "work.count": "{count} iş",
-  "work.count.one": "{count} iş",
   "work.kind.rendering": "Render",
   "work.kind.cad": "CAD baskı",
   "work.kind.editorial": "Editoryal",
@@ -160,7 +157,7 @@ const tr: Record<string, string> = {
   "kontakt.form.error.fields": "Ad, e-posta ve mesaj hâlâ eksik — ya da adreste bir yazım hatası var.",
   "kontakt.form.error.busy": "Buradan az önce çok fazla talep geldi. Lütfen bir saat sonra tekrar dene.",
   "kontakt.form.nojs": "Form JavaScript gerektiriyor. Bize doğrudan yaz: hallo@nokta-studio.de",
-  "kontakt.addr.region": "Kuzey Ren-Vestfalya, Almanya",
+  "kontakt.addr.region": "Düsseldorf, Almanya",
   "kontakt.mailAria": "E-posta yaz",
 
   // ── Çizgi baskılar — künye, spesifikasyon, satın alma (/arbeiten/[slug]) ─
@@ -181,14 +178,42 @@ const tr: Record<string, string> = {
   "projects.imageAlt": "görsel {n}",
   "line.metaDescSuffix": "Vektörleştirilmiş CAD çizgi baskısı, A1 basılmış ve çerçeveli.",
 
+  // ── Shop (/shop) ──
+  "shop.heading": "Mağaza",
+  "shop.intro": "Tanınmış yapıların çizgi baskıları. Her çizgi bir CAD çiziminden vektörleştirildi, A1 basıldı ve çerçevelendi.",
+  "shop.listLabel": "Çizgi baskılar",
+  "shop.back": "Tüm baskılar",
+
   // ── Projeler (render’lar) ─────────────────────────────────────────
   "projects.client.private": "Bireysel müşteri",
-  "projects.desc.sanktgores": "Almanya’da modern bir müstakil evin fotogerçekçi dış görselleştirmesi.",
-  "projects.desc.teahouse": "Japon esintili bir bahçe çay evinin görselleştirmesi.",
-  "projects.desc.beatbuilding": "Kentsel bir kültür binasının görselleştirmesi.",
-  "projects.desc.binome": "Minimalist bir konut projesinin iç ve dış görselleştirmesi.",
-  "projects.desc.ipehouse": "Ipe ahşap cepheli modern bir evin görselleştirmesi.",
-  "projects.desc.velostation": "Kentsel alanda modern bir bisiklet istasyonunun mimari görselleştirmesi.",
+  "projects.desc.sanktgores": "Almanya’da açık renk tuğlalı bir konutun dış ve iç görselleştirmesi.",
+  "projects.desc.teahouse": "Şehirde bir çay salonunun akşam iç görselleştirmesi.",
+  "projects.desc.beatbuilding": "Brüt beton cepheli bir konut ve ticaret binasının görselleştirmesi.",
+  "projects.desc.binome": "Kırmızı tuğlalı bir konut binasının dış ve iç görselleştirmesi.",
+  "projects.desc.ipehouse": "Ahşap panjurlu, geniş saçaklı tek katlı bir evin görselleştirmesi.",
+  "projects.desc.velostation": "Ahşap yapılı bir bisiklet istasyonunun iç görselleştirmesi.",
+
+  // Project page: one paragraph and two facts above the image stack.
+  "projects.label.service": "Hizmet",
+  "projects.label.scope": "Kapsam",
+  "projects.text.sanktgores": "Sokak cephesi, kalkan duvarı ve cephe detayları yumuşak gün ışığında, ayrıca çatı altında bir oda. Odakta açık renk tuğla, metal çatı ve kemerli ahşap pencereler var.",
+  "projects.service.sanktgores": "Dış ve iç görselleştirme",
+  "projects.scope.sanktgores": "6 görsel · 5 dış, 1 iç",
+  "projects.text.teahouse": "Minderli uzun bir çay masası, açık renk ahşap ve dolaylı ışık. Cam cepheden gece şehir görünüyor, bir görünüm aydınlatılmış mekânı sokaktan gösteriyor.",
+  "projects.service.teahouse": "İç görselleştirme, akşam ışığı",
+  "projects.scope.teahouse": "7 görsel · 6 iç, 1 dış",
+  "projects.text.beatbuilding": "Gün ışığında üç dış görünüm: sokak cephesinden balkon detaylarına kadar. Ayrıca iki kat yüksekliğindeki cam cephenin arkasında bir iç mekân.",
+  "projects.service.beatbuilding": "Dış ve iç görselleştirme",
+  "projects.scope.beatbuilding": "4 görsel · 3 dış, 1 iç",
+  "projects.text.binome": "Tuğla ve kırmızı boyalı çelikten cephe, dış merdiven ve açık koridor. İçeride: bir dairenin oturma odası ve mutfağı.",
+  "projects.service.binome": "Dış ve iç görselleştirme",
+  "projects.scope.binome": "6 görsel · 3 dış, 3 iç",
+  "projects.text.ipehouse": "Bahçede gün ışığında iki dış görünüm, ayrıca iki iç mekân: yatak odası ve gömme dolaplı çalışma köşesi.",
+  "projects.service.ipehouse": "Dış ve iç görselleştirme",
+  "projects.scope.ipehouse": "4 görsel · 2 dış, 2 iç",
+  "projects.text.velostation": "İki katlı bisiklet raflarıyla park salonu ve galerili atölye, ikisi de ahşap ve gün ışığında.",
+  "projects.service.velostation": "İç görselleştirme",
+  "projects.scope.velostation": "2 görsel · iç",
 
   // ── Alt bilgi ─────────────────────────────────────────────────────
   "footer.tag1": "Düsseldorf’ta tasarım stüdyosu.",
@@ -200,6 +225,7 @@ const tr: Record<string, string> = {
   "footer.col.social": "Sosyal",
   "footer.link.arbeiten": "işler",
   "footer.link.studio": "stüdyo",
+  "footer.link.shop": "mağaza",
   "footer.link.kontakt": "iletişim",
   "footer.link.impressum": "künye",
   "footer.link.datenschutz": "gizlilik",
@@ -215,6 +241,7 @@ const tr: Record<string, string> = {
   "nav.home": "ana sayfa.",
   "nav.studio": "stüdyo.",
   "nav.arbeiten": "işler.",
+  "nav.shop": "mağaza.",
   "nav.contact": "iletişim.",
   "aria.home": "nokta, ana sayfa",
   "aria.skip": "İçeriğe geç",

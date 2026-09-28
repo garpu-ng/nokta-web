@@ -57,8 +57,15 @@ function badFields(f: typeof EMPTY) {
   };
 }
 
-export default function InquiryForm({ copy }: { copy: Copy }) {
-  const [kind, setKind] = useState(copy.kinds[0].id);
+export default function InquiryForm({
+  copy,
+  initialKind,
+}: {
+  copy: Copy;
+  /** the chip to start on (from ?kind= on /kontakt); defaults to the first */
+  initialKind?: string;
+}) {
+  const [kind, setKind] = useState(initialKind ?? copy.kinds[0].id);
   const [fields, setFields] = useState(EMPTY);
   const [state, setState] = useState<State>("idle");
   const [trouble, setTrouble] = useState<Trouble>(null);
@@ -77,7 +84,7 @@ export default function InquiryForm({ copy }: { copy: Copy }) {
   }, [state]);
 
   function reset() {
-    setKind(copy.kinds[0].id);
+    setKind(initialKind ?? copy.kinds[0].id);
     setFields(EMPTY);
     setState("idle");
     setTrouble(null);
