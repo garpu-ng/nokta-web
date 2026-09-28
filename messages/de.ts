@@ -201,7 +201,6 @@ const de: Record<string, string> = {
   "shop.intro": "Liniendrucke bekannter Bauwerke. Jede Linie aus einer CAD-Zeichnung vektorisiert, in A1 gedruckt und gerahmt.",
   "shop.listLabel": "Liniendrucke",
   "shop.back": "Alle Drucke",
-  "shop.mockupAlt": "gerahmt als A1-Druck an einer Wand",
 
   // ── Projekte (Renderings) ─────────────────────────────────────────
   "projects.client.private": "Privatkunde",

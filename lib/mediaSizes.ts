@@ -70,14 +70,6 @@ const SIZES: Record<string, MediaSize> = {
   "/line/eiffel.png": { width: 1080, height: 1618 },
   "/line/empire-state.png": { width: 1080, height: 1618 },
   "/line/osaka.png": { width: 1080, height: 1618 },
-  "/shop/chrysler-wand.jpg": { width: 1080, height: 1350 },
-  "/shop/chrysler-detail.jpg": { width: 1620, height: 1080 },
-  "/shop/eiffel-wand.jpg": { width: 1080, height: 1350 },
-  "/shop/eiffel-detail.jpg": { width: 1620, height: 1080 },
-  "/shop/empire-state-wand.jpg": { width: 1080, height: 1350 },
-  "/shop/empire-state-detail.jpg": { width: 1620, height: 1080 },
-  "/shop/osaka-wand.jpg": { width: 1080, height: 1350 },
-  "/shop/osaka-detail.jpg": { width: 1620, height: 1080 },
   // The three studio portraits on /studio. Drawn, not photographed: each is a
   // line figure on ink, in that person's colour.
   //

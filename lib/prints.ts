@@ -20,10 +20,6 @@ export type Print = {
   price: number;
   /** display artwork (png, white paper) under /public */
   image: string;
-  /** product photos: the framed A1 print on a wall. [0] is the portrait room
-      shot the shop card leads with, [1] the angled close-up. Rendered in
-      Blender from `image` (same room, same light for every print). */
-  mockups: string[];
   /**
    * Stripe Payment Link for this print's checkout.
    *
@@ -50,7 +46,6 @@ export const PRINTS: Print[] = [
     coordinates: "48° 51 30 N · 2° 17 40 O",
     price: 100,
     image: "/line/eiffel.png",
-    mockups: ["/shop/eiffel-wand.jpg", "/shop/eiffel-detail.jpg"],
     paymentLink: undefined, // paste the Stripe Payment Link to go live
   },
   {
@@ -62,7 +57,6 @@ export const PRINTS: Print[] = [
     coordinates: "40° 45 5.78 N · 73° 58 31.27 W",
     price: 100,
     image: "/line/chrysler.png",
-    mockups: ["/shop/chrysler-wand.jpg", "/shop/chrysler-detail.jpg"],
     paymentLink: undefined, // paste the Stripe Payment Link to go live
   },
   {
@@ -74,7 +68,6 @@ export const PRINTS: Print[] = [
     coordinates: "40° 44 54 N · 73° 59 09 W",
     price: 100,
     image: "/line/empire-state.png",
-    mockups: ["/shop/empire-state-wand.jpg", "/shop/empire-state-detail.jpg"],
     paymentLink: undefined, // paste the Stripe Payment Link to go live
   },
   {
@@ -86,7 +79,6 @@ export const PRINTS: Print[] = [
     coordinates: "34° 41 14 N · 135° 31 33 O",
     price: 100,
     image: "/line/osaka.png",
-    mockups: ["/shop/osaka-wand.jpg", "/shop/osaka-detail.jpg"],
     paymentLink: undefined, // paste the Stripe Payment Link to go live
   },
 ];

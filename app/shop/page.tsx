@@ -11,9 +11,7 @@ import { PRINTS } from "@/lib/prints";
 import { socialMetadata } from "@/lib/socialMeta";
 import styles from "./page.module.css";
 
-/* The shop: the CAD line prints, on their own. Each card leads with the print
-   framed on a wall — the thing a buyer is picturing — and the flat sheet waits
-   on the print's own page. They used to hang on the wall
+/* The shop: the CAD line prints, on their own. They used to hang on the wall
    at /arbeiten as a fifth material, which made a product read as studio work
    and left no room for CAD as a service. Here they are what they are — four
    framed sheets with a price — and /arbeiten keeps "cad" free for floor plans,
@@ -50,8 +48,7 @@ export default async function ShopPage() {
 
       <ul className={styles.grid} aria-label={t("shop.listLabel")}>
         {PRINTS.map((print, i) => {
-          const photo = print.mockups[0];
-          const { width, height } = getMediaSize(photo);
+          const { width, height } = getMediaSize(print.image);
           return (
             <li key={print.slug}>
               <Link href={`/shop/${print.slug}`} className={styles.card}>
@@ -60,8 +57,8 @@ export default async function ShopPage() {
                   style={{ "--nk-ratio": `${width} / ${height}` } as CSSProperties}
                 >
                   <Image
-                    src={photo}
-                    alt={`${print.title}, ${t("shop.mockupAlt")}`}
+                    src={print.image}
+                    alt={`${print.title}, ${t("line.altSuffix")}`}
                     width={width}
                     height={height}
                     sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1199px) 45vw, 300px"

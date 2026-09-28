@@ -191,7 +191,6 @@ const en: Record<string, string> = {
   "shop.intro": "Line prints of well-known buildings. Every line vectorised from a CAD drawing, printed in A1 and framed.",
   "shop.listLabel": "Line prints",
   "shop.back": "All prints",
-  "shop.mockupAlt": "framed as an A1 print on a wall",
 
   // ── Projects (renderings) ─────────────────────────────────────────
   "projects.client.private": "Private client",
