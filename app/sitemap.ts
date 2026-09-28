@@ -1,7 +1,9 @@
 import type { MetadataRoute } from "next";
+import { PRINTS } from "@/lib/prints";
 import { WORKS } from "@/lib/works";
 
-// One URL per page that exists: the wall, every work on it, the studio pages
+// One URL per page that exists: the wall, every work on it, the shop and its
+// prints, the studio pages
 // and the legal pages. The legacy paths 308-redirect and stay out — including
 // /prozess and /prozess/3d, which both now land on /studio.
 //
@@ -16,6 +18,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/` },
     { url: `${BASE}/arbeiten` },
     ...WORKS.map((w) => ({ url: `${BASE}/arbeiten/${w.slug}` })),
+    { url: `${BASE}/shop` },
+    ...PRINTS.map((p) => ({ url: `${BASE}/shop/${p.slug}` })),
     { url: `${BASE}/studio` },
     { url: `${BASE}/kontakt` },
     { url: `${BASE}/impressum` },

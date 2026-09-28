@@ -27,8 +27,8 @@ import styles from "./page.module.css";
    before this change may keep landing on the homepage until they clear it —
    the redirect is gone from the code, but not from their browser. */
 
-/* The three materials the wall is made of, handed to the plate in the
-   masthead. Module scope so it is given one array reference for the life of
+/* The three door colours, handed to the plate in the masthead (the CAD red
+   stays: it is the studio's colour as much as the material's). Module scope so it is given one array reference for the life of
    the page rather than a fresh one on each render. */
 const DOOR_COLOURS = [KIND_FIELD.rendering, KIND_FIELD.editorial, KIND_FIELD.cad];
 
@@ -65,7 +65,12 @@ export default async function ArbeitenPage({
 
   // The material the wall opens on. kinds[0] is whatever leads the curated
   // order in lib/works.ts — no second list to keep in step with the wall.
-  const initialKind = isWorkKind(requested) ? requested : kinds[0].kind;
+  // A kind with nothing on the wall (?kind=cad, since the prints moved to the
+  // shop) falls back the same way an unknown one does.
+  const initialKind =
+    isWorkKind(requested) && kinds.some((k) => k.kind === requested)
+      ? requested
+      : kinds[0].kind;
 
   const title = `${t("home.wall.label")}.`;
 

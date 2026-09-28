@@ -10,7 +10,9 @@ const ja: Record<string, string> = {
   "meta.kontakt.title": "お問い合わせ · nokta",
   "meta.kontakt.desc": "デュッセルドルフのnoktaへのお問い合わせ：建築ビジュアライゼーション、NRW州のデベロッパー向けビジュアライゼーション、年次報告書と書籍の組版、印刷、CAD図面。",
   "meta.arbeiten.title": "仕事 · nokta",
-  "meta.arbeiten.desc": "デュッセルドルフのnoktaの仕事：建築ビジュアライゼーション、CADプリント、エディトリアルと組版、マニュアル。素材ごとに並び、それぞれに専用ページがあります。",
+  "meta.arbeiten.desc": "デュッセルドルフのnoktaの仕事：建築ビジュアライゼーション、エディトリアルと組版、マニュアル。素材ごとに並び、それぞれに専用ページがあります。",
+  "meta.shop.title": "ショップ · nokta",
+  "meta.shop.desc": "noktaのラインプリント：名建築をベクター化したCAD図面として、A1で印刷し額装。",
 
   // ── ホーム ────────────────────────────────────────────────────────
   "home.wall.label": "作品",
@@ -183,6 +185,12 @@ const ja: Record<string, string> = {
   "projects.imageAlt": "画像 {n}",
   "line.metaDescSuffix": "ベクター化したCADラインプリント、A1印刷・額装。",
 
+  // ── Shop (/shop) ──
+  "shop.heading": "ショップ",
+  "shop.intro": "名建築のラインプリント。すべての線をCAD図面からベクター化し、A1で印刷して額装しています。",
+  "shop.listLabel": "ラインプリント",
+  "shop.back": "すべてのプリント",
+
   // ── プロジェクト（レンダリング） ──────────────────────────────────
   "projects.client.private": "個人のお客様",
   "projects.desc.sanktgores": "ドイツの淡色レンガの住宅の外観・内観ビジュアライゼーション。",
@@ -227,6 +235,7 @@ const ja: Record<string, string> = {
   "footer.col.social": "ソーシャル",
   "footer.link.arbeiten": "作品",
   "footer.link.studio": "スタジオ",
+  "footer.link.shop": "ショップ",
   "footer.link.kontakt": "お問い合わせ",
   "footer.link.impressum": "会社概要",
   "footer.link.datenschutz": "プライバシー",

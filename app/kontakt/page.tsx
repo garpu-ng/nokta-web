@@ -33,8 +33,21 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function KontaktPage() {
+/** The kinds the form offers, in the order the route validates them and
+    kontakt.form.kind.0–3 labels them. */
+const KINDS = ["visualisierung", "editorial", "druck", "cad"];
+
+export default async function KontaktPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
   const t = await getT();
+  // ?kind= preselects a chip (the home page's CAD door lands here with "cad").
+  // Anything else leaves the form on its first kind.
+  const requested = (await searchParams).kind;
+  const initialKind =
+    typeof requested === "string" && KINDS.includes(requested) ? requested : undefined;
   const title = `${t("kontakt.heading")}.`;
 
   return (
@@ -49,13 +62,14 @@ export default async function KontaktPage() {
 
       <div className={styles.body}>
         <InquiryForm
+          initialKind={initialKind}
           copy={{
             step1: t("kontakt.form.step1"),
             step2: t("kontakt.form.step2"),
             step3: t("kontakt.form.step3"),
             // The id is what the route validates; the label is what the
             // reader reads. Order matches kontakt.form.kind.0–3.
-            kinds: ["visualisierung", "editorial", "druck", "cad"].map((id, i) => ({
+            kinds: KINDS.map((id, i) => ({
               id,
               label: t(`kontakt.form.kind.${i}`),
             })),

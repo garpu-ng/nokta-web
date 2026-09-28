@@ -16,7 +16,9 @@ const de: Record<string, string> = {
   "meta.kontakt.title": "Kontakt · nokta",
   "meta.kontakt.desc": "Anfrage an nokta in Düsseldorf: Architekturvisualisierung, Visualisierung für Bauträger in NRW, Satz von Jahresberichten und Büchern, Druck und CAD-Pläne.",
   "meta.arbeiten.title": "Arbeiten · nokta",
-  "meta.arbeiten.desc": "Arbeiten von nokta aus Düsseldorf: Architekturvisualisierungen, CAD-Drucke, Editorial und Satz, Handbücher. Nach Material sortiert, jede Arbeit mit eigener Seite.",
+  "meta.arbeiten.desc": "Arbeiten von nokta aus Düsseldorf: Architekturvisualisierungen, Editorial und Satz, Handbücher. Nach Material sortiert, jede Arbeit mit eigener Seite.",
+  "meta.shop.title": "Shop · nokta",
+  "meta.shop.desc": "Liniendrucke von nokta: bekannte Bauwerke als vektorisierte CAD-Zeichnung, in A1 gedruckt und gerahmt.",
 
   // ── Home ──────────────────────────────────────────────────────────
   // wall.label/aria head the one wall, which hangs at /arbeiten since
@@ -194,6 +196,12 @@ const de: Record<string, string> = {
   "projects.imageAlt": "Bild {n}",
   "line.metaDescSuffix": "Vektorisierter CAD-Liniendruck, gedruckt in A1 und gerahmt.",
 
+  // ── Shop (/shop) ──
+  "shop.heading": "Shop",
+  "shop.intro": "Liniendrucke bekannter Bauwerke. Jede Linie aus einer CAD-Zeichnung vektorisiert, in A1 gedruckt und gerahmt.",
+  "shop.listLabel": "Liniendrucke",
+  "shop.back": "Alle Drucke",
+
   // ── Projekte (Renderings) ─────────────────────────────────────────
   "projects.client.private": "Privatkunde",
   "projects.desc.sanktgores": "Außen- und Innenvisualisierung eines Wohnhauses aus hellem Ziegel in NRW.",
@@ -238,6 +246,7 @@ const de: Record<string, string> = {
   "footer.col.social": "Social",
   "footer.link.arbeiten": "arbeiten",
   "footer.link.studio": "studio",
+  "footer.link.shop": "shop",
   "footer.link.kontakt": "kontakt",
   "footer.link.impressum": "impressum",
   "footer.link.datenschutz": "datenschutz",

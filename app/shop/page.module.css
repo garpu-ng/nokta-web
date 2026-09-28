@@ -1,0 +1,104 @@
+/* /shop — the four line prints as a row of paper sheets. The page is ink, so
+   each sheet stands on its own paper mount, the way the passport shows it. */
+
+.page {
+  padding-bottom: 88px;
+}
+
+.head {
+  padding: 40px var(--nk-gutter) 8px;
+}
+
+.intro {
+  margin: 0;
+  max-width: 58ch;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--paper);
+  opacity: 0.85;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(20px, 3vw, 40px);
+  margin: 0;
+  padding: 40px var(--nk-gutter) 0;
+  list-style: none;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  color: var(--paper);
+  text-decoration: none;
+}
+.card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 6px;
+}
+
+.sheet {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(14px, 2vw, 24px);
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.card:hover .sheet {
+  transform: translateY(-4px);
+}
+
+.img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: var(--nk-ratio);
+  box-shadow: 0 6px 22px rgba(26, 26, 24, 0.16);
+}
+
+.caption {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 12px;
+  border-top: 1px solid var(--nk-hair);
+}
+
+.title {
+  font-family: var(--display-font);
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.meta {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+@media (max-width: 1199px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 599px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheet {
+    transition: none;
+  }
+  .card:hover .sheet {
+    transform: none;
+  }
+}

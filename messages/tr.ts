@@ -10,7 +10,9 @@ const tr: Record<string, string> = {
   "meta.kontakt.title": "İletişim · nokta",
   "meta.kontakt.desc": "Düsseldorf’taki nokta’ya talep: mimari görselleştirme, NRW’deki inşaat şirketleri için görselleştirme, faaliyet raporu ve kitap dizgisi, baskı ve CAD planları.",
   "meta.arbeiten.title": "İşler · nokta",
-  "meta.arbeiten.desc": "nokta’nın işleri, Düsseldorf: mimari görselleştirmeler, CAD baskıları, editoryal ve dizgi, el kitapları. Malzemeye göre sıralı, her iş kendi sayfasında.",
+  "meta.arbeiten.desc": "nokta’nın işleri, Düsseldorf: mimari görselleştirmeler, editoryal ve dizgi, el kitapları. Malzemeye göre sıralı, her iş kendi sayfasında.",
+  "meta.shop.title": "Mağaza · nokta",
+  "meta.shop.desc": "nokta’dan çizgi baskılar: tanınmış yapılar vektörel CAD çizimi olarak, A1 basılı ve çerçeveli.",
 
   // ── Ana sayfa ─────────────────────────────────────────────────────
   "home.wall.label": "işler",
@@ -176,6 +178,12 @@ const tr: Record<string, string> = {
   "projects.imageAlt": "görsel {n}",
   "line.metaDescSuffix": "Vektörleştirilmiş CAD çizgi baskısı, A1 basılmış ve çerçeveli.",
 
+  // ── Shop (/shop) ──
+  "shop.heading": "Mağaza",
+  "shop.intro": "Tanınmış yapıların çizgi baskıları. Her çizgi bir CAD çiziminden vektörleştirildi, A1 basıldı ve çerçevelendi.",
+  "shop.listLabel": "Çizgi baskılar",
+  "shop.back": "Tüm baskılar",
+
   // ── Projeler (render’lar) ─────────────────────────────────────────
   "projects.client.private": "Bireysel müşteri",
   "projects.desc.sanktgores": "Almanya’da açık renk tuğlalı bir konutun dış ve iç görselleştirmesi.",
@@ -217,6 +225,7 @@ const tr: Record<string, string> = {
   "footer.col.social": "Sosyal",
   "footer.link.arbeiten": "işler",
   "footer.link.studio": "stüdyo",
+  "footer.link.shop": "mağaza",
   "footer.link.kontakt": "iletişim",
   "footer.link.impressum": "künye",
   "footer.link.datenschutz": "gizlilik",

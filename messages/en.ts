@@ -15,7 +15,9 @@ const en: Record<string, string> = {
   "meta.kontakt.title": "Contact · nokta",
   "meta.kontakt.desc": "Inquiries to nokta in Düsseldorf: architectural visualisation, visualisation for property developers in NRW, typesetting of annual reports and books, print and CAD plans.",
   "meta.arbeiten.title": "Work · nokta",
-  "meta.arbeiten.desc": "Work by nokta, Düsseldorf: architectural visualisations, CAD prints, editorial and typesetting, manuals. Sorted by material, every piece on its own page.",
+  "meta.arbeiten.desc": "Work by nokta, Düsseldorf: architectural visualisations, editorial and typesetting, manuals. Sorted by material, every piece on its own page.",
+  "meta.shop.title": "Shop · nokta",
+  "meta.shop.desc": "Line prints by nokta: well-known buildings as vectorised CAD drawings, printed in A1 and framed.",
 
   // ── Home ──────────────────────────────────────────────────────────
   "home.wall.label": "Work",
@@ -184,6 +186,12 @@ const en: Record<string, string> = {
   "projects.imageAlt": "image {n}",
   "line.metaDescSuffix": "Vectorised CAD line print, printed in A1 and framed.",
 
+  // ── Shop (/shop) ──
+  "shop.heading": "Shop",
+  "shop.intro": "Line prints of well-known buildings. Every line vectorised from a CAD drawing, printed in A1 and framed.",
+  "shop.listLabel": "Line prints",
+  "shop.back": "All prints",
+
   // ── Projects (renderings) ─────────────────────────────────────────
   "projects.client.private": "Private client",
   "projects.desc.sanktgores": "Exterior and interior visualisation of a pale-brick house in Germany.",
@@ -228,6 +236,7 @@ const en: Record<string, string> = {
   "footer.col.social": "Social",
   "footer.link.arbeiten": "work",
   "footer.link.studio": "studio",
+  "footer.link.shop": "shop",
   "footer.link.kontakt": "contact",
   "footer.link.impressum": "imprint",
   "footer.link.datenschutz": "privacy",
