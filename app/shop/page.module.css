@@ -1,5 +1,4 @@
-/* /shop — the four line prints as a row of paper sheets. The page is ink, so
-   each sheet stands on its own paper mount, the way the passport shows it. */
+/* /shop — the four line prints, each shown framed on a wall. */
 
 .page {
   padding-bottom: 88px;
@@ -40,16 +39,15 @@
 }
 
 .sheet {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: clamp(14px, 2vw, 24px);
-  background: var(--paper);
-  border: 1px solid var(--ink);
-  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--nk-hair);
 }
-.card:hover .sheet {
-  transform: translateY(-4px);
+.img {
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.card:hover .img {
+  transform: scale(1.03);
 }
 
 .img {
@@ -57,7 +55,6 @@
   width: 100%;
   height: auto;
   aspect-ratio: var(--nk-ratio);
-  box-shadow: 0 6px 22px rgba(26, 26, 24, 0.16);
 }
 
 .caption {
@@ -95,10 +92,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .sheet {
+  .img {
     transition: none;
   }
-  .card:hover .sheet {
+  .card:hover .img {
     transform: none;
   }
 }

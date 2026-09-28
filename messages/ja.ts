@@ -190,6 +190,7 @@ const ja: Record<string, string> = {
   "shop.intro": "名建築のラインプリント。すべての線をCAD図面からベクター化し、A1で印刷して額装しています。",
   "shop.listLabel": "ラインプリント",
   "shop.back": "すべてのプリント",
+  "shop.mockupAlt": "壁に掛けたA1額装プリント",
 
   // ── プロジェクト（レンダリング） ──────────────────────────────────
   "projects.client.private": "個人のお客様",
@@ -251,6 +252,7 @@ const ja: Record<string, string> = {
   "nav.home": "ホーム",
   "nav.studio": "スタジオ",
   "nav.arbeiten": "作品",
+  "nav.shop": "ショップ",
   "nav.contact": "お問い合わせ",
   "aria.home": "nokta、ホーム",
   "aria.skip": "本文へスキップ",

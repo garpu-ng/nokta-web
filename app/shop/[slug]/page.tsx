@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     "line.metaDescSuffix",
   )} ${print.price} €.`;
   const path = `/shop/${print.slug}`;
-  const { width, height } = getMediaSize(print.image);
+  const { width, height } = getMediaSize(print.mockups[0]);
   const social = socialMetadata({ title, description, locale, path });
 
   return {
@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ...social,
     openGraph: {
       ...social.openGraph,
-      images: [{ url: print.image, width, height, alt: print.title }],
+      images: [{ url: print.mockups[0], width, height, alt: print.title }],
     },
   };
 }

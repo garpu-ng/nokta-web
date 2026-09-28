@@ -183,6 +183,7 @@ const tr: Record<string, string> = {
   "shop.intro": "Tanınmış yapıların çizgi baskıları. Her çizgi bir CAD çiziminden vektörleştirildi, A1 basıldı ve çerçevelendi.",
   "shop.listLabel": "Çizgi baskılar",
   "shop.back": "Tüm baskılar",
+  "shop.mockupAlt": "duvarda çerçeveli A1 baskı olarak",
 
   // ── Projeler (render’lar) ─────────────────────────────────────────
   "projects.client.private": "Bireysel müşteri",
@@ -241,6 +242,7 @@ const tr: Record<string, string> = {
   "nav.home": "ana sayfa.",
   "nav.studio": "stüdyo.",
   "nav.arbeiten": "işler.",
+  "nav.shop": "mağaza.",
   "nav.contact": "iletişim.",
   "aria.home": "nokta, ana sayfa",
   "aria.skip": "İçeriğe geç",

@@ -90,6 +90,25 @@ export default function PrintPassport({ print, t }: { print: Print; t: Translate
           </div>
         </div>
       </div>
+
+      {/* The print in a room: how an A1 sheet sits on a wall, which the flat
+          sheet above cannot say. */}
+      <div className={styles.photos}>
+        {print.mockups.map((src) => {
+          const size = getMediaSize(src);
+          return (
+            <Image
+              key={src}
+              src={src}
+              alt={`${print.title}, ${t("shop.mockupAlt")}`}
+              width={size.width}
+              height={size.height}
+              sizes="(max-width: 1100px) 100vw, 1100px"
+              className={styles.photo}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }
