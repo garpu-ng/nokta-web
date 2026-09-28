@@ -53,12 +53,6 @@ const de: Record<string, string> = {
   // annotated "Eigenprojekt" and stands beside the commissions, unexplained.
   "work.own": "Eigenprojekt",
   "work.back": "Alle Arbeiten",
-  // Zählt, was gerade auf der Wand hängt — die Wand steht immer auf einem
-  // Material, es gibt kein "Alle". Auf der Startseite zählt dieselbe Zeile
-  // das ganze Werk (13) und führt zur Wand. Drei der fünf Materialien halten
-  // genau eine Arbeit, deshalb die zweite Zeile.
-  "work.count": "{count} arbeiten",
-  "work.count.one": "{count} arbeit",
   "work.kind.rendering": "Rendering",
   "work.kind.cad": "CAD-Druck",
   "work.kind.editorial": "Editorial",
@@ -178,7 +172,7 @@ const de: Record<string, string> = {
   "kontakt.form.error.fields": "Name, E-Mail und Nachricht fehlen noch — oder die Adresse hat einen Tippfehler.",
   "kontakt.form.error.busy": "Es kamen gerade sehr viele Anfragen von hier. Bitte in einer Stunde noch einmal.",
   "kontakt.form.nojs": "Das Formular braucht JavaScript. Schreib uns direkt: hallo@nokta-studio.de",
-  "kontakt.addr.region": "Nordrhein-Westfalen, Deutschland",
+  "kontakt.addr.region": "Düsseldorf, Deutschland",
   "kontakt.mailAria": "E-Mail schreiben",
 
   // ── Liniendrucke — Passport, Spezifikation, Kauf (/arbeiten/[slug]) ─
@@ -202,12 +196,34 @@ const de: Record<string, string> = {
 
   // ── Projekte (Renderings) ─────────────────────────────────────────
   "projects.client.private": "Privatkunde",
-  "projects.desc.sanktgores": "Fotorealistische Außenvisualisierung eines modernen Einfamilienhauses in NRW.",
-  "projects.desc.teahouse": "Visualisierung eines japanisch inspirierten Teehauses im Garten.",
-  "projects.desc.beatbuilding": "Visualisierung eines urbanen Kulturgebäudes.",
-  "projects.desc.binome": "Innen- und Außenvisualisierung eines minimalistischen Wohnprojekts.",
-  "projects.desc.ipehouse": "Visualisierung eines modernen Hauses mit Ipe-Holzfassade.",
-  "projects.desc.velostation": "Architekturvisualisierung einer modernen Fahrradstation im urbanen Raum.",
+  "projects.desc.sanktgores": "Außen- und Innenvisualisierung eines Wohnhauses aus hellem Ziegel in NRW.",
+  "projects.desc.teahouse": "Innenvisualisierung eines Teesalons in der Stadt, am Abend.",
+  "projects.desc.beatbuilding": "Visualisierung eines Wohn- und Geschäftshauses mit Sichtbetonfassade.",
+  "projects.desc.binome": "Außen- und Innenvisualisierung eines Wohnhauses aus rotem Ziegel.",
+  "projects.desc.ipehouse": "Visualisierung eines eingeschossigen Hauses mit Holzläden und weitem Dachüberstand.",
+  "projects.desc.velostation": "Innenvisualisierung einer Fahrradstation in Holzbauweise.",
+
+  // Projektseite: ein Absatz und zwei Angaben über dem Bildstapel.
+  "projects.label.service": "Leistung",
+  "projects.label.scope": "Umfang",
+  "projects.text.sanktgores": "Straßenseite, Giebel und Fassadendetails im weichen Tageslicht, dazu ein Raum unter dem Dach. Im Mittelpunkt stehen der helle Ziegel, das Blechdach und die Holzfenster mit Rundbögen.",
+  "projects.service.sanktgores": "Außen- und Innenvisualisierung",
+  "projects.scope.sanktgores": "6 Bilder · 5 außen, 1 innen",
+  "projects.text.teahouse": "Eine lange Teetafel mit Sitzkissen, helles Holz und indirektes Licht. Durch die Glasfront sieht man die Stadt bei Nacht, eine Ansicht zeigt den beleuchteten Raum von der Straße aus.",
+  "projects.service.teahouse": "Innenvisualisierung, Abendlicht",
+  "projects.scope.teahouse": "7 Bilder · 6 innen, 1 außen",
+  "projects.text.beatbuilding": "Drei Außenansichten bei Tageslicht, von der Straßenfront bis zu den Balkonen im Detail. Dazu ein Innenraum hinter der zweigeschossigen Glasfront.",
+  "projects.service.beatbuilding": "Außen- und Innenvisualisierung",
+  "projects.scope.beatbuilding": "4 Bilder · 3 außen, 1 innen",
+  "projects.text.binome": "Fassade, Außentreppe und Laubengang in Ziegel und rot gestrichenem Stahl. Innen: Wohnraum und Küche einer Wohnung.",
+  "projects.service.binome": "Außen- und Innenvisualisierung",
+  "projects.scope.binome": "6 Bilder · 3 außen, 3 innen",
+  "projects.text.ipehouse": "Zwei Außenansichten im Garten bei Tageslicht, dazu zwei Innenräume: Schlafzimmer und Arbeitsplatz mit Einbauschrank.",
+  "projects.service.ipehouse": "Außen- und Innenvisualisierung",
+  "projects.scope.ipehouse": "4 Bilder · 2 außen, 2 innen",
+  "projects.text.velostation": "Die Abstellhalle mit doppelstöckigen Radständern und die Werkstatt mit Galerie, beide in Holz und Tageslicht.",
+  "projects.service.velostation": "Innenvisualisierung",
+  "projects.scope.velostation": "2 Bilder · innen",
 
   // ── Footer ────────────────────────────────────────────────────────
   // tag1 stacks over studio.motto in the colophon brand block

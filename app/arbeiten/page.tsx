@@ -90,10 +90,6 @@ export default async function ArbeitenPage({
         kinds={kinds}
         listLabel={t("home.wall.aria")}
         initialKind={initialKind}
-        countTemplate={t("work.count")}
-        countOneTemplate={t("work.count.one")}
-        headClassName={styles.head}
-        countClassName={styles.count}
         wallClassName={styles.wall}
       />
     </main>

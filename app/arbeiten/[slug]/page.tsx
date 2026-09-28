@@ -123,6 +123,32 @@ function imageStack(project: Project, title: string, t: Translate) {
   );
 }
 
+/** Rendering: what the images show and what was delivered, in one paragraph
+    and two facts, before the stack itself. The desc line doubles as the page's
+    meta description, so it is the sentence a shared link previews. */
+function projectIntro(slug: string, t: Translate) {
+  return (
+    <div className={styles.body}>
+      <div className={styles.intro}>
+        <div>
+          <p className={styles.introLead}>{t(`projects.desc.${slug}`)}</p>
+          <p className={styles.lead}>{t(`projects.text.${slug}`)}</p>
+        </div>
+        <dl className={styles.facts}>
+          <div>
+            <dt>{t("projects.label.service")}</dt>
+            <dd>{t(`projects.service.${slug}`)}</dd>
+          </div>
+          <div>
+            <dt>{t("projects.label.scope")}</dt>
+            <dd>{t(`projects.scope.${slug}`)}</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  );
+}
+
 /** CAD print: the sheet, its passport, its price and its checkout. This is the
     only place in the studio where a price is stated. */
 function printPassport(print: Print, t: Translate) {
@@ -246,7 +272,12 @@ function pieceBody(slug: string, t: Translate) {
 function workBody(work: Work, t: Translate) {
   switch (work.source.type) {
     case "project":
-      return imageStack(work.source.project, work.title, t);
+      return (
+        <>
+          {projectIntro(work.slug, t)}
+          {imageStack(work.source.project, work.title, t)}
+        </>
+      );
     case "print":
       return printPassport(work.source.print, t);
     case "piece":

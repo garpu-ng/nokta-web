@@ -1,45 +1,13 @@
 /* The wall's own page. The h1 sits in the plate at the top of the sheet
-   (components/nokta/PlateHead), so what is left here is the block under it:
-   the count on the right, one hairline underneath — and then the wall
-   itself is handed the page unchanged. */
+   (components/nokta/PlateHead), so what is left here is the wall itself,
+   handed the page unchanged. No count: the wall shows one material at a time,
+   and a figure only made the home page and this one disagree. */
 
 .page {
   padding-bottom: 88px;
-}
-
-.head {
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 48px;
-  padding: 56px var(--nk-gutter);
-  border-bottom: 1px solid var(--nk-hair);
 }
 
 .wall {
   padding: 40px var(--nk-gutter) 0;
 }
 
-.count {
-  margin: 0 0 8px;
-  flex-shrink: 0;
-  font-size: 11px;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  opacity: 0.6;
-}
-
-@media (max-width: 899px) {
-  .head {
-    flex-direction: column;
-    /* stretch, not flex-start: in a column flex container flex-start sizes a
-       child to its max-content, so a child would lay out on one line at its
-       natural width and run off the sheet instead of wrapping. */
-    align-items: stretch;
-    gap: 20px;
-    padding-block: 40px 32px;
-  }
-  .count {
-    margin-bottom: 0;
-  }
-}

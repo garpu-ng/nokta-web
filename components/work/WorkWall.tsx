@@ -37,10 +37,6 @@ export default function WorkWall({
   kinds,
   listLabel,
   initialKind,
-  countTemplate,
-  countOneTemplate,
-  headClassName,
-  countClassName,
   wallClassName,
 }: {
   items: WallItem[];
@@ -49,17 +45,8 @@ export default function WorkWall({
   listLabel: string;
   /** the material the wall opens on — the page resolves it from ?kind= */
   initialKind: WorkKind;
-  /** the count line's templates, each carrying a literal {count}. Two of them,
-      because three of the five materials hold exactly one work — "1 arbeiten"
-      is a bug the old wall never showed, since it only ever counted the whole
-      body of work. German and English take the singular; Turkish and Japanese do
-      not inflect after a numeral and simply repeat the plural string. */
-  countTemplate: string;
-  countOneTemplate: string;
-  /** the page's own class names — the wall renders the header block so the
-      count can follow the filter, but the page keeps owning how it looks */
-  headClassName: string;
-  countClassName: string;
+  /** the page's own class name for the wall — the page keeps owning how it
+      looks */
   wallClassName: string;
 }) {
   const [active, setActive] = useState<WorkKind>(initialKind);
@@ -72,12 +59,6 @@ export default function WorkWall({
      decides the FIRST paint, and pressing a chip later must not re-prioritise
      images the browser has already fetched. */
   const leadSlug = items.find((item) => item.kind === initialKind)?.slug;
-
-  const shown = items.filter((i) => i.kind === active).length;
-  const count = (shown === 1 ? countOneTemplate : countTemplate).replace(
-    "{count}",
-    String(shown),
-  );
 
   /* Where each card sits on the sheet the reader is looking at, which is not
      where it sits in the running order: the fourth print is the twelfth item
@@ -107,15 +88,6 @@ export default function WorkWall({
 
   return (
     <>
-      <div className={headClassName}>
-        {/* aria-live: the filter is the one control on this page that changes
-            the page rather than navigating, and the count is the only thing
-            that reports what it did. */}
-        <p className={countClassName} aria-live="polite">
-          {count}
-        </p>
-      </div>
-
       <div className={wallClassName}>
         <div className={styles.filter}>
           {kinds.map(({ kind, label }) => (

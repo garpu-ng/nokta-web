@@ -13,7 +13,7 @@ import { KIND_FIELD } from "@/lib/colors";
 import { getLocale, getT, type Translate } from "@/lib/i18n";
 import { getMediaSize } from "@/lib/mediaSizes";
 import { socialMetadata } from "@/lib/socialMeta";
-import { WORKS, getWork, type Work } from "@/lib/works";
+import { getWork, type Work } from "@/lib/works";
 import styles from "./page.module.css";
 
 /* The homepage, as a numbered register.
@@ -330,10 +330,9 @@ export default async function HomePage() {
         </div>
 
         <Link href="/arbeiten" className={styles.allWorks}>
-          {/* The way on. It used to promise "alle 13 arbeiten", which the wall
-              no longer answers with: /arbeiten stands on one material at a
-              time. The figure still says how much work is over there. */}
-          <span>{t("work.count").replace("{count}", String(WORKS.length))}</span>
+          {/* The way on, without a figure: the wall opens on one material, so any
+              count here named a different set than the one you land on. */}
+          <span>{t("work.back")}</span>
           <span aria-hidden="true">↗</span>
         </Link>
       </section>
