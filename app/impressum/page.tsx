@@ -15,7 +15,7 @@ export default function ImpressumPage() {
       <p>Angaben gemäß § 5 DDG und § 18 Abs. 2 MStV</p>
 
       <p>
-        Kaan Özden — nokta studio
+        Kaan Özden, nokta studio
         <br />
         Messerstraße 31
         <br />

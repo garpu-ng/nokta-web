@@ -1,7 +1,7 @@
 /* /arbeiten/[slug] — the shared detail frame. The print passport moved to the
    shop (components/shop/PrintPassport). The renderings' image stack keeps
    using the global .wa-project-images vocabulary; the pieces bring their own
-   sections (CaseStudy, ArtPlate, Leuchtturm), all of them already paper-backed
+   sections (CaseStudy, ArtPlate), all of them already paper-backed
    and set in this same 1100px measure.
 
    Since Kolonnade the page around them is ink, so everything set directly on

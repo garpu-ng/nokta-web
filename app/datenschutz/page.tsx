@@ -14,7 +14,7 @@ export default function DatenschutzPage() {
       <p>
         <strong>1. Verantwortlicher</strong>
         <br />
-        Kaan Özden — nokta studio, Messerstraße 31, 42657 Solingen,
+        Kaan Özden, nokta studio, Messerstraße 31, 42657 Solingen,
         Deutschland. Kontakt:{" "}
         <a href="mailto:hallo@nokta-studio.de">hallo@nokta-studio.de</a>.
       </p>
@@ -41,8 +41,8 @@ export default function DatenschutzPage() {
         <strong>4. Anfrageformular</strong>
         <br />
         Auf der Kontaktseite können Sie uns über ein Formular schreiben. Wir
-        verarbeiten dabei die Angaben, die Sie selbst eintragen — Art der
-        Anfrage, Name, E-Mail-Adresse und Ihre Nachricht — ausschließlich, um
+        verarbeiten dabei die Angaben, die Sie selbst eintragen (Art der
+        Anfrage, Name, E-Mail-Adresse und Ihre Nachricht), ausschließlich, um
         die Anfrage zu beantworten (Art. 6 Abs. 1 lit. b/f DSGVO). Die Angaben
         werden per E-Mail an unser Postfach zugestellt und nicht in einer
         Datenbank gespeichert. Zur Abwehr automatisierter Einsendungen wird die
