@@ -70,11 +70,13 @@ const FEATURED: { slug: string; plate?: string }[] = [
   { slug: "beatbuilding" },
 ];
 
-/* Where a door leads when it is not the wall. CAD is offered as a service
+/* Where a door leads when it is not the wall. Visualisation opens the page
+   that states the service in words (and links on to every rendering). CAD is offered as a service
    (floor plans, sections, site plans) before there is any on the wall, so its
    door opens the inquiry with CAD already chosen. The line prints are a shop
    of their own (/shop), not this service. */
 const DOOR_HREF: Partial<Record<string, string>> = {
+  rendering: "/3d-visualisierung",
   cad: "/kontakt?kind=cad",
 };
 
