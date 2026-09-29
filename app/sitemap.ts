@@ -17,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: `${BASE}/` },
     { url: `${BASE}/arbeiten` },
+    { url: `${BASE}/3d-visualisierung` },
     ...WORKS.map((w) => ({ url: `${BASE}/arbeiten/${w.slug}` })),
     { url: `${BASE}/shop` },
     ...PRINTS.map((p) => ({ url: `${BASE}/shop/${p.slug}` })),

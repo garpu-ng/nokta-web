@@ -101,25 +101,27 @@ export function makeKnockout(
       the face reports no box to sit it in. */
   let dot: { dx: number; dy: number; r: number } | null = null;
 
-  /** Greedy wrap at a given size. Languages that do not space their words
-      (the Japanese line) are broken by character instead. */
+  /** Greedy wrap at a given size. A line breaks after a space or after a
+      hyphen ("3D-Visualisierung." stacks as "3D-" over "Visualisierung.",
+      never inside the word). Languages that do not space their words (the
+      Japanese line) are broken by character instead. Each part keeps its
+      trailing space or hyphen; a space is trimmed where a line ends. */
   const wrap = (m: CanvasRenderingContext2D, size: number, maxW: number) => {
     m.font = `700 ${size}px ${face}`;
-    const spaced = text.includes(" ");
-    const parts = spaced ? text.split(" ") : Array.from(text);
-    const glue = spaced ? " " : "";
+    const breakable = /[ -]/.test(text);
+    const parts = breakable ? text.split(/(?<=[ -])/) : Array.from(text);
     const out: string[] = [];
     let cur = "";
     for (const part of parts) {
-      const test = cur ? cur + glue + part : part;
-      if (cur && m.measureText(test).width > maxW) {
-        out.push(cur);
+      const test = cur + part;
+      if (cur && m.measureText(test.trimEnd()).width > maxW) {
+        out.push(cur.trimEnd());
         cur = part;
       } else {
         cur = test;
       }
     }
-    if (cur) out.push(cur);
+    if (cur) out.push(cur.trimEnd());
     return out;
   };
 

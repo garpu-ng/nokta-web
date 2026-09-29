@@ -78,6 +78,7 @@ function studioJsonLd(description: string) {
       { "@type": "State", name: "Nordrhein-Westfalen" },
     ],
     knowsAbout: [
+      "3D-Visualisierung",
       "Architekturvisualisierung",
       "Editorial und Satz",
       "Druckproduktion",

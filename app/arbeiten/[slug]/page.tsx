@@ -42,6 +42,15 @@ function describe(work: Work, t: Translate): string {
   }
 }
 
+/** The alt text of a project image: the project's title and what the shot
+    shows, or its running number where no line is written yet. */
+function imageAlt(slug: string, title: string, i: number, t: Translate): string {
+  const key = `projects.alt.${slug}.${i + 1}`;
+  const line = t(key);
+  if (line !== key) return `${title}, ${line}`;
+  return `${title}, ${t("projects.imageAlt").replace("{n}", String(i + 1))}`;
+}
+
 /** Existing copy that already says what each piece is. */
 const PIECE_DESC: Record<string, string> = {
   "abschlussbericht-ki-kommission": "point.case.lead",
@@ -99,9 +108,10 @@ function imageStack(project: Project, title: string, t: Translate) {
           >
             <Image
               src={src}
-              /* The neighbouring print body already translates its alt; this
-                 one used to say "Bild n" to an EN/TR/JA reader. */
-              alt={`${title}, ${t("projects.imageAlt").replace("{n}", String(i + 1))}`}
+              /* Each shot says what it shows (projects.alt.<slug>.<n>). A shot
+                 added without one falls back to its running number rather than
+                 rendering the key. */
+              alt={imageAlt(project.slug, title, i, t)}
               width={width}
               height={height}
               sizes="(max-width: 1500px) 100vw, 1500px"

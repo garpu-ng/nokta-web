@@ -1,0 +1,302 @@
+/* /3d-visualisierung — the plate masthead, an opening in the homepage's
+   proportions, then four ruled sections (uses, steps, renderings, questions)
+   and the studio page's CTA. Everything set on ink, nothing new invented:
+   the measures are the ones app/page.module.css and app/studio/page.module.css
+   already use. */
+
+/* ── Opening ───────────────────────────────────────────────────────── */
+
+.opening {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 88px;
+  align-items: start;
+  padding: 56px var(--nk-gutter) 0;
+}
+
+.claim {
+  margin: 0;
+  font-family: var(--headline-font);
+  font-size: clamp(28px, 3.3vw, 44px);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.018em;
+  text-wrap: pretty;
+}
+
+.openingText {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  min-width: 0;
+}
+
+.body {
+  margin: 0;
+  max-width: 52ch;
+  font-size: 17px;
+  line-height: 1.68;
+  opacity: 0.8;
+  text-wrap: pretty;
+}
+
+/* The deliverables as a run of hairline-ruled lines. */
+.services {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--nk-hair);
+}
+.services li {
+  padding: 11px 0;
+  border-bottom: 1px solid var(--nk-hair);
+  font-size: 14px;
+  letter-spacing: 0.02em;
+}
+
+/* ── Sections ──────────────────────────────────────────────────────── */
+
+.section {
+  padding-top: 104px;
+}
+
+.itemTitle {
+  margin: 0 0 10px;
+  font-family: var(--headline-font);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.itemText {
+  margin: 0;
+  max-width: 48ch;
+  font-size: 16px;
+  line-height: 1.65;
+  opacity: 0.72;
+  text-wrap: pretty;
+}
+
+.uses {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 48px;
+  padding: 48px var(--nk-gutter) 0;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 40px;
+  margin: 0;
+  padding: 48px var(--nk-gutter) 0;
+  list-style: none;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  padding-top: 18px;
+  border-top: 1px solid var(--nk-hair);
+  min-width: 0;
+}
+
+/* The folio of a real sequence, in the red that can set words on ink. */
+.stepNo {
+  margin-bottom: 26px;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--accent-on-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── The renderings ────────────────────────────────────────────────── */
+
+.works {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 56px 40px;
+  margin: 0;
+  padding: 48px var(--nk-gutter) 0;
+  list-style: none;
+}
+
+.work {
+  min-width: 0;
+}
+
+.workLink {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--paper);
+  text-decoration: none;
+}
+
+/* One frame height for all six, so the captions stand on one line whatever
+   the thumbnail's own ratio. */
+.workFrame {
+  display: block;
+  aspect-ratio: 4 / 5;
+  margin-bottom: 10px;
+  overflow: hidden;
+  background: var(--nk-media);
+  border: 1px solid var(--nk-hair);
+}
+
+.workImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.workLink:hover .workImg,
+.workLink:focus-visible .workImg {
+  transform: scale(1.03);
+}
+
+.workTitle {
+  font-family: var(--headline-font);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.workAnno {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.workText {
+  font-size: 15px;
+  line-height: 1.6;
+  opacity: 0.72;
+  text-wrap: pretty;
+}
+
+/* ── Questions ─────────────────────────────────────────────────────── */
+
+.faq {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 48px 64px;
+  padding: 48px var(--nk-gutter) 0;
+}
+
+.faqItem {
+  padding-top: 18px;
+  border-top: 1px solid var(--nk-hair);
+  min-width: 0;
+}
+
+/* ── CTA (the studio page's, word for word) ────────────────────────── */
+
+.cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+  margin-top: 104px;
+  padding: 72px var(--nk-gutter);
+  border-top: 1px solid var(--nk-hair);
+}
+
+.ctaText {
+  margin: 0;
+  max-width: 20ch;
+  font-family: var(--headline-font);
+  font-size: clamp(30px, 3.6vw, 48px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.ctaFill {
+  flex-shrink: 0;
+  padding: 17px 26px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 0.18s ease;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--paper);
+}
+
+.ctaFill:hover {
+  transform: translateY(-3px);
+  color: var(--paper);
+}
+
+/* ── Tablet ────────────────────────────────────────────────────────── */
+
+@media (max-width: 1199px) {
+  .opening {
+    gap: 56px;
+  }
+  .steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 48px 40px;
+  }
+  .works {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ── Phone ─────────────────────────────────────────────────────────── */
+
+@media (max-width: 899px) {
+  .opening,
+  .uses,
+  .steps,
+  .works,
+  .faq {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .opening {
+    gap: 32px;
+    padding-top: 40px;
+  }
+  .section {
+    padding-top: 64px;
+  }
+  .uses,
+  .steps,
+  .works,
+  .faq {
+    gap: 36px;
+    padding-top: 32px;
+  }
+  .cta {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 32px;
+    margin-top: 64px;
+    padding-block: 56px;
+  }
+  .ctaFill {
+    text-align: center;
+    white-space: normal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .workImg,
+  .ctaFill {
+    transition: none;
+  }
+  .workLink:hover .workImg,
+  .workLink:focus-visible .workImg,
+  .ctaFill:hover {
+    transform: none;
+  }
+}
