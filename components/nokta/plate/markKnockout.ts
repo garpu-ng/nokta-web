@@ -48,6 +48,17 @@ const MARK_W_TALL = 0.72;
 const MARK_H = 0.36;
 /** Above this height-to-width ratio a plate counts as "tall". */
 const TALL_AT = 0.5;
+/** Set aside (see `aside` below): the mark takes this much of a wide plate's
+    width, standing in the right-hand part and held this far off the right
+    edge; on a tall plate it takes this much of the width and hangs this far
+    down from the top. */
+const ASIDE_W_WIDE = 0.34;
+const ASIDE_RIGHT = 0.07;
+const ASIDE_W_TALL = 0.62;
+const ASIDE_TOP = 0.13;
+/** Set aside, a plate only counts as tall once it is actually portrait: the
+    hero box is about 2:1 on a laptop, and must keep the mark to the right. */
+const ASIDE_TALL_AT = 0.9;
 /** The two rings of stamps the dilation is built from, as counts and as a
     fraction of the pen's radius. Twenty stamps put adjacent centres a third of
     a radius apart, which is finer than the mask is ever read at; the inner
@@ -85,6 +96,10 @@ function loadMark(src: string): Mark {
 export function makeMarkKnockout(
   src: string,
   ink: string,
+  /** Set the mark aside instead of in the middle: to the right on a wide
+      plate, at the top on a tall one, so the rest of the plate can carry a
+      block of text (the homepage hero). */
+  aside = false,
 ): Knockout & { ready: Promise<unknown> } {
   const off = document.createElement("canvas");
   /** The mark, already struck in the plate's ink and at the plate's
@@ -114,15 +129,27 @@ export function makeMarkKnockout(
     mc.setTransform(dpr, 0, 0, dpr, 0, 0);
     mc.clearRect(0, 0, width, height);
 
-    const tall = height / width > TALL_AT;
-    const fit = Math.min(
-      (width * (tall ? MARK_W_TALL : MARK_W_WIDE)) / img.width,
-      (height * MARK_H) / img.height,
-    );
+    const tall = height / width > (aside ? ASIDE_TALL_AT : TALL_AT);
+    const share = aside
+      ? tall
+        ? ASIDE_W_TALL
+        : ASIDE_W_WIDE
+      : tall
+        ? MARK_W_TALL
+        : MARK_W_WIDE;
+    const fit = Math.min((width * share) / img.width, (height * MARK_H) / img.height);
     mw = img.width * fit;
     mh = img.height * fit;
-    mx = (width - mw) / 2;
-    my = (height - mh) / 2;
+    if (aside && !tall) {
+      mx = width - mw - width * ASIDE_RIGHT;
+      my = (height - mh) / 2;
+    } else if (aside) {
+      mx = (width - mw) / 2;
+      my = height * ASIDE_TOP;
+    } else {
+      mx = (width - mw) / 2;
+      my = (height - mh) / 2;
+    }
 
     // The mark, stamped round two rings and once in the middle. The union is
     // the mark grown by `pen` in every direction — the round pen type gets

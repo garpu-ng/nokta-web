@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import HomeContact from "@/components/HomeContact";
 import Reveal from "@/components/Reveal";
-import HeroPlate from "@/components/HeroPlate";
 import HomeHero from "@/components/HomeHero";
 import OneLine from "@/components/nokta/OneLine/OneLine";
 import KindMark, { type DoorKind } from "@/components/nokta/KindMark";
@@ -59,11 +58,12 @@ const SERVICES: { kind: DoorKind }[] = [
 
    `plate` overrides the image a work is shown at plate size with, for the case
    where its wall thumbnail is the wrong shape to be given a whole plate. The
-   lead is Velostation at its first full image: the Teahouse, which led here
-   before, now opens the page in the hero (components/HomeHero.tsx), and one
-   picture twice in two screens is one too many. */
+   wall wants one small image per work and hangs them all by ratio;
+   teahouse's is a square the client cropped, which is a shape the interior was
+   never shot in, so the home page shows the project's first image instead
+   (resized and recompressed to plate size). */
 const FEATURED: { slug: string; plate?: string }[] = [
-  { slug: "velostation", plate: "/projects/velostation/01.jpg" },
+  { slug: "teahouse", plate: "/projects/teahouse/plate.jpg" },
   { slug: "abschlussbericht-ki-kommission" },
   { slug: "sanktgores" },
   { slug: "beatbuilding" },
@@ -224,7 +224,6 @@ export default async function HomePage() {
         sub={t("home.hero.sub")}
         ctaWork={t("home.hero.ctaWork")}
         ctaContact={t("home.hero.ctaContact")}
-        caption={t("home.hero.caption")}
       />
 
       {/* ── 01 · Studio ────────────────────────────────────────────────
@@ -350,9 +349,6 @@ export default async function HomePage() {
         body={t("home.contact.body")}
         cta={t("home.contact.cta")}
       />
-
-      {/* The dot plate with the wordmark, as the page's sign-off. */}
-      <HeroPlate />
     </main>
   );
 }

@@ -22,7 +22,6 @@ const tr: Record<string, string> = {
   "home.hero.sub": "Mimarlık ofisleri, bireysel müşteriler ve kamu işverenleri için 3B görselleştirme, editoryal ve baskı.",
   "home.hero.ctaWork": "İşleri gör",
   "home.hero.ctaContact": "Proje talebi gönder",
-  "home.hero.caption": "Teahouse · iç görselleştirme",
   // ── Kolonnade: ana sayfa hero, giriş, üç hizmet satırı ────────────
   "home.intro.body": "Mimarlık ofisleri, bireysel müşteriler ve kamu işverenleri için çalışıyoruz. Kimi bitmiş bir planla geliyor, kimi bir peçeteye çizilmiş bir eskizle. İkisiyle de başlayabiliriz.",
   // 01’deki plakada olan şey — bir tuval hiçbir şey söylemediği için,

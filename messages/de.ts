@@ -30,7 +30,6 @@ const de: Record<string, string> = {
   "home.hero.sub": "3D-Visualisierung, Editorial und Druck für Architekturbüros, private Bauherren und öffentliche Auftraggeber.",
   "home.hero.ctaWork": "Arbeiten ansehen",
   "home.hero.ctaContact": "Projekt anfragen",
-  "home.hero.caption": "Teahouse · Innenvisualisierung",
   // ── Kolonnade: homepage hero, intro, the three service rows ───────
   "home.intro.body": "Wir arbeiten für Architekturbüros, private Bauherren und öffentliche Auftraggeber. Manche kommen mit einem fertigen Plan, andere mit einer Skizze auf einer Serviette. Mit beidem können wir anfangen.",
   // Was auf der Platte in Abschnitt 01 geschieht — für Screenreader, weil
