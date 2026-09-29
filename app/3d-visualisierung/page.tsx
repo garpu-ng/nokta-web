@@ -111,22 +111,6 @@ export default async function VisualisierungPage() {
         </div>
       </section>
 
-      {/* ── Ablauf: a real sequence, so it is numbered ─────────────────── */}
-      <section className={styles.section} aria-labelledby="nk-viz-steps">
-        <SectionRule id="nk-viz-steps" label={t("viz.steps.label")} />
-        <ol className={styles.steps}>
-          {STEPS.map((i) => (
-            <li key={i} className={styles.step}>
-              <span className={styles.stepNo} aria-hidden="true">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <h3 className={styles.itemTitle}>{t(`viz.step.${i}.title`)}</h3>
-              <p className={styles.itemText}>{t(`viz.step.${i}.text`)}</p>
-            </li>
-          ))}
-        </ol>
-      </section>
-
       {/* ── The renderings, each with its own line ─────────────────────── */}
       <section className={styles.section} aria-labelledby="nk-viz-work">
         <SectionRule id="nk-viz-work" label={t("viz.work.label")} />
@@ -157,6 +141,22 @@ export default async function VisualisierungPage() {
             );
           })}
         </ul>
+      </section>
+
+      {/* ── Ablauf: a real sequence, so it is numbered ─────────────────── */}
+      <section className={styles.section} aria-labelledby="nk-viz-steps">
+        <SectionRule id="nk-viz-steps" label={t("viz.steps.label")} />
+        <ol className={styles.steps}>
+          {STEPS.map((i) => (
+            <li key={i} className={styles.step}>
+              <span className={styles.stepNo} aria-hidden="true">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 className={styles.itemTitle}>{t(`viz.step.${i}.title`)}</h3>
+              <p className={styles.itemText}>{t(`viz.step.${i}.text`)}</p>
+            </li>
+          ))}
+        </ol>
       </section>
 
       {/* ── Häufige Fragen ─────────────────────────────────────────────── */}
