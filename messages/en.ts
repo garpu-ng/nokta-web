@@ -27,7 +27,6 @@ const en: Record<string, string> = {
   "home.hero.sub": "3D visualisation, editorial and print for architecture practices, private clients and public bodies.",
   "home.hero.ctaWork": "See the work",
   "home.hero.ctaContact": "Send an enquiry",
-  "home.hero.caption": "Teahouse · interior visualisation",
   // ── Kolonnade: homepage hero, intro, the three service rows ───────
   "home.intro.body": "We work for architecture practices, private clients and public bodies. Some arrive with a finished plan, others with a sketch on a napkin. We can start from either.",
   // What happens on the plate in section 01 — for screen readers, since a

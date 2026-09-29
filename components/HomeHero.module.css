@@ -1,7 +1,7 @@
-/* The first screen: a framed rendering on the sheet's gutter, the copy set
-   over its darkened lower left. The box keeps the render's wide proportion
-   on a desktop and turns portrait on a phone, where the picture is cropped
-   to its middle: the table and the lamp. */
+/* The first screen: the dot plate in a hairline frame on the sheet's gutter,
+   the text block over its left half. The canvas fills the box; the copy sits
+   above it. Nothing darkens the plate: the dots themselves keep clear of the
+   type. */
 
 .hero {
   padding: 24px var(--nk-gutter) 0;
@@ -11,41 +11,28 @@
   position: relative;
   aspect-ratio: 16 / 8.2;
   max-height: calc(100svh - 150px);
-  min-height: 460px;
+  min-height: 480px;
   width: 100%;
   overflow: hidden;
-  background: var(--nk-media);
+  background: var(--nk-frame);
   border: 1px solid var(--nk-hair);
 }
 
-.img {
+.field {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 55%;
-}
-
-/* Ink rising from the lower left: the type stands on shadow, the lamp and the
-   city at the upper right stay lit. */
-.wash {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(to top, rgba(26, 26, 24, 0.92) 0%, rgba(26, 26, 24, 0.55) 38%, rgba(26, 26, 24, 0) 70%),
-    linear-gradient(to right, rgba(26, 26, 24, 0.55) 0%, rgba(26, 26, 24, 0) 55%);
 }
 
 .copy {
   position: absolute;
-  left: clamp(24px, 4vw, 56px);
-  right: clamp(24px, 4vw, 56px);
-  bottom: clamp(28px, 4.5vw, 60px);
+  top: 50%;
+  left: clamp(28px, 4.5vw, 64px);
+  transform: translateY(-50%);
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  max-width: 640px;
+  align-items: flex-start;
+  gap: 18px;
+  width: min(48%, 620px);
   color: var(--paper);
 }
 
@@ -59,16 +46,16 @@
 .title {
   margin: 0;
   font-family: var(--headline-font);
-  font-size: clamp(38px, 5.2vw, 76px);
+  font-size: clamp(38px, 4.8vw, 72px);
   font-weight: 700;
-  line-height: 1;
+  line-height: 1.02;
   letter-spacing: -0.02em;
   text-wrap: balance;
 }
 
 .sub {
   margin: 0;
-  max-width: 46ch;
+  max-width: 42ch;
   font-size: clamp(16px, 1.3vw, 18px);
   line-height: 1.55;
   text-wrap: pretty;
@@ -78,7 +65,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 8px;
+  margin-top: 6px;
 }
 
 .primary,
@@ -100,7 +87,7 @@
 
 .secondary {
   border: 1px solid var(--paper);
-  background: rgba(26, 26, 24, 0.25);
+  background: var(--nk-frame);
   color: var(--paper);
 }
 
@@ -110,80 +97,48 @@
   color: var(--paper);
 }
 
-.secondary:hover {
-  background: rgba(26, 26, 24, 0.5);
-}
-
 .primary:focus-visible,
-.secondary:focus-visible,
-.credit:focus-visible {
+.secondary:focus-visible {
   outline: 2px solid var(--paper);
   outline-offset: 3px;
-}
-
-/* Which work the picture is, set small in the corner like a plate credit. */
-.credit {
-  position: absolute;
-  right: clamp(16px, 2vw, 28px);
-  bottom: clamp(14px, 1.6vw, 22px);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--paper);
-  text-decoration: none;
-  opacity: 0.75;
-}
-
-.credit:hover {
-  opacity: 1;
-  color: var(--paper);
 }
 
 /* ── Tablet ────────────────────────────────────────────────────────── */
 @media (max-width: 1199px) {
   .box {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 16 / 10;
     max-height: none;
+  }
+  .copy {
+    width: 54%;
   }
 }
 
-/* ── Phone ─────────────────────────────────────────────────────────── */
+/* ── Phone: portrait plate, mark at the top, text at the foot ─────── */
 @media (max-width: 767px) {
   .hero {
     padding-top: 16px;
   }
   .box {
-    aspect-ratio: 4 / 5.6;
+    aspect-ratio: 4 / 6.4;
     min-height: 0;
   }
-  .img {
-    object-position: 46% 50%;
-  }
-  /* On a phone the copy climbs into the bright ceiling, so the wash runs the
-     full height: dense behind the buttons, still a veil behind the eyebrow. */
-  .wash {
-    background: linear-gradient(
-      to top,
-      rgba(26, 26, 24, 0.95) 0%,
-      rgba(26, 26, 24, 0.82) 40%,
-      rgba(26, 26, 24, 0.62) 70%,
-      rgba(26, 26, 24, 0.35) 100%
-    );
-  }
   .copy {
+    top: auto;
+    bottom: 28px;
+    left: 22px;
+    right: 22px;
+    width: auto;
+    transform: none;
     gap: 12px;
-    bottom: 52px;
   }
   .actions {
+    align-self: stretch;
     flex-direction: column;
   }
   .primary,
   .secondary {
     text-align: center;
-  }
-  .credit {
-    left: clamp(24px, 4vw, 56px);
-    right: auto;
   }
 }
 

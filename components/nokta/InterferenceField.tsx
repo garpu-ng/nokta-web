@@ -82,10 +82,49 @@ const AGREEMENT = 0.95;
 
 export type FieldVariant = "single" | "meeting";
 
+/** A box, in the canvas's CSS pixels, the raster keeps clear of. */
+type Clear = { x0: number; y0: number; x1: number; y1: number };
+
+/** How far the raster is held off live text, in lattice pitches. */
+const TEXT_DODGE = 1.05;
+
+/** The boxes of every [data-dodge] element inside the plate's scope, relative
+    to the canvas. data-dodge="lines" clears each line of its text on its own,
+    so the dots follow the ragged right edge of a paragraph instead of clearing
+    its whole rectangle; any other value clears the element's box (a button). */
+function readClears(canvas: HTMLCanvasElement, pad: number): Clear[] {
+  const scope = canvas.closest("[data-dodge-scope]");
+  if (!scope) return [];
+  const origin = canvas.getBoundingClientRect();
+  const out: Clear[] = [];
+  for (const el of scope.querySelectorAll<HTMLElement>("[data-dodge]")) {
+    let rects: DOMRect[];
+    if (el.dataset.dodge === "lines") {
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      rects = [...range.getClientRects()];
+    } else {
+      rects = [el.getBoundingClientRect()];
+    }
+    for (const r of rects) {
+      if (r.width === 0 || r.height === 0) continue;
+      out.push({
+        x0: r.left - origin.left - pad,
+        y0: r.top - origin.top - pad,
+        x1: r.right - origin.left + pad,
+        y1: r.bottom - origin.top + pad,
+      });
+    }
+  }
+  return out;
+}
+
 export default function InterferenceField({
   variant = "single",
   motto,
   mark,
+  markAside = false,
+  dodgeText = false,
   className,
 }: {
   /** Which question the physics is asked — see the note above. */
@@ -96,6 +135,13 @@ export default function InterferenceField({
       the same file the masthead wears. Takes precedence over `motto`, which
       stays the plate's accessible name at the call site. */
   mark?: string;
+  /** Set the mark to the right (on a tall plate: at the top) instead of in
+      the middle. */
+  markAside?: boolean;
+  /** Keep the raster clear of every [data-dodge] element inside the nearest
+      [data-dodge-scope] ancestor: text laid over the plate in the page itself
+      gets the same clearance the knocked-out mark gets. */
+  dodgeText?: boolean;
   className?: string;
 }) {
   const ref = useRef<HTMLCanvasElement>(null);
@@ -108,7 +154,8 @@ export default function InterferenceField({
       const { paper, accent, face } = plateInk(canvas);
       // Held separately from `cut` only because it is the one of the two that
       // has to be waited for.
-      const stamp = mark ? makeMarkKnockout(mark, paper) : null;
+      const stamp = mark ? makeMarkKnockout(mark, paper, markAside) : null;
+      let clears: Clear[] = [];
       const cut = stamp ?? (motto ? makeKnockout(motto, face, paper, accent) : null);
       const meeting = variant === "meeting";
 
@@ -130,6 +177,10 @@ export default function InterferenceField({
           pitch = Math.max(PITCH_MIN, Math.min(PITCH, width / ACROSS));
           k = (2 * Math.PI) / (pitch * WAVELENGTH);
           cut?.layout(width, height, dpr);
+          // Re-read on every fit: a resize reflows the text, and the webfont
+          // landing (which mountPlate also answers with a fit) changes the
+          // line boxes.
+          if (dodgeText) clears = readClears(canvas, pitch * TEXT_DODGE);
         },
 
         draw(t) {
@@ -176,6 +227,7 @@ export default function InterferenceField({
               // every dot on the boundary in half and those halves would line
               // up into a contour around the letters — see plate/knockout.ts.
               if (cut?.dodged(x, y)) continue;
+              if (clears.length && clears.some((c) => x > c.x0 && x < c.x1 && y > c.y0 && y < c.y1)) continue;
 
               const amp = interference(x, y, ax, ay, bx, by, k, t);
               const r = maxR * Math.pow(amp, GAMMA);
@@ -207,7 +259,7 @@ export default function InterferenceField({
 
       return plate;
     });
-  }, [variant, motto, mark]);
+  }, [variant, motto, mark, markAside, dodgeText]);
 
   return (
     <canvas

@@ -1,21 +1,17 @@
-import Image from "next/image";
 import Link from "next/link";
-import { getMediaSize } from "@/lib/mediaSizes";
+import InterferenceField from "@/components/nokta/InterferenceField";
 import styles from "./HomeHero.module.css";
 
-/* The homepage's first screen: one rendering, whole, with the studio's
-   sentence set over it. A visitor who never scrolls still leaves knowing
-   what nokta makes and where to go next.
+/* The homepage's first screen: the studio's dot plate, with the wordmark set
+   to the right and the studio's sentence to the left. The dots keep clear of
+   both. The mark is knocked out of the raster (plate/markKnockout.ts); the
+   text is real page text laid over the canvas, and every line of it, and each
+   button, is marked data-dodge so the raster leaves it clean ground too
+   (InterferenceField's dodgeText). A visitor who never scrolls still leaves
+   knowing what nokta makes and where to go next.
 
-   The picture is the long tea table of the Teahouse, the widest and sharpest
-   render the studio has. A dark wash rises from the lower left so the type
-   stands on shadow, never on the bright wall; the credit in the lower right
-   says which work the picture is and links to it.
-
-   The h1 lives here now. The dot plate that used to open the page (and carried
-   the h1 off-screen) hangs at the foot of the page instead. */
-
-const SRC = "/projects/teahouse/01.jpg";
+   On a phone the plate turns portrait: the mark hangs at the top, the text
+   stands at the foot. */
 
 export default function HomeHero({
   eyebrow,
@@ -23,48 +19,43 @@ export default function HomeHero({
   sub,
   ctaWork,
   ctaContact,
-  caption,
 }: {
   eyebrow: string;
   title: string;
   sub: string;
   ctaWork: string;
   ctaContact: string;
-  caption: string;
 }) {
-  const { width, height } = getMediaSize(SRC);
   return (
     <section className={styles.hero}>
-      <div className={styles.box}>
-        <Image
-          src={SRC}
-          alt=""
-          width={width}
-          height={height}
-          sizes="(max-width: 1500px) 100vw, 1420px"
-          preload
-          className={styles.img}
+      <div className={styles.box} data-dodge-scope>
+        <InterferenceField
+          mark="/nokta_logo.png"
+          markAside
+          dodgeText
+          className={styles.field}
         />
-        <div className={styles.wash} aria-hidden="true" />
 
         <div className={styles.copy}>
-          <p className={styles.eyebrow}>{eyebrow}</p>
-          <h1 className={styles.title}>{title}</h1>
-          <p className={styles.sub}>{sub}</p>
+          <p className={styles.eyebrow}>
+            <span data-dodge="lines">{eyebrow}</span>
+          </p>
+          <h1 className={styles.title}>
+            <span data-dodge="lines">{title}</span>
+          </h1>
+          <p className={styles.sub}>
+            <span data-dodge="lines">{sub}</span>
+          </p>
           <div className={styles.actions}>
-            <Link href="/kontakt" className={styles.primary}>
+            <Link href="/kontakt" className={styles.primary} data-dodge="box">
               {ctaContact}
               <span aria-hidden="true"> ↗</span>
             </Link>
-            <Link href="/arbeiten" className={styles.secondary}>
+            <Link href="/arbeiten" className={styles.secondary} data-dodge="box">
               {ctaWork}
             </Link>
           </div>
         </div>
-
-        <Link href="/arbeiten/teahouse" className={styles.credit}>
-          {caption}
-        </Link>
       </div>
     </section>
   );
