@@ -5,6 +5,7 @@ import Link from "next/link";
 import HomeContact from "@/components/HomeContact";
 import Reveal from "@/components/Reveal";
 import HeroPlate from "@/components/HeroPlate";
+import HomeHero from "@/components/HomeHero";
 import OneLine from "@/components/nokta/OneLine/OneLine";
 import KindMark, { type DoorKind } from "@/components/nokta/KindMark";
 import SectionRule from "@/components/nokta/SectionRule";
@@ -58,13 +59,11 @@ const SERVICES: { kind: DoorKind }[] = [
 
    `plate` overrides the image a work is shown at plate size with, for the case
    where its wall thumbnail is the wrong shape to be given a whole plate. The
-   wall wants one small image per work and hangs them all by ratio;
-   teahouse's is a square the client cropped, which is a shape the interior was
-   never shot in, so the home page shows the project's first image instead
-   (resized and recompressed to plate size). The wall keeps its square: its
-   columns are tuned to the thumbnails it has (see lib/works.ts). */
+   lead is Velostation at its first full image: the Teahouse, which led here
+   before, now opens the page in the hero (components/HomeHero.tsx), and one
+   picture twice in two screens is one too many. */
 const FEATURED: { slug: string; plate?: string }[] = [
-  { slug: "teahouse", plate: "/projects/teahouse/plate.jpg" },
+  { slug: "velostation", plate: "/projects/velostation/01.jpg" },
   { slug: "abschlussbericht-ki-kommission" },
   { slug: "sanktgores" },
   { slug: "beatbuilding" },
@@ -219,33 +218,34 @@ export default async function HomePage() {
 
   return (
     <main>
-      <HeroPlate lead1={t("home.hero.lead1")} lead2={t("home.hero.lead2")} />
+      <HomeHero
+        eyebrow={t("home.hero.eyebrow")}
+        title={t("home.hero.title")}
+        sub={t("home.hero.sub")}
+        ctaWork={t("home.hero.ctaWork")}
+        ctaContact={t("home.hero.ctaContact")}
+        caption={t("home.hero.caption")}
+      />
 
       {/* ── 01 · Studio ────────────────────────────────────────────────
-          The claim, then the plate across the full measure of the sheet. The
-          name is drawn in the band at the head of the page; what stands here
-          is the sentence that band used to carry, made literal — a single
-          point draws a whole building without lifting, holds it, and takes the
-          line back with it. Vom Punkt über die Linie zur Form, and every
-          building is generated afresh. */}
+          Who the studio works for, beside the plate: a single point draws a
+          whole building without lifting, holds it, and takes the line back.
+          The claim itself now stands in the hero above. */}
       <section className={styles.section} aria-labelledby="nk-reg-01">
         <SectionRule id="nk-reg-01" label={t("home.reg.studio")} />
 
         <div className={styles.opening}>
-          <p className={styles.claim}>{t("home.intro.statement")}</p>
           <p className={styles.body}>{t("home.intro.body")}</p>
+          <Reveal as="figure" className={styles.figure} variant="wipe">
+            <div className={styles.fieldPlate}>
+              <OneLine />
+            </div>
+            {/* The canvas is decoration and hidden from assistive tech, so what
+                happens in it is also rendered as real text, off-screen rather
+                than display:none, so a screen reader still reaches it. */}
+            <figcaption className="nk-sr-only">{t("home.plate.oneline")}</figcaption>
+          </Reveal>
         </div>
-
-        <Reveal as="figure" className={styles.figure} variant="wipe">
-          <div className={styles.fieldPlate}>
-            <OneLine />
-          </div>
-          {/* The canvas is decoration and hidden from assistive tech, so what
-              happens in it is also rendered as real text — off-screen, not
-              display:none, so a screen reader still reaches it. Nothing on
-              this site is ever spoken only by a canvas. */}
-          <figcaption className="nk-sr-only">{t("home.plate.oneline")}</figcaption>
-        </Reveal>
       </section>
 
       {/* ── 02 · Leistungen ───────────────────────────────────────────
@@ -350,6 +350,9 @@ export default async function HomePage() {
         body={t("home.contact.body")}
         cta={t("home.contact.cta")}
       />
+
+      {/* The dot plate with the wordmark, as the page's sign-off. */}
+      <HeroPlate />
     </main>
   );
 }

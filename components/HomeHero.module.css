@@ -1,0 +1,199 @@
+/* The first screen: a framed rendering on the sheet's gutter, the copy set
+   over its darkened lower left. The box keeps the render's wide proportion
+   on a desktop and turns portrait on a phone, where the picture is cropped
+   to its middle: the table and the lamp. */
+
+.hero {
+  padding: 24px var(--nk-gutter) 0;
+}
+
+.box {
+  position: relative;
+  aspect-ratio: 16 / 8.2;
+  max-height: calc(100svh - 150px);
+  min-height: 460px;
+  width: 100%;
+  overflow: hidden;
+  background: var(--nk-media);
+  border: 1px solid var(--nk-hair);
+}
+
+.img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 55%;
+}
+
+/* Ink rising from the lower left: the type stands on shadow, the lamp and the
+   city at the upper right stay lit. */
+.wash {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(26, 26, 24, 0.92) 0%, rgba(26, 26, 24, 0.55) 38%, rgba(26, 26, 24, 0) 70%),
+    linear-gradient(to right, rgba(26, 26, 24, 0.55) 0%, rgba(26, 26, 24, 0) 55%);
+}
+
+.copy {
+  position: absolute;
+  left: clamp(24px, 4vw, 56px);
+  right: clamp(24px, 4vw, 56px);
+  bottom: clamp(28px, 4.5vw, 60px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 640px;
+  color: var(--paper);
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--headline-font);
+  font-size: clamp(38px, 5.2vw, 76px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.sub {
+  margin: 0;
+  max-width: 46ch;
+  font-size: clamp(16px, 1.3vw, 18px);
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.primary,
+.secondary {
+  padding: 16px 24px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 0.18s ease, background-color 0.18s ease;
+}
+
+.primary {
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--paper);
+}
+
+.secondary {
+  border: 1px solid var(--paper);
+  background: rgba(26, 26, 24, 0.25);
+  color: var(--paper);
+}
+
+.primary:hover,
+.secondary:hover {
+  transform: translateY(-2px);
+  color: var(--paper);
+}
+
+.secondary:hover {
+  background: rgba(26, 26, 24, 0.5);
+}
+
+.primary:focus-visible,
+.secondary:focus-visible,
+.credit:focus-visible {
+  outline: 2px solid var(--paper);
+  outline-offset: 3px;
+}
+
+/* Which work the picture is, set small in the corner like a plate credit. */
+.credit {
+  position: absolute;
+  right: clamp(16px, 2vw, 28px);
+  bottom: clamp(14px, 1.6vw, 22px);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper);
+  text-decoration: none;
+  opacity: 0.75;
+}
+
+.credit:hover {
+  opacity: 1;
+  color: var(--paper);
+}
+
+/* ── Tablet ────────────────────────────────────────────────────────── */
+@media (max-width: 1199px) {
+  .box {
+    aspect-ratio: 4 / 3;
+    max-height: none;
+  }
+}
+
+/* ── Phone ─────────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .hero {
+    padding-top: 16px;
+  }
+  .box {
+    aspect-ratio: 4 / 5.6;
+    min-height: 0;
+  }
+  .img {
+    object-position: 46% 50%;
+  }
+  /* On a phone the copy climbs into the bright ceiling, so the wash runs the
+     full height: dense behind the buttons, still a veil behind the eyebrow. */
+  .wash {
+    background: linear-gradient(
+      to top,
+      rgba(26, 26, 24, 0.95) 0%,
+      rgba(26, 26, 24, 0.82) 40%,
+      rgba(26, 26, 24, 0.62) 70%,
+      rgba(26, 26, 24, 0.35) 100%
+    );
+  }
+  .copy {
+    gap: 12px;
+    bottom: 52px;
+  }
+  .actions {
+    flex-direction: column;
+  }
+  .primary,
+  .secondary {
+    text-align: center;
+  }
+  .credit {
+    left: clamp(24px, 4vw, 56px);
+    right: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primary,
+  .secondary {
+    transition: none;
+  }
+  .primary:hover,
+  .secondary:hover {
+    transform: none;
+  }
+}

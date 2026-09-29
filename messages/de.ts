@@ -25,11 +25,14 @@ const de: Record<string, string> = {
   // Kolonnade — the "home" prefix is where it used to hang.
   "home.wall.label": "Arbeiten",
   "home.wall.aria": "Alle Arbeiten",
+  "home.hero.eyebrow": "Designstudio in Düsseldorf",
+  "home.hero.title": "Wir machen Architektur sichtbar.",
+  "home.hero.sub": "3D-Visualisierung, Editorial und Druck für Architekturbüros, private Bauherren und öffentliche Auftraggeber.",
+  "home.hero.ctaWork": "Arbeiten ansehen",
+  "home.hero.ctaContact": "Projekt anfragen",
+  "home.hero.caption": "Teahouse · Innenvisualisierung",
   // ── Kolonnade: homepage hero, intro, the three service rows ───────
-  "home.hero.lead1": "Nokta heißt Punkt",
-  "home.hero.lead2": "Und mit einem Punkt hat alles begonnen",
-  "home.intro.statement": "nokta ist ein Designstudio in Düsseldorf. Wir machen Architektur sichtbar: in Bildern, Büchern und Drucken.",
-  "home.intro.body": "Wir arbeiten für Architekturbüros, Verlage, Kulturinstitutionen und öffentliche Auftraggeber. Manche kommen mit einem fertigen Plan, andere mit einer Skizze auf einer Serviette. Mit beidem können wir anfangen.",
+  "home.intro.body": "Wir arbeiten für Architekturbüros, private Bauherren und öffentliche Auftraggeber. Manche kommen mit einem fertigen Plan, andere mit einer Skizze auf einer Serviette. Mit beidem können wir anfangen.",
   // Was auf der Platte in Abschnitt 01 geschieht — für Screenreader, weil
   // ein Canvas nichts spricht.
   "home.plate.oneline": "Ein Punkt zeichnet ein Gebäude in einer Linie, ohne abzusetzen, und nimmt die Linie danach wieder zurück. Jedes Mal entsteht ein anderes Gebäude.",
@@ -154,7 +157,7 @@ const de: Record<string, string> = {
   "kontakt.form.kind.3": "CAD-Plan",
   "kontakt.form.name": "Name",
   "kontakt.form.email": "E-Mail",
-  "kontakt.form.message": "Worum geht es? Zwei Sätze reichen.",
+  "kontakt.form.message": "Skizze, Plan oder erste Idee: Zwei Sätze reichen.",
   "kontakt.form.submit": "Anfrage senden",
   "kontakt.form.sending": "Wird gesendet",
   "kontakt.form.sla": "Antwort persönlich, an Werktagen",
@@ -340,7 +343,7 @@ const de: Record<string, string> = {
   "nav.home": "start.",
   "nav.studio": "studio.",
   "nav.arbeiten": "arbeiten.",
-  "nav.shop": "shop.",
+  "nav.viz": "visualisierung.",
   "nav.contact": "kontakt.",
   "aria.home": "nokta, Startseite",
   "aria.skip": "Zum Inhalt",

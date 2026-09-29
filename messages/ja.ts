@@ -17,11 +17,14 @@ const ja: Record<string, string> = {
   // ── ホーム ────────────────────────────────────────────────────────
   "home.wall.label": "作品",
   "home.wall.aria": "すべての作品",
+  "home.hero.eyebrow": "デュッセルドルフのデザインスタジオ",
+  "home.hero.title": "建築を、見えるかたちに。",
+  "home.hero.sub": "設計事務所、個人のお客様、公共の発注者のための3Dビジュアライゼーション、エディトリアル、印刷。",
+  "home.hero.ctaWork": "作品を見る",
+  "home.hero.ctaContact": "問い合わせる",
+  "home.hero.caption": "Teahouse · 内観ビジュアライゼーション",
   // ── Kolonnade: トップのヒーロー、導入、三つのサービス行 ─────────
-  "home.hero.lead1": "nokta は「点」",
-  "home.hero.lead2": "すべては一つの点から始まりました",
-  "home.intro.statement": "nokta はデュッセルドルフのデザインスタジオです。画像、本、印刷物で建築を見えるようにします。",
-  "home.intro.body": "設計事務所、出版社、文化施設、公共の発注者のために働いています。完成した図面を持って来る人もいれば、ナプキンに描いたスケッチを持って来る人もいます。どちらからでも始められます。",
+  "home.intro.body": "設計事務所、個人のお客様、公共の発注者のために働いています。完成した図面を持って来る人もいれば、ナプキンに描いたスケッチを持って来る人もいます。どちらからでも始められます。",
   // 01 のプレートで起きていること — キャンバスは何も語らないので、
   // スクリーンリーダーのために。
   "home.plate.oneline": "一つの点が、線を切らずに建物を一筆で描き、そしてその線を連れて戻ります。建物は毎回あたらしく生まれます。",
@@ -145,7 +148,7 @@ const ja: Record<string, string> = {
   "kontakt.form.kind.3": "CAD 図面",
   "kontakt.form.name": "お名前",
   "kontakt.form.email": "メール",
-  "kontakt.form.message": "どんなご用件ですか？ 二文で十分です。",
+  "kontakt.form.message": "スケッチ、図面、最初のアイデアなど。二文で十分です。",
   "kontakt.form.submit": "問い合わせを送る",
   "kontakt.form.sending": "送信中",
   "kontakt.form.sla": "営業日に担当者が返信",
@@ -329,7 +332,7 @@ const ja: Record<string, string> = {
   "nav.home": "ホーム",
   "nav.studio": "スタジオ",
   "nav.arbeiten": "作品",
-  "nav.shop": "ショップ",
+  "nav.viz": "ビジュアライゼーション",
   "nav.contact": "お問い合わせ",
   "aria.home": "nokta、ホーム",
   "aria.skip": "本文へスキップ",

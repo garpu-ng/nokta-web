@@ -22,11 +22,14 @@ const en: Record<string, string> = {
   // ── Home ──────────────────────────────────────────────────────────
   "home.wall.label": "Work",
   "home.wall.aria": "All work",
+  "home.hero.eyebrow": "Design studio in Düsseldorf",
+  "home.hero.title": "We make architecture visible.",
+  "home.hero.sub": "3D visualisation, editorial and print for architecture practices, private clients and public bodies.",
+  "home.hero.ctaWork": "See the work",
+  "home.hero.ctaContact": "Send an enquiry",
+  "home.hero.caption": "Teahouse · interior visualisation",
   // ── Kolonnade: homepage hero, intro, the three service rows ───────
-  "home.hero.lead1": "Nokta means dot",
-  "home.hero.lead2": "And it all began with a dot",
-  "home.intro.statement": "nokta is a design studio in Düsseldorf. We make architecture visible in images, books and prints.",
-  "home.intro.body": "We work for architecture practices, publishers, cultural institutions and public clients. Some arrive with a finished plan, others with a sketch on a napkin. We can start from either.",
+  "home.intro.body": "We work for architecture practices, private clients and public bodies. Some arrive with a finished plan, others with a sketch on a napkin. We can start from either.",
   // What happens on the plate in section 01 — for screen readers, since a
   // canvas says nothing.
   "home.plate.oneline": "A point draws a building in one continuous line, then takes the line back. Each time a different building appears.",
@@ -146,7 +149,7 @@ const en: Record<string, string> = {
   "kontakt.form.kind.3": "CAD plan",
   "kontakt.form.name": "Name",
   "kontakt.form.email": "Email",
-  "kontakt.form.message": "What is it about? Two sentences are enough.",
+  "kontakt.form.message": "A sketch, a plan or a first idea: two sentences are enough.",
   "kontakt.form.submit": "Send enquiry",
   "kontakt.form.sending": "Sending",
   "kontakt.form.sla": "A personal reply, on working days",
@@ -330,7 +333,7 @@ const en: Record<string, string> = {
   "nav.home": "home.",
   "nav.studio": "studio.",
   "nav.arbeiten": "work.",
-  "nav.shop": "shop.",
+  "nav.viz": "visualisation.",
   "nav.contact": "contact.",
   "aria.home": "nokta, home",
   "aria.skip": "Skip to content",

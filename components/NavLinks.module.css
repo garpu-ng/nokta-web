@@ -43,7 +43,7 @@
      mid-word. So the row is allowed to wrap instead of overflowing. */
   .nav {
     flex-wrap: wrap;
-    column-gap: 18px;
+    column-gap: 13px;
     row-gap: 0;
   }
   .link {
@@ -51,5 +51,10 @@
   }
   .rule {
     bottom: 10px;
+  }
+  /* The home link gives way on a phone: the wordmark beside it already leads
+     home, and without it the four pages fit on one line. */
+  .link[href="/"] {
+    display: none;
   }
 }
