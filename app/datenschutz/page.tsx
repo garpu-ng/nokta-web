@@ -44,8 +44,9 @@ export default function DatenschutzPage() {
         verarbeiten dabei die Angaben, die Sie selbst eintragen (Art der
         Anfrage, Name, E-Mail-Adresse und Ihre Nachricht), ausschließlich, um
         die Anfrage zu beantworten (Art. 6 Abs. 1 lit. b/f DSGVO). Die Angaben
-        werden per E-Mail an unser Postfach zugestellt und nicht in einer
-        Datenbank gespeichert. Zur Abwehr automatisierter Einsendungen wird die
+        werden über den Mailserver unseres E-Mail-Anbieters INWX (Deutschland)
+        als E-Mail an unser Postfach zugestellt und nicht in einer Datenbank
+        gespeichert. Zur Abwehr automatisierter Einsendungen wird die
         Zahl der Anfragen je IP-Adresse kurzzeitig im Arbeitsspeicher begrenzt;
         eine darüber hinausgehende Auswertung oder Protokollierung der
         Formularinhalte findet nicht statt. Ein Captcha-Dienst wird nicht

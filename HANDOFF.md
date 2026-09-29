@@ -56,17 +56,21 @@ Requires Node 20+.
 
 ### Environment
 
-The inquiry form is the site's only conversion path and it needs two variables
-to work at all. Without them `/api/kontakt` answers **503** and the form shows
+The inquiry form is the site's only conversion path and it needs one variable
+to work at all. Without it `/api/kontakt` answers **503** and the form shows
 its error panel — by design, so an inquiry is refused honestly rather than
 swallowed, but it means **an unconfigured deployment has no working contact
 route**.
 
 ```bash
-KONTAKT_API_KEY=...   # Resend API key
-KONTAKT_FROM="nokta Website <formular@nokta-studio.de>"   # verified sender
-KONTAKT_TO=...        # optional; defaults to hallo@nokta-studio.de
+KONTAKT_SMTP_PASS=...   # mailbox password of hallo@nokta-studio.de (INWX)
+# optional, defaults in app/api/kontakt/route.ts:
+# KONTAKT_SMTP_HOST=smtp.webspace.bz  KONTAKT_SMTP_PORT=465
+# KONTAKT_SMTP_USER=hallo@nokta-studio.de  KONTAKT_TO=hallo@nokta-studio.de
 ```
+
+Mail goes out over SMTP (nodemailer) through the studio's own INWX mailbox.
+Resend was used before 2026-09-29 and is gone.
 
 There is no `.env.example` in the repo — `.gitignore` excludes `.env*`.
 

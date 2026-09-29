@@ -1,30 +1,36 @@
 import { after } from "next/server";
+import nodemailer from "nodemailer";
 
 /* The inquiry form's delivery route.
 
-   The site carries no dependencies beyond Next and React, and this route does
-   not add any: mail goes out over plain fetch to a transactional HTTP API
-   (Resend), configured entirely by environment variables. Swapping providers
-   is a change to sendMail() below and nothing else.
+   Mail goes out over SMTP through the studio's own mailbox,
+   hallo@nokta-studio.de at INWX: the same server the studio sends and reads
+   its mail with, so no further provider sees an inquiry. Host, port and user
+   are not secret and are set here; only the password comes from the
+   environment.
 
    Required env:
-     KONTAKT_API_KEY   the provider's API key
-     KONTAKT_FROM      a verified sender on the sending domain,
-                       e.g. "nokta Website <formular@nokta-studio.de>"
+     KONTAKT_SMTP_PASS  the mailbox password of hallo@nokta-studio.de
    Optional:
-     KONTAKT_TO        recipient; defaults to the studio address below
+     KONTAKT_SMTP_HOST  default smtp.webspace.bz
+     KONTAKT_SMTP_PORT  default 465 (implicit TLS)
+     KONTAKT_SMTP_USER  default hallo@nokta-studio.de
+     KONTAKT_TO         recipient; defaults to the studio address
 
-   With no key configured the route refuses honestly (503) rather than
-   swallowing an inquiry — the form then shows its error panel, which names
+   With no password configured the route refuses honestly (503) rather than
+   swallowing an inquiry: the form then shows its error panel, which names
    the studio's address so the reader can write directly.
 
    GDPR: nothing is stored and nothing is logged but the outcome. The message
    body, the sender's name and their address exist only for the length of the
    request and inside the mail itself. */
 
-const TO = process.env.KONTAKT_TO ?? "hallo@nokta-studio.de";
-const FROM = process.env.KONTAKT_FROM;
-const API_KEY = process.env.KONTAKT_API_KEY;
+const STUDIO = "hallo@nokta-studio.de";
+const TO = process.env.KONTAKT_TO ?? STUDIO;
+const SMTP_HOST = process.env.KONTAKT_SMTP_HOST ?? "smtp.webspace.bz";
+const SMTP_PORT = Number(process.env.KONTAKT_SMTP_PORT ?? 465);
+const SMTP_USER = process.env.KONTAKT_SMTP_USER ?? STUDIO;
+const SMTP_PASS = process.env.KONTAKT_SMTP_PASS;
 
 /* The four things the form can be about, keyed by the stable id the form
    sends — NOT by the label the reader saw. The chips are translated, so
@@ -88,23 +94,31 @@ async function sendMail(body: {
   email: string;
   message: string;
 }): Promise<boolean> {
-  if (!API_KEY || !FROM) {
-    console.error("kontakt: KONTAKT_API_KEY / KONTAKT_FROM not configured");
+  if (!SMTP_PASS) {
+    console.error("kontakt: KONTAKT_SMTP_PASS not configured");
     return false;
   }
 
-  const response = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${API_KEY}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      from: FROM,
-      to: [TO],
+  const transport = nodemailer.createTransport({
+    host: SMTP_HOST,
+    port: SMTP_PORT,
+    secure: SMTP_PORT === 465,
+    auth: { user: SMTP_USER, pass: SMTP_PASS },
+    // A serverless function has a few seconds; a hung server must not eat them.
+    connectionTimeout: 8000,
+    greetingTimeout: 8000,
+    socketTimeout: 10000,
+  });
+
+  try {
+    await transport.sendMail({
+      // Sent as the mailbox it authenticates as, which is the only sender the
+      // server will accept, and named so the inbox shows where it came from.
+      from: { name: "nokta Website", address: SMTP_USER },
+      to: TO,
       // The sender's own address, so hitting reply in the mail client answers
       // the person rather than the form.
-      reply_to: body.email,
+      replyTo: { name: body.name, address: body.email },
       subject: `Anfrage · ${body.kind} · ${body.name}`,
       text: [
         `Art: ${body.kind}`,
@@ -113,16 +127,15 @@ async function sendMail(body: {
         "",
         body.message,
       ].join("\n"),
-    }),
-  });
-
-  if (!response.ok) {
-    // Status only — the provider's body can quote the payload back at us, and
-    // none of that belongs in a log.
-    console.error(`kontakt: delivery failed (${response.status})`);
+    });
+    return true;
+  } catch (error) {
+    // The error's code only: the server's reply can quote the message back,
+    // and none of that belongs in a log.
+    const code = (error as { code?: string; responseCode?: number }) ?? {};
+    console.error(`kontakt: delivery failed (${code.code ?? "?"} ${code.responseCode ?? ""})`);
     return false;
   }
-  return true;
 }
 
 export async function POST(request: Request) {
