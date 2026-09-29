@@ -7,9 +7,9 @@
 // argues. Self-initiated work is annotated "Eigenprojekt", nothing more.
 const de: Record<string, string> = {
   // ── Metadata ──────────────────────────────────────────────────────
-  "meta.site.title": "nokta — Designstudio, Düsseldorf",
-  "meta.site.desc": "Designstudio in Düsseldorf. Wir zeichnen Gebäude, Bücher und Drucke — Visualisierung, Satz, Druckvorstufe und CAD-Pläne.",
-  "meta.home.title": "nokta — Architekturvisualisierung, Satz und Druck in Düsseldorf",
+  "meta.site.title": "nokta · Designstudio, Düsseldorf",
+  "meta.site.desc": "Designstudio in Düsseldorf. Wir zeichnen Gebäude, Bücher und Drucke: Visualisierung, Satz, Druckvorstufe und CAD-Pläne.",
+  "meta.home.title": "nokta · Architekturvisualisierung, Satz und Druck in Düsseldorf",
   "meta.home.desc": "Designstudio in Düsseldorf: Architekturvisualisierung, Editorial und Satz, Druckproduktion und CAD-Pläne. Visualisierung für Architekturbüros und Bauträger in NRW, Satz für Bücher und Jahresberichte.",
   "meta.studio.title": "Studio · nokta",
   "meta.studio.desc": "Das Studio hinter den Arbeiten: drei Leute in Düsseldorf. Architekturvisualisierung, Editorial und Satz, Druckproduktion und CAD-Pläne.",
@@ -28,26 +28,26 @@ const de: Record<string, string> = {
   // ── Kolonnade: homepage hero, intro, the three service rows ───────
   "home.hero.lead1": "Nokta heißt Punkt",
   "home.hero.lead2": "Und mit einem Punkt hat alles begonnen",
-  "home.intro.statement": "nokta ist ein Designstudio in Düsseldorf. Wir machen Architektur sichtbar — als Bild, als Buch, als Druck.",
-  "home.intro.body": "Wir arbeiten für Architekturbüros, Verlage, Kulturinstitutionen und öffentliche Auftraggeber. Manche kommen mit einem fertigen Plan, andere mit einer Serviette. Beides ist ein Anfang: ein Punkt, aus dem eine Linie wird, aus der eine Form wird.",
+  "home.intro.statement": "nokta ist ein Designstudio in Düsseldorf. Wir machen Architektur sichtbar: in Bildern, Büchern und Drucken.",
+  "home.intro.body": "Wir arbeiten für Architekturbüros, Verlage, Kulturinstitutionen und öffentliche Auftraggeber. Manche kommen mit einem fertigen Plan, andere mit einer Skizze auf einer Serviette. Mit beidem können wir anfangen.",
   // Was auf der Platte in Abschnitt 01 geschieht — für Screenreader, weil
   // ein Canvas nichts spricht.
-  "home.plate.oneline": "Ein Punkt zeichnet ein Gebäude in einer Linie, ohne abzusetzen — und nimmt sie wieder mit. Jedes Gebäude entsteht neu.",
+  "home.plate.oneline": "Ein Punkt zeichnet ein Gebäude in einer Linie, ohne abzusetzen, und nimmt die Linie danach wieder zurück. Jedes Mal entsteht ein anderes Gebäude.",
   "home.reg.studio": "Studio",
   "home.services.aria": "Leistungen",
   "home.svc.0.title": "Visualisierung",
-  "home.svc.0.short": "Renderings, Clay-Renders und Studien — für Wettbewerb, Vermarktung und Genehmigung.",
+  "home.svc.0.short": "Renderings, Clay-Renders und Studien für Wettbewerb, Vermarktung und Genehmigung.",
   "home.svc.1.title": "Editorial & Satz",
   "home.svc.1.short": "Vom Manuskript bis zur Druckvorstufe: Raster, Typografie, Bildredaktion, Register.",
   "home.svc.2.title": "Druck & CAD",
-  "home.svc.2.short": "Druckreife Dateien, CAD-Pläne und vektorisierte Liniendrucke — als Datei oder gerahmt in A1.",
+  "home.svc.2.short": "Druckreife Dateien, CAD-Pläne und vektorisierte Liniendrucke, als Datei oder gerahmt in A1.",
   "home.selected": "Ausgewählte Arbeiten",
   // The two spreads' caption copy. The pair below them carries no body text —
   // title and annotation are the whole caption there.
   "home.work.teahouse.text": "Visualisierung eines japanisch inspirierten Teehauses im Garten. Privatkunde.",
-  "home.work.abschlussbericht-ki-kommission.text": "216 Seiten, 8 Kapitel, 20 Handlungsempfehlungen — Layoutsystem bis zur druckreifen Datei. BMWE.",
+  "home.work.abschlussbericht-ki-kommission.text": "216 Seiten, 8 Kapitel, 20 Handlungsempfehlungen. Vom Layoutsystem bis zur druckreifen Datei. BMWE.",
   "home.contact.title": "Hast du einen Punkt, an dem wir anfangen?",
-  "home.contact.body": "Zeig uns die Skizze, den Plan oder den unfertigen Gedanken. Wir melden uns mit den richtigen Fragen.",
+  "home.contact.body": "Schick uns deine Skizze, den Plan oder eine erste Idee. Wir melden uns und fragen nach, was wir noch brauchen.",
   "home.contact.cta": "Projekt beginnen",
 
   // ── Arbeiten (the one wall + every detail page) ───────────────────
@@ -67,7 +67,7 @@ const de: Record<string, string> = {
   // The spec line names what the film is, the way the art plate's names what
   // the print is.
   "work.lichtspiel.spec": "lichtspiel · 1920 × 912 px · 24 bilder/s · 1:45 mit ton",
-  "work.lichtspiel.player": "Lichtspiel — Film mit Ton",
+  "work.lichtspiel.player": "Lichtspiel, Film mit Ton",
   "work.lichtspiel.noVideo": "Ihr Browser kann dieses Video nicht abspielen.",
 
   // ── Leistungen (ServiceIndex, /studio) ────────────────────────────
@@ -76,24 +76,24 @@ const de: Record<string, string> = {
   // line (see components/nokta/ServiceIndex.tsx) citing the flagship commission.
   "nokta.index.label": "Leistungen",
   "nokta.svc.0.title": "Architekturvisualisierung",
-  "nokta.svc.0.text": "Modell, Licht, Bild. Aus Plänen und Skizzen entstehen Außen- und Innenansichten in Fotoqualität — erst Clay-Renders zur Abstimmung von Perspektive und Ausschnitt, dann die finalen Bilder in Druckauflösung.",
+  "nokta.svc.0.text": "Aus Plänen und Skizzen entstehen Außen- und Innenansichten in Fotoqualität. Zuerst Clay-Renders, um Perspektive und Ausschnitt abzustimmen, dann die finalen Bilder in Druckauflösung.",
   "nokta.svc.1.title": "Editorial & Satz",
-  "nokta.svc.1.text": "Vom Manuskript bis zur Druckvorstufe. Raster, Typografie, Bildredaktion, Register und Folios — für Broschüren, Berichte und Bücher.",
+  "nokta.svc.1.text": "Vom Manuskript bis zur Druckvorstufe. Raster, Typografie, Bildredaktion, Register und Folios für Broschüren, Berichte und Bücher.",
   "nokta.svc.1.evidence": "Abschlussbericht der KI-Kommission · 216 Seiten · 8 Kapitel",
   "nokta.svc.2.title": "Druckproduktion",
-  "nokta.svc.2.text": "Papier, Bogen, Auflage. Druckreife Dateien mit Beschnitt, Farbraum und Veredelung, abgestimmt mit der Druckerei.",
+  "nokta.svc.2.text": "Druckreife Dateien mit Beschnitt, Farbraum und Veredelung, abgestimmt mit der Druckerei.",
   "nokta.svc.2.evidence": "216 Seiten druckreif · Beschnitt, Farbraum, Reihenfolge geprüft",
   "nokta.svc.3.title": "CAD-Pläne & Liniendrucke",
-  "nokta.svc.3.text": "Aus echten Zeichnungen vektorisiert. Grundrisse, Ansichten und Schnitte als saubere Linie — als Datei oder als gerahmter A1-Druck.",
+  "nokta.svc.3.text": "Grundrisse, Ansichten und Schnitte, aus echten Zeichnungen vektorisiert. Als Datei oder als gerahmter A1-Druck.",
 
   // ── Fallstudie (Abschlussbericht KI-Kommission) ───────────────────
   "point.case.kicker": "editorial · druckvorstufe",
   "point.case.label": "216 Seiten, druckreif",
   "point.case.title": "Abschlussbericht · KI, Wettbewerb & Wettbewerbsfähigkeit",
-  "point.case.lead": "Der Abschlussbericht der Kommission Wettbewerb & Künstliche Intelligenz — 216 Seiten Editorial, von der ersten Satzspalte bis zur druckreifen Datei.",
+  "point.case.lead": "Der Abschlussbericht der Kommission Wettbewerb & Künstliche Intelligenz: 216 Seiten, gestaltet von der ersten Satzspalte bis zur druckreifen Datei.",
   "point.case.stripAria": "Sechs Seiten aus dem Abschlussbericht, horizontal scrollbar",
   "point.case.spread.cover.alt": "Titelseite des Abschlussberichts mit blau-grünem Farbverlauf, dem Titel „KI, Wettbewerb & Wettbewerbsfähigkeit“ und der vertikalen Jahreszahl 2026.",
-  "point.case.spread.cover.caption": "titel · ein verlauf trägt die seite, kein bild",
+  "point.case.spread.cover.caption": "titel · farbverlauf statt bild",
   "point.case.spread.contents.alt": "Inhaltsverzeichnis mit großen nummerierten Kapitelüberschriften, gepunkteten Führungslinien und cyanfarbenen Wegweiser-Labels.",
   "point.case.spread.contents.caption": "inhalt · wegweiser durch 216 seiten",
   "point.case.spread.prinzipien.alt": "Seite „Prinzipien“ mit nummerierten Grundsätzen in klarer typografischer Hierarchie.",
@@ -101,7 +101,7 @@ const de: Record<string, string> = {
   "point.case.spread.empfehlung.alt": "Auftakt der „Handlungsempfehlung 11“: zweispaltiger wissenschaftlicher Text über einem großen Empfehlungsblock mit vertikaler Linie.",
   "point.case.spread.empfehlung.caption": "empfehlung 11 · displaygröße bricht die spalten",
   "point.case.spread.opinion.alt": "Meinungsseite „Opinion: Johannes Reck“ mit um 90 Grad gedrehtem Seitenlabel, kursivem Vorspann und gerahmtem Zitat.",
-  "point.case.spread.opinion.caption": "opinion · stimmen bekommen ein eigenes register",
+  "point.case.spread.opinion.caption": "opinion · eigenes register für meinungsbeiträge",
   "point.case.spread.termine.alt": "Terminübersicht mit Sitzungsdaten und einem Gruppenfoto der Kommission.",
   "point.case.spread.termine.caption": "termine · daten und gesichter der kommission",
   "point.case.facts.label": "Projektdaten",
@@ -117,20 +117,20 @@ const de: Record<string, string> = {
   "point.case.facts.credit.value": "Mert Büyüktüfekci (nokta)",
   "point.case.web": "kikommission.de",
   "point.case.webHint": "Dort steht der Report zum Download.",
-  "point.case.narrative1": "Die Aufgabe: ein 216-seitiger Regierungsbericht mit acht Kapiteln, 20 Handlungsempfehlungen, Prinzipien, wissenschaftlichem Report und den Meinungen und Essays der Kommissionsmitglieder — als ein Dokument, das man von vorne bis hinten lesen kann, ohne sich zu verlaufen.",
-  "point.case.narrative2": "nokta hat dafür das Layoutsystem gebaut: ein durchgehendes Raster mit nummerierten Kapiteln und Folios, cyanfarbene Wegweiser für die Textsorten, zweispaltiger Fließtext für die Wissenschaft, eigene Register für Meinung und Zitat. Am Ende steht die druckreife Datei — Beschnitt, Farbraum und Reihenfolge stimmen.",
+  "point.case.narrative1": "Ein Regierungsbericht mit 216 Seiten: acht Kapitel, 20 Handlungsempfehlungen, Prinzipien, ein wissenschaftlicher Report sowie Meinungsbeiträge und Essays der Kommissionsmitglieder. Daraus sollte ein Dokument werden, das sich von vorne bis hinten lesen lässt.",
+  "point.case.narrative2": "nokta hat dafür das Layoutsystem gebaut: ein durchgehendes Raster mit nummerierten Kapiteln und Folios, cyanfarbene Wegweiser für die Textsorten, zweispaltiger Fließtext für den wissenschaftlichen Teil und eigene Register für Meinung und Zitat. Geliefert wurde die druckreife Datei, mit geprüftem Beschnitt, Farbraum und Seitenfolge.",
 
   // ── Kunstplatte (n-Studie) ────────────────────────────────────────
   "point.plate.kicker": "hausschrift · studie",
   "point.plate.label": "System und eine Abweichung",
   "point.plate.spec": "n-studie · 536 × 918 px · ein akzent",
   "point.plate.alt": "Raster aus wiederholten fetten kursiven Kleinbuchstaben „n“, schwarz auf hellem Bogen, mit einem einzelnen „n“ in Kobaltblau, das aus dem Muster ausbricht.",
-  "point.plate.text": "Ein Raster aus fetten, kursiven n, schwarz auf dem Bogen. Alles folgt dem System — bis auf ein einziges n in Kobalt, das ausschert.",
+  "point.plate.text": "Ein Raster aus fetten, kursiven n, schwarz auf dem Bogen. Ein einziges n in Kobalt schert aus dem System aus.",
 
   // ── Hausmanual (Leuchtturm) ───────────────────────────────────────
   "point.manual.kicker": "hausmanual · regelwerk",
   "point.manual.label": "Leuchtturm",
-  "point.manual.text": "Der Leuchtturm ist unser Hausmanual: Typografie-Regeln, Raster, Farbsystem und Druckstandards — alles, womit hier jede Arbeit anfängt. Zu kaufen gibt es ihn nicht; wir arbeiten daraus.",
+  "point.manual.text": "Der Leuchtturm ist unser Hausmanual mit Typografie-Regeln, Raster, Farbsystem und Druckstandards. Jede Arbeit bei uns fängt damit an. Das Manual ist nur für den internen Gebrauch.",
   "point.manual.spec": "leuchtturm · hausinternes manual · fortlaufend ergänzt",
   "point.manual.alt": "Gescannter Umschlag des Hausmanuals „Leuchtturm“: körniges Schwarzweiß, oben ein schwarzer Balken mit „NOKTA STUDIO – LEUCHTTURM“ in gesperrter Monoschrift, darunter die fünf nokta-Glyphen vertikal gestapelt in Grautönen, leicht gedreht, dazu graue Eckfelder und eine sichtbare Falzlinie.",
 
@@ -139,7 +139,7 @@ const de: Record<string, string> = {
   "studio.services.note": "vier zeilen · je ein ergebnis",
   "studio.p1": "nokta ist ein Designstudio in Düsseldorf. Wir sind zu dritt und zeichnen Gebäude, Bücher und Drucke: Architekturvisualisierung, Editorial und Satz, Druckproduktion und CAD-Pläne.",
   "studio.p2": "Wir bauen unsere Werkzeuge und Abläufe selbst: Render-Setups, Satzvorlagen und Prüfschritte für die Druckvorstufe. Am Anfang eines Projekts liegen mehrere Varianten auf dem Tisch.",
-  "studio.p3": "Angefangen haben wir mit Architekturvisualisierung; sie ist bis heute der größte Teil der Arbeit. Fotorealistische 3D-Renderings, innen und außen: Licht, Material, Raum. Das Projekt, wie es später aussieht — lange bevor der erste Stein liegt.",
+  "studio.p3": "Angefangen haben wir mit Architekturvisualisierung, und sie ist bis heute der größte Teil der Arbeit: fotorealistische 3D-Renderings von Innen- und Außenräumen. Sie zeigen ein Projekt so, wie es später aussieht, bevor gebaut wird.",
   "studio.team": "Das Team",
   "studio.film": "Film: Vom Punkt über die Linie zur Form",
   "studio.role.kaan": "Design · Konzept",
@@ -150,7 +150,7 @@ const de: Record<string, string> = {
 
   // ── Kontakt ───────────────────────────────────────────────────────
   "kontakt.heading": "Kontakt",
-  "kontakt.intro": "Du hast ein Projekt in Planung? Wir freuen uns, von dir zu hören.",
+  "kontakt.intro": "Du hast ein Projekt in Planung? Erzähl uns davon.",
   "kontakt.direct": "Direkt",
   "kontakt.form.step1": "01 · Worum geht es?",
   "kontakt.form.step2": "02 · Wer schreibt?",
@@ -161,17 +161,17 @@ const de: Record<string, string> = {
   "kontakt.form.kind.3": "CAD-Plan",
   "kontakt.form.name": "Name",
   "kontakt.form.email": "E-Mail",
-  "kontakt.form.message": "Skizze, Plan oder unfertiger Gedanke — beschreib es in zwei Sätzen.",
+  "kontakt.form.message": "Worum geht es? Zwei Sätze reichen.",
   "kontakt.form.submit": "Anfrage senden",
   "kontakt.form.sending": "Wird gesendet",
   "kontakt.form.sla": "Antwort persönlich, an Werktagen",
-  "kontakt.form.done.title": "Angekommen. Das ist der Punkt.",
-  "kontakt.form.done.body": "Wir lesen mit und melden uns — mit den richtigen Fragen, nicht mit einem Angebotsformular.",
+  "kontakt.form.done.title": "Deine Anfrage ist angekommen.",
+  "kontakt.form.done.body": "Wir lesen sie und melden uns persönlich.",
   "kontakt.form.again": "Noch eine Anfrage",
   "kontakt.form.error": "Das hat nicht geklappt. Schreib uns direkt: hallo@nokta-studio.de",
   // Die Anfrage kam nie beim Server an — der Fehler liegt im Formular selbst,
   // also nennt diese Zeile die Studio-Adresse NICHT: es gibt nichts zu umgehen.
-  "kontakt.form.error.fields": "Name, E-Mail und Nachricht fehlen noch — oder die Adresse hat einen Tippfehler.",
+  "kontakt.form.error.fields": "Bitte Name, E-Mail und Nachricht ausfüllen und die E-Mail-Adresse auf Tippfehler prüfen.",
   "kontakt.form.error.busy": "Es kamen gerade sehr viele Anfragen von hier. Bitte in einer Stunde noch einmal.",
   "kontakt.form.nojs": "Das Formular braucht JavaScript. Schreib uns direkt: hallo@nokta-studio.de",
   "kontakt.addr.region": "Düsseldorf, Deutschland",
@@ -188,7 +188,7 @@ const de: Record<string, string> = {
   "line.spec.techniqueVal": "Vektorisierte CAD-Zeichnung",
   "line.spec.format": "Format",
   "line.spec.formatVal": "A1 (594 × 841 mm), gerahmt",
-  "line.detailLead": "Ein technischer Aufriss als Kunst. Jede Linie aus einer CAD-Zeichnung vektorisiert, sauber gesetzt, in A1 gedruckt und gerahmt.",
+  "line.detailLead": "Ein technischer Aufriss als Druck. Jede Linie aus einer CAD-Zeichnung vektorisiert, in A1 gedruckt und gerahmt.",
   "line.order": "Bestellen",
   "line.buy": "Kaufen",
   "line.altSuffix": "vektorisierter CAD-Liniendruck",
@@ -253,9 +253,9 @@ const de: Record<string, string> = {
   "footer.disciplines": "Visualisierung · Editorial · Druck · CAD",
 
   // ── 404 / not-found ───────────────────────────────────────────────
-  "notfound.aria": "404 — Seite nicht gefunden",
+  "notfound.aria": "404, Seite nicht gefunden",
   "notfound.title": "Diesen Punkt haben wir nicht.",
-  "notfound.text": "Diese Seite haben wir nicht im Programm. Tippfehler, alter Link oder einfach umgezogen. Vom Punkt zurück zum Anfang.",
+  "notfound.text": "Diese Seite gibt es nicht. Vielleicht ein Tippfehler oder ein alter Link.",
   "notfound.cta": "Zurück zur Startseite",
 
   // ── Header nav / aria ─────────────────────────────────────────────
