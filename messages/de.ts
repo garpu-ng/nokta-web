@@ -16,7 +16,7 @@ const de: Record<string, string> = {
   "meta.kontakt.title": "Kontakt · nokta",
   "meta.kontakt.desc": "Anfrage an nokta in Düsseldorf: Architekturvisualisierung, Visualisierung für Bauträger in NRW, Satz von Jahresberichten und Büchern, Druck und CAD-Pläne.",
   "meta.arbeiten.title": "Arbeiten · nokta",
-  "meta.arbeiten.desc": "Arbeiten von nokta aus Düsseldorf: Architekturvisualisierungen, Editorial und Satz, Studien. Nach Material sortiert, jede Arbeit mit eigener Seite.",
+  "meta.arbeiten.desc": "Arbeiten von nokta aus Düsseldorf: 3D-Visualisierungen, Editorial und Satz, Studien und Liniendrucke. Jede Arbeit mit eigener Seite.",
   "meta.shop.title": "Shop · nokta",
   "meta.shop.desc": "Liniendrucke von nokta: bekannte Bauwerke als vektorisierte CAD-Zeichnung, in A1 gedruckt und gerahmt.",
 
@@ -298,6 +298,17 @@ const de: Record<string, string> = {
   "projects.alt.ipehouse.4": "Arbeitsplatz mit Wandtisch und offenem Einbauschrank aus Holz",
   "projects.alt.velostation.1": "Abstellhalle mit doppelstöckigen Radständern unter einer Holzdecke",
   "projects.alt.velostation.2": "Werkstatt mit Werkbänken, Wendeltreppe und Galerie",
+
+  // ── Arbeiten (Übersicht /arbeiten) ───────────────────────────────
+  "arbeiten.intro": "Alle Arbeiten auf einer Seite: Visualisierungen, Editorial, Studien und die Liniendrucke aus dem Shop. Die Reihenfolge ist bei jedem Besuch eine andere.",
+  "arbeiten.doors.aria": "Direkt zu",
+  "arbeiten.door.viz.title": "3D-Visualisierung",
+  "arbeiten.door.viz.text": "Außen- und Innenansichten für Architekturbüros, Bauträger und private Bauherren.",
+  "arbeiten.door.editorial.title": "Editorial & Satz",
+  "arbeiten.door.editorial.text": "Layout bis zur druckreifen Datei, zum Beispiel der 216-seitige Abschlussbericht der KI-Kommission.",
+  "arbeiten.filter.all": "Alle",
+  "arbeiten.shopLabel": "Shop",
+
 
 
   // ── Footer ────────────────────────────────────────────────────────

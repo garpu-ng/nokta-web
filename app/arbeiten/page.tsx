@@ -1,36 +1,51 @@
 import type { Metadata } from "next";
+import type { CSSProperties } from "react";
+import Link from "next/link";
+import { connection } from "next/server";
+import Reveal from "@/components/Reveal";
 import DiscField from "@/components/nokta/DiscField";
+import KindMark, { type DoorKind } from "@/components/nokta/KindMark";
 import PlateHead from "@/components/nokta/PlateHead";
-import { toWallItem } from "@/components/work/WorkCard";
-import WorkWall from "@/components/work/WorkWall";
+import { toWallItem, type WallItem } from "@/components/work/WorkCard";
+import WorkWall, { type WallFilter } from "@/components/work/WorkWall";
 import { KIND_FIELD } from "@/lib/colors";
 import { getLocale, getT } from "@/lib/i18n";
+import { getMediaSize } from "@/lib/mediaSizes";
+import { PRINTS, type Print } from "@/lib/prints";
 import { socialMetadata } from "@/lib/socialMeta";
 import { WORKS, isWorkKind, type WorkKind } from "@/lib/works";
 import styles from "./page.module.css";
 
-/* The wall — one body of work, every sheet of it. It used to be the second
-   half of the homepage; since Kolonnade the homepage shows four works large
-   and the full set lives here, at the route every detail URL already implies
-   (/arbeiten/teahouse advertises /arbeiten as its directory, and people try
-   it). The label names the wall, it does not sort it.
+/* /arbeiten: the overview. A short line on what hangs here, two doors into
+   the two materials the studio leads with, then the whole wall: every work
+   and the shop's line prints, shuffled on each visit, with "Alle" pressed.
 
-   The wall stands on one material at a time — there is no "all". ?kind= says
-   which, which is where the homepage's three doors land. The filter is read
-   here rather than in the browser, so the narrowed wall is what the server
-   sends — no flash of another material, and the URL is shareable. A missing
-   or unknown kind falls back to the first material in wall order rather than
-   404ing: a filter is not worth a 404.
+   The doors are the homepage's material fields made larger: visualisation
+   opens /3d-visualisierung, the page that states that service in words;
+   editorial opens the report, which is the editorial work on the site.
+
+   ?kind= still narrows the wall on the server (the homepage's doors land on
+   their own material that way). A missing or unknown kind opens on "Alle"
+   rather than 404ing: a filter is not worth a 404.
 
    NOTE: this route previously answered with a 308 permanentRedirect to "/".
    Browsers cache permanent redirects hard, so a reader who hit /arbeiten
-   before this change may keep landing on the homepage until they clear it —
-   the redirect is gone from the code, but not from their browser. */
+   before that change may keep landing on the homepage until they clear it. */
 
-/* The three door colours, handed to the plate in the masthead (the CAD red
-   stays: it is the studio's colour as much as the material's). Module scope so it is given one array reference for the life of
-   the page rather than a fresh one on each render. */
-const DOOR_COLOURS = [KIND_FIELD.rendering, KIND_FIELD.editorial, KIND_FIELD.cad];
+/* The three door colours, handed to the plate in the masthead. Module scope so
+   it is given one array reference for the life of the page. */
+const PLATE_COLOURS = [KIND_FIELD.rendering, KIND_FIELD.editorial, KIND_FIELD.cad];
+
+/* The chips, in a fixed order whatever the shuffle does: a row that re-sorted
+   itself on every visit would be one more thing to read. Kinds with nothing on
+   the wall are left out. */
+const KIND_ORDER: WorkKind[] = ["rendering", "editorial", "study", "cad", "manual"];
+
+/* The two doors above the wall. */
+const DOORS: { kind: DoorKind; href: string; key: string }[] = [
+  { kind: "rendering", href: "/3d-visualisierung", key: "arbeiten.door.viz" },
+  { kind: "editorial", href: "/arbeiten/abschlussbericht-ki-kommission", key: "arbeiten.door.editorial" },
+];
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getT();
@@ -45,6 +60,44 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+/** A shop print as a card on the wall. It leads to its page in the shop, and
+    its annotation reads CAD-Druck · city · Shop: the building's year is not
+    the print's, and the price stays on the print's own page. */
+function printToWallItem(print: Print, t: (key: string) => string): WallItem {
+  const { width, height } = getMediaSize(print.image);
+  return {
+    slug: `shop-${print.slug}`,
+    href: `/shop/${print.slug}`,
+    title: print.title,
+    kind: "cad",
+    thumb: print.image,
+    width,
+    height,
+    span: 6,
+    lift: 0,
+    anno: { kind: t("work.kind.cad"), year: print.subtitle, client: t("arbeiten.shopLabel") },
+  };
+}
+
+/** Fisher-Yates, then a few more draws until no three cards of one kind stand
+    in a row, so a shuffle never reads as a section by accident. Gives up after
+    a handful of tries and keeps the last draw: it is a nicety, not a rule. */
+function shuffle(items: WallItem[]): WallItem[] {
+  let out = items;
+  for (let attempt = 0; attempt < 30; attempt++) {
+    out = [...items];
+    for (let i = out.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [out[i], out[j]] = [out[j], out[i]];
+    }
+    const clumped = out.some(
+      (item, i) => i >= 2 && item.kind === out[i - 1].kind && item.kind === out[i - 2].kind,
+    );
+    if (!clumped) break;
+  }
+  return out;
+}
+
 export default async function ArbeitenPage({
   searchParams,
 }: {
@@ -52,25 +105,21 @@ export default async function ArbeitenPage({
 }) {
   const t = await getT();
   const requested = (await searchParams).kind;
+  // Rendered per request, never prerendered: the order is drawn fresh each time.
+  await connection();
 
   // Every string the wall shows is translated here: WorkWall is a client
   // component and never reaches for a dictionary itself.
-  const items = WORKS.map((work) => toWallItem(work, t));
-  const kinds = WORKS.reduce<{ kind: WorkKind; label: string }[]>((acc, work) => {
-    if (!acc.some((k) => k.kind === work.kind)) {
-      acc.push({ kind: work.kind, label: t(`work.kind.${work.kind}`) });
-    }
-    return acc;
-  }, []);
+  const items = shuffle([
+    ...WORKS.map((work) => toWallItem(work, t)),
+    ...PRINTS.map((print) => printToWallItem(print, t)),
+  ]);
+  const kinds = KIND_ORDER.filter((kind) => items.some((item) => item.kind === kind)).map(
+    (kind) => ({ kind, label: t(`work.kind.${kind}`) }),
+  );
 
-  // The material the wall opens on. kinds[0] is whatever leads the curated
-  // order in lib/works.ts — no second list to keep in step with the wall.
-  // A kind with nothing on the wall (?kind=cad, since the prints moved to the
-  // shop) falls back the same way an unknown one does.
-  const initialKind =
-    isWorkKind(requested) && kinds.some((k) => k.kind === requested)
-      ? requested
-      : kinds[0].kind;
+  const initialKind: WallFilter =
+    isWorkKind(requested) && kinds.some((k) => k.kind === requested) ? requested : "all";
 
   const title = `${t("home.wall.label")}.`;
 
@@ -78,23 +127,43 @@ export default async function ArbeitenPage({
     <main className={styles.page}>
       {/* The studio's motto, turned into geometry: a field of discs hanging
           in depth, each of them a point, a line or a form depending only on
-          how far round it has swung. Nothing is cut around the title — the
-          discs nearest it have turned edge on to make the room. */}
+          how far round it has swung. */}
       <PlateHead title={title}>
-        <DiscField palette={DOOR_COLOURS} motto={title} />
+        <DiscField palette={PLATE_COLOURS} motto={title} />
       </PlateHead>
 
-      {/* The header block and the wall are both rendered by WorkWall now: the
-          count is client state (a server-rendered figure went on naming the
-          whole wall while one material was shown), and the head has to stay OUTSIDE
-          the wall's gutter or the padding doubles. The page still owns the
-          look — it hands its own three class names down, so the markup and the
-          styling are exactly what they were. */}
+      <section className={styles.intro}>
+        <p className={styles.introText}>{t("arbeiten.intro")}</p>
+      </section>
+
+      <nav className={styles.doors} aria-label={t("arbeiten.doors.aria")}>
+        {DOORS.map(({ kind, href, key }, i) => (
+          <Reveal key={kind} delay={i * 90} className={styles.doorCell}>
+            <Link
+              href={href}
+              // nk-door is a global hook: KindMark keys its hover state off it.
+              className={`${styles.door} nk-door`}
+              style={{ "--nk-field": KIND_FIELD[kind] } as CSSProperties}
+            >
+              <span className={styles.doorMark}>
+                <KindMark kind={kind} />
+              </span>
+              <span className={styles.doorTitle}>{t(`${key}.title`)}</span>
+              <span className={styles.doorText}>{t(`${key}.text`)}</span>
+              <span className={styles.doorArrow} aria-hidden="true">
+                ↗
+              </span>
+            </Link>
+          </Reveal>
+        ))}
+      </nav>
+
       <WorkWall
         items={items}
         kinds={kinds}
         listLabel={t("home.wall.aria")}
         initialKind={initialKind}
+        allLabel={t("arbeiten.filter.all")}
         wallClassName={styles.wall}
       />
     </main>

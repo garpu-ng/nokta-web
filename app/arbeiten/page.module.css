@@ -1,13 +1,144 @@
-/* The wall's own page. The h1 sits in the plate at the top of the sheet
-   (components/nokta/PlateHead), so what is left here is the wall itself,
-   handed the page unchanged. No count: the wall shows one material at a time,
-   and a figure only made the home page and this one disagree. */
+/* /arbeiten — the plate masthead, one line on what hangs here, two material
+   doors, then the wall. */
 
 .page {
   padding-bottom: 88px;
 }
 
-.wall {
+/* ── Intro ─────────────────────────────────────────────────────────── */
+
+.intro {
+  padding: 48px var(--nk-gutter) 0;
+}
+
+.introText {
+  margin: 0;
+  max-width: 44ch;
+  font-family: var(--headline-font);
+  font-size: clamp(22px, 2.4vw, 32px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.012em;
+  text-wrap: pretty;
+}
+
+/* ── Doors ─────────────────────────────────────────────────────────────
+   The homepage's material fields, stood up as two big tiles side by side:
+   the mark top left, the arrow top right, the name and one line at the foot. */
+
+.doors {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px;
   padding: 40px var(--nk-gutter) 0;
 }
 
+.doorCell {
+  min-width: 0;
+}
+
+.door {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "mark arrow"
+    "title title"
+    "text text";
+  align-content: start;
+  row-gap: 18px;
+  height: 100%;
+  min-height: 300px;
+  padding: 36px 36px 40px;
+  background: var(--nk-field);
+  color: var(--paper);
+  text-decoration: none;
+  transition: filter 0.2s ease;
+}
+
+.door:hover {
+  color: var(--paper);
+  filter: brightness(1.12);
+}
+
+.door:focus-visible {
+  outline: 2px solid var(--paper);
+  outline-offset: -6px;
+}
+
+.doorMark {
+  grid-area: mark;
+  display: block;
+  width: 76px;
+  height: 76px;
+  margin-bottom: 36px;
+}
+
+.doorArrow {
+  grid-area: arrow;
+  font-size: 26px;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.door:hover .doorArrow {
+  transform: translate(3px, -3px);
+}
+
+.doorTitle {
+  grid-area: title;
+  font-family: var(--headline-font);
+  font-size: clamp(34px, 4vw, 56px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.doorText {
+  grid-area: text;
+  max-width: 40ch;
+  font-size: 16px;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+/* ── The wall ──────────────────────────────────────────────────────── */
+
+.wall {
+  padding: 88px var(--nk-gutter) 0;
+}
+
+/* ── Phone ─────────────────────────────────────────────────────────── */
+
+@media (max-width: 767px) {
+  .intro {
+    padding-top: 32px;
+  }
+  .doors {
+    grid-template-columns: minmax(0, 1fr);
+    padding-top: 28px;
+  }
+  .door {
+    min-height: 0;
+    padding: 28px 24px 30px;
+    row-gap: 14px;
+  }
+  .doorMark {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 16px;
+  }
+  .wall {
+    padding-top: 56px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .door,
+  .doorArrow {
+    transition: none;
+  }
+  .door:hover .doorArrow {
+    transform: none;
+  }
+}

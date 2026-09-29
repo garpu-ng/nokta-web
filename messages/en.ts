@@ -15,7 +15,7 @@ const en: Record<string, string> = {
   "meta.kontakt.title": "Contact · nokta",
   "meta.kontakt.desc": "Inquiries to nokta in Düsseldorf: architectural visualisation, visualisation for property developers in NRW, typesetting of annual reports and books, print and CAD plans.",
   "meta.arbeiten.title": "Work · nokta",
-  "meta.arbeiten.desc": "Work by nokta, Düsseldorf: architectural visualisations, editorial and typesetting, studies. Sorted by material, every piece on its own page.",
+  "meta.arbeiten.desc": "Work by nokta, Düsseldorf: 3D visualisations, editorial and typesetting, studies and line prints. Every piece on its own page.",
   "meta.shop.title": "Shop · nokta",
   "meta.shop.desc": "Line prints by nokta: well-known buildings as vectorised CAD drawings, printed in A1 and framed.",
 
@@ -288,6 +288,17 @@ const en: Record<string, string> = {
   "projects.alt.ipehouse.4": "Desk with a wall-mounted table and an open built-in timber wardrobe",
   "projects.alt.velostation.1": "Parking hall with two-tier bike racks under a timber ceiling",
   "projects.alt.velostation.2": "Workshop with workbenches, a spiral staircase and a gallery",
+
+  // ── Work (overview /arbeiten) ─────────────────────────────────────
+  "arbeiten.intro": "All work on one page: visualisations, editorial, studies and the line prints from the shop. The order changes with every visit.",
+  "arbeiten.doors.aria": "Go straight to",
+  "arbeiten.door.viz.title": "3D visualisation",
+  "arbeiten.door.viz.text": "Exterior and interior views for architects, property developers and private clients.",
+  "arbeiten.door.editorial.title": "Editorial & typesetting",
+  "arbeiten.door.editorial.text": "Layout through to the print-ready file, for example the 216-page final report of the AI Commission.",
+  "arbeiten.filter.all": "All",
+  "arbeiten.shopLabel": "Shop",
+
 
 
   // ── Footer ────────────────────────────────────────────────────────

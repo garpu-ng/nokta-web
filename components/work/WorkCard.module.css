@@ -16,11 +16,14 @@
   text-decoration: none;
 }
 
-/* The image keeps its own ratio — architecture leads the wall by ratio, so no
-   card crops its work into a common shape. */
+/* One frame shape for every card, so a shuffled wall still reads as a
+   contact sheet: rows line up whatever lands next to what. Renderings and
+   stills fill the frame; a line print is shown whole on its own white paper
+   (see [data-kind="cad"] below), because cropping a drawing cuts the drawing. */
 .frame {
   position: relative;
   display: block;
+  aspect-ratio: 4 / 5;
   overflow: hidden;
   outline: 1px solid var(--nk-hair);
   background: var(--nk-media);
@@ -30,8 +33,18 @@
 .img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   transition: transform 0.6s ease;
+}
+
+.card[data-kind="cad"] .frame {
+  background: #fff;
+}
+
+.card[data-kind="cad"] .img {
+  object-fit: contain;
+  padding: 6%;
 }
 
 .caption {

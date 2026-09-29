@@ -104,7 +104,8 @@ Lichtspiel). `client` absent ⇒ the UI annotates **Eigenprojekt**.
 | Route | What |
 |---|---|
 | `/` | teaser film → 01 statement + interference plate → 02 three doors → 03 two spreads + a pair + the way on → `HomeContact` |
-| `/arbeiten` | the wall: one material at a time, `?kind=` (server-read, and kept in the URL as you click); no kind ⇒ the first in wall order. Two-up contact sheet, no "Alle" |
+| `/arbeiten` | the overview: intro line, two doors (3D-Visualisierung → `/3d-visualisierung`, Editorial → the KI report), then every work plus the shop prints, shuffled per request, three-up in 4:5 frames. Chips: Alle (default) + one per kind; `?kind=` preselects |
+| `/3d-visualisierung` | the visualisation service in words: uses, steps, the six renderings, FAQ, CTA; Service JSON-LD |
 | `/arbeiten/[slug]` | one detail route for all 13: shared `ProjectHeader` + per-kind body — image stack (renderings), technical passport incl. price + buy (prints), `CaseStudy` (report), `ArtPlate` (n-Studie), `FilmPlate` (Lichtspiel) — + prev/next crossing kinds |
 | `/studio` | hero, team (three drawn portraits, each a hover-once CSS sprite reveal — see README), `ServiceIndex` (4 deliverable rows, the one paper section), CTA |
 | `/kontakt` | `InquiryForm` + a rail carrying the direct address |

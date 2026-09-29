@@ -10,7 +10,7 @@ const tr: Record<string, string> = {
   "meta.kontakt.title": "İletişim · nokta",
   "meta.kontakt.desc": "Düsseldorf’taki nokta’ya talep: mimari görselleştirme, NRW’deki inşaat şirketleri için görselleştirme, faaliyet raporu ve kitap dizgisi, baskı ve CAD planları.",
   "meta.arbeiten.title": "İşler · nokta",
-  "meta.arbeiten.desc": "nokta’nın işleri, Düsseldorf: mimari görselleştirmeler, editoryal ve dizgi, çalışmalar. Malzemeye göre sıralı, her iş kendi sayfasında.",
+  "meta.arbeiten.desc": "nokta’nın işleri, Düsseldorf: 3B görselleştirmeler, editoryal ve dizgi, çalışmalar ve çizgi baskılar. Her iş kendi sayfasında.",
   "meta.shop.title": "Mağaza · nokta",
   "meta.shop.desc": "nokta’dan çizgi baskılar: tanınmış yapılar vektörel CAD çizimi olarak, A1 basılı ve çerçeveli.",
 
@@ -280,6 +280,17 @@ const tr: Record<string, string> = {
   "projects.alt.ipehouse.4": "Duvara monte masalı çalışma köşesi ve açık ahşap gömme dolap",
   "projects.alt.velostation.1": "Ahşap tavan altında iki katlı bisiklet raflarıyla park salonu",
   "projects.alt.velostation.2": "Tezgâhlar, döner merdiven ve galeriyle atölye",
+
+  // ── İşler (genel bakış /arbeiten) ─────────────────────────────────
+  "arbeiten.intro": "Tüm işler tek sayfada: görselleştirmeler, editoryal, çalışmalar ve mağazadaki çizgi baskılar. Sıralama her ziyarette değişiyor.",
+  "arbeiten.doors.aria": "Doğrudan",
+  "arbeiten.door.viz.title": "3B görselleştirme",
+  "arbeiten.door.viz.text": "Mimarlık ofisleri, inşaat şirketleri ve bireysel müşteriler için dış ve iç görünüşler.",
+  "arbeiten.door.editorial.title": "Editoryal & Dizgi",
+  "arbeiten.door.editorial.text": "Baskıya hazır dosyaya kadar mizanpaj, örneğin YZ Komisyonu’nun 216 sayfalık nihai raporu.",
+  "arbeiten.filter.all": "Tümü",
+  "arbeiten.shopLabel": "Mağaza",
+
 
 
   // ── Alt bilgi ─────────────────────────────────────────────────────

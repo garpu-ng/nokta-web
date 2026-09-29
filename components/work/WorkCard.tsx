@@ -22,6 +22,8 @@ import styles from "./WorkCard.module.css";
     card that was already answerable on the server. */
 export type WallItem = {
   slug: string;
+  /** where the card leads: a work's own page, or a print's page in the shop */
+  href: string;
   title: string;
   kind: WorkKind;
   thumb: string;
@@ -42,6 +44,7 @@ export function toWallItem(work: Work, t: (key: string) => string): WallItem {
   const { width, height } = getMediaSize(work.thumb);
   return {
     slug: work.slug,
+    href: `/arbeiten/${work.slug}`,
     title: work.title,
     kind: work.kind,
     thumb: work.thumb,
@@ -64,24 +67,18 @@ const MEASURE = 1420;
 const COLUMNS = 12;
 const GAP = 24;
 
-/** The columns a card actually takes on the wall. Not the work's own curated
-    span: the wall stands on one material at a time and hangs it two-up
-    (.aligned in WorkWall.module.css), so a span-4 print and a span-7 rendering
-    are both six columns wide there. */
-const WALL_SPAN: WallItem["span"] = 6;
+/** The columns a card takes on the wall: four of twelve (three-up) on a full
+    sheet, see .aligned in WorkWall.module.css. Below 1100px the wall is
+    two-up and the hint says so in viewport terms. */
+const WALL_SPAN: WallItem["span"] = 4;
 
-/** What a card of this span actually renders at on a full sheet. The hint used
-    to end in a flat 640px for every card, which under-declared the widest ones
-    by nearly a third — a span-7 rendering takes ~818px, so a 1× screen picked
-    the 640w candidate and upscaled it. The lead pieces on the wall were the
-    soft ones. Declaring each work's curated span instead would now under-
-    declare the narrow ones by the same third, from the other end. */
-function cardSizes(span: WallItem["span"]): string {
+/** What a card renders at on a full sheet, derived from the span above. */
+function cardSizes(span: number): string {
   const column = (MEASURE - GAP * (COLUMNS - 1)) / COLUMNS;
   const width = Math.round(span * column + GAP * (span - 1));
   return [
     "(max-width: 767px) 92vw",
-    "(max-width: 1100px) 55vw",
+    "(max-width: 1099px) 46vw",
     `${width}px`,
   ].join(", ");
 }
@@ -98,7 +95,7 @@ export default function WorkCard({
 }) {
   return (
     <Link
-      href={`/arbeiten/${item.slug}`}
+      href={item.href}
       className={styles.card}
       // What the sheet is made of. The card is identical for every kind — only
       // the way the material answers the hand differs (see the module CSS).
