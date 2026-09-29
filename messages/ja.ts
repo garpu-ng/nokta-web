@@ -10,7 +10,7 @@ const ja: Record<string, string> = {
   "meta.kontakt.title": "お問い合わせ · nokta",
   "meta.kontakt.desc": "デュッセルドルフのnoktaへのお問い合わせ：建築ビジュアライゼーション、NRW州のデベロッパー向けビジュアライゼーション、年次報告書と書籍の組版、印刷、CAD図面。",
   "meta.arbeiten.title": "仕事 · nokta",
-  "meta.arbeiten.desc": "デュッセルドルフのnoktaの仕事：建築ビジュアライゼーション、エディトリアルと組版、スタディ。素材ごとに並び、それぞれに専用ページがあります。",
+  "meta.arbeiten.desc": "デュッセルドルフのnoktaの作品：3Dビジュアライゼーション、エディトリアルと組版、スタディ、ラインプリント。それぞれに専用ページがあります。",
   "meta.shop.title": "ショップ · nokta",
   "meta.shop.desc": "noktaのラインプリント：名建築をベクター化したCAD図面として、A1で印刷し額装。",
 
@@ -287,6 +287,17 @@ const ja: Record<string, string> = {
   "projects.alt.ipehouse.4": "壁付けのデスクと開いた造り付けの木製収納",
   "projects.alt.velostation.1": "木の天井の下、2段式ラックが並ぶ駐輪ホール",
   "projects.alt.velostation.2": "作業台、らせん階段、ギャラリーのある工房",
+
+  // ── 作品（一覧 /arbeiten） ─────────────────────────────────────────
+  "arbeiten.intro": "すべての作品を一つのページに。ビジュアライゼーション、エディトリアル、スタディ、ショップのラインプリント。並び順は訪れるたびに変わります。",
+  "arbeiten.doors.aria": "直接見る",
+  "arbeiten.door.viz.title": "3Dビジュアライゼーション",
+  "arbeiten.door.viz.text": "設計事務所、デベロッパー、個人のお客様のための外観と内観。",
+  "arbeiten.door.editorial.title": "エディトリアル & 組版",
+  "arbeiten.door.editorial.text": "印刷可能なデータまでのレイアウト。例：AI委員会の216ページの最終報告書。",
+  "arbeiten.filter.all": "すべて",
+  "arbeiten.shopLabel": "ショップ",
+
 
 
   // ── フッター ──────────────────────────────────────────────────────

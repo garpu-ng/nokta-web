@@ -56,6 +56,14 @@
   }
 }
 
+/* Three-up from 1100px: the overview holds every work and the shop's prints,
+   and two-up made it a very long scroll. */
+@media (min-width: 1100px) {
+  .aligned .cell {
+    grid-column: span 4;
+  }
+}
+
 .span3 {
   grid-column: span 3;
 }
