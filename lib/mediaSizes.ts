@@ -56,7 +56,6 @@ const SIZES: Record<string, MediaSize> = {
   "/point/abschlussbericht/opinion.webp": { width: 1477, height: 2085 },
   "/point/abschlussbericht/termine.webp": { width: 1477, height: 2085 },
   "/point/n-study.png": { width: 536, height: 918 },
-  "/point/leuchtturm-cover.webp": { width: 1194, height: 1701 },
   // The Lichtspiel's first frame. It is the only entry here cut from a film
   // rather than measured off a photograph, and it carries the finished cut's
   // proportion — 2.105:1, not the 16:9 of the render it came from — because

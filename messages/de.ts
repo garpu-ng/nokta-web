@@ -16,7 +16,7 @@ const de: Record<string, string> = {
   "meta.kontakt.title": "Kontakt · nokta",
   "meta.kontakt.desc": "Anfrage an nokta in Düsseldorf: Architekturvisualisierung, Visualisierung für Bauträger in NRW, Satz von Jahresberichten und Büchern, Druck und CAD-Pläne.",
   "meta.arbeiten.title": "Arbeiten · nokta",
-  "meta.arbeiten.desc": "Arbeiten von nokta aus Düsseldorf: Architekturvisualisierungen, Editorial und Satz, Handbücher. Nach Material sortiert, jede Arbeit mit eigener Seite.",
+  "meta.arbeiten.desc": "Arbeiten von nokta aus Düsseldorf: Architekturvisualisierungen, Editorial und Satz, Studien. Nach Material sortiert, jede Arbeit mit eigener Seite.",
   "meta.shop.title": "Shop · nokta",
   "meta.shop.desc": "Liniendrucke von nokta: bekannte Bauwerke als vektorisierte CAD-Zeichnung, in A1 gedruckt und gerahmt.",
 
@@ -127,12 +127,6 @@ const de: Record<string, string> = {
   "point.plate.alt": "Raster aus wiederholten fetten kursiven Kleinbuchstaben „n“, schwarz auf hellem Bogen, mit einem einzelnen „n“ in Kobaltblau, das aus dem Muster ausbricht.",
   "point.plate.text": "Ein Raster aus fetten, kursiven n, schwarz auf dem Bogen. Ein einziges n in Kobalt schert aus dem System aus.",
 
-  // ── Hausmanual (Leuchtturm) ───────────────────────────────────────
-  "point.manual.kicker": "hausmanual · regelwerk",
-  "point.manual.label": "Leuchtturm",
-  "point.manual.text": "Der Leuchtturm ist unser Hausmanual mit Typografie-Regeln, Raster, Farbsystem und Druckstandards. Jede Arbeit bei uns fängt damit an. Das Manual ist nur für den internen Gebrauch.",
-  "point.manual.spec": "leuchtturm · hausinternes manual · fortlaufend ergänzt",
-  "point.manual.alt": "Gescannter Umschlag des Hausmanuals „Leuchtturm“: körniges Schwarzweiß, oben ein schwarzer Balken mit „NOKTA STUDIO – LEUCHTTURM“ in gesperrter Monoschrift, darunter die fünf nokta-Glyphen vertikal gestapelt in Grautönen, leicht gedreht, dazu graue Eckfelder und eine sichtbare Falzlinie.",
 
   // ── Studio ────────────────────────────────────────────────────────
   "studio.heading": "Studio",

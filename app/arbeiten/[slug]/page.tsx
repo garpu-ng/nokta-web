@@ -8,7 +8,6 @@ import Reveal from "@/components/Reveal";
 import ArtPlate from "@/components/nokta/ArtPlate";
 import CaseStudy from "@/components/nokta/CaseStudy";
 import FilmPlate from "@/components/nokta/FilmPlate";
-import Leuchtturm from "@/components/nokta/Leuchtturm";
 import WorkAnno, { workAnnotation } from "@/components/work/WorkAnno";
 import { getLocale, getT, type Translate } from "@/lib/i18n";
 import { getMediaSize } from "@/lib/mediaSizes";
@@ -21,7 +20,7 @@ import styles from "./page.module.css";
 /* One detail route for every kind of work. The frame is always the same — back
    to the wall, the title, the same annotation the card carries — and only the
    body changes with the material: an image stack for a rendering, the piece's
-   own section for a report, a study or the house manual. The CAD prints live
+   own section for a report or a study. The CAD prints live
    in the shop (/shop/[slug]). The prev/next pair at the foot deliberately crosses kinds:
    there is one body of work, not four shelves. */
 
@@ -48,7 +47,6 @@ const PIECE_DESC: Record<string, string> = {
   "abschlussbericht-ki-kommission": "point.case.lead",
   "n-studie": "work.nstudie.lead",
   lichtspiel: "work.lichtspiel.lead",
-  leuchtturm: "point.manual.text",
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -143,7 +141,7 @@ function projectIntro(slug: string, t: Translate) {
   );
 }
 
-/** Editorial, study, manual: each piece brings its own section. */
+/** Editorial, study: each piece brings its own section. */
 function pieceBody(slug: string, t: Translate) {
   switch (slug) {
     case "abschlussbericht-ki-kommission":
@@ -166,9 +164,6 @@ function pieceBody(slug: string, t: Translate) {
           <FilmPlate />
         </>
       );
-    case "leuchtturm":
-      // Deliberately no CTA: the manual is not for sale and not obtainable.
-      return <Leuchtturm />;
     default:
       return null;
   }

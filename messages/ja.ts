@@ -10,7 +10,7 @@ const ja: Record<string, string> = {
   "meta.kontakt.title": "お問い合わせ · nokta",
   "meta.kontakt.desc": "デュッセルドルフのnoktaへのお問い合わせ：建築ビジュアライゼーション、NRW州のデベロッパー向けビジュアライゼーション、年次報告書と書籍の組版、印刷、CAD図面。",
   "meta.arbeiten.title": "仕事 · nokta",
-  "meta.arbeiten.desc": "デュッセルドルフのnoktaの仕事：建築ビジュアライゼーション、エディトリアルと組版、マニュアル。素材ごとに並び、それぞれに専用ページがあります。",
+  "meta.arbeiten.desc": "デュッセルドルフのnoktaの仕事：建築ビジュアライゼーション、エディトリアルと組版、スタディ。素材ごとに並び、それぞれに専用ページがあります。",
   "meta.shop.title": "ショップ · nokta",
   "meta.shop.desc": "noktaのラインプリント：名建築をベクター化したCAD図面として、A1で印刷し額装。",
 
@@ -118,12 +118,6 @@ const ja: Record<string, string> = {
   "point.plate.alt": "明るい紙面に黒で並ぶ、太いイタリックの小文字「n」の格子。その中で一つだけ、パターンから外れるコバルトブルーの「n」。",
   "point.plate.text": "紙面に黒で並ぶ、太いイタリックの n の格子。一つだけ、コバルトの n がシステムから外れています。",
 
-  // ── ハウスマニュアル（Leuchtturm） ────────────────────────────────
-  "point.manual.kicker": "ハウスマニュアル · ルールブック",
-  "point.manual.label": "Leuchtturm",
-  "point.manual.text": "Leuchtturm は私たちのハウスマニュアルです。タイポグラフィの規則、グリッド、カラーシステム、印刷標準をまとめています。ここでの仕事はすべてここから始まります。社内用のため、販売はしていません。",
-  "point.manual.spec": "leuchtturm · 社内マニュアル · 継続的に追補",
-  "point.manual.alt": "ハウスマニュアル「Leuchtturm」のスキャンされた表紙。粒子の粗いモノクロで、上部には字間を空けたモノスペース大文字の「NOKTA STUDIO – LEUCHTTURM」の黒い帯、その下にグレーの階調でわずかに回転した5つの nokta グリフが縦に積まれ、グレーのコーナーブロックと折り目の線が見える。",
 
   // ── スタジオ ──────────────────────────────────────────────────────
   "studio.heading": "スタジオ",

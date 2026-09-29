@@ -10,7 +10,7 @@ const tr: Record<string, string> = {
   "meta.kontakt.title": "İletişim · nokta",
   "meta.kontakt.desc": "Düsseldorf’taki nokta’ya talep: mimari görselleştirme, NRW’deki inşaat şirketleri için görselleştirme, faaliyet raporu ve kitap dizgisi, baskı ve CAD planları.",
   "meta.arbeiten.title": "İşler · nokta",
-  "meta.arbeiten.desc": "nokta’nın işleri, Düsseldorf: mimari görselleştirmeler, editoryal ve dizgi, el kitapları. Malzemeye göre sıralı, her iş kendi sayfasında.",
+  "meta.arbeiten.desc": "nokta’nın işleri, Düsseldorf: mimari görselleştirmeler, editoryal ve dizgi, çalışmalar. Malzemeye göre sıralı, her iş kendi sayfasında.",
   "meta.shop.title": "Mağaza · nokta",
   "meta.shop.desc": "nokta’dan çizgi baskılar: tanınmış yapılar vektörel CAD çizimi olarak, A1 basılı ve çerçeveli.",
 
@@ -112,12 +112,6 @@ const tr: Record<string, string> = {
   "point.plate.alt": "Açık renk bir tabaka üzerinde siyah, tekrar eden kalın italik küçük „n“ harflerinden oluşan bir ızgara; içinde desenden çıkan tek bir kobalt mavisi „n“.",
   "point.plate.text": "Tabaka üzerinde siyah, kalın italik n’lerden bir ızgara. Tek bir kobalt n sistemin dışına çıkıyor.",
 
-  // ── Stüdyo el kitabı (Leuchtturm) ─────────────────────────────────
-  "point.manual.kicker": "stüdyo el kitabı · kurallar",
-  "point.manual.label": "Leuchtturm",
-  "point.manual.text": "Leuchtturm bizim stüdyo el kitabımız: tipografi kuralları, ızgara, renk sistemi ve baskı standartları. Buradaki her iş onunla başlıyor. El kitabı yalnızca stüdyo içinde kullanılıyor.",
-  "point.manual.spec": "leuchtturm · stüdyo içi el kitabı · sürekli genişliyor",
-  "point.manual.alt": "„Leuchtturm“ stüdyo el kitabının taranmış kapağı: grenli siyah-beyaz, üstte aralıklı mono büyük harflerle „NOKTA STUDIO – LEUCHTTURM“ yazan siyah bir bant, altında gri tonlarında, hafifçe döndürülmüş, dikey istiflenmiş beş nokta glifi; gri köşe blokları ve görünür bir katlama izi.",
 
   // ── Stüdyo ────────────────────────────────────────────────────────
   "studio.heading": "Stüdyo",

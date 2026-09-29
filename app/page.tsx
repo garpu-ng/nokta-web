@@ -51,7 +51,7 @@ const SERVICES: { kind: DoorKind }[] = [
    lead — the whole measure of the sheet, and the one work introduced with a line
    of its own — and the rest stand together in the row that closes the section.
    Named rather than derived: the selection is an editorial decision — two
-   renderings, one editorial commission, one print, one manual — and a rule like
+   renderings, one editorial commission, one more rendering — and a rule like
    "first of each kind" would silently re-cut it the next time a work is added to
    the wall. The slugs are resolved against lib/works.ts, so a renamed work fails
    the build here instead of rendering a hole.
@@ -68,7 +68,6 @@ const FEATURED: { slug: string; plate?: string }[] = [
   { slug: "abschlussbericht-ki-kommission" },
   { slug: "sanktgores" },
   { slug: "beatbuilding" },
-  { slug: "leuchtturm" },
 ];
 
 /* Where a door leads when it is not the wall. CAD is offered as a service
@@ -121,8 +120,7 @@ function annotation(work: Work, t: Translate): string {
     this askable: a work's own description is preferred, because it states the
     work without repeating the client that the annotation already carries, and
     the home page's own line stands in for works that are not projects. Only the
-    lead is introduced this way — leuchtturm has no such line in any
-    locale, and a set where one plate of four is explained and three are not
+    lead is introduced this way, and a set where one plate of three is explained and three are not
     reads as an omission rather than a rhythm. */
 function description(work: Featured, t: Translate): string | undefined {
   for (const key of [`projects.desc.${work.slug}`, `home.work.${work.slug}.text`]) {

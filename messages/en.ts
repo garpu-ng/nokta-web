@@ -15,7 +15,7 @@ const en: Record<string, string> = {
   "meta.kontakt.title": "Contact · nokta",
   "meta.kontakt.desc": "Inquiries to nokta in Düsseldorf: architectural visualisation, visualisation for property developers in NRW, typesetting of annual reports and books, print and CAD plans.",
   "meta.arbeiten.title": "Work · nokta",
-  "meta.arbeiten.desc": "Work by nokta, Düsseldorf: architectural visualisations, editorial and typesetting, manuals. Sorted by material, every piece on its own page.",
+  "meta.arbeiten.desc": "Work by nokta, Düsseldorf: architectural visualisations, editorial and typesetting, studies. Sorted by material, every piece on its own page.",
   "meta.shop.title": "Shop · nokta",
   "meta.shop.desc": "Line prints by nokta: well-known buildings as vectorised CAD drawings, printed in A1 and framed.",
 
@@ -119,12 +119,6 @@ const en: Record<string, string> = {
   "point.plate.alt": "Grid of repeated bold italic lowercase letters “n”, black on a light sheet, with a single “n” in cobalt blue breaking out of the pattern.",
   "point.plate.text": "A grid of bold, italic n’s, black on the sheet. A single cobalt n steps out of the system.",
 
-  // ── House manual (Leuchtturm) ─────────────────────────────────────
-  "point.manual.kicker": "house manual · rulebook",
-  "point.manual.label": "Leuchtturm",
-  "point.manual.text": "Leuchtturm is our house manual, with typographic rules, the grid, the colour system and print standards. Every job here starts with it. The manual is for internal use only.",
-  "point.manual.spec": "leuchtturm · in-house manual · continually extended",
-  "point.manual.alt": "Scanned cover of the house manual “Leuchtturm”: grainy black and white, a black bar at the top reading “NOKTA STUDIO – LEUCHTTURM” in spaced mono capitals, below it the five nokta glyphs stacked vertically in shades of grey, slightly rotated, with grey corner patches and a visible fold line.",
 
   // ── Studio ────────────────────────────────────────────────────────
   "studio.heading": "Studio",
