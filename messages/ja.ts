@@ -34,7 +34,6 @@ const ja: Record<string, string> = {
   "home.svc.2.title": "印刷 & CAD",
   "home.svc.2.short": "印刷可能なデータ、CAD 図面、ベクター化した線画。データでも、A1 額装でも。",
   "home.selected": "選ばれた仕事",
-  "home.work.teahouse.text": "庭に建つ、日本から着想を得た茶室のビジュアライゼーション。個人のお客様。",
   "home.work.abschlussbericht-ki-kommission.text": "216 ページ、8 章、20 の提言。レイアウトシステムから印刷可能なデータまで。BMWE。",
   "home.contact.title": "始まりの点はありますか？",
   "home.contact.body": "スケッチ、図面、最初のアイデアを送ってください。必要なことを確認して、こちらからご連絡します。",

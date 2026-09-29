@@ -34,7 +34,6 @@ const tr: Record<string, string> = {
   "home.svc.2.title": "Baskı & CAD",
   "home.svc.2.short": "Baskıya hazır dosyalar, CAD planları ve vektörel çizgi baskılar. Dosya olarak ya da A1 çerçeveli.",
   "home.selected": "Seçilmiş işler",
-  "home.work.teahouse.text": "Bahçede, Japon esintili bir çay evinin görselleştirmesi. Özel müşteri.",
   "home.work.abschlussbericht-ki-kommission.text": "216 sayfa, 8 bölüm, 20 öneri. Mizanpaj sisteminden baskıya hazır dosyaya. BMWE.",
   "home.contact.title": "Başlayabileceğimiz bir noktan var mı?",
   "home.contact.body": "Eskizini, planını ya da ilk fikrini bize gönder. Sana dönüp neye ihtiyacımız olduğunu soralım.",

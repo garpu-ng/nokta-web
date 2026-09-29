@@ -44,7 +44,6 @@ const de: Record<string, string> = {
   "home.selected": "Ausgewählte Arbeiten",
   // The two spreads' caption copy. The pair below them carries no body text —
   // title and annotation are the whole caption there.
-  "home.work.teahouse.text": "Visualisierung eines japanisch inspirierten Teehauses im Garten. Privatkunde.",
   "home.work.abschlussbericht-ki-kommission.text": "216 Seiten, 8 Kapitel, 20 Handlungsempfehlungen. Vom Layoutsystem bis zur druckreifen Datei. BMWE.",
   "home.contact.title": "Hast du einen Punkt, an dem wir anfangen?",
   "home.contact.body": "Schick uns deine Skizze, den Plan oder eine erste Idee. Wir melden uns und fragen nach, was wir noch brauchen.",
