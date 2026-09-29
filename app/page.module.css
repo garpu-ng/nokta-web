@@ -14,17 +14,16 @@
   padding-top: 104px;
 }
 
-/* ── 01 · The claim, then the plate ─────────────────────────────────
-   The claim and its supporting line share the measure; the plate takes the
-   whole of it underneath. The plate is where the studio's own sentence is
-   set, so it is given the width a statement deserves rather than a column
-   beside something else. */
+/* ── 01 · Who we work for, beside the plate ──────────────────────────
+   The claim moved up into the hero, so this row pairs the supporting text
+   with the one-line plate: text left, plate right, one row instead of a
+   paragraph and then a full-width band. */
 
 .opening {
   display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  gap: 88px;
-  align-items: start;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 72px;
+  align-items: center;
   padding: 56px var(--nk-gutter) 0;
 }
 
@@ -32,29 +31,19 @@
   min-width: 0;
 }
 
-.claim {
-  margin: 0;
-  font-family: var(--headline-font);
-  font-size: clamp(28px, 3.3vw, 44px);
-  font-weight: 700;
-  line-height: 1.12;
-  letter-spacing: -0.018em;
-  text-wrap: pretty;
-}
 
 .body {
   margin: 0;
-  max-width: 52ch;
-  font-size: 17px;
-  line-height: 1.68;
-  opacity: 0.68;
+  max-width: 40ch;
+  font-size: clamp(18px, 1.6vw, 22px);
+  line-height: 1.6;
+  opacity: 0.85;
   text-wrap: pretty;
 }
 
-/* The plate, across the sheet. */
+/* The plate, in the right-hand column. */
 .figure {
-  margin: 72px 0 0;
-  padding: 0 var(--nk-gutter);
+  margin: 0;
 }
 
 /* The window the raster is printed in. Proportion rather than a fixed height,
@@ -64,7 +53,7 @@
    even before the canvas has drawn a frame — and stays one if the script never
    runs at all. */
 .fieldPlate {
-  aspect-ratio: 2.5;
+  aspect-ratio: 16 / 10;
   background: var(--nk-frame);
   border: 1px solid var(--nk-hair);
   overflow: hidden;
@@ -462,13 +451,10 @@
   }
 
   .figure {
-    margin-top: 48px;
+    margin-top: 8px;
   }
-  /* The one-line plate draws a building, and a building is a tall object: on
-     a phone the plate turns portrait so the massing has room to stand up
-     rather than being fitted into a letterbox. */
   .fieldPlate {
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 4 / 3;
   }
 
   /* The door becomes a small card: the mark down the left, the folio and the
