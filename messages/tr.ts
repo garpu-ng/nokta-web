@@ -348,7 +348,7 @@ const tr: Record<string, string> = {
   "bt.price.label": "Fiyat",
   "bt.price.0.title": "Dış görünüm başına net 490 EUR",
   "bt.price.0.text": "Bu, ilk üç doğrudan müşterimiz için pilot fiyatımızdır. Karşılığında projeyi daha sonra referans olarak gösterebiliriz.",
-  "bt.price.1.title": "İç görünüm başına net 588 EUR",
+  "bt.price.1.title": "İç görünüm başına net 300 EUR",
   "bt.price.1.text": "Bu da referans karşılığında pilot fiyattır. Hangi görünümlerin anlamlı olduğunu tekliften önce sizinle konuşuruz.",
   "bt.price.2.title": "İki taksitte ödeme",
   "bt.price.2.text": "Siparişte yüzde 50, teslimatta yüzde 50. Broşür ve web sitesi için kullanım hakları teklifte yer alır.",

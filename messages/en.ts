@@ -359,7 +359,7 @@ const en: Record<string, string> = {
   "bt.price.label": "Price",
   "bt.price.0.title": "EUR 490 net per exterior view",
   "bt.price.0.text": "This is our pilot price for our first three direct clients. In return we may name the project as a reference afterwards.",
-  "bt.price.1.title": "EUR 588 net per interior view",
+  "bt.price.1.title": "EUR 300 net per interior view",
   "bt.price.1.text": "Also at the pilot price, for a reference. We agree with you which views make sense before we send the quote.",
   "bt.price.2.title": "Payment in two parts",
   "bt.price.2.text": "50 percent on order, 50 percent on delivery. The usage rights for brochure and website are set out in the quote.",

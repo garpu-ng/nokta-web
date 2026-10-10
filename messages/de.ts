@@ -369,7 +369,7 @@ const de: Record<string, string> = {
   "bt.price.label": "Preis",
   "bt.price.0.title": "490 EUR netto je Außenansicht",
   "bt.price.0.text": "Das ist unser Pilotpreis für die ersten drei Direktkunden. Im Gegenzug dürfen wir das Projekt danach als Referenz nennen.",
-  "bt.price.1.title": "588 EUR netto je Innenansicht",
+  "bt.price.1.title": "300 EUR netto je Innenansicht",
   "bt.price.1.text": "Ebenfalls als Pilotpreis gegen Referenz. Welche Ansichten sinnvoll sind, klären wir mit Ihnen vor dem Angebot.",
   "bt.price.2.title": "Zahlung in zwei Teilen",
   "bt.price.2.text": "50 Prozent bei Beauftragung, 50 Prozent bei Lieferung. Die Nutzungsrechte für Exposé und Website stehen im Angebot.",
