@@ -43,6 +43,8 @@ export default async function Footer() {
             <span className={styles.colH}>{t("footer.col.seiten")}</span>
             <Link href="/arbeiten" className={styles.link}>{t("footer.link.arbeiten")}</Link>
             <Link href="/3d-visualisierung" className={styles.link}>{t("footer.link.viz")}</Link>
+            <Link href="/fuer-bautraeger" className={styles.link}>{t("footer.link.bt")}</Link>
+            <Link href="/fuer-institutionen" className={styles.link}>{t("footer.link.inst")}</Link>
             <Link href="/studio" className={styles.link}>{t("footer.link.studio")}</Link>
             <Link href="/shop" className={styles.link}>{t("footer.link.shop")}</Link>
             <Link href="/kontakt" className={styles.link}>{t("footer.link.kontakt")}</Link>

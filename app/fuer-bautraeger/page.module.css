@@ -1,0 +1,73 @@
+/* /fuer-bautraeger and /fuer-institutionen: everything else comes from
+   app/3d-visualisierung/page.module.css. These are the pieces that page does
+   not have. */
+
+.needs {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 88px;
+  align-items: start;
+  padding: 48px var(--nk-gutter) 0;
+}
+
+.more {
+  margin: 0;
+  padding: 40px var(--nk-gutter) 0;
+}
+
+.moreLink {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.ctaNote {
+  margin: 18px 0 0;
+  max-width: 44ch;
+  font-size: 16px;
+  line-height: 1.6;
+  opacity: 0.72;
+}
+
+/* The one reference, cover beside its facts. */
+.ref {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+  gap: 64px;
+  align-items: center;
+  padding: 48px var(--nk-gutter) 0;
+  color: var(--paper);
+  text-decoration: none;
+}
+
+.refFrame {
+  display: block;
+  overflow: hidden;
+  background: var(--nk-media);
+  border: 1px solid var(--nk-hair);
+}
+
+.refImg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.refText {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+@media (max-width: 899px) {
+  .needs,
+  .ref {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+    padding-top: 32px;
+  }
+}
