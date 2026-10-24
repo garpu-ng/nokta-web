@@ -16,20 +16,19 @@ import styles from "../fuer-bautraeger/page.module.css";
 
 /* /fuer-institutionen: the page the editorial letters point at. Ministries,
    commissions, foundations and associations that publish reports. It says
-   what the studio takes over, how a job runs and how the price is set, and
-   shows the one editorial commission there is: the final report of the
-   KI-Kommission at the BMWE.
+   what the studio takes over and how a job runs, and shows the one editorial
+   commission there is: the final report of the KI-Kommission at the BMWE.
 
-   The price is named as a method (a fixed price by page count, in writing
-   before work starts), not as a figure. Nothing is claimed that the studio
-   has not delivered. */
+   No price, no payment terms and no schedule are stated. Those are set in
+   the quote for each project. Nothing is claimed that the studio has not
+   delivered. */
 
 const PATH = "/fuer-institutionen";
 const REF = "abschlussbericht-ki-kommission";
 
 const PALETTE = [KIND_FIELD.editorial];
 
-const FACTS = [0, 1, 2, 3, 4];
+const FACTS = [0, 1, 2, 3];
 const SCOPE = [0, 1, 2, 3];
 const STEPS = [0, 1, 2, 3];
 

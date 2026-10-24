@@ -77,7 +77,7 @@ const FEATURED: { slug: string; plate?: string }[] = [
 const DOOR_HREF: Partial<Record<string, string>> = {
   rendering: "/3d-visualisierung",
   // Editorial opens the page written for institutions, which leads on to the
-  // one editorial work and states scope, process and how the price is set.
+  // one editorial work and states scope and process.
   editorial: "/fuer-institutionen",
   cad: "/kontakt?kind=cad",
 };

@@ -14,11 +14,9 @@ import viz from "../3d-visualisierung/page.module.css";
 import styles from "./page.module.css";
 
 /* /fuer-bautraeger: the page the letters and mails to developers point at.
-   It answers the three things such a reader looks for, in this order: what
-   they get, what it costs and how long it takes, how to ask. Same sheet as
-   /3d-visualisierung (its stylesheet is reused, nothing new invented), only
-   the facts are the ones from the offer: the pilot price, ten working days
-   for up to three images, two rounds of corrections.
+   It says what they get and how to ask. Same sheet as /3d-visualisierung
+   (its stylesheet is reused, nothing new invented). Payment terms and the
+   schedule are not stated here. They are set in the quote for each project.
 
    The renderings carry kind and year only. Who they were made for is a
    question the wall answers; this page makes no claim about clients. */
@@ -28,7 +26,6 @@ const PATH = "/fuer-bautraeger";
 const PALETTE = [KIND_FIELD.rendering];
 
 const FACTS = [0, 1, 2, 3];
-const PRICE = [0, 1, 2];
 const STEPS = [0, 1, 2, 3];
 const NEEDS = [0, 1, 2, 3, 4];
 
@@ -66,19 +63,6 @@ export default async function BautraegerPage() {
               <li key={i}>{t(`bt.fact.${i}`)}</li>
             ))}
           </ul>
-        </div>
-      </section>
-
-      {/* Preis */}
-      <section className={viz.section} aria-labelledby="nk-bt-price">
-        <SectionRule id="nk-bt-price" label={t("bt.price.label")} />
-        <div className={viz.uses}>
-          {PRICE.map((i) => (
-            <Reveal key={i} delay={i * 90}>
-              <h3 className={viz.itemTitle}>{t(`bt.price.${i}.title`)}</h3>
-              <p className={viz.itemText}>{t(`bt.price.${i}.text`)}</p>
-            </Reveal>
-          ))}
         </div>
       </section>
 
