@@ -19,12 +19,17 @@ export default function HomeHero({
   sub,
   ctaWork,
   ctaContact,
+  audiences = [],
+  audiencesLabel,
 }: {
   eyebrow: string;
   title: string;
   sub: string;
   ctaWork: string;
   ctaContact: string;
+  /** the pages written for one kind of client, linked under the buttons */
+  audiences?: { href: string; label: string }[];
+  audiencesLabel?: string;
 }) {
   return (
     <section className={styles.hero}>
@@ -55,6 +60,16 @@ export default function HomeHero({
               {ctaWork}
             </Link>
           </div>
+          {audiences.length > 0 ? (
+            <nav className={styles.audiences} aria-label={audiencesLabel}>
+              {audiences.map(({ href, label }) => (
+                <Link key={href} href={href} className={styles.audience} data-dodge="box">
+                  {label}
+                  <span aria-hidden="true"> ↗</span>
+                </Link>
+              ))}
+            </nav>
+          ) : null}
         </div>
       </div>
     </section>

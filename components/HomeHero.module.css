@@ -103,6 +103,34 @@
   outline-offset: 3px;
 }
 
+/* The audience pages: two quiet text links under the buttons, so a
+   developer or an institution arriving from a letter finds its own page
+   without scrolling. */
+.audiences {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+
+.audience {
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--paper);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  background: var(--nk-frame);
+}
+
+.audience:hover {
+  color: var(--paper);
+  text-decoration-thickness: 2px;
+}
+
+.audience:focus-visible {
+  outline: 2px solid var(--paper);
+  outline-offset: 3px;
+}
+
 /* ── Tablet ────────────────────────────────────────────────────────── */
 @media (max-width: 1199px) {
   .box {

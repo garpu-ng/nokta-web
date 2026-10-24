@@ -76,6 +76,9 @@ const FEATURED: { slug: string; plate?: string }[] = [
    of their own (/shop), not this service. */
 const DOOR_HREF: Partial<Record<string, string>> = {
   rendering: "/3d-visualisierung",
+  // Editorial opens the page written for institutions, which leads on to the
+  // one editorial work and states scope and process.
+  editorial: "/fuer-institutionen",
   cad: "/kontakt?kind=cad",
 };
 
@@ -224,6 +227,11 @@ export default async function HomePage() {
         sub={t("home.hero.sub")}
         ctaWork={t("home.hero.ctaWork")}
         ctaContact={t("home.hero.ctaContact")}
+        audiences={[
+          { href: "/fuer-bautraeger", label: t("home.hero.forBt") },
+          { href: "/fuer-institutionen", label: t("home.hero.forInst") },
+        ]}
+        audiencesLabel={t("home.hero.forAria")}
       />
 
       {/* ── 01 · Studio ────────────────────────────────────────────────
