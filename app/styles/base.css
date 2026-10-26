@@ -327,6 +327,14 @@ body:has(.nk-roller) .nk-page-fade {
   }
 }
 
+/* /arbeiten opens on a rendering. The sheet fade starts at opacity 0, and an
+   image that is invisible does not count as painted, so this one page is
+   already there. Every other page keeps the entrance. */
+body:has(.nk-flat) .nk-page-fade,
+body:has(.nk-roller):has(.nk-flat) .nk-page-fade {
+  animation: none;
+}
+
 /* Reduced motion: no smooth-scroll, and the page simply is — no transition
    between one sheet and the next. */
 @media (prefers-reduced-motion: reduce) {

@@ -302,7 +302,8 @@ const de: Record<string, string> = {
   "projects.alt.velostation.2": "Werkstatt mit Werkbänken, Wendeltreppe und Galerie",
 
   // ── Arbeiten (Übersicht /arbeiten) ───────────────────────────────
-  "arbeiten.intro": "Alle Arbeiten auf einer Seite: Visualisierungen, Editorial, Studien und die Liniendrucke aus dem Shop. Die Reihenfolge ist bei jedem Besuch eine andere.",
+  "arbeiten.intro": "Visualisierungen, Editorial, Studien und die Liniendrucke aus dem Shop.",
+  "arbeiten.contact.form": "Kontakt",
   "arbeiten.doors.aria": "Direkt zu",
   "arbeiten.door.viz.title": "3D-Visualisierung",
   "arbeiten.door.viz.text": "Außen- und Innenansichten für Architekturbüros, Bauträger und private Bauherren.",

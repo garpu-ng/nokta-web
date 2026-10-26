@@ -15,7 +15,7 @@
   flex-wrap: wrap;
   align-items: stretch;
   gap: 10px;
-  margin: 0 0 clamp(2rem, 5vh, 3rem);
+  margin: 0 0 12px;
 }
 
 /* ── The grid ────────────────────────────────────────────────────────── */
@@ -100,9 +100,18 @@
     row-gap: clamp(2.5rem, 6svh, 3.5rem);
   }
 
-  /* Five chips wrap onto two rows on a phone (the chip does its own
-     tightening — see .nk-chip in base.css). */
+  /* One row. Wrapping the chips put a second line between the reader and
+     the first rendering. Anything that does not fit scrolls sideways. */
   .filter {
+    flex-wrap: nowrap;
     gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .filter::-webkit-scrollbar {
+    display: none;
+  }
+  .filter > * {
+    flex: 0 0 auto;
   }
 }

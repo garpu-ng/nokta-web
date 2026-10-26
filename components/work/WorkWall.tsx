@@ -7,8 +7,8 @@ import WorkCard, { type WallItem } from "./WorkCard";
 import styles from "./WorkWall.module.css";
 
 /* The wall: every piece the studio shows, the shop's line prints included,
-   in an order the page shuffles on each visit. The kinds are stamps and a
-   filter, never sections, never headings.
+   in the order the page hands in. The kinds are stamps and a filter, never
+   sections, never headings.
 
    "Alle" leads the chips and is where the wall opens: the page is the overview
    now, and the two doors above it (app/arbeiten/page.tsx) are the way into one
@@ -115,10 +115,10 @@ export default function WorkWall({
           ))}
         </div>
 
-        {/* Always aligned: a shuffled wall has no curated neighbours, so the
-            hand-pinned hanging (spans and lifts, drawn for one fixed order)
-            would land at random. Every card hangs two-up instead; the cells
-            still carry span and lift, which the module CSS overrides. */}
+        {/* Always aligned. The spans and lifts on each work were drawn for the
+            alternating order in lib/works.ts. This overview has its own order
+            (renderings first), so every card hangs on the same grid and the
+            module CSS overrides span and lift. */}
         <ul className={`${styles.grid} ${styles.aligned}`} aria-label={listLabel}>
           {items.map((item) => (
             <li

@@ -32,6 +32,9 @@ const SIZES: Record<string, MediaSize> = {
   "/projects/sanktgores/05.jpg": { width: 1125, height: 1500 },
   "/projects/sanktgores/06.jpg": { width: 1125, height: 1500 },
   "/projects/sanktgores/thumb.jpg": { width: 1125, height: 1500 },
+  // The /arbeiten lead card. Same frame as thumb.jpg, encoded smaller so the
+  // first image on a phone is not the full master.
+  "/projects/sanktgores/wall.webp": { width: 640, height: 853 },
   "/projects/teahouse/01.jpg": { width: 3017, height: 1420 },
   "/projects/teahouse/02.jpg": { width: 1920, height: 1080 },
   "/projects/teahouse/03.jpg": { width: 1920, height: 1080 },

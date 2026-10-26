@@ -291,7 +291,8 @@ const ja: Record<string, string> = {
   "projects.alt.velostation.2": "作業台、らせん階段、ギャラリーのある工房",
 
   // ── 作品（一覧 /arbeiten） ─────────────────────────────────────────
-  "arbeiten.intro": "すべての作品を一つのページに。ビジュアライゼーション、エディトリアル、スタディ、ショップのラインプリント。並び順は訪れるたびに変わります。",
+  "arbeiten.intro": "ビジュアライゼーション、エディトリアル、スタディ、ショップのラインプリント。",
+  "arbeiten.contact.form": "連絡",
   "arbeiten.doors.aria": "直接見る",
   "arbeiten.door.viz.title": "3Dビジュアライゼーション",
   "arbeiten.door.viz.text": "設計事務所、デベロッパー、個人のお客様のための外観と内観。",
