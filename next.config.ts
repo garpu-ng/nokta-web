@@ -2,6 +2,9 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   devIndicators: false,
+  // The root layout lives under app/[locale], so an unmatched URL has no
+  // document to render into. global-not-found is that document.
+  experimental: { globalNotFound: true },
   // Image Optimization is left on (the previous global `unoptimized: true` is
   // gone) so next/image emits a responsive srcset and serves modern formats.
   // On Vercel this runs on the Image Optimization CDN; a self-hosted `next start`

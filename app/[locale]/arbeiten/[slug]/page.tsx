@@ -9,7 +9,7 @@ import ArtPlate from "@/components/nokta/ArtPlate";
 import CaseStudy from "@/components/nokta/CaseStudy";
 import FilmPlate from "@/components/nokta/FilmPlate";
 import WorkAnno, { workAnnotation } from "@/components/work/WorkAnno";
-import { getLocale, getT, type Translate } from "@/lib/i18n";
+import { getLocale, getT, requestLocale, type Translate } from "@/lib/i18n";
 import { getMediaSize } from "@/lib/mediaSizes";
 import { PRINTS } from "@/lib/prints";
 import type { Project } from "@/lib/projects";
@@ -24,12 +24,20 @@ import styles from "./page.module.css";
    in the shop (/shop/[slug]). The prev/next pair at the foot deliberately crosses kinds:
    there is one body of work, not four shelves. */
 
-type Props = { params: Promise<{ slug: string }> };
+type Props = { params: Promise<{ locale: string; slug: string }> };
 
-// Currently inert (the locale cookie keeps every page dynamic), but kept so the
-// route prerenders the moment i18n moves off cookies.
+// One prerendered page per work, plus the CAD prints so an old
+// /arbeiten/<print> link still redirects to the shop. Unknown slugs are not
+// rendered on demand: with no fallback they 404 through the global document
+// instead of a shell that has no <html>. The locale segment is filled in by
+// the layout's generateStaticParams.
+export const dynamicParams = false;
+
 export function generateStaticParams() {
-  return WORKS.map((work) => ({ slug: work.slug }));
+  return [
+    ...WORKS.map((work) => ({ slug: work.slug })),
+    ...PRINTS.map((print) => ({ slug: print.slug })),
+  ];
 }
 
 /** The page's one description, reused for the meta tag and the social card. */
@@ -59,17 +67,18 @@ const PIECE_DESC: Record<string, string> = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  requestLocale(locale);
   const work = getWork(slug);
   if (!work) return {};
 
   const t = await getT();
-  const locale = await getLocale();
+  const localeNow = await getLocale();
   const title = `${work.title} · nokta`;
   const description = describe(work, t);
   const path = `/arbeiten/${work.slug}`;
   const { width, height } = getMediaSize(work.thumb);
-  const social = socialMetadata({ title, description, locale, path });
+  const social = socialMetadata({ title, description, locale: localeNow, path });
 
   return {
     title,
@@ -196,7 +205,8 @@ function workBody(work: Work, t: Translate) {
 /* ── The page ───────────────────────────────────────────────────────── */
 
 export default async function WorkPage({ params }: Props) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  requestLocale(locale);
   // The CAD prints left the wall for the shop; an old link to one still lands
   // on that print. Temporary on purpose: /arbeiten may carry CAD work again
   // once it is a service rather than a product.

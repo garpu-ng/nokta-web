@@ -1,6 +1,11 @@
 import { permanentRedirect } from "next/navigation";
+import { PRINTS } from "@/lib/prints";
 
 type Props = { params: Promise<{ slug: string }> };
+
+export function generateStaticParams() {
+  return PRINTS.map((print) => ({ slug: print.slug }));
+}
 
 // Every print used to have its passport page under /line. The passport lives at
 // /shop/[slug] now, so the slug is carried across unchanged — an old link to a

@@ -10,7 +10,7 @@ import KindMark, { type DoorKind } from "@/components/nokta/KindMark";
 import SectionRule from "@/components/nokta/SectionRule";
 import { workAnnotation } from "@/components/work/WorkAnno";
 import { KIND_FIELD } from "@/lib/colors";
-import { getLocale, getT, type Translate } from "@/lib/i18n";
+import { getLocale, getT, requestLocale, type Translate } from "@/lib/i18n";
 import { getMediaSize } from "@/lib/mediaSizes";
 import { socialMetadata } from "@/lib/socialMeta";
 import { getWork, type Work } from "@/lib/works";
@@ -82,7 +82,12 @@ const DOOR_HREF: Partial<Record<string, string>> = {
   cad: "/kontakt?kind=cad",
 };
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  requestLocale((await params).locale);
   const t = await getT();
   const locale = await getLocale();
   const title = t("meta.home.title");
@@ -214,7 +219,12 @@ function Plate({
   );
 }
 
-export default async function HomePage() {
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  requestLocale((await params).locale);
   const t = await getT();
   const [lead, ...set] = featured();
   const leadText = description(lead, t);

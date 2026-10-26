@@ -6,7 +6,7 @@ import DiscField from "@/components/nokta/DiscField";
 import PlateHead from "@/components/nokta/PlateHead";
 import SectionRule from "@/components/nokta/SectionRule";
 import { KIND_FIELD } from "@/lib/colors";
-import { getLocale, getT } from "@/lib/i18n";
+import { getLocale, getT, requestLocale } from "@/lib/i18n";
 import { getMediaSize } from "@/lib/mediaSizes";
 import { socialMetadata } from "@/lib/socialMeta";
 import { WORKS } from "@/lib/works";
@@ -29,7 +29,12 @@ const FACTS = [0, 1, 2, 3];
 const STEPS = [0, 1, 2, 3];
 const NEEDS = [0, 1, 2, 3, 4];
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  requestLocale((await params).locale);
   const t = await getT();
   const locale = await getLocale();
   const title = t("meta.bt.title");
@@ -42,7 +47,12 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function BautraegerPage() {
+export default async function BautraegerPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  requestLocale((await params).locale);
   const t = await getT();
   const title = `${t("bt.heading")}.`;
   const renderings = WORKS.filter((w) => w.kind === "rendering").slice(0, 3);

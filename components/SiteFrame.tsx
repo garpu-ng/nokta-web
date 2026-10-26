@@ -1,14 +1,12 @@
-import type { Metadata } from "next";
 import { DM_Sans, Syne } from "next/font/google";
 import Link from "next/link";
-import "./globals.css";
 import Footer from "@/components/Footer";
 import LanguageToggle from "@/components/LanguageToggle";
 import NavLinks from "@/components/NavLinks";
 import Wordmark from "@/components/Wordmark";
 import { getLocale, getT } from "@/lib/i18n";
-import { socialMetadata } from "@/lib/socialMeta";
-import styles from "./layout.module.css";
+import styles from "@/app/[locale]/layout.module.css";
+import "@/app/globals.css";
 
 /* Fonts are self-hosted at build time via next/font (GDPR: the browser never
    talks to Google Fonts). Exposed as CSS variables consumed by tokens.css.
@@ -44,25 +42,8 @@ const syne = Syne({
   variable: "--font-syne",
 });
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getT();
-  const locale = await getLocale();
-  const title = t("meta.site.title");
-  const description = t("meta.site.desc");
-  return {
-    title,
-    description,
-    metadataBase: new URL("https://www.nokta-studio.de"),
-    // Studio-wide default social card. No `path` → no og:url here, so the
-    // pages that inherit this block (studio, kontakt, legal…) don't pick up a
-    // wrong canonical; home and the work pages set their own url. The card
-    // image comes from app/opengraph-image.tsx + app/twitter-image.tsx.
-    ...socialMetadata({ title, description, locale }),
-  };
-}
-
 /** schema.org ProfessionalService for the studio. The url is the canonical
-    host (metadataBase above) — the bare domain 308s onto it. */
+    host — the bare domain 308s onto it. */
 function studioJsonLd(description: string) {
   const site = "https://www.nokta-studio.de";
   return {
@@ -87,11 +68,11 @@ function studioJsonLd(description: string) {
   };
 }
 
-export default async function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+// The document shell shared by the locale layout and the global 404. The
+// caller pins the locale first (the [locale] segment, or the nk_lang cookie
+// on a route that has no segment) so this render stays off the cookie when
+// the page is static.
+export default async function SiteFrame({ children }: { children: React.ReactNode }) {
   const locale = await getLocale();
   const t = await getT();
   return (

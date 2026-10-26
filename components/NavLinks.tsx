@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { stripLocalePrefix } from "@/lib/locales";
 import styles from "./NavLinks.module.css";
 
 /* The pages of the sheet. Each is set lowercase with its own trailing
@@ -22,7 +23,9 @@ export default function NavLinks({
   items: Item[];
   navLabel: string;
 }) {
-  const pathname = usePathname();
+  // The proxy rewrites onto /de, /en, /tr, /ja. The address bar stays
+  // unprefixed; strip in case the router reports the internal path.
+  const pathname = stripLocalePrefix(usePathname());
 
   return (
     <nav className={styles.nav} aria-label={navLabel}>

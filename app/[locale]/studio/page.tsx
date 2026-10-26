@@ -5,7 +5,7 @@ import Reveal from "@/components/Reveal";
 import PlateHead from "@/components/nokta/PlateHead";
 import RidgeField from "@/components/nokta/RidgeField";
 import ServiceIndex from "@/components/nokta/ServiceIndex";
-import { getLocale, getT } from "@/lib/i18n";
+import { getLocale, getT, requestLocale } from "@/lib/i18n";
 import { getMediaSize } from "@/lib/mediaSizes";
 import { socialMetadata } from "@/lib/socialMeta";
 import styles from "./page.module.css";
@@ -59,7 +59,12 @@ const TEAM: Member[] = [
   },
 ];
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  requestLocale((await params).locale);
   const t = await getT();
   const locale = await getLocale();
   const title = t("meta.studio.title");
@@ -75,7 +80,12 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function StudioPage() {
+export default async function StudioPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  requestLocale((await params).locale);
   const t = await getT();
   const locale = await getLocale();
   const title = `${t("studio.heading")}.`;

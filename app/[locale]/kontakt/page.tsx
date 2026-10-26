@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import InquiryForm from "@/components/kontakt/InquiryForm";
 import InterferenceField from "@/components/nokta/InterferenceField";
 import PlateHead from "@/components/nokta/PlateHead";
-import { getLocale, getT } from "@/lib/i18n";
+import { getLocale, getT, requestLocale } from "@/lib/i18n";
 import { socialMetadata } from "@/lib/socialMeta";
 import styles from "./page.module.css";
 
@@ -18,7 +18,12 @@ import styles from "./page.module.css";
    agree — and it is dots, so the page's one sanctioned red FIELD is still the
    rail's disc and nothing here spends it twice. */
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  requestLocale((await params).locale);
   const t = await getT();
   const locale = await getLocale();
   const title = t("meta.kontakt.title");
@@ -38,10 +43,13 @@ export async function generateMetadata(): Promise<Metadata> {
 const KINDS = ["visualisierung", "editorial", "druck", "cad"];
 
 export default async function KontaktPage({
+  params,
   searchParams,
 }: {
+  params: Promise<{ locale: string }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
+  requestLocale((await params).locale);
   const t = await getT();
   // ?kind= preselects a chip (the home page's CAD door lands here with "cad").
   // Anything else leaves the form on its first kind.

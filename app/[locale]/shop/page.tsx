@@ -5,7 +5,7 @@ import Link from "next/link";
 import DiscField from "@/components/nokta/DiscField";
 import PlateHead from "@/components/nokta/PlateHead";
 import { KIND_FIELD, PAPER } from "@/lib/colors";
-import { getLocale, getT } from "@/lib/i18n";
+import { getLocale, getT, requestLocale } from "@/lib/i18n";
 import { getMediaSize } from "@/lib/mediaSizes";
 import { PRINTS } from "@/lib/prints";
 import { socialMetadata } from "@/lib/socialMeta";
@@ -19,7 +19,12 @@ import styles from "./page.module.css";
 
 const PALETTE = [KIND_FIELD.cad, PAPER];
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  requestLocale((await params).locale);
   const t = await getT();
   const locale = await getLocale();
   const title = t("meta.shop.title");
@@ -32,7 +37,12 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function ShopPage() {
+export default async function ShopPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  requestLocale((await params).locale);
   const t = await getT();
   const title = `${t("shop.heading")}.`;
 

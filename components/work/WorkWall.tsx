@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Reveal from "@/components/Reveal";
-import type { WorkKind } from "@/lib/works";
+import { isWorkKind, type WorkKind } from "@/lib/works";
 import WorkCard, { type WallItem } from "./WorkCard";
 import styles from "./WorkWall.module.css";
 
@@ -24,9 +24,9 @@ import styles from "./WorkWall.module.css";
    The cards enter through the shared Reveal primitive, staggered left-then-
    right so a row lands as a pair rather than a block.
 
-   Which filter the wall opens on is decided on the server: /arbeiten?kind=
-   rendering renders the renderings, so the homepage's doors land on their own
-   material rather than flashing another one and then swapping. */
+   The page prerenders the whole wall. A copied /arbeiten?kind= link applies
+   once the chips hydrate — the document itself does not vary by the query,
+   which is what lets the four languages be cached. */
 
 /** A chip's value: one kind, or the whole wall. */
 export type WallFilter = WorkKind | "all";
@@ -51,7 +51,21 @@ export default function WorkWall({
       looks */
   wallClassName: string;
 }) {
-  const [active, setActive] = useState<WallFilter>(initialKind);
+  // The prerender is always the full wall. A shared /arbeiten?kind= link is
+  // applied from the address bar once the client takes over; useSyncExternalStore
+  // keeps that read out of an effect so the first paint and hydration agree.
+  const fromUrl = useSyncExternalStore(
+    () => () => {},
+    () => {
+      const requested = new URLSearchParams(window.location.search).get("kind");
+      return isWorkKind(requested) && kinds.some((k) => k.kind === requested)
+        ? requested
+        : "all";
+    },
+    () => initialKind,
+  );
+  const [picked, setPicked] = useState<WallFilter | null>(null);
+  const active = picked ?? fromUrl;
   const shows = (kind: WorkKind, filter: WallFilter) => filter === "all" || kind === filter;
 
   /* Which card the reader actually sees first, and therefore which image is
@@ -75,11 +89,10 @@ export default function WorkWall({
   }
 
   /* Keep the URL honest about what is on screen, so a narrowed wall can be
-     copied out of the address bar — the server already reads ?kind= and
-     renders the same set. replaceState rather than the router: this is the
-     same page with a different filter, and a real navigation would refetch it
-     and cost a flash. History is replaced, not pushed, so the back button
-     still leaves the wall instead of walking back through filter states. */
+     copied out of the address bar. replaceState rather than the router: this
+     is the same page with a different filter, and a real navigation would
+     refetch it and cost a flash. History is replaced, not pushed, so the back
+     button still leaves the wall instead of walking back through filter states. */
   const first = useRef(true);
   useEffect(() => {
     if (first.current) {
@@ -98,7 +111,7 @@ export default function WorkWall({
             type="button"
             className="nk-chip"
             aria-pressed={active === "all"}
-            onClick={() => setActive("all")}
+            onClick={() => setPicked("all")}
           >
             {allLabel}
           </button>
@@ -108,7 +121,7 @@ export default function WorkWall({
               type="button"
               className="nk-chip"
               aria-pressed={active === kind}
-              onClick={() => setActive(kind)}
+              onClick={() => setPicked(kind)}
             >
               {label}
             </button>

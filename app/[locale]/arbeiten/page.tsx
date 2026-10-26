@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 import Link from "next/link";
-import { connection } from "next/server";
 import Reveal from "@/components/Reveal";
 import DiscField from "@/components/nokta/DiscField";
 import KindMark, { type DoorKind } from "@/components/nokta/KindMark";
@@ -9,24 +8,24 @@ import PlateHead from "@/components/nokta/PlateHead";
 import { toWallItem, type WallItem } from "@/components/work/WorkCard";
 import WorkWall, { type WallFilter } from "@/components/work/WorkWall";
 import { KIND_FIELD } from "@/lib/colors";
-import { getLocale, getT } from "@/lib/i18n";
+import { getLocale, getT, requestLocale } from "@/lib/i18n";
 import { getMediaSize } from "@/lib/mediaSizes";
 import { PRINTS, type Print } from "@/lib/prints";
 import { socialMetadata } from "@/lib/socialMeta";
-import { WORKS, isWorkKind, type WorkKind } from "@/lib/works";
+import { WORKS, type WorkKind } from "@/lib/works";
 import styles from "./page.module.css";
 
 /* /arbeiten: the overview. A short line on what hangs here, two doors into
    the two materials the studio leads with, then the whole wall: every work
-   and the shop's line prints, shuffled on each visit, with "Alle" pressed.
+   and the shop's line prints, in one fixed shuffle, with "Alle" pressed.
 
    The doors are the homepage's material fields made larger: visualisation
    opens /3d-visualisierung, the page that states that service in words;
    editorial opens the report, which is the editorial work on the site.
 
-   ?kind= still narrows the wall on the server (the homepage's doors land on
-   their own material that way). A missing or unknown kind opens on "Alle"
-   rather than 404ing: a filter is not worth a 404.
+   ?kind= still narrows the wall. The document itself is the full wall — one
+   prerendered page per language — and the chips apply the query in the
+   browser, so a filter is not a separate render and not a 404.
 
    NOTE: this route previously answered with a 308 permanentRedirect to "/".
    Browsers cache permanent redirects hard, so a reader who hit /arbeiten
@@ -47,7 +46,12 @@ const DOORS: { kind: DoorKind; href: string; key: string }[] = [
   { kind: "editorial", href: "/arbeiten/abschlussbericht-ki-kommission", key: "arbeiten.door.editorial" },
 ];
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  requestLocale((await params).locale);
   const t = await getT();
   const locale = await getLocale();
   const title = t("meta.arbeiten.title");
@@ -79,15 +83,29 @@ function printToWallItem(print: Print, t: (key: string) => string): WallItem {
   };
 }
 
+/** mulberry32. A fixed seed, not Math.random: the draw has to be the same on
+    every request and in every language, or the page cannot be prerendered. */
+function mulberry32(seed: number) {
+  return function () {
+    seed |= 0;
+    seed = (seed + 0x6d2b79f5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
 /** Fisher-Yates, then a few more draws until no three cards of one kind stand
     in a row, so a shuffle never reads as a section by accident. Gives up after
-    a handful of tries and keeps the last draw: it is a nicety, not a rule. */
+    a handful of tries and keeps the last draw: it is a nicety, not a rule.
+    The seed is constant, so the order is stable for the life of a build. */
 function shuffle(items: WallItem[]): WallItem[] {
+  const rand = mulberry32(0x6e6b7461);
   let out = items;
   for (let attempt = 0; attempt < 30; attempt++) {
     out = [...items];
     for (let i = out.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
+      const j = Math.floor(rand() * (i + 1));
       [out[i], out[j]] = [out[j], out[i]];
     }
     const clumped = out.some(
@@ -99,14 +117,12 @@ function shuffle(items: WallItem[]): WallItem[] {
 }
 
 export default async function ArbeitenPage({
-  searchParams,
+  params,
 }: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+  params: Promise<{ locale: string }>;
 }) {
+  requestLocale((await params).locale);
   const t = await getT();
-  const requested = (await searchParams).kind;
-  // Rendered per request, never prerendered: the order is drawn fresh each time.
-  await connection();
 
   // Every string the wall shows is translated here: WorkWall is a client
   // component and never reaches for a dictionary itself.
@@ -118,8 +134,9 @@ export default async function ArbeitenPage({
     (kind) => ({ kind, label: t(`work.kind.${kind}`) }),
   );
 
-  const initialKind: WallFilter =
-    isWorkKind(requested) && kinds.some((k) => k.kind === requested) ? requested : "all";
+  // The document is always the whole wall. WorkWall reads ?kind= after
+  // hydration and hides the rest, which keeps this route static.
+  const initialKind: WallFilter = "all";
 
   const title = `${t("home.wall.label")}.`;
 

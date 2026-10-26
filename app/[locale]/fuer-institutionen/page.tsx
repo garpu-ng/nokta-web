@@ -7,7 +7,7 @@ import PlateHead from "@/components/nokta/PlateHead";
 import SectionRule from "@/components/nokta/SectionRule";
 import { workAnnotation } from "@/components/work/WorkAnno";
 import { KIND_FIELD } from "@/lib/colors";
-import { getLocale, getT } from "@/lib/i18n";
+import { getLocale, getT, requestLocale } from "@/lib/i18n";
 import { getMediaSize } from "@/lib/mediaSizes";
 import { socialMetadata } from "@/lib/socialMeta";
 import { getWork } from "@/lib/works";
@@ -32,7 +32,12 @@ const FACTS = [0, 1, 2, 3];
 const SCOPE = [0, 1, 2, 3];
 const STEPS = [0, 1, 2, 3];
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  requestLocale((await params).locale);
   const t = await getT();
   const locale = await getLocale();
   const title = t("meta.inst.title");
@@ -45,7 +50,12 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function InstitutionenPage() {
+export default async function InstitutionenPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  requestLocale((await params).locale);
   const t = await getT();
   const title = `${t("inst.heading")}.`;
   const ref = getWork(REF);
