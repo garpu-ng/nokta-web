@@ -64,7 +64,7 @@ export default async function Footer() {
       </div>
 
       <div className={styles.bottom}>
-        <span>© 2026 nokta · Düsseldorf, DE</span>
+        <span>© 2026 nokta · NRW, DE</span>
         <span>{t("footer.disciplines")}</span>
       </div>
     </footer>

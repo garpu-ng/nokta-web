@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Datenschutz · nokta",
-  description: "Datenschutzerklärung von nokta, Designstudio in Düsseldorf: welche Daten die Website verarbeitet und wofür.",
+  description: "Datenschutzerklärung von nokta, Designstudio aus NRW: welche Daten die Website verarbeitet und wofür.",
   alternates: { canonical: "/datenschutz" },
 };
 

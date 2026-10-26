@@ -6,23 +6,23 @@
 // annotated "Self-initiated", nothing more.
 const en: Record<string, string> = {
   // ── Metadata ──────────────────────────────────────────────────────
-  "meta.site.title": "nokta · design studio, Düsseldorf",
-  "meta.site.desc": "Design studio in Düsseldorf. We draw buildings, books and prints: visualisation, typesetting, prepress and CAD plans.",
-  "meta.home.title": "nokta · 3D visualisation, typesetting and print in Düsseldorf",
-  "meta.home.desc": "Design studio in Düsseldorf: 3D visualisation and architectural visualisation, editorial and typesetting, print production and CAD plans. Visualisation for architects and property developers in NRW, typesetting for books and annual reports.",
+  "meta.site.title": "nokta · design studio from NRW",
+  "meta.site.desc": "Design studio from NRW. We draw buildings, books and prints: visualisation, typesetting, prepress and CAD plans.",
+  "meta.home.title": "nokta · 3D visualisation, typesetting and print from NRW",
+  "meta.home.desc": "Design studio from NRW: 3D visualisation and architectural visualisation, editorial and typesetting, print production and CAD plans. Visualisation for architects and property developers in NRW, typesetting for books and annual reports.",
   "meta.studio.title": "Studio · nokta",
-  "meta.studio.desc": "The studio behind the work: three people in Düsseldorf. Architectural visualisation, editorial and typesetting, print production and CAD plans.",
+  "meta.studio.desc": "The studio behind the work: three people from NRW. Architectural visualisation, editorial and typesetting, print production and CAD plans.",
   "meta.kontakt.title": "Contact · nokta",
-  "meta.kontakt.desc": "Inquiries to nokta in Düsseldorf: architectural visualisation, visualisation for property developers in NRW, typesetting of annual reports and books, print and CAD plans.",
+  "meta.kontakt.desc": "Inquiries to nokta from NRW: architectural visualisation, visualisation for property developers in NRW, typesetting of annual reports and books, print and CAD plans.",
   "meta.arbeiten.title": "Work · nokta",
-  "meta.arbeiten.desc": "Work by nokta, Düsseldorf: 3D visualisations, editorial and typesetting, studies and line prints. Every piece on its own page.",
+  "meta.arbeiten.desc": "Work by nokta from NRW: 3D visualisations, editorial and typesetting, studies and line prints. Every piece on its own page.",
   "meta.shop.title": "Shop · nokta",
   "meta.shop.desc": "Line prints by nokta: well-known buildings as vectorised CAD drawings, printed in A1 and framed.",
 
   // ── Home ──────────────────────────────────────────────────────────
   "home.wall.label": "Work",
   "home.wall.aria": "All work",
-  "home.hero.eyebrow": "Design studio in Düsseldorf",
+  "home.hero.eyebrow": "Design studio from NRW",
   "home.hero.title": "We make architecture visible.",
   "home.hero.sub": "3D visualisation, editorial and print for architecture practices, private clients and public bodies.",
   "home.hero.ctaWork": "See the work",
@@ -124,7 +124,7 @@ const en: Record<string, string> = {
   // ── Studio ────────────────────────────────────────────────────────
   "studio.heading": "Studio",
   "studio.services.note": "four lines · one deliverable each",
-  "studio.p1": "nokta is a design studio in Düsseldorf. There are three of us, and we draw buildings, books and prints: architectural visualisation, editorial and typesetting, print production and CAD plans.",
+  "studio.p1": "nokta is a design studio from NRW. There are three of us, and we draw buildings, books and prints: architectural visualisation, editorial and typesetting, print production and CAD plans.",
   "studio.p2": "We build our own tools and workflows: render setups, typesetting templates and prepress checks. At the start of a project there are several versions on the table.",
   "studio.p3": "We started with architectural visualisation, and it is still the largest part of the work: photorealistic 3D renderings of interiors and exteriors. They show a project as it will look, before it is built.",
   "studio.team": "The team",
@@ -159,7 +159,7 @@ const en: Record<string, string> = {
   "kontakt.form.error.fields": "Please fill in name, email and message, and check the email address for typos.",
   "kontakt.form.error.busy": "A lot of enquiries have just come from here. Please try again in an hour.",
   "kontakt.form.nojs": "The form needs JavaScript. Write to us directly: hallo@nokta-studio.de",
-  "kontakt.addr.region": "Düsseldorf, Germany",
+  "kontakt.addr.region": "NRW, Germany",
   "kontakt.mailAria": "Write an email",
 
   // ── Line prints — passport, specification, purchase (/arbeiten/[slug]) ─
@@ -219,7 +219,7 @@ const en: Record<string, string> = {
   "projects.scope.velostation": "2 images · interior",
 
   // ── 3D visualisation (/3d-visualisierung) ─────────────────────────
-  "meta.viz.title": "3D visualisation and architectural visualisation in Düsseldorf · nokta",
+  "meta.viz.title": "3D visualisation and architectural visualisation from NRW · nokta",
   "meta.viz.desc": "Photorealistic 3D visualisations of buildings and interiors for architects, property developers and private clients in Düsseldorf and NRW. Exterior and interior views, clay renders, images at print resolution.",
   "viz.heading": "3D visualisation",
   "viz.claim": "Photorealistic images of buildings and interiors before they are built.",
@@ -253,7 +253,7 @@ const en: Record<string, string> = {
   "viz.faq.1.q": "Which documents do you need?",
   "viz.faq.1.a": "Floor plans, elevations and sections are enough to start, as PDF or DWG. A 3D model, material details and reference images help, but are not required.",
   "viz.faq.2.q": "Do you only work in Düsseldorf?",
-  "viz.faq.2.a": "No. The studio is in Düsseldorf, and we coordinate by email and video call. We work for clients across NRW and beyond.",
+  "viz.faq.2.a": "No. The studio is from NRW, and we coordinate by email and video call. We work for clients across NRW and beyond.",
   "viz.faq.3.q": "Can you visualise interiors too?",
   "viz.faq.3.a": "Yes. About half of our images show interiors, from a living room to the workshop of a bicycle station.",
   "viz.cta.text": "Planning a project and need images of it?",
@@ -308,7 +308,7 @@ const en: Record<string, string> = {
   // tag1 stacks over studio.motto in the colophon brand block
   // (components/Footer.tsx); the motto is also the root social card caption
   // (app/opengraph-image.tsx, lowercased).
-  "footer.tag1": "Design studio in Düsseldorf.",
+  "footer.tag1": "Design studio from NRW.",
   // The studio's line. One string, three places: the footer, the
   // generated social card, and the homepage plate it is knocked into.
   "studio.motto": "From the dot by way of the line to the form.",

@@ -1,23 +1,23 @@
 // Türkçe
 const tr: Record<string, string> = {
   // ── Üst veri ──────────────────────────────────────────────────────
-  "meta.site.title": "nokta · tasarım stüdyosu, Düsseldorf",
-  "meta.site.desc": "Düsseldorf’ta tasarım stüdyosu. Yapılar, kitaplar ve baskılar çiziyoruz: görselleştirme, dizgi, baskı öncesi ve CAD planları.",
-  "meta.home.title": "nokta · Düsseldorf’ta 3B görselleştirme, dizgi ve baskı",
-  "meta.home.desc": "Düsseldorf’ta tasarım stüdyosu: 3B görselleştirme ve mimari görselleştirme, editoryal ve dizgi, baskı üretimi ve CAD planları. NRW’deki mimarlık ofisleri ve inşaat şirketleri için görselleştirme, kitaplar ve faaliyet raporları için dizgi.",
+  "meta.site.title": "nokta · NRW’den tasarım stüdyosu",
+  "meta.site.desc": "NRW’den tasarım stüdyosu. Yapılar, kitaplar ve baskılar çiziyoruz: görselleştirme, dizgi, baskı öncesi ve CAD planları.",
+  "meta.home.title": "nokta · NRW’den 3B görselleştirme, dizgi ve baskı",
+  "meta.home.desc": "NRW’den tasarım stüdyosu: 3B görselleştirme ve mimari görselleştirme, editoryal ve dizgi, baskı üretimi ve CAD planları. NRW’deki mimarlık ofisleri ve inşaat şirketleri için görselleştirme, kitaplar ve faaliyet raporları için dizgi.",
   "meta.studio.title": "Stüdyo · nokta",
-  "meta.studio.desc": "İşlerin arkasındaki stüdyo: Düsseldorf’ta üç kişi. Mimari görselleştirme, editoryal ve dizgi, baskı üretimi ve CAD planları.",
+  "meta.studio.desc": "İşlerin arkasındaki stüdyo: NRW’den üç kişi. Mimari görselleştirme, editoryal ve dizgi, baskı üretimi ve CAD planları.",
   "meta.kontakt.title": "İletişim · nokta",
-  "meta.kontakt.desc": "Düsseldorf’taki nokta’ya talep: mimari görselleştirme, NRW’deki inşaat şirketleri için görselleştirme, faaliyet raporu ve kitap dizgisi, baskı ve CAD planları.",
+  "meta.kontakt.desc": "NRW’den nokta’ya talep: mimari görselleştirme, NRW’deki inşaat şirketleri için görselleştirme, faaliyet raporu ve kitap dizgisi, baskı ve CAD planları.",
   "meta.arbeiten.title": "İşler · nokta",
-  "meta.arbeiten.desc": "nokta’nın işleri, Düsseldorf: 3B görselleştirmeler, editoryal ve dizgi, çalışmalar ve çizgi baskılar. Her iş kendi sayfasında.",
+  "meta.arbeiten.desc": "NRW’den nokta’nın işleri: 3B görselleştirmeler, editoryal ve dizgi, çalışmalar ve çizgi baskılar. Her iş kendi sayfasında.",
   "meta.shop.title": "Mağaza · nokta",
   "meta.shop.desc": "nokta’dan çizgi baskılar: tanınmış yapılar vektörel CAD çizimi olarak, A1 basılı ve çerçeveli.",
 
   // ── Ana sayfa ─────────────────────────────────────────────────────
   "home.wall.label": "işler",
   "home.wall.aria": "Tüm işler",
-  "home.hero.eyebrow": "Düsseldorf’ta tasarım stüdyosu",
+  "home.hero.eyebrow": "NRW’den tasarım stüdyosu",
   "home.hero.title": "Mimariyi görünür kılıyoruz.",
   "home.hero.sub": "Mimarlık ofisleri, bireysel müşteriler ve kamu işverenleri için 3B görselleştirme, editoryal ve baskı.",
   "home.hero.ctaWork": "İşleri gör",
@@ -117,7 +117,7 @@ const tr: Record<string, string> = {
   // ── Stüdyo ────────────────────────────────────────────────────────
   "studio.heading": "Stüdyo",
   "studio.services.note": "dört satır · her birine bir sonuç",
-  "studio.p1": "nokta, Düsseldorf’ta bir tasarım stüdyosu. Üç kişiyiz; yapılar, kitaplar ve baskılar çiziyoruz: mimari görselleştirme, editoryal ve dizgi, baskı üretimi ve CAD planları.",
+  "studio.p1": "nokta, NRW’den bir tasarım stüdyosu. Üç kişiyiz; yapılar, kitaplar ve baskılar çiziyoruz: mimari görselleştirme, editoryal ve dizgi, baskı üretimi ve CAD planları.",
   "studio.p2": "Araçlarımızı ve iş akışlarımızı kendimiz kuruyoruz: render kurulumları, dizgi şablonları ve baskı öncesi kontrol adımları. Bir projenin başında masada birkaç varyasyon durur.",
   "studio.p3": "İşe mimari görselleştirmeyle başladık ve bugün de işin en büyük bölümü o: iç ve dış mekânların fotogerçekçi 3B render’ları. Bir projeyi daha inşa edilmeden, sonradan nasıl görüneceğiyle gösteriyorlar.",
   "studio.team": "Ekip",
@@ -152,7 +152,7 @@ const tr: Record<string, string> = {
   "kontakt.form.error.fields": "Lütfen ad, e-posta ve mesajı doldur, e-posta adresinde yazım hatası olup olmadığına da bak.",
   "kontakt.form.error.busy": "Buradan az önce çok fazla talep geldi. Lütfen bir saat sonra tekrar dene.",
   "kontakt.form.nojs": "Form JavaScript gerektiriyor. Bize doğrudan yaz: hallo@nokta-studio.de",
-  "kontakt.addr.region": "Düsseldorf, Almanya",
+  "kontakt.addr.region": "NRW, Almanya",
   "kontakt.mailAria": "E-posta yaz",
 
   // ── Çizgi baskılar — künye, spesifikasyon, satın alma (/arbeiten/[slug]) ─
@@ -211,7 +211,7 @@ const tr: Record<string, string> = {
   "projects.scope.velostation": "2 görsel · iç",
 
   // ── 3B görselleştirme (/3d-visualisierung) ────────────────────────
-  "meta.viz.title": "Düsseldorf’ta 3B görselleştirme ve mimari görselleştirme · nokta",
+  "meta.viz.title": "NRW’den 3B görselleştirme ve mimari görselleştirme · nokta",
   "meta.viz.desc": "Düsseldorf ve NRW’deki mimarlık ofisleri, inşaat şirketleri ve bireysel müşteriler için binaların ve iç mekânların fotogerçekçi 3B görselleştirmeleri. Dış ve iç görünüşler, clay render’lar, baskı çözünürlüğünde görseller.",
   "viz.heading": "3B görselleştirme",
   "viz.claim": "Binaların ve iç mekânların, daha inşa edilmeden fotogerçekçi görselleri.",
@@ -245,7 +245,7 @@ const tr: Record<string, string> = {
   "viz.faq.1.q": "Hangi belgelere ihtiyacınız var?",
   "viz.faq.1.a": "Başlangıç için PDF ya da DWG olarak kat planları, görünüşler ve kesitler yeterli. Bir 3B model, malzeme bilgileri ve referans görseller işe yarar ama şart değil.",
   "viz.faq.2.q": "Yalnızca Düsseldorf’ta mı çalışıyorsunuz?",
-  "viz.faq.2.a": "Hayır. Stüdyo Düsseldorf’ta, iletişim e-posta ve görüntülü görüşmeyle yürüyor. NRW’nin her yerinde ve ötesinde işverenler için çalışıyoruz.",
+  "viz.faq.2.a": "Hayır. Stüdyo NRW’den, iletişim e-posta ve görüntülü görüşmeyle yürüyor. NRW’nin her yerinde ve ötesinde işverenler için çalışıyoruz.",
   "viz.faq.3.q": "İç mekânları da görselleştirebiliyor musunuz?",
   "viz.faq.3.a": "Evet. Görsellerimizin yaklaşık yarısı iç mekân gösteriyor, bir oturma odasından bir bisiklet istasyonunun atölyesine kadar.",
   "viz.cta.text": "Bir proje mi planlıyorsun ve görsellerine mi ihtiyacın var?",
@@ -297,7 +297,7 @@ const tr: Record<string, string> = {
 
 
   // ── Alt bilgi ─────────────────────────────────────────────────────
-  "footer.tag1": "Düsseldorf’ta tasarım stüdyosu.",
+  "footer.tag1": "NRW’den tasarım stüdyosu.",
   // The studio's line. One string, three places: the footer, the
   // generated social card, and the homepage plate it is knocked into.
   "studio.motto": "Noktadan çizgiye, çizgiden forma.",

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Impressum · nokta",
-  description: "Impressum von nokta, Designstudio in Düsseldorf: Anbieterkennzeichnung nach § 5 DDG.",
+  description: "Impressum von nokta, Designstudio aus NRW: Anbieterkennzeichnung nach § 5 DDG.",
   alternates: { canonical: "/impressum" },
 };
 
