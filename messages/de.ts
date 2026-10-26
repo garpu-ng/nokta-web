@@ -19,8 +19,6 @@ const de: Record<string, string> = {
   "meta.arbeiten.desc": "Arbeiten von nokta aus NRW: 3D-Visualisierungen, Editorial und Satz, Studien und Liniendrucke. Jede Arbeit mit eigener Seite.",
   "meta.shop.title": "Shop · nokta",
   "meta.shop.desc": "Liniendrucke von nokta: bekannte Bauwerke als vektorisierte CAD-Zeichnung, in A1 gedruckt und gerahmt.",
-  "meta.impressum.desc": "Impressum von nokta, Designstudio aus NRW: Anbieterkennzeichnung nach § 5 DDG.",
-  "meta.datenschutz.desc": "Datenschutzerklärung von nokta, Designstudio aus NRW: welche Daten die Website verarbeitet und wofür.",
 
   // ── Home ──────────────────────────────────────────────────────────
   // wall.label/aria head the one wall, which hangs at /arbeiten since

@@ -1,19 +1,10 @@
 import type { Metadata } from "next";
-import { getLocale, getT } from "@/lib/i18n";
-import { socialMetadata } from "@/lib/socialMeta";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getT();
-  const locale = await getLocale();
-  const title = "Datenschutz · nokta";
-  const description = t("meta.datenschutz.desc");
-  return {
-    title,
-    description,
-    alternates: { canonical: "/datenschutz" },
-    ...socialMetadata({ title, description, locale, path: "/datenschutz" }),
-  };
-}
+export const metadata: Metadata = {
+  title: "Datenschutz · nokta",
+  description: "Datenschutzerklärung von nokta, Designstudio aus NRW: welche Daten die Website verarbeitet und wofür.",
+  alternates: { canonical: "/datenschutz" },
+};
 
 export default function DatenschutzPage() {
   return (

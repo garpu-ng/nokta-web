@@ -1,20 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getLocale, getT } from "@/lib/i18n";
-import { socialMetadata } from "@/lib/socialMeta";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getT();
-  const locale = await getLocale();
-  const title = "Impressum · nokta";
-  const description = t("meta.impressum.desc");
-  return {
-    title,
-    description,
-    alternates: { canonical: "/impressum" },
-    ...socialMetadata({ title, description, locale, path: "/impressum" }),
-  };
-}
+export const metadata: Metadata = {
+  title: "Impressum · nokta",
+  description: "Impressum von nokta, Designstudio aus NRW: Anbieterkennzeichnung nach § 5 DDG.",
+  alternates: { canonical: "/impressum" },
+};
 
 export default function ImpressumPage() {
   return (

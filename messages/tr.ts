@@ -13,8 +13,6 @@ const tr: Record<string, string> = {
   "meta.arbeiten.desc": "NRW’den nokta’nın işleri: 3B görselleştirmeler, editoryal ve dizgi, çalışmalar ve çizgi baskılar. Her iş kendi sayfasında.",
   "meta.shop.title": "Mağaza · nokta",
   "meta.shop.desc": "nokta’dan çizgi baskılar: tanınmış yapılar vektörel CAD çizimi olarak, A1 basılı ve çerçeveli.",
-  "meta.impressum.desc": "nokta’nın künyesi, NRW’den tasarım stüdyosu: § 5 DDG uyarınca sağlayıcı bilgisi.",
-  "meta.datenschutz.desc": "nokta’nın gizlilik bildirimi, NRW’den tasarım stüdyosu: sitenin hangi verileri ne için işlediği.",
 
   // ── Ana sayfa ─────────────────────────────────────────────────────
   "home.wall.label": "işler",

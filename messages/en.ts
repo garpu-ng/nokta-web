@@ -18,8 +18,6 @@ const en: Record<string, string> = {
   "meta.arbeiten.desc": "Work by nokta from NRW: 3D visualisations, editorial and typesetting, studies and line prints. Every piece on its own page.",
   "meta.shop.title": "Shop · nokta",
   "meta.shop.desc": "Line prints by nokta: well-known buildings as vectorised CAD drawings, printed in A1 and framed.",
-  "meta.impressum.desc": "Imprint of nokta, design studio from NRW: provider identification under § 5 DDG.",
-  "meta.datenschutz.desc": "Privacy notice of nokta, design studio from NRW: which data the website processes and what for.",
 
   // ── Home ──────────────────────────────────────────────────────────
   "home.wall.label": "Work",
