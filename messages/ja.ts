@@ -13,6 +13,8 @@ const ja: Record<string, string> = {
   "meta.arbeiten.desc": "NRW州のnoktaの作品：3Dビジュアライゼーション、エディトリアルと組版、スタディ、ラインプリント。それぞれに専用ページがあります。",
   "meta.shop.title": "ショップ · nokta",
   "meta.shop.desc": "noktaのラインプリント：名建築をベクター化したCAD図面として、A1で印刷し額装。",
+  "meta.impressum.desc": "noktaの会社概要、NRW州のデザインスタジオ：§ 5 DDGに基づく提供者表示。",
+  "meta.datenschutz.desc": "noktaのプライバシー、NRW州のデザインスタジオ：このサイトがどのデータを、何のために処理するか。",
 
   // ── ホーム ────────────────────────────────────────────────────────
   "home.wall.label": "作品",
