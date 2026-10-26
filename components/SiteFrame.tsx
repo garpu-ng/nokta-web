@@ -83,6 +83,9 @@ export default async function SiteFrame({ children }: { children: React.ReactNod
       lang={locale}
       data-scroll-behavior="smooth"
       className={`${dmSans.variable} ${syne.variable}`}
+      // /arbeiten sets data-nk-wall from ?kind= before paint. React does not
+      // own that attribute, so the mismatch stays on this element.
+      suppressHydrationWarning
     >
       {/* suppressHydrationWarning: browser extensions (e.g. asbplayer) inject
           attributes on <body> before React hydrates; this scopes the warning

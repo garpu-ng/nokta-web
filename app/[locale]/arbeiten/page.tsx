@@ -23,9 +23,9 @@ import styles from "./page.module.css";
    opens /3d-visualisierung, the page that states that service in words;
    editorial opens the report, which is the editorial work on the site.
 
-   ?kind= still narrows the wall. The document itself is the full wall — one
-   prerendered page per language — and the chips apply the query in the
-   browser, so a filter is not a separate render and not a 404.
+   ?kind= still narrows the wall. The document itself is the full wall, one
+   prerendered page per language. A blocking script and a style tag apply the
+   query before the wall paints, so the filter is not a separate render.
 
    NOTE: this route previously answered with a 308 permanentRedirect to "/".
    Browsers cache permanent redirects hard, so a reader who hit /arbeiten
@@ -134,9 +134,23 @@ export default async function ArbeitenPage({
     (kind) => ({ kind, label: t(`work.kind.${kind}`) }),
   );
 
-  // The document is always the whole wall. WorkWall reads ?kind= after
-  // hydration and hides the rest, which keeps this route static.
+  // The document is always the whole wall, so the route stays static. The
+  // script stamps the query onto <html> before the cards are parsed, and the
+  // style tag hides the rest. Neither changes the HTML per query.
   const initialKind: WallFilter = "all";
+  const presentKinds = kinds.map((entry) => entry.kind);
+  // A real script tag, not next/script: Next queues that one until after the
+  // first paint. This one is in the HTML and runs while the parser is still
+  // above the wall, so ?kind= is applied before those cards are drawn.
+  const wallFilterScript = `<script>(function(){try{var allowed=${JSON.stringify(presentKinds)};var k=new URLSearchParams(location.search).get("kind");if(k&&allowed.indexOf(k)!==-1)document.documentElement.dataset.nkWall=k;}catch(e){}})()</script>`;
+  const wallFilterCss = [
+    ...presentKinds.map(
+      (kind) =>
+        `html[data-nk-wall="${kind}"] [data-wall-kind]:not([data-wall-kind="${kind}"]){display:none}` +
+        `html[data-nk-wall="${kind}"] [data-wall-filter="${kind}"]{background:var(--paper);border-color:var(--paper);color:var(--ink)}`,
+    ),
+    `html[data-nk-wall] [data-wall-filter="all"][aria-pressed="true"]{background:none;border-color:var(--nk-hair);color:var(--paper)}`,
+  ].join("");
 
   const title = `${t("home.wall.label")}.`;
 
@@ -175,6 +189,8 @@ export default async function ArbeitenPage({
         ))}
       </nav>
 
+      <div suppressHydrationWarning dangerouslySetInnerHTML={{ __html: wallFilterScript }} />
+      <style dangerouslySetInnerHTML={{ __html: wallFilterCss }} />
       <WorkWall
         items={items}
         kinds={kinds}

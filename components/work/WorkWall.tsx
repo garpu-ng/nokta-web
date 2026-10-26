@@ -1,14 +1,14 @@
 "use client";
 
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
 import Reveal from "@/components/Reveal";
 import { isWorkKind, type WorkKind } from "@/lib/works";
 import WorkCard, { type WallItem } from "./WorkCard";
 import styles from "./WorkWall.module.css";
 
 /* The wall: every piece the studio shows, the shop's line prints included,
-   in an order the page shuffles on each visit. The kinds are stamps and a
-   filter, never sections, never headings.
+   in one fixed order. The kinds are stamps and a filter, never sections,
+   never headings.
 
    "Alle" leads the chips and is where the wall opens: the page is the overview
    now, and the two doors above it (app/arbeiten/page.tsx) are the way into one
@@ -24,9 +24,11 @@ import styles from "./WorkWall.module.css";
    The cards enter through the shared Reveal primitive, staggered left-then-
    right so a row lands as a pair rather than a block.
 
-   The page prerenders the whole wall. A copied /arbeiten?kind= link applies
-   once the chips hydrate — the document itself does not vary by the query,
-   which is what lets the four languages be cached. */
+   The page prerenders the whole wall. A copied /arbeiten?kind= link is applied
+   by a blocking script before paint (app/[locale]/arbeiten/page.tsx). This
+   component catches up after hydration and keeps the attribute in step with
+   the chips. The document itself does not vary by the query, which is what
+   lets the four languages be cached. */
 
 /** A chip's value: one kind, or the whole wall. */
 export type WallFilter = WorkKind | "all";
@@ -51,9 +53,8 @@ export default function WorkWall({
       looks */
   wallClassName: string;
 }) {
-  // The prerender is always the full wall. A shared /arbeiten?kind= link is
-  // applied from the address bar once the client takes over; useSyncExternalStore
-  // keeps that read out of an effect so the first paint and hydration agree.
+  // The prerender is always the full wall. The address bar is read here so the
+  // chips and the hidden cards match ?kind= once React is running.
   const fromUrl = useSyncExternalStore(
     () => () => {},
     () => {
@@ -66,14 +67,28 @@ export default function WorkWall({
   );
   const [picked, setPicked] = useState<WallFilter | null>(null);
   const active = picked ?? fromUrl;
+  // False only for the hydration render, which still believes the wall is
+  // unfiltered. Touching data-nk-wall then would undo the script and flash
+  // every card before the client snapshot arrives.
+  const clientReady = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
   const shows = (kind: WorkKind, filter: WallFilter) => filter === "all" || kind === filter;
 
-  /* Which card the reader actually sees first, and therefore which image is
-     the page's LCP. Filtering only hides cards, so it is the first item the
-     server-rendered filter leaves standing — /arbeiten?kind=rendering must
-     hand its priority to the first rendering, not to the first card in the
-     wall order. Read from initialKind rather than the live filter: this
-     decides the FIRST paint, and pressing a chip later must not re-prioritise
+  useLayoutEffect(() => {
+    if (!clientReady) return;
+    const root = document.documentElement;
+    if (active === "all") delete root.dataset.nkWall;
+    else root.dataset.nkWall = active;
+    return () => {
+      delete root.dataset.nkWall;
+    };
+  }, [clientReady, active]);
+
+  /* Which image is fetched first. The HTML is the whole wall, so this stays
+     the first card of that wall. Pressing a chip later must not re-prioritise
      images the browser has already fetched. */
   const leadSlug = items.find((item) => shows(item.kind, initialKind))?.slug;
 
@@ -111,6 +126,7 @@ export default function WorkWall({
             type="button"
             className="nk-chip"
             aria-pressed={active === "all"}
+            data-wall-filter="all"
             onClick={() => setPicked("all")}
           >
             {allLabel}
@@ -121,6 +137,7 @@ export default function WorkWall({
               type="button"
               className="nk-chip"
               aria-pressed={active === kind}
+              data-wall-filter={kind}
               onClick={() => setPicked(kind)}
             >
               {label}
@@ -136,6 +153,7 @@ export default function WorkWall({
           {items.map((item) => (
             <li
               key={item.slug}
+              data-wall-kind={item.kind}
               className={`${styles.cell} ${styles[`span${item.span}`]}${
                 !shows(item.kind, active) ? ` ${styles.filteredOut}` : ""
               }`}
