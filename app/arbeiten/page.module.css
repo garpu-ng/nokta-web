@@ -11,6 +11,22 @@
   padding: 48px var(--nk-gutter) 0;
 }
 
+.caseLine {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  margin: 22px 0 0;
+}
+
+.caseLink {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
 .introText {
   margin: 0;
   max-width: 44ch;

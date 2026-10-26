@@ -79,6 +79,17 @@
   text-wrap: pretty;
 }
 
+.caseLink {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
 .uses {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

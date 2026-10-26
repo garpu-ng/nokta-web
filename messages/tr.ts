@@ -401,6 +401,37 @@ const tr: Record<string, string> = {
   "inst.cta.text": "Bir rapor veya yayın mı planlıyorsunuz?",
   "inst.cta.note": "Kapsam ve tarihle birlikte form üzerinden veya hallo@nokta-studio.de adresine yazın. Yazılı bir teklif alırsınız.",
   "inst.cta.button": "Dizgi talep et",
+
+  // ── Vaka çalışmaları (/fallstudie/[slug]) ─────────────────────────
+  // Bir uygulama, bir sipariş iddiası değil. Müşteri adı yok.
+  "case.kicker": "Vaka çalışması",
+  "case.section.situation": "Çıkış noktası",
+  "case.section.images": "Görseller",
+  "case.section.use": "Kullanım",
+  "case.links.aria": "Devam",
+  "case.arch.for": "Mimarlık ofisleri için",
+  "case.fromWork": "Bu görsellerin vaka çalışması",
+
+  "meta.case.bt.title": "Vaka çalışması Sanktgores Residence · nokta",
+  "meta.case.bt.desc": "2024, NRW’de açık renk tuğlalı bir konutun dış ve iç görselleştirmesi. Altı görsel. Bu görünüşler broşürde şöyle kullanılabilir.",
+  "case.bt.claim": "Ortada yalnızca planlar varken broşür ve satış için görünüşler.",
+  "case.bt.situation": "Sanktgores Residence, 2024, NRW’de açık renk tuğlalı bir konutun dış ve iç görselleştirmesidir. Bir konut projesi yalnızca plan olarak dururken, dış ve iç görünüşler broşürde ve satışta gösterilebilir. Bu konutun görselleri bu kullanımın bir uygulamasıdır.",
+  "case.bt.images": "Altı görsel var, beşi dış, biri iç. Sokak cephesini, kalkan duvarını ve cephe detaylarını yumuşak gün ışığında gösterirler, ayrıca çatı altında bir odayı. Odakta açık renk tuğla, metal çatı ve kemerli ahşap pencereler vardır. Görünüşler yuvarlak pencereli kalkan duvarını, kemerli ahşap ek binayı ve üstündeki balkonu, tuğla cepheye bitişik camlı ahşap ek binayı ve ahşap kirişli, üç parçalı kemerli pencereli çatı katı odasını gösterir.",
+  "case.bt.use": "Bu görseller broşürde şöyle kullanılabilir. Kalkan duvarı, metal çatı ve çatı pencereleriyle sokak görünümü ilk sayfayı taşıyabilir. Detay görseller tuğlayı, çatıyı ve kemerli ahşap pencereleri yakından gösterir. İç görünüş, beş dış görünüşe çatı altındaki odayı ekler. Aynı dizi, ortada yalnızca planlar varken web sitesi ve şantiye panosu için de kullanılabilir.",
+  "case.bt.contact": "Bir konut projesinin görünümleri için hallo@nokta-studio.de adresine veya iletişim formu üzerinden yazın. Yazılı bir teklif alırsınız.",
+
+  "meta.case.arch.title": "Vaka çalışması Velostation · nokta",
+  "meta.case.arch.desc": "2022, ahşap yapılı bir bisiklet istasyonunun iç görselleştirmesi. İki görsel. Bu görünüşler yarışma ve ruhsatta şöyle kullanılabilir.",
+  "case.arch.claim": "Yarışma ve ruhsat için iç görünüşler.",
+  "case.arch.situation": "Velostation, 2022, ahşap yapılı bir bisiklet istasyonunun iç görselleştirmesidir. Bu tür iç görünüşler yarışma projelerinde, jüriye ya da işverene yapılan sunumlarda ve yapı ruhsatı başvurusu, tasarım kurulu ile belediye görüşmeleri için belgelerde kullanılabilir. İki görsel, bunun bu istasyonda nasıl görünebileceğini gösterir.",
+  "case.arch.images": "İki görsel var, ikisi de iç mekân. İki katlı bisiklet raflarıyla park salonunu ve galerili atölyeyi gösterirler, ikisi de ahşap ve gün ışığında. Salon ahşap bir tavanın altındadır. Atölyede tezgâhlar, bir döner merdiven ve galeri vardır.",
+  "case.arch.use": "Bu görseller yarışma ve ruhsatta şöyle kullanılabilir. Park salonu, raflı mekânı bir yarışma projesinde ve jüriye ya da işverene yapılan sunumda gösterebilir. Atölye yanında durabilir: galeri, tezgâhlar ve döner merdiven, yapı ruhsatı başvurusu veya tasarım kurulu ikinci bir iç görünüş istediğinde.",
+  "case.arch.contact": "Yarışma veya ruhsat için görünüşlerde hallo@nokta-studio.de adresine veya iletişim formu üzerinden yazın. Yazılı bir teklif alırsınız.",
+
+  "arbeiten.case.bt": "Proje geliştiriciler için: Sanktgores Residence",
+  "arbeiten.case.arch": "Mimarlık ofisleri için: Velostation",
+  "bt.case.link": "Vaka çalışması: Sanktgores Residence",
+  "viz.case.arch": "Vaka çalışması: Velostation",
 };
 
 export default tr;

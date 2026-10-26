@@ -412,6 +412,37 @@ const en: Record<string, string> = {
   "inst.cta.text": "You are planning a report or a publication?",
   "inst.cta.note": "Write to us through the form or to hallo@nokta-studio.de, with the scope and your date. You will get a written quote.",
   "inst.cta.button": "Request typesetting",
+
+  // ── Case studies (/fallstudie/[slug]) ─────────────────────────────
+  // An application, not a claim about a commission. No client names.
+  "case.kicker": "Case study",
+  "case.section.situation": "Starting point",
+  "case.section.images": "Images",
+  "case.section.use": "Use",
+  "case.links.aria": "Continue",
+  "case.arch.for": "For architecture practices",
+  "case.fromWork": "Case study of these images",
+
+  "meta.case.bt.title": "Case study Sanktgores Residence · nokta",
+  "meta.case.bt.desc": "Exterior and interior visualisation of a pale-brick house in NRW, 2024. Six images. This is how the views can be used in a brochure.",
+  "case.bt.claim": "Views for a brochure and for sales, while there are only plans.",
+  "case.bt.situation": "Sanktgores Residence, 2024, is the exterior and interior visualisation of a pale-brick house in NRW. While a housing project exists only as plans, exterior and interior views can be shown in the brochure and in sales. The images of this house are a way to do that.",
+  "case.bt.images": "There are six images, five exterior and one interior. They show the street side, the gable and façade details in soft daylight, plus a room under the roof. The focus is the pale brick, the metal roof and the arched timber windows. The views show the gable with its round window, the timber extension with round arches and a balcony above, the glazed timber extension against the brick façade, and the room under the roof with timber beams and a three-part arched window.",
+  "case.bt.use": "This is how these images can be used in a brochure. The street view, with gable, metal roof and roof windows, can carry the first page. The detail views show brick, roof and the arched timber windows up close. The interior view adds the room under the roof to the five exterior views. The same sequence can be used for the website and the site hoarding, while there are only plans.",
+  "case.bt.contact": "For views of a housing project, write to hallo@nokta-studio.de or use the contact form. You will get a written quote.",
+
+  "meta.case.arch.title": "Case study Velostation · nokta",
+  "meta.case.arch.desc": "Interior visualisation of a timber-built bicycle station, 2022. Two images. This is how the views can be used for competitions and planning.",
+  "case.arch.claim": "Interior views for competitions and planning.",
+  "case.arch.situation": "Velostation, 2022, is the interior visualisation of a timber-built bicycle station. Interior views of this kind can be used in competition entries, in presentations to juries and clients, and in documents for planning applications, design review panels and talks with the city. The two images show what that can look like for this station.",
+  "case.arch.images": "There are two images, both interiors. They show the parking hall with two-tier bike racks and the workshop with its gallery, both in timber and daylight. The hall sits under a timber ceiling. The workshop has workbenches, a spiral staircase and the gallery.",
+  "case.arch.use": "This is how these images can be used for competitions and planning. The parking hall can show the room with the bike racks in a competition entry, and in a presentation to juries and clients. The workshop can stand beside it, with the gallery, workbenches and a spiral staircase, when a planning application or a design review panel needs a second interior view.",
+  "case.arch.contact": "For views for a competition or a planning application, write to hallo@nokta-studio.de or use the contact form. You will get a written quote.",
+
+  "arbeiten.case.bt": "For property developers: Sanktgores Residence",
+  "arbeiten.case.arch": "For architecture practices: Velostation",
+  "bt.case.link": "Case study: Sanktgores Residence",
+  "viz.case.arch": "Case study: Velostation",
 };
 
 export default en;

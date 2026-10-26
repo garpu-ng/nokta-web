@@ -5,6 +5,7 @@ import Reveal from "@/components/Reveal";
 import DiscField from "@/components/nokta/DiscField";
 import PlateHead from "@/components/nokta/PlateHead";
 import SectionRule from "@/components/nokta/SectionRule";
+import { getCaseStudy } from "@/lib/caseStudies";
 import { KIND_FIELD } from "@/lib/colors";
 import { getLocale, getT } from "@/lib/i18n";
 import { getMediaSize } from "@/lib/mediaSizes";
@@ -124,6 +125,12 @@ export default async function BautraegerPage() {
           })}
         </ul>
         <p className={styles.more}>
+          {getCaseStudy("sanktgores") ? (
+            <Link href="/fallstudie/sanktgores" className={styles.moreLink}>
+              {t("bt.case.link")}
+              <span aria-hidden="true"> ↗</span>
+            </Link>
+          ) : null}
           <Link href="/3d-visualisierung" className={styles.moreLink}>
             {t("bt.work.more")}
             <span aria-hidden="true"> ↗</span>

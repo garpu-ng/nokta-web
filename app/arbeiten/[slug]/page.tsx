@@ -9,6 +9,7 @@ import ArtPlate from "@/components/nokta/ArtPlate";
 import CaseStudy from "@/components/nokta/CaseStudy";
 import FilmPlate from "@/components/nokta/FilmPlate";
 import WorkAnno, { workAnnotation } from "@/components/work/WorkAnno";
+import { getCaseStudy } from "@/lib/caseStudies";
 import { getLocale, getT, type Translate } from "@/lib/i18n";
 import { getMediaSize } from "@/lib/mediaSizes";
 import { PRINTS } from "@/lib/prints";
@@ -129,12 +130,18 @@ function imageStack(project: Project, title: string, t: Translate) {
     and two facts, before the stack itself. The desc line doubles as the page's
     meta description, so it is the sentence a shared link previews. */
 function projectIntro(slug: string, t: Translate) {
+  const study = getCaseStudy(slug);
   return (
     <div className={styles.body}>
       <div className={styles.intro}>
         <div>
           <p className={styles.introLead}>{t(`projects.desc.${slug}`)}</p>
           <p className={styles.lead}>{t(`projects.text.${slug}`)}</p>
+          {study ? (
+            <p className={styles.caseLink}>
+              <Link href={`/fallstudie/${study.slug}`}>{t("case.fromWork")}</Link>
+            </p>
+          ) : null}
         </div>
         <dl className={styles.facts}>
           <div>

@@ -1,0 +1,131 @@
+/* /fallstudie/[slug] — a short reading of one existing project.
+   The masthead, the ruled sections and the closing band come from the
+   visualisation page. This file only holds the reading column, the shots
+   and the quiet links. */
+
+.kicker {
+  margin: 0 0 18px;
+}
+
+.motto {
+  margin: 0 0 16px;
+  max-width: 28ch;
+  font-family: var(--headline-font);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+}
+
+.prose {
+  padding: 32px var(--nk-gutter) 0;
+}
+
+.prose p {
+  margin: 0;
+  max-width: 62ch;
+  font-size: 17px;
+  line-height: 1.7;
+  opacity: 0.84;
+  text-wrap: pretty;
+}
+
+.shots {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 32px;
+  margin: 0;
+  padding: 36px var(--nk-gutter) 0;
+  list-style: none;
+}
+
+.shot {
+  min-width: 0;
+  margin: 0;
+}
+
+.shot figure {
+  margin: 0;
+}
+
+.frame {
+  display: block;
+  background: var(--nk-media);
+  border: 1px solid var(--nk-hair);
+}
+
+.img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.caption {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  margin: 12px 0 0;
+  max-width: 62ch;
+  font-size: 14px;
+  line-height: 1.5;
+  opacity: 0.72;
+  text-wrap: pretty;
+}
+
+.folio {
+  flex: none;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+  color: var(--accent-on-ink);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  padding: 36px var(--nk-gutter) 0;
+}
+
+.textLink {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.note {
+  margin: 0;
+  max-width: 48ch;
+  font-size: 17px;
+  line-height: 1.65;
+  opacity: 0.84;
+  text-wrap: pretty;
+}
+
+.note a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (min-width: 900px) {
+  .shotsPair {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 40px 28px;
+  }
+}
+
+@media (max-width: 899px) {
+  .prose,
+  .shots,
+  .links {
+    padding-top: 24px;
+  }
+  .prose p,
+  .note {
+    font-size: 16px;
+    line-height: 1.65;
+  }
+}

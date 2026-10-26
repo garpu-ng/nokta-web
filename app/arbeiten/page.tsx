@@ -8,6 +8,7 @@ import KindMark, { type DoorKind } from "@/components/nokta/KindMark";
 import PlateHead from "@/components/nokta/PlateHead";
 import { toWallItem, type WallItem } from "@/components/work/WorkCard";
 import WorkWall, { type WallFilter } from "@/components/work/WorkWall";
+import { CASE_STUDIES } from "@/lib/caseStudies";
 import { KIND_FIELD } from "@/lib/colors";
 import { getLocale, getT } from "@/lib/i18n";
 import { getMediaSize } from "@/lib/mediaSizes";
@@ -134,6 +135,15 @@ export default async function ArbeitenPage({
 
       <section className={styles.intro}>
         <p className={styles.introText}>{t("arbeiten.intro")}</p>
+        {/* Text only. The studies are their own pages, so the wall does not
+            gain cards or images. */}
+        <p className={styles.caseLine}>
+          {CASE_STUDIES.map((study) => (
+            <Link key={study.slug} href={`/fallstudie/${study.slug}`} className={styles.caseLink}>
+              {t(study.arbeitenKey)}
+            </Link>
+          ))}
+        </p>
       </section>
 
       <nav className={styles.doors} aria-label={t("arbeiten.doors.aria")}>

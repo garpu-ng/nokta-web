@@ -11,6 +11,9 @@
 }
 
 .more {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
   margin: 0;
   padding: 40px var(--nk-gutter) 0;
 }

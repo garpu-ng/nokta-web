@@ -45,6 +45,17 @@
 .intro .lead {
   margin-top: 1rem;
 }
+.caseLink {
+  margin: 1.25rem 0 0;
+}
+.caseLink a {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
 .facts {
   margin: 0;
   border: 1px solid var(--nk-hair);

@@ -1,9 +1,10 @@
 import type { MetadataRoute } from "next";
+import { CASE_STUDIES } from "@/lib/caseStudies";
 import { PRINTS } from "@/lib/prints";
 import { WORKS } from "@/lib/works";
 
-// One URL per page that exists: the wall, every work on it, the shop and its
-// prints, the studio pages
+// One URL per page that exists: the wall, every work on it, the two case
+// studies, the shop and its prints, the studio pages
 // and the legal pages. The legacy paths 308-redirect and stay out — including
 // /prozess and /prozess/3d, which both now land on /studio.
 //
@@ -20,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/3d-visualisierung` },
     { url: `${BASE}/fuer-bautraeger` },
     { url: `${BASE}/fuer-institutionen` },
+    ...CASE_STUDIES.map((study) => ({ url: `${BASE}/fallstudie/${study.slug}` })),
     ...WORKS.map((w) => ({ url: `${BASE}/arbeiten/${w.slug}` })),
     { url: `${BASE}/shop` },
     ...PRINTS.map((p) => ({ url: `${BASE}/shop/${p.slug}` })),

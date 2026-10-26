@@ -422,6 +422,37 @@ const de: Record<string, string> = {
   "inst.cta.text": "Sie planen einen Bericht oder eine Publikation?",
   "inst.cta.note": "Schreiben Sie uns über das Formular oder an hallo@nokta-studio.de, mit Umfang und Termin. Sie bekommen ein schriftliches Angebot.",
   "inst.cta.button": "Satz anfragen",
+
+  // ── Fallstudien (/fallstudie/[slug]) ──────────────────────────────
+  // Anwendung, keine Behauptung über einen Auftrag. Keine Kundennamen.
+  "case.kicker": "Fallstudie",
+  "case.section.situation": "Ausgangslage",
+  "case.section.images": "Bilder",
+  "case.section.use": "Einsatz",
+  "case.links.aria": "Weiter",
+  "case.arch.for": "Für Architekturbüros",
+  "case.fromWork": "Fallstudie zu diesen Bildern",
+
+  "meta.case.bt.title": "Fallstudie Sanktgores Residence · nokta",
+  "meta.case.bt.desc": "Außen- und Innenvisualisierung eines Wohnhauses aus hellem Ziegel in NRW, 2024. Sechs Bilder. So lassen sich die Ansichten im Exposé einsetzen.",
+  "case.bt.claim": "Ansichten für Exposé und Vertrieb, solange es nur Pläne gibt.",
+  "case.bt.situation": "Sanktgores Residence, 2024, ist die Außen- und Innenvisualisierung eines Wohnhauses aus hellem Ziegel in NRW. Solange ein Wohnprojekt nur als Plan vorliegt, lassen sich Außen- und Innenansichten im Exposé und im Vertrieb zeigen. An den Bildern dieses Hauses lässt sich das nachvollziehen.",
+  "case.bt.images": "Es sind sechs Bilder, fünf außen und eines innen. Sie zeigen Straßenseite, Giebel und Fassadendetails im weichen Tageslicht, dazu einen Raum unter dem Dach. Im Mittelpunkt stehen der helle Ziegel, das Blechdach und die Holzfenster mit Rundbögen. Zu sehen sind der Giebel mit rundem Fenster, der Holzanbau mit Rundbögen und einem Balkon darüber, der verglaste Holzanbau an der Ziegelfassade und der Raum unter dem Dach mit Holzbalken und dreiteiligem Rundbogenfenster.",
+  "case.bt.use": "So lassen sich diese Bilder im Exposé einsetzen. Die Straßenansicht mit Giebel, Blechdach und Dachfenstern kann die erste Seite tragen. Die Detailbilder zeigen Ziegel, Dach und die Holzfenster mit Rundbögen aus der Nähe. Die Innenansicht ergänzt die fünf Außenansichten um den Raum unter dem Dach. Dieselbe Bildfolge lässt sich für Website und Bauschild verwenden, solange es nur Pläne gibt.",
+  "case.bt.contact": "Für Ansichten eines Wohnprojekts schreiben Sie an hallo@nokta-studio.de oder über das Kontaktformular. Sie bekommen ein schriftliches Angebot.",
+
+  "meta.case.arch.title": "Fallstudie Velostation · nokta",
+  "meta.case.arch.desc": "Innenvisualisierung einer Fahrradstation in Holzbauweise, 2022. Zwei Bilder. So lassen sich die Ansichten in Wettbewerb und Genehmigung einsetzen.",
+  "case.arch.claim": "Innenansichten für Wettbewerb und Genehmigung.",
+  "case.arch.situation": "Velostation, 2022, ist die Innenvisualisierung einer Fahrradstation in Holzbauweise. Innenansichten dieser Art lassen sich in Wettbewerbsbeiträgen einsetzen, in Präsentationen vor Jury und Bauherr und in Unterlagen für Bauantrag, Gestaltungsbeirat und Gespräche mit der Stadt. Die beiden Bilder zeigen, wie das bei dieser Station aussehen kann.",
+  "case.arch.images": "Es sind zwei Bilder, beide innen. Sie zeigen die Abstellhalle mit doppelstöckigen Radständern und die Werkstatt mit Galerie, beide in Holz und Tageslicht. Die Halle liegt unter einer Holzdecke. In der Werkstatt stehen Werkbänke, eine Wendeltreppe und die Galerie.",
+  "case.arch.use": "So lassen sich diese Bilder in Wettbewerb und Genehmigung einsetzen. Die Abstellhalle kann in einem Wettbewerbsbeitrag den Raum mit den Radständern zeigen, und ebenso in einer Präsentation vor Jury und Bauherr. Die Werkstatt kann daneben stehen, mit Galerie, Werkbänken und Wendeltreppe, wenn Bauantrag oder Gestaltungsbeirat eine zweite Innenansicht brauchen.",
+  "case.arch.contact": "Für Ansichten zu Wettbewerb oder Genehmigung schreiben Sie an hallo@nokta-studio.de oder über das Kontaktformular. Sie bekommen ein schriftliches Angebot.",
+
+  "arbeiten.case.bt": "Für Bauträger: Sanktgores Residence",
+  "arbeiten.case.arch": "Für Architekturbüros: Velostation",
+  "bt.case.link": "Fallstudie: Sanktgores Residence",
+  "viz.case.arch": "Fallstudie: Velostation",
 };
 
 export default de;

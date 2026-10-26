@@ -6,6 +6,7 @@ import DiscField from "@/components/nokta/DiscField";
 import PlateHead from "@/components/nokta/PlateHead";
 import SectionRule from "@/components/nokta/SectionRule";
 import { workAnnotation } from "@/components/work/WorkAnno";
+import { getCaseStudy } from "@/lib/caseStudies";
 import { KIND_FIELD } from "@/lib/colors";
 import { getLocale, getT } from "@/lib/i18n";
 import { getMediaSize } from "@/lib/mediaSizes";
@@ -68,6 +69,7 @@ export default async function VisualisierungPage() {
   const t = await getT();
   const title = `${t("viz.heading")}.`;
   const renderings = WORKS.filter((w) => w.kind === "rendering");
+  const archCase = getCaseStudy("velostation");
 
   return (
     <main>
@@ -106,6 +108,12 @@ export default async function VisualisierungPage() {
             <Reveal key={i} className={styles.use} delay={i * 90}>
               <h3 className={styles.itemTitle}>{t(`viz.use.${i}.title`)}</h3>
               <p className={styles.itemText}>{t(`viz.use.${i}.text`)}</p>
+              {i === 0 && archCase ? (
+                <Link href={`/fallstudie/${archCase.slug}`} className={styles.caseLink}>
+                  {t("viz.case.arch")}
+                  <span aria-hidden="true"> ↗</span>
+                </Link>
+              ) : null}
             </Reveal>
           ))}
         </div>
