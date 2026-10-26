@@ -1,23 +1,23 @@
 // 日本語
 const ja: Record<string, string> = {
   // ── メタデータ ────────────────────────────────────────────────────
-  "meta.site.title": "nokta · デュッセルドルフのデザインスタジオ",
-  "meta.site.desc": "デュッセルドルフのデザインスタジオ。建物、本、プリントを描きます。ビジュアライゼーション、組版、製版、CAD図面。",
-  "meta.home.title": "nokta · デュッセルドルフの3Dビジュアライゼーション、組版、印刷",
-  "meta.home.desc": "デュッセルドルフのデザインスタジオ：3Dビジュアライゼーションと建築ビジュアライゼーション、エディトリアルと組版、印刷制作、CAD図面。NRW州の建築事務所・デベロッパー向けビジュアライゼーション、書籍と年次報告書の組版。",
+  "meta.site.title": "nokta · NRW州のデザインスタジオ",
+  "meta.site.desc": "NRW州のデザインスタジオ。建物、本、プリントを描きます。ビジュアライゼーション、組版、製版、CAD図面。",
+  "meta.home.title": "nokta · NRW州の3Dビジュアライゼーション、組版、印刷",
+  "meta.home.desc": "NRW州のデザインスタジオ：3Dビジュアライゼーションと建築ビジュアライゼーション、エディトリアルと組版、印刷制作、CAD図面。NRW州の建築事務所・デベロッパー向けビジュアライゼーション、書籍と年次報告書の組版。",
   "meta.studio.title": "スタジオ · nokta",
-  "meta.studio.desc": "作品の背後にあるスタジオ：デュッセルドルフの三人。建築ビジュアライゼーション、エディトリアルと組版、印刷制作、CAD図面。",
+  "meta.studio.desc": "作品の背後にあるスタジオ：NRW州の三人。建築ビジュアライゼーション、エディトリアルと組版、印刷制作、CAD図面。",
   "meta.kontakt.title": "お問い合わせ · nokta",
-  "meta.kontakt.desc": "デュッセルドルフのnoktaへのお問い合わせ：建築ビジュアライゼーション、NRW州のデベロッパー向けビジュアライゼーション、年次報告書と書籍の組版、印刷、CAD図面。",
+  "meta.kontakt.desc": "NRW州のnoktaへのお問い合わせ：建築ビジュアライゼーション、NRW州のデベロッパー向けビジュアライゼーション、年次報告書と書籍の組版、印刷、CAD図面。",
   "meta.arbeiten.title": "仕事 · nokta",
-  "meta.arbeiten.desc": "デュッセルドルフのnoktaの作品：3Dビジュアライゼーション、エディトリアルと組版、スタディ、ラインプリント。それぞれに専用ページがあります。",
+  "meta.arbeiten.desc": "NRW州のnoktaの作品：3Dビジュアライゼーション、エディトリアルと組版、スタディ、ラインプリント。それぞれに専用ページがあります。",
   "meta.shop.title": "ショップ · nokta",
   "meta.shop.desc": "noktaのラインプリント：名建築をベクター化したCAD図面として、A1で印刷し額装。",
 
   // ── ホーム ────────────────────────────────────────────────────────
   "home.wall.label": "作品",
   "home.wall.aria": "すべての作品",
-  "home.hero.eyebrow": "デュッセルドルフのデザインスタジオ",
+  "home.hero.eyebrow": "NRW州のデザインスタジオ",
   "home.hero.title": "建築を、見えるかたちに。",
   "home.hero.sub": "設計事務所、個人のお客様、公共の発注者のための3Dビジュアライゼーション、エディトリアル、印刷。",
   "home.hero.ctaWork": "作品を見る",
@@ -123,7 +123,7 @@ const ja: Record<string, string> = {
   // ── スタジオ ──────────────────────────────────────────────────────
   "studio.heading": "スタジオ",
   "studio.services.note": "四行 · それぞれに一つの成果物",
-  "studio.p1": "nokta はデュッセルドルフのデザインスタジオです。三人で、建物、本、プリントを描いています：建築ビジュアライゼーション、エディトリアルと組版、印刷制作、CAD図面。",
+  "studio.p1": "nokta はNRW州のデザインスタジオです。三人で、建物、本、プリントを描いています：建築ビジュアライゼーション、エディトリアルと組版、印刷制作、CAD図面。",
   "studio.p2": "ツールとワークフローは自分たちで作ります：レンダリングのセットアップ、組版テンプレート、製版のチェック工程。プロジェクトの始まりには、複数の案が机の上に並びます。",
   "studio.p3": "私たちは建築ビジュアライゼーションから始めました。今も仕事の大部分を占めています。内観と外観のフォトリアルな3Dレンダリングで、建てられる前のプロジェクトを完成後の姿で見せます。",
   "studio.team": "チーム",
@@ -158,7 +158,7 @@ const ja: Record<string, string> = {
   "kontakt.form.error.fields": "お名前・メールアドレス・メッセージが未入力です。アドレスの入力間違いもご確認ください。",
   "kontakt.form.error.busy": "この端末から短時間に多くの送信がありました。1時間ほどおいて再度お試しください。",
   "kontakt.form.nojs": "このフォームには JavaScript が必要です。直接ご連絡ください：hallo@nokta-studio.de",
-  "kontakt.addr.region": "デュッセルドルフ、ドイツ",
+  "kontakt.addr.region": "NRW州、ドイツ",
   "kontakt.mailAria": "メールを送る",
 
   // ── ラインプリント — 図面情報、仕様、購入（/arbeiten/[slug]） ─────
@@ -218,7 +218,7 @@ const ja: Record<string, string> = {
   "projects.scope.velostation": "2点 · 内観",
 
   // ── 3Dビジュアライゼーション（/3d-visualisierung） ────────────────
-  "meta.viz.title": "デュッセルドルフの3Dビジュアライゼーションと建築ビジュアライゼーション · nokta",
+  "meta.viz.title": "NRW州の3Dビジュアライゼーションと建築ビジュアライゼーション · nokta",
   "meta.viz.desc": "デュッセルドルフとNRW州の設計事務所、デベロッパー、個人のお客様のための、建物と内装のフォトリアルな3Dビジュアライゼーション。外観・内観、クレイレンダー、印刷解像度の画像。",
   "viz.heading": "3Dビジュアライゼーション",
   "viz.claim": "建てられる前の建物と内装を、フォトリアルな画像で。",
@@ -252,7 +252,7 @@ const ja: Record<string, string> = {
   "viz.faq.1.q": "どんな資料が必要ですか？",
   "viz.faq.1.a": "始めるには、PDFまたはDWGの平面図、立面図、断面図で十分です。3Dモデル、素材の情報、参考画像があると助かりますが、必須ではありません。",
   "viz.faq.2.q": "デュッセルドルフだけで仕事をしていますか？",
-  "viz.faq.2.a": "いいえ。スタジオはデュッセルドルフにあり、やり取りはメールとビデオ通話で行います。NRW州全域、そしてその外のお客様とも仕事をしています。",
+  "viz.faq.2.a": "いいえ。スタジオはNRW州から来ており、やり取りはメールとビデオ通話で行います。NRW州全域、そしてその外のお客様とも仕事をしています。",
   "viz.faq.3.q": "内装のビジュアライゼーションもできますか？",
   "viz.faq.3.a": "はい。私たちの画像のおよそ半分は内観です。リビングから駐輪ステーションの工房まで。",
   "viz.cta.text": "プロジェクトを計画中で、そのイメージが必要ですか？",
@@ -307,7 +307,7 @@ const ja: Record<string, string> = {
   // tag1 は奥付のブランドブロックで studio.motto の上に積まれる
   // （components/Footer.tsx）。motto はルートのソーシャルカードの
   // キャプションにもなる（app/opengraph-image.tsx）。
-  "footer.tag1": "デュッセルドルフのデザインスタジオ。",
+  "footer.tag1": "NRW州のデザインスタジオ。",
   // The studio's line. One string, three places: the footer, the
   // generated social card, and the homepage plate it is knocked into.
   "studio.motto": "点から線を経て形へ。",

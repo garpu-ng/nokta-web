@@ -7,16 +7,16 @@
 // argues. Self-initiated work is annotated "Eigenprojekt", nothing more.
 const de: Record<string, string> = {
   // ── Metadata ──────────────────────────────────────────────────────
-  "meta.site.title": "nokta · Designstudio, Düsseldorf",
-  "meta.site.desc": "Designstudio in Düsseldorf. Wir zeichnen Gebäude, Bücher und Drucke: Visualisierung, Satz, Druckvorstufe und CAD-Pläne.",
-  "meta.home.title": "nokta · 3D-Visualisierung, Satz und Druck in Düsseldorf",
-  "meta.home.desc": "Designstudio in Düsseldorf: 3D-Visualisierung und Architekturvisualisierung, Editorial und Satz, Druckproduktion und CAD-Pläne. Visualisierung für Architekturbüros und Bauträger in NRW, Satz für Bücher und Jahresberichte.",
+  "meta.site.title": "nokta · Designstudio aus NRW",
+  "meta.site.desc": "Designstudio aus NRW. Wir zeichnen Gebäude, Bücher und Drucke: Visualisierung, Satz, Druckvorstufe und CAD-Pläne.",
+  "meta.home.title": "nokta · 3D-Visualisierung, Satz und Druck aus NRW",
+  "meta.home.desc": "Designstudio aus NRW: 3D-Visualisierung und Architekturvisualisierung, Editorial und Satz, Druckproduktion und CAD-Pläne. Visualisierung für Architekturbüros und Bauträger in NRW, Satz für Bücher und Jahresberichte.",
   "meta.studio.title": "Studio · nokta",
-  "meta.studio.desc": "Das Studio hinter den Arbeiten: drei Leute in Düsseldorf. Architekturvisualisierung, Editorial und Satz, Druckproduktion und CAD-Pläne.",
+  "meta.studio.desc": "Das Studio hinter den Arbeiten: drei Leute aus NRW. Architekturvisualisierung, Editorial und Satz, Druckproduktion und CAD-Pläne.",
   "meta.kontakt.title": "Kontakt · nokta",
-  "meta.kontakt.desc": "Anfrage an nokta in Düsseldorf: Architekturvisualisierung, Visualisierung für Bauträger in NRW, Satz von Jahresberichten und Büchern, Druck und CAD-Pläne.",
+  "meta.kontakt.desc": "Anfrage an nokta aus NRW: Architekturvisualisierung, Visualisierung für Bauträger in NRW, Satz von Jahresberichten und Büchern, Druck und CAD-Pläne.",
   "meta.arbeiten.title": "Arbeiten · nokta",
-  "meta.arbeiten.desc": "Arbeiten von nokta aus Düsseldorf: 3D-Visualisierungen, Editorial und Satz, Studien und Liniendrucke. Jede Arbeit mit eigener Seite.",
+  "meta.arbeiten.desc": "Arbeiten von nokta aus NRW: 3D-Visualisierungen, Editorial und Satz, Studien und Liniendrucke. Jede Arbeit mit eigener Seite.",
   "meta.shop.title": "Shop · nokta",
   "meta.shop.desc": "Liniendrucke von nokta: bekannte Bauwerke als vektorisierte CAD-Zeichnung, in A1 gedruckt und gerahmt.",
 
@@ -25,7 +25,7 @@ const de: Record<string, string> = {
   // Kolonnade — the "home" prefix is where it used to hang.
   "home.wall.label": "Arbeiten",
   "home.wall.aria": "Alle Arbeiten",
-  "home.hero.eyebrow": "Designstudio in Düsseldorf",
+  "home.hero.eyebrow": "Designstudio aus NRW",
   "home.hero.title": "Wir machen Architektur sichtbar.",
   "home.hero.sub": "3D-Visualisierung, Editorial und Druck für Architekturbüros, private Bauherren und öffentliche Auftraggeber.",
   "home.hero.ctaWork": "Arbeiten ansehen",
@@ -132,7 +132,7 @@ const de: Record<string, string> = {
   // ── Studio ────────────────────────────────────────────────────────
   "studio.heading": "Studio",
   "studio.services.note": "vier zeilen · je ein ergebnis",
-  "studio.p1": "nokta ist ein Designstudio in Düsseldorf. Wir sind zu dritt und zeichnen Gebäude, Bücher und Drucke: Architekturvisualisierung, Editorial und Satz, Druckproduktion und CAD-Pläne.",
+  "studio.p1": "nokta ist ein Designstudio aus NRW. Wir sind zu dritt und zeichnen Gebäude, Bücher und Drucke: Architekturvisualisierung, Editorial und Satz, Druckproduktion und CAD-Pläne.",
   "studio.p2": "Wir bauen unsere Werkzeuge und Abläufe selbst: Render-Setups, Satzvorlagen und Prüfschritte für die Druckvorstufe. Am Anfang eines Projekts liegen mehrere Varianten auf dem Tisch.",
   "studio.p3": "Angefangen haben wir mit Architekturvisualisierung, und sie ist bis heute der größte Teil der Arbeit: fotorealistische 3D-Renderings von Innen- und Außenräumen. Sie zeigen ein Projekt so, wie es später aussieht, bevor gebaut wird.",
   "studio.team": "Das Team",
@@ -169,7 +169,7 @@ const de: Record<string, string> = {
   "kontakt.form.error.fields": "Bitte Name, E-Mail und Nachricht ausfüllen und die E-Mail-Adresse auf Tippfehler prüfen.",
   "kontakt.form.error.busy": "Es kamen gerade sehr viele Anfragen von hier. Bitte in einer Stunde noch einmal.",
   "kontakt.form.nojs": "Das Formular braucht JavaScript. Schreib uns direkt: hallo@nokta-studio.de",
-  "kontakt.addr.region": "Düsseldorf, Deutschland",
+  "kontakt.addr.region": "NRW, Deutschland",
   "kontakt.mailAria": "E-Mail schreiben",
 
   // ── Liniendrucke — Passport, Spezifikation, Kauf (/arbeiten/[slug]) ─
@@ -229,7 +229,7 @@ const de: Record<string, string> = {
   "projects.scope.velostation": "2 Bilder · innen",
 
   // ── 3D-Visualisierung (/3d-visualisierung) ─────────────────────────
-  "meta.viz.title": "3D-Visualisierung und Architekturvisualisierung in Düsseldorf · nokta",
+  "meta.viz.title": "3D-Visualisierung und Architekturvisualisierung aus NRW · nokta",
   "meta.viz.desc": "Fotorealistische 3D-Visualisierungen von Gebäuden und Innenräumen für Architekturbüros, Bauträger und private Bauherren in Düsseldorf und NRW. Außen- und Innenansichten, Clay-Renders, Bilder in Druckauflösung.",
   "viz.heading": "3D-Visualisierung",
   "viz.claim": "Fotorealistische Bilder von Gebäuden und Innenräumen, bevor sie gebaut sind.",
@@ -263,7 +263,7 @@ const de: Record<string, string> = {
   "viz.faq.1.q": "Welche Unterlagen braucht ihr?",
   "viz.faq.1.a": "Grundrisse, Ansichten und Schnitte reichen für den Anfang, als PDF oder DWG. Ein 3D-Modell, Materialangaben und Referenzbilder helfen, sind aber keine Voraussetzung.",
   "viz.faq.2.q": "Arbeitet ihr nur in Düsseldorf?",
-  "viz.faq.2.a": "Nein. Das Studio sitzt in Düsseldorf, die Abstimmung läuft per E-Mail und Videocall. Wir arbeiten für Auftraggeber in ganz NRW und darüber hinaus.",
+  "viz.faq.2.a": "Nein. Das Studio kommt aus NRW, die Abstimmung läuft per E-Mail und Videocall. Wir arbeiten für Auftraggeber in ganz NRW und darüber hinaus.",
   "viz.faq.3.q": "Könnt ihr auch Innenräume visualisieren?",
   "viz.faq.3.a": "Ja. Etwa die Hälfte unserer Bilder zeigt Innenräume, vom Wohnzimmer bis zur Werkstatt einer Fahrradstation.",
   "viz.cta.text": "Du planst ein Projekt und brauchst Bilder davon?",
@@ -318,7 +318,7 @@ const de: Record<string, string> = {
   // tag1 stacks over studio.motto in the colophon brand block
   // (components/Footer.tsx); the motto is also the root social card caption
   // (app/opengraph-image.tsx, lowercased).
-  "footer.tag1": "Designstudio in Düsseldorf.",
+  "footer.tag1": "Designstudio aus NRW.",
   // The studio's line. One string, three places: the footer, the
   // generated social card, and the homepage plate it is knocked into.
   "studio.motto": "Vom Punkt über die Linie zur Form.",
