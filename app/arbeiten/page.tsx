@@ -4,7 +4,7 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import DiscField from "@/components/nokta/DiscField";
 import KindMark, { type DoorKind } from "@/components/nokta/KindMark";
-import plateStyles from "@/components/nokta/PlateHead.module.css";
+import PlateHead from "@/components/nokta/PlateHead";
 import { toWallItem, type WallItem } from "@/components/work/WorkCard";
 import WorkWall, { type WallFilter } from "@/components/work/WorkWall";
 import { KIND_FIELD } from "@/lib/colors";
@@ -18,12 +18,10 @@ import styles from "./page.module.css";
 /* /arbeiten: the overview, and the page a first mail to a developer or an
    architecture office lands on.
 
-   The masthead is the turning-disc plate again, in the same frame every
-   other page hangs its plate in (PlateHead): same field, same size, the
-   title cut out of the discs. The short title under it stays real text —
-   that line is this page's h1, so the plate does not add a second one.
-   Under that, one line on what hangs here and the address, so writing to
-   the studio does not mean scrolling to the colophon.
+   The masthead is the turning-disc plate, as it was: PlateHead draws the
+   title out of the discs and keeps that title as the page's h1. Under it,
+   one short line on what hangs here and the address, so writing to the
+   studio does not mean scrolling to the colophon.
 
    Then the wall. Architecture leads: the six renderings, in a fixed order,
    then the other work in the order lib/works.ts already keeps, then the shop
@@ -151,18 +149,11 @@ export default async function ArbeitenPage({
 
   return (
     <main className={`${styles.page} nk-flat`}>
-      {/* PlateHead's frame, without its own h1: the short title below is the
-          heading. DiscField still cuts that same title out of the discs. */}
-      <Reveal as="header" className={plateStyles.head} variant="wipe">
-        <div className={plateStyles.plate}>
-          <DiscField palette={PLATE_COLOURS} motto={title} />
-        </div>
-      </Reveal>
+      <PlateHead title={title}>
+        <DiscField palette={PLATE_COLOURS} motto={title} />
+      </PlateHead>
 
       <header className={styles.mast}>
-        <div className={styles.band}>
-          <h1 className={styles.title}>{title}</h1>
-        </div>
         <p className={styles.introText}>{t("arbeiten.intro")}</p>
         <p className={styles.contact}>
           <a className={styles.mail} href="mailto:hallo@nokta-studio.de">

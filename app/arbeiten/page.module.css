@@ -1,6 +1,5 @@
-/* /arbeiten — a short title, the address, the wall, then the two doors.
-   The first rendering has to clear a phone's fold, so nothing tall sits
-   above the wall. */
+/* /arbeiten — the disc plate, then a short line, the address, the wall,
+   then the two doors. */
 
 .page {
   padding-bottom: 88px;
@@ -10,24 +9,6 @@
 
 .mast {
   padding: 4px var(--nk-gutter) 0;
-}
-
-/* The framed title the plate used to carry, set as text. A band, not a
-   poster: the work underneath is the picture. */
-.band {
-  border: 1px solid var(--nk-hair);
-  background: var(--nk-frame);
-  padding: 8px 12px 7px;
-}
-
-.title {
-  margin: 0;
-  font-family: var(--headline-font);
-  font-size: clamp(36px, 7vw, 72px);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 0.95;
-  text-wrap: balance;
 }
 
 .introText {
@@ -41,8 +22,8 @@
   text-wrap: pretty;
 }
 
-/* The address and the form, on the same band as the title. Both are links
-   with a 44px target so a thumb finds them without hunting the footer. */
+/* The address and the form. Both are links with a 44px target so a thumb
+   finds them without hunting the footer. */
 .contact {
   display: flex;
   flex-wrap: nowrap;
@@ -192,9 +173,6 @@
 }
 
 @media (min-width: 768px) {
-  .band {
-    padding: 18px 24px 16px;
-  }
   .introText {
     margin-top: 16px;
     font-size: clamp(18px, 2vw, 26px);
