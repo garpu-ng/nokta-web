@@ -292,7 +292,8 @@ const en: Record<string, string> = {
   "projects.alt.velostation.2": "Workshop with workbenches, a spiral staircase and a gallery",
 
   // ── Work (overview /arbeiten) ─────────────────────────────────────
-  "arbeiten.intro": "All work on one page: visualisations, editorial, studies and the line prints from the shop. The order changes with every visit.",
+  "arbeiten.intro": "Visualisations, editorial, studies and the line prints from the shop.",
+  "arbeiten.contact.form": "Contact",
   "arbeiten.doors.aria": "Go straight to",
   "arbeiten.door.viz.title": "3D visualisation",
   "arbeiten.door.viz.text": "Exterior and interior views for architects, property developers and private clients.",

@@ -284,7 +284,8 @@ const tr: Record<string, string> = {
   "projects.alt.velostation.2": "Tezgâhlar, döner merdiven ve galeriyle atölye",
 
   // ── İşler (genel bakış /arbeiten) ─────────────────────────────────
-  "arbeiten.intro": "Tüm işler tek sayfada: görselleştirmeler, editoryal, çalışmalar ve mağazadaki çizgi baskılar. Sıralama her ziyarette değişiyor.",
+  "arbeiten.intro": "Görselleştirmeler, editoryal, çalışmalar ve mağazadaki çizgi baskılar.",
+  "arbeiten.contact.form": "İletişim",
   "arbeiten.doors.aria": "Doğrudan",
   "arbeiten.door.viz.title": "3B görselleştirme",
   "arbeiten.door.viz.text": "Mimarlık ofisleri, inşaat şirketleri ve bireysel müşteriler için dış ve iç görünüşler.",

@@ -36,6 +36,9 @@ export type WallItem = {
   /** vertical drop (rem) on the desktop wall; phone ignores it */
   lift: number;
   anno: WorkAnnotation;
+  /** serve the file as-is. Used for the lead thumbnail, which is already
+      sized for the card, so the image optimiser does not re-encode it. */
+  unoptimized?: boolean;
 };
 
 /** Reduce a work to what the wall shows, translating its annotation on the way
@@ -127,14 +130,15 @@ export default function WorkCard({
           alt=""
           width={item.width}
           height={item.height}
-          sizes={CARD_SIZES}
-          /* This one image is the wall's LCP element, and every card on the
-             wall was lazy — so the browser deprioritised the one thing the
-             page is measured on until layout settled. Eager + high rather than
-             `preload`: the shipped docs steer to these "in most cases", and
-             warn off preload precisely when the LCP candidate can change,
-             which here it does the moment a kind filter is pressed. */
+          sizes={item.unoptimized ? undefined : CARD_SIZES}
+          unoptimized={item.unoptimized}
+          /* This one image is the wall's LCP element. Eager + high, not
+             preload: a preload link made Lighthouse treat the bytes as
+             already here and then charge the whole wait as render delay.
+             The lead is chosen on the server, so the first paint's image
+             is known. A chip pressed later does not change that. */
           loading={lead ? "eager" : "lazy"}
+          decoding={lead ? "sync" : "async"}
           fetchPriority={lead ? "high" : undefined}
           className={styles.img}
         />

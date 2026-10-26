@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 import Link from "next/link";
-import { connection } from "next/server";
 import Reveal from "@/components/Reveal";
-import DiscField from "@/components/nokta/DiscField";
 import KindMark, { type DoorKind } from "@/components/nokta/KindMark";
-import PlateHead from "@/components/nokta/PlateHead";
 import { toWallItem, type WallItem } from "@/components/work/WorkCard";
 import WorkWall, { type WallFilter } from "@/components/work/WorkWall";
 import { KIND_FIELD } from "@/lib/colors";
@@ -13,39 +10,68 @@ import { getLocale, getT } from "@/lib/i18n";
 import { getMediaSize } from "@/lib/mediaSizes";
 import { PRINTS, type Print } from "@/lib/prints";
 import { socialMetadata } from "@/lib/socialMeta";
-import { WORKS, isWorkKind, type WorkKind } from "@/lib/works";
+import { WORKS, isWorkKind, type Work, type WorkKind } from "@/lib/works";
 import styles from "./page.module.css";
 
-/* /arbeiten: the overview. A short line on what hangs here, two doors into
-   the two materials the studio leads with, then the whole wall: every work
-   and the shop's line prints, shuffled on each visit, with "Alle" pressed.
+/* /arbeiten: the overview, and the page a first mail to a developer or an
+   architecture office lands on.
 
-   The doors are the homepage's material fields made larger: visualisation
-   opens /3d-visualisierung, the page that states that service in words;
-   editorial opens the report, which is the editorial work on the site.
+   The masthead is a short title, not the turning-disc plate. That plate is a
+   canvas that keeps drawing, and on a phone it sat between the reader and the
+   first rendering. The title is real text. Under it, one line on what hangs
+   here and the address, so writing to the studio does not mean scrolling to
+   the colophon.
 
-   ?kind= still narrows the wall on the server (the homepage's doors land on
-   their own material that way). A missing or unknown kind opens on "Alle"
-   rather than 404ing: a filter is not worth a 404.
+   Then the wall. Architecture leads: the six renderings, in a fixed order,
+   then the other work in the order lib/works.ts already keeps, then the shop
+   prints. Detail pages still step through WORKS, which alternates kinds on
+   purpose. This page does not. The order is the same on every visit.
+
+   The two doors (visualisation, editorial) come after the wall. They are the
+   way into one material in words; they are not the first thing a reader sees.
+
+   ?kind= still narrows the wall on the server (a link can land on its own
+   material). A missing or unknown kind opens on "Alle" rather than 404ing.
 
    NOTE: this route previously answered with a 308 permanentRedirect to "/".
    Browsers cache permanent redirects hard, so a reader who hit /arbeiten
-   before that change may keep landing on the homepage until they clear it. */
+   before that change may keep landing on the homepage until they clear it.
 
-/* The three door colours, handed to the plate in the masthead. Module scope so
-   it is given one array reference for the life of the page. */
-const PLATE_COLOURS = [KIND_FIELD.rendering, KIND_FIELD.editorial, KIND_FIELD.cad];
+   The route stays dynamic because the root layout reads the locale cookie.
+   Nothing on this page calls connection() or Math.random(). */
 
-/* The chips, in a fixed order whatever the shuffle does: a row that re-sorted
-   itself on every visit would be one more thing to read. Kinds with nothing on
-   the wall are left out. */
+/* The chips, in a fixed order: a row that re-sorted itself would be one more
+   thing to read. Kinds with nothing on the wall are left out. */
 const KIND_ORDER: WorkKind[] = ["rendering", "editorial", "study", "cad", "manual"];
 
-/* The two doors above the wall. */
+/* The two doors below the wall. */
 const DOORS: { kind: DoorKind; href: string; key: string }[] = [
   { kind: "rendering", href: "/3d-visualisierung", key: "arbeiten.door.viz" },
   { kind: "editorial", href: "/arbeiten/abschlussbericht-ki-kommission", key: "arbeiten.door.editorial" },
 ];
+
+/* Renderings first, strongest projects leading. The rest keep the relative
+   order they have in WORKS, so editorial and the studies follow the
+   architecture instead of interrupting it. */
+const RENDERING_FIRST = [
+  "sanktgores",
+  "beatbuilding",
+  "binome",
+  "velostation",
+  "teahouse",
+  "ipehouse",
+] as const;
+
+function orderedWorks(): Work[] {
+  const lead: Work[] = [];
+  for (const slug of RENDERING_FIRST) {
+    const work = WORKS.find((item) => item.slug === slug);
+    if (!work) throw new Error(`arbeiten: no work "${slug}"`);
+    lead.push(work);
+  }
+  const leadSlugs = new Set<string>(RENDERING_FIRST);
+  return [...lead, ...WORKS.filter((work) => !leadSlugs.has(work.slug))];
+}
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getT();
@@ -79,23 +105,18 @@ function printToWallItem(print: Print, t: (key: string) => string): WallItem {
   };
 }
 
-/** Fisher-Yates, then a few more draws until no three cards of one kind stand
-    in a row, so a shuffle never reads as a section by accident. Gives up after
-    a handful of tries and keeps the last draw: it is a nicety, not a rule. */
-function shuffle(items: WallItem[]): WallItem[] {
-  let out = items;
-  for (let attempt = 0; attempt < 30; attempt++) {
-    out = [...items];
-    for (let i = out.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [out[i], out[j]] = [out[j], out[i]];
-    }
-    const clumped = out.some(
-      (item, i) => i >= 2 && item.kind === out[i - 1].kind && item.kind === out[i - 2].kind,
-    );
-    if (!clumped) break;
-  }
-  return out;
+/** The first rendering is what a phone paints. Its master thumbnail is a
+    1125px JPEG; the card only needs a 640px frame, already encoded, so the
+    image optimiser does not build a second, larger file on the way out. */
+function leadThumb(item: WallItem): WallItem {
+  if (item.slug !== "sanktgores") return item;
+  return {
+    ...item,
+    thumb: "/projects/sanktgores/wall.webp",
+    width: 640,
+    height: 853,
+    unoptimized: true,
+  };
 }
 
 export default async function ArbeitenPage({
@@ -103,17 +124,15 @@ export default async function ArbeitenPage({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const t = await getT();
-  const requested = (await searchParams).kind;
-  // Rendered per request, never prerendered: the order is drawn fresh each time.
-  await connection();
+  const [t, params] = await Promise.all([getT(), searchParams]);
+  const requested = params.kind;
 
   // Every string the wall shows is translated here: WorkWall is a client
   // component and never reaches for a dictionary itself.
-  const items = shuffle([
-    ...WORKS.map((work) => toWallItem(work, t)),
+  const items = [
+    ...orderedWorks().map((work) => toWallItem(work, t)),
     ...PRINTS.map((print) => printToWallItem(print, t)),
-  ]);
+  ].map(leadThumb);
   const kinds = KIND_ORDER.filter((kind) => items.some((item) => item.kind === kind)).map(
     (kind) => ({ kind, label: t(`work.kind.${kind}`) }),
   );
@@ -124,17 +143,31 @@ export default async function ArbeitenPage({
   const title = `${t("home.wall.label")}.`;
 
   return (
-    <main className={styles.page}>
-      {/* The studio's motto, turned into geometry: a field of discs hanging
-          in depth, each of them a point, a line or a form depending only on
-          how far round it has swung. */}
-      <PlateHead title={title}>
-        <DiscField palette={PLATE_COLOURS} motto={title} />
-      </PlateHead>
-
-      <section className={styles.intro}>
+    <main className={`${styles.page} nk-flat`}>
+      <header className={styles.mast}>
+        <div className={styles.band}>
+          <h1 className={styles.title}>{title}</h1>
+        </div>
         <p className={styles.introText}>{t("arbeiten.intro")}</p>
-      </section>
+        <p className={styles.contact}>
+          <a className={styles.mail} href="mailto:hallo@nokta-studio.de">
+            hallo@nokta-studio.de
+          </a>
+          <Link className={styles.form} href="/kontakt">
+            {t("arbeiten.contact.form")}
+            <span aria-hidden="true">↗</span>
+          </Link>
+        </p>
+      </header>
+
+      <WorkWall
+        items={items}
+        kinds={kinds}
+        listLabel={t("home.wall.aria")}
+        initialKind={initialKind}
+        allLabel={t("arbeiten.filter.all")}
+        wallClassName={styles.wall}
+      />
 
       <nav className={styles.doors} aria-label={t("arbeiten.doors.aria")}>
         {DOORS.map(({ kind, href, key }, i) => (
@@ -157,15 +190,6 @@ export default async function ArbeitenPage({
           </Reveal>
         ))}
       </nav>
-
-      <WorkWall
-        items={items}
-        kinds={kinds}
-        listLabel={t("home.wall.aria")}
-        initialKind={initialKind}
-        allLabel={t("arbeiten.filter.all")}
-        wallClassName={styles.wall}
-      />
     </main>
   );
 }
