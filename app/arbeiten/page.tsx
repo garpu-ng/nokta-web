@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
+import DiscField from "@/components/nokta/DiscField";
 import KindMark, { type DoorKind } from "@/components/nokta/KindMark";
+import PlateHead from "@/components/nokta/PlateHead";
 import { toWallItem, type WallItem } from "@/components/work/WorkCard";
 import WorkWall, { type WallFilter } from "@/components/work/WorkWall";
 import { KIND_FIELD } from "@/lib/colors";
@@ -16,11 +18,10 @@ import styles from "./page.module.css";
 /* /arbeiten: the overview, and the page a first mail to a developer or an
    architecture office lands on.
 
-   The masthead is a short title, not the turning-disc plate. That plate is a
-   canvas that keeps drawing, and on a phone it sat between the reader and the
-   first rendering. The title is real text. Under it, one line on what hangs
-   here and the address, so writing to the studio does not mean scrolling to
-   the colophon.
+   The masthead is the turning-disc plate, as it was: PlateHead draws the
+   title out of the discs and keeps that title as the page's h1. Under it,
+   one short line on what hangs here and the address, so writing to the
+   studio does not mean scrolling to the colophon.
 
    Then the wall. Architecture leads: the six renderings, in a fixed order,
    then the other work in the order lib/works.ts already keeps, then the shop
@@ -39,6 +40,10 @@ import styles from "./page.module.css";
 
    The route stays dynamic because the root layout reads the locale cookie.
    Nothing on this page calls connection() or Math.random(). */
+
+/* The three door colours, handed to the plate in the masthead. Module scope so
+   it is given one array reference for the life of the page. */
+const PLATE_COLOURS = [KIND_FIELD.rendering, KIND_FIELD.editorial, KIND_FIELD.cad];
 
 /* The chips, in a fixed order: a row that re-sorted itself would be one more
    thing to read. Kinds with nothing on the wall are left out. */
@@ -144,10 +149,11 @@ export default async function ArbeitenPage({
 
   return (
     <main className={`${styles.page} nk-flat`}>
+      <PlateHead title={title}>
+        <DiscField palette={PLATE_COLOURS} motto={title} />
+      </PlateHead>
+
       <header className={styles.mast}>
-        <div className={styles.band}>
-          <h1 className={styles.title}>{title}</h1>
-        </div>
         <p className={styles.introText}>{t("arbeiten.intro")}</p>
         <p className={styles.contact}>
           <a className={styles.mail} href="mailto:hallo@nokta-studio.de">
