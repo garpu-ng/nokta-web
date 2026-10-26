@@ -41,6 +41,7 @@ const en: Record<string, string> = {
   "home.svc.2.title": "Print & CAD",
   "home.svc.2.short": "Print-ready files, CAD plans and vectorised line prints, as a file or framed in A1.",
   "home.selected": "Selected work",
+  "home.selected.lede": "Visualisations of houses and a mixed-use residential building.",
   "home.work.abschlussbericht-ki-kommission.text": "216 pages, 8 chapters, 20 recommendations. From the layout system to the print-ready file. BMWE.",
   "home.contact.title": "Have a point to start from?",
   "home.contact.body": "Send us your sketch, plan or first idea. We’ll get back to you and ask what else we need.",

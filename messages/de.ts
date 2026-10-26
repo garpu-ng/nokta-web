@@ -44,8 +44,8 @@ const de: Record<string, string> = {
   "home.svc.2.title": "Druck & CAD",
   "home.svc.2.short": "Druckreife Dateien, CAD-Pläne und vektorisierte Liniendrucke, als Datei oder gerahmt in A1.",
   "home.selected": "Ausgewählte Arbeiten",
-  // The two spreads' caption copy. The pair below them carries no body text —
-  // title and annotation are the whole caption there.
+  "home.selected.lede": "Visualisierungen von Wohnhäusern und einem Wohn- und Geschäftshaus.",
+  // The report's home line. The selection above no longer prints it.
   "home.work.abschlussbericht-ki-kommission.text": "216 Seiten, 8 Kapitel, 20 Handlungsempfehlungen. Vom Layoutsystem bis zur druckreifen Datei. BMWE.",
   "home.contact.title": "Hast du einen Punkt, an dem wir anfangen?",
   "home.contact.body": "Schick uns deine Skizze, den Plan oder eine erste Idee. Wir melden uns und fragen nach, was wir noch brauchen.",
