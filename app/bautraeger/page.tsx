@@ -16,10 +16,12 @@ import styles from "./page.module.css";
    language cookie, because the copy is read from messages/de.ts and nowhere
    else. Not in the nav, the footer or the sitemap, and noindex.
 
-   Services, project titles and the contact lines are ones the site already
-   uses. Nothing here names a price, a deadline, a client or a city. */
+   The first five services are the ones the visualisation page already names.
+   The last four are the same set the architect draft carries, worded here
+   for residential developers. Nothing here names a price, a deadline, a
+   client or a city. */
 
-const SERVICES = [0, 1, 2, 3, 4] as const;
+const SERVICES = [0, 1, 2, 3, 4, 5, 6, 7, 8] as const;
 const STEPS = [0, 1, 2, 3] as const;
 
 /* Housing projects already in lib/projects.ts, in the order the wall leads
@@ -55,12 +57,13 @@ export default function BautraegerDraftPage() {
 
       <section className={viz.section} aria-labelledby="nk-bautraeger-svc">
         <SectionRule id="nk-bautraeger-svc" label={line("bautraeger.services")} />
-        <div className={styles.list}>
-          <ul className={viz.services}>
-            {SERVICES.map((i) => (
-              <li key={i}>{line(`viz.svc.${i}`)}</li>
-            ))}
-          </ul>
+        <div className={viz.uses}>
+          {SERVICES.map((i) => (
+            <Reveal key={i} delay={(i % 3) * 90}>
+              <h3 className={viz.itemTitle}>{line(`bautraeger.svc.${i}.title`)}</h3>
+              <p className={viz.itemText}>{line(`bautraeger.svc.${i}.text`)}</p>
+            </Reveal>
+          ))}
         </div>
       </section>
 
