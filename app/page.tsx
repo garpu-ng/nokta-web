@@ -172,11 +172,17 @@ function leadSizes(): string {
     desktop sheet, two to a row below 1200px, one per row on a phone. */
 function setSizes(work: Featured, set: Featured[]): string {
   const sum = set.reduce((total, w) => total + ratioOf(w), 0);
-  const row = MEASURE - GAP * (set.length - 1);
+  const share = ratioOf(work) / sum;
+  const gaps = GAP * (set.length - 1);
+  const row = MEASURE - gaps;
   return [
     "(max-width: 899px) calc(100vw - 40px)",
     `(max-width: 1199px) calc((100vw - ${64 + GAP}px) / 2)`,
-    `${Math.round((row * ratioOf(work)) / sum)}px`,
+    // Above 1199 the three plates share one row, and the row is the viewport
+    // until the sheet hits --content-max. A hint sized for 1420px made a
+    // 1350px window fetch the next bucket up.
+    `(max-width: 1500px) calc((100vw - ${80 + gaps}px) * ${share.toFixed(4)})`,
+    `${Math.round(row * share)}px`,
   ].join(", ");
 }
 

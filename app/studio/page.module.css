@@ -258,8 +258,8 @@
   text-decoration: none;
   white-space: nowrap;
   transition: border-color 0.18s ease, transform 0.18s ease;
-  border: 1px solid var(--accent);
-  background: var(--accent);
+  border: 1px solid var(--accent-field);
+  background: var(--accent-field);
   color: var(--paper);
 }
 .ctaFill:hover {

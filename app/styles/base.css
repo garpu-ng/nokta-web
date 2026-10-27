@@ -124,7 +124,7 @@ textarea {
    The single place the red is allowed to be a surface besides the contact
    band's disc — and the reader is the one who asks for it. */
 ::selection {
-  background: var(--accent);
+  background: var(--accent-field);
   color: var(--paper);
 }
 

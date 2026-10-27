@@ -9,7 +9,7 @@
   align-items: center;
   text-align: center;
   padding: 96px var(--nk-gutter);
-  background: var(--accent);
+  background: var(--accent-field);
   color: var(--paper);
 }
 
@@ -24,9 +24,9 @@
   text-wrap: balance;
 }
 
-/* Paper on the red field is 4.43:1 at full strength — the whole budget, with
-   nothing to spend on a fade. At .9 this sat at 3.86:1, and it is the line
-   that asks for the project. */
+/* The field is --accent-field (4.51:1 against paper). --accent itself is
+   4.43:1, which this 19px line cannot be. There is still nothing to spend
+   on a fade: at .9 the same line sat at 3.86:1. */
 .body {
   max-width: 560px;
   margin: 24px 0 0;

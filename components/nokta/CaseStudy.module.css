@@ -158,7 +158,7 @@
 }
 .site:hover,
 .site:focus-visible {
-  background: var(--accent);
+  background: var(--accent-field);
 }
 
 /* The note under the button. Held back like every other annotation on the

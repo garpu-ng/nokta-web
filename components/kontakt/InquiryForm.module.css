@@ -141,7 +141,7 @@
 
 .submit {
   padding: 20px 32px;
-  background: var(--accent);
+  background: var(--accent-field);
   border: none;
   color: var(--paper);
   font-size: 12px;
