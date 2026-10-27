@@ -252,7 +252,7 @@ const de: Record<string, string> = {
 
   // ── 3D-Visualisierung (/3d-visualisierung) ─────────────────────────
   "meta.viz.title": "3D-Visualisierung und Architekturvisualisierung aus NRW · nokta",
-  "meta.viz.desc": "Fotorealistische 3D-Visualisierungen von Gebäuden und Innenräumen für Architekturbüros, Bauträger und private Bauherren in Düsseldorf und NRW. Außen- und Innenansichten, Clay-Renders, Bilder in Druckauflösung.",
+  "meta.viz.desc": "Fotorealistische 3D-Visualisierungen von Gebäuden und Innenräumen für Architekturbüros, Bauträger und private Bauherren in NRW. Außen- und Innenansichten, Clay-Renders, Bilder in Druckauflösung.",
   "viz.heading": "3D-Visualisierung",
   "viz.claim": "Fotorealistische Bilder von Gebäuden und Innenräumen, bevor sie gebaut sind.",
   "viz.lead": "Wir erstellen 3D-Visualisierungen von Gebäuden und Innenräumen: fotorealistische Außen- und Innenansichten aus Plänen, Skizzen oder einem vorhandenen 3D-Modell. Für Architekturbüros, Bauträger und private Bauherren in Düsseldorf, NRW und darüber hinaus.",
@@ -284,7 +284,7 @@ const de: Record<string, string> = {
   "viz.faq.0.a": "Das hängt von der Zahl der Ansichten, vom Detailgrad und von den Unterlagen ab. Schick uns eine kurze Anfrage, dann bekommst du ein Angebot.",
   "viz.faq.1.q": "Welche Unterlagen braucht ihr?",
   "viz.faq.1.a": "Grundrisse, Ansichten und Schnitte reichen für den Anfang, als PDF oder DWG. Ein 3D-Modell, Materialangaben und Referenzbilder helfen, sind aber keine Voraussetzung.",
-  "viz.faq.2.q": "Arbeitet ihr nur in Düsseldorf?",
+  "viz.faq.2.q": "Arbeitet ihr nur in NRW?",
   "viz.faq.2.a": "Nein. Das Studio kommt aus NRW, die Abstimmung läuft per E-Mail und Videocall. Wir arbeiten für Auftraggeber in ganz NRW und darüber hinaus.",
   "viz.faq.3.q": "Könnt ihr auch Innenräume visualisieren?",
   "viz.faq.3.a": "Ja. Etwa die Hälfte unserer Bilder zeigt Innenräume, vom Wohnzimmer bis zur Werkstatt einer Fahrradstation.",
