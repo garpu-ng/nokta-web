@@ -427,8 +427,7 @@ const de: Record<string, string> = {
   // ── Entwurf /architekturbueros ────────────────────────────────────
   // German only, on purpose: the other locales do not carry these keys,
   // and the page reads this file directly so a language cookie still gets
-  // German. A draft for review. Not linked from the nav, the footer or
-  // the sitemap.
+  // German. Not linked from the nav or the footer. Listed in the sitemap.
   "meta.architekturbueros.title": "Architekturvisualisierung für Architekturbüros in NRW · nokta",
   "meta.architekturbueros.desc": "Architekturvisualisierung aus NRW für Architekturbüros. Außen- und Innenansichten aus Plänen und Skizzen.",
   "architekturbueros.heading": "Architekturvisualisierung für Architekturbüros in NRW",
@@ -439,7 +438,15 @@ const de: Record<string, string> = {
   "architekturbueros.step.0": "Sie schicken Pläne, eine Skizze oder ein Modell.",
   "architekturbueros.step.1": "Perspektive und Ausschnitt stimmen wir an Clay-Renders ab.",
   "architekturbueros.step.2": "Materialien, Licht und Umgebung kommen dazu.",
-  "architekturbueros.step.3": "Sie bekommen die Bilder in Druckauflösung, für Bildschirm und Druck.",
+  "architekturbueros.step.3": "Sie bekommen Bilder, Filme und Pläne für Bildschirm und Druck.",
+  "architekturbueros.more.0.title": "3D-Rundgang und Kamerafahrt",
+  "architekturbueros.more.0.text": "Die Kamera bewegt sich durch das Projekt oder um es herum, als Film.",
+  "architekturbueros.more.1.title": "3D-Animation",
+  "architekturbueros.more.1.text": "Bewegte Bilder zeigen etwa das Licht über den Tag oder das Gebäude in seiner Umgebung.",
+  "architekturbueros.more.2.title": "2D-Pläne für die Präsentation",
+  "architekturbueros.more.2.text": "Grundrisse, Schnitte und Ansichten werden grafisch für die Präsentation aufbereitet.",
+  "architekturbueros.more.3.title": "Gestaltung der Präsentation",
+  "architekturbueros.more.3.text": "Wir gestalten Wettbewerbstafeln und die Unterlagen für Bauantrag und Gestaltungsbeirat, so dass Bilder und Pläne als eine Präsentation ankommen.",
 };
 
 export default de;

@@ -12,14 +12,16 @@ import viz from "../3d-visualisierung/page.module.css";
 import note from "../fuer-bautraeger/page.module.css";
 import styles from "./page.module.css";
 
-/* /architekturbueros: a draft landing page for review. German only, on every
-   language cookie, because the copy is read from messages/de.ts and nowhere
-   else. Not in the nav, the footer or the sitemap, and noindex.
+/* /architekturbueros: German only, on every language cookie, because the
+   copy is read from messages/de.ts and nowhere else. Not in the nav or the
+   footer. In the sitemap, and indexable.
 
-   Services, project titles and the contact lines are ones the site already
-   uses. Nothing here names a price, a deadline, a client or a city. */
+   The first five services, the project titles and the contact lines are ones
+   the site already uses. Nothing here names a price, a deadline, a client
+   or a city. */
 
 const SERVICES = [0, 1, 2, 3, 4] as const;
+const MORE = [0, 1, 2, 3] as const;
 const STEPS = [0, 1, 2, 3] as const;
 
 /* Projects already in lib/projects.ts whose descriptions are architectural
@@ -33,7 +35,6 @@ function line(key: string): string {
 export const metadata: Metadata = {
   title: line("meta.architekturbueros.title"),
   description: line("meta.architekturbueros.desc"),
-  robots: { index: false, follow: false },
 };
 
 export default function ArchitekturbuerosDraftPage() {
@@ -59,6 +60,12 @@ export default function ArchitekturbuerosDraftPage() {
           <ul className={viz.services}>
             {SERVICES.map((i) => (
               <li key={i}>{line(`viz.svc.${i}`)}</li>
+            ))}
+            {MORE.map((i) => (
+              <li key={`more-${i}`} className={styles.more}>
+                <h3 className={styles.moreName}>{line(`architekturbueros.more.${i}.title`)}</h3>
+                <p className={styles.moreText}>{line(`architekturbueros.more.${i}.text`)}</p>
+              </li>
             ))}
           </ul>
         </div>
