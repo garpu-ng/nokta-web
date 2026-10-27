@@ -105,7 +105,7 @@ export default function ArchitekturbuerosDraftPage() {
 
       <section className={viz.cta}>
         <div>
-          <p className={viz.ctaText}>{line("bt.cta.text")}</p>
+          <p className={viz.ctaText}>{line("architekturbueros.cta.text")}</p>
           <p className={note.ctaNote}>{line("bt.cta.note")}</p>
         </div>
         <Link href="/kontakt?kind=visualisierung" className={viz.ctaFill}>

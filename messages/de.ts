@@ -435,6 +435,7 @@ const de: Record<string, string> = {
   "architekturbueros.lede": "Bilder können ein Projekt zeigen, bevor gebaut wird: für Wettbewerbe, für Bauanträge und für den Gestaltungsbeirat.",
   "architekturbueros.services": "Was wir für Architekturbüros machen",
   "architekturbueros.steps": "So arbeiten wir",
+  "architekturbueros.cta.text": "Sie arbeiten an einem Wettbewerb oder einem Bauantrag?",
   "architekturbueros.step.0": "Sie schicken Pläne, eine Skizze oder ein Modell.",
   "architekturbueros.step.1": "Perspektive und Ausschnitt stimmen wir an Clay-Renders ab.",
   "architekturbueros.step.2": "Materialien, Licht und Umgebung kommen dazu.",
