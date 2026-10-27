@@ -1,0 +1,47 @@
+/* /architekturbueros — a draft. The plate, the lists, the steps, the cards and
+   the contact block come from /3d-visualisierung and /fuer-bautraeger.
+   This sheet only places the lede, and gives the service list the same
+   gutter those pages already use for a list that sits under a section rule. */
+
+.lede {
+  padding: 56px var(--nk-gutter) 0;
+}
+
+.list {
+  padding: 48px var(--nk-gutter) 0;
+}
+
+/* The four later services keep the hairline list. The name sits in the same
+   voice as the lines above it. The sentence is the body size already used
+   under a section rule. */
+.more {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.moreName {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+}
+
+.moreText {
+  margin: 8px 0 0;
+  max-width: 62ch;
+  font-size: 16px;
+  line-height: 1.65;
+  letter-spacing: 0;
+  opacity: 0.72;
+}
+
+@media (max-width: 899px) {
+  .lede {
+    padding-top: 40px;
+  }
+  .list {
+    padding-top: 32px;
+  }
+}
