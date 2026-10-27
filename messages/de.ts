@@ -228,6 +228,28 @@ const de: Record<string, string> = {
   "projects.service.velostation": "Innenvisualisierung",
   "projects.scope.velostation": "2 Bilder · innen",
 
+  // Fallstudie unter dem Bildstapel, nur für die drei Projekte, die eine haben.
+  // Andere Sprachen fallen auf diese deutschen Sätze zurück.
+  "projects.case.label": "Fallstudie",
+  "projects.case.aufgabe": "Aufgabe",
+  "projects.case.vorgehen": "Vorgehen",
+  "projects.case.ergebnis": "Ergebnis",
+  "projects.case.binome.title": "Wohnhaus aus rotem Ziegel",
+  "projects.case.binome.lead": "Wohnhaus aus rotem Ziegel. Rendering, 2023.",
+  "projects.case.binome.aufgabe": "Außen- und Innenvisualisierung eines Wohnhauses aus rotem Ziegel. Außen geht es um Fassade, Außentreppe und Laubengang in Ziegel und rot gestrichenem Stahl, innen um Wohnraum und Küche einer Wohnung.",
+  "projects.case.binome.vorgehen": "Sechs Bilder, drei außen und drei innen. Außen: die Straßenfassade mit Stützen im Erdgeschoss, die Außentreppe zwischen Ziegelpfeilern und der Laubengang mit Holzdecke und rotem Geländer. Innen: der Wohnraum mit gelbem Sessel, blauer Stehleuchte und rotem Beistelltisch, ein Fenster mit rotem Geländer davor und die Küche mit Kochinsel aus hellem Holz und roten Fliesen. Am Anfang stehen bei nokta Clay-Renders für Perspektive und Ausschnitt, danach folgen Material und Licht.",
+  "projects.case.binome.ergebnis": "Sechs Bilder, die das Haus von der Straße bis in die Küche zeigen.",
+  "projects.case.beatbuilding.title": "Beat Building",
+  "projects.case.beatbuilding.lead": "Wohn- und Geschäftshaus mit Sichtbetonfassade. Rendering, 2023.",
+  "projects.case.beatbuilding.aufgabe": "Außen- und Innenvisualisierung eines Wohn- und Geschäftshauses mit Sichtbetonfassade. Die Arbeit umfasst Ansichten der Straßenfront, der Balkone und eines Innenraums hinter der zweigeschossigen Glasfront.",
+  "projects.case.beatbuilding.vorgehen": "Vier Bilder, drei außen und eines innen. Die Außenansichten bei Tageslicht reichen von der Straßenfront über die oberen Geschosse mit Balkonen vor blauem Himmel bis zum Fassadendetail mit Balkonen und schwarzen Geländern. Das vierte Bild zeigt den zweigeschossigen Innenraum mit einem langen Tisch vor der Glasfront. Am Anfang stehen bei nokta Clay-Renders für Perspektive und Ausschnitt, danach folgen Material und Licht.",
+  "projects.case.beatbuilding.ergebnis": "Vier Bilder, die das Gebäude vom Straßenraum bis zum Detail und in einen Innenraum zeigen.",
+  "projects.case.ipehouse.title": "IPE House",
+  "projects.case.ipehouse.lead": "Eingeschossiges Haus mit Holzläden und weitem Dachüberstand. Rendering, 2023.",
+  "projects.case.ipehouse.aufgabe": "Außen- und Innenvisualisierung eines eingeschossigen Hauses mit Holzläden und weitem Dachüberstand. Die Arbeit umfasst das Haus im Garten und zwei Innenräume.",
+  "projects.case.ipehouse.vorgehen": "Vier Bilder, zwei außen und zwei innen. Außen bei Tageslicht: das Haus mit offenen Holzläden und Rasen davor, dazu die überdachte Terrasse unter Holzbalken mit Palmen im Hintergrund. Innen: das Schlafzimmer mit Doppelbett, Holzbalken und Nachttischen mit Büchern sowie ein Arbeitsplatz mit Wandtisch und offenem Einbauschrank aus Holz. Am Anfang stehen bei nokta Clay-Renders für Perspektive und Ausschnitt, danach folgen Material und Licht.",
+  "projects.case.ipehouse.ergebnis": "Vier Bilder, die Haus, Terrasse und zwei Räume zeigen, bevor gebaut ist.",
+
   // ── 3D-Visualisierung (/3d-visualisierung) ─────────────────────────
   "meta.viz.title": "3D-Visualisierung und Architekturvisualisierung aus NRW · nokta",
   "meta.viz.desc": "Fotorealistische 3D-Visualisierungen von Gebäuden und Innenräumen für Architekturbüros, Bauträger und private Bauherren in Düsseldorf und NRW. Außen- und Innenansichten, Clay-Renders, Bilder in Druckauflösung.",

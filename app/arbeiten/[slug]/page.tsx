@@ -134,6 +134,41 @@ function imageStack(project: Project, title: string, t: Translate) {
   );
 }
 
+/** The three renderings that carry a written case study under the stack.
+    Every other project page stays as it is. */
+const CASE_SLUGS = ["binome", "beatbuilding", "ipehouse"] as const;
+const CASE_PARTS = ["aufgabe", "vorgehen", "ergebnis"] as const;
+
+function hasCase(slug: string): slug is (typeof CASE_SLUGS)[number] {
+  return (CASE_SLUGS as readonly string[]).includes(slug);
+}
+
+/** Fallstudie: the written account, under the images, in the same measure as
+    the intro. German only; other locales fall back through getT. */
+function projectCase(slug: string, t: Translate) {
+  if (!hasCase(slug)) return null;
+  const titleId = `fallstudie-${slug}`;
+  return (
+    <section className={styles.case} aria-labelledby={titleId}>
+      <header className={styles.caseHead}>
+        <p className={`nk-caption ${styles.caseKicker}`}>{t("projects.case.label")}</p>
+        <h2 id={titleId} className={styles.caseTitle}>
+          {t(`projects.case.${slug}.title`)}
+        </h2>
+        <p className={styles.caseLead}>{t(`projects.case.${slug}.lead`)}</p>
+      </header>
+      <div className={styles.caseBlocks}>
+        {CASE_PARTS.map((part) => (
+          <div className={styles.caseBlock} key={part}>
+            <h3>{t(`projects.case.${part}`)}</h3>
+            <p>{t(`projects.case.${slug}.${part}`)}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 /** Rendering: what the images show and what was delivered, in one paragraph
     and two facts, before the stack itself. The desc line doubles as the page's
     meta description, so it is the sentence a shared link previews. */
@@ -195,6 +230,7 @@ function workBody(work: Work, t: Translate) {
         <>
           {projectIntro(work.slug, t)}
           {imageStack(work.source.project, work.title, t)}
+          {projectCase(work.slug, t)}
         </>
       );
     case "piece":
