@@ -423,6 +423,22 @@ const de: Record<string, string> = {
   "inst.cta.text": "Sie planen einen Bericht oder eine Publikation?",
   "inst.cta.note": "Schreiben Sie uns über das Formular oder an hallo@nokta-studio.de, mit Umfang und Termin. Sie bekommen ein schriftliches Angebot.",
   "inst.cta.button": "Satz anfragen",
+
+  // ── Entwurf /architekturbueros ────────────────────────────────────
+  // German only, on purpose: the other locales do not carry these keys,
+  // and the page reads this file directly so a language cookie still gets
+  // German. A draft for review. Not linked from the nav, the footer or
+  // the sitemap.
+  "meta.architekturbueros.title": "Architekturvisualisierung für Architekturbüros in NRW · nokta",
+  "meta.architekturbueros.desc": "Architekturvisualisierung aus NRW für Architekturbüros. Außen- und Innenansichten aus Plänen und Skizzen.",
+  "architekturbueros.heading": "Architekturvisualisierung für Architekturbüros in NRW",
+  "architekturbueros.lede": "Bilder können ein Projekt zeigen, bevor gebaut wird: für Wettbewerbe, für Bauanträge und für den Gestaltungsbeirat.",
+  "architekturbueros.services": "Was wir für Architekturbüros machen",
+  "architekturbueros.steps": "So arbeiten wir",
+  "architekturbueros.step.0": "Sie schicken Pläne, eine Skizze oder ein Modell.",
+  "architekturbueros.step.1": "Perspektive und Ausschnitt stimmen wir an Clay-Renders ab.",
+  "architekturbueros.step.2": "Materialien, Licht und Umgebung kommen dazu.",
+  "architekturbueros.step.3": "Sie bekommen die Bilder in Druckauflösung, für Bildschirm und Druck.",
 };
 
 export default de;
