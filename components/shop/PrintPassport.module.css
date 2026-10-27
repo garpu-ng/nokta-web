@@ -99,7 +99,7 @@
 .btn {
   padding: 8px 16px;
   border: none;
-  background: var(--accent-field);
+  background: var(--accent);
   color: var(--paper);
   font-size: 0.72rem;
   font-weight: 600;

@@ -140,12 +140,14 @@
 }
 
 .submit {
-  padding: 20px 32px;
-  background: var(--accent-field);
+  padding: 14px 28px;
+  background: var(--accent);
   border: none;
   color: var(--paper);
-  font-size: 12px;
-  letter-spacing: 0.08em;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   cursor: pointer;
   transition: transform 0.18s ease, opacity 0.18s ease;

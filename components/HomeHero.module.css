@@ -70,9 +70,14 @@
 
 .primary,
 .secondary {
-  padding: 16px 24px;
-  font-size: 12px;
-  letter-spacing: 0.08em;
+  /* 19px bold is large text, so paper on the brand red only has to clear
+     3:1. The box stays about as tall as the old 12px label: less padding,
+     line-height 1. Both labels share the size so the pair still matches. */
+  padding: 13px 22px;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   text-decoration: none;
   white-space: nowrap;
@@ -80,8 +85,8 @@
 }
 
 .primary {
-  border: 1px solid var(--accent-field);
-  background: var(--accent-field);
+  border: 1px solid var(--accent);
+  background: var(--accent);
   color: var(--paper);
 }
 

@@ -42,13 +42,6 @@
   --accent-on-ink: #d16161;
   --accent-on-paper: #ae3232;
 
-  /* Paper words sitting ON the red need 4.5:1. --accent is 4.43:1 against
-     paper, so a 12px button and a 19px line fail, and it cannot be darkened
-     globally: on ink it is already 3.00:1, the floor for a mark. This is the
-     same red two steps darker (182,53,54 instead of 184,54,54), 4.51:1.
-     Marks, rules and the contact disc stay --accent. */
-  --accent-field: #b63536;
-
   /* Every hairline rule drawn on the ink ground. Its counterpart on paper is
      rgba(26,26,24,.22) — same weight, other way round. */
   --nk-hair: rgba(233, 224, 206, 0.22);

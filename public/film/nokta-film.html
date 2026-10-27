@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>nokta · vom punkt über die linie zur form</title>
-<meta name="description" content="Ein 80-Sekunden-Film aus losen Punkten. nokta, Designstudio aus NRW.">
+<meta name="description" content="Ein Film aus losen Punkten. nokta, Designstudio aus NRW.">
 <style>
 :root{
   --ink:#1a1a18; --frame:#1f1f1c; --paper:#e9e0ce; --accent:#b83636; --hair:#e9e0ce38;
@@ -42,7 +42,9 @@ canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 'use strict';
 (() => {
 /* ============================================================
-   nokta — ein Film aus losen Punkten. 80 s, WebGL2, keine Dateien.
+   nokta, ein Film aus losen Punkten. WebGL2, keine Dateien.
+   Der Einstieg liegt bei Sekunde 6 (die Öffnungswelle entfällt), die
+   Wiedergabe läuft 1,35-fach, und die Schleife kehrt dorthin zurück.
    Jede Fliese ist ein Punkt: oben Papier, unten Tinte. Einer ist rot.
    ============================================================ */
 
@@ -58,6 +60,9 @@ const phiOf = t => t <= 0.045 ? PI : Math.acos(Math.min(1, t));   // tone -> til
 
 /* ---------- film constants ---------- */
 const DUR = 80;
+const OPEN_AT = 6;          // punkt scene; the opening wave (t < 6) is not shown
+const RATE = 1.35;          // wall-clock playback
+const STEP = 1 / 45;        // physics substep; 1/120 made every frame a long task
 const N = 60, F0 = 0.07, F1 = 0.93, S = (F1 - F0) / N, R = 0.40 * S;
 const BI = 0.035, NBS = 66;                     // border ring inset + tiles per side
 const NI = N * N, NBT = NBS * 4, T = NI + NBT;
@@ -610,22 +615,36 @@ function physics(h, t) {
   }
 }
 
-let filmT = 0;
+let filmT = 0, accum = 0;
+function wrap() {
+  if (filmT < DUR) return;
+  filmT = OPEN_AT + (filmT - DUR);
+  if (filmT >= DUR) filmT = OPEN_AT;
+  firstRun = false;
+}
+/* One or two substeps per frame. A stalled tab must not replay a burst of
+   physics on the main thread; playback simply holds at 1.35x when it can. */
 function advance(dt) {
-  let rem = dt;
-  while (rem > 1e-6) {
-    const h = Math.min(rem, 1 / 120);
-    computeTargets(filmT); physics(h, filmT);
-    filmT += h; rem -= h;
-    if (filmT >= DUR) { filmT -= DUR; firstRun = false; }
+  accum += dt * RATE;
+  if (accum > STEP * 2) accum = STEP * 2;
+  let n = 0;
+  while (accum >= STEP && n < 2) {
+    computeTargets(filmT); physics(STEP, filmT);
+    filmT += STEP; accum -= STEP; n++;
+    wrap();
   }
 }
 function seek(target) {
   target = ((target % DUR) + DUR) % DUR;
-  firstRun = target < 6;
+  firstRun = target < OPEN_AT;
   const from = Math.max(0, target - 5);
-  resetState(!firstRun); filmT = from;
-  advance(target - from);
+  resetState(!firstRun); filmT = from; accum = 0;
+  let guard = 0;
+  while (filmT < target - 1e-4 && guard++ < 400) {
+    const h = Math.min(STEP, target - filmT);
+    computeTargets(filmT); physics(h, filmT);
+    filmT += h;
+  }
   ev.land = ev.flip = 0; ev.xs.length = 0;
 }
 
@@ -848,6 +867,7 @@ function showUI() { film.classList.add('ui'); measureKnock(); clearTimeout(uiTim
 function setPlaying(p) {
   playing = p; capOverride = p ? null : COPY.pause; last = performance.now();
   if (p && snd.on && snd.ctx) snd.ctx.resume();
+  if (p) startLoop();
 }
 async function toggleSound() {
   if (!snd.ctx && !sndInit()) return;
@@ -864,9 +884,8 @@ document.addEventListener('keydown', e => {
   if (e.target === sbtn && (e.key === ' ' || e.key === 'Enter')) return;
   if (e.key === ' ' || e.key === 'k') { e.preventDefault(); setPlaying(!playing); showUI(); }
   else if (e.key === 'm') toggleSound();
-  else if (e.key === 'r') { firstRun = true; resetState(false); filmT = 0; setPlaying(true); }
+  else if (e.key === 'r') { firstRun = false; resetState(true); filmT = OPEN_AT; accum = 0; setPlaying(true); }
 });
-document.addEventListener('visibilitychange', () => { last = performance.now(); });
 window.addEventListener('resize', resize);
 if (window.ResizeObserver) new ResizeObserver(resize).observe(film);
 
@@ -875,21 +894,43 @@ const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)
 const startAt = parseFloat(params.get('t'));
 if (Number.isFinite(startAt)) seek(startAt);
 else if (reduce) { seek(76.5); playing = false; capOverride = COPY.play; }
-else { resetState(false); filmT = 0; }
+else { resetState(true); filmT = OPEN_AT; firstRun = false; }
 if (params.has('paused')) { playing = false; }
 resize();
 window.__film = { seek: t => { seek(t); render(); }, get t() { return filmT; }, pause: () => setPlaying(false) };
 
+let rafId = 0, onScreen = !window.IntersectionObserver;
 function frame(now) {
+  rafId = 0;
   const dt = Math.min(.05, Math.max(0, (now - last) / 1000)); last = now;
   if (playing && !document.hidden) advance(dt);
   flushSound(dt);
   updateCaption();
   render();
-  requestAnimationFrame(frame);
+  if (playing && onScreen && !document.hidden) rafId = requestAnimationFrame(frame);
 }
+function startLoop() {
+  if (rafId || !playing || !onScreen) return;
+  last = performance.now();
+  rafId = requestAnimationFrame(frame);
+}
+function stopLoop() {
+  if (!rafId) return;
+  cancelAnimationFrame(rafId); rafId = 0;
+}
+document.addEventListener('visibilitychange', () => {
+  last = performance.now();
+  if (!document.hidden) startLoop();
+});
 updateCaption();
-requestAnimationFrame(frame);
+render();
+if (window.IntersectionObserver) {
+  new IntersectionObserver(entries => {
+    onScreen = entries.some(e => e.isIntersecting);
+    if (onScreen) startLoop(); else stopLoop();
+  }, { rootMargin: '200px' }).observe(film);
+} else onScreen = true;
+startLoop();
 })();
 </script>
 </body>
