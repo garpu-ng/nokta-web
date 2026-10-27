@@ -77,6 +77,74 @@
   }
 }
 
+/* ── Fallstudie, under the image stack, same sheet as the intro ──────
+   A caption, the study's own heading, the one-line lead, then Aufgabe,
+   Vorgehen and Ergebnis. Only the three projects that have copy render it. */
+.case {
+  max-width: 1100px;
+  margin: clamp(2.75rem, 7svh, 4.5rem) auto 0;
+  padding: 0 clamp(20px, 5vw, 48px);
+}
+.caseHead {
+  margin: 0;
+  padding-top: clamp(1.75rem, 4svh, 2.5rem);
+  border-top: 1px solid var(--nk-hair);
+}
+.caseKicker {
+  margin: 0;
+  color: var(--paper);
+}
+.caseTitle {
+  margin: 0.85rem 0 0;
+  max-width: 16ch;
+  font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.05;
+  color: var(--paper);
+  text-wrap: balance;
+}
+.caseLead {
+  margin: 1rem 0 0;
+  max-width: 42ch;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--paper);
+}
+.caseBlocks {
+  margin-top: clamp(1.75rem, 4svh, 2.5rem);
+}
+.caseBlock {
+  display: grid;
+  grid-template-columns: minmax(8.5rem, 11rem) minmax(0, 1fr);
+  gap: clamp(0.75rem, 3vw, 2.5rem);
+  padding: clamp(1.15rem, 2.5vw, 1.6rem) 0;
+  border-top: 1px solid var(--nk-hair);
+}
+.caseBlock h3 {
+  margin: 0;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper);
+  opacity: 0.6;
+}
+.caseBlock p {
+  margin: 0;
+  max-width: 62ch;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--paper);
+  opacity: 0.85;
+}
+@media (max-width: 767px) {
+  .caseBlock {
+    grid-template-columns: 1fr;
+    gap: 0.45rem;
+  }
+}
+
 /* ── Prev / next — the wall's running order, one step at a time ───────
    Two plates, not two links: a caption kicker over a title set large enough to
    be the next thing you look at. Reaching for one sweeps a red rule under the
