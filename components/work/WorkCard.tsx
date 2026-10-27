@@ -82,6 +82,10 @@ function cardSizes(span: number): string {
   return [
     "(max-width: 767px) 92vw",
     "(max-width: 1099px) 46vw",
+    // Three-up, but the sheet is not yet --content-max. A fixed 457px here
+    // made a ~400px card request the 640 bucket.
+    "(max-width: 1199px) calc((100vw - 112px) / 3)",
+    "(max-width: 1500px) calc((100vw - 128px) / 3)",
     `${width}px`,
   ].join(", ");
 }

@@ -44,6 +44,15 @@ function describe(work: Work, t: Translate): string {
 
 /** The alt text of a project image: the project's title and what the shot
     shows, or its running number where no line is written yet. */
+/** How wide the stack actually paints this shot. .wa-project-img is
+    min(100%, 1500px, 900px times the ratio): a tall frame is narrower than
+    the sheet, and a sizes hint of 100vw made a ~670px plate download 1920. */
+function projectImageSizes(width: number, height: number): string {
+  const cap = Math.round((900 * width) / height);
+  if (cap >= 1500) return "(max-width: 1500px) 100vw, 1500px";
+  return `(max-width: ${cap}px) 100vw, ${cap}px`;
+}
+
 function imageAlt(slug: string, title: string, i: number, t: Translate): string {
   const key = `projects.alt.${slug}.${i + 1}`;
   const line = t(key);
@@ -114,7 +123,7 @@ function imageStack(project: Project, title: string, t: Translate) {
               alt={imageAlt(project.slug, title, i, t)}
               width={width}
               height={height}
-              sizes="(max-width: 1500px) 100vw, 1500px"
+              sizes={projectImageSizes(width, height)}
               preload={i === 0}
               className="wa-project-img"
             />

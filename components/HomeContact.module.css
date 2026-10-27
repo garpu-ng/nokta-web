@@ -24,14 +24,15 @@
   text-wrap: balance;
 }
 
-/* Paper on the red field is 4.43:1 at full strength — the whole budget, with
-   nothing to spend on a fade. At .9 this sat at 3.86:1, and it is the line
-   that asks for the project. */
+/* Paper on the brand red is 4.43:1. At 19px bold this line is large text
+   and only has to clear 3:1. A fade still spends that budget: at .9 it sat
+   at 3.86:1, under even the large-text bar. */
 .body {
   max-width: 560px;
   margin: 24px 0 0;
   font-size: 19px;
-  line-height: 1.55;
+  font-weight: 700;
+  line-height: 1.45;
   text-wrap: pretty;
 }
 
@@ -67,7 +68,7 @@
     padding-block: 64px;
   }
   .body {
-    font-size: 17px;
+    font-size: 19px;
   }
 }
 
