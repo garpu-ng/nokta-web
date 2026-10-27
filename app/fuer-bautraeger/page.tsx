@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import JsonLd from "@/components/JsonLd";
 import Reveal from "@/components/Reveal";
 import DiscField from "@/components/nokta/DiscField";
 import PlateHead from "@/components/nokta/PlateHead";
 import SectionRule from "@/components/nokta/SectionRule";
 import { KIND_FIELD } from "@/lib/colors";
 import { getLocale, getT } from "@/lib/i18n";
+import { serviceJsonLd, titleWithoutSite } from "@/lib/jsonld";
 import { getMediaSize } from "@/lib/mediaSizes";
 import { socialMetadata } from "@/lib/socialMeta";
 import { WORKS } from "@/lib/works";
@@ -44,11 +46,21 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function BautraegerPage() {
   const t = await getT();
+  const locale = await getLocale();
   const title = `${t("bt.heading")}.`;
   const renderings = WORKS.filter((w) => w.kind === "rendering").slice(0, 3);
 
   return (
     <main>
+      <JsonLd
+        data={serviceJsonLd({
+          path: PATH,
+          name: t("bt.heading"),
+          description: t("meta.bt.desc"),
+          serviceType: titleWithoutSite(t("meta.bt.title")),
+          inLanguage: locale,
+        })}
+      />
       <PlateHead title={title}>
         <DiscField palette={PALETTE} motto={title} />
       </PlateHead>
