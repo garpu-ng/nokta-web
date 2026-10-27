@@ -255,7 +255,7 @@ const de: Record<string, string> = {
   "meta.viz.desc": "Fotorealistische 3D-Visualisierungen von Gebäuden und Innenräumen für Architekturbüros, Bauträger und private Bauherren in NRW. Außen- und Innenansichten, Clay-Renders, Bilder in Druckauflösung.",
   "viz.heading": "3D-Visualisierung",
   "viz.claim": "Fotorealistische Bilder von Gebäuden und Innenräumen, bevor sie gebaut sind.",
-  "viz.lead": "Wir erstellen 3D-Visualisierungen von Gebäuden und Innenräumen: fotorealistische Außen- und Innenansichten aus Plänen, Skizzen oder einem vorhandenen 3D-Modell. Für Architekturbüros, Bauträger und private Bauherren in Düsseldorf, NRW und darüber hinaus.",
+  "viz.lead": "Wir erstellen 3D-Visualisierungen von Gebäuden und Innenräumen: fotorealistische Außen- und Innenansichten aus Plänen, Skizzen oder einem vorhandenen 3D-Modell. Für Architekturbüros, Bauträger und private Bauherren in NRW und darüber hinaus.",
   "viz.services.label": "Leistungen",
   "viz.svc.0": "Außenvisualisierung",
   "viz.svc.1": "Innenvisualisierung",

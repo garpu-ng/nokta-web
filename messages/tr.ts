@@ -215,7 +215,7 @@ const tr: Record<string, string> = {
   "meta.viz.desc": "NRW’deki mimarlık ofisleri, inşaat şirketleri ve bireysel müşteriler için binaların ve iç mekânların fotogerçekçi 3B görselleştirmeleri. Dış ve iç görünüşler, clay render’lar, baskı çözünürlüğünde görseller.",
   "viz.heading": "3B görselleştirme",
   "viz.claim": "Binaların ve iç mekânların, daha inşa edilmeden fotogerçekçi görselleri.",
-  "viz.lead": "Binaların ve iç mekânların 3B görselleştirmelerini hazırlıyoruz: planlardan, eskizlerden ya da mevcut bir 3B modelden fotogerçekçi dış ve iç görünüşler. Düsseldorf, NRW ve ötesindeki mimarlık ofisleri, inşaat şirketleri ve bireysel müşteriler için.",
+  "viz.lead": "Binaların ve iç mekânların 3B görselleştirmelerini hazırlıyoruz: planlardan, eskizlerden ya da mevcut bir 3B modelden fotogerçekçi dış ve iç görünüşler. NRW ve ötesindeki mimarlık ofisleri, inşaat şirketleri ve bireysel müşteriler için.",
   "viz.services.label": "Hizmetler",
   "viz.svc.0": "Dış mekân görselleştirme",
   "viz.svc.1": "İç mekân görselleştirme",

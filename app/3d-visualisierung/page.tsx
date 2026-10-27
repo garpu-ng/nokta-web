@@ -18,7 +18,7 @@ import styles from "./page.module.css";
 /* /3d-visualisierung: the one page that states the visualisation service in
    words. The wall shows the renderings; this page says what they are, who they
    are for, how a job runs and what it costs to ask. It exists so a search for
-   "3D-Visualisierung Düsseldorf" has a page that answers it.
+   "3D-Visualisierung NRW" has a page that answers it.
 
    Same register as every other page: say what it is. No prices, no delivery
    times and no tools are named, because none of them are fixed. */

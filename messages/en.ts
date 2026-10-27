@@ -223,7 +223,7 @@ const en: Record<string, string> = {
   "meta.viz.desc": "Photorealistic 3D visualisations of buildings and interiors for architects, property developers and private clients in NRW. Exterior and interior views, clay renders, images at print resolution.",
   "viz.heading": "3D visualisation",
   "viz.claim": "Photorealistic images of buildings and interiors before they are built.",
-  "viz.lead": "We create 3D visualisations of buildings and interiors: photorealistic exterior and interior views from plans, sketches or an existing 3D model. For architects, property developers and private clients in Düsseldorf, NRW and beyond.",
+  "viz.lead": "We create 3D visualisations of buildings and interiors: photorealistic exterior and interior views from plans, sketches or an existing 3D model. For architects, property developers and private clients in NRW and beyond.",
   "viz.services.label": "Services",
   "viz.svc.0": "Exterior visualisation",
   "viz.svc.1": "Interior visualisation",
