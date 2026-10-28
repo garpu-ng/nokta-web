@@ -58,6 +58,11 @@ const tr: Record<string, string> = {
   "work.lichtspiel.spec": "lichtspiel · 1920 × 912 px · 24 fps · 1:45, sesli",
   "work.lichtspiel.player": "Lichtspiel, sesli film",
   "work.lichtspiel.noVideo": "Tarayıcınız bu videoyu oynatamıyor.",
+  "work.ma.subtitle": "Hiroshi Yoshimura’nın müziğine göre bir tasarım sistemi.",
+  "work.ma.lead": "Ma, nokta’nın tasarım sistemidir ve adını Japon ambient bestecisi Hiroshi Yoshimura’dan alır. Kitap renk, yazı, boşluk ve hareketi onun müziğine göre düzenler. İngilizce bir A4 PDF’tir, 19 sayfa.",
+  "work.ma.download": "PDF indir (19 sayfa, İngilizce)",
+  "work.ma.service": "Tasarım sistemi",
+  "work.ma.scope": "19 sayfa · A4 · İngilizce",
 
   // ── Hizmetler (ServiceIndex, /studio) ─────────────────────────────
   "nokta.index.label": "Hizmetler",
@@ -282,6 +287,11 @@ const tr: Record<string, string> = {
   "projects.alt.ipehouse.4": "Duvara monte masalı çalışma köşesi ve açık ahşap gömme dolap",
   "projects.alt.velostation.1": "Ahşap tavan altında iki katlı bisiklet raflarıyla park salonu",
   "projects.alt.velostation.2": "Tezgâhlar, döner merdiven ve galeriyle atölye",
+  "projects.alt.ma.1": "Ma tasarım kitabının kapağı: 間 işareti, Ma başlığı, gökyüzü, su ve bir noktadan oluşan bir yüzey",
+  "projects.alt.ma.2": "Day renk sayfası: gökyüzü, su ve yosun yüzeyleri ve adlandırılmış renk değerleri",
+  "projects.alt.ma.3": "Two voices tipografi sayfası: Japonca ve Latin için bir display yazı ve bir metin yazısı",
+  "projects.alt.ma.4": "Space decays like a note boşluk sayfası: artan bir aralık dizisi",
+  "projects.alt.ma.5": "Ma tasarım kitabının 19 sayfasının tümüne bakış",
 
   // ── İşler (genel bakış /arbeiten) ─────────────────────────────────
   "arbeiten.intro": "Görselleştirmeler, editoryal, çalışmalar ve mağazadaki çizgi baskılar.",

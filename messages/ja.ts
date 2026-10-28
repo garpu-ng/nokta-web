@@ -62,6 +62,11 @@ const ja: Record<string, string> = {
   "work.lichtspiel.spec": "リヒトシュピール · 1920 × 912 px · 24 fps · 1:45、音声あり",
   "work.lichtspiel.player": "リヒトシュピール（音声つきの映像）",
   "work.lichtspiel.noVideo": "お使いのブラウザはこの動画を再生できません。",
+  "work.ma.subtitle": "Hiroshi Yoshimuraの音楽にならったデザインシステム。",
+  "work.ma.lead": "Maはnoktaのデザインシステムです。名前は日本のアンビエント作曲家Hiroshi Yoshimuraに由来します。色、書体、余白、動きをその音楽にならって記した、英語のA4 PDF、19ページです。",
+  "work.ma.download": "PDFをダウンロード（19ページ、英語）",
+  "work.ma.service": "デザインシステム",
+  "work.ma.scope": "19ページ · A4 · 英語",
 
   // ── サービス（ServiceIndex, /studio） ─────────────────────────────
   // 四つの行、それぞれを成果物として記す。1行目と2行目には主要案件を事実として
@@ -289,6 +294,11 @@ const ja: Record<string, string> = {
   "projects.alt.ipehouse.4": "壁付けのデスクと開いた造り付けの木製収納",
   "projects.alt.velostation.1": "木の天井の下、2段式ラックが並ぶ駐輪ホール",
   "projects.alt.velostation.2": "作業台、らせん階段、ギャラリーのある工房",
+  "projects.alt.ma.1": "デザインバイブルMaの表紙。間の字、題字Ma、空と水と一つの点からなる面",
+  "projects.alt.ma.2": "色のページDay。空、水、苔の面と、名前の付いた色の値",
+  "projects.alt.ma.3": "タイポグラフィのページTwo voices。日本語とラテン文字のためのディスプレイ書体と本文書体",
+  "projects.alt.ma.4": "余白のページSpace decays like a note。次第に広がる間隔の列",
+  "projects.alt.ma.5": "デザインバイブルMaの全19ページの一覧",
 
   // ── 作品（一覧 /arbeiten） ─────────────────────────────────────────
   "arbeiten.intro": "ビジュアライゼーション、エディトリアル、スタディ、ショップのラインプリント。",

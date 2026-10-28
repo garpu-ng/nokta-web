@@ -113,6 +113,17 @@ export const WORKS: Work[] = [
     source: { type: "piece" },
   },
   fromProject("velostation", 4, 3),
+  {
+    slug: "ma",
+    title: "Ma (間)",
+    kind: "manual",
+    year: "2026",
+    // No client: the studio's own design bible → annotated "Eigenprojekt".
+    thumb: "/ma/cover.webp",
+    span: 5,
+    lift: 1,
+    source: { type: "piece" },
+  },
 ];
 
 /** The five kinds, as a runtime set — the type alone cannot be checked

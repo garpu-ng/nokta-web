@@ -63,6 +63,11 @@ const en: Record<string, string> = {
   "work.lichtspiel.spec": "lichtspiel · 1920 × 912 px · 24 fps · 1:45 with sound",
   "work.lichtspiel.player": "Lichtspiel, film with sound",
   "work.lichtspiel.noVideo": "Your browser cannot play this video.",
+  "work.ma.subtitle": "A design system after the music of Hiroshi Yoshimura.",
+  "work.ma.lead": "Ma is a design system by nokta, named after the Japanese ambient composer Hiroshi Yoshimura. The design bible follows his music in colour, type, space and motion. It is an English PDF in A4, 19 pages.",
+  "work.ma.download": "Download PDF (19 pages, English)",
+  "work.ma.service": "Design system",
+  "work.ma.scope": "19 pages · A4 · English",
 
   // ── Services (ServiceIndex, /studio) ──────────────────────────────
   // Four rows, each stated as a deliverable. Rows 1 and 2 carry an evidence
@@ -290,6 +295,11 @@ const en: Record<string, string> = {
   "projects.alt.ipehouse.4": "Desk with a wall-mounted table and an open built-in timber wardrobe",
   "projects.alt.velostation.1": "Parking hall with two-tier bike racks under a timber ceiling",
   "projects.alt.velostation.2": "Workshop with workbenches, a spiral staircase and a gallery",
+  "projects.alt.ma.1": "Cover of the design bible Ma, with the character 間, the title Ma, and a field of sky, water and a point",
+  "projects.alt.ma.2": "Colour page Day, with the fields sky, water and moss and the named colour values",
+  "projects.alt.ma.3": "Typography page Two voices, with a display face and a text face for Japanese and Latin",
+  "projects.alt.ma.4": "Space page Space decays like a note, with a rising sequence of gaps",
+  "projects.alt.ma.5": "Overview of all 19 pages of the design bible Ma",
 
   // ── Work (overview /arbeiten) ─────────────────────────────────────
   "arbeiten.intro": "Visualisations, editorial, studies and the line prints from the shop.",

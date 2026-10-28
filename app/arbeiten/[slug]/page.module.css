@@ -71,6 +71,31 @@
   margin: 0;
   font-size: 0.85rem;
 }
+.download {
+  margin: 1.35rem 0 0;
+}
+.download a {
+  display: inline-block;
+  max-width: 100%;
+  padding: 0.8rem 1.15rem;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--headline-font);
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+.download a:hover,
+.download a:focus-visible {
+  background: var(--accent);
+  color: var(--paper);
+}
+.download a:focus-visible {
+  outline: 2px solid var(--paper);
+  outline-offset: 3px;
+}
 @media (max-width: 767px) {
   .intro {
     grid-template-columns: 1fr;
