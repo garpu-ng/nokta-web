@@ -1,0 +1,14 @@
+/* /bautraeger — a draft. The plate, the service grid, the steps, the cards
+   and the contact block come from /3d-visualisierung and /fuer-bautraeger.
+   This sheet only places the lede. The nine services use the same grid the
+   visualisation page uses for its three uses. */
+
+.lede {
+  padding: 56px var(--nk-gutter) 0;
+}
+
+@media (max-width: 899px) {
+  .lede {
+    padding-top: 40px;
+  }
+}

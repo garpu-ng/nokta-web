@@ -469,6 +469,39 @@ const de: Record<string, string> = {
   "architekturbueros.more.2.text": "Grundrisse, Schnitte und Ansichten werden grafisch für die Präsentation aufbereitet.",
   "architekturbueros.more.3.title": "Gestaltung der Präsentation",
   "architekturbueros.more.3.text": "Wir gestalten Wettbewerbstafeln und die Unterlagen für Bauantrag und Gestaltungsbeirat, so dass Bilder und Pläne als eine Präsentation ankommen.",
+
+  // ── /bautraeger ───────────────────────────────────────────────────
+  // German only, on purpose: the other locales do not carry these keys,
+  // and the page reads this file directly so a language cookie still gets
+  // German. Not linked from the nav or the footer. Listed in the sitemap.
+  "meta.bautraeger.title": "Architekturvisualisierung für Bauträger in NRW · nokta",
+  "meta.bautraeger.desc": "Architekturvisualisierung aus NRW für Bauträger. Außen- und Innenansichten aus Plänen und Skizzen.",
+  "bautraeger.heading": "Architekturvisualisierung für Bauträger in NRW",
+  "bautraeger.lede": "Bilder können Wohnungen zeigen, bevor gebaut wird: für Vermarktung und Vertrieb, für Genehmigungen und für das Gespräch mit Käufern.",
+  "bautraeger.services": "Was wir für Bauträger machen",
+  "bautraeger.svc.0.title": "Außenvisualisierung",
+  "bautraeger.svc.0.text": "Außenansichten aus Plänen und Skizzen, für Exposé, Website und Bauschild.",
+  "bautraeger.svc.1.title": "Innenvisualisierung",
+  "bautraeger.svc.1.text": "Innenansichten von Wohnungen, für Vermarktung und das Gespräch mit Käufern.",
+  "bautraeger.svc.2.title": "Clay-Renders und Studien",
+  "bautraeger.svc.2.text": "Clay-Renders und Studien, um Perspektive und Ausschnitt abzustimmen.",
+  "bautraeger.svc.3.title": "Tageslicht und Abendstimmung",
+  "bautraeger.svc.3.text": "Ansichten bei Tageslicht und in Abendstimmung, für Exposé und Website.",
+  "bautraeger.svc.4.title": "Bilder in Druckauflösung",
+  "bautraeger.svc.4.text": "Bilder in Druckauflösung, für Bildschirm und Druck.",
+  "bautraeger.svc.5.title": "3D-Rundgang und Kamerafahrt",
+  "bautraeger.svc.5.text": "Ein Rundgang und eine Kamerafahrt durch die Wohnungen, für Website, Exposé und das Gespräch mit Käufern.",
+  "bautraeger.svc.6.title": "3D-Animation",
+  "bautraeger.svc.6.text": "Bewegte Bilder eines Wohnprojekts, für Vermarktung, Vertrieb und das Gespräch mit Käufern.",
+  "bautraeger.svc.7.title": "2D-Pläne für die Präsentation",
+  "bautraeger.svc.7.text": "Grundrisse, Ansichten und Schnitte als Pläne für Exposé und das Gespräch mit Käufern.",
+  "bautraeger.svc.8.title": "Gestaltung der Präsentation",
+  "bautraeger.svc.8.text": "Gestaltung von Exposé, Website und Bauschild für Vermarktung und Vertrieb.",
+  "bautraeger.steps": "So arbeiten wir",
+  "bautraeger.step.0": "Sie schicken Pläne, eine Skizze oder ein Modell.",
+  "bautraeger.step.1": "Perspektive und Ausschnitt stimmen wir an Clay-Renders ab.",
+  "bautraeger.step.2": "Materialien, Licht und Umgebung kommen dazu.",
+  "bautraeger.step.3": "Sie bekommen die Bilder in Druckauflösung, für Bildschirm und Druck.",
 };
 
 export default de;
