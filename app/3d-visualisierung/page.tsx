@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import JsonLd from "@/components/JsonLd";
 import Reveal from "@/components/Reveal";
 import DiscField from "@/components/nokta/DiscField";
 import PlateHead from "@/components/nokta/PlateHead";
@@ -8,6 +9,7 @@ import SectionRule from "@/components/nokta/SectionRule";
 import { workAnnotation } from "@/components/work/WorkAnno";
 import { KIND_FIELD } from "@/lib/colors";
 import { getLocale, getT } from "@/lib/i18n";
+import { faqPageJsonLd, serviceJsonLd } from "@/lib/jsonld";
 import { getMediaSize } from "@/lib/mediaSizes";
 import { socialMetadata } from "@/lib/socialMeta";
 import { WORKS } from "@/lib/works";
@@ -16,13 +18,12 @@ import styles from "./page.module.css";
 /* /3d-visualisierung: the one page that states the visualisation service in
    words. The wall shows the renderings; this page says what they are, who they
    are for, how a job runs and what it costs to ask. It exists so a search for
-   "3D-Visualisierung Düsseldorf" has a page that answers it.
+   "3D-Visualisierung NRW" has a page that answers it.
 
    Same register as every other page: say what it is. No prices, no delivery
    times and no tools are named, because none of them are fixed. */
 
 const PATH = "/3d-visualisierung";
-const SITE = "https://www.nokta-studio.de";
 
 /* The archviz colour alone: this page is one material. Module scope so the
    plate gets one array reference for the life of the page. */
@@ -46,40 +47,25 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-/** schema.org Service, provided by the studio the root layout describes. */
-function serviceJsonLd(name: string, description: string) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "@id": `${SITE}${PATH}#service`,
-    name,
-    serviceType: "3D-Visualisierung",
-    description,
-    url: `${SITE}${PATH}`,
-    provider: { "@id": `${SITE}/#studio` },
-    areaServed: [
-      { "@type": "City", name: "Düsseldorf" },
-      { "@type": "State", name: "Nordrhein-Westfalen" },
-    ],
-  };
-}
-
 export default async function VisualisierungPage() {
   const t = await getT();
+  const locale = await getLocale();
   const title = `${t("viz.heading")}.`;
   const renderings = WORKS.filter((w) => w.kind === "rendering");
+  const faq = FAQ.map((i) => ({ q: t(`viz.faq.${i}.q`), a: t(`viz.faq.${i}.a`) }));
 
   return (
     <main>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(serviceJsonLd(t("viz.heading"), t("meta.viz.desc"))).replace(
-            /</g,
-            "\\u003c",
-          ),
-        }}
+      <JsonLd
+        data={serviceJsonLd({
+          path: PATH,
+          name: t("viz.heading"),
+          description: t("meta.viz.desc"),
+          serviceType: t("viz.heading"),
+          inLanguage: locale,
+        })}
       />
+      <JsonLd data={faqPageJsonLd(PATH, faq, locale)} />
 
       <PlateHead title={title}>
         <DiscField palette={PALETTE} motto={title} />

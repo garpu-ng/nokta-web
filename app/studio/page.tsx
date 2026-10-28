@@ -136,7 +136,7 @@ export default async function StudioPage() {
                     alt=""
                     width={width}
                     height={height}
-                    sizes="(max-width: 899px) 320px, (max-width: 1199px) 33vw, 452px"
+                    sizes="(max-width: 899px) 320px, (max-width: 1199px) calc((100vw - 112px) / 3), (max-width: 1500px) calc((100vw - 144px) / 3), 452px"
                     /* .still only where there is a reveal to stand down for.
                        On a plate with no reveal it is the portrait, full stop —
                        marking it .still would hide it on every desktop. */

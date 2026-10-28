@@ -3,6 +3,7 @@ import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
+import JsonLd from "@/components/JsonLd";
 import ProjectHeader from "@/components/ProjectHeader";
 import Reveal from "@/components/Reveal";
 import ArtPlate from "@/components/nokta/ArtPlate";
@@ -10,6 +11,7 @@ import CaseStudy from "@/components/nokta/CaseStudy";
 import FilmPlate from "@/components/nokta/FilmPlate";
 import WorkAnno, { workAnnotation } from "@/components/work/WorkAnno";
 import { getLocale, getT, type Translate } from "@/lib/i18n";
+import { creativeWorkJsonLd } from "@/lib/jsonld";
 import { getMediaSize } from "@/lib/mediaSizes";
 import { PRINTS } from "@/lib/prints";
 import type { Project } from "@/lib/projects";
@@ -42,8 +44,28 @@ function describe(work: Work, t: Translate): string {
   }
 }
 
+/** Description for the work's JSON-LD. Same sentence as the meta description,
+    except the KI-Kommission report: that sentence names the commissioning
+    body. The two narrative paragraphs on the page describe the work without
+    a client name. */
+function workLdDescription(work: Work, t: Translate): string {
+  if (work.slug === "abschlussbericht-ki-kommission") {
+    return `${t("point.case.narrative1")} ${t("point.case.narrative2")}`;
+  }
+  return describe(work, t);
+}
+
 /** The alt text of a project image: the project's title and what the shot
     shows, or its running number where no line is written yet. */
+/** How wide the stack actually paints this shot. .wa-project-img is
+    min(100%, 1500px, 900px times the ratio): a tall frame is narrower than
+    the sheet, and a sizes hint of 100vw made a ~670px plate download 1920. */
+function projectImageSizes(width: number, height: number): string {
+  const cap = Math.round((900 * width) / height);
+  if (cap >= 1500) return "(max-width: 1500px) 100vw, 1500px";
+  return `(max-width: ${cap}px) 100vw, ${cap}px`;
+}
+
 function imageAlt(slug: string, title: string, i: number, t: Translate): string {
   const key = `projects.alt.${slug}.${i + 1}`;
   const line = t(key);
@@ -114,7 +136,7 @@ function imageStack(project: Project, title: string, t: Translate) {
               alt={imageAlt(project.slug, title, i, t)}
               width={width}
               height={height}
-              sizes="(max-width: 1500px) 100vw, 1500px"
+              sizes={projectImageSizes(width, height)}
               preload={i === 0}
               className="wa-project-img"
             />
@@ -122,6 +144,41 @@ function imageStack(project: Project, title: string, t: Translate) {
         );
       })}
     </div>
+  );
+}
+
+/** The three renderings that carry a written case study under the stack.
+    Every other project page stays as it is. */
+const CASE_SLUGS = ["binome", "beatbuilding", "ipehouse"] as const;
+const CASE_PARTS = ["aufgabe", "vorgehen", "ergebnis"] as const;
+
+function hasCase(slug: string): slug is (typeof CASE_SLUGS)[number] {
+  return (CASE_SLUGS as readonly string[]).includes(slug);
+}
+
+/** Fallstudie: the written account, under the images, in the same measure as
+    the intro. German only; other locales fall back through getT. */
+function projectCase(slug: string, t: Translate) {
+  if (!hasCase(slug)) return null;
+  const titleId = `fallstudie-${slug}`;
+  return (
+    <section className={styles.case} aria-labelledby={titleId}>
+      <header className={styles.caseHead}>
+        <p className={`nk-caption ${styles.caseKicker}`}>{t("projects.case.label")}</p>
+        <h2 id={titleId} className={styles.caseTitle}>
+          {t(`projects.case.${slug}.title`)}
+        </h2>
+        <p className={styles.caseLead}>{t(`projects.case.${slug}.lead`)}</p>
+      </header>
+      <div className={styles.caseBlocks}>
+        {CASE_PARTS.map((part) => (
+          <div className={styles.caseBlock} key={part}>
+            <h3>{t(`projects.case.${part}`)}</h3>
+            <p>{t(`projects.case.${slug}.${part}`)}</p>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 }
 
@@ -186,6 +243,7 @@ function workBody(work: Work, t: Translate) {
         <>
           {projectIntro(work.slug, t)}
           {imageStack(work.source.project, work.title, t)}
+          {projectCase(work.slug, t)}
         </>
       );
     case "piece":
@@ -205,10 +263,20 @@ export default async function WorkPage({ params }: Props) {
   if (!work) notFound();
 
   const t = await getT();
+  const locale = await getLocale();
   const { prev, next } = prevNext(work.slug);
 
   return (
     <main>
+      <JsonLd
+        data={creativeWorkJsonLd({
+          path: `/arbeiten/${work.slug}`,
+          name: work.title,
+          description: workLdDescription(work, t),
+          imagePath: work.thumb,
+          inLanguage: locale,
+        })}
+      />
       <ProjectHeader
         title={work.title}
         anno={<WorkAnno anno={workAnnotation(work, t)} />}

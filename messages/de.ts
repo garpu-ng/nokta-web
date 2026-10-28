@@ -228,12 +228,34 @@ const de: Record<string, string> = {
   "projects.service.velostation": "Innenvisualisierung",
   "projects.scope.velostation": "2 Bilder · innen",
 
+  // Fallstudie unter dem Bildstapel, nur für die drei Projekte, die eine haben.
+  // Andere Sprachen fallen auf diese deutschen Sätze zurück.
+  "projects.case.label": "Fallstudie",
+  "projects.case.aufgabe": "Aufgabe",
+  "projects.case.vorgehen": "Vorgehen",
+  "projects.case.ergebnis": "Ergebnis",
+  "projects.case.binome.title": "Wohnhaus aus rotem Ziegel",
+  "projects.case.binome.lead": "Wohnhaus aus rotem Ziegel. Rendering, 2023.",
+  "projects.case.binome.aufgabe": "Außen- und Innenvisualisierung eines Wohnhauses aus rotem Ziegel. Außen geht es um Fassade, Außentreppe und Laubengang in Ziegel und rot gestrichenem Stahl, innen um Wohnraum und Küche einer Wohnung.",
+  "projects.case.binome.vorgehen": "Sechs Bilder, drei außen und drei innen. Außen: die Straßenfassade mit Stützen im Erdgeschoss, die Außentreppe zwischen Ziegelpfeilern und der Laubengang mit Holzdecke und rotem Geländer. Innen: der Wohnraum mit gelbem Sessel, blauer Stehleuchte und rotem Beistelltisch, ein Fenster mit rotem Geländer davor und die Küche mit Kochinsel aus hellem Holz und roten Fliesen. Am Anfang stehen bei nokta Clay-Renders für Perspektive und Ausschnitt, danach folgen Material und Licht.",
+  "projects.case.binome.ergebnis": "Sechs Bilder, die das Haus von der Straße bis in die Küche zeigen.",
+  "projects.case.beatbuilding.title": "Beat Building",
+  "projects.case.beatbuilding.lead": "Wohn- und Geschäftshaus mit Sichtbetonfassade. Rendering, 2023.",
+  "projects.case.beatbuilding.aufgabe": "Außen- und Innenvisualisierung eines Wohn- und Geschäftshauses mit Sichtbetonfassade. Die Arbeit umfasst Ansichten der Straßenfront, der Balkone und eines Innenraums hinter der zweigeschossigen Glasfront.",
+  "projects.case.beatbuilding.vorgehen": "Vier Bilder, drei außen und eines innen. Die Außenansichten bei Tageslicht reichen von der Straßenfront über die oberen Geschosse mit Balkonen vor blauem Himmel bis zum Fassadendetail mit Balkonen und schwarzen Geländern. Das vierte Bild zeigt den zweigeschossigen Innenraum mit einem langen Tisch vor der Glasfront. Am Anfang stehen bei nokta Clay-Renders für Perspektive und Ausschnitt, danach folgen Material und Licht.",
+  "projects.case.beatbuilding.ergebnis": "Vier Bilder, die das Gebäude vom Straßenraum bis zum Detail und in einen Innenraum zeigen.",
+  "projects.case.ipehouse.title": "IPE House",
+  "projects.case.ipehouse.lead": "Eingeschossiges Haus mit Holzläden und weitem Dachüberstand. Rendering, 2023.",
+  "projects.case.ipehouse.aufgabe": "Außen- und Innenvisualisierung eines eingeschossigen Hauses mit Holzläden und weitem Dachüberstand. Die Arbeit umfasst das Haus im Garten und zwei Innenräume.",
+  "projects.case.ipehouse.vorgehen": "Vier Bilder, zwei außen und zwei innen. Außen bei Tageslicht: das Haus mit offenen Holzläden und Rasen davor, dazu die überdachte Terrasse unter Holzbalken mit Palmen im Hintergrund. Innen: das Schlafzimmer mit Doppelbett, Holzbalken und Nachttischen mit Büchern sowie ein Arbeitsplatz mit Wandtisch und offenem Einbauschrank aus Holz. Am Anfang stehen bei nokta Clay-Renders für Perspektive und Ausschnitt, danach folgen Material und Licht.",
+  "projects.case.ipehouse.ergebnis": "Vier Bilder, die Haus, Terrasse und zwei Räume zeigen, bevor gebaut ist.",
+
   // ── 3D-Visualisierung (/3d-visualisierung) ─────────────────────────
   "meta.viz.title": "3D-Visualisierung und Architekturvisualisierung aus NRW · nokta",
-  "meta.viz.desc": "Fotorealistische 3D-Visualisierungen von Gebäuden und Innenräumen für Architekturbüros, Bauträger und private Bauherren in Düsseldorf und NRW. Außen- und Innenansichten, Clay-Renders, Bilder in Druckauflösung.",
+  "meta.viz.desc": "Fotorealistische 3D-Visualisierungen von Gebäuden und Innenräumen für Architekturbüros, Bauträger und private Bauherren in NRW. Außen- und Innenansichten, Clay-Renders, Bilder in Druckauflösung.",
   "viz.heading": "3D-Visualisierung",
   "viz.claim": "Fotorealistische Bilder von Gebäuden und Innenräumen, bevor sie gebaut sind.",
-  "viz.lead": "Wir erstellen 3D-Visualisierungen von Gebäuden und Innenräumen: fotorealistische Außen- und Innenansichten aus Plänen, Skizzen oder einem vorhandenen 3D-Modell. Für Architekturbüros, Bauträger und private Bauherren in Düsseldorf, NRW und darüber hinaus.",
+  "viz.lead": "Wir erstellen 3D-Visualisierungen von Gebäuden und Innenräumen: fotorealistische Außen- und Innenansichten aus Plänen, Skizzen oder einem vorhandenen 3D-Modell. Für Architekturbüros, Bauträger und private Bauherren in NRW und darüber hinaus.",
   "viz.services.label": "Leistungen",
   "viz.svc.0": "Außenvisualisierung",
   "viz.svc.1": "Innenvisualisierung",
@@ -262,7 +284,7 @@ const de: Record<string, string> = {
   "viz.faq.0.a": "Das hängt von der Zahl der Ansichten, vom Detailgrad und von den Unterlagen ab. Schick uns eine kurze Anfrage, dann bekommst du ein Angebot.",
   "viz.faq.1.q": "Welche Unterlagen braucht ihr?",
   "viz.faq.1.a": "Grundrisse, Ansichten und Schnitte reichen für den Anfang, als PDF oder DWG. Ein 3D-Modell, Materialangaben und Referenzbilder helfen, sind aber keine Voraussetzung.",
-  "viz.faq.2.q": "Arbeitet ihr nur in Düsseldorf?",
+  "viz.faq.2.q": "Arbeitet ihr nur in NRW?",
   "viz.faq.2.a": "Nein. Das Studio kommt aus NRW, die Abstimmung läuft per E-Mail und Videocall. Wir arbeiten für Auftraggeber in ganz NRW und darüber hinaus.",
   "viz.faq.3.q": "Könnt ihr auch Innenräume visualisieren?",
   "viz.faq.3.a": "Ja. Etwa die Hälfte unserer Bilder zeigt Innenräume, vom Wohnzimmer bis zur Werkstatt einer Fahrradstation.",
@@ -424,11 +446,34 @@ const de: Record<string, string> = {
   "inst.cta.note": "Schreiben Sie uns über das Formular oder an hallo@nokta-studio.de, mit Umfang und Termin. Sie bekommen ein schriftliches Angebot.",
   "inst.cta.button": "Satz anfragen",
 
-  // ── Entwurf /bautraeger ───────────────────────────────────────────
+  // ── Entwurf /architekturbueros ────────────────────────────────────
   // German only, on purpose: the other locales do not carry these keys,
   // and the page reads this file directly so a language cookie still gets
-  // German. A draft for review. Not linked from the nav, the footer or
-  // the sitemap.
+  // German. Not linked from the nav or the footer. Listed in the sitemap.
+  "meta.architekturbueros.title": "Architekturvisualisierung für Architekturbüros in NRW · nokta",
+  "meta.architekturbueros.desc": "Architekturvisualisierung aus NRW für Architekturbüros. Außen- und Innenansichten aus Plänen und Skizzen.",
+  "architekturbueros.heading": "Architekturvisualisierung für Architekturbüros in NRW",
+  "architekturbueros.lede": "Bilder können ein Projekt zeigen, bevor gebaut wird: für Wettbewerbe, für Bauanträge und für den Gestaltungsbeirat.",
+  "architekturbueros.services": "Was wir für Architekturbüros machen",
+  "architekturbueros.steps": "So arbeiten wir",
+  "architekturbueros.cta.text": "Sie arbeiten an einem Wettbewerb oder einem Bauantrag?",
+  "architekturbueros.step.0": "Sie schicken Pläne, eine Skizze oder ein Modell.",
+  "architekturbueros.step.1": "Perspektive und Ausschnitt stimmen wir an Clay-Renders ab.",
+  "architekturbueros.step.2": "Materialien, Licht und Umgebung kommen dazu.",
+  "architekturbueros.step.3": "Sie bekommen Bilder, Filme und Pläne für Bildschirm und Druck.",
+  "architekturbueros.more.0.title": "3D-Rundgang und Kamerafahrt",
+  "architekturbueros.more.0.text": "Die Kamera bewegt sich durch das Projekt oder um es herum, als Film.",
+  "architekturbueros.more.1.title": "3D-Animation",
+  "architekturbueros.more.1.text": "Bewegte Bilder zeigen etwa das Licht über den Tag oder das Gebäude in seiner Umgebung.",
+  "architekturbueros.more.2.title": "2D-Pläne für die Präsentation",
+  "architekturbueros.more.2.text": "Grundrisse, Schnitte und Ansichten werden grafisch für die Präsentation aufbereitet.",
+  "architekturbueros.more.3.title": "Gestaltung der Präsentation",
+  "architekturbueros.more.3.text": "Wir gestalten Wettbewerbstafeln und die Unterlagen für Bauantrag und Gestaltungsbeirat, so dass Bilder und Pläne als eine Präsentation ankommen.",
+
+  // ── /bautraeger ───────────────────────────────────────────────────
+  // German only, on purpose: the other locales do not carry these keys,
+  // and the page reads this file directly so a language cookie still gets
+  // German. Not linked from the nav or the footer. Listed in the sitemap.
   "meta.bautraeger.title": "Architekturvisualisierung für Bauträger in NRW · nokta",
   "meta.bautraeger.desc": "Architekturvisualisierung aus NRW für Bauträger. Außen- und Innenansichten aus Plänen und Skizzen.",
   "bautraeger.heading": "Architekturvisualisierung für Bauträger in NRW",
