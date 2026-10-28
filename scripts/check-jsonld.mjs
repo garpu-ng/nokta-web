@@ -295,6 +295,8 @@ await checkPage("/3d-visualisierung", "en", { ...viz, locale: "en" });
 await checkPage("/3d-visualisierung", "ja", { ...viz, locale: "ja" });
 await checkPage("/architekturbueros", "de", { ...service, locale: "de" });
 await checkPage("/architekturbueros", "en", { ...service, locale: "de" });
+await checkPage("/bautraeger", "de", { ...service, locale: "de" });
+await checkPage("/bautraeger", "en", { ...service, locale: "de" });
 await checkPage("/fuer-bautraeger", "de", { ...service, locale: "de" });
 await checkPage("/fuer-bautraeger", "en", { ...service, locale: "en" });
 await checkPage("/fuer-institutionen", "de", { ...service, locale: "de" });
@@ -332,4 +334,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`JSON-LD check passed (${works.length} works, 4 service pages, home in 4 languages)`);
+console.log(`JSON-LD check passed (${works.length} works, 5 service pages, home in 4 languages)`);

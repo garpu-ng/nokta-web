@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import JsonLd from "@/components/JsonLd";
 import Reveal from "@/components/Reveal";
 import PlateHead from "@/components/nokta/PlateHead";
 import RidgeField from "@/components/nokta/RidgeField";
 import SectionRule from "@/components/nokta/SectionRule";
+import { serviceJsonLd, titleWithoutSite } from "@/lib/jsonld";
 import { getMediaSize } from "@/lib/mediaSizes";
 import { PROJECTS } from "@/lib/projects";
 import de from "@/messages/de";
@@ -12,14 +14,16 @@ import viz from "../3d-visualisierung/page.module.css";
 import note from "../fuer-bautraeger/page.module.css";
 import styles from "./page.module.css";
 
-/* /bautraeger: a draft landing page for review. German only, on every
-   language cookie, because the copy is read from messages/de.ts and nowhere
-   else. Not in the nav, the footer or the sitemap, and noindex.
+/* /bautraeger: German only, on every language cookie, because the copy is
+   read from messages/de.ts and nowhere else. Not in the nav or the footer.
+   In the sitemap, and indexable.
 
    The first five services are the ones the visualisation page already names.
-   The last four are the same set the architect draft carries, worded here
+   The last four are the same set the architect page carries, worded here
    for residential developers. Nothing here names a price, a deadline, a
    client or a city. */
+
+const PATH = "/bautraeger";
 
 const SERVICES = [0, 1, 2, 3, 4, 5, 6, 7, 8] as const;
 const STEPS = [0, 1, 2, 3] as const;
@@ -35,7 +39,8 @@ function line(key: string): string {
 export const metadata: Metadata = {
   title: line("meta.bautraeger.title"),
   description: line("meta.bautraeger.desc"),
-  robots: { index: false, follow: false },
+  alternates: { canonical: PATH },
+  robots: { index: true, follow: true },
 };
 
 export default function BautraegerDraftPage() {
@@ -47,6 +52,16 @@ export default function BautraegerDraftPage() {
 
   return (
     <main>
+      {/* German on every language cookie, same as the copy below. */}
+      <JsonLd
+        data={serviceJsonLd({
+          path: PATH,
+          name: line("bautraeger.heading"),
+          description: line("meta.bautraeger.desc"),
+          serviceType: titleWithoutSite(line("meta.bautraeger.title")),
+          inLanguage: "de",
+        })}
+      />
       <PlateHead title={title}>
         <RidgeField motto={title} />
       </PlateHead>

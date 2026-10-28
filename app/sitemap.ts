@@ -19,6 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/arbeiten` },
     { url: `${BASE}/3d-visualisierung` },
     { url: `${BASE}/architekturbueros` },
+    { url: `${BASE}/bautraeger` },
     { url: `${BASE}/fuer-bautraeger` },
     { url: `${BASE}/fuer-institutionen` },
     ...WORKS.map((w) => ({ url: `${BASE}/arbeiten/${w.slug}` })),
