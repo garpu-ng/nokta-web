@@ -96,6 +96,17 @@
   outline: 2px solid var(--paper);
   outline-offset: 3px;
 }
+
+/* The shared project plate caps height at 900px. That is right for an A4
+   page and wrong for the contact sheet: at that cap the sheet is about
+   800px wide and the pages on it cannot be read. It takes the content
+   column instead, the same 1500px the shell stops at. */
+.maSheet {
+  display: block;
+  width: min(100%, 1500px);
+  height: auto;
+  outline: 1px solid var(--ink);
+}
 @media (max-width: 767px) {
   .intro {
     grid-template-columns: 1fr;

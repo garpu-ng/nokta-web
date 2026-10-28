@@ -14,6 +14,10 @@ const nextConfig: NextConfig = {
     // from 1200 to 1920. imageSizes stay below the smallest deviceSize.
     imageSizes: [32, 48, 64, 96, 128, 256, 384, 480, 560],
     deviceSizes: [640, 750, 828, 1080, 1200, 1440, 1920, 2048, 3840],
+    // 75 stays the default for every other image. 90 is allowlisted only so
+    // the Ma plates can ask for it: Next 16 serves the closest allowed
+    // quality, and a quality={90} prop without this entry would stay at 75.
+    qualities: [75, 90],
     // Optimized images were leaving with max-age=0, so every return visit
     // revalidated them. A day is long enough to help and short enough that a
     // replaced project file is not stuck for a month. HTML stays dynamic

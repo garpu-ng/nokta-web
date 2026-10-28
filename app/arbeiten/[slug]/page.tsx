@@ -90,6 +90,11 @@ const MA_IMAGES = [
   "/ma/sheet.webp",
 ];
 
+/** The contact sheet is the one Ma image that is not height-capped. It paints
+    the full content column (1500px), so a retina screen can ask for the
+    3144px master instead of a ~800px reduction of it. */
+const MA_SHEET_SIZES = "(max-width: 1500px) 100vw, 1500px";
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const work = getWork(slug);
@@ -126,6 +131,7 @@ function imageStack(
   project: { slug: string; images: string[] },
   title: string,
   t: Translate,
+  opts?: { quality?: number; sheetSrc?: string; sheetSizes?: string; sheetClassName?: string },
 ) {
   return (
     <div className="wa-project-images">
@@ -150,9 +156,18 @@ function imageStack(
               alt={imageAlt(project.slug, title, i, t)}
               width={width}
               height={height}
-              sizes={projectImageSizes(width, height)}
+              sizes={
+                opts?.sheetSrc === src && opts.sheetSizes
+                  ? opts.sheetSizes
+                  : projectImageSizes(width, height)
+              }
+              quality={opts?.quality}
               preload={i === 0}
-              className="wa-project-img"
+              className={
+                opts?.sheetSrc === src && opts.sheetClassName
+                  ? opts.sheetClassName
+                  : "wa-project-img"
+              }
             />
           </Reveal>
         );
@@ -271,7 +286,12 @@ function pieceBody(slug: string, t: Translate) {
               </dl>
             </div>
           </div>
-          {imageStack({ slug: "ma", images: MA_IMAGES }, "Ma (間)", t)}
+          {imageStack({ slug: "ma", images: MA_IMAGES }, "Ma (間)", t, {
+            quality: 90,
+            sheetSrc: "/ma/sheet.webp",
+            sheetSizes: MA_SHEET_SIZES,
+            sheetClassName: styles.maSheet,
+          })}
         </>
       );
     default:
