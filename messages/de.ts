@@ -70,6 +70,11 @@ const de: Record<string, string> = {
   "work.lichtspiel.spec": "lichtspiel · 1920 × 912 px · 24 bilder/s · 1:45 mit ton",
   "work.lichtspiel.player": "Lichtspiel, Film mit Ton",
   "work.lichtspiel.noVideo": "Ihr Browser kann dieses Video nicht abspielen.",
+  "work.ma.subtitle": "Ein Designsystem nach der Musik von Hiroshi Yoshimura.",
+  "work.ma.lead": "Ma ist ein Designsystem von nokta, benannt nach dem japanischen Ambient-Komponisten Hiroshi Yoshimura. Die Designbibel folgt seiner Musik in Farbe, Schrift, Raum und Bewegung. Sie liegt als englisches PDF im Format A4 vor, 19 Seiten.",
+  "work.ma.download": "PDF herunterladen (19 Seiten, englisch)",
+  "work.ma.service": "Designsystem",
+  "work.ma.scope": "19 Seiten · A4 · Englisch",
 
   // ── Leistungen (ServiceIndex, /studio) ────────────────────────────
   // Four rows, each stated as a deliverable. Keys svc.1 and svc.2 (zero-indexed
@@ -322,6 +327,11 @@ const de: Record<string, string> = {
   "projects.alt.ipehouse.4": "Arbeitsplatz mit Wandtisch und offenem Einbauschrank aus Holz",
   "projects.alt.velostation.1": "Abstellhalle mit doppelstöckigen Radständern unter einer Holzdecke",
   "projects.alt.velostation.2": "Werkstatt mit Werkbänken, Wendeltreppe und Galerie",
+  "projects.alt.ma.1": "Titelseite der Designbibel Ma mit dem Zeichen 間, dem Titel Ma und einer Fläche aus Himmel, Wasser und einem Punkt",
+  "projects.alt.ma.2": "Farbseite Day mit den Flächen Himmel, Wasser und Moos und den benannten Farbwerten",
+  "projects.alt.ma.3": "Typografieseite Two voices mit einer Displayschrift und einer Textschrift für Japanisch und Latein",
+  "projects.alt.ma.4": "Raumseite Space decays like a note mit einer ansteigenden Folge von Abständen",
+  "projects.alt.ma.5": "Übersicht aller 19 Seiten der Designbibel Ma",
 
   // ── Arbeiten (Übersicht /arbeiten) ───────────────────────────────
   "arbeiten.intro": "Visualisierungen, Editorial, Studien und die Liniendrucke aus dem Shop.",

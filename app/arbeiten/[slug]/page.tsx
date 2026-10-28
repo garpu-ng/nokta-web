@@ -14,7 +14,6 @@ import { getLocale, getT, type Translate } from "@/lib/i18n";
 import { creativeWorkJsonLd } from "@/lib/jsonld";
 import { getMediaSize } from "@/lib/mediaSizes";
 import { PRINTS } from "@/lib/prints";
-import type { Project } from "@/lib/projects";
 import { socialMetadata } from "@/lib/socialMeta";
 import { WORKS, getWork, prevNext, type Work } from "@/lib/works";
 import styles from "./page.module.css";
@@ -78,7 +77,18 @@ const PIECE_DESC: Record<string, string> = {
   "abschlussbericht-ki-kommission": "point.case.lead",
   "n-studie": "work.nstudie.lead",
   lichtspiel: "work.lichtspiel.lead",
+  ma: "work.ma.lead",
 };
+
+/** Ma's plates, in reading order: cover, three chapters, the full sheet.
+    The work itself carries no client; this list is only the gallery. */
+const MA_IMAGES = [
+  "/ma/cover.webp",
+  "/ma/day.webp",
+  "/ma/two-voices.webp",
+  "/ma/space.webp",
+  "/ma/sheet.webp",
+];
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
@@ -112,7 +122,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 /** Rendering: the images, stacked, at full width. Each plate opens on the way
     down the stack — a soft wipe from its bottom edge, never a fade of the
     first one (it is the page's preloaded image and is already on screen). */
-function imageStack(project: Project, title: string, t: Translate) {
+function imageStack(
+  project: { slug: string; images: string[] },
+  title: string,
+  t: Translate,
+) {
   return (
     <div className="wa-project-images">
       {project.images.map((src, i) => {
@@ -229,6 +243,35 @@ function pieceBody(slug: string, t: Translate) {
             <p className={styles.lead}>{t("work.lichtspiel.lead")}</p>
           </div>
           <FilmPlate />
+        </>
+      );
+    case "ma":
+      return (
+        <>
+          <div className={styles.body}>
+            <div className={styles.intro}>
+              <div>
+                <p className={styles.introLead}>{t("work.ma.subtitle")}</p>
+                <p className={styles.lead}>{t("work.ma.lead")}</p>
+                <p className={styles.download}>
+                  <a href="/ma/ma-design-bible.pdf" download="ma-design-bible.pdf">
+                    {t("work.ma.download")}
+                  </a>
+                </p>
+              </div>
+              <dl className={styles.facts}>
+                <div>
+                  <dt>{t("projects.label.service")}</dt>
+                  <dd>{t("work.ma.service")}</dd>
+                </div>
+                <div>
+                  <dt>{t("projects.label.scope")}</dt>
+                  <dd>{t("work.ma.scope")}</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+          {imageStack({ slug: "ma", images: MA_IMAGES }, "Ma (間)", t)}
         </>
       );
     default:
