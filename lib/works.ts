@@ -118,7 +118,7 @@ export const WORKS: Work[] = [
     title: "Ma (間)",
     kind: "manual",
     year: "2026",
-    // No client: the studio's own design bible → annotated "Eigenes Projekt".
+    // No client: the studio's own design bible → annotated "Eigenprojekt".
     thumb: "/ma/cover.webp",
     span: 5,
     lift: 1,

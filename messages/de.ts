@@ -4,7 +4,7 @@
 // Register (binding on every string in this file): say what it is, never why
 // it is allowed. Facts read as confidence, arguments read as defence. No
 // superlatives, no agency-speak, no defending the studio's breadth — the work
-// argues. Self-initiated work is annotated "Eigenes Projekt", nothing more.
+// argues. Self-initiated work is annotated "Eigenprojekt", nothing more.
 const de: Record<string, string> = {
   // ── Metadata ──────────────────────────────────────────────────────
   "meta.site.title": "nokta · Designstudio aus NRW",
@@ -53,8 +53,8 @@ const de: Record<string, string> = {
 
   // ── Arbeiten (the one wall + every detail page) ───────────────────
   // The annotation every work carries: kind stamp · year · client. Own work is
-  // annotated "Eigenes Projekt" and stands beside the commissions, unexplained.
-  "work.own": "Eigenes Projekt",
+  // annotated "Eigenprojekt" and stands beside the commissions, unexplained.
+  "work.own": "Eigenprojekt",
   "work.back": "Alle Arbeiten",
   "work.kind.rendering": "Rendering",
   "work.kind.cad": "CAD-Druck",
