@@ -3,7 +3,7 @@
 //
 // Same register as the German: say what it is, never why it is allowed. Facts,
 // no defence, no agency-speak, no superlatives. Self-initiated work is
-// annotated "Self-initiated", nothing more.
+// annotated "Own project", nothing more.
 const en: Record<string, string> = {
   // ── Metadata ──────────────────────────────────────────────────────
   "meta.site.title": "nokta · design studio from NRW",
@@ -48,8 +48,8 @@ const en: Record<string, string> = {
 
   // ── Work (the one wall + every detail page) ───────────────────────
   // The annotation every work carries: kind stamp · year · client. Own work is
-  // annotated "Self-initiated" and stands beside the commissions, unexplained.
-  "work.own": "Self-initiated",
+  // annotated "Own project" and stands beside the commissions, unexplained.
+  "work.own": "Own project",
   "work.back": "All work",
   "work.kind.rendering": "Rendering",
   "work.kind.cad": "CAD print",
