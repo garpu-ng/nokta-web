@@ -65,13 +65,13 @@ const SIZES: Record<string, MediaSize> = {
   // that is the box every view of the piece stands in: the wall card, the
   // social card, and the still a reader is left with under reduced motion.
   "/lichtspiel/still.jpg": { width: 1280, height: 608 },
-  // Ma, the design bible. The four plates are A4 at 150 dpi, lossless WebP
-  // so the type stays sharp. The sheet is the contact sheet of all 19 pages.
-  "/ma/cover.webp": { width: 1240, height: 1754 },
-  "/ma/day.webp": { width: 1240, height: 1754 },
-  "/ma/two-voices.webp": { width: 1240, height: 1754 },
-  "/ma/space.webp": { width: 1240, height: 1754 },
-  "/ma/sheet.webp": { width: 1591, height: 1800 },
+  // Ma, the design bible. Plates are A4 renders from the PDF. The sheet is
+  // every page, including the empty twentieth cell in the page colour.
+  "/ma/cover.webp": { width: 1754, height: 2480 },
+  "/ma/day.webp": { width: 1754, height: 2480 },
+  "/ma/two-voices.webp": { width: 1754, height: 2480 },
+  "/ma/space.webp": { width: 1754, height: 2480 },
+  "/ma/sheet.webp": { width: 3144, height: 3516 },
   // The four CAD prints, re-drawn to one sheet: same proportion for all of them
   // now, where they used to differ by a few percent each. Wider than any page
   // renders them — the largest is some 480px, on a tablet's two-up home page.
