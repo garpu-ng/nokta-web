@@ -212,10 +212,10 @@ const tr: Record<string, string> = {
 
   // ── 3B görselleştirme (/3d-visualisierung) ────────────────────────
   "meta.viz.title": "NRW’den 3B görselleştirme ve mimari görselleştirme · nokta",
-  "meta.viz.desc": "Düsseldorf ve NRW’deki mimarlık ofisleri, inşaat şirketleri ve bireysel müşteriler için binaların ve iç mekânların fotogerçekçi 3B görselleştirmeleri. Dış ve iç görünüşler, clay render’lar, baskı çözünürlüğünde görseller.",
+  "meta.viz.desc": "NRW’deki mimarlık ofisleri, inşaat şirketleri ve bireysel müşteriler için binaların ve iç mekânların fotogerçekçi 3B görselleştirmeleri. Dış ve iç görünüşler, clay render’lar, baskı çözünürlüğünde görseller.",
   "viz.heading": "3B görselleştirme",
   "viz.claim": "Binaların ve iç mekânların, daha inşa edilmeden fotogerçekçi görselleri.",
-  "viz.lead": "Binaların ve iç mekânların 3B görselleştirmelerini hazırlıyoruz: planlardan, eskizlerden ya da mevcut bir 3B modelden fotogerçekçi dış ve iç görünüşler. Düsseldorf, NRW ve ötesindeki mimarlık ofisleri, inşaat şirketleri ve bireysel müşteriler için.",
+  "viz.lead": "Binaların ve iç mekânların 3B görselleştirmelerini hazırlıyoruz: planlardan, eskizlerden ya da mevcut bir 3B modelden fotogerçekçi dış ve iç görünüşler. NRW ve ötesindeki mimarlık ofisleri, inşaat şirketleri ve bireysel müşteriler için.",
   "viz.services.label": "Hizmetler",
   "viz.svc.0": "Dış mekân görselleştirme",
   "viz.svc.1": "İç mekân görselleştirme",
@@ -244,7 +244,7 @@ const tr: Record<string, string> = {
   "viz.faq.0.a": "Görünüş sayısına, detay düzeyine ve belgelere bağlı. Bize kısa bir talep gönder, sana bir teklif hazırlayalım.",
   "viz.faq.1.q": "Hangi belgelere ihtiyacınız var?",
   "viz.faq.1.a": "Başlangıç için PDF ya da DWG olarak kat planları, görünüşler ve kesitler yeterli. Bir 3B model, malzeme bilgileri ve referans görseller işe yarar ama şart değil.",
-  "viz.faq.2.q": "Yalnızca Düsseldorf’ta mı çalışıyorsunuz?",
+  "viz.faq.2.q": "Yalnızca NRW’de mi çalışıyorsunuz?",
   "viz.faq.2.a": "Hayır. Stüdyo NRW’den, iletişim e-posta ve görüntülü görüşmeyle yürüyor. NRW’nin her yerinde ve ötesinde işverenler için çalışıyoruz.",
   "viz.faq.3.q": "İç mekânları da görselleştirebiliyor musunuz?",
   "viz.faq.3.a": "Evet. Görsellerimizin yaklaşık yarısı iç mekân gösteriyor, bir oturma odasından bir bisiklet istasyonunun atölyesine kadar.",

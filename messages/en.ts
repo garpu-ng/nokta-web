@@ -220,10 +220,10 @@ const en: Record<string, string> = {
 
   // ── 3D visualisation (/3d-visualisierung) ─────────────────────────
   "meta.viz.title": "3D visualisation and architectural visualisation from NRW · nokta",
-  "meta.viz.desc": "Photorealistic 3D visualisations of buildings and interiors for architects, property developers and private clients in Düsseldorf and NRW. Exterior and interior views, clay renders, images at print resolution.",
+  "meta.viz.desc": "Photorealistic 3D visualisations of buildings and interiors for architects, property developers and private clients in NRW. Exterior and interior views, clay renders, images at print resolution.",
   "viz.heading": "3D visualisation",
   "viz.claim": "Photorealistic images of buildings and interiors before they are built.",
-  "viz.lead": "We create 3D visualisations of buildings and interiors: photorealistic exterior and interior views from plans, sketches or an existing 3D model. For architects, property developers and private clients in Düsseldorf, NRW and beyond.",
+  "viz.lead": "We create 3D visualisations of buildings and interiors: photorealistic exterior and interior views from plans, sketches or an existing 3D model. For architects, property developers and private clients in NRW and beyond.",
   "viz.services.label": "Services",
   "viz.svc.0": "Exterior visualisation",
   "viz.svc.1": "Interior visualisation",
@@ -252,7 +252,7 @@ const en: Record<string, string> = {
   "viz.faq.0.a": "It depends on the number of views, the level of detail and the documents. Send us a short enquiry and we will send you a quote.",
   "viz.faq.1.q": "Which documents do you need?",
   "viz.faq.1.a": "Floor plans, elevations and sections are enough to start, as PDF or DWG. A 3D model, material details and reference images help, but are not required.",
-  "viz.faq.2.q": "Do you only work in Düsseldorf?",
+  "viz.faq.2.q": "Do you only work in NRW?",
   "viz.faq.2.a": "No. The studio is from NRW, and we coordinate by email and video call. We work for clients across NRW and beyond.",
   "viz.faq.3.q": "Can you visualise interiors too?",
   "viz.faq.3.a": "Yes. About half of our images show interiors, from a living room to the workshop of a bicycle station.",

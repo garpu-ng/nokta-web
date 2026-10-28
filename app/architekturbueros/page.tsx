@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import JsonLd from "@/components/JsonLd";
 import Reveal from "@/components/Reveal";
 import PlateHead from "@/components/nokta/PlateHead";
 import RidgeField from "@/components/nokta/RidgeField";
 import SectionRule from "@/components/nokta/SectionRule";
+import { serviceJsonLd, titleWithoutSite } from "@/lib/jsonld";
 import { getMediaSize } from "@/lib/mediaSizes";
 import { PROJECTS } from "@/lib/projects";
 import de from "@/messages/de";
@@ -19,6 +21,8 @@ import styles from "./page.module.css";
    The first five services, the project titles and the contact lines are ones
    the site already uses. Nothing here names a price, a deadline, a client
    or a city. */
+
+const PATH = "/architekturbueros";
 
 const SERVICES = [0, 1, 2, 3, 4] as const;
 const MORE = [0, 1, 2, 3] as const;
@@ -46,6 +50,16 @@ export default function ArchitekturbuerosDraftPage() {
 
   return (
     <main>
+      {/* German on every language cookie, same as the copy below. */}
+      <JsonLd
+        data={serviceJsonLd({
+          path: PATH,
+          name: line("architekturbueros.heading"),
+          description: line("meta.architekturbueros.desc"),
+          serviceType: titleWithoutSite(line("meta.architekturbueros.title")),
+          inLanguage: "de",
+        })}
+      />
       <PlateHead title={title}>
         <RidgeField motto={title} />
       </PlateHead>

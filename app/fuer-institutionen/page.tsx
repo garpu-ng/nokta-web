@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import JsonLd from "@/components/JsonLd";
 import Reveal from "@/components/Reveal";
 import DiscField from "@/components/nokta/DiscField";
 import PlateHead from "@/components/nokta/PlateHead";
@@ -8,6 +9,7 @@ import SectionRule from "@/components/nokta/SectionRule";
 import { workAnnotation } from "@/components/work/WorkAnno";
 import { KIND_FIELD } from "@/lib/colors";
 import { getLocale, getT } from "@/lib/i18n";
+import { serviceJsonLd, titleWithoutSite } from "@/lib/jsonld";
 import { getMediaSize } from "@/lib/mediaSizes";
 import { socialMetadata } from "@/lib/socialMeta";
 import { getWork } from "@/lib/works";
@@ -47,6 +49,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function InstitutionenPage() {
   const t = await getT();
+  const locale = await getLocale();
   const title = `${t("inst.heading")}.`;
   const ref = getWork(REF);
   if (!ref) throw new Error(`app/fuer-institutionen: no work "${REF}" in lib/works.ts`);
@@ -55,6 +58,15 @@ export default async function InstitutionenPage() {
 
   return (
     <main>
+      <JsonLd
+        data={serviceJsonLd({
+          path: PATH,
+          name: t("inst.heading"),
+          description: t("meta.inst.desc"),
+          serviceType: titleWithoutSite(t("meta.inst.title")),
+          inLanguage: locale,
+        })}
+      />
       <PlateHead title={title}>
         <DiscField palette={PALETTE} motto={title} />
       </PlateHead>
