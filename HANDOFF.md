@@ -173,6 +173,11 @@ missing key renders visibly as the key.
 `getT()` in `lib/i18n.ts` is server-only; client components receive
 pre-translated strings as props.
 
+**Language link:** `proxy.ts` handles `?lang=de|en|tr|ja` on any URL. It sets
+the `nk_lang` cookie and 307-redirects to the same URL without the parameter,
+so shared links (e.g. `https://www.nokta-studio.de/arbeiten?lang=en`) open in
+that language and the choice sticks. Unknown values are ignored.
+
 > **There is no parity script.** Earlier versions of this file called one "the
 > gate"; it has never existed in git history. Parity is currently exact, and
 > it is maintained by hand. This one-liner checks it:
@@ -208,12 +213,14 @@ through it) + `lib/og.tsx` render the root card; work detail pages override
 - [ ] **Contact mailbox** — `hallo@nokta-studio.de` is unified everywhere but
       the mailbox itself still has to be registered.
 - [ ] **`KONTAKT_API_KEY` / `KONTAKT_FROM`** — unset, so the form 503s. See §2.
-- [ ] **Vercel + domain** — repo not connected; `metadataBase` is
-      `https://www.nokta-studio.de`.
+- [x] **Vercel + domain** — done. Vercel deploys `main` automatically and serves
+      `https://www.nokta-studio.de` (checked 2026-10-29 with the `?lang=` link);
+      `metadataBase` is `https://www.nokta-studio.de`.
 
 **Known gaps:**
 
-- [ ] **No hreflang, no locale URLs.** i18n is cookie-only and the sitemap
+- [ ] **No hreflang, no locale URLs.** i18n is cookie-only (plus the `?lang=`
+      link, which also just sets the cookie) and the sitemap
       lists 20 German-only URLs, so a crawler — which carries no cookie — only
       ever indexes German. The EN/TR/JA translations are complete and
       unreachable from search. Architectural: it needs locale paths.
