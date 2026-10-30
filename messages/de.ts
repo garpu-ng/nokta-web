@@ -451,10 +451,9 @@ const de: Record<string, string> = {
   "inst.cta.note": "Schreiben Sie uns über das Formular oder an hallo@nokta-studio.de, mit Umfang und Termin. Sie bekommen ein schriftliches Angebot.",
   "inst.cta.button": "Satz anfragen",
 
-  // ── Entwurf /architekturbueros ────────────────────────────────────
-  // German only, on purpose: the other locales do not carry these keys,
-  // and the page reads this file directly so a language cookie still gets
-  // German. Not linked from the nav or the footer. Listed in the sitemap.
+  // ── /architekturbueros ────────────────────────────────────────────
+  // Translated in all four locales. Linked from the homepage hero and the
+  // footer. Listed in the sitemap.
   "meta.architekturbueros.title": "Architekturvisualisierung für Architekturbüros in NRW · nokta",
   "meta.architekturbueros.desc": "Architekturvisualisierung aus NRW für Architekturbüros. Außen- und Innenansichten aus Plänen und Skizzen.",
   "architekturbueros.heading": "Architekturvisualisierung für Architekturbüros in NRW",
@@ -476,9 +475,8 @@ const de: Record<string, string> = {
   "architekturbueros.more.3.text": "Wir gestalten Wettbewerbstafeln und die Unterlagen für Bauantrag und Gestaltungsbeirat, so dass Bilder und Pläne als eine Präsentation ankommen.",
 
   // ── /bautraeger ───────────────────────────────────────────────────
-  // German only, on purpose: the other locales do not carry these keys,
-  // and the page reads this file directly so a language cookie still gets
-  // German. Not linked from the nav or the footer. Listed in the sitemap.
+  // Translated in all four locales. Linked from the homepage hero and the
+  // footer; /fuer-bautraeger redirects here. Listed in the sitemap.
   "meta.bautraeger.title": "Architekturvisualisierung für Bauträger in NRW · nokta",
   "meta.bautraeger.desc": "Architekturvisualisierung aus NRW für Bauträger. Außen- und Innenansichten aus Plänen und Skizzen.",
   "bautraeger.heading": "Architekturvisualisierung für Bauträger in NRW",
@@ -507,6 +505,42 @@ const de: Record<string, string> = {
   "bautraeger.step.1": "Perspektive und Ausschnitt stimmen wir an Clay-Renders ab.",
   "bautraeger.step.2": "Materialien, Licht und Umgebung kommen dazu.",
   "bautraeger.step.3": "Sie bekommen die Bilder in Druckauflösung, für Bildschirm und Druck.",
+  // Impressum and Datenschutz. Names, address, e-mail, company names and
+  // law citations stay as they are in every language.
+  "meta.impressum.title": "Impressum · nokta",
+  "meta.impressum.desc": "Impressum von nokta, Designstudio aus NRW: Anbieterkennzeichnung nach § 5 DDG.",
+  "impressum.heading": "Impressum",
+  "impressum.basis": "Angaben gemäß § 5 DDG und § 18 Abs. 2 MStV",
+  "impressum.country": "Deutschland",
+  "impressum.contact.label": "Kontakt",
+  "impressum.contact.email": "E-Mail:",
+  "impressum.contact.form.before": "Anfragen auch über das",
+  "impressum.contact.form.link": "Kontaktformular",
+  "impressum.contact.form.after": ".",
+  "impressum.responsible.label": "Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV",
+  "impressum.responsible.text": "Kaan Özden, Anschrift wie oben",
+  "impressum.dispute.label": "Verbraucherstreitbeilegung",
+  "impressum.dispute.text": "Wir sind nicht bereit und nicht verpflichtet, an Streitbeilegungs\u00ADverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.",
+  "meta.datenschutz.title": "Datenschutz · nokta",
+  "meta.datenschutz.desc": "Datenschutzerklärung von nokta, Designstudio aus NRW: welche Daten die Website verarbeitet und wofür.",
+  "datenschutz.heading": "Datenschutz",
+  "datenschutz.1.title": "1. Verantwortlicher",
+  "datenschutz.1.text": "Kaan Özden, nokta studio, Messerstraße 31, 42657 Solingen, Deutschland. Kontakt:",
+  "datenschutz.1.after": ".",
+  "datenschutz.2.title": "2. Erhebung und Verarbeitung",
+  "datenschutz.2.text": "Beim Besuch dieser Website werden durch den Hosting-Anbieter automatisch technische Zugriffsdaten (z. B. IP-Adresse, Zeitpunkt, aufgerufene Seite) verarbeitet, soweit dies zum Betrieb erforderlich ist. Die Website wird bei der Vercel Inc. gehostet; Rechtsgrundlage ist unser berechtigtes Interesse an einem sicheren und stabilen Betrieb (Art. 6 Abs. 1 lit. f DSGVO).",
+  "datenschutz.3.title": "3. Kontaktaufnahme",
+  "datenschutz.3.text": "Wenn Sie uns per E-Mail kontaktieren, verarbeiten wir Ihre Angaben zur Bearbeitung der Anfrage auf Grundlage von Art. 6 Abs. 1 lit. b/f DSGVO.",
+  "datenschutz.4.title": "4. Anfrageformular",
+  "datenschutz.4.text": "Auf der Kontaktseite können Sie uns über ein Formular schreiben. Wir verarbeiten dabei die Angaben, die Sie selbst eintragen (Art der Anfrage, Name, E-Mail-Adresse und Ihre Nachricht), ausschließlich, um die Anfrage zu beantworten (Art. 6 Abs. 1 lit. b/f DSGVO). Die Angaben werden über den Mailserver unseres E-Mail-Anbieters INWX (Deutschland) als E-Mail an unser Postfach zugestellt und nicht in einer Datenbank gespeichert. Zur Abwehr automatisierter Einsendungen wird die Zahl der Anfragen je IP-Adresse kurzzeitig im Arbeitsspeicher begrenzt; eine darüber hinausgehende Auswertung oder Protokollierung der Formularinhalte findet nicht statt. Ein Captcha-Dienst wird nicht eingesetzt. Sie können uns stattdessen jederzeit direkt an",
+  "datenschutz.4.after": "schreiben.",
+  "datenschutz.5.title": "5. Ihre Rechte",
+  "datenschutz.5.text": "Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit und Widerspruch sowie ein Beschwerderecht bei einer Aufsichtsbehörde.",
+  "legal.binding": "Maßgeblich ist die deutsche Fassung.",
+  // Easter egg at /punkt and the footer mail link.
+  "meta.punkt.title": "nokta · Punkt",
+  "punkt.back": "zurück",
+  "footer.link.email": "E-Mail",
 };
 
 export default de;

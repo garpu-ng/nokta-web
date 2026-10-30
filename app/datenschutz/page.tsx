@@ -1,66 +1,70 @@
 import type { Metadata } from "next";
+import { getLocale, getT } from "@/lib/i18n";
+import { socialMetadata } from "@/lib/socialMeta";
 
-export const metadata: Metadata = {
-  title: "Datenschutz · nokta",
-  description: "Datenschutzerklärung von nokta, Designstudio aus NRW: welche Daten die Website verarbeitet und wofür.",
-  alternates: { canonical: "/datenschutz" },
-};
+/* /datenschutz: copy from messages (datenschutz.*), German fallback per key.
+   Names, address, e-mail, company names and law citations stay as they are
+   in every language. Outside German a note says the German version is
+   binding (legal.binding). */
 
-export default function DatenschutzPage() {
+const PATH = "/datenschutz";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getT();
+  const locale = await getLocale();
+  const title = t("meta.datenschutz.title");
+  const description = t("meta.datenschutz.desc");
+  return {
+    title,
+    description,
+    alternates: { canonical: PATH },
+    ...socialMetadata({ title, description, locale, path: PATH }),
+  };
+}
+
+export default async function DatenschutzPage() {
+  const t = await getT();
+  const locale = await getLocale();
+  // Japanese runs text and links together without spaces.
+  const sp = locale === "ja" ? "" : " ";
   return (
     <main className="wa-page">
-      <h1>Datenschutz</h1>
+      <h1>{t("datenschutz.heading")}</h1>
+
+      {locale !== "de" && <p>{t("legal.binding")}</p>}
 
       <p>
-        <strong>1. Verantwortlicher</strong>
+        <strong>{t("datenschutz.1.title")}</strong>
         <br />
-        Kaan Özden, nokta studio, Messerstraße 31, 42657 Solingen,
-        Deutschland. Kontakt:{" "}
-        <a href="mailto:hallo@nokta-studio.de">hallo@nokta-studio.de</a>.
+        {t("datenschutz.1.text")}{sp}
+        <a href="mailto:hallo@nokta-studio.de">hallo@nokta-studio.de</a>
+        {t("datenschutz.1.after")}
       </p>
 
       <p>
-        <strong>2. Erhebung und Verarbeitung</strong>
+        <strong>{t("datenschutz.2.title")}</strong>
         <br />
-        Beim Besuch dieser Website werden durch den Hosting-Anbieter automatisch
-        technische Zugriffsdaten (z. B. IP-Adresse, Zeitpunkt, aufgerufene Seite)
-        verarbeitet, soweit dies zum Betrieb erforderlich ist. Die Website wird
-        bei der Vercel Inc. gehostet; Rechtsgrundlage ist unser berechtigtes
-        Interesse an einem sicheren und stabilen Betrieb (Art. 6 Abs. 1 lit. f
-        DSGVO).
+        {t("datenschutz.2.text")}
       </p>
 
       <p>
-        <strong>3. Kontaktaufnahme</strong>
+        <strong>{t("datenschutz.3.title")}</strong>
         <br />
-        Wenn Sie uns per E-Mail kontaktieren, verarbeiten wir Ihre Angaben zur
-        Bearbeitung der Anfrage auf Grundlage von Art. 6 Abs. 1 lit. b/f DSGVO.
+        {t("datenschutz.3.text")}
       </p>
 
       <p>
-        <strong>4. Anfrageformular</strong>
+        <strong>{t("datenschutz.4.title")}</strong>
         <br />
-        Auf der Kontaktseite können Sie uns über ein Formular schreiben. Wir
-        verarbeiten dabei die Angaben, die Sie selbst eintragen (Art der
-        Anfrage, Name, E-Mail-Adresse und Ihre Nachricht), ausschließlich, um
-        die Anfrage zu beantworten (Art. 6 Abs. 1 lit. b/f DSGVO). Die Angaben
-        werden über den Mailserver unseres E-Mail-Anbieters INWX (Deutschland)
-        als E-Mail an unser Postfach zugestellt und nicht in einer Datenbank
-        gespeichert. Zur Abwehr automatisierter Einsendungen wird die
-        Zahl der Anfragen je IP-Adresse kurzzeitig im Arbeitsspeicher begrenzt;
-        eine darüber hinausgehende Auswertung oder Protokollierung der
-        Formularinhalte findet nicht statt. Ein Captcha-Dienst wird nicht
-        eingesetzt. Sie können uns stattdessen jederzeit direkt an{" "}
-        <a href="mailto:hallo@nokta-studio.de">hallo@nokta-studio.de</a>{" "}
-        schreiben.
+        {t("datenschutz.4.text")}{sp}
+        <a href="mailto:hallo@nokta-studio.de">hallo@nokta-studio.de</a>{sp}
+        {t("datenschutz.4.after")}
       </p>
 
       <p>
-        <strong>5. Ihre Rechte</strong>
+        <strong>{t("datenschutz.5.title")}</strong>
         <br />
-        Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung,
-        Datenübertragbarkeit und Widerspruch sowie ein Beschwerderecht bei einer
-        Aufsichtsbehörde.
+        {t("datenschutz.5.text")}
       </p>
 
     </main>
