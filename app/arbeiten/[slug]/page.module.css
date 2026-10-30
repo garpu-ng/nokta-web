@@ -24,6 +24,23 @@
   color: var(--paper);
   opacity: 0.8;
 }
+/* Ma, named inside a study's lead. Same quiet paper link the legal pages
+   use, so the sentence stays one column of type and only the name is a link. */
+.lead a {
+  color: var(--paper);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid var(--nk-hair);
+  padding-bottom: 1px;
+}
+.lead a:hover,
+.lead a:focus-visible {
+  border-bottom-color: var(--paper);
+}
+.lead a:focus-visible {
+  outline: 2px solid var(--paper);
+  outline-offset: 3px;
+}
 
 /* ── Rendering intro — paragraph left, two facts right ─────────────── */
 .intro {

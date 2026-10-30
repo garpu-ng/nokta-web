@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import type { CSSProperties } from "react";
+import { Fragment, type CSSProperties, type ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
@@ -77,6 +77,8 @@ const PIECE_DESC: Record<string, string> = {
   "abschlussbericht-ki-kommission": "point.case.lead",
   "n-studie": "work.nstudie.lead",
   lichtspiel: "work.lichtspiel.lead",
+  "highway-score": "work.highway-score.lead",
+  "flock-score": "work.flock-score.lead",
   ma: "work.ma.lead",
 };
 
@@ -237,6 +239,53 @@ function projectIntro(slug: string, t: Translate) {
   );
 }
 
+/** A film study, in the proportion of its own cut. The plate is the same
+    component Lichtspiel uses; only the files and the sentences change. */
+const FILMS = {
+  lichtspiel: { width: 1920, height: 912 },
+  "highway-score": { width: 1920, height: 892 },
+  "flock-score": { width: 1920, height: 1080 },
+} as const;
+
+type FilmSlug = keyof typeof FILMS;
+
+/** Where a lead names Ma, that name links to the design system. The word
+    stays in the sentence, so the meta description (the same string, without
+    this pass) still reads as prose. */
+function leadWithMa(text: string): ReactNode {
+  const parts = text.split(/(\bMa\b)/);
+  if (parts.length === 1) return text;
+  return parts.map((part, i) =>
+    part === "Ma" ? (
+      <Link key={i} href="/arbeiten/ma">
+        Ma
+      </Link>
+    ) : (
+      <Fragment key={i}>{part}</Fragment>
+    ),
+  );
+}
+
+function filmPiece(slug: FilmSlug, t: Translate) {
+  const ratio = FILMS[slug];
+  return (
+    <>
+      <div className={styles.body}>
+        <p className={styles.lead}>{leadWithMa(t(`work.${slug}.lead`))}</p>
+      </div>
+      <FilmPlate
+        base={`/${slug}`}
+        ratio={ratio}
+        texts={{
+          player: `work.${slug}.player`,
+          spec: `work.${slug}.spec`,
+          noVideo: `work.${slug}.noVideo`,
+        }}
+      />
+    </>
+  );
+}
+
 /** Editorial, study: each piece brings its own section. */
 function pieceBody(slug: string, t: Translate) {
   switch (slug) {
@@ -252,14 +301,9 @@ function pieceBody(slug: string, t: Translate) {
         </>
       );
     case "lichtspiel":
-      return (
-        <>
-          <div className={styles.body}>
-            <p className={styles.lead}>{t("work.lichtspiel.lead")}</p>
-          </div>
-          <FilmPlate />
-        </>
-      );
+    case "highway-score":
+    case "flock-score":
+      return filmPiece(slug, t);
     case "ma":
       return (
         <>
