@@ -521,7 +521,9 @@ const en: Record<string, string> = {
   "datenschutz.4.title": "4. Enquiry form",
   "datenschutz.4.text": "On the contact page you can write to us through a form. We process the information you enter yourself (type of enquiry, name, email address and your message) solely to answer the enquiry (Art. 6(1)(b)/(f) GDPR). The information is delivered as an email to our mailbox via the mail server of our email provider INWX (Germany) and is not stored in a database. To prevent automated submissions, the number of enquiries per IP address is briefly limited in working memory; no further analysis or logging of the form contents takes place. No captcha service is used. You can write to us directly at any time at",
   "datenschutz.4.after": "instead.",
-  "datenschutz.5.title": "5. Your rights",
+  "datenschutz.analytics.title": "5. Audience measurement",
+  "datenschutz.analytics.text": "To see how many visits the website has, which pages are viewed and through which links visitors arrive, we use Vercel Web Analytics by Vercel Inc. No cookies are set and no information is stored on or read from your device. Visitors are not tracked across websites; to tell visits apart, a hash is derived from the request data and discarded after 24 hours. We only see aggregated figures such as page viewed, referring page, country, device type and browser. The legal basis is our legitimate interest in improving the website and our approach to prospective clients (Art. 6(1)(f) GDPR). You can object at any time, for example by email to hallo@nokta-studio.de.",
+  "datenschutz.5.title": "6. Your rights",
   "datenschutz.5.text": "You have the right of access, rectification, erasure, restriction of processing, data portability and objection, as well as the right to lodge a complaint with a supervisory authority.",
   "legal.binding": "The German version is legally binding.",
   // Easter egg at /punkt and the footer mail link.

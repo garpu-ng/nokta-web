@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { DM_Sans, Syne } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
@@ -147,6 +148,10 @@ export default async function RootLayout({
             corner. The pointer is the browser's own now. The per-page title
             blocks, which are part of a layout rather than floating above one,
             stay. */}
+
+        {/* Visitor count: Vercel Web Analytics, cookieless, aggregated only.
+            Described in the privacy policy (section 5). */}
+        <Analytics />
       </body>
     </html>
   );

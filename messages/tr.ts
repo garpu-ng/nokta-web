@@ -509,7 +509,9 @@ const tr: Record<string, string> = {
   "datenschutz.4.title": "4. Talep formu",
   "datenschutz.4.text": "İletişim sayfasındaki bir form üzerinden bize yazabilirsiniz. Bu sırada kendi girdiğiniz bilgileri (talep türü, ad, e-posta adresi ve mesajınız) yalnızca talebi yanıtlamak amacıyla işleriz (GDPR m. 6/1-b/f). Bilgiler, e-posta sağlayıcımız INWX’in (Almanya) posta sunucusu üzerinden e-posta olarak posta kutumuza iletilir ve bir veritabanında saklanmaz. Otomatik gönderimleri önlemek için IP adresi başına talep sayısı kısa süreliğine çalışma belleğinde sınırlandırılır; form içeriklerinin bunun ötesinde değerlendirilmesi ya da kayda alınması yapılmaz. Captcha hizmeti kullanılmaz. Bunun yerine bize dilediğiniz zaman doğrudan",
   "datenschutz.4.after": "adresine de yazabilirsiniz.",
-  "datenschutz.5.title": "5. Haklarınız",
+  "datenschutz.analytics.title": "5. Ziyaret ölçümü",
+  "datenschutz.analytics.text": "Web sitesinin kaç ziyaret aldığını, hangi sayfaların açıldığını ve ziyaretçilerin hangi bağlantılardan geldiğini görmek için Vercel Inc.’in Vercel Web Analytics hizmetini kullanıyoruz. Çerez kullanılmaz; cihazınızda bilgi saklanmaz ve cihazınızdan bilgi okunmaz. Ziyaretçiler farklı web siteleri arasında izlenmez; ziyaretleri birbirinden ayırmak için istek verilerinden bir karma değer (hash) oluşturulur ve bu değer 24 saat sonra silinir. Yalnızca açılan sayfa, yönlendiren sayfa, ülke, cihaz türü ve tarayıcı gibi toplu değerleri görürüz. Hukuki dayanak, web sitesini ve potansiyel müşterilere yaklaşımımızı iyileştirmeye yönelik meşru menfaatimizdir (GDPR m. 6/1-f). Buna dilediğiniz zaman, örneğin hallo@nokta-studio.de adresine e-posta göndererek itiraz edebilirsiniz.",
+  "datenschutz.5.title": "6. Haklarınız",
   "datenschutz.5.text": "Bilgi alma, düzeltme, silme, işlemenin kısıtlanması, veri taşınabilirliği ve itiraz haklarına, ayrıca bir denetim makamına şikâyette bulunma hakkına sahipsiniz.",
   "legal.binding": "Bağlayıcı olan Almanca metindir.",
   // /punkt’taki sürpriz sayfa ve alt bilgideki e-posta bağlantısı.
