@@ -63,7 +63,7 @@ const en: Record<string, string> = {
   "work.lichtspiel.spec": "lichtspiel · 1920 × 912 px · 24 fps · 1:45 with sound",
   "work.lichtspiel.player": "Lichtspiel, film with sound",
   "work.lichtspiel.noVideo": "Your browser cannot play this video.",
-  "work.highway-score.lead": "An audiovisual study: 72 seconds of night footage from Osaka, with an elevated road along the lower edge of the frame. A fine vertical line divides the image, and each car that crosses it releases a warm tone and a point of light that fades slowly. Beneath it, a quiet sound field breathes in a cycle of 16 seconds. Sound and image were made with Claude from a single sentence as the rule, without samples, and after the studio's own design system Ma.",
+  "work.highway-score.lead": "An audiovisual study: 72 seconds of night footage from Osaka, with an elevated road along the lower edge of the frame. A fine vertical line divides the image, and each car that crosses it releases a warm tone and a point of light that fades slowly. Beneath it, a quiet sound field breathes in a cycle of 16 seconds. The sound is built without samples and follows the studio's own design system Ma.",
   "work.highway-score.spec": "highway score · 1920 × 892 px · 30 fps · 1:13 with sound",
   "work.highway-score.player": "Highway Score, Osaka, film with sound",
   "work.highway-score.noVideo": "Your browser cannot play this video.",
