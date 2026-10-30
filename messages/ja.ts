@@ -365,7 +365,7 @@ const ja: Record<string, string> = {
   "footer.link.studio": "スタジオ",
   "footer.link.shop": "ショップ",
   "footer.link.kontakt": "お問い合わせ",
-  "footer.link.impressum": "会社概要",
+  "footer.link.impressum": "運営者情報",
   "footer.link.datenschutz": "プライバシー",
   "footer.disciplines": "ビジュアライゼーション · エディトリアル · 印刷 · CAD",
 
@@ -492,18 +492,18 @@ const ja: Record<string, string> = {
   "bautraeger.step.2": "素材、光、周辺環境を加えます。",
   "bautraeger.step.3": "画面用と印刷用に、印刷解像度の画像をお渡しします。",
 
-  // ── 会社概要とプライバシー ──────────────────────────────────────────
+  // ── 運営者情報とプライバシー ──────────────────────────────────────────
   // 氏名、住所、メール、会社名、法令の条項はそのまま。
-  "meta.impressum.title": "会社概要 · nokta",
-  "meta.impressum.desc": "NRW州のデザインスタジオ nokta の会社概要：DDG第5条に基づく事業者情報。",
-  "impressum.heading": "会社概要",
+  "meta.impressum.title": "運営者情報 · nokta",
+  "meta.impressum.desc": "NRW州のデザインスタジオ nokta の運営者情報：DDG第5条に基づく事業者情報。",
+  "impressum.heading": "運営者情報",
   "impressum.basis": "DDG第5条およびMStV第18条第2項に基づく表示",
   "impressum.country": "ドイツ",
   "impressum.contact.label": "連絡先",
   "impressum.contact.email": "メール：",
-  "impressum.contact.form.before": "お問い合わせは",
+  "impressum.contact.form.before": "",
   "impressum.contact.form.link": "お問い合わせフォーム",
-  "impressum.contact.form.after": "からも受け付けています。",
+  "impressum.contact.form.after": "からもご連絡いただけます。",
   "impressum.responsible.label": "MStV第18条第2項に基づく内容責任者",
   "impressum.responsible.text": "Kaan Özden、住所は上記のとおり",
   "impressum.dispute.label": "消費者紛争解決",

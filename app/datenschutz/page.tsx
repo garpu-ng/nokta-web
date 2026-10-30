@@ -25,6 +25,8 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function DatenschutzPage() {
   const t = await getT();
   const locale = await getLocale();
+  // Japanese runs text and links together without spaces.
+  const sp = locale === "ja" ? "" : " ";
   return (
     <main className="wa-page">
       <h1>{t("datenschutz.heading")}</h1>
@@ -34,7 +36,7 @@ export default async function DatenschutzPage() {
       <p>
         <strong>{t("datenschutz.1.title")}</strong>
         <br />
-        {t("datenschutz.1.text")}{" "}
+        {t("datenschutz.1.text")}{sp}
         <a href="mailto:hallo@nokta-studio.de">hallo@nokta-studio.de</a>
         {t("datenschutz.1.after")}
       </p>
@@ -54,8 +56,8 @@ export default async function DatenschutzPage() {
       <p>
         <strong>{t("datenschutz.4.title")}</strong>
         <br />
-        {t("datenschutz.4.text")}{" "}
-        <a href="mailto:hallo@nokta-studio.de">hallo@nokta-studio.de</a>{" "}
+        {t("datenschutz.4.text")}{sp}
+        <a href="mailto:hallo@nokta-studio.de">hallo@nokta-studio.de</a>{sp}
         {t("datenschutz.4.after")}
       </p>
 

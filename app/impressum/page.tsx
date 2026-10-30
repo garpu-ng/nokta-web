@@ -25,6 +25,8 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function ImpressumPage() {
   const t = await getT();
   const locale = await getLocale();
+  // Japanese runs text and links together without spaces.
+  const sp = locale === "ja" ? "" : " ";
   return (
     <main className="wa-page">
       <h1>{t("impressum.heading")}</h1>
@@ -46,10 +48,10 @@ export default async function ImpressumPage() {
       <p>
         <strong>{t("impressum.contact.label")}</strong>
         <br />
-        {t("impressum.contact.email")}{" "}
+        {t("impressum.contact.email")}{sp}
         <a href="mailto:hallo@nokta-studio.de">hallo@nokta-studio.de</a>
         <br />
-        {t("impressum.contact.form.before")}{" "}
+        {t("impressum.contact.form.before")}{sp}
         <Link href="/kontakt">{t("impressum.contact.form.link")}</Link>
         {t("impressum.contact.form.after")}
       </p>
