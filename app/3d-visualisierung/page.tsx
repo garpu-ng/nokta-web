@@ -6,10 +6,11 @@ import Reveal from "@/components/Reveal";
 import DiscField from "@/components/nokta/DiscField";
 import PlateHead from "@/components/nokta/PlateHead";
 import SectionRule from "@/components/nokta/SectionRule";
-import { workAnnotation } from "@/components/work/WorkAnno";
+import { annotationLine, workAnnotation } from "@/components/work/WorkAnno";
 import { KIND_FIELD } from "@/lib/colors";
 import { getLocale, getT } from "@/lib/i18n";
 import { faqPageJsonLd, serviceJsonLd } from "@/lib/jsonld";
+import { thumbAlt } from "@/lib/alt";
 import { getMediaSize } from "@/lib/mediaSizes";
 import { socialMetadata } from "@/lib/socialMeta";
 import { WORKS } from "@/lib/works";
@@ -110,7 +111,7 @@ export default async function VisualisierungPage() {
                   <span className={styles.workFrame}>
                     <Image
                       src={work.thumb}
-                      alt=""
+                      alt={thumbAlt(work, t)}
                       width={width}
                       height={height}
                       sizes="(max-width: 899px) calc(100vw - 40px), (max-width: 1199px) 45vw, 460px"
@@ -119,7 +120,7 @@ export default async function VisualisierungPage() {
                   </span>
                   <span className={styles.workTitle}>{work.title}</span>
                   <span className={styles.workAnno}>
-                    {anno.kind} · {anno.year} · {anno.client}
+                    {annotationLine(anno)}
                   </span>
                   <span className={styles.workText}>{t(`projects.desc.${work.slug}`)}</span>
                 </Link>

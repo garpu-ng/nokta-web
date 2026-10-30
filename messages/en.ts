@@ -191,7 +191,14 @@ const en: Record<string, string> = {
   "line.buy": "Buy",
   "line.altSuffix": "vectorised CAD line print",
   // Alt text for the stacked project shots; {n} is the running number.
-  "projects.imageAlt": "image {n}",
+  "projects.imageAlt": "image {n} of {total}",
+  // Thumbnail alt text (lib/alt.ts): the title and one word for what the image is.
+  "alt.thumb": "{title}, {what}",
+  "alt.thumb.rendering": "visualisation",
+  "alt.thumb.cad": "CAD line print",
+  "alt.thumb.editorial": "cover",
+  "alt.thumb.study": "study",
+  "alt.thumb.manual": "cover",
   "line.metaDescSuffix": "Vectorised CAD line print, printed in A1 and framed.",
 
   // ── Shop (/shop) ──
@@ -201,7 +208,6 @@ const en: Record<string, string> = {
   "shop.back": "All prints",
 
   // ── Projects (renderings) ─────────────────────────────────────────
-  "projects.client.private": "Private client",
   "projects.desc.sanktgores": "Exterior and interior visualisation of a pale-brick house in Germany.",
   "projects.desc.teahouse": "Interior visualisation of a city tea salon in the evening.",
   "projects.desc.beatbuilding": "Visualisation of a mixed-use residential building with an exposed-concrete façade.",

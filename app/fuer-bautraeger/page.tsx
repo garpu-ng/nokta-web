@@ -9,6 +9,7 @@ import SectionRule from "@/components/nokta/SectionRule";
 import { KIND_FIELD } from "@/lib/colors";
 import { getLocale, getT } from "@/lib/i18n";
 import { serviceJsonLd, titleWithoutSite } from "@/lib/jsonld";
+import { thumbAlt } from "@/lib/alt";
 import { getMediaSize } from "@/lib/mediaSizes";
 import { socialMetadata } from "@/lib/socialMeta";
 import { WORKS } from "@/lib/works";
@@ -119,7 +120,7 @@ export default async function BautraegerPage() {
                   <span className={viz.workFrame}>
                     <Image
                       src={work.thumb}
-                      alt=""
+                      alt={thumbAlt(work, t)}
                       width={width}
                       height={height}
                       sizes="(max-width: 899px) calc(100vw - 40px), (max-width: 1199px) 45vw, 460px"

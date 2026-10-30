@@ -183,7 +183,14 @@ const tr: Record<string, string> = {
   "line.order": "Sipariş ver",
   "line.buy": "Satın al",
   "line.altSuffix": "vektörleştirilmiş CAD çizgi baskısı",
-  "projects.imageAlt": "görsel {n}",
+  "projects.imageAlt": "görsel {n} / {total}",
+  // Thumbnail alt text (lib/alt.ts): the title and one word for what the image is.
+  "alt.thumb": "{title}, {what}",
+  "alt.thumb.rendering": "görselleştirme",
+  "alt.thumb.cad": "CAD çizgi baskısı",
+  "alt.thumb.editorial": "kapak",
+  "alt.thumb.study": "çalışma",
+  "alt.thumb.manual": "kapak",
   "line.metaDescSuffix": "Vektörleştirilmiş CAD çizgi baskısı, A1 basılmış ve çerçeveli.",
 
   // ── Shop (/shop) ──
@@ -193,7 +200,6 @@ const tr: Record<string, string> = {
   "shop.back": "Tüm baskılar",
 
   // ── Projeler (render’lar) ─────────────────────────────────────────
-  "projects.client.private": "Bireysel müşteri",
   "projects.desc.sanktgores": "Almanya’da açık renk tuğlalı bir konutun dış ve iç görselleştirmesi.",
   "projects.desc.teahouse": "Şehirde bir çay salonunun akşam iç görselleştirmesi.",
   "projects.desc.beatbuilding": "Brüt beton cepheli bir konut ve ticaret binasının görselleştirmesi.",

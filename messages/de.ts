@@ -47,8 +47,8 @@ const de: Record<string, string> = {
   // The two spreads' caption copy. The pair below them carries no body text —
   // title and annotation are the whole caption there.
   "home.work.abschlussbericht-ki-kommission.text": "216 Seiten, 8 Kapitel, 20 Handlungsempfehlungen. Vom Layoutsystem bis zur druckreifen Datei. BMWE.",
-  "home.contact.title": "Hast du einen Punkt, an dem wir anfangen?",
-  "home.contact.body": "Schick uns deine Skizze, den Plan oder eine erste Idee. Wir melden uns und fragen nach, was wir noch brauchen.",
+  "home.contact.title": "Haben Sie einen Punkt, an dem wir anfangen?",
+  "home.contact.body": "Schicken Sie uns Ihre Skizze, den Plan oder eine erste Idee. Wir melden uns und fragen nach, was wir noch brauchen.",
   "home.contact.cta": "Projekt beginnen",
 
   // ── Arbeiten (the one wall + every detail page) ───────────────────
@@ -154,11 +154,11 @@ const de: Record<string, string> = {
   "studio.role.mohammed": "3D · Visualisierung",
   "studio.role.mert": "Layout · Druck",
   "studio.cta": "Projekt in Planung?",
-  "studio.ctaWrite": "Schreib uns",
+  "studio.ctaWrite": "Schreiben Sie uns",
 
   // ── Kontakt ───────────────────────────────────────────────────────
   "kontakt.heading": "Kontakt",
-  "kontakt.intro": "Du hast ein Projekt in Planung? Erzähl uns davon.",
+  "kontakt.intro": "Sie haben ein Projekt in Planung? Erzählen Sie uns davon.",
   "kontakt.direct": "Direkt",
   "kontakt.form.step1": "01 · Worum geht es?",
   "kontakt.form.step2": "02 · Wer schreibt?",
@@ -173,15 +173,15 @@ const de: Record<string, string> = {
   "kontakt.form.submit": "Anfrage senden",
   "kontakt.form.sending": "Wird gesendet",
   "kontakt.form.sla": "Antwort persönlich, an Werktagen",
-  "kontakt.form.done.title": "Deine Anfrage ist angekommen.",
+  "kontakt.form.done.title": "Ihre Anfrage ist angekommen.",
   "kontakt.form.done.body": "Wir lesen sie und melden uns persönlich.",
   "kontakt.form.again": "Noch eine Anfrage",
-  "kontakt.form.error": "Das hat nicht geklappt. Schreib uns direkt: hallo@nokta-studio.de",
+  "kontakt.form.error": "Das hat nicht geklappt. Schreiben Sie uns direkt: hallo@nokta-studio.de",
   // Die Anfrage kam nie beim Server an — der Fehler liegt im Formular selbst,
   // also nennt diese Zeile die Studio-Adresse NICHT: es gibt nichts zu umgehen.
   "kontakt.form.error.fields": "Bitte Name, E-Mail und Nachricht ausfüllen und die E-Mail-Adresse auf Tippfehler prüfen.",
   "kontakt.form.error.busy": "Es kamen gerade sehr viele Anfragen von hier. Bitte in einer Stunde noch einmal.",
-  "kontakt.form.nojs": "Das Formular braucht JavaScript. Schreib uns direkt: hallo@nokta-studio.de",
+  "kontakt.form.nojs": "Das Formular braucht JavaScript. Schreiben Sie uns direkt: hallo@nokta-studio.de",
   "kontakt.addr.region": "NRW, Deutschland",
   "kontakt.mailAria": "E-Mail schreiben",
 
@@ -201,7 +201,14 @@ const de: Record<string, string> = {
   "line.buy": "Kaufen",
   "line.altSuffix": "vektorisierter CAD-Liniendruck",
   // Alt-Text der gestapelten Projektbilder; {n} ist die laufende Nummer.
-  "projects.imageAlt": "Bild {n}",
+  "projects.imageAlt": "Bild {n} von {total}",
+  // Thumbnail alt text (lib/alt.ts): the title and one word for what the image is.
+  "alt.thumb": "{title}, {what}",
+  "alt.thumb.rendering": "Visualisierung",
+  "alt.thumb.cad": "CAD-Liniendruck",
+  "alt.thumb.editorial": "Titelseite",
+  "alt.thumb.study": "Studie",
+  "alt.thumb.manual": "Titelseite",
   "line.metaDescSuffix": "Vektorisierter CAD-Liniendruck, gedruckt in A1 und gerahmt.",
 
   // ── Shop (/shop) ──
@@ -211,7 +218,6 @@ const de: Record<string, string> = {
   "shop.back": "Alle Drucke",
 
   // ── Projekte (Renderings) ─────────────────────────────────────────
-  "projects.client.private": "Privatkunde",
   "projects.desc.sanktgores": "Außen- und Innenvisualisierung eines Wohnhauses aus hellem Ziegel in NRW.",
   "projects.desc.teahouse": "Innenvisualisierung eines Teesalons in der Stadt, am Abend.",
   "projects.desc.beatbuilding": "Visualisierung eines Wohn- und Geschäftshauses mit Sichtbetonfassade.",
@@ -284,24 +290,24 @@ const de: Record<string, string> = {
   "viz.use.2.text": "Ansichten für Bauantrag, Gestaltungsbeirat und Gespräche mit der Stadt.",
   "viz.steps.label": "Ablauf",
   "viz.step.0.title": "Unterlagen",
-  "viz.step.0.text": "Du schickst uns Grundrisse, Ansichten und Schnitte, eine Skizze oder ein 3D-Modell. Dazu Materialien, Referenzbilder und die gewünschten Blickwinkel, soweit sie feststehen.",
+  "viz.step.0.text": "Sie schicken uns Grundrisse, Ansichten und Schnitte, eine Skizze oder ein 3D-Modell. Dazu Materialien, Referenzbilder und die gewünschten Blickwinkel, soweit sie feststehen.",
   "viz.step.1.title": "Clay-Renders",
   "viz.step.1.text": "Wir bauen das Modell und schicken Clay-Renders ohne Material. Daran stimmen wir Perspektive und Ausschnitt ab.",
   "viz.step.2.title": "Material und Licht",
   "viz.step.2.text": "Danach kommen Materialien, Licht und Umgebung dazu. Tageslicht, Abendlicht oder beides.",
   "viz.step.3.title": "Finale Bilder",
-  "viz.step.3.text": "Du bekommst die fertigen Bilder in Druckauflösung, für Bildschirm und Druck.",
+  "viz.step.3.text": "Sie bekommen die fertigen Bilder in Druckauflösung, für Bildschirm und Druck.",
   "viz.work.label": "Visualisierungen",
   "viz.faq.label": "Häufige Fragen",
   "viz.faq.0.q": "Was kostet eine 3D-Visualisierung?",
-  "viz.faq.0.a": "Das hängt von der Zahl der Ansichten, vom Detailgrad und von den Unterlagen ab. Schick uns eine kurze Anfrage, dann bekommst du ein Angebot.",
-  "viz.faq.1.q": "Welche Unterlagen braucht ihr?",
+  "viz.faq.0.a": "Das hängt von der Zahl der Ansichten, vom Detailgrad und von den Unterlagen ab. Schicken Sie uns eine kurze Anfrage, dann bekommen Sie ein Angebot.",
+  "viz.faq.1.q": "Welche Unterlagen brauchen Sie?",
   "viz.faq.1.a": "Grundrisse, Ansichten und Schnitte reichen für den Anfang, als PDF oder DWG. Ein 3D-Modell, Materialangaben und Referenzbilder helfen, sind aber keine Voraussetzung.",
-  "viz.faq.2.q": "Arbeitet ihr nur in NRW?",
+  "viz.faq.2.q": "Arbeiten Sie nur in NRW?",
   "viz.faq.2.a": "Nein. Das Studio kommt aus NRW, die Abstimmung läuft per E-Mail und Videocall. Wir arbeiten für Auftraggeber in ganz NRW und darüber hinaus.",
-  "viz.faq.3.q": "Könnt ihr auch Innenräume visualisieren?",
+  "viz.faq.3.q": "Können Sie auch Innenräume visualisieren?",
   "viz.faq.3.a": "Ja. Etwa die Hälfte unserer Bilder zeigt Innenräume, vom Wohnzimmer bis zur Werkstatt einer Fahrradstation.",
-  "viz.cta.text": "Du planst ein Projekt und brauchst Bilder davon?",
+  "viz.cta.text": "Sie planen ein Projekt und brauchen Bilder davon?",
   "viz.cta.button": "Visualisierung anfragen",
   "footer.link.viz": "3d-visualisierung",
 

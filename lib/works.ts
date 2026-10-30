@@ -30,8 +30,12 @@ export type Work = {
   title: string;
   kind: WorkKind;
   year: string;
-  /** client name; omit for own work → the UI annotates "Eigenprojekt" */
+  /** client name, only where the client may be named (the one verified
+      commission). Omitted on the renderings: their annotation names no one. */
   client?: string;
+  /** the studio's own work → the UI annotates "Eigenprojekt". A work with
+      neither `client` nor `own` carries no third annotation fact at all. */
+  own?: true;
   /** wall thumbnail (must exist in lib/mediaSizes.ts) */
   thumb: string;
   /** a moving version of the thumbnail, for work that is itself moving. The
@@ -59,6 +63,8 @@ function fromProject(slug: string, span: Work["span"], lift?: number): Work {
     title: project.title,
     kind: "rendering",
     year: project.year,
+    // Renderings name no client (decision of 27.10.2026) and are not own
+    // work either, so their annotation stops after the year.
     client: project.client,
     thumb: project.thumb,
     span,
@@ -93,7 +99,8 @@ export const WORKS: Work[] = [
     title: "Lichtspiel",
     kind: "study",
     year: "2026",
-    // No client: the studio's own experiment → annotated "Eigenprojekt".
+    // The studio's own experiment → annotated "Eigenprojekt".
+    own: true,
     thumb: "/lichtspiel/still.jpg",
     clip: "/lichtspiel/wall.mp4",
     span: 6,
@@ -107,6 +114,8 @@ export const WORKS: Work[] = [
     title: "n-Studie",
     kind: "study",
     year: "2025",
+    // The studio's own study → annotated "Eigenprojekt".
+    own: true,
     thumb: "/point/n-study.png",
     span: 4,
     lift: 0,
@@ -118,7 +127,8 @@ export const WORKS: Work[] = [
     title: "Ma (間)",
     kind: "manual",
     year: "2026",
-    // No client: the studio's own design bible → annotated "Eigenprojekt".
+    // The studio's own design bible → annotated "Eigenprojekt".
+    own: true,
     thumb: "/ma/cover.webp",
     span: 5,
     lift: 1,
@@ -129,7 +139,8 @@ export const WORKS: Work[] = [
     title: "Highway Score, Osaka",
     kind: "study",
     year: "2026",
-    // No client: the studio's own study → annotated "Eigenprojekt".
+    // The studio's own study → annotated "Eigenprojekt".
+    own: true,
     thumb: "/highway-score/still.jpg",
     clip: "/highway-score/wall.mp4",
     // Same span as Lichtspiel: the cut is the same kind of wide frame
@@ -143,7 +154,8 @@ export const WORKS: Work[] = [
     title: "Flock Score",
     kind: "study",
     year: "2026",
-    // No client: the studio's own study → annotated "Eigenprojekt".
+    // The studio's own study → annotated "Eigenprojekt".
+    own: true,
     thumb: "/flock-score/still.jpg",
     clip: "/flock-score/wall.mp4",
     span: 6,
@@ -187,6 +199,9 @@ export function prevNext(slug: string): { prev?: Work; next?: Work } {
    bad edit fails the build instead of quietly breaking the running order. */
 const seen = new Set<string>();
 for (const work of WORKS) {
+  if (work.own && work.client) {
+    throw new Error(`works.ts: "${work.slug}" is marked own work and names a client`);
+  }
   if (seen.has(work.slug)) throw new Error(`works.ts: duplicate slug "${work.slug}"`);
   seen.add(work.slug);
 }

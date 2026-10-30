@@ -7,6 +7,7 @@ import PlateHead from "@/components/nokta/PlateHead";
 import RidgeField from "@/components/nokta/RidgeField";
 import SectionRule from "@/components/nokta/SectionRule";
 import { serviceJsonLd, titleWithoutSite } from "@/lib/jsonld";
+import { thumbAlt } from "@/lib/alt";
 import { getMediaSize } from "@/lib/mediaSizes";
 import { PROJECTS } from "@/lib/projects";
 import de from "@/messages/de";
@@ -93,7 +94,7 @@ export default function BautraegerDraftPage() {
                   <span className={viz.workFrame}>
                     <Image
                       src={project.thumb}
-                      alt=""
+                      alt={thumbAlt({ title: project.title, kind: "rendering" }, line)}
                       width={width}
                       height={height}
                       sizes="(max-width: 899px) calc(100vw - 40px), (max-width: 1199px) 45vw, 460px"
