@@ -8,9 +8,8 @@ import HomeHero from "@/components/HomeHero";
 import OneLine from "@/components/nokta/OneLine/OneLine";
 import KindMark, { type DoorKind } from "@/components/nokta/KindMark";
 import SectionRule from "@/components/nokta/SectionRule";
-import { workAnnotation } from "@/components/work/WorkAnno";
 import { KIND_FIELD } from "@/lib/colors";
-import { getLocale, getT, type Translate } from "@/lib/i18n";
+import { getLocale, getT } from "@/lib/i18n";
 import { getMediaSize } from "@/lib/mediaSizes";
 import { socialMetadata } from "@/lib/socialMeta";
 import { getWork, type Work } from "@/lib/works";
@@ -31,8 +30,8 @@ import styles from "./page.module.css";
    elsewhere; it is the studio's own material, moving. The teaser film still
    opens the page above all of it.
 
-   The full wall lives at /arbeiten — this page shows the fewest
-   works it can get away with, at the biggest size it can give them. */
+   The full wall lives at /arbeiten. This page shows three housing
+   visualisations in one row, at the size the sheet gives that row. */
 
 /* The three doors. Each lands on the wall already filtered to its material,
    wears that material's motto colour as a solid field, and carries the mark
@@ -47,27 +46,15 @@ const SERVICES: { kind: DoorKind }[] = [
   { kind: "cad" }, // Druck & CAD
 ];
 
-/* The works the homepage shows, in the order they appear: the first takes the
-   lead — the whole measure of the sheet, and the one work introduced with a line
-   of its own — and the rest stand together in the row that closes the section.
-   Named rather than derived: the selection is an editorial decision — two
-   renderings, one editorial commission, one more rendering — and a rule like
-   "first of each kind" would silently re-cut it the next time a work is added to
-   the wall. The slugs are resolved against lib/works.ts, so a renamed work fails
-   the build here instead of rendering a hole.
-
-   `plate` overrides the image a work is shown at plate size with, for the case
-   where its wall thumbnail is the wrong shape to be given a whole plate. The
-   wall wants one small image per work and hangs them all by ratio;
-   teahouse's is a square the client cropped, which is a shape the interior was
-   never shot in, so the home page shows the project's first image instead
-   (resized and recompressed to plate size). */
-const FEATURED: { slug: string; plate?: string }[] = [
-  { slug: "teahouse", plate: "/projects/teahouse/plate.jpg" },
-  { slug: "abschlussbericht-ki-kommission" },
-  { slug: "sanktgores" },
-  { slug: "beatbuilding" },
-];
+/* The three works the homepage shows, in wall order. Named rather than
+   derived: the selection is an editorial cut of lib/projects.ts — housing
+   visualisations a developer can read as the kind of building they commission.
+   Sanktgores and Binome are houses; Beat Building is a mixed-use residential
+   building. A rule like "first three renderings" would pull in the tea salon
+   the moment the wall order changed. The slugs are resolved against
+   lib/works.ts, and each one has to be a project, so a renamed or non-project
+   work fails the build here instead of rendering a hole. */
+const FEATURED = ["sanktgores", "beatbuilding", "binome"] as const;
 
 /* Where a door leads when it is not the wall. Visualisation opens the page
    that states the service in words (and links on to every rendering). CAD is offered as a service
@@ -97,41 +84,18 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-/** A featured work and the image it is shown at plate size with — its own
-    thumbnail unless FEATURED names another. */
+/** A featured project and the image it is shown with: its wall thumbnail. */
 type Featured = Work & { plate: string };
 
 function featured(): Featured[] {
-  return FEATURED.map(({ slug, plate }) => {
+  return FEATURED.map((slug) => {
     const work = getWork(slug);
     if (!work) throw new Error(`app/page.tsx: no work "${slug}" in lib/works.ts`);
-    return { ...work, plate: plate ?? work.thumb };
+    if (work.source.type !== "project") {
+      throw new Error(`app/page.tsx: "${slug}" is not a project in lib/projects.ts`);
+    }
+    return { ...work, plate: work.thumb };
   });
-}
-
-/** kind · year · who it was for — the same annotation the wall and every detail
-    page carries, word for word, built by the same function
-    (components/work/WorkAnno.tsx). This section used to set a line of its own
-    that dropped the client; it was the third fact a reader wants, and it was
-    already written and already translated. */
-function annotation(work: Work, t: Translate): string {
-  const { kind, year, client } = workAnnotation(work, t);
-  return `${kind} · ${year} · ${client}`;
-}
-
-/** The line that tells a work, where the studio has written one. The dictionary
-    answers an unknown key with the key itself (lib/i18n.ts), which is what makes
-    this askable: a work's own description is preferred, because it states the
-    work without repeating the client that the annotation already carries, and
-    the home page's own line stands in for works that are not projects. Only the
-    lead is introduced this way, and a set where one plate of three is explained and three are not
-    reads as an omission rather than a rhythm. */
-function description(work: Featured, t: Translate): string | undefined {
-  for (const key of [`projects.desc.${work.slug}`, `home.work.${work.slug}.text`]) {
-    const line = t(key);
-    if (line !== key) return line;
-  }
-  return undefined;
 }
 
 /** The work's own proportion, in the form CSS spends it: `w / h`, which is at
@@ -155,19 +119,7 @@ function ratioOf(work: Featured): number {
 const MEASURE = 1420;
 const GAP = 56;
 
-/** The lead takes the measure, so its hint is the measure: the gutter tightens
-    twice on the way down to a phone, and the sheet stops growing at
-    --content-max. */
-function leadSizes(): string {
-  return [
-    "(max-width: 899px) calc(100vw - 40px)",
-    "(max-width: 1199px) calc(100vw - 64px)",
-    "(max-width: 1500px) calc(100vw - 80px)",
-    `${MEASURE}px`,
-  ].join(", ");
-}
-
-/** A plate in the set is its share of a justified row — the row's width divided
+/** A plate in the row is its share of a justified row — the row's width divided
     in proportion to the ratios standing in it. One row of all of them on a
     desktop sheet, two to a row below 1200px, one per row on a phone. */
 function setSizes(work: Featured, set: Featured[]): string {
@@ -222,8 +174,7 @@ function Plate({
 
 export default async function HomePage() {
   const t = await getT();
-  const [lead, ...set] = featured();
-  const leadText = description(lead, t);
+  const works = featured();
 
   return (
     <main>
@@ -302,33 +253,16 @@ export default async function HomePage() {
       </section>
 
       {/* ── 03 · Ausgewählte Arbeiten ─────────────────────────────────
-          A lead and a set, and the same caption under both: a plate, a hairline,
-          a title, a line of facts. The lead takes the measure of the sheet and is
-          the one work introduced with a sentence; the rest stand in a row
-          justified to that same measure, so they come out one height whatever
-          their proportions. Then the door to the rest. */}
+          Three equal plates in one row, then the door to the wall. The caption
+          under each is the name and the service line already written for that
+          project. No client and no count: both live on the work's own page. */}
       <section className={styles.section} aria-labelledby="nk-reg-03">
         <SectionRule id="nk-reg-03" label={t("home.selected")} />
 
-        <Reveal as="article" className={styles.lead}>
-          <Link href={`/arbeiten/${lead.slug}`} className={styles.plateLink}>
-            <Plate work={lead} sizes={leadSizes()} />
-          </Link>
-          <div className={styles.leadCaption}>
-            <h3 className={styles.leadTitle}>
-              <Link href={`/arbeiten/${lead.slug}`} className={styles.titleLink}>
-                {lead.title}
-              </Link>
-            </h3>
-            <div>
-              <p className={`${styles.anno} ${styles.leadAnno}`}>{annotation(lead, t)}</p>
-              {leadText ? <p className={styles.leadText}>{leadText}</p> : null}
-            </div>
-          </div>
-        </Reveal>
+        <p className={`${styles.body} ${styles.lead}`}>{t("home.selected.lede")}</p>
 
         <div className={styles.set}>
-          {set.map((work, i) => (
+          {works.map((work, i) => (
             <Reveal
               key={work.slug}
               className={styles.setItem}
@@ -338,11 +272,11 @@ export default async function HomePage() {
               style={ratio(work)}
             >
               <Link href={`/arbeiten/${work.slug}`} className={styles.setLink}>
-                <Plate work={work} sizes={setSizes(work, set)} labelled />
+                <Plate work={work} sizes={setSizes(work, works)} labelled />
                 <span className={styles.setCaption}>
                   <span className={styles.setTitle}>{work.title}</span>
                   <span className={`${styles.anno} ${styles.setAnno}`}>
-                    {annotation(work, t)}
+                    {t(`projects.service.${work.slug}`)}
                   </span>
                 </span>
               </Link>

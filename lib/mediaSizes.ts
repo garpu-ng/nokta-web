@@ -42,11 +42,9 @@ const SIZES: Record<string, MediaSize> = {
   "/projects/teahouse/05.jpg": { width: 1920, height: 1080 },
   "/projects/teahouse/06.jpg": { width: 1920, height: 1080 },
   "/projects/teahouse/07.jpg": { width: 1920, height: 1080 },
-  // The home page's plate for this work: 01.jpg resized and recompressed. Its
-  // thumbnail is a square the client cropped, which is the wall's shape but not
-  // a proportion the work was ever photographed in (see FEATURED in app/page.tsx).
-  // Wide enough for the lead plate at two device pixels to the CSS pixel: the
-  // lead takes the sheet's whole 1420px measure, so it asks for 2840 of them.
+  // 01.jpg resized and recompressed. The thumbnail is a square the client
+  // cropped, which is the wall's shape but not a proportion the interior was
+  // shot in. Wide enough for a full-measure plate at two device pixels.
   "/projects/teahouse/plate.jpg": { width: 2840, height: 1337 },
   "/projects/teahouse/thumb.jpg": { width: 1415, height: 1415 },
   "/projects/velostation/01.jpg": { width: 3754, height: 2112 },
