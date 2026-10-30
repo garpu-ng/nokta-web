@@ -58,7 +58,7 @@ export const PROJECTS: Project[] = [
   },
   {
     slug: "binome",
-    title: "Binome",
+    title: "Brick House",
     year: "2023",
     thumb: "/projects/binome/thumb.jpg",
     images: [

@@ -131,7 +131,7 @@ export default function WorkCard({
         ) : (
         <Image
           src={item.thumb}
-          /* Title and what the image is ("Binome, Visualisierung"), built
+          /* Title and what the image is ("Brick House, Visualisierung"), built
              server-side in toWallItem from lib/alt.ts. */
           alt={item.alt}
           width={item.width}
