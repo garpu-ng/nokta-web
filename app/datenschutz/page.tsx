@@ -62,6 +62,12 @@ export default async function DatenschutzPage() {
       </p>
 
       <p>
+        <strong>{t("datenschutz.analytics.title")}</strong>
+        <br />
+        {t("datenschutz.analytics.text")}
+      </p>
+
+      <p>
         <strong>{t("datenschutz.5.title")}</strong>
         <br />
         {t("datenschutz.5.text")}

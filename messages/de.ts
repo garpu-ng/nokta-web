@@ -534,7 +534,9 @@ const de: Record<string, string> = {
   "datenschutz.4.title": "4. Anfrageformular",
   "datenschutz.4.text": "Auf der Kontaktseite können Sie uns über ein Formular schreiben. Wir verarbeiten dabei die Angaben, die Sie selbst eintragen (Art der Anfrage, Name, E-Mail-Adresse und Ihre Nachricht), ausschließlich, um die Anfrage zu beantworten (Art. 6 Abs. 1 lit. b/f DSGVO). Die Angaben werden über den Mailserver unseres E-Mail-Anbieters INWX (Deutschland) als E-Mail an unser Postfach zugestellt und nicht in einer Datenbank gespeichert. Zur Abwehr automatisierter Einsendungen wird die Zahl der Anfragen je IP-Adresse kurzzeitig im Arbeitsspeicher begrenzt; eine darüber hinausgehende Auswertung oder Protokollierung der Formularinhalte findet nicht statt. Ein Captcha-Dienst wird nicht eingesetzt. Sie können uns stattdessen jederzeit direkt an",
   "datenschutz.4.after": "schreiben.",
-  "datenschutz.5.title": "5. Ihre Rechte",
+  "datenschutz.analytics.title": "5. Reichweitenmessung",
+  "datenschutz.analytics.text": "Um zu sehen, wie viele Besuche die Website hat, welche Seiten aufgerufen werden und über welche Links Besucher kommen, nutzen wir Vercel Web Analytics der Vercel Inc. Dabei werden keine Cookies gesetzt und keine Informationen auf Ihrem Gerät gespeichert oder ausgelesen. Besucher werden nicht über mehrere Websites hinweg verfolgt; zur Unterscheidung von Besuchen wird aus den Anfragedaten ein Hashwert gebildet, der nach 24 Stunden verworfen wird. Wir sehen nur zusammengefasste Werte wie aufgerufene Seite, verweisende Seite, Land, Gerätetyp und Browser. Rechtsgrundlage ist unser berechtigtes Interesse, die Website und unsere Anfragen an Interessenten zu verbessern (Art. 6 Abs. 1 lit. f DSGVO). Sie können dem jederzeit widersprechen, zum Beispiel per E-Mail an hallo@nokta-studio.de.",
+  "datenschutz.5.title": "6. Ihre Rechte",
   "datenschutz.5.text": "Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit und Widerspruch sowie ein Beschwerderecht bei einer Aufsichtsbehörde.",
   "legal.binding": "Maßgeblich ist die deutsche Fassung.",
   // Easter egg at /punkt and the footer mail link.
