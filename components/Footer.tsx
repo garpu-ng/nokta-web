@@ -59,7 +59,7 @@ export default async function Footer() {
 
           <div className={styles.col}>
             <span className={styles.colH}>{t("footer.col.social")}</span>
-            <a href="mailto:hallo@nokta-studio.de" className={styles.link}>E-Mail</a>
+            <a href="mailto:hallo@nokta-studio.de" className={styles.link}>{t("footer.link.email")}</a>
           </div>
         </nav>
       </div>

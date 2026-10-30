@@ -1,18 +1,37 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { getLocale, getT } from "@/lib/i18n";
+import { socialMetadata } from "@/lib/socialMeta";
 
-export const metadata: Metadata = {
-  title: "Impressum · nokta",
-  description: "Impressum von nokta, Designstudio aus NRW: Anbieterkennzeichnung nach § 5 DDG.",
-  alternates: { canonical: "/impressum" },
-};
+/* /impressum: copy from messages (impressum.*), German fallback per key.
+   Names, address and e-mail stay as they are in every language. Outside
+   German a note says the German version is binding (legal.binding). */
 
-export default function ImpressumPage() {
+const PATH = "/impressum";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getT();
+  const locale = await getLocale();
+  const title = t("meta.impressum.title");
+  const description = t("meta.impressum.desc");
+  return {
+    title,
+    description,
+    alternates: { canonical: PATH },
+    ...socialMetadata({ title, description, locale, path: PATH }),
+  };
+}
+
+export default async function ImpressumPage() {
+  const t = await getT();
+  const locale = await getLocale();
   return (
     <main className="wa-page">
-      <h1>Impressum</h1>
+      <h1>{t("impressum.heading")}</h1>
 
-      <p>Angaben gemäß § 5 DDG und § 18 Abs. 2 MStV</p>
+      {locale !== "de" && <p>{t("legal.binding")}</p>}
+
+      <p>{t("impressum.basis")}</p>
 
       <p>
         Kaan Özden, nokta studio
@@ -21,28 +40,30 @@ export default function ImpressumPage() {
         <br />
         42657 Solingen
         <br />
-        Deutschland
+        {t("impressum.country")}
       </p>
 
       <p>
-        <strong>Kontakt</strong>
+        <strong>{t("impressum.contact.label")}</strong>
         <br />
-        E-Mail: <a href="mailto:hallo@nokta-studio.de">hallo@nokta-studio.de</a>
+        {t("impressum.contact.email")}{" "}
+        <a href="mailto:hallo@nokta-studio.de">hallo@nokta-studio.de</a>
         <br />
-        Anfragen auch über das <Link href="/kontakt">Kontaktformular</Link>.
+        {t("impressum.contact.form.before")}{" "}
+        <Link href="/kontakt">{t("impressum.contact.form.link")}</Link>
+        {t("impressum.contact.form.after")}
       </p>
 
       <p>
-        <strong>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</strong>
+        <strong>{t("impressum.responsible.label")}</strong>
         <br />
-        Kaan Özden, Anschrift wie oben
+        {t("impressum.responsible.text")}
       </p>
 
       <p>
-        <strong>Verbraucherstreitbeilegung</strong>
+        <strong>{t("impressum.dispute.label")}</strong>
         <br />
-        Wir sind nicht bereit und nicht verpflichtet, an Streitbeilegungs&shy;verfahren
-        vor einer Verbraucherschlichtungsstelle teilzunehmen.
+        {t("impressum.dispute.text")}
       </p>
     </main>
   );

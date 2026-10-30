@@ -61,7 +61,7 @@ function shapeRadius(shape: number, a: number): number {
  * with a ripple. "nokta." rests on it. Portalled to <body> so it covers the
  * whole viewport, header included.
  */
-export default function PunktEasterEgg() {
+export default function PunktEasterEgg({ backLabel }: { backLabel: string }) {
   const rootRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [mounted, setMounted] = useState(false);
@@ -226,7 +226,7 @@ export default function PunktEasterEgg() {
     <div ref={rootRef} className={styles.root}>
       <canvas ref={canvasRef} className={styles.canvas} />
       <Link href="/" className={styles.back}>
-        ← zurück
+        ← {backLabel}
       </Link>
       <div className={styles.center}>
         <span className={styles.word}>
