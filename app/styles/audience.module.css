@@ -1,4 +1,5 @@
-/* /fuer-bautraeger and /fuer-institutionen: everything else comes from
+/* Shared by /bautraeger, /architekturbueros and /fuer-institutionen
+   (moved here from the retired /fuer-bautraeger). Everything else comes from
    app/3d-visualisierung/page.module.css. These are the pieces that page does
    not have. */
 

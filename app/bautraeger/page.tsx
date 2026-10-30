@@ -11,12 +11,16 @@ import { getMediaSize } from "@/lib/mediaSizes";
 import { PROJECTS } from "@/lib/projects";
 import de from "@/messages/de";
 import viz from "../3d-visualisierung/page.module.css";
-import note from "../fuer-bautraeger/page.module.css";
+import note from "../styles/audience.module.css";
 import styles from "./page.module.css";
 
 /* /bautraeger: German only, on every language cookie, because the copy is
-   read from messages/de.ts and nowhere else. Not in the nav or the footer.
-   In the sitemap, and indexable.
+   read from messages/de.ts and nowhere else. Linked from the homepage hero
+   and the footer; /fuer-bautraeger (the URL on the letters) 308s here. In the
+   sitemap, and indexable.
+
+   "Was wir brauchen" came over from the retired /fuer-bautraeger, with its
+   German copy (bt.needs.*, bt.need.*).
 
    The first five services are the ones the visualisation page already names.
    The last four are the same set the architect page carries, worded here
@@ -27,6 +31,7 @@ const PATH = "/bautraeger";
 
 const SERVICES = [0, 1, 2, 3, 4, 5, 6, 7, 8] as const;
 const STEPS = [0, 1, 2, 3] as const;
+const NEEDS = [0, 1, 2, 3, 4] as const;
 
 /* Housing projects already in lib/projects.ts, in the order the wall leads
    with them. A slug that is not in the file is skipped. */
@@ -119,6 +124,18 @@ export default function BautraegerDraftPage() {
             </li>
           ))}
         </ol>
+      </section>
+
+      <section className={viz.section} aria-labelledby="nk-bautraeger-needs">
+        <SectionRule id="nk-bautraeger-needs" label={line("bt.needs.label")} />
+        <div className={note.needs}>
+          <p className={viz.itemText}>{line("bt.needs.text")}</p>
+          <ul className={viz.services}>
+            {NEEDS.map((i) => (
+              <li key={i}>{line(`bt.need.${i}`)}</li>
+            ))}
+          </ul>
+        </div>
       </section>
 
       <section className={viz.cta}>

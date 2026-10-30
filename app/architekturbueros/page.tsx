@@ -11,12 +11,12 @@ import { getMediaSize } from "@/lib/mediaSizes";
 import { PROJECTS } from "@/lib/projects";
 import de from "@/messages/de";
 import viz from "../3d-visualisierung/page.module.css";
-import note from "../fuer-bautraeger/page.module.css";
+import note from "../styles/audience.module.css";
 import styles from "./page.module.css";
 
 /* /architekturbueros: German only, on every language cookie, because the
-   copy is read from messages/de.ts and nowhere else. Not in the nav or the
-   footer. In the sitemap, and indexable.
+   copy is read from messages/de.ts and nowhere else. Linked from the homepage
+   hero and the footer. In the sitemap, and indexable.
 
    The first five services, the project titles and the contact lines are ones
    the site already uses. Nothing here names a price, a deadline, a client
@@ -39,6 +39,7 @@ function line(key: string): string {
 export const metadata: Metadata = {
   title: line("meta.architekturbueros.title"),
   description: line("meta.architekturbueros.desc"),
+  alternates: { canonical: PATH },
 };
 
 export default function ArchitekturbuerosDraftPage() {

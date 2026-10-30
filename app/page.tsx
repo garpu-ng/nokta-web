@@ -234,7 +234,8 @@ export default async function HomePage() {
         ctaWork={t("home.hero.ctaWork")}
         ctaContact={t("home.hero.ctaContact")}
         audiences={[
-          { href: "/fuer-bautraeger", label: t("home.hero.forBt") },
+          { href: "/bautraeger", label: t("home.hero.forBt") },
+          { href: "/architekturbueros", label: t("home.hero.forArch") },
           { href: "/fuer-institutionen", label: t("home.hero.forInst") },
         ]}
         audiencesLabel={t("home.hero.forAria")}

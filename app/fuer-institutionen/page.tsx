@@ -14,7 +14,7 @@ import { getMediaSize } from "@/lib/mediaSizes";
 import { socialMetadata } from "@/lib/socialMeta";
 import { getWork } from "@/lib/works";
 import viz from "../3d-visualisierung/page.module.css";
-import styles from "../fuer-bautraeger/page.module.css";
+import styles from "../styles/audience.module.css";
 
 /* /fuer-institutionen: the page the editorial letters point at. Ministries,
    commissions, foundations and associations that publish reports. It says
