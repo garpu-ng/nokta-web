@@ -58,7 +58,7 @@ const tr: Record<string, string> = {
   "work.lichtspiel.spec": "lichtspiel · 1920 × 912 px · 24 fps · 1:45, sesli",
   "work.lichtspiel.player": "Lichtspiel, sesli film",
   "work.lichtspiel.noVideo": "Tarayıcınız bu videoyu oynatamıyor.",
-  "work.highway-score.lead": "Görüntülü ve sesli bir çalışma: Osaka’dan 72 saniyelik bir gece çekimi, karenin alt kenarında yükseltilmiş bir karayolu. İnce bir dikey çizgi görüntüyü böler. Onu kesen her araba sıcak bir ton ve yavaşça sönen bir ışık noktası çıkarır. Altında, 16 saniyelik bir döngüde nefes alan sakin bir ses alanı durur. Ses ve görüntü Claude ile, kural olarak tek bir cümleden, sample kullanmadan ve kendi tasarım sistemimiz Ma’ya göre oluştu.",
+  "work.highway-score.lead": "Görüntülü ve sesli bir çalışma: Osaka’dan 72 saniyelik bir gece çekimi, karenin alt kenarında yükseltilmiş bir karayolu. İnce bir dikey çizgi görüntüyü böler. Onu kesen her araba sıcak bir ton ve yavaşça sönen bir ışık noktası çıkarır. Altında, 16 saniyelik bir döngüde nefes alan sakin bir ses alanı durur. Ses sample kullanmadan kuruldu ve kendi tasarım sistemimiz Ma’yı izler.",
   "work.highway-score.spec": "highway score · 1920 × 892 px · 30 fps · 1:13, sesli",
   "work.highway-score.player": "Highway Score, Osaka, sesli film",
   "work.highway-score.noVideo": "Tarayıcınız bu videoyu oynatamıyor.",

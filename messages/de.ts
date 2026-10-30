@@ -70,7 +70,7 @@ const de: Record<string, string> = {
   "work.lichtspiel.spec": "lichtspiel · 1920 × 912 px · 24 bilder/s · 1:45 mit ton",
   "work.lichtspiel.player": "Lichtspiel, Film mit Ton",
   "work.lichtspiel.noVideo": "Ihr Browser kann dieses Video nicht abspielen.",
-  "work.highway-score.lead": "Eine audiovisuelle Studie: 72 Sekunden Nachtaufnahme von Osaka, mit einer Hochstraße am unteren Bildrand. Eine feine senkrechte Linie teilt das Bild, und jedes Auto, das sie kreuzt, löst einen warmen Ton und einen langsam verglimmenden Lichtpunkt aus. Darunter atmet eine ruhige Klangfläche in einem Zyklus von 16 Sekunden. Klang und Bild entstanden mit Claude aus einem einzigen Satz als Regel, ohne Samples und nach dem eigenen Gestaltungssystem Ma.",
+  "work.highway-score.lead": "Eine audiovisuelle Studie: 72 Sekunden Nachtaufnahme von Osaka, mit einer Hochstraße am unteren Bildrand. Eine feine senkrechte Linie teilt das Bild, und jedes Auto, das sie kreuzt, löst einen warmen Ton und einen langsam verglimmenden Lichtpunkt aus. Darunter atmet eine ruhige Klangfläche in einem Zyklus von 16 Sekunden. Der Klang ist ohne Samples gebaut und folgt dem eigenen Gestaltungssystem Ma.",
   "work.highway-score.spec": "highway score · 1920 × 892 px · 30 bilder/s · 1:13 mit ton",
   "work.highway-score.player": "Highway Score, Osaka, Film mit Ton",
   "work.highway-score.noVideo": "Ihr Browser kann dieses Video nicht abspielen.",

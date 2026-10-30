@@ -64,7 +64,7 @@ const ja: Record<string, string> = {
   "work.lichtspiel.noVideo": "お使いのブラウザはこの動画を再生できません。",
   // Titles stay in Latin on the sheet. The spec and the player say how to
   // read them, the same way リヒトシュピール does for Lichtspiel.
-  "work.highway-score.lead": "映像と音のスタディ。大阪の夜を72秒撮ったもので、画面の下端に高架道路が通る。細い垂直の線が画面を分け、その線を横切る車ごとに温かい音と、ゆっくり消えていく光の点が生まれる。その下では静かな音の層が16秒の周期で呼吸する。音と映像はClaudeとともに、一つの文を規則として、サンプルを使わず、自らのデザインシステムMaに従ってつくられた。",
+  "work.highway-score.lead": "映像と音のスタディ。大阪の夜を72秒撮ったもので、画面の下端に高架道路が通る。細い垂直の線が画面を分け、その線を横切る車ごとに温かい音と、ゆっくり消えていく光の点が生まれる。その下では静かな音の層が16秒の周期で呼吸する。音はサンプルを使わずにつくられ、自らのデザインシステムMaに従う。",
   "work.highway-score.spec": "ハイウェイ・スコア · 1920 × 892 px · 30 fps · 1:13、音声あり",
   "work.highway-score.player": "ハイウェイ・スコア、大阪（音声つきの映像）",
   "work.highway-score.noVideo": "お使いのブラウザはこの動画を再生できません。",
