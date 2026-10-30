@@ -124,6 +124,32 @@ export const WORKS: Work[] = [
     lift: 1,
     source: { type: "piece" },
   },
+  {
+    slug: "highway-score",
+    title: "Highway Score, Osaka",
+    kind: "study",
+    year: "2026",
+    // No client: the studio's own study → annotated "Eigenprojekt".
+    thumb: "/highway-score/still.jpg",
+    clip: "/highway-score/wall.mp4",
+    // Same span as Lichtspiel: the cut is the same kind of wide frame
+    // (1920 × 892). Lift differs from Flock Score, its neighbour on this row.
+    span: 6,
+    lift: 2,
+    source: { type: "piece" },
+  },
+  {
+    slug: "flock-score",
+    title: "Flock Score",
+    kind: "study",
+    year: "2026",
+    // No client: the studio's own study → annotated "Eigenprojekt".
+    thumb: "/flock-score/still.jpg",
+    clip: "/flock-score/wall.mp4",
+    span: 6,
+    lift: 0,
+    source: { type: "piece" },
+  },
 ];
 
 /** The five kinds, as a runtime set — the type alone cannot be checked

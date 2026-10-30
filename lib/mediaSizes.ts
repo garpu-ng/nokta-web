@@ -65,6 +65,12 @@ const SIZES: Record<string, MediaSize> = {
   // that is the box every view of the piece stands in: the wall card, the
   // social card, and the still a reader is left with under reduced motion.
   "/lichtspiel/still.jpg": { width: 1280, height: 608 },
+  // Highway Score, Osaka. The film's first frame at the finished cut,
+  // 1920 × 892. The wall card, the social card and the plate all stand
+  // in that proportion.
+  "/highway-score/still.jpg": { width: 1920, height: 892 },
+  // Flock Score. Same three jobs as the still above, at 1920 × 1080.
+  "/flock-score/still.jpg": { width: 1920, height: 1080 },
   // Ma, the design bible. Plates are A4 renders from the PDF. The sheet is
   // every page, including the empty twentieth cell in the page colour.
   "/ma/cover.webp": { width: 1754, height: 2480 },

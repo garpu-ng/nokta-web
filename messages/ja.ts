@@ -62,6 +62,16 @@ const ja: Record<string, string> = {
   "work.lichtspiel.spec": "リヒトシュピール · 1920 × 912 px · 24 fps · 1:45、音声あり",
   "work.lichtspiel.player": "リヒトシュピール（音声つきの映像）",
   "work.lichtspiel.noVideo": "お使いのブラウザはこの動画を再生できません。",
+  // Titles stay in Latin on the sheet. The spec and the player say how to
+  // read them, the same way リヒトシュピール does for Lichtspiel.
+  "work.highway-score.lead": "映像と音のスタディ。大阪の夜を72秒撮ったもので、画面の下端に高架道路が通る。細い垂直の線が画面を分け、その線を横切る車ごとに温かい音と、ゆっくり消えていく光の点が生まれる。その下では静かな音の層が16秒の周期で呼吸する。音と映像はClaudeとともに、一つの文を規則として、サンプルを使わず、自らのデザインシステムMaに従ってつくられた。",
+  "work.highway-score.spec": "ハイウェイ・スコア · 1920 × 892 px · 30 fps · 1:13、音声あり",
+  "work.highway-score.player": "ハイウェイ・スコア、大阪（音声つきの映像）",
+  "work.highway-score.noVideo": "お使いのブラウザはこの動画を再生できません。",
+  "work.flock-score.lead": "同じ規則による二つ目のスタディ。視線は曇り空へ向かい、大きな鳥の群れがそこを旋回する。鳥が画面中央の細い垂直の線を横切ると、そこに温かい光の点がともり、音が鳴る。その下には静かな音の層がある。",
+  "work.flock-score.spec": "フロック・スコア · 1920 × 1080 px · 29.97 fps · 0:20、音声あり",
+  "work.flock-score.player": "フロック・スコア（音声つきの映像）",
+  "work.flock-score.noVideo": "お使いのブラウザはこの動画を再生できません。",
   "work.ma.subtitle": "Hiroshi Yoshimuraの音楽にならったデザインシステム。",
   "work.ma.lead": "Maはnoktaのデザインシステムです。名前は日本のアンビエント作曲家Hiroshi Yoshimuraに由来します。色、書体、余白、動きをその音楽にならって記した、英語のA4 PDF、19ページです。",
   "work.ma.download": "PDFをダウンロード（19ページ、英語）",
