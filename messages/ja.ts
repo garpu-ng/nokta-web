@@ -192,7 +192,14 @@ const ja: Record<string, string> = {
   "line.buy": "購入",
   "line.altSuffix": "ベクター化したCADラインプリント",
   // 積み重ねたプロジェクト画像の代替テキスト。{n} は通し番号。
-  "projects.imageAlt": "画像 {n}",
+  "projects.imageAlt": "画像 {n}/{total}",
+  // Thumbnail alt text (lib/alt.ts): the title and one word for what the image is.
+  "alt.thumb": "{title}、{what}",
+  "alt.thumb.rendering": "ビジュアライゼーション",
+  "alt.thumb.cad": "CADラインプリント",
+  "alt.thumb.editorial": "表紙",
+  "alt.thumb.study": "スタディ",
+  "alt.thumb.manual": "表紙",
   "line.metaDescSuffix": "ベクター化したCADラインプリント、A1印刷・額装。",
 
   // ── Shop (/shop) ──
@@ -202,7 +209,6 @@ const ja: Record<string, string> = {
   "shop.back": "すべてのプリント",
 
   // ── プロジェクト（レンダリング） ──────────────────────────────────
-  "projects.client.private": "個人のお客様",
   "projects.desc.sanktgores": "ドイツの淡色レンガの住宅の外観・内観ビジュアライゼーション。",
   "projects.desc.teahouse": "夜の街にある茶房の内観ビジュアライゼーション。",
   "projects.desc.beatbuilding": "打放しコンクリートのファサードをもつ住商複合ビルのビジュアライゼーション。",

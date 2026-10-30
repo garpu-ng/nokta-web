@@ -65,11 +65,11 @@ function projectImageSizes(width: number, height: number): string {
   return `(max-width: ${cap}px) 100vw, ${cap}px`;
 }
 
-function imageAlt(slug: string, title: string, i: number, t: Translate): string {
+function imageAlt(slug: string, title: string, i: number, total: number, t: Translate): string {
   const key = `projects.alt.${slug}.${i + 1}`;
   const line = t(key);
   if (line !== key) return `${title}, ${line}`;
-  return `${title}, ${t("projects.imageAlt").replace("{n}", String(i + 1))}`;
+  return `${title}, ${t("projects.imageAlt").replace("{n}", String(i + 1)).replace("{total}", String(total))}`;
 }
 
 /** Existing copy that already says what each piece is. */
@@ -155,7 +155,7 @@ function imageStack(
               /* Each shot says what it shows (projects.alt.<slug>.<n>). A shot
                  added without one falls back to its running number rather than
                  rendering the key. */
-              alt={imageAlt(project.slug, title, i, t)}
+              alt={imageAlt(project.slug, title, i, project.images.length, t)}
               width={width}
               height={height}
               sizes={
