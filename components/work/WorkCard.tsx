@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { thumbAlt } from "@/lib/alt";
 import { getMediaSize } from "@/lib/mediaSizes";
 import type { Work, WorkKind } from "@/lib/works";
 import WorkAnno, { workAnnotation, type WorkAnnotation } from "./WorkAnno";
@@ -27,6 +28,8 @@ export type WallItem = {
   title: string;
   kind: WorkKind;
   thumb: string;
+  /** the thumbnail's alt text, translated server-side (lib/alt.ts) */
+  alt: string;
   /** the moving version of the thumbnail, where the work is itself moving */
   clip?: string;
   /** the thumbnail's intrinsic size, resolved server-side */
@@ -51,6 +54,7 @@ export function toWallItem(work: Work, t: (key: string) => string): WallItem {
     title: work.title,
     kind: work.kind,
     thumb: work.thumb,
+    alt: thumbAlt(work, t),
     clip: work.clip,
     width,
     height,
@@ -127,11 +131,9 @@ export default function WorkCard({
         ) : (
         <Image
           src={item.thumb}
-          /* Empty on purpose: the title is set as real text inside this same
-             link, two lines down. Repeating it here made a screen reader
-             announce every work twice — once over for every card on the wall. The
-             link still has an accessible name; it comes from the caption. */
-          alt=""
+          /* Title and what the image is ("Brick House, Visualisierung"), built
+             server-side in toWallItem from lib/alt.ts. */
+          alt={item.alt}
           width={item.width}
           height={item.height}
           sizes={item.unoptimized ? undefined : CARD_SIZES}

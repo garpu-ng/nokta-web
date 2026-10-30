@@ -24,6 +24,18 @@ const nextConfig: NextConfig = {
     // (the locale cookie) and is not covered here.
     minimumCacheTTL: 60 * 60 * 24,
   },
+  // /fuer-bautraeger was the older developer page and is the URL printed on
+  // the postal letters. /bautraeger is the one page now; the old path moves
+  // there with a 308 so the letters and the index follow it.
+  async redirects() {
+    return [
+      {
+        source: "/fuer-bautraeger",
+        destination: "/bautraeger",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

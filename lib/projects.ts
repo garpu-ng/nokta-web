@@ -1,11 +1,14 @@
-// The archviz projects: slugs, clients, and the image stacks their detail
+// The archviz projects: slugs, titles, and the image stacks their detail
 // pages render. Wall placement (span/lift) is curated in lib/works.ts, and the
 // reader-facing descriptions are locale copy (messages/*, projects.desc.*) —
 // neither belongs to this record.
 export type Project = {
   slug: string;
   title: string;
-  client: string;
+  /** Not set on any rendering: since 27.10.2026 the rendering case studies
+      name no client (no name, no generic "private client", no "Eigenprojekt"). Only set
+      this for a client who has confirmed they may be named. */
+  client?: string;
   year: string;
   thumb: string;
   images: string[];
@@ -15,7 +18,6 @@ export const PROJECTS: Project[] = [
   {
     slug: "sanktgores",
     title: "Sanktgores Residence",
-    client: "Privatkunde",
     year: "2024",
     thumb: "/projects/sanktgores/thumb.jpg",
     images: [
@@ -30,7 +32,6 @@ export const PROJECTS: Project[] = [
   {
     slug: "teahouse",
     title: "Teahouse",
-    client: "Privatkunde",
     year: "2024",
     thumb: "/projects/teahouse/thumb.jpg",
     images: [
@@ -46,7 +47,6 @@ export const PROJECTS: Project[] = [
   {
     slug: "beatbuilding",
     title: "Beat Building",
-    client: "Architekturbüro",
     year: "2023",
     thumb: "/projects/beatbuilding/thumb.jpg",
     images: [
@@ -58,8 +58,7 @@ export const PROJECTS: Project[] = [
   },
   {
     slug: "binome",
-    title: "Binome",
-    client: "Binome Architekten",
+    title: "Brick House",
     year: "2023",
     thumb: "/projects/binome/thumb.jpg",
     images: [
@@ -74,7 +73,6 @@ export const PROJECTS: Project[] = [
   {
     slug: "ipehouse",
     title: "IPE House",
-    client: "Privatkunde",
     year: "2023",
     thumb: "/projects/ipehouse/thumb.jpg",
     images: [
@@ -87,7 +85,6 @@ export const PROJECTS: Project[] = [
   {
     slug: "velostation",
     title: "Velostation",
-    client: "Stadtplanung NRW",
     year: "2022",
     thumb: "/projects/velostation/thumb.jpg",
     images: [

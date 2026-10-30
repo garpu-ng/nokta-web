@@ -297,8 +297,6 @@ await checkPage("/architekturbueros", "de", { ...service, locale: "de" });
 await checkPage("/architekturbueros", "en", { ...service, locale: "de" });
 await checkPage("/bautraeger", "de", { ...service, locale: "de" });
 await checkPage("/bautraeger", "en", { ...service, locale: "de" });
-await checkPage("/fuer-bautraeger", "de", { ...service, locale: "de" });
-await checkPage("/fuer-bautraeger", "en", { ...service, locale: "en" });
 await checkPage("/fuer-institutionen", "de", { ...service, locale: "de" });
 await checkPage("/fuer-institutionen", "tr", { ...service, locale: "tr" });
 

@@ -6,15 +6,16 @@ import Reveal from "@/components/Reveal";
 import DiscField from "@/components/nokta/DiscField";
 import PlateHead from "@/components/nokta/PlateHead";
 import SectionRule from "@/components/nokta/SectionRule";
-import { workAnnotation } from "@/components/work/WorkAnno";
+import { annotationLine, workAnnotation } from "@/components/work/WorkAnno";
 import { KIND_FIELD } from "@/lib/colors";
 import { getLocale, getT } from "@/lib/i18n";
 import { serviceJsonLd, titleWithoutSite } from "@/lib/jsonld";
+import { thumbAlt } from "@/lib/alt";
 import { getMediaSize } from "@/lib/mediaSizes";
 import { socialMetadata } from "@/lib/socialMeta";
 import { getWork } from "@/lib/works";
 import viz from "../3d-visualisierung/page.module.css";
-import styles from "../fuer-bautraeger/page.module.css";
+import styles from "../styles/audience.module.css";
 
 /* /fuer-institutionen: the page the editorial letters point at. Ministries,
    commissions, foundations and associations that publish reports. It says
@@ -92,7 +93,7 @@ export default async function InstitutionenPage() {
             <span className={styles.refFrame}>
               <Image
                 src={ref.thumb}
-                alt=""
+                alt={thumbAlt(ref, t)}
                 width={width}
                 height={height}
                 sizes="(max-width: 899px) calc(100vw - 40px), 560px"
@@ -102,7 +103,7 @@ export default async function InstitutionenPage() {
             <span className={styles.refText}>
               <span className={viz.workTitle}>{ref.title}</span>
               <span className={viz.workAnno}>
-                {anno.kind} · {anno.year} · {anno.client}
+                {annotationLine(anno)}
               </span>
               <span className={viz.itemText}>{t("inst.ref.text")}</span>
               <span className={styles.moreLink}>

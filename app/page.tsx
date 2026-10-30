@@ -8,9 +8,10 @@ import HomeHero from "@/components/HomeHero";
 import OneLine from "@/components/nokta/OneLine/OneLine";
 import KindMark, { type DoorKind } from "@/components/nokta/KindMark";
 import SectionRule from "@/components/nokta/SectionRule";
-import { workAnnotation } from "@/components/work/WorkAnno";
+import { annotationLine, workAnnotation } from "@/components/work/WorkAnno";
 import { KIND_FIELD } from "@/lib/colors";
 import { getLocale, getT, type Translate } from "@/lib/i18n";
+import { thumbAlt } from "@/lib/alt";
 import { getMediaSize } from "@/lib/mediaSizes";
 import { socialMetadata } from "@/lib/socialMeta";
 import { getWork, type Work } from "@/lib/works";
@@ -115,8 +116,7 @@ function featured(): Featured[] {
     that dropped the client; it was the third fact a reader wants, and it was
     already written and already translated. */
 function annotation(work: Work, t: Translate): string {
-  const { kind, year, client } = workAnnotation(work, t);
-  return `${kind} · ${year} · ${client}`;
+  return annotationLine(workAnnotation(work, t));
 }
 
 /** The line that tells a work, where the studio has written one. The dictionary
@@ -192,25 +192,24 @@ function setSizes(work: Featured, set: Featured[]): string {
     nothing shifts on load, they hand the stylesheet the work's ratio, and they
     size the `sizes` hint the caller passes in.
 
-    `labelled` says whether the link around this plate already carries the work's
-    title as text. In the set it does, so the alt is dropped rather than announced
-    twice; the lead's plate is alone inside its link, and without the alt that
-    link would have no accessible name at all. */
+    The alt text is the work's title and what the image is (lib/alt.ts). The
+    lead's plate is alone inside its link, so the alt is also that link's
+    accessible name. */
 function Plate({
   work,
   sizes,
-  labelled = false,
+  alt,
 }: {
   work: Featured;
   sizes: string;
-  labelled?: boolean;
+  alt: string;
 }) {
   const { width, height } = getMediaSize(work.plate);
   return (
     <span className={styles.plate} style={ratio(work)}>
       <Image
         src={work.plate}
-        alt={labelled ? "" : work.title}
+        alt={alt}
         width={width}
         height={height}
         sizes={sizes}
@@ -234,7 +233,8 @@ export default async function HomePage() {
         ctaWork={t("home.hero.ctaWork")}
         ctaContact={t("home.hero.ctaContact")}
         audiences={[
-          { href: "/fuer-bautraeger", label: t("home.hero.forBt") },
+          { href: "/bautraeger", label: t("home.hero.forBt") },
+          { href: "/architekturbueros", label: t("home.hero.forArch") },
           { href: "/fuer-institutionen", label: t("home.hero.forInst") },
         ]}
         audiencesLabel={t("home.hero.forAria")}
@@ -312,7 +312,7 @@ export default async function HomePage() {
 
         <Reveal as="article" className={styles.lead}>
           <Link href={`/arbeiten/${lead.slug}`} className={styles.plateLink}>
-            <Plate work={lead} sizes={leadSizes()} />
+            <Plate work={lead} sizes={leadSizes()} alt={thumbAlt(lead, t)} />
           </Link>
           <div className={styles.leadCaption}>
             <h3 className={styles.leadTitle}>
@@ -338,7 +338,7 @@ export default async function HomePage() {
               style={ratio(work)}
             >
               <Link href={`/arbeiten/${work.slug}`} className={styles.setLink}>
-                <Plate work={work} sizes={setSizes(work, set)} labelled />
+                <Plate work={work} sizes={setSizes(work, set)} alt={thumbAlt(work, t)} />
                 <span className={styles.setCaption}>
                   <span className={styles.setTitle}>{work.title}</span>
                   <span className={`${styles.anno} ${styles.setAnno}`}>

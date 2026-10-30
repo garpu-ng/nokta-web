@@ -102,6 +102,7 @@ function printToWallItem(print: Print, t: (key: string) => string): WallItem {
     title: print.title,
     kind: "cad",
     thumb: print.image,
+    alt: `${print.title}, ${t("line.altSuffix")}`,
     width,
     height,
     span: 6,
