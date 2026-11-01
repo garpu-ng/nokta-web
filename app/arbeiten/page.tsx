@@ -162,7 +162,6 @@ export default async function ArbeitenPage({
           </a>
           <Link className={styles.form} href="/kontakt">
             {t("arbeiten.contact.form")}
-            <span aria-hidden="true">↗</span>
           </Link>
         </p>
       </header>
@@ -190,9 +189,6 @@ export default async function ArbeitenPage({
               </span>
               <span className={styles.doorTitle}>{t(`${key}.title`)}</span>
               <span className={styles.doorText}>{t(`${key}.text`)}</span>
-              <span className={styles.doorArrow} aria-hidden="true">
-                ↗
-              </span>
             </Link>
           </Reveal>
         ))}

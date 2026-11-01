@@ -397,14 +397,12 @@ export default async function WorkPage({ params }: Props) {
       {workBody(work, t)}
 
       {/* The neighbours are plates of their own: a caption kicker over a title set
-          at reading-across-the-room scale. The arrows are marks, not words —
-          aria-hidden, so the link is announced by its title alone. */}
+          at reading-across-the-room scale. The caption says the direction. */}
       <nav className={styles.nav}>
         {prev ? (
           <Link href={`/arbeiten/${prev.slug}`} className={styles.navLink}>
             <span className="nk-caption">{t("work.prev")}</span>
             <span className={styles.navTitle}>
-              <span className={styles.navArrow} aria-hidden="true">←</span>
               <span className={styles.navName}>{prev.title}</span>
             </span>
           </Link>
@@ -416,7 +414,6 @@ export default async function WorkPage({ params }: Props) {
             <span className="nk-caption">{t("work.next")}</span>
             <span className={styles.navTitle}>
               <span className={styles.navName}>{next.title}</span>
-              <span className={styles.navArrow} aria-hidden="true">→</span>
             </span>
           </Link>
         ) : (

@@ -226,7 +226,7 @@ export default function PunktEasterEgg({ backLabel }: { backLabel: string }) {
     <div ref={rootRef} className={styles.root}>
       <canvas ref={canvasRef} className={styles.canvas} />
       <Link href="/" className={styles.back}>
-        ← {backLabel}
+        {backLabel}
       </Link>
       <div className={styles.center}>
         <span className={styles.word}>

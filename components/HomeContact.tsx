@@ -16,7 +16,6 @@ export default function HomeContact({
       <p className={styles.body}>{body}</p>
       <Link href="/kontakt" className={styles.link}>
         {cta}
-        <span aria-hidden="true">↗</span>
       </Link>
     </section>
   );

@@ -292,9 +292,6 @@ export default async function HomePage() {
                 <span className={styles.doorText}>
                   {t(`home.svc.${i}.short`)}
                 </span>
-                <span className={styles.doorArrow} aria-hidden="true">
-                  ↗
-                </span>
               </Link>
             </Reveal>
           ))}
@@ -354,7 +351,6 @@ export default async function HomePage() {
           {/* The way on, without a figure: the wall opens on one material, so any
               count here named a different set than the one you land on. */}
           <span>{t("work.back")}</span>
-          <span aria-hidden="true">↗</span>
         </Link>
       </section>
 

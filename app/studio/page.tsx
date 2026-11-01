@@ -187,7 +187,6 @@ export default async function StudioPage() {
         <div className={styles.ctaLinks}>
           <Link href="/kontakt" className={styles.ctaFill}>
             {t("studio.ctaWrite")}
-            <span aria-hidden="true"> ↗</span>
           </Link>
         </div>
       </section>

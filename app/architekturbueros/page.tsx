@@ -138,7 +138,6 @@ export default async function ArchitekturbuerosDraftPage() {
         </div>
         <Link href="/kontakt?kind=visualisierung" className={viz.ctaFill}>
           {t("bt.cta.button")}
-          <span aria-hidden="true"> ↗</span>
         </Link>
       </section>
     </main>

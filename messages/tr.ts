@@ -23,7 +23,7 @@ const tr: Record<string, string> = {
   "home.hero.ctaWork": "İşleri görün",
   "home.hero.ctaContact": "Proje talebi gönderin",
   // ── Kolonnade: ana sayfa hero, giriş, üç hizmet satırı ────────────
-  "home.intro.body": "Mimarlık ofisleri, bireysel müşteriler ve kamu işverenleri için çalışıyoruz. Kimi bitmiş bir planla geliyor, kimi bir peçeteye çizilmiş bir eskizle. İkisiyle de başlayabiliriz.",
+  "home.intro.body": "Mimarlık ofisleri, bireysel müşteriler ve kamu işverenleri için çalışıyoruz. Kimi bitmiş bir planla geliyor, kimi bir peçeteye çizilmiş bir eskizle.",
   // 01’deki plakada olan şey — bir tuval hiçbir şey söylemediği için,
   // ekran okuyucular adına.
   "home.plate.oneline": "Bir nokta, kalemi kaldırmadan tek bir çizgiyle bir bina çiziyor, sonra çizgiyi geri alıyor. Her seferinde başka bir bina ortaya çıkıyor.",
@@ -53,8 +53,8 @@ const tr: Record<string, string> = {
   "work.kind.manual": "El kitabı",
   "work.prev": "önceki iş",
   "work.next": "sonraki iş",
-  "work.nstudie.lead": "Küçük n üzerine tipografik bir çalışma. Çizildi, ızgaraya oturtuldu, baskı olarak çıkarıldı.",
-  "work.lichtspiel.lead": "Kendi işaretimizle bir ışık denemesi: su üzerinde hareket eden spotlar, aralarında duran logo. Kuruldu, render alındı, müziklendirildi.",
+  "work.nstudie.lead": "Küçük n üzerine tipografik bir çalışma, baskı olarak çıkarıldı.",
+  "work.lichtspiel.lead": "Kendi işaretimizle bir ışık denemesi: su üzerinde hareket eden spotlar, aralarında duran logo, kendi sesiyle.",
   "work.lichtspiel.spec": "lichtspiel · 1920 × 912 px · 24 fps · 1:45, sesli",
   "work.lichtspiel.player": "Lichtspiel, sesli film",
   "work.lichtspiel.noVideo": "Tarayıcınız bu videoyu oynatamıyor.",
@@ -92,7 +92,7 @@ const tr: Record<string, string> = {
   "point.case.lead": "Rekabet ve Yapay Zekâ Komisyonu’nun nihai raporu: ilk metin sütunundan baskıya hazır dosyaya kadar tasarlanmış 216 sayfa.",
   "point.case.stripAria": "Nihai rapordan altı sayfa, yatay olarak kaydırılabilir",
   "point.case.spread.cover.alt": "Mavi-yeşil geçişli, „YZ, Rekabet ve Rekabet Gücü“ başlıklı ve dikey 2026 yılını taşıyan nihai rapor kapağı.",
-  "point.case.spread.cover.caption": "kapak · görsel yerine renk geçişi",
+  "point.case.spread.cover.caption": "kapak · maviden yeşile renk geçişi",
   "point.case.spread.contents.alt": "Büyük numaralı bölüm başlıkları, noktalı kılavuz çizgileri ve camgöbeği yönlendirme etiketleriyle içindekiler sayfası.",
   "point.case.spread.contents.caption": "içindekiler · 216 sayfa boyunca yönlendirme",
   "point.case.spread.prinzipien.alt": "Net bir tipografik hiyerarşide numaralı ilkelerle „İlkeler“ sayfası.",
@@ -132,7 +132,7 @@ const tr: Record<string, string> = {
   "studio.services.note": "dört satır · her birine bir sonuç",
   "studio.p1": "nokta, NRW’den bir tasarım stüdyosu. Üç kişiyiz; yapılar, kitaplar ve baskılar çiziyoruz: mimari görselleştirme, editoryal ve dizgi, baskı üretimi ve CAD planları.",
   "studio.p2": "Araçlarımızı ve iş akışlarımızı kendimiz kuruyoruz: render kurulumları, dizgi şablonları ve baskı öncesi kontrol adımları. Bir projenin başında masada birkaç varyasyon durur.",
-  "studio.p3": "İşe mimari görselleştirmeyle başladık ve bugün de işin en büyük bölümü o: iç ve dış mekânların fotogerçekçi 3B render’ları. Bir projeyi daha inşa edilmeden, sonradan nasıl görüneceğiyle gösteriyorlar.",
+  "studio.p3": "İşe mimari görselleştirmeyle başladık ve bugün de işin büyük kısmı o: iç ve dış mekânların fotogerçekçi 3B render’ları. Bir projeyi daha inşa edilmeden, sonradan nasıl görüneceğiyle gösteriyorlar.",
   "studio.team": "Ekip",
   "studio.film": "Film: Noktadan çizgiye, çizgiden forma",
   "studio.role.kaan": "Tasarım · Konsept",
@@ -398,7 +398,7 @@ const tr: Record<string, string> = {
   "meta.inst.desc": "Bakanlıklar, komisyonlar, vakıflar ve dernekler için rapor ve yayınların tasarımı ve dizgisi. Müsveddeden baskıya hazır dosyaya. Referans: Alman Federal Ekonomi ve Enerji Bakanlığı Yapay Zeka Komisyonu nihai raporu, 216 sayfa.",
   "inst.heading": "Kurumlar için",
   "inst.claim": "Müsveddeden baskıya hazır dosyaya, raporlar ve yayınlar.",
-  "inst.lead": "Bakanlıklar, komisyonlar, vakıflar ve dernekler için rapor ve yayınları tasarlıyor ve diziyoruz. En son Alman Federal Ekonomi ve Enerji Bakanlığı bünyesindeki Yapay Zeka Komisyonu'nun 216 sayfalık nihai raporunu. Her proje için ödeme koşullarını ve zaman planını teklifte belirleriz.",
+  "inst.lead": "Bakanlıklar, komisyonlar, vakıflar ve dernekler için rapor ve yayınları tasarlıyor ve diziyoruz. 2026'da Alman Federal Ekonomi ve Enerji Bakanlığı bünyesindeki Yapay Zeka Komisyonu'nun 216 sayfalık nihai raporunu. Her proje için ödeme koşullarını ve zaman planını teklifte belirleriz.",
   "inst.facts.label": "Kısaca",
   "inst.fact.0": "Yapı, sayfa planı, grid ve tipografi",
   "inst.fact.1": "Metin, tablo, grafik ve önerilerin dizgisi",
@@ -516,7 +516,7 @@ const tr: Record<string, string> = {
   "legal.binding": "Bağlayıcı olan Almanca metindir.",
   // /punkt’taki sürpriz sayfa ve alt bilgideki e-posta bağlantısı.
   "meta.punkt.title": "nokta · Nokta",
-  "punkt.back": "geri",
+  "punkt.back": "Ana sayfaya dön",
   "footer.link.email": "E-posta",
 };
 
