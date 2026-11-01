@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fragment, type CSSProperties, type ReactNode } from "react";
+import { type CSSProperties, type ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
@@ -10,6 +10,7 @@ import ArtPlate from "@/components/nokta/ArtPlate";
 import CaseStudy from "@/components/nokta/CaseStudy";
 import FilmPlate from "@/components/nokta/FilmPlate";
 import WorkAnno, { workAnnotation } from "@/components/work/WorkAnno";
+import { displayTitle } from "@/lib/alt";
 import { getLocale, getT, type Translate } from "@/lib/i18n";
 import { creativeWorkJsonLd } from "@/lib/jsonld";
 import { getMediaSize } from "@/lib/mediaSizes";
@@ -79,6 +80,10 @@ const PIECE_DESC: Record<string, string> = {
   lichtspiel: "work.lichtspiel.lead",
   "highway-score": "work.highway-score.lead",
   "flock-score": "work.flock-score.lead",
+  kohaku: "work.kohaku.lead",
+  "ma-sounds": "work.ma-sounds.lead",
+  gebaeude: "work.gebaeude.lead",
+  baeume: "work.baeume.lead",
   ma: "work.ma.lead",
 };
 
@@ -104,7 +109,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const t = await getT();
   const locale = await getLocale();
-  const title = `${work.title} · nokta`;
+  const name = displayTitle(work, t);
+  const title = `${name} · nokta`;
   const description = describe(work, t);
   const path = `/arbeiten/${work.slug}`;
   const { width, height } = getMediaSize(work.thumb);
@@ -119,7 +125,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     // and only then given this work's own card image.
     openGraph: {
       ...social.openGraph,
-      images: [{ url: work.thumb, width, height, alt: work.title }],
+      images: [{ url: work.thumb, width, height, alt: name }],
     },
   };
 }
@@ -245,49 +251,101 @@ const FILMS = {
   lichtspiel: { width: 1920, height: 912 },
   "highway-score": { width: 1920, height: 892 },
   "flock-score": { width: 1920, height: 1080 },
+  kohaku: { width: 1920, height: 1080 },
+  gebaeude: { width: 1200, height: 1200 },
+  baeume: { width: 1080, height: 1920 },
 } as const;
 
 type FilmSlug = keyof typeof FILMS;
 
-/** Where a lead names Ma, that name links to the design system. The word
-    stays in the sentence, so the meta description (the same string, without
-    this pass) still reads as prose. */
-function leadWithMa(text: string): ReactNode {
-  const parts = text.split(/(\bMa\b)/);
-  if (parts.length === 1) return text;
-  return parts.map((part, i) =>
-    part === "Ma" ? (
-      <Link key={i} href="/arbeiten/ma">
-        Ma
-      </Link>
-    ) : (
-      <Fragment key={i}>{part}</Fragment>
-    ),
+/** Names in a lead that point at another work. The word stays in the
+    sentence, so the meta description (the same string, without this pass)
+    still reads as prose. */
+const LEAD_LINKS = [
+  { word: "Binôme", href: "/arbeiten/binome" },
+  { word: "Ma", href: "/arbeiten/ma" },
+];
+
+function linkWords(text: string): ReactNode {
+  let nodes: ReactNode[] = [text];
+  for (const { word, href } of LEAD_LINKS) {
+    const next: ReactNode[] = [];
+    nodes.forEach((node, ni) => {
+      if (typeof node !== "string") {
+        next.push(node);
+        return;
+      }
+      const parts = node.split(word);
+      parts.forEach((part, i) => {
+        // Stay a string until every name has had a pass. Wrapping the
+        // remainder in an element here would hide a later name from split.
+        if (part) next.push(part);
+        if (i < parts.length - 1) {
+          next.push(
+            <Link key={`${word}-${ni}-${i}`} href={href}>
+              {word}
+            </Link>,
+          );
+        }
+      });
+    });
+    nodes = next;
+  }
+  return nodes;
+}
+
+/** One plain link out to the study's first post. No embed. */
+const STUDY_POST: Record<string, string> = {
+  kohaku: "https://x.com/garpu_ng/status/2114723176664158540",
+  "ma-sounds": "https://x.com/garpu_ng/status/2115709170649620611",
+  gebaeude: "https://x.com/garpu_ng/status/2116578906648002657",
+  baeume: "https://x.com/garpu_ng/status/2116836601062117551",
+};
+
+function studyLead(slug: string, t: Translate) {
+  return (
+    <div className={styles.body}>
+      <p className={styles.lead}>
+        {linkWords(t(`work.${slug}.lead`))}{" "}
+        <a href={STUDY_POST[slug]} target="_blank" rel="noopener noreferrer">
+          {t(`work.${slug}.source`)}
+        </a>
+      </p>
+    </div>
+  );
+}
+
+function filmPlateFor(slug: FilmSlug, base: string, suffix = "") {
+  return (
+    <FilmPlate
+      base={base}
+      ratio={FILMS[slug]}
+      texts={{
+        player: `work.${slug}.player${suffix}`,
+        spec: `work.${slug}.spec${suffix}`,
+        noVideo: `work.${slug}.noVideo`,
+      }}
+    />
   );
 }
 
 function filmPiece(slug: FilmSlug, t: Translate) {
-  const ratio = FILMS[slug];
   return (
     <>
       <div className={styles.body}>
-        <p className={styles.lead}>{leadWithMa(t(`work.${slug}.lead`))}</p>
+        <p className={styles.lead}>{linkWords(t(`work.${slug}.lead`))}</p>
       </div>
-      <FilmPlate
-        base={`/${slug}`}
-        ratio={ratio}
-        texts={{
-          player: `work.${slug}.player`,
-          spec: `work.${slug}.spec`,
-          noVideo: `work.${slug}.noVideo`,
-        }}
-      />
+      {filmPlateFor(slug, `/${slug}`)}
     </>
   );
 }
 
+/** Ma, the Windows sound scheme. Two stills, in reading order. */
+const MA_SOUND_IMAGES = ["/ma-sounds/01.jpg", "/ma-sounds/02.jpg"];
+
 /** Editorial, study: each piece brings its own section. */
-function pieceBody(slug: string, t: Translate) {
+function pieceBody(work: Work, t: Translate) {
+  const slug = work.slug;
   switch (slug) {
     case "abschlussbericht-ki-kommission":
       return <CaseStudy />;
@@ -304,6 +362,35 @@ function pieceBody(slug: string, t: Translate) {
     case "highway-score":
     case "flock-score":
       return filmPiece(slug, t);
+    case "kohaku":
+    case "gebaeude":
+      return (
+        <>
+          {studyLead(slug, t)}
+          {filmPlateFor(slug, `/${slug}`)}
+        </>
+      );
+    case "baeume":
+      return (
+        <>
+          {studyLead(slug, t)}
+          <div className={styles.films}>
+            {filmPlateFor("baeume", "/baeume")}
+            {filmPlateFor("baeume", "/baeume/2", "2")}
+          </div>
+        </>
+      );
+    case "ma-sounds":
+      return (
+        <>
+          {studyLead(slug, t)}
+          {imageStack(
+            { slug: "ma-sounds", images: MA_SOUND_IMAGES },
+            displayTitle(work, t),
+            t,
+          )}
+        </>
+      );
     case "ma":
       return (
         <>
@@ -354,7 +441,7 @@ function workBody(work: Work, t: Translate) {
         </>
       );
     case "piece":
-      return pieceBody(work.slug, t);
+      return pieceBody(work, t);
   }
 }
 
@@ -371,6 +458,7 @@ export default async function WorkPage({ params }: Props) {
 
   const t = await getT();
   const locale = await getLocale();
+  const name = displayTitle(work, t);
   const { prev, next } = prevNext(work.slug);
 
   return (
@@ -378,14 +466,14 @@ export default async function WorkPage({ params }: Props) {
       <JsonLd
         data={creativeWorkJsonLd({
           path: `/arbeiten/${work.slug}`,
-          name: work.title,
+          name: name,
           description: workLdDescription(work, t),
           imagePath: work.thumb,
           inLanguage: locale,
         })}
       />
       <ProjectHeader
-        title={work.title}
+        title={name}
         anno={<WorkAnno anno={workAnnotation(work, t)} />}
         // The label promises the wall ("Alle Arbeiten"), so the link keeps
         // that promise: since Kolonnade the wall hangs at /arbeiten, not on
@@ -403,7 +491,7 @@ export default async function WorkPage({ params }: Props) {
           <Link href={`/arbeiten/${prev.slug}`} className={styles.navLink}>
             <span className="nk-caption">{t("work.prev")}</span>
             <span className={styles.navTitle}>
-              <span className={styles.navName}>{prev.title}</span>
+              <span className={styles.navName}>{displayTitle(prev, t)}</span>
             </span>
           </Link>
         ) : (
@@ -413,7 +501,7 @@ export default async function WorkPage({ params }: Props) {
           <Link href={`/arbeiten/${next.slug}`} className={`${styles.navLink} ${styles.navNext}`}>
             <span className="nk-caption">{t("work.next")}</span>
             <span className={styles.navTitle}>
-              <span className={styles.navName}>{next.title}</span>
+              <span className={styles.navName}>{displayTitle(next, t)}</span>
             </span>
           </Link>
         ) : (

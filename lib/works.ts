@@ -38,6 +38,10 @@ export type Work = {
   own?: true;
   /** wall thumbnail (must exist in lib/mediaSizes.ts) */
   thumb: string;
+  /** object-position of the wall crop, when the subject is not in the centre
+      of the frame. The card is always 4:5, so a wide sheet otherwise loses
+      the part that matters. */
+  focus?: string;
   /** a moving version of the thumbnail, for work that is itself moving. The
       wall plays it in the frame where the thumb would hang; `thumb` stays
       required and stays the clip's own first frame, because it is still what
@@ -92,8 +96,39 @@ export const WORKS: Work[] = [
     lift: 3.5,
     source: { type: "piece" },
   },
+  {
+    slug: "kohaku",
+    title: "Kohaku (琥珀)",
+    kind: "study",
+    year: "2026",
+    own: true,
+    thumb: "/kohaku/still.jpg",
+    clip: "/kohaku/wall.mp4",
+    // The name and the waveform sit on the left of a 16:9 frame.
+    focus: "left center",
+    // 16:9, the same wide frame as Highway Score. Lift sits between the
+    // report above (3.5) and Teahouse below (0).
+    span: 6,
+    lift: 1.5,
+    source: { type: "piece" },
+  },
   fromProject("teahouse", 6, 0),
   fromProject("beatbuilding", 7, 2),
+  {
+    slug: "ma-sounds",
+    title: "Ma (間), Klänge für Windows 11",
+    kind: "study",
+    year: "2026",
+    own: true,
+    thumb: "/ma-sounds/01.jpg",
+    // The square sits on the right of a wide card.
+    focus: "right center",
+    // Wide still, 1600 × 783. No clip: the study is two pictures.
+    // Lift 0, against Beatbuilding at 2 and Lichtspiel at 2.5.
+    span: 6,
+    lift: 0,
+    source: { type: "piece" },
+  },
   {
     slug: "lichtspiel",
     title: "Lichtspiel",
@@ -108,7 +143,36 @@ export const WORKS: Work[] = [
     source: { type: "piece" },
   },
   fromProject("binome", 7, 0),
+  {
+    slug: "gebaeude",
+    title: "Binôme als Linienmodell",
+    kind: "study",
+    year: "2026",
+    own: true,
+    thumb: "/gebaeude/still.jpg",
+    clip: "/gebaeude/wall.mp4",
+    // Square, 1200 × 1200, a column more than a portrait sheet.
+    // Lift 3, against Binôme at 0 and Ipe House at 1.5.
+    span: 6,
+    lift: 3,
+    source: { type: "piece" },
+  },
   fromProject("ipehouse", 7, 1.5),
+  {
+    slug: "baeume",
+    title: "Bäume im Wind",
+    kind: "study",
+    year: "2026",
+    own: true,
+    thumb: "/baeume/still.jpg",
+    clip: "/baeume/wall.mp4",
+    // Portrait, 1080 × 1920. Narrower than Ipe House above it,
+    // wider than the n-Studie print that follows. Lift 3.5, against
+    // Ipe House at 1.5 and n-Studie at 0.
+    span: 5,
+    lift: 3.5,
+    source: { type: "piece" },
+  },
   {
     slug: "n-studie",
     title: "n-Studie",

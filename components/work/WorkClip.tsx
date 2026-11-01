@@ -33,6 +33,7 @@ export default function WorkClip({
   poster,
   width,
   height,
+  focus,
   className,
 }: {
   src: string;
@@ -41,6 +42,8 @@ export default function WorkClip({
       same job lib/mediaSizes.ts does for a still */
   width: number;
   height: number;
+  /** object-position, when the wall's 4:5 crop should not stay centred */
+  focus?: string;
   className?: string;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
@@ -88,6 +91,7 @@ export default function WorkClip({
       poster={poster}
       width={width}
       height={height}
+      style={focus ? { objectPosition: focus } : undefined}
       muted
       loop
       playsInline
