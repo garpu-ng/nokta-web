@@ -71,6 +71,17 @@ const SIZES: Record<string, MediaSize> = {
   "/highway-score/still.jpg": { width: 1920, height: 892 },
   // Flock Score. Same three jobs as the still above, at 1920 × 1080.
   "/flock-score/still.jpg": { width: 1920, height: 1080 },
+  // Kohaku. A frame from the sound film, 1920 × 1080, the same proportion
+  // the plate and the wall card stand in.
+  "/kohaku/still.jpg": { width: 1920, height: 1080 },
+  // Binôme as a line model. The film's first frame, square.
+  "/gebaeude/still.jpg": { width: 1200, height: 1200 },
+  // Bäume im Wind. The first film's frame, portrait. The second film is the
+  // same proportion and is only a plate, so it has no entry of its own.
+  "/baeume/still.jpg": { width: 1080, height: 1920 },
+  // Ma, the Windows 11 sound scheme. Two stills, not a film.
+  "/ma-sounds/01.jpg": { width: 1600, height: 783 },
+  "/ma-sounds/02.jpg": { width: 1600, height: 900 },
   // Ma, the design bible. Plates are A4 renders from the PDF. The sheet is
   // every page, including the empty twentieth cell in the page colour.
   "/ma/cover.webp": { width: 1754, height: 2480 },

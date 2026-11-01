@@ -42,6 +42,14 @@
   outline-offset: 3px;
 }
 
+/* Two films of one study. Each plate already carries its own caption, so the
+   gap here is only the air between one film and the next. */
+.films {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.25rem, 5vw, 3.5rem);
+}
+
 /* ── Rendering intro — paragraph left, two facts right ─────────────── */
 .intro {
   display: grid;

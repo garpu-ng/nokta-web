@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { thumbAlt } from "@/lib/alt";
+import { displayTitle, thumbAlt } from "@/lib/alt";
 import { getMediaSize } from "@/lib/mediaSizes";
 import type { Work, WorkKind } from "@/lib/works";
 import WorkAnno, { workAnnotation, type WorkAnnotation } from "./WorkAnno";
@@ -32,6 +32,8 @@ export type WallItem = {
   alt: string;
   /** the moving version of the thumbnail, where the work is itself moving */
   clip?: string;
+  /** object-position, when the wall's 4:5 crop should not stay centred */
+  focus?: string;
   /** the thumbnail's intrinsic size, resolved server-side */
   width: number;
   height: number;
@@ -48,14 +50,16 @@ export type WallItem = {
     (server pages call this; the wall itself never reaches for a dictionary). */
 export function toWallItem(work: Work, t: (key: string) => string): WallItem {
   const { width, height } = getMediaSize(work.thumb);
+  const title = displayTitle(work, t);
   return {
     slug: work.slug,
     href: `/arbeiten/${work.slug}`,
-    title: work.title,
+    title,
     kind: work.kind,
     thumb: work.thumb,
-    alt: thumbAlt(work, t),
+    alt: thumbAlt({ title, kind: work.kind, slug: work.slug }, t),
     clip: work.clip,
+    focus: work.focus,
     width,
     height,
     span: work.span,
@@ -126,6 +130,7 @@ export default function WorkCard({
             poster={item.thumb}
             width={item.width}
             height={item.height}
+            focus={item.focus}
             className={styles.img}
           />
         ) : (
@@ -147,6 +152,7 @@ export default function WorkCard({
           decoding={lead ? "sync" : "async"}
           fetchPriority={lead ? "high" : undefined}
           className={styles.img}
+          style={item.focus ? { objectPosition: item.focus } : undefined}
         />
         )}
       </span>
