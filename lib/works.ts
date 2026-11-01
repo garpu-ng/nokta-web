@@ -96,39 +96,9 @@ export const WORKS: Work[] = [
     lift: 3.5,
     source: { type: "piece" },
   },
-  {
-    slug: "kohaku",
-    title: "Kohaku (琥珀)",
-    kind: "study",
-    year: "2026",
-    own: true,
-    thumb: "/kohaku/still.jpg",
-    clip: "/kohaku/wall.mp4",
-    // The name and the waveform sit on the left of a 16:9 frame.
-    focus: "left center",
-    // 16:9, the same wide frame as Highway Score. Lift sits between the
-    // report above (3.5) and Teahouse below (0).
-    span: 6,
-    lift: 1.5,
-    source: { type: "piece" },
-  },
   fromProject("teahouse", 6, 0),
-  fromProject("beatbuilding", 7, 2),
-  {
-    slug: "ma-sounds",
-    title: "Ma (間), Klänge für Windows 11",
-    kind: "study",
-    year: "2026",
-    own: true,
-    thumb: "/ma-sounds/01.jpg",
-    // The square sits on the right of a wide card.
-    focus: "right center",
-    // Wide still, 1600 × 783. No clip: the study is two pictures.
-    // Lift 0, against Beatbuilding at 2 and Lichtspiel at 2.5.
-    span: 6,
-    lift: 0,
-    source: { type: "piece" },
-  },
+  // Shares the row with Teahouse. Lift 2, so the two tops do not line up.
+  fromProject("beatbuilding", 6, 2),
   {
     slug: "lichtspiel",
     title: "Lichtspiel",
@@ -142,7 +112,8 @@ export const WORKS: Work[] = [
     lift: 2.5,
     source: { type: "piece" },
   },
-  fromProject("binome", 7, 0),
+  // Shares the row with Lichtspiel. Lift 0, against Lichtspiel at 2.5.
+  fromProject("binome", 6, 0),
   {
     slug: "gebaeude",
     title: "Binôme als Linienmodell",

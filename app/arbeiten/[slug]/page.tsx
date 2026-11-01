@@ -80,8 +80,6 @@ const PIECE_DESC: Record<string, string> = {
   lichtspiel: "work.lichtspiel.lead",
   "highway-score": "work.highway-score.lead",
   "flock-score": "work.flock-score.lead",
-  kohaku: "work.kohaku.lead",
-  "ma-sounds": "work.ma-sounds.lead",
   gebaeude: "work.gebaeude.lead",
   baeume: "work.baeume.lead",
   ma: "work.ma.lead",
@@ -251,7 +249,6 @@ const FILMS = {
   lichtspiel: { width: 1920, height: 912 },
   "highway-score": { width: 1920, height: 892 },
   "flock-score": { width: 1920, height: 1080 },
-  kohaku: { width: 1920, height: 1080 },
   gebaeude: { width: 1200, height: 1200 },
   baeume: { width: 1080, height: 1920 },
 } as const;
@@ -294,23 +291,10 @@ function linkWords(text: string): ReactNode {
   return nodes;
 }
 
-/** One plain link out to the study's first post. No embed. */
-const STUDY_POST: Record<string, string> = {
-  kohaku: "https://x.com/garpu_ng/status/2114723176664158540",
-  "ma-sounds": "https://x.com/garpu_ng/status/2115709170649620611",
-  gebaeude: "https://x.com/garpu_ng/status/2116578906648002657",
-  baeume: "https://x.com/garpu_ng/status/2116836601062117551",
-};
-
 function studyLead(slug: string, t: Translate) {
   return (
     <div className={styles.body}>
-      <p className={styles.lead}>
-        {linkWords(t(`work.${slug}.lead`))}{" "}
-        <a href={STUDY_POST[slug]} target="_blank" rel="noopener noreferrer">
-          {t(`work.${slug}.source`)}
-        </a>
-      </p>
+      <p className={styles.lead}>{linkWords(t(`work.${slug}.lead`))}</p>
     </div>
   );
 }
@@ -332,16 +316,11 @@ function filmPlateFor(slug: FilmSlug, base: string, suffix = "") {
 function filmPiece(slug: FilmSlug, t: Translate) {
   return (
     <>
-      <div className={styles.body}>
-        <p className={styles.lead}>{linkWords(t(`work.${slug}.lead`))}</p>
-      </div>
+      {studyLead(slug, t)}
       {filmPlateFor(slug, `/${slug}`)}
     </>
   );
 }
-
-/** Ma, the Windows sound scheme. Two stills, in reading order. */
-const MA_SOUND_IMAGES = ["/ma-sounds/01.jpg", "/ma-sounds/02.jpg"];
 
 /** Editorial, study: each piece brings its own section. */
 function pieceBody(work: Work, t: Translate) {
@@ -361,34 +340,16 @@ function pieceBody(work: Work, t: Translate) {
     case "lichtspiel":
     case "highway-score":
     case "flock-score":
-      return filmPiece(slug, t);
-    case "kohaku":
     case "gebaeude":
-      return (
-        <>
-          {studyLead(slug, t)}
-          {filmPlateFor(slug, `/${slug}`)}
-        </>
-      );
+      return filmPiece(slug, t);
     case "baeume":
       return (
         <>
-          {studyLead(slug, t)}
+          {studyLead("baeume", t)}
           <div className={styles.films}>
             {filmPlateFor("baeume", "/baeume")}
             {filmPlateFor("baeume", "/baeume/2", "2")}
           </div>
-        </>
-      );
-    case "ma-sounds":
-      return (
-        <>
-          {studyLead(slug, t)}
-          {imageStack(
-            { slug: "ma-sounds", images: MA_SOUND_IMAGES },
-            displayTitle(work, t),
-            t,
-          )}
         </>
       );
     case "ma":
