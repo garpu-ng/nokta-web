@@ -78,11 +78,11 @@
 
 .door {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr;
   grid-template-areas:
-    "mark arrow"
-    "title title"
-    "text text";
+    "mark"
+    "title"
+    "text";
   align-content: start;
   row-gap: 18px;
   height: 100%;
@@ -110,17 +110,6 @@
   width: 64px;
   height: 64px;
   margin-bottom: 20px;
-}
-
-.doorArrow {
-  grid-area: arrow;
-  font-size: 26px;
-  line-height: 1;
-  transition: transform 0.2s ease;
-}
-
-.door:hover .doorArrow {
-  transform: translate(3px, -3px);
 }
 
 .doorTitle {
@@ -192,11 +181,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .door,
-  .doorArrow {
+  .door {
     transition: none;
-  }
-  .door:hover .doorArrow {
-    transform: none;
   }
 }

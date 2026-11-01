@@ -54,7 +54,6 @@ export default function HomeHero({
           <div className={styles.actions}>
             <Link href="/kontakt" className={styles.primary} data-dodge="box">
               {ctaContact}
-              <span aria-hidden="true"> ↗</span>
             </Link>
             <Link href="/arbeiten" className={styles.secondary} data-dodge="box">
               {ctaWork}
@@ -65,7 +64,6 @@ export default function HomeHero({
               {audiences.map(({ href, label }) => (
                 <Link key={href} href={href} className={styles.audience} data-dodge="box">
                   {label}
-                  <span aria-hidden="true"> ↗</span>
                 </Link>
               ))}
             </nav>

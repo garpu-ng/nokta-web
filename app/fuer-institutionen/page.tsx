@@ -108,7 +108,6 @@ export default async function InstitutionenPage() {
               <span className={viz.itemText}>{t("inst.ref.text")}</span>
               <span className={styles.moreLink}>
                 {t("inst.ref.more")}
-                <span aria-hidden="true"> ↗</span>
               </span>
             </span>
           </Link>
@@ -152,7 +151,6 @@ export default async function InstitutionenPage() {
         </div>
         <Link href="/kontakt?kind=editorial" className={viz.ctaFill}>
           {t("inst.cta.button")}
-          <span aria-hidden="true"> ↗</span>
         </Link>
       </section>
     </main>

@@ -259,7 +259,6 @@ export default function InquiryForm({
       <div className={styles.submitRow}>
         <button type="submit" className={styles.submit} disabled={sending}>
           {sending ? copy.sending : copy.submit}
-          <span aria-hidden="true"> ↗</span>
         </button>
         <span className={styles.sla}>{copy.sla}</span>
       </div>

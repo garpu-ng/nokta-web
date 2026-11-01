@@ -28,7 +28,7 @@ const en: Record<string, string> = {
   "home.hero.ctaWork": "See the work",
   "home.hero.ctaContact": "Send an enquiry",
   // ── Kolonnade: homepage hero, intro, the three service rows ───────
-  "home.intro.body": "We work for architecture practices, private clients and public bodies. Some arrive with a finished plan, others with a sketch on a napkin. We can start from either.",
+  "home.intro.body": "We work for architecture practices, private clients and public bodies. Some arrive with a finished plan, others with a sketch on a napkin.",
   // What happens on the plate in section 01 — for screen readers, since a
   // canvas says nothing.
   "home.plate.oneline": "A point draws a building in one continuous line, then takes the line back. Each time a different building appears.",
@@ -58,8 +58,8 @@ const en: Record<string, string> = {
   "work.kind.manual": "Manual",
   "work.prev": "Previous work",
   "work.next": "Next work",
-  "work.nstudie.lead": "A typographic study of the lowercase n. Drawn, set in a grid, issued as a print.",
-  "work.lichtspiel.lead": "A light experiment with the studio's own mark: moving spotlights over water, the logotype standing between them. Built, rendered, scored.",
+  "work.nstudie.lead": "A typographic study of the lowercase n, issued as a print.",
+  "work.lichtspiel.lead": "A light experiment with the studio's own mark: moving spotlights over water, the logotype standing between them, with its own sound.",
   "work.lichtspiel.spec": "lichtspiel · 1920 × 912 px · 24 fps · 1:45 with sound",
   "work.lichtspiel.player": "Lichtspiel, film with sound",
   "work.lichtspiel.noVideo": "Your browser cannot play this video.",
@@ -99,7 +99,7 @@ const en: Record<string, string> = {
   "point.case.lead": "The final report of the Commission on Competition & Artificial Intelligence: 216 pages, designed from the first column of text to the print-ready file.",
   "point.case.stripAria": "Six pages from the final report, scrollable horizontally",
   "point.case.spread.cover.alt": "Cover of the final report with a blue-to-green gradient, the title “AI, Competition & Competitiveness” and the vertical year 2026.",
-  "point.case.spread.cover.caption": "cover · a gradient instead of an image",
+  "point.case.spread.cover.caption": "cover · a blue-to-green gradient",
   "point.case.spread.contents.alt": "Table of contents with large numbered chapter headings, dotted leaders and cyan wayfinding labels.",
   "point.case.spread.contents.caption": "contents · wayfinding through 216 pages",
   "point.case.spread.prinzipien.alt": "“Principles” page with numbered tenets in a clear typographic hierarchy.",
@@ -139,7 +139,7 @@ const en: Record<string, string> = {
   "studio.services.note": "four lines · one deliverable each",
   "studio.p1": "nokta is a design studio from NRW. There are three of us, and we draw buildings, books and prints: architectural visualisation, editorial and typesetting, print production and CAD plans.",
   "studio.p2": "We build our own tools and workflows: render setups, typesetting templates and prepress checks. At the start of a project there are several versions on the table.",
-  "studio.p3": "We started with architectural visualisation, and it is still the largest part of the work: photorealistic 3D renderings of interiors and exteriors. They show a project as it will look, before it is built.",
+  "studio.p3": "We started with architectural visualisation, and it is still the bulk of the work: photorealistic 3D renderings of interiors and exteriors. They show a project as it will look, before it is built.",
   "studio.team": "The team",
   "studio.film": "Film: from the dot by way of the line to the form",
   "studio.role.kaan": "Design · Concept",
@@ -409,7 +409,7 @@ const en: Record<string, string> = {
   "meta.inst.desc": "Design and typesetting of reports and publications for ministries, commissions, foundations and associations. From manuscript to print-ready file. Reference: final report of the AI Commission at the German Federal Ministry for Economic Affairs and Energy, 216 pages.",
   "inst.heading": "For institutions",
   "inst.claim": "Reports and publications, from manuscript to print-ready file.",
-  "inst.lead": "We design and typeset reports and publications for ministries, commissions, foundations and associations. Most recently the final report of the AI Commission at the German Federal Ministry for Economic Affairs and Energy, 216 pages. We set payment terms and the schedule in the quote for each project.",
+  "inst.lead": "We design and typeset reports and publications for ministries, commissions, foundations and associations. In 2026, the final report of the AI Commission at the German Federal Ministry for Economic Affairs and Energy, 216 pages. We set payment terms and the schedule in the quote for each project.",
   "inst.facts.label": "At a glance",
   "inst.fact.0": "Structure, page plan, grid and typography",
   "inst.fact.1": "Typesetting of text, tables, charts and recommendations",
@@ -528,7 +528,7 @@ const en: Record<string, string> = {
   "legal.binding": "The German version is legally binding.",
   // Easter egg at /punkt and the footer mail link.
   "meta.punkt.title": "nokta · Dot",
-  "punkt.back": "back",
+  "punkt.back": "Back to the homepage",
   "footer.link.email": "email",
 };
 

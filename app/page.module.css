@@ -82,8 +82,8 @@
 
 .door {
   display: grid;
-  grid-template-columns: 44px 76px 1fr 380px 44px;
-  grid-template-areas: "folio mark title text arrow";
+  grid-template-columns: 44px 76px 1fr 380px;
+  grid-template-areas: "folio mark title text";
   gap: 28px;
   align-items: center;
   padding: 40px 32px;
@@ -151,13 +151,6 @@
   font-size: 16px;
   line-height: 1.5;
   text-wrap: pretty;
-}
-
-.doorArrow {
-  grid-area: arrow;
-  font-size: 22px;
-  text-align: right;
-  opacity: 0.8;
 }
 
 /* The focus ring is paper here — the accent would sit on its own colour in
@@ -416,10 +409,10 @@
   }
 
   .door {
-    grid-template-columns: 40px 64px 1fr 40px;
+    grid-template-columns: 40px 64px 1fr;
     grid-template-areas:
-      "folio mark title arrow"
-      ".     mark text  .";
+      "folio mark title"
+      ".     mark text";
     gap: 10px 22px;
     padding-inline: 28px;
   }
@@ -458,8 +451,8 @@
   }
 
   /* The door becomes a small card: the mark down the left, the folio and the
-     title beside it, the description across the foot. The arrow goes — the
-     whole row is the link, and on a phone it was only ever decoration. */
+     title beside it, the description across the foot. The whole row is the
+     link. */
   .doors {
     padding-top: 36px;
   }
@@ -482,9 +475,6 @@
   }
   .doorText {
     margin-top: 10px;
-  }
-  .doorArrow {
-    display: none;
   }
 
   /* The set stops being a row: one plate under the next, each taking the whole

@@ -31,7 +31,7 @@ const de: Record<string, string> = {
   "home.hero.ctaWork": "Arbeiten ansehen",
   "home.hero.ctaContact": "Projekt anfragen",
   // ── Kolonnade: homepage hero, intro, the three service rows ───────
-  "home.intro.body": "Wir arbeiten für Architekturbüros, private Bauherren und öffentliche Auftraggeber. Manche kommen mit einem fertigen Plan, andere mit einer Skizze auf einer Serviette. Mit beidem können wir anfangen.",
+  "home.intro.body": "Wir arbeiten für Architekturbüros, private Bauherren und öffentliche Auftraggeber. Manche kommen mit einem fertigen Plan, andere mit einer Skizze auf einer Serviette.",
   // Was auf der Platte in Abschnitt 01 geschieht — für Screenreader, weil
   // ein Canvas nichts spricht.
   "home.plate.oneline": "Ein Punkt zeichnet ein Gebäude in einer Linie, ohne abzusetzen, und nimmt die Linie danach wieder zurück. Jedes Mal entsteht ein anderes Gebäude.",
@@ -63,8 +63,8 @@ const de: Record<string, string> = {
   "work.kind.manual": "Handbuch",
   "work.prev": "Vorherige Arbeit",
   "work.next": "Nächste Arbeit",
-  "work.nstudie.lead": "Eine typografische Studie über das kleine n. Gezeichnet, gerastert, als Druck aufgelegt.",
-  "work.lichtspiel.lead": "Ein Lichtversuch mit dem eigenen Zeichen: bewegte Scheinwerfer über Wasser, das Signet dazwischen. Gebaut, gerendert, vertont.",
+  "work.nstudie.lead": "Eine typografische Studie über das kleine n, als Druck aufgelegt.",
+  "work.lichtspiel.lead": "Ein Lichtversuch mit dem eigenen Zeichen: bewegte Scheinwerfer über Wasser, das Signet dazwischen, mit eigenem Ton.",
   // The spec line names what the film is, the way the art plate's names what
   // the print is.
   "work.lichtspiel.spec": "lichtspiel · 1920 × 912 px · 24 bilder/s · 1:45 mit ton",
@@ -107,7 +107,7 @@ const de: Record<string, string> = {
   "point.case.lead": "Der Abschlussbericht der Kommission Wettbewerb & Künstliche Intelligenz: 216 Seiten, gestaltet von der ersten Satzspalte bis zur druckreifen Datei.",
   "point.case.stripAria": "Sechs Seiten aus dem Abschlussbericht, horizontal scrollbar",
   "point.case.spread.cover.alt": "Titelseite des Abschlussberichts mit blau-grünem Farbverlauf, dem Titel „KI, Wettbewerb & Wettbewerbsfähigkeit“ und der vertikalen Jahreszahl 2026.",
-  "point.case.spread.cover.caption": "titel · farbverlauf statt bild",
+  "point.case.spread.cover.caption": "titel · farbverlauf von blau nach grün",
   "point.case.spread.contents.alt": "Inhaltsverzeichnis mit großen nummerierten Kapitelüberschriften, gepunkteten Führungslinien und cyanfarbenen Wegweiser-Labels.",
   "point.case.spread.contents.caption": "inhalt · wegweiser durch 216 seiten",
   "point.case.spread.prinzipien.alt": "Seite „Prinzipien“ mit nummerierten Grundsätzen in klarer typografischer Hierarchie.",
@@ -147,7 +147,7 @@ const de: Record<string, string> = {
   "studio.services.note": "vier zeilen · je ein ergebnis",
   "studio.p1": "nokta ist ein Designstudio aus NRW. Wir sind zu dritt und zeichnen Gebäude, Bücher und Drucke: Architekturvisualisierung, Editorial und Satz, Druckproduktion und CAD-Pläne.",
   "studio.p2": "Wir bauen unsere Werkzeuge und Abläufe selbst: Render-Setups, Satzvorlagen und Prüfschritte für die Druckvorstufe. Am Anfang eines Projekts liegen mehrere Varianten auf dem Tisch.",
-  "studio.p3": "Angefangen haben wir mit Architekturvisualisierung, und sie ist bis heute der größte Teil der Arbeit: fotorealistische 3D-Renderings von Innen- und Außenräumen. Sie zeigen ein Projekt so, wie es später aussieht, bevor gebaut wird.",
+  "studio.p3": "Angefangen haben wir mit Architekturvisualisierung, und sie macht bis heute den Großteil der Arbeit aus: fotorealistische 3D-Renderings von Innen- und Außenräumen. Sie zeigen ein Projekt so, wie es später aussieht, bevor gebaut wird.",
   "studio.team": "Das Team",
   "studio.film": "Film: Vom Punkt über die Linie zur Form",
   "studio.role.kaan": "Design · Konzept",
@@ -541,7 +541,7 @@ const de: Record<string, string> = {
   "legal.binding": "Maßgeblich ist die deutsche Fassung.",
   // Easter egg at /punkt and the footer mail link.
   "meta.punkt.title": "nokta · Punkt",
-  "punkt.back": "zurück",
+  "punkt.back": "Zurück zur Startseite",
   "footer.link.email": "E-Mail",
 };
 

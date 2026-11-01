@@ -201,7 +201,7 @@
 /* ── Prev / next — the wall's running order, one step at a time ───────
    Two plates, not two links: a caption kicker over a title set large enough to
    be the next thing you look at. Reaching for one sweeps a red rule under the
-   title and steps the arrow the way it points. */
+   title. */
 .nav {
   display: flex;
   align-items: start;
@@ -270,33 +270,9 @@
   transform: scaleX(1);
 }
 
-.navArrow {
-  flex: none;
-  opacity: 0.55;
-  transition:
-    transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
-    opacity 0.25s ease;
-}
-.navLink:hover .navArrow,
-.navLink:focus-visible .navArrow {
-  opacity: 1;
-  transform: translateX(-7px);
-}
-.navNext:hover .navArrow,
-.navNext:focus-visible .navArrow {
-  transform: translateX(7px);
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .navName::after,
-  .navArrow {
+  .navName::after {
     transition: none;
-  }
-  .navLink:hover .navArrow,
-  .navLink:focus-visible .navArrow,
-  .navNext:hover .navArrow,
-  .navNext:focus-visible .navArrow {
-    transform: none;
   }
 }
 

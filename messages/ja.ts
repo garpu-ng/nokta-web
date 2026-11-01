@@ -23,7 +23,7 @@ const ja: Record<string, string> = {
   "home.hero.ctaWork": "作品を見る",
   "home.hero.ctaContact": "問い合わせる",
   // ── Kolonnade: トップのヒーロー、導入、三つのサービス行 ─────────
-  "home.intro.body": "設計事務所、個人のお客様、公共の発注者のために働いています。完成した図面を持って来る人もいれば、ナプキンに描いたスケッチを持って来る人もいます。どちらからでも始められます。",
+  "home.intro.body": "設計事務所、個人のお客様、公共の発注者のために働いています。完成した図面を持って来る人もいれば、ナプキンに描いたスケッチを持って来る人もいます。",
   // 01 のプレートで起きていること — キャンバスは何も語らないので、
   // スクリーンリーダーのために。
   "home.plate.oneline": "一つの点が、線を切らずに建物を一筆で描き、そしてその線を連れて戻ります。建物は毎回あたらしく生まれます。",
@@ -53,8 +53,8 @@ const ja: Record<string, string> = {
   "work.kind.manual": "マニュアル",
   "work.prev": "前の作品",
   "work.next": "次の作品",
-  "work.nstudie.lead": "小文字の n をめぐるタイポグラフィのスタディ。描き、格子に並べ、プリントとして刷りました。",
-  "work.lichtspiel.lead": "自らのマークによる光の実験。水面を動くスポットライト、その間に立つロゴ。組み、レンダリングし、音をつけました。",
+  "work.nstudie.lead": "小文字の n をめぐるタイポグラフィのスタディをプリントとして刷りました。",
+  "work.lichtspiel.lead": "自らのマークによる光の実験。水面を動くスポットライト、その間に立つロゴ、自らの音とともに。",
   // The name is transliterated rather than translated — リヒトシュピール is how
   // "Lichtspiel" is read, not what it means. Same treatment n-Studie already
   // gets two lines down in the spec line it wears as "n スタディ": the work
@@ -529,7 +529,7 @@ const ja: Record<string, string> = {
 
   // /punkt のイースターエッグと、フッターのメールリンク。
   "meta.punkt.title": "nokta · 点",
-  "punkt.back": "戻る",
+  "punkt.back": "トップページに戻る",
   "footer.link.email": "メール",
 };
 

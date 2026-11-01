@@ -164,7 +164,6 @@ export default async function VisualisierungPage() {
         <p className={styles.ctaText}>{t("viz.cta.text")}</p>
         <Link href="/kontakt?kind=visualisierung" className={styles.ctaFill}>
           {t("viz.cta.button")}
-          <span aria-hidden="true"> ↗</span>
         </Link>
       </section>
     </main>
