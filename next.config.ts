@@ -34,6 +34,16 @@ const nextConfig: NextConfig = {
         destination: "/bautraeger",
         permanent: true,
       },
+      {
+        source: "/arbeiten/kohaku",
+        destination: "/arbeiten",
+        permanent: true,
+      },
+      {
+        source: "/arbeiten/ma-sounds",
+        destination: "/arbeiten",
+        permanent: true,
+      },
     ];
   },
   async headers() {
