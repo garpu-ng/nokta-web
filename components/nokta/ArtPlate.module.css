@@ -3,6 +3,7 @@
    the frame carries a spec line, the text sits beside it. */
 .plate {
   background: var(--paper);
+  --nk-focus: var(--ink); /* ring on paper */
   padding: clamp(3rem, 8svh, 5.5rem) clamp(20px, 5vw, 48px);
 }
 .inner {

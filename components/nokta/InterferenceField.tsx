@@ -3,7 +3,9 @@
 import { useEffect, useRef } from "react";
 import { makeKnockout, plateInk } from "./plate/knockout";
 import { makeMarkKnockout } from "./plate/markKnockout";
+import { makePictureScreen, type Room } from "./plate/pictureScreen";
 import { interference, mountPlate, type Plate } from "./plate/mountPlate";
+import { motionOff, prefersReducedMotion } from "@/lib/motion";
 import styles from "./InterferenceField.module.css";
 
 /* ── Interferenz ──────────────────────────────────────────────────────
@@ -43,10 +45,23 @@ import styles from "./InterferenceField.module.css";
    laid over it — see plate/knockout.ts, which every plate in the family now
    shares, and plate/markKnockout.ts for the wordmark. The homepage carries the
    mark: nokta is the dot, the plate is a field of dots, and the name is the
-   one shape that field leaves empty. */
+   one shape that field leaves empty.
+
+   A `picture` is the other way round: not a shape the field leaves empty but
+   one it draws. Inside it the dots take their size from a studio rendering
+   instead of from the waves (plate/pictureScreen.ts). The homepage uses it:
+   the studio's claim is making architecture visible, so its first screen
+   shows a building, printed in the plate's own dots. */
 
 /** Screen angle of the raster. A printer's answer, in radians. */
 const SCREEN_ANGLE = (15 * Math.PI) / 180;
+/** …except under a picture. A building is verticals and horizontals, and a
+    15-degree lattice samples both unevenly: dots run along its rows, which
+    lie close to horizontal, so every slab and column of the picture came out
+    visibly leaning. At 45 degrees the lattice is symmetric about both axes
+    and nothing leans; it is also the angle a printer gives a single black
+    screen when the subject is a photograph. */
+const SCREEN_ANGLE_PICTURE = (45 * Math.PI) / 180;
 /** Lattice pitch in CSS px — the distance between two dot centres — at the
     size the plate was drawn at, and the floor it may not go under.
 
@@ -81,6 +96,29 @@ const GAMMA = 1.7;
 const AGREEMENT = 0.95;
 
 export type FieldVariant = "single" | "meeting";
+
+/** With a picture the screen is finer: at 68 across a building is about thirty
+    dots wide on a laptop, too few to read as anything. 130 across, and a
+    phone floor of 6.5px, give it forty to fifty, which reads at a glance. */
+const ACROSS_PICTURE = 130;
+const PITCH_MIN_PICTURE = 6.5;
+/** Inside the picture the dots may grow until they touch: a halftone needs
+    the full range to carry a white wall, where the field never should. */
+const PICTURE_DOT = 0.52;
+/** The waves still run through the picture, but only this much: enough that
+    it is visibly the same live field, not enough to cost the building its
+    edges. */
+const PICTURE_LIVE = 0.15;
+/** How far the field is quieted around the picture (see HALO in
+    plate/pictureScreen.ts), as a fraction of its tone. */
+const PICTURE_QUIET = 0.85;
+/** Seconds the picture takes to settle out of the wave field once it has
+    loaded. */
+const SETTLE = 3.5;
+/** Clear space between the copy and the picture, and between the picture and
+    the plate's edge, in pitches. On top of TEXT_DODGE. */
+const PICTURE_GAP = 2;
+const PICTURE_EDGE = 1.5;
 
 /** A box, in the canvas's CSS pixels, the raster keeps clear of. */
 type Clear = { x0: number; y0: number; x1: number; y1: number };
@@ -119,11 +157,45 @@ function readClears(canvas: HTMLCanvasElement, pad: number): Clear[] {
   return out;
 }
 
+/** Where a picture may stand: beside the copy (right of its furthest line) or
+    above it (over its first line), whichever holds the larger picture of the
+    given aspect. Measured from the copy itself rather than from breakpoints,
+    so it cannot overlap the text at any width the copy wraps at. */
+function pictureRoom(
+  w: number,
+  h: number,
+  clears: Clear[],
+  pitch: number,
+  aspect: number,
+): Room | null {
+  const m = pitch * PICTURE_EDGE;
+  const gap = pitch * PICTURE_GAP;
+  const whole: Room = { x0: m, y0: m, x1: w - m, y1: h - m };
+  if (!clears.length || aspect <= 0) return whole;
+  let right = 0;
+  let top = h;
+  for (const c of clears) {
+    right = Math.max(right, c.x1);
+    top = Math.min(top, c.y0);
+  }
+  const side: Room = { x0: right + gap, y0: m, x1: w - m, y1: h - m };
+  const above: Room = { x0: m, y0: m, x1: w - m, y1: top - gap };
+  const size = (r: Room) => {
+    const rw = r.x1 - r.x0;
+    const rh = r.y1 - r.y0;
+    if (rw <= 0 || rh <= 0) return 0;
+    return Math.min(rw, rh * aspect);
+  };
+  const best = size(side) >= size(above) ? side : above;
+  return size(best) > 0 ? best : null;
+}
+
 export default function InterferenceField({
   variant = "single",
   motto,
   mark,
   markAside = false,
+  picture,
   dodgeText = false,
   className,
 }: {
@@ -138,6 +210,10 @@ export default function InterferenceField({
   /** Set the mark to the right (on a tall plate: at the top) instead of in
       the middle. */
   markAside?: boolean;
+  /** A small greyscale image to screen into the raster as a halftone, placed
+      in the room the copy leaves (see pictureRoom). The canvas stays
+      decoration: the caller provides the text alternative. */
+  picture?: string;
   /** Keep the raster clear of every [data-dodge] element inside the nearest
       [data-dodge-scope] ancestor: text laid over the plate in the page itself
       gets the same clearance the knocked-out mark gets. */
@@ -150,37 +226,105 @@ export default function InterferenceField({
     const canvas = ref.current;
     if (!canvas) return;
 
+    // mountPlate hands a still plate t = 0 and nothing else; the picture has
+    // to know so it can be drawn finished rather than not yet settled.
+    const still = prefersReducedMotion();
+
     return mountPlate(canvas, (ctx) => {
       const { paper, accent, face } = plateInk(canvas);
       // Held separately from `cut` only because it is the one of the two that
       // has to be waited for.
       const stamp = mark ? makeMarkKnockout(mark, paper, markAside) : null;
+      const screen = picture ? makePictureScreen(picture) : null;
       let clears: Clear[] = [];
       const cut = stamp ?? (motto ? makeKnockout(motto, face, paper, accent) : null);
       const meeting = variant === "meeting";
+      const across = screen ? ACROSS_PICTURE : ACROSS;
+      const pitchMin = screen ? PITCH_MIN_PICTURE : PITCH_MIN;
 
       let w = 0;
       let h = 0;
       let pitch = PITCH;
       let k = (2 * Math.PI) / (PITCH * WAVELENGTH);
-      const cos = Math.cos(SCREEN_ANGLE);
-      const sin = Math.sin(SCREEN_ANGLE);
+      const angle = screen ? SCREEN_ANGLE_PICTURE : SCREEN_ANGLE;
+      const cos = Math.cos(angle);
+      const sin = Math.sin(angle);
+
+      /* The dots that survive every clearing, with what the picture says about
+         each, laid out once per fit. The lattice, the knockouts and the
+         picture only change when the box does, so a frame is left with the
+         waves and nothing else. */
+      let n = 0;
+      let dx = new Float32Array(0);
+      let dy = new Float32Array(0);
+      /** Picture tone, or -1 where there is no picture. */
+      let dTone = new Float32Array(0);
+      let dOwn = new Float32Array(0);
+      let dNear = new Float32Array(0);
+      /** Plate-time the picture first stood ready, for the settle. */
+      let since = -1;
+      /** Once settled, always settled: switching motion back on must not make
+          the picture dissolve and settle a second time. */
+      let settled = false;
+
+      const lay = () => {
+        const reach = Math.ceil((Math.hypot(w, h) / 2 + pitch) / pitch);
+        const cap = (2 * reach + 1) ** 2;
+        if (dx.length < cap) {
+          dx = new Float32Array(cap);
+          dy = new Float32Array(cap);
+          dTone = new Float32Array(cap);
+          dOwn = new Float32Array(cap);
+          dNear = new Float32Array(cap);
+        }
+        const cx = w / 2;
+        const cy = h / 2;
+        const placed = screen?.placed() ?? false;
+        n = 0;
+        // The lattice is rotated, so it has to be generated over a disc wide
+        // enough to still cover the corners once turned.
+        for (let iy = -reach; iy <= reach; iy++) {
+          for (let ix = -reach; ix <= reach; ix++) {
+            const x = cx + ix * pitch * cos - iy * pitch * sin;
+            const y = cy + ix * pitch * sin + iy * pitch * cos;
+            if (x < -pitch || x > w + pitch) continue;
+            if (y < -pitch || y > h + pitch) continue;
+            // Whole dots, or none. Erasing the raster afterwards would slice
+            // every dot on the boundary in half and those halves would line
+            // up into a contour around the letters — see plate/knockout.ts.
+            if (cut?.dodged(x, y)) continue;
+            if (clears.length && clears.some((c) => x > c.x0 && x < c.x1 && y > c.y0 && y < c.y1)) continue;
+            dx[n] = x;
+            dy[n] = y;
+            dTone[n] = placed ? screen!.tone(x, y) : -1;
+            dOwn[n] = placed ? screen!.own(x, y) : 0;
+            dNear[n] = placed ? screen!.near(x, y) : 0;
+            n++;
+          }
+        }
+      };
 
       const plate: Plate = {
         // An image mask is decoded asynchronously; the raster re-fits itself
-        // around the mark once it is in. Type has no such wait.
-        ready: stamp?.ready,
+        // around the mark, or screens the picture, once it is in. Type has no
+        // such wait.
+        ready:
+          stamp || screen
+            ? Promise.all([stamp?.ready, screen?.ready])
+            : undefined,
 
         resize(width, height, dpr) {
           w = width;
           h = height;
-          pitch = Math.max(PITCH_MIN, Math.min(PITCH, width / ACROSS));
+          pitch = Math.max(pitchMin, Math.min(PITCH, width / across));
           k = (2 * Math.PI) / (pitch * WAVELENGTH);
           cut?.layout(width, height, dpr);
           // Re-read on every fit: a resize reflows the text, and the webfont
           // landing (which mountPlate also answers with a fit) changes the
           // line boxes.
           if (dodgeText) clears = readClears(canvas, pitch * TEXT_DODGE);
+          screen?.layout(pictureRoom(w, h, clears, pitch, screen.aspect()), pitch);
+          lay();
         },
 
         draw(t) {
@@ -206,43 +350,63 @@ export default function InterferenceField({
             by = cy + 0.34 * h * Math.sin(t * 0.09 + 1.3);
           }
 
+          // The picture settles out of the field from the moment it is in,
+          // and a still plate gets it finished.
+          // The header's motion switch counts as still too: with it off the
+          // loop never runs, and the one frame painted has to be the picture.
+          let s = 0;
+          if (screen?.placed()) {
+            if (settled || still || motionOff()) {
+              settled = true;
+              s = 1;
+            } else {
+              if (since < 0) since = t;
+              const u = Math.min(1, Math.max(0, (t - since) / SETTLE));
+              s = u * u * (3 - 2 * u);
+              if (u >= 1) settled = true;
+            }
+          }
+
           ctx.clearRect(0, 0, w, h);
 
           const path = new Path2D();
-          // Only the meeting variant strikes anything, so only it pays for a
-          // second path.
+          // Only the meeting variant strikes anything, and only a picture is
+          // inked heavier than the field, so only they pay for more paths.
           const struck = meeting ? new Path2D() : path;
+          const pic = s > 0 ? new Path2D() : path;
           const maxR = pitch * MAX_DOT;
-          // The lattice is rotated, so it has to be generated over a disc wide
-          // enough to still cover the corners once turned.
-          const reach = Math.ceil((Math.hypot(w, h) / 2 + pitch) / pitch);
+          const picR = pitch * PICTURE_DOT;
 
-          for (let iy = -reach; iy <= reach; iy++) {
-            for (let ix = -reach; ix <= reach; ix++) {
-              const x = cx + ix * pitch * cos - iy * pitch * sin;
-              const y = cy + ix * pitch * sin + iy * pitch * cos;
-              if (x < -pitch || x > w + pitch) continue;
-              if (y < -pitch || y > h + pitch) continue;
-              // Whole dots, or none. Erasing the raster afterwards would slice
-              // every dot on the boundary in half and those halves would line
-              // up into a contour around the letters — see plate/knockout.ts.
-              if (cut?.dodged(x, y)) continue;
-              if (clears.length && clears.some((c) => x > c.x0 && x < c.x1 && y > c.y0 && y < c.y1)) continue;
-
-              const amp = interference(x, y, ax, ay, bx, by, k, t);
-              const r = maxR * Math.pow(amp, GAMMA);
-              if (r <= 0.18) continue;
-
-              const into = amp > AGREEMENT ? struck : path;
-              into.moveTo(x + r, y);
-              into.arc(x, y, r, 0, Math.PI * 2);
+          for (let i = 0; i < n; i++) {
+            const x = dx[i];
+            const y = dy[i];
+            const amp = interference(x, y, ax, ay, bx, by, k, t);
+            let r = maxR * Math.pow(amp, GAMMA) * (1 - PICTURE_QUIET * s * dNear[i]);
+            const own = dOwn[i] * s;
+            if (own > 0) {
+              // Mixed in radius, not in tone: the field's radius follows its
+              // tone curve, the picture's follows area (the root), which is
+              // what makes a halftone's grey the grey of the original.
+              const tone = dTone[i] * (1 - PICTURE_LIVE + PICTURE_LIVE * amp);
+              r = r * (1 - own) + picR * Math.sqrt(Math.max(0, tone)) * own;
             }
+            if (r <= 0.18) continue;
+
+            const into = dOwn[i] > 0.5 && s > 0 ? pic : amp > AGREEMENT ? struck : path;
+            into.moveTo(x + r, y);
+            into.arc(x, y, r, 0, Math.PI * 2);
           }
 
           // The raster, in one fill.
           ctx.fillStyle = paper;
           ctx.globalAlpha = 0.82;
           ctx.fill(path);
+          // The picture in full ink, so it is the brightest thing on the plate;
+          // eased in with the settle so nothing jumps.
+          if (pic !== path) {
+            ctx.globalAlpha = 0.82 + 0.18 * s;
+            ctx.fill(pic);
+          }
           ctx.globalAlpha = 1;
 
           // Every place the two waves agree, in one more.
@@ -259,7 +423,7 @@ export default function InterferenceField({
 
       return plate;
     });
-  }, [variant, motto, mark, markAside, dodgeText]);
+  }, [variant, motto, mark, markAside, picture, dodgeText]);
 
   return (
     <canvas

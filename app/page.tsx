@@ -49,8 +49,7 @@ const SERVICES: { kind: DoorKind }[] = [
 ];
 
 /* The works the homepage shows, in the order they appear: the first takes the
-   lead — the whole measure of the sheet, and the one work introduced with a line
-   of its own — and the rest stand together in the row that closes the section.
+   lead — the whole measure of the sheet — and the rest stand together in the row that closes the section.
    Named rather than derived: the selection is an editorial decision — two
    renderings, one editorial commission, one more rendering — and a rule like
    "first of each kind" would silently re-cut it the next time a work is added to
@@ -123,9 +122,10 @@ function annotation(work: Work, t: Translate): string {
     answers an unknown key with the key itself (lib/i18n.ts), which is what makes
     this askable: a work's own description is preferred, because it states the
     work without repeating the client that the annotation already carries, and
-    the home page's own line stands in for works that are not projects. Only the
-    lead is introduced this way, and a set where one plate of three is explained and three are not
-    reads as an omission rather than a rhythm. */
+    the home page's own line stands in for works that are not projects. Every
+    featured work that has one carries it: in the set, a work left unexplained
+    beside an explained one reads as an omission, so the line is given wherever
+    it exists. */
 function description(work: Featured, t: Translate): string | undefined {
   for (const key of [`projects.desc.${work.slug}`, `home.work.${work.slug}.text`]) {
     const line = t(key);
@@ -223,6 +223,7 @@ export default async function HomePage() {
   const t = await getT();
   const [lead, ...set] = featured();
   const leadText = description(lead, t);
+  const setText = set.map((work) => description(work, t));
 
   return (
     <main>
@@ -238,26 +239,30 @@ export default async function HomePage() {
           { href: "/fuer-institutionen", label: t("home.hero.forInst") },
         ]}
         audiencesLabel={t("home.hero.forAria")}
+        pictureAlt={t("home.hero.picture")}
       />
 
       {/* ── 01 · Studio ────────────────────────────────────────────────
-          Who the studio works for, beside the plate: a single point draws a
-          whole building without lifting, holds it, and takes the line back.
-          The claim itself now stands in the hero above. */}
+          The studio's signature, first thing under the hero: a single point
+          draws a whole building without lifting, holds it, and takes the line
+          back, a different building each time. The plate leads at the larger
+          share of the sheet with its caption under it; who the studio works
+          for is set beside it as the plate's note. */}
       <section className={styles.section} aria-labelledby="nk-reg-01">
         <SectionRule id="nk-reg-01" label={t("home.reg.studio")} />
 
         <div className={styles.opening}>
-          <p className={styles.body}>{t("home.intro.body")}</p>
           <Reveal as="figure" className={styles.figure} variant="wipe">
             <div className={styles.fieldPlate}>
               <OneLine />
             </div>
-            {/* The canvas is decoration and hidden from assistive tech, so what
-                happens in it is also rendered as real text, off-screen rather
-                than display:none, so a screen reader still reaches it. */}
-            <figcaption className="nk-sr-only">{t("home.plate.oneline")}</figcaption>
+            {/* The canvas is aria-hidden, so this visible caption is the one
+                place a screen reader learns what the plate does. */}
+            <figcaption className={styles.plateCaption}>
+              {t("home.plate.oneline")}
+            </figcaption>
           </Reveal>
+          <p className={styles.body}>{t("home.intro.body")}</p>
         </div>
       </section>
 
@@ -300,10 +305,10 @@ export default async function HomePage() {
 
       {/* ── 03 · Ausgewählte Arbeiten ─────────────────────────────────
           A lead and a set, and the same caption under both: a plate, a hairline,
-          a title, a line of facts. The lead takes the measure of the sheet and is
-          the one work introduced with a sentence; the rest stand in a row
-          justified to that same measure, so they come out one height whatever
-          their proportions. Then the door to the rest. */}
+          a title, a line of facts. The lead takes the measure of the sheet; the
+          rest stand in a row justified to that same measure, so they come out
+          one height whatever their proportions. Each work that has a line of
+          its own carries it under its facts. Then the door to the rest. */}
       <section className={styles.section} aria-labelledby="nk-reg-03">
         <SectionRule id="nk-reg-03" label={t("home.selected")} />
 
@@ -343,6 +348,9 @@ export default async function HomePage() {
                   </span>
                 </span>
               </Link>
+              {/* Outside the link, so the link's name stays the title and
+                  the facts rather than a paragraph. */}
+              {setText[i] ? <p className={styles.setText}>{setText[i]}</p> : null}
             </Reveal>
           ))}
         </div>

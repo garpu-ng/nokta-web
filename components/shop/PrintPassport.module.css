@@ -50,7 +50,7 @@
   border: 1px solid var(--nk-hair);
   background: rgba(233, 224, 206, 0.04);
   color: var(--paper);
-  font-size: 0.62rem;
+  font-size: 0.8125rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   font-variant-numeric: tabular-nums;
@@ -97,16 +97,33 @@
 }
 
 .btn {
-  padding: 8px 16px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 16px;
   border: none;
-  background: var(--accent);
+  background: var(--accent-on-paper);
   color: var(--paper);
-  font-size: 0.72rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
+}
+
+.note {
+  margin: 0.9rem 0 0;
+  max-width: 52ch;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+@media (max-width: 899px) {
+  .btn {
+    min-height: 44px;
+  }
 }
 
 @media (max-width: 767px) {

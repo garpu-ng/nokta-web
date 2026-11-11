@@ -60,9 +60,9 @@
 
 .label {
   margin: 0 0 28px;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 400;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
   opacity: 0.6;
 }
@@ -201,7 +201,10 @@
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 12px;
+  /* At 13px "3D · VISUALISIERUNG" no longer shares a line with the name in a
+     257px card; it drops under it rather than overflowing. */
+  flex-wrap: wrap;
+  gap: 4px 12px;
   margin-top: 14px;
   padding-top: 12px;
   border-top: 1px solid var(--nk-hair);
@@ -211,16 +214,18 @@
   font-family: var(--headline-font);
   font-size: 26px;
   font-weight: 700;
+  /* Was the body's fixed 20px; stated now that the body leading is unitless. */
+  line-height: 1.15;
   letter-spacing: -0.01em;
 }
 
 .role {
   flex-shrink: 0;
-  font-size: 11px;
-  letter-spacing: 0.07em;
+  font-size: 13px;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   text-align: right;
-  opacity: 0.6;
+  opacity: 0.6; /* 5.54:1 on ink */
 }
 
 /* ── CTA ───────────────────────────────────────────────────────────── */
@@ -249,7 +254,9 @@
   flex-shrink: 0;
 }
 
-/* The page's one red field — small, but a field. */
+/* The page's one red field — small, but a field. Paper type on --accent is
+   4.43:1, under AA at this size (19px bold is not "large"); the field takes
+   --accent-on-paper, 4.85:1, same hue. */
 .ctaFill {
   padding: 13px 22px;
   font-size: 19px;
@@ -260,8 +267,8 @@
   text-decoration: none;
   white-space: nowrap;
   transition: border-color 0.18s ease, transform 0.18s ease;
-  border: 1px solid var(--accent);
-  background: var(--accent);
+  border: 1px solid var(--accent-on-paper);
+  background: var(--accent-on-paper);
   color: var(--paper);
 }
 .ctaFill:hover {

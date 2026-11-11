@@ -198,6 +198,30 @@ through it) + `lib/og.tsx` render the root card; work detail pages override
 
 ---
 
+## 4a. Audit pass of 2026-11-11
+
+Changes from the design and accessibility audit, merged together:
+
+- **Hero:** the second wordmark is gone; the dot field resolves into a halftone
+  of the Beat Building rendering (`components/nokta/plate/pictureScreen.ts`,
+  source `public/projects/beatbuilding/halftone.jpg`).
+- **Motion switch:** `components/MotionToggle.tsx` + `lib/motion.ts` set
+  `data-motion="off"` on `<html>` (localStorage `nk_motion`). Plates, the
+  one-line drawing, looping videos and CSS animation all listen to it.
+- **Inquiry form:** takes up to 5 attachments, 4 MiB total (pdf, dwg, dxf, jpg,
+  png), sent as multipart and attached to the mail. All validation lives in
+  `lib/inquiry.ts` and is shared by form and route. The limits are also named
+  in the copy of all four locales.
+- **Work pages** end in an inquiry CTA with the matching `?kind=`; print pages
+  say "Druck anfragen" while no `paymentLink` is set.
+- **Type and contrast:** body 16px, nothing under 13px, focus ring is
+  `--nk-focus` (paper on ink, ink on paper), control borders use
+  `--nk-control`, small red buttons use `--accent-on-paper`.
+- Still open: locale URLs + hreflang, Stripe links, and `og.services` exists
+  only in `messages/de.ts`.
+
+---
+
 ## 5. Open work
 
 **Blocking a real launch:**

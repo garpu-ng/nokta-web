@@ -1,0 +1,67 @@
+/* The motion switch, set the way the language switch beside it is set: the
+   same size, the same held-back paper, full strength only when it is the
+   thing in force (here: when motion is stopped). */
+
+.toggle {
+  appearance: none;
+  background: none;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  /* The target is taller than the type; the negative margin gives the height
+     back so the header row keeps the height its type gives it, the same trick
+     LanguageToggle plays with its padding. */
+  min-height: 32px;
+  margin-block: -8px;
+  padding: 0 6px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  color: inherit;
+  white-space: nowrap;
+  /* .62 on ink is 5.83:1, the language switch's figure. */
+  opacity: 0.62;
+  transition: opacity 0.18s ease;
+}
+.toggle:hover {
+  opacity: 0.85;
+}
+
+.off {
+  opacity: 1;
+  font-weight: 600;
+}
+
+/* Sized to the cap height so it sits on the line as a sign, not an icon. */
+.glyph {
+  display: block;
+  flex: 0 0 auto;
+  width: 9px;
+  height: 9px;
+}
+
+/* ── Tablet ──────────────────────────────────────────────────────────
+   Between 900 and 1199px the header still runs on one row, and the five page
+   names plus four languages leave it no room for another word. The glyph
+   alone stands here; the button keeps its full name through aria-label. */
+@media (min-width: 900px) and (max-width: 1199px) {
+  .word {
+    display: none;
+  }
+  .toggle {
+    padding-inline: 8px;
+  }
+}
+
+/* ── Phone ───────────────────────────────────────────────────────────
+   The header stacks and the row under the wordmark wraps, so the word is back,
+   and the target grows to the 44px a thumb needs. */
+@media (max-width: 899px) {
+  .toggle {
+    min-height: 44px;
+    margin-block: -14px;
+  }
+}

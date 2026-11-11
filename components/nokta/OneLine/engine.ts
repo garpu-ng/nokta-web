@@ -570,8 +570,8 @@ export function createOneLine(ctx: CanvasRenderingContext2D, opts: OneLineOption
       if (cum[i] < s0 || cum[i] > s1) continue;
       const hid = hiddenAt(cum[i] + (i + 1 < pts.length ? 1e-4 : -1e-4));
       const [X, Y] = toScreen(pts[i]);
-      ctx.globalAlpha = hid ? 0.35 : 0.88;
-      ctx.beginPath(); ctx.arc(X, Y, 1.5, 0, Math.PI * 2); ctx.fill();
+      ctx.globalAlpha = hid ? 0.4 : 0.92;
+      ctx.beginPath(); ctx.arc(X, Y, 1.8, 0, Math.PI * 2); ctx.fill();
     }
     ctx.globalAlpha = 1;
   }
@@ -684,10 +684,15 @@ export function createOneLine(ctx: CanvasRenderingContext2D, opts: OneLineOption
     }
 
     if (head > tail) {
-      strokePath(tail, head, 1.15, 0.84, 0.3);
+      // The pen grows with the plate. A fixed 1.15px hairline read as a
+      // drawing at the old 600px plate and as a scratch once the plate became
+      // the section's figure; 1.4 to 2.2px keeps the line a line at both ends,
+      // and the hidden runs stay legible as hidden rather than as missing.
+      const pen = Math.max(1.4, Math.min(2.2, Math.min(W, H) / 330));
+      strokePath(tail, head, pen, 0.92, 0.4);
       // fresh ink: the last stretch behind the pen is brighter
       const fresh = Math.min(head - tail, 150 / fit.scale);
-      if (phase === "draw") strokePath(head - fresh, head, 1.5, 1, 0.5);
+      if (phase === "draw") strokePath(head - fresh, head, pen * 1.3, 1, 0.55);
       drawVertices(tail, head);
     }
     drawHead(headXY[0], headXY[1], pulse, phase === "draw" && head > 0 && head < L && hiddenAt(head));
@@ -705,6 +710,15 @@ export function createOneLine(ctx: CanvasRenderingContext2D, opts: OneLineOption
         advance(dt);
       }
       render(t);
+    },
+    /** Jump to the finished drawing and hold it. Used when the plate mounts
+        with the site's motion switch off: the frame it then shows is the
+        whole building rather than the bare point a t = 0 draw would leave,
+        and switching motion back on continues from there (the hold, then
+        the retraction) instead of wiping the drawing to start over. */
+    hold() {
+      phase = "hold";
+      phaseT = 0;
     },
     destroy() {},
   };

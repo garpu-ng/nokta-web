@@ -1,7 +1,12 @@
 /* The first screen: the dot plate in a hairline frame on the sheet's gutter,
-   the text block over its left half. The canvas fills the box; the copy sits
-   above it. Nothing darkens the plate: the dots themselves keep clear of the
-   type. */
+   the text block over its left half, the halftone picture in the room to its
+   right. The canvas fills the box; the copy sits above it. Nothing darkens
+   the plate: the dots themselves keep clear of the type.
+
+   The copy is in the box's flow, and the box's ratio is a minimum height
+   rather than a fixed one: where the copy needs more room (a long locale, a
+   narrow tablet, the 44px touch links) the box grows instead of clipping it
+   or pushing it into the picture. */
 
 .hero {
   padding: 24px var(--nk-gutter) 0;
@@ -9,9 +14,15 @@
 
 .box {
   position: relative;
-  aspect-ratio: 16 / 8.2;
-  max-height: calc(100svh - 150px);
-  min-height: 480px;
+  display: flex;
+  align-items: center;
+  /* The old 16:8.2 box, capped at the viewport, never under 480px; written
+     as a min-height so content can still grow it. 100vw less the two
+     gutters is the box's own width. */
+  min-height: max(
+    480px,
+    min(calc((100vw - 2 * var(--nk-gutter)) * 0.5125), calc(100svh - 150px))
+  );
   width: 100%;
   overflow: hidden;
   background: var(--nk-frame);
@@ -24,10 +35,9 @@
 }
 
 .copy {
-  position: absolute;
-  top: 50%;
-  left: clamp(28px, 4.5vw, 64px);
-  transform: translateY(-50%);
+  position: relative;
+  margin-left: clamp(28px, 4.5vw, 64px);
+  padding-block: 40px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -38,7 +48,7 @@
 
 .eyebrow {
   margin: 0;
-  font-size: 12px;
+  font-size: 13px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -118,6 +128,11 @@
 }
 
 .audience {
+  /* A text link still needs a 24px target; the box grows round the 13px
+     line rather than the type growing. */
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
   font-size: 13px;
   letter-spacing: 0.04em;
   color: var(--paper);
@@ -139,30 +154,40 @@
 /* ── Tablet ────────────────────────────────────────────────────────── */
 @media (max-width: 1199px) {
   .box {
-    aspect-ratio: 16 / 10;
-    max-height: none;
+    /* 16:10, no viewport cap. */
+    min-height: max(480px, calc((100vw - 2 * var(--nk-gutter)) * 0.625));
   }
   .copy {
     width: 54%;
   }
 }
 
-/* ── Phone: portrait plate, mark at the top, text at the foot ─────── */
+/* ── Touch: the audience links get a finger-sized target ───────────── */
+@media (max-width: 899px) {
+  .audience {
+    min-height: 44px;
+  }
+  .audiences {
+    gap: 0 24px;
+  }
+}
+
+/* ── Phone: picture at the top, text below it ─────────────────────── */
 @media (max-width: 767px) {
   .hero {
     padding-top: 16px;
   }
   .box {
-    aspect-ratio: 4 / 6.4;
     min-height: 0;
+    align-items: stretch;
   }
   .copy {
-    top: auto;
-    bottom: 28px;
-    left: 22px;
-    right: 22px;
-    width: auto;
-    transform: none;
+    /* The padding is the picture's room: the plate places the picture over
+       the first line of copy (InterferenceField's pictureRoom), so this is
+       what gives it its height and keeps it clear of the eyebrow. */
+    padding: clamp(240px, 80vw, 440px) 22px 28px;
+    margin-left: 0;
+    width: 100%;
     gap: 12px;
   }
   .actions {

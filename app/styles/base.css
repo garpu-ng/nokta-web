@@ -48,13 +48,14 @@ body {
      retired, inheriting this IS the annotation voice — no rule has to name a
      face to get it. */
   font-family: var(--wa-font);
-  /* Carried over from the old Webflow body reset (mir.css set
-     `body{font-size:14px;line-height:20px}`). It once anchored the em-based
-     archviz label sizes; those rules are long retired, but the reset is kept
-     as the site-wide baseline so any remaining
-     em-based sizing does not silently scale up to the 16px default. */
-  font-size: 14px;
-  line-height: 20px;
+  /* 16px with a unitless leading: running copy is never set under 16px, and a
+     unitless line-height follows whatever size an element sets for itself
+     (the old fixed 20px crushed any display type that forgot its own
+     leading). The Webflow-era 14px / 20px is gone; every rule that relied on
+     inheriting it now states its own size. Nothing on the site is set under
+     13px. */
+  font-size: 16px;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   /* sticky footer: page content grows, footer sits at the bottom */
   display: flex;
@@ -82,12 +83,19 @@ textarea {
   font-family: inherit;
 }
 
-/* One focus ring for the whole site, in the studio's red, held two pixels off
-   the element so it reads on ink and on the paper register alike. Set on
-   :focus-visible only, so a mouse click never draws it — but every keyboard
-   tab does, on links, buttons, chips and fields without exception. */
+/* One focus ring for the whole site, held two pixels off the element. It
+   takes the colour of the TYPE of the ground it stands on, via --nk-focus:
+   paper on ink (13.3:1) and on the red fields (4.43:1), ink on the paper
+   surfaces (13.3:1), which set --nk-focus: var(--ink) themselves (the
+   Leistungen register, the case study, the art plate, the sticky card). The
+   red it used to be was exactly 3.00:1 on ink and vanished on a red field.
+   Set on :focus-visible only, so a mouse click never draws it — but every
+   keyboard tab does, on links, buttons, chips and fields without exception. */
+:root {
+  --nk-focus: var(--paper);
+}
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--nk-focus);
   outline-offset: 2px;
 }
 
@@ -104,14 +112,18 @@ textarea {
   padding: 12px 18px;
   background: var(--paper);
   color: var(--ink);
-  font-size: 12px;
-  letter-spacing: 0.08em;
+  font-size: 13px;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   text-decoration: none;
   transition: transform 0.16s ease;
 }
+/* The chip is paper, so the ring is ink and drawn inside it: outside, it
+   would be paper on paper against the masthead's own edge. */
 .nk-skip:focus-visible {
   transform: translateY(0);
+  outline-color: var(--ink);
+  outline-offset: -4px;
 }
 @media (prefers-reduced-motion: reduce) {
   .nk-skip {
@@ -141,8 +153,11 @@ textarea {
    and the lowercase that make this a note in the margin rather than a line of
    copy, and all three are unchanged. */
 .nk-caption {
-  font-size: 0.7rem;
-  letter-spacing: 0.11em;
+  /* 13px, the floor for every annotation on the site (it was 0.7rem =
+     11.2px); the tracking gives back a little so the lines stay as short as
+     they were. */
+  font-size: 13px;
+  letter-spacing: 0.07em;
   text-transform: lowercase;
   color: currentColor;
   opacity: 0.7;
@@ -185,7 +200,9 @@ textarea {
   min-height: 46px;
   padding: 14px 20px;
   background: none;
-  border: 1px solid var(--nk-hair);
+  /* A control's boundary is non-text contrast (WCAG 1.4.11, 3:1): the hairline
+     was 1.84:1 on ink. --nk-control is paper at .5 = 4.25:1 on ink. */
+  border: 1px solid var(--nk-control);
   color: var(--paper);
   font-family: var(--headline-font);
   font-size: 15px;
@@ -211,20 +228,22 @@ textarea {
   color: var(--ink);
 }
 
-/* The ring belongs to the chip, never to the pixel-sized radio inside it. */
+/* The ring belongs to the chip, never to the pixel-sized radio inside it. It
+   stands 2px outside the chip, on the page's ink, so it is paper even for the
+   chosen (paper-filled) chip: 13.3:1 against the ground it is drawn on. */
 .nk-chip:focus-visible,
 .nk-chip:has(input:focus-visible) {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--paper);
   outline-offset: 2px;
 }
 
 /* A phone takes the row on two lines; it only needs to tighten, not to
-   scroll. */
+   scroll. 13px is the floor — the chip was 11px here. */
 @media (max-width: 767px) {
   .nk-chip {
     padding: 12px 14px;
-    font-size: 11px;
-    letter-spacing: 0.05em;
+    font-size: 13px;
+    letter-spacing: 0;
   }
 }
 
@@ -345,4 +364,30 @@ body:has(.nk-roller):has(.nk-flat) .nk-page-fade {
   body:has(.nk-roller) .nk-page-fade {
     animation: none;
   }
+}
+
+/* ── Motion switched off ─────────────────────────────────────────────
+   The header's switch (components/MotionToggle, lib/motion.ts) sets
+   data-motion="off" on <html>; the canvases and the looping clips stop in
+   their own code, and this stops everything CSS animates (WCAG 2.2.2).
+
+   Not `animation-play-state: paused`. That would freeze every one-shot
+   entrance on its first keyframe, which for the page fade and the project
+   titles is opacity 0: the page would vanish. Every animation is instead
+   run to its end in a millisecond, once, so each piece lands on the state it
+   was drawn to rest in: an entrance is simply there, the marks on the doors
+   stand finished (the same state the reduced-motion rules give them), the
+   moiré rules hold still, a hover sweep never shows. Switched back on, the
+   overrides lift and the loops pick up again on their own timeline. */
+html[data-motion="off"] {
+  scroll-behavior: auto;
+}
+html[data-motion="off"] *,
+html[data-motion="off"] *::before,
+html[data-motion="off"] *::after {
+  animation-duration: 1ms !important;
+  animation-delay: 0s !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0s !important;
+  transition-delay: 0s !important;
 }

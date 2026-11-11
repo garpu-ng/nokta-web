@@ -6,9 +6,11 @@ import "./globals.css";
 import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
 import LanguageToggle from "@/components/LanguageToggle";
+import MotionToggle from "@/components/MotionToggle";
 import NavLinks from "@/components/NavLinks";
 import Wordmark from "@/components/Wordmark";
 import { getLocale, getT } from "@/lib/i18n";
+import { MOTION_INIT_SCRIPT } from "@/lib/motion";
 import { studioJsonLd } from "@/lib/jsonld";
 import { socialMetadata } from "@/lib/socialMeta";
 import styles from "./layout.module.css";
@@ -75,15 +77,25 @@ export default async function RootLayout({
     // data-scroll-behavior="smooth" → Next disables smooth scrolling *during
     // route transitions* (so navigation lands cleanly at the top) while keeping
     // CSS smooth-scroll for in-page scrolling.
+    // suppressHydrationWarning on <html>: the inline script below may add
+    // data-motion="off" before React hydrates, which the server cannot know.
+    // It covers this element's own attributes only, not its children.
     <html
       lang={locale}
       data-scroll-behavior="smooth"
       className={`${dmSans.variable} ${syne.variable}`}
+      suppressHydrationWarning
     >
       {/* suppressHydrationWarning: browser extensions (e.g. asbplayer) inject
           attributes on <body> before React hydrates; this scopes the warning
           to <body> only and doesn't hide real mismatches elsewhere. */}
       <body suppressHydrationWarning>
+        {/* Restores the reader's motion switch (components/MotionToggle)
+            before anything paints, so a stopped page never starts moving for
+            a frame. Inline and first in <body>: a parser-blocking script this
+            small costs nothing, and no next/script strategy runs before the
+            first paint. Static string, no user data in it. */}
+        <script dangerouslySetInnerHTML={{ __html: MOTION_INIT_SCRIPT }} />
         {/* The sheet. Masthead, page and colophon are laid on one centred
             column capped at --content-max; past that the ink runs on to the
             edges of the screen, so a wide monitor shows a sheet on a ground
@@ -130,7 +142,12 @@ export default async function RootLayout({
                     { href: "/kontakt", label: t("nav.contact") },
                   ]}
                 />
-                <LanguageToggle current={locale} label={t("aria.language")} />
+                {/* The two switches that are about the reader, not the site,
+                    kept together so they wrap as one if the row runs out. */}
+                <div className={styles.tools}>
+                  <LanguageToggle current={locale} label={t("aria.language")} />
+                  <MotionToggle label={t("motion.label")} name={t("aria.motion")} />
+                </div>
               </div>
             </div>
           </header>

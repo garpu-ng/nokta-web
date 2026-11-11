@@ -43,6 +43,7 @@ export default async function KontaktPage({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const t = await getT();
+  const locale = await getLocale();
   // ?kind= preselects a chip (the home page's CAD door lands here with "cad").
   // Anything else leaves the form on its first kind.
   const requested = (await searchParams).kind;
@@ -63,6 +64,7 @@ export default async function KontaktPage({
       <div className={styles.body}>
         <InquiryForm
           initialKind={initialKind}
+          locale={locale}
           copy={{
             step1: t("kontakt.form.step1"),
             step2: t("kontakt.form.step2"),
@@ -75,7 +77,24 @@ export default async function KontaktPage({
             })),
             name: t("kontakt.form.name"),
             email: t("kontakt.form.email"),
+            messageLabel: t("kontakt.form.messageLabel"),
             message: t("kontakt.form.message"),
+            files: {
+              label: t("kontakt.form.files.label"),
+              choose: t("kontakt.form.files.choose"),
+              hint: t("kontakt.form.files.hint"),
+              remove: t("kontakt.form.files.remove"),
+              total: t("kontakt.form.files.total"),
+              refused: t("kontakt.form.files.refused"),
+              errorType: t("kontakt.form.files.error.type"),
+              errorEmpty: t("kontakt.form.files.error.empty"),
+              errorCount: t("kontakt.form.files.error.count"),
+              errorSize: t("kontakt.form.files.error.size"),
+              errorServer: t("kontakt.form.files.error.server"),
+            },
+            privacy: t("kontakt.form.privacy"),
+            privacyLink: t("kontakt.form.privacy.link"),
+            privacyAfter: t("kontakt.form.privacy.after"),
             submit: t("kontakt.form.submit"),
             sending: t("kontakt.form.sending"),
             sla: t("kontakt.form.sla"),

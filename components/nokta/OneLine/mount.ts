@@ -3,6 +3,7 @@
  * ResizeObserver, pause when off-screen or hidden, reduced-motion → still frame,
  * pointer parallax. Mirrors the site's existing canvas-plate lifecycle.
  */
+import { motionOff, prefersReducedMotion, watchMotion } from "@/lib/motion";
 import { createOneLine, type Ink } from "./engine";
 
 export function plateInk(el: HTMLElement): Ink {
@@ -18,7 +19,11 @@ export function mountOneLine(canvas: HTMLCanvasElement, seed?: number): () => vo
   const ctx = canvas.getContext("2d");
   if (!ctx) return () => {};
 
-  const reduced = typeof window.matchMedia === "function" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reduced = prefersReducedMotion();
+  // The header's motion switch (lib/motion.ts). Unlike `reduced` it can change
+  // while the plate lives: off stops the loop on the frame it reached, on
+  // resumes from that frame.
+  let held = motionOff();
   const fine = typeof window.matchMedia === "function" && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
   let pointer: { x: number; y: number } | null = null;
@@ -37,6 +42,8 @@ export function mountOneLine(canvas: HTMLCanvasElement, seed?: number): () => vo
   }
 
   const plate = createOneLine(ctx, { ink: plateInk(canvas), seed, still: reduced, pointer: () => pointer });
+  // Mounted with motion off: show the finished building, not the bare point.
+  if (held) plate.hold();
 
   let cssW = 0, cssH = 0, dpr = 0;
   let running = false, raf = 0, t0 = performance.now(), paused = 0;
@@ -56,7 +63,7 @@ export function mountOneLine(canvas: HTMLCanvasElement, seed?: number): () => vo
     }
   };
   const frame = (now: number) => { plate.draw((now - t0) / 1000); raf = requestAnimationFrame(frame); };
-  const start = () => { if (running || reduced) return; running = true; t0 = performance.now() - paused * 1000; raf = requestAnimationFrame(frame); };
+  const start = () => { if (running || reduced || held) return; running = true; t0 = performance.now() - paused * 1000; raf = requestAnimationFrame(frame); };
   const stop = () => { if (!running) return; running = false; paused = (performance.now() - t0) / 1000; cancelAnimationFrame(raf); };
 
   layout();
@@ -74,9 +81,14 @@ export function mountOneLine(canvas: HTMLCanvasElement, seed?: number): () => vo
     else stop();
   };
   document.addEventListener("visibilitychange", onVis);
+  const unwatch = watchMotion((off) => {
+    held = off;
+    if (off) stop();
+    else onVis();
+  });
 
   return () => {
-    stop(); ro.disconnect(); io.disconnect();
+    stop(); unwatch(); ro.disconnect(); io.disconnect();
     document.removeEventListener("visibilitychange", onVis);
     window.removeEventListener("pointermove", onMove);
     document.documentElement.removeEventListener("pointerleave", onLeave);

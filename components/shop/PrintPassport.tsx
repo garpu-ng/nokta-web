@@ -78,16 +78,17 @@ export default function PrintPassport({ print, t }: { print: Print; t: Translate
                 {t("line.buy")} · {print.price} €
               </a>
             ) : (
-              // No link pasted yet: fall back to the /kontakt inquiry route.
+              // No link pasted yet: an honest inquiry, not an order, on /kontakt.
               // The passport above still states the price.
               <>
                 <span className={styles.price}>{print.price} €</span>
-                <Link href="/kontakt" className={styles.btn}>
-                  {t("line.order")}
+                <Link href="/kontakt?kind=druck" className={styles.btn}>
+                  {t("line.inquire")}
                 </Link>
               </>
             )}
           </div>
+          {!print.paymentLink && <p className={styles.note}>{t("line.orderNote")}</p>}
         </div>
       </div>
     </div>

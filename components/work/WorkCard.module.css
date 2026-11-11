@@ -80,7 +80,8 @@
 }
 
 .card:focus-visible {
-  outline: 2px solid var(--accent);
+  /* Paper on the ink wall (the accent was 3.00:1). */
+  outline: 2px solid var(--paper);
   outline-offset: 5px;
 }
 
