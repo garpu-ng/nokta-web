@@ -24,7 +24,7 @@ const en: Record<string, string> = {
   "home.wall.aria": "All work",
   "home.hero.eyebrow": "Design studio from NRW",
   "home.hero.title": "We make architecture visible.",
-  "home.hero.sub": "3D visualisation, editorial and print for architecture practices, private clients and public bodies.",
+  "home.hero.sub": "3D visualisation, editorial and print for architecture practices, developers, private clients and public bodies.",
   "home.hero.ctaWork": "See the work",
   "home.hero.ctaContact": "Send an enquiry",
   // ── Kolonnade: homepage hero, intro, the three service rows ───────
@@ -416,7 +416,7 @@ const en: Record<string, string> = {
   "bt.need.3": "Photos of the site and the neighbouring buildings",
   "bt.need.4": "Your date, for example the sales launch",
   "bt.cta.text": "You have a project in planning or on sale?",
-  "bt.cta.note": "Send us the plans through the form or to hallo@nokta-studio.de. You will get a written quote.",
+  "bt.cta.note": "Send us the plans through the form or to hallo@nokta-studio.de. You will get a written quote. Would you like to see how we work first? Name a project and we will make a sample image of it.",
   "bt.cta.button": "Request views",
 
   "meta.inst.title": "Design and typesetting of reports · nokta",
