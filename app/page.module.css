@@ -14,23 +14,24 @@
   padding-top: 104px;
 }
 
-/* ── 01 · Who we work for, beside the plate ──────────────────────────
-   The claim moved up into the hero, so this row pairs the supporting text
-   with the one-line plate: text left, plate right, one row instead of a
-   paragraph and then a full-width band. */
+/* ── 01 · The plate, and who we work for beside it ───────────────────
+   The one-line plate is the studio's signature, so it leads the section: the
+   larger share of the row on a desktop sheet, the whole measure below that.
+   Who the studio works for is set beside it as the plate's note, standing on
+   the same foot line as the caption, so the two read as one figure and its
+   margin rather than as a paragraph with a picture next to it. */
 
 .opening {
   display: grid;
-  grid-template-columns: 1fr 1.25fr;
-  gap: 72px;
-  align-items: center;
+  grid-template-columns: minmax(0, 2.3fr) minmax(0, 1fr);
+  gap: 64px;
+  align-items: end;
   padding: 56px var(--nk-gutter) 0;
 }
 
 .opening > * {
   min-width: 0;
 }
-
 
 .body {
   margin: 0;
@@ -41,17 +42,16 @@
   text-wrap: pretty;
 }
 
-/* The plate, in the right-hand column. */
 .figure {
   margin: 0;
 }
 
-/* The window the raster is printed in. Proportion rather than a fixed height,
-   so the plate keeps its format at every width — and a squarer one on a phone,
-   where a 2.5:1 band would leave the line no room to be set at any size worth
-   reading. The ground is the site's empty-frame ink, so the plate is a surface
-   even before the canvas has drawn a frame — and stays one if the script never
-   runs at all. */
+/* The window the line is drawn in. Proportion rather than a fixed height, so
+   the plate keeps its format at every width, and a squarer one on a phone,
+   where a wide band would leave the building no room to be drawn at a size
+   worth reading. The ground is the site's empty-frame ink, so the plate is a
+   surface even before the canvas has drawn a frame, and stays one if the
+   script never runs at all. */
 .fieldPlate {
   aspect-ratio: 16 / 10;
   background: var(--nk-frame);
@@ -59,8 +59,34 @@
   overflow: hidden;
 }
 
-/* (The plate's line is kept for screen readers only — it wears the global
-   .nk-sr-only, declared once in app/styles/base.css.) */
+/* What the plate does, said once, under it: the caption a plate on this site
+   would carry, led by the red point the line is drawn from. Sentence case at
+   14px, because it is two sentences, not a spec line. Visible, and the only
+   text alternative: the canvas itself is aria-hidden. */
+.plateCaption {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  max-width: 64ch;
+  margin-top: 18px;
+  font-size: 14px;
+  line-height: 1.55;
+  letter-spacing: 0.01em;
+  /* Held back by colour, not opacity, so the point before it stays the full
+     red. Paper at 75% on ink is about 7.8:1. */
+  color: color-mix(in srgb, var(--paper) 75%, transparent);
+  text-wrap: pretty;
+}
+.plateCaption::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  /* Baseline-aligned, so it stands on the first line's baseline and reaches
+     its x-height. */
+  background: var(--accent);
+}
 
 /* ── 02 · The three doors ──────────────────────────────────────────
    Each row is a solid field in its material's motto colour and a door into
@@ -118,7 +144,7 @@
 .doorFolio {
   grid-area: folio;
   align-self: start;
-  font-size: 11px;
+  font-size: 13px; /* the site's text floor; it was 11px */
   letter-spacing: 0.08em;
   /* Three folios in a column, and the mono that used to keep them the same
      width is gone. Tabular figures are what that width actually was. */
@@ -171,9 +197,10 @@
    spreads left some 400px of ink standing empty beside them.
 
    So it is one grammar now: a plate, a hairline, a title, a line of facts.
-   The lead takes the whole measure of the sheet and is the one work introduced
-   with a sentence; the rest stand in a row justified to that same measure. What
-   varies between them is scale, not vocabulary. */
+   The lead takes the whole measure of the sheet; the rest stand in a row
+   justified to that same measure, and every work with a sentence of its own
+   carries it under its facts. What varies between them is scale, not
+   vocabulary. */
 
 /* ── The plate ───────────────────────────────────────────────────────
    A window cut to the work's own proportion: it fills whatever box it is given
@@ -348,21 +375,36 @@
 .anno {
   display: block;
   margin: 0;
-  font-size: 11px;
+  /* 13px, the site's floor for an annotation (it was 11px). */
+  font-size: 13px;
   line-height: 1.5;
   letter-spacing: 0.07em;
   text-transform: uppercase;
 }
 
 /* Under the lead this is the one red mark in the section, and it takes the tint
-   cut for type: --accent itself is 3.00:1 on ink, which an 11px line cannot be
+   cut for type: --accent itself is 3.00:1 on ink, which a 13px line cannot be
    read at. In the set the same line is simply held back. */
 .leadAnno {
   color: var(--accent-on-ink);
 }
 .setAnno {
   margin-top: 10px;
-  opacity: 0.6;
+  /* .6 put 13px at 5.6:1; .7 gives the line that carries the client a
+     little more weight without competing with the title. */
+  opacity: 0.7;
+}
+
+/* The work's one line, under its facts: what the lead's note is, at the
+   row's size. Outside the link (app/page.tsx), so it is read as text, not
+   as part of the link's name. */
+.setText {
+  max-width: 52ch;
+  margin: 10px 0 0;
+  font-size: 15px;
+  line-height: 1.55;
+  opacity: 0.7;
+  text-wrap: pretty;
 }
 
 /* The way on. A rule the width of the sheet, not a link in a heading. */
@@ -404,8 +446,15 @@
     padding-top: 88px;
   }
 
+  /* The plate takes the whole measure and the note drops under it: beside
+     a plate two thirds of a tablet sheet wide, the note would be a column of
+     single words. */
   .opening {
-    gap: 56px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+  }
+  .fieldPlate {
+    aspect-ratio: 16 / 9;
   }
 
   .door {
@@ -438,16 +487,16 @@
   }
 
   .opening {
-    grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 32px;
     padding-top: 36px;
   }
 
-  .figure {
-    margin-top: 8px;
-  }
   .fieldPlate {
     aspect-ratio: 4 / 3;
+  }
+  .plateCaption {
+    gap: 10px;
+    margin-top: 14px;
   }
 
   /* The door becomes a small card: the mark down the left, the folio and the
@@ -492,7 +541,6 @@
 
   .allWorks {
     margin-block: 64px 88px;
-    font-size: 12px;
   }
 }
 

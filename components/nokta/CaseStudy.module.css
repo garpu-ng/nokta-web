@@ -7,7 +7,11 @@
   overflow: hidden;
   background: var(--paper);
   padding: clamp(3rem, 9svh, 6rem) clamp(20px, 5vw, 48px);
-  --case-cyan: #0e97b7;
+  /* Was #0e97b7 = 2.61:1 on paper, under AA for the 13px kicker and folios
+     it sets. Same hue, darkened to 4.71:1. */
+  --case-cyan: #0a6a83;
+  /* Paper surface: focus rings are ink (base.css). */
+  --nk-focus: var(--ink);
 }
 .inner {
   max-width: 1100px;
@@ -63,7 +67,7 @@
   -webkit-overflow-scrolling: touch;
 }
 .strip:focus-visible {
-  outline: 2px solid var(--case-cyan);
+  outline: 2px solid var(--ink);
   outline-offset: 4px;
 }
 .proof {
@@ -123,16 +127,17 @@
 .factLabel {
   margin: 0;
   color: var(--ink);
-  font-size: 0.62rem;
-  letter-spacing: 0.06em;
+  font-size: 13px;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  opacity: 0.55;
+  /* .55 was 3.60:1 on paper; .72 is 6.00:1. */
+  opacity: 0.72;
   line-height: 1.5;
 }
 .factValue {
   margin: 0;
   color: var(--ink);
-  font-size: 0.9rem;
+  font-size: 1rem;
   line-height: 1.5;
 }
 
@@ -148,18 +153,22 @@
   margin: 1.5rem 0 0;
 }
 .site {
-  font-size: 0.72rem;
-  letter-spacing: 0.035em;
+  font-size: 13px;
+  letter-spacing: 0.03em;
   text-decoration: none;
   color: var(--paper);
   background: var(--ink);
-  padding: 0.7rem 1.1rem;
+  padding: 0.8rem 1.1rem;
   transition: background 0.2s ease;
 }
+/* Paper type on --accent is 4.43:1, under AA at 13px; --accent-on-paper is
+   4.85:1. */
 .site:hover,
 .site:focus-visible {
-  background: var(--accent);
+  background: var(--accent-on-paper);
 }
+/* The ring stays ink, and the button turns red under it: ink on the paper
+   section around it, not on the button's own fill. */
 
 /* The note under the button. Held back like every other annotation on the
    sheet, but left in sentence case — it is a sentence, not a caption, so it does not
@@ -167,10 +176,10 @@
 .hint {
   max-width: 34ch;
   color: var(--ink);
-  font-size: 0.68rem;
-  letter-spacing: 0.025em;
+  font-size: 14px;
+  letter-spacing: 0.01em;
   line-height: 1.5;
-  opacity: 0.65;
+  opacity: 0.75; /* was .65 = 4.84:1; .75 is 6.59:1 */
 }
 
 .narrative p {

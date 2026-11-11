@@ -8,6 +8,8 @@
 .section {
   background: var(--paper);
   color: var(--ink);
+  /* Focus rings on paper are ink (base.css): the red was 4.43:1 here. */
+  --nk-focus: var(--ink);
   padding: 72px var(--nk-gutter) 80px;
 }
 
@@ -27,16 +29,19 @@
   font-family: var(--headline-font);
   font-size: clamp(30px, 3.2vw, 40px);
   font-weight: 700;
+  /* The body's old fixed 20px leading used to be what set this title's box;
+     a unitless body leading would make it 60px tall, so it says so. */
+  line-height: 1.1;
   letter-spacing: -0.015em;
 }
 
-/* Ink on the paper register: .6 lands at 4.16:1, which an 11px line cannot be
-   read at. .72 clears AA with the same held-back weight. */
+/* Ink on the paper register: .6 lands at 4.16:1, which a small line cannot be
+   read at. .72 is 6.00:1 with the same held-back weight. */
 .note {
   margin: 0;
   flex-shrink: 0;
-  font-size: 11px;
-  letter-spacing: 0.09em;
+  font-size: 13px;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   opacity: 0.72;
 }
@@ -59,9 +64,9 @@
 }
 
 .folio {
-  padding-top: 8px;
-  font-size: 11px;
-  letter-spacing: 0.08em;
+  padding-top: 6px;
+  font-size: 13px;
+  letter-spacing: 0.05em;
   color: var(--accent-on-paper);
   /* Four folios ruled down the register — tabular figures hold the column
      the mono used to hold on its own. */
@@ -93,11 +98,12 @@
 /* The evidence line — a commission, cited. The note that used to stand here
    claimed accent on paper was ~5.4:1 and let an 11px line take the colour on
    that basis; it is 4.43:1, which is under AA. 5.4 is the manual slate, not
-   the red. Set in the tint cut for type on paper: 4.85:1. */
+   the red. Set in the tint cut for type on paper: 4.85:1, and at full
+   opacity at rest (Reveal ends on opacity 1). */
 .evidence {
   margin: 12px 0 0;
-  font-size: 11px;
-  letter-spacing: 0.06em;
+  font-size: 13px;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--accent-on-paper);
 }

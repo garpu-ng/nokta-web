@@ -17,8 +17,9 @@
 }
 
 .moreLink {
-  font-size: 12px;
-  letter-spacing: 0.08em;
+  /* A span inside the whole-card link (.ref), so the card is the target. */
+  font-size: 13px;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--paper);
   text-decoration: underline;

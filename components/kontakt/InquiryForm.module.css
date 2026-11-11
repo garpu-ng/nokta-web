@@ -2,13 +2,17 @@
    rounded corners, nothing that reads as a web form rather than as a sheet
    waiting to be written on.
 
-   Two things on it are hidden and neither is styled here: the radio that IS
-   each chip's control (step 01) and the written label over each field (steps
-   02/03) both wear the global .nk-sr-only (app/styles/base.css). Hidden from
-   sight only — never from the keyboard or the accessibility tree, and
-   placeholders are not labels. */
+   Two controls on it are hidden from sight and neither is styled here: the
+   radio that IS each chip's control (step 01) and the file input under the
+   message, both in the global .nk-sr-only (app/styles/base.css). Hidden from
+   sight only, never from the keyboard or the accessibility tree. Every field
+   carries its written label in view above it; placeholders are not labels. */
 
+/* The rule every field is drawn with. --nk-hair (.22) is a divider's weight,
+   1.9:1 on ink; a control's edge has to clear 3:1 (WCAG 1.4.11), and paper
+   at .45 lands at 3.7:1. */
 .form {
+  --field-rule: rgba(233, 224, 206, 0.45);
   display: block;
 }
 
@@ -25,10 +29,19 @@
   display: block;
   margin: 0 0 16px;
   padding: 0;
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  opacity: 0.6;
+  opacity: 0.6; /* 5.5:1 */
+}
+
+/* The label over each field, always in view. Paper at full strength: it is
+   what the field is called, not a hint. */
+.label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  letter-spacing: 0.04em;
 }
 
 /* ── 01 · the chips ────────────────────────────────────────────────── */
@@ -64,7 +77,7 @@
   padding: 12px 0;
   background: none;
   border: none;
-  border-bottom: 1px solid var(--nk-hair);
+  border-bottom: 1px solid var(--field-rule);
   color: var(--paper);
   font-size: 18px;
   transition: border-color 0.18s ease;
@@ -76,14 +89,12 @@
 /* The keyboard still gets a ring — .input:focus drops the default outline for
    the pointer, and this puts one back for anyone tabbing. */
 .input:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--nk-focus);
   outline-offset: 4px;
 }
 
-/* The real labels are visually hidden (.nk-sr-only), so on this form the
-   placeholder is the ONLY label a sighted reader ever sees — it has to clear
-   4.5:1 like any other body text, not sit at the .4 a decorative hint could.
-   On this ink, paper below ~0.55 fails; .62 lands at 4.9:1. */
+/* Only the message keeps a placeholder, as an example of what to write. It
+   still clears 4.5:1 like body text: on this ink, .62 lands at 5.8:1. */
 .input::placeholder,
 .textarea::placeholder {
   color: rgba(233, 224, 206, 0.62);
@@ -103,7 +114,7 @@
   width: 100%;
   padding: 18px;
   background: none;
-  border: 1px solid var(--nk-hair);
+  border: 1px solid var(--field-rule);
   color: var(--paper);
   font-size: 17px;
   line-height: 1.6;
@@ -115,8 +126,106 @@
   border-color: var(--accent);
 }
 .textarea:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--nk-focus);
   outline-offset: 2px;
+}
+
+/* ── Attachments ───────────────────────────────────────────────────── */
+
+.files {
+  margin-top: 28px;
+}
+
+/* The picker's label, drawn as the form's secondary button (the ghost's
+   outline). The input inside is the control; the ring is drawn here when it
+   has keyboard focus, since the input itself is a pixel. */
+.pick {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 20px;
+  border: 1px solid var(--field-rule);
+  color: var(--paper);
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.18s ease;
+}
+.pick:hover {
+  border-color: var(--paper);
+}
+.pick:has(input:focus-visible) {
+  outline: 2px solid var(--nk-focus);
+  outline-offset: 4px;
+}
+.pick:has(input[aria-invalid="true"]) {
+  border-color: var(--accent);
+}
+
+.hint {
+  max-width: 60ch;
+  margin: 12px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+  opacity: 0.7; /* 7.1:1 */
+}
+
+.fileList {
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--nk-hair);
+}
+
+.fileRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--nk-hair);
+  font-size: 15px;
+}
+
+.fileName {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.fileSize {
+  flex: none;
+  font-size: 14px;
+  opacity: 0.7;
+  font-variant-numeric: tabular-nums;
+}
+
+/* A text button: underlined, so it reads as an action without a box. */
+.remove {
+  flex: none;
+  min-height: 32px;
+  padding: 4px 0;
+  background: none;
+  border: none;
+  color: var(--paper);
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.remove:hover {
+  color: var(--accent-on-ink);
+}
+.remove:focus-visible {
+  outline: 2px solid var(--nk-focus);
+  outline-offset: 2px;
+}
+
+.fileTotal {
+  margin: 10px 0 0;
+  font-size: 14px;
+  opacity: 0.7;
+  font-variant-numeric: tabular-nums;
 }
 
 /* Off-screen, out of the tab order, and never announced. */
@@ -139,9 +248,12 @@
   margin-top: 28px;
 }
 
+/* On --accent-on-paper rather than the mark red: paper words on #b83636 are
+   4.4:1, on #ae3232 they clear AA at 4.85:1. */
 .submit {
+  min-height: 48px;
   padding: 14px 28px;
-  background: var(--accent);
+  background: var(--accent-on-paper);
   border: none;
   color: var(--paper);
   font-size: 19px;
@@ -160,14 +272,32 @@
   opacity: 0.7;
 }
 
-/* The 24-hour promise beside the button. It was set at .5, which on this ink
-   is 4.26:1 — under AA for 11px, and this is the one line on the page that
-   answers "what happens after I press send". */
+/* The promise beside the button, the one line on the page that answers
+   "what happens after I press send". .7 is 7.1:1 on this ink. */
 .sla {
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  opacity: 0.62;
+  opacity: 0.7;
+}
+
+/* What the data is for, under the button, with the way to the full text. */
+.privacy {
+  max-width: 60ch;
+  margin: 16px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+  opacity: 0.75;
+}
+.privacyLink {
+  display: inline-block;
+  min-height: 24px;
+  color: var(--paper);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.privacyLink:hover {
+  color: var(--accent-on-ink);
 }
 
 /* Failure, in the same voice as the success panel: an accent rule and a line
@@ -176,10 +306,17 @@
   margin: 24px 0 0;
   padding: 16px 18px;
   border-left: 2px solid var(--accent);
-  font-size: 11px;
+  font-size: 13px;
   line-height: 1.7;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+}
+
+/* Beside the file field the line names files, and a file name set in caps
+   is a different name. Same voice otherwise. */
+.fileError {
+  text-transform: none;
+  letter-spacing: 0.02em;
 }
 
 /* ── The sent panel ────────────────────────────────────────────────── */
@@ -224,9 +361,9 @@
   margin-top: 12px;
   padding: 14px 22px;
   background: none;
-  border: 1px solid var(--nk-hair);
+  border: 1px solid var(--field-rule);
   color: var(--paper);
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   cursor: pointer;
@@ -248,13 +385,26 @@
   .submitRow {
     gap: 14px;
   }
+  /* Touch targets: 44px on a phone. */
+  .remove,
+  .privacyLink {
+    min-height: 44px;
+  }
+  .remove {
+    padding-inline: 8px;
+  }
+  .privacyLink {
+    display: inline-flex;
+    align-items: center;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .input,
   .textarea,
   .submit,
-  .ghost {
+  .ghost,
+  .pick {
     transition: none;
   }
   .submit:hover:not(:disabled) {

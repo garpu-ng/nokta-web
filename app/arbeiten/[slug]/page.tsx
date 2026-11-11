@@ -406,6 +406,37 @@ function workBody(work: Work, t: Translate) {
   }
 }
 
+/** The inquiry kind a work page hands to /kontakt (ids from KINDS there).
+    Renderings and the film and image studies are visualisation work; the
+    report and the design system are editorial. */
+function inquiryKind(work: Work): "visualisierung" | "editorial" | "druck" | "cad" {
+  switch (work.kind) {
+    case "editorial":
+    case "manual":
+      return "editorial";
+    case "cad":
+      return "cad";
+    default:
+      return "visualisierung";
+  }
+}
+
+/** Quiet inquiry close, for every kind of work. */
+function workCta(work: Work, t: Translate) {
+  const kind = inquiryKind(work);
+  return (
+    <section className={styles.cta} aria-labelledby="work-cta-title">
+      <h2 id="work-cta-title" className={styles.ctaTitle}>
+        {t("work.cta.title")}
+      </h2>
+      <p className={styles.ctaBody}>{t(`work.cta.body.${kind}`)}</p>
+      <Link href={`/kontakt?kind=${kind}`} className={styles.ctaBtn}>
+        {t("work.cta.button")}
+      </Link>
+    </section>
+  );
+}
+
 /* ── The page ───────────────────────────────────────────────────────── */
 
 export default async function WorkPage({ params }: Props) {
@@ -444,6 +475,8 @@ export default async function WorkPage({ params }: Props) {
       />
 
       {workBody(work, t)}
+
+      {workCta(work, t)}
 
       {/* The neighbours are plates of their own: a caption kicker over a title set
           at reading-across-the-room scale. The caption says the direction. */}

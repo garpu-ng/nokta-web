@@ -80,7 +80,9 @@ export default function PunktEasterEgg({ backLabel }: { backLabel: string }) {
     if (!ctx) return;
 
     const dpr = Math.min(2, window.devicePixelRatio || 1);
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduce =
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      document.documentElement.getAttribute("data-motion") === "off";
     let W = 0;
     let H = 0;
     const resize = () => {

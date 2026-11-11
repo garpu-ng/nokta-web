@@ -132,9 +132,19 @@
   /* The name keeps its clearing but gives up tracking and a couple of points
      so a long one still sits inside the band's faded ends on a 320px sheet. */
   .label {
-    padding: 0 12px;
-    font-size: 10px;
-    letter-spacing: 0.1em;
+    /* 13px is the floor, and "Was wir für Architekturbüros machen" (35
+       characters) cannot sit on one 280px line at it, so on a phone the name
+       may take two lines inside the 34px band. width:max-content is what
+       lets the box grow past the 50% an absolutely placed box at left:50%
+       would otherwise be offered. */
+    width: max-content;
+    max-width: calc(100% - 2 * var(--nk-gutter));
+    padding: 0 10px;
+    font-size: 13px;
+    line-height: 1.15;
+    letter-spacing: 0.05em;
+    text-align: center;
+    white-space: normal;
   }
 }
 

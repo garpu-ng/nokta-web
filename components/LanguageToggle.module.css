@@ -1,5 +1,8 @@
 /* Small language switch, styled to match the utility links in the header. */
 .toggle {
+  /* The rule between the options is sized in em; it keeps the proportion it
+     had at the old 14px base. */
+  font-size: 13px;
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -27,13 +30,13 @@
   margin: -15px 0;
   cursor: pointer;
   font: inherit;
-  font-size: 0.72rem;
+  font-size: 13px; /* was 0.72rem = 11.52px */
   line-height: 1.2;
   letter-spacing: 0.02em;
   /* Inherit the ground's ink — the toggle sits on the header's ink bar today,
      and follows whatever surface hosts it. */
   color: inherit;
-  /* .5 was 4.26:1 on this ink — under AA for 11.5px. */
+  /* .62 on ink is 5.83:1 (.5 was 4.26:1). */
   opacity: 0.62;
   transition: opacity 0.18s ease;
 }

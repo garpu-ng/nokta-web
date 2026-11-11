@@ -5,7 +5,7 @@
    utility whatever order the two sheets end up in. */
 span.anno {
   display: block;
-  font-size: 0.6rem;
-  letter-spacing: 0.08em;
+  font-size: 13px;
+  letter-spacing: 0.04em;
   text-transform: none;
 }

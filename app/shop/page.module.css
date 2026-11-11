@@ -35,7 +35,7 @@
   text-decoration: none;
 }
 .card:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--nk-focus);
   outline-offset: 6px;
 }
 
@@ -76,7 +76,7 @@
 }
 
 .meta {
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   opacity: 0.6;

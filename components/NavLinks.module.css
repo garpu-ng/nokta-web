@@ -9,7 +9,12 @@
 
 .link {
   position: relative;
-  padding-bottom: 4px;
+  /* 8px above and below the type is a 34px target instead of 22px; the
+     negative margin returns it, so the header's rhythm and the rule 4px
+     under the words stay where they were (the rule moves up with the
+     padding, see below). */
+  padding-block: 8px 12px;
+  margin-block: -8px;
   color: var(--paper);
   font-family: var(--headline-font);
   font-size: 15px;
@@ -29,7 +34,7 @@
   position: absolute;
   left: 0;
   right: 6px;
-  bottom: 0;
+  bottom: 8px;
   height: 2px;
   background: var(--accent);
 }
@@ -48,6 +53,7 @@
   }
   .link {
     padding-block: 12px 14px;
+    margin-block: 0;
   }
   .rule {
     bottom: 10px;

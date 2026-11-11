@@ -1,5 +1,6 @@
 import { after } from "next/server";
 import nodemailer from "nodemailer";
+import { MAX_BODY_BYTES, readInquiry, type Inquiry } from "@/lib/inquiry";
 
 /* The inquiry form's delivery route.
 
@@ -22,8 +23,14 @@ import nodemailer from "nodemailer";
    the studio's address so the reader can write directly.
 
    GDPR: nothing is stored and nothing is logged but the outcome. The message
-   body, the sender's name and their address exist only for the length of the
-   request and inside the mail itself. */
+   body, the sender's name, their address and any attached files exist only
+   in memory for the length of the request and inside the mail itself.
+
+   Header safety: the sender's name and address reach the From/Reply-To and
+   Subject headers only as nodemailer address objects and an encoded subject,
+   and lib/inquiry.ts has already turned every control character in them
+   (line breaks included) into a space, so no header can be started from the
+   form. */
 
 const STUDIO = "hallo@nokta-studio.de";
 const TO = process.env.KONTAKT_TO ?? STUDIO;
@@ -32,28 +39,10 @@ const SMTP_PORT = Number(process.env.KONTAKT_SMTP_PORT ?? 465);
 const SMTP_USER = process.env.KONTAKT_SMTP_USER ?? STUDIO;
 const SMTP_PASS = process.env.KONTAKT_SMTP_PASS;
 
-/* The four things the form can be about, keyed by the stable id the form
-   sends — NOT by the label the reader saw. The chips are translated, so
-   whitelisting display text would accept German and reject the same click
-   from an English, Turkish or Japanese visitor.
-
-   The value here is what the mail says, so an inquiry always arrives in the
-   studio's own vocabulary whatever language it was written in. */
-const KINDS: Record<string, string> = {
-  visualisierung: "Visualisierung",
-  editorial: "Editorial",
-  druck: "Druck",
-  cad: "CAD-Plan",
-};
-
-/* Field caps. Long enough for a real briefing, short enough that the route is
-   never asked to relay a payload. */
-const MAX = { name: 120, email: 200, message: 4000 } as const;
-
-/* Deliberately loose: one @, something either side, a dot in the domain. A
-   stricter pattern rejects valid addresses, and the only real proof that an
-   address works is a reply arriving at it. */
-const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+/* What the form may send (the kind whitelist, the field caps, the address
+   pattern, the attachment limits) and the reading of a submitted form against
+   it live in lib/inquiry.ts, shared with the form so both ends apply one set
+   of rules, and kept free of anything Next so they can be tested alone. */
 
 /* ── Rate limit ────────────────────────────────────────────────────────
    A speed bump, not a wall: five inquiries per address per hour. The map
@@ -84,16 +73,12 @@ function clientIp(request: Request): string {
   return forwarded?.split(",")[0]?.trim() || "unknown";
 }
 
-function field(value: unknown, max: number): string {
-  return typeof value === "string" ? value.trim().slice(0, max) : "";
+/** "1,2 MB" for the mail's list of attachments. */
+function megabytes(bytes: number): string {
+  return `${(bytes / (1024 * 1024)).toFixed(1).replace(".", ",")} MB`;
 }
 
-async function sendMail(body: {
-  kind: string;
-  name: string;
-  email: string;
-  message: string;
-}): Promise<boolean> {
+async function sendMail(body: Inquiry): Promise<boolean> {
   if (!SMTP_PASS) {
     console.error("kontakt: KONTAKT_SMTP_PASS not configured");
     return false;
@@ -124,9 +109,23 @@ async function sendMail(body: {
         `Art: ${body.kind}`,
         `Name: ${body.name}`,
         `E-Mail: ${body.email}`,
+        ...(body.attachments.length
+          ? [
+              `Anhänge: ${body.attachments
+                .map((a) => `${a.filename} (${megabytes(a.content.byteLength)})`)
+                .join(", ")}`,
+            ]
+          : []),
         "",
         body.message,
       ].join("\n"),
+      // Checked in lib/inquiry.ts: extension, first bytes, total size; the
+      // name is sanitised and the content type is ours, not the browser's.
+      attachments: body.attachments.map((a) => ({
+        filename: a.filename,
+        content: Buffer.from(a.content),
+        contentType: a.contentType,
+      })),
     });
     return true;
   } catch (error) {
@@ -139,37 +138,37 @@ async function sendMail(body: {
 }
 
 export async function POST(request: Request) {
-  let payload: unknown;
+  /* Refused before parsing when the request says it is too big. Vercel turns
+     away anything over 4.5 MB on its own, but a self-hosted run would not, and
+     the form never sends more than this. */
+  const length = Number(request.headers.get("content-length") ?? 0);
+  if (length > MAX_BODY_BYTES) {
+    return Response.json({ ok: false, reason: "files" }, { status: 413 });
+  }
+
+  let data: FormData;
   try {
-    payload = await request.json();
+    // multipart/form-data from the form (urlencoded parses here too).
+    data = await request.formData();
   } catch {
     return Response.json({ ok: false }, { status: 400 });
   }
 
-  const data = payload as Record<string, unknown>;
+  const reading = await readInquiry(data);
 
-  /* The honeypot. A field no human sees and no human fills; anything in it
-     came from something reading the markup rather than the page. Answered
-     with a plain 200 so the sender learns nothing from the difference. */
-  if (field(data.website, 100) !== "") {
-    return Response.json({ ok: true });
-  }
-
-  const kind = field(data.kind, 40);
-  const name = field(data.name, MAX.name);
-  const email = field(data.email, MAX.email);
-  const message = field(data.message, MAX.message);
-
-  const kindLabel = KINDS[kind];
-  if (!name || !message || !EMAIL.test(email) || !kindLabel) {
-    return Response.json({ ok: false }, { status: 422 });
+  /* The honeypot answers with a plain 200 so the sender learns nothing from
+     the difference. */
+  if (reading.result === "honeypot") return Response.json({ ok: true });
+  // "reason" tells the form which of its messages to show: a field or a file.
+  if (reading.result !== "ok") {
+    return Response.json({ ok: false, reason: reading.result }, { status: reading.status });
   }
 
   if (rateLimited(clientIp(request))) {
     return Response.json({ ok: false }, { status: 429 });
   }
 
-  const delivered = await sendMail({ kind: kindLabel, name, email, message });
+  const delivered = await sendMail(reading.inquiry);
   if (!delivered) {
     return Response.json({ ok: false }, { status: 503 });
   }

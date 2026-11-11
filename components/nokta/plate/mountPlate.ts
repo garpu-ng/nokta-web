@@ -16,6 +16,8 @@
    returning its own teardown lets each component own a normal useEffect with
    the dependencies it actually has. */
 
+import { motionOff, prefersReducedMotion, watchMotion } from "@/lib/motion";
+
 /** Never rasterise more than this — a retina 4K plate would otherwise ask for
     four times the fill rate it needs to look identical.
 
@@ -58,9 +60,11 @@ export function mountPlate(
 
   const plate = make(ctx, canvas);
 
-  const still =
-    typeof window.matchMedia === "function" &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const still = prefersReducedMotion();
+  /** The header's motion switch is off. Unlike `still` this can change while
+      the plate lives, so it pauses the loop on whatever frame it reached and
+      resumes from there, rather than repainting the plate at t = 0. */
+  let held = motionOff();
 
   let width = 0;
   let height = 0;
@@ -119,7 +123,7 @@ export function mountPlate(
   };
 
   const play = () => {
-    if (running || still) return;
+    if (running || still || held) return;
     running = true;
     // Rebase the clock so a plate that has been paused resumes where it
     // stopped instead of jumping forward by the length of the pause.
@@ -179,9 +183,19 @@ export function mountPlate(
   };
   document.addEventListener("visibilitychange", onVisibility);
 
+  // The header's motion switch. Pausing leaves the canvas as it is, so the
+  // plate holds the frame it was on; resuming goes through the same gate as
+  // everything else, so a plate off screen stays stopped.
+  const unwatch = watchMotion((off) => {
+    held = off;
+    if (off) pause();
+    else onVisibility();
+  });
+
   return () => {
     dead = true;
     pause();
+    unwatch();
     io.disconnect();
     ro.disconnect();
     document.removeEventListener("visibilitychange", onVisibility);

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { motionOff, prefersReducedMotion, watchMotion } from "@/lib/motion";
 
 /* The moving version of a card's image, for work that is itself moving.
 
@@ -53,27 +54,32 @@ export default function WorkClip({
     if (!v) return;
     v.muted = true;
 
-    if (
-      typeof window.matchMedia === "function" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) {
-      return;
-    }
+    if (prefersReducedMotion()) return;
+
+    // Plays only while on screen AND the header's motion switch is on; both
+    // are re-checked whenever either changes, so switching motion back on
+    // does not start a clip that is scrolled out of view.
+    let onScreen = typeof IntersectionObserver !== "function";
+    const sync = () => {
+      if (onScreen && !motionOff()) {
+        v.play().catch(() => {
+          /* autoplay may be blocked; the poster stays visible */
+        });
+      } else {
+        v.pause();
+      }
+    };
+    const unwatch = watchMotion(sync);
 
     if (typeof IntersectionObserver !== "function") {
-      v.play().catch(() => {});
-      return;
+      sync();
+      return unwatch;
     }
 
     const io = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          v.play().catch(() => {
-            /* autoplay may be blocked; the poster stays visible */
-          });
-        } else {
-          v.pause();
-        }
+        onScreen = entry.isIntersecting;
+        sync();
       },
       // A sliver is enough to count as on screen: the card enters from the
       // bottom edge, and waiting for a fraction of it would start the clip
@@ -81,7 +87,10 @@ export default function WorkClip({
       { threshold: 0.01 },
     );
     io.observe(v);
-    return () => io.disconnect();
+    return () => {
+      io.disconnect();
+      unwatch();
+    };
   }, []);
 
   return (

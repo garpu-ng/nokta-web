@@ -56,11 +56,25 @@
   height: 28px;
 }
 
-/* The pages, then the language — one group, right-aligned. */
+/* The pages, then the language and motion switches — one group,
+   right-aligned. It may wrap: if a long locale ever leaves the row short, the
+   switches drop as one to a second line under the pages, right-aligned,
+   instead of pushing the row past the sheet. The nav itself never wraps above
+   the phone breakpoint, so it is always the switches that move. */
 .right {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
   align-items: center;
-  gap: 34px;
+  gap: 8px 34px;
+}
+
+/* Language and motion side by side, a little further apart than the languages
+   are from each other, so the switch does not read as a fifth language. */
+.tools {
+  display: flex;
+  align-items: center;
+  gap: 18px;
 }
 
 /* ── Tablet ──────────────────────────────────────────────────────────
@@ -68,7 +82,7 @@
    nav and the language switch needs closing by hand. */
 @media (max-width: 1199px) {
   .right {
-    gap: 24px;
+    column-gap: 24px;
   }
 }
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { motionOff, prefersReducedMotion, watchMotion } from "@/lib/motion";
 import styles from "./TeaserVideo.module.css";
 
 /* The studio teaser, full-bleed, opening the homepage.
@@ -32,15 +33,17 @@ export default function TeaserVideo({
     if (!v) return;
     v.muted = true;
     // Honour prefers-reduced-motion: leave the video paused on its poster frame.
-    if (
-      typeof window.matchMedia === "function" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) {
-      return;
-    }
-    v.play().catch(() => {
-      /* autoplay may be blocked; the poster stays visible */
-    });
+    if (prefersReducedMotion()) return;
+    const play = () => {
+      v.play().catch(() => {
+        /* autoplay may be blocked; the poster stays visible */
+      });
+    };
+    // The header's motion switch: off at load means the clip is never
+    // started (and, with preload="metadata", never fetched); switched off
+    // later it pauses on the frame it is on, and on again resumes there.
+    if (!motionOff()) play();
+    return watchMotion((off) => (off ? v.pause() : play()));
   }, []);
 
   return (

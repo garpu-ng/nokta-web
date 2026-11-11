@@ -100,18 +100,10 @@
     row-gap: clamp(2.5rem, 6svh, 3.5rem);
   }
 
-  /* One row. Wrapping the chips put a second line between the reader and
-     the first rendering. Anything that does not fit scrolls sideways. */
+  /* The chips wrap. At 13px six of them are wider than a 320px sheet, and a
+     row that scrolls sideways with its scrollbar hidden leaves the last
+     chips undiscoverable; two short lines are the lesser cost. */
   .filter {
-    flex-wrap: nowrap;
     gap: 8px;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-  .filter::-webkit-scrollbar {
-    display: none;
-  }
-  .filter > * {
-    flex: 0 0 auto;
   }
 }
