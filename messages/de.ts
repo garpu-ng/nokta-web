@@ -27,7 +27,7 @@ const de: Record<string, string> = {
   "home.wall.aria": "Alle Arbeiten",
   "home.hero.eyebrow": "Designstudio aus NRW",
   "home.hero.title": "Wir machen Architektur sichtbar.",
-  "home.hero.sub": "3D-Visualisierung, Editorial und Druck für Architekturbüros, private Bauherren und öffentliche Auftraggeber.",
+  "home.hero.sub": "3D-Visualisierung, Editorial und Druck für Architekturbüros, Bauträger, private Bauherren und öffentliche Auftraggeber.",
   "home.hero.ctaWork": "Arbeiten ansehen",
   "home.hero.ctaContact": "Projekt anfragen",
   // ── Kolonnade: homepage hero, intro, the three service rows ───────
@@ -382,6 +382,8 @@ const de: Record<string, string> = {
   // The studio's line. One string, three places: the footer, the
   // generated social card, and the homepage plate it is knocked into.
   "studio.motto": "Vom Punkt über die Linie zur Form.",
+  // Line on the shared-link card (app/opengraph-image.tsx), German only: the card is built once at build time.
+  "og.services": "Architekturvisualisierung, Editorial und Druck aus NRW",
   "footer.col.seiten": "Seiten",
   "footer.col.rechtliches": "Rechtliches",
   "footer.col.social": "Social",
@@ -427,7 +429,7 @@ const de: Record<string, string> = {
   "bt.need.3": "Fotos vom Grundstück und der Nachbarbebauung",
   "bt.need.4": "Ihr Termin, zum Beispiel der Vertriebsstart",
   "bt.cta.text": "Sie haben ein Projekt in Planung oder im Vertrieb?",
-  "bt.cta.note": "Schicken Sie uns die Pläne über das Formular oder an hallo@nokta-studio.de. Sie bekommen ein schriftliches Angebot.",
+  "bt.cta.note": "Schicken Sie uns die Pläne über das Formular oder an hallo@nokta-studio.de. Sie bekommen ein schriftliches Angebot. Sie möchten vorher sehen, wie wir arbeiten? Nennen Sie uns ein Projekt, dann erstellen wir ein Probebild dazu.",
   "bt.cta.button": "Ansichten anfragen",
 
   "meta.inst.title": "Satz und Gestaltung von Berichten · nokta",

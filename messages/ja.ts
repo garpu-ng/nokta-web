@@ -19,7 +19,7 @@ const ja: Record<string, string> = {
   "home.wall.aria": "すべての作品",
   "home.hero.eyebrow": "NRW州のデザインスタジオ",
   "home.hero.title": "建築を、見えるかたちに。",
-  "home.hero.sub": "設計事務所、個人のお客様、公共の発注者のための3Dビジュアライゼーション、エディトリアル、印刷。",
+  "home.hero.sub": "設計事務所、デベロッパー、個人のお客様、公共の発注者のための3Dビジュアライゼーション、エディトリアル、印刷。",
   "home.hero.ctaWork": "作品を見る",
   "home.hero.ctaContact": "問い合わせる",
   // ── Kolonnade: トップのヒーロー、導入、三つのサービス行 ─────────
@@ -417,7 +417,7 @@ const ja: Record<string, string> = {
   "bt.need.3": "敷地と周辺建物の写真",
   "bt.need.4": "ご希望の時期（例：販売開始）",
   "bt.cta.text": "計画中または販売中のプロジェクトはありますか？",
-  "bt.cta.note": "フォームまたは hallo@nokta-studio.de に図面をお送りください。書面でお見積りをお送りします。",
+  "bt.cta.note": "フォームまたは hallo@nokta-studio.de に図面をお送りください。書面でお見積りをお送りします。先に仕事の進め方をご覧になりたい場合は、プロジェクトをひとつお知らせください。その試作画像をお作りします。",
   "bt.cta.button": "パースを依頼する",
 
   "meta.inst.title": "報告書のデザインと組版 · nokta",

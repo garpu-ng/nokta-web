@@ -19,7 +19,7 @@ const tr: Record<string, string> = {
   "home.wall.aria": "Tüm işler",
   "home.hero.eyebrow": "NRW’den tasarım stüdyosu",
   "home.hero.title": "Mimariyi görünür kılıyoruz.",
-  "home.hero.sub": "Mimarlık ofisleri, bireysel müşteriler ve kamu işverenleri için 3B görselleştirme, editoryal ve baskı.",
+  "home.hero.sub": "Mimarlık ofisleri, proje geliştiriciler, bireysel müşteriler ve kamu işverenleri için 3B görselleştirme, editoryal ve baskı.",
   "home.hero.ctaWork": "İşleri görün",
   "home.hero.ctaContact": "Proje talebi gönderin",
   // ── Kolonnade: ana sayfa hero, giriş, üç hizmet satırı ────────────
@@ -405,7 +405,7 @@ const tr: Record<string, string> = {
   "bt.need.3": "Arsanın ve komşu yapıların fotoğrafları",
   "bt.need.4": "Tarihiniz, örneğin satış başlangıcı",
   "bt.cta.text": "Planlama ya da satış aşamasında bir projeniz mi var?",
-  "bt.cta.note": "Planları form üzerinden veya hallo@nokta-studio.de adresine gönderin. Yazılı bir teklif alırsınız.",
+  "bt.cta.note": "Planları form üzerinden veya hallo@nokta-studio.de adresine gönderin. Yazılı bir teklif alırsınız. Önce nasıl çalıştığımızı görmek ister misiniz? Bir proje belirtin, onun için bir deneme görseli hazırlayalım.",
   "bt.cta.button": "Görünüm talep edin",
 
   "meta.inst.title": "Raporların tasarımı ve dizgisi · nokta",

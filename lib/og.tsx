@@ -27,8 +27,11 @@ export function renderOgImage(opts: {
   wordmark: string;
   caption: string;
   background: string;
+  /** Optional plain line between wordmark and caption that says what the
+      studio does, so a shared link names the work and not only the brand. */
+  services?: string;
 }) {
-  const { wordmark, caption, background } = opts;
+  const { wordmark, caption, background, services } = opts;
   // The short home lockup ("nokta.") can run bigger than the branch lockups.
   const wordSize = wordmark.length > 8 ? 122 : 176;
 
@@ -59,10 +62,23 @@ export function renderOgImage(opts: {
           {wordmark}
         </div>
 
+        {services ? (
+          <div
+            style={{
+              display: "flex",
+              marginTop: 40,
+              fontSize: 34,
+              lineHeight: 1.25,
+            }}
+          >
+            {services}
+          </div>
+        ) : null}
+
         <div
           style={{
             display: "flex",
-            marginTop: 42,
+            marginTop: services ? 28 : 42,
             fontSize: 30,
             letterSpacing: "0.32em",
             opacity: 0.74,
